@@ -4,6 +4,24 @@
 	import Home from './views/Home.svelte';
 	import Profile from "./views/Profile.svelte";
 
+  const param = window.location.search
+
+  const urlParams = new URLSearchParams(param)
+  const user = urlParams.get('user')
+
+  
+  const userData = async (user)=>{
+    localStorage.setItem('user', user)
+    const response = await fetch(`http://18.118.50.78:8000/user/create/?email=${localStorage.getItem('user')}`,{
+      method : 'GET',
+      headers : {
+        'Content-Type': 'application/json'
+      }
+    })
+    const content = await response.json();
+    console.log(content[0]);
+  }
+
 </script>
 
 <style>
@@ -57,7 +75,7 @@
 
 <Header/>
 
-<main class="container">
+<main class="container" on:load={userData(user)}>
 
 	<Router>
 		<Route path="/">

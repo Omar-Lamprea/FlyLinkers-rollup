@@ -62,7 +62,7 @@
             <i class="fas fa-grip-vertical dropdown-toggle" id="settings" data-bs-toggle="dropdown" aria-expanded="false" ></i>
           <ul class="dropdown-menu" aria-labelledby="settings">
             <li><span class="dropdown-item">Settings</span></li>
-            <li><span class="dropdown-item" on:click={logOut}>Log out</span></li>
+            <li><span class="dropdown-item" on:click={logOut}>Log Out</span></li>
           </ul>
         </div>
         
