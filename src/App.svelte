@@ -4,14 +4,20 @@
 	import Home from './views/Home.svelte';
 	import Profile from "./views/Profile.svelte";
 
-  const param = window.location.search
+  if(!localStorage.getItem('user') || localStorage.getItem('user') === 'null'){
+    const param = window.location.search
+    const urlParams = new URLSearchParams(param)
+    const user = urlParams.get('user')
+    const savedUser = localStorage.setItem('user', user)
+  }
 
-  const urlParams = new URLSearchParams(param)
-  const user = urlParams.get('user')
+  setTimeout(() => {
+    if(localStorage.getItem('user') === 'null') window.location.href = 'http://localhost:3000/'
+  }, 1000);
 
+  let data;
   
-  const userData = async (user)=>{
-    localStorage.setItem('user', user)
+  const getData = async ()=>{
     const response = await fetch(`http://18.118.50.78:8000/user/create/?email=${localStorage.getItem('user')}`,{
       method : 'GET',
       headers : {
@@ -19,8 +25,15 @@
       }
     })
     const content = await response.json();
-    console.log(content[0]);
+    data = content[0]
+    // console.log(content[0]);
+    return content[0]
   }
+
+  // const userdata = {
+  //   name: 'Omar',
+  //   title: 'Developer'
+  // }
 
 </script>
 
@@ -75,11 +88,11 @@
 
 <Header/>
 
-<main class="container" on:load={userData(user)}>
+<main class="container" on:load={getData()}>
 
 	<Router>
 		<Route path="/">
-			<Home/>
+			<Home {...data}/>
 		</Route>
 
 		<Route path="/profile">

@@ -3,11 +3,13 @@
   import TimelineH from '../components/TimelineH.svelte';
   import SidebarRight from '../components/SidebarRight.svelte'
 
+  export let name, title;
+
 </script>
 
 <div class="row">
 
-    <SidebarLeft />
+    <SidebarLeft {name} {title}/>
     <TimelineH />
     <SidebarRight />
     
