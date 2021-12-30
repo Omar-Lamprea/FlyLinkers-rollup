@@ -1,7 +1,8 @@
 <script>
   import UserPotho from './UserPhoto.svelte'
+  import Modal from '../Modal.svelte'
 
-  export let name, title, email , photo;
+  export let name, title, email , photo, id, aboutMe;
 
 </script>
 
@@ -65,13 +66,13 @@
           <div class="Profile-card-info mt-2">
             <div class="Profile-card-user">
               <h2>{name}</h2>
-              <span>{title}</span><br>
+              <span>title{title}</span>
               <p>Colombia</p>
             </div>
             <div class="Profile-description my-3">
-              <p> <i class="fas fa-pen"></i> About me</p>
+              <p><i class="fas fa-pen"></i> About me</p>
               <div class="Profile-description-text my-2">
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id dolores maxime laborum hic earum ut quis est quo commodi aut!</p>
+                <p>{aboutMe}</p>
               </div>
               <div class="Profile-description-contact">
                 <p>Email</p>
@@ -81,12 +82,11 @@
           </div>
         </div>
       </div>
-
     </div>
-
     <div class="col-6">
-      <div class="Profile-card-text text-end">
-        <p class="mb-3"><i class="fas fa-pen"></i> Edit profile</p>
+      <div class="Profile-card-text text-end d-flex flex-column align-items-end">
+        <p type="button" class="mb-3" data-bs-toggle="modal" data-bs-target="#editProfile"><i class="fas fa-pen"></i> Edit profile</p>
+        <Modal {id}/>
         <div class="Profile-card-statistics">
           <p>Who viewed your profile-card <span>3.8K</span></p> 
           <p>Views of your post <span>3.8K</span></p> 

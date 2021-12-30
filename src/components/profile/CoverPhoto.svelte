@@ -1,3 +1,7 @@
+<script>
+  export let coverPhoto;
+</script>
+
 <style>
   .CoverPhoto{
     height: 15rem;
@@ -12,5 +16,9 @@
 </style>
 
 <div class="CoverPhoto">
-    <img src="https://media-cldnry.s-nbcnews.com/image/upload/t_fit-2000w,f_auto,q_auto:best/newscms/2021_10/3455159/210308-pilot-airport-mn-1315.jpg" alt="">
+  {#if localStorage.getItem('coverPhoto')}
+    <img src={localStorage.getItem('coverPhoto')} alt="">
+  {:else}
+    <img src={coverPhoto} alt="">
+  {/if}
 </div>

@@ -4,9 +4,7 @@
   let image;
   const urlImage = setTimeout(() => {
     image = `http://18.118.50.78:8000${photo}`
-    console.log(photo);
-    console.log(image);
-    return image
+    localStorage.setItem('profilePhoto', image)
   }, 1000);
 
 </script>
@@ -22,6 +20,11 @@
   cursor: pointer;
 }
 </style>
+
 <div class="Profile-card-avatar">
-<img src={image} alt="">
+  {#if localStorage.getItem('profilePhoto')}
+    <img src={localStorage.getItem('profilePhoto')} alt="">
+  {:else}
+    <img src={image} alt="">
+  {/if}
 </div>

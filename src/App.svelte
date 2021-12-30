@@ -26,8 +26,6 @@
     })
     const content = await response.json();
     data = content[0]
-    // console.log(content[0]);
-    return content[0]
   }
 
 </script>

@@ -5,13 +5,28 @@
   import Experience from './profile//Experience.svelte'
   import Panel from './profile/Panel.svelte'
 
-  export let name, title, email , photo;
+  export let name, title, email , photo , id;
+
+  let coverPhoto;
+  let aboutMe;
+
+  const getProfile = async ()=>{
+    setTimeout(async() => {
+      const response = await fetch(`http://18.118.50.78:8000/user/profile/?user_id=${id}`)
+      const content = await response.json()
+      let data = content[0]
+      coverPhoto = `http://18.118.50.78:8000${data.profile_img}`
+      aboutMe = data.about
+      localStorage.setItem('coverPhoto', coverPhoto)
+    }, 1000);
+  }
+
 </script>
 
-<div class="Profile col-9">
+<div class="Profile col-9" on:load={getProfile()}>
   <div class="Profile-container">
-    <CoverPhoto/>
-    <UserDetails {name} {title} {email} {photo}/>
+    <CoverPhoto {coverPhoto}/>
+    <UserDetails {name} {title} {email} {photo} {id} {aboutMe}/>
     <CreatePost/>
     <Experience/>
     <Panel/>
