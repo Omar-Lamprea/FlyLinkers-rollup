@@ -1,3 +1,16 @@
+<script>
+  export let photo
+
+  let image;
+  const urlImage = setTimeout(() => {
+    image = `http://18.118.50.78:8000${photo}`
+    console.log(photo);
+    console.log(image);
+    return image
+  }, 1000);
+
+</script>
+
 <style>
   .Profile-card-avatar img {
   width: 90px;
@@ -10,5 +23,5 @@
 }
 </style>
 <div class="Profile-card-avatar">
-<img src="./img/pilot.jpg" alt="">
+<img src={image} alt="">
 </div>

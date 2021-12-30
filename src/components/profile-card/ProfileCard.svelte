@@ -2,7 +2,7 @@
   import UserPotho from '../profile/UserPhoto.svelte'
 	import { Router, Link, Route } from "svelte-routing";
 
-  export let name, title;
+  export let name, title, photo;
 
 </script>
 
@@ -46,7 +46,7 @@
 
 <div class="Profile-card Default-containers px-0">
   <div class="Profile-card-content d-flex flex-column justify-content-center align-items-center">
-    <UserPotho/>
+    <UserPotho {photo}/>
     <div class="Profile-card-info text-center mt-2">
       <div class="Profile-card-user">
         <h2>{name}</h2>

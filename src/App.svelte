@@ -30,11 +30,6 @@
     return content[0]
   }
 
-  // const userdata = {
-  //   name: 'Omar',
-  //   title: 'Developer'
-  // }
-
 </script>
 
 <style>
@@ -96,7 +91,7 @@
 		</Route>
 
 		<Route path="/profile">
-			<Profile/>
+			<Profile {...data}/>
 		</Route>
 	</Router>
 

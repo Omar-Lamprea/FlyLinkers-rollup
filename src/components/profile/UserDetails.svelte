@@ -1,18 +1,8 @@
 <script>
   import UserPotho from './UserPhoto.svelte'
 
-  const userDetails =
-    {
-      name: 'Sam Anderson',
-      Age: 26,
-      profilePhoto: '../../../public/img/pilot.jpg',
-      coverPotho: 'https://arepa.s3.amazonaws.com/elmo002.jpg',
-      workTitle: 'Fonder',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora fugit tempore totam, voluptatem odio similique esse quibusdam nemo quod! Blanditiis.',
-      email: 'samanderson@outlook.com',
-      profileViews: 2.3,
-      postViews: 2.3
-    }
+  export let name, title, email , photo;
+
 </script>
 
 <style>
@@ -71,11 +61,11 @@
 
       <div class="Profile-card">
         <div class="Profile-card-content d-flex flex-column">
-          <UserPotho/>
+          <UserPotho {photo}/>
           <div class="Profile-card-info mt-2">
             <div class="Profile-card-user">
-              <h2>SAM ANDERSON</h2>
-              <span>Founder</span><br>
+              <h2>{name}</h2>
+              <span>{title}</span><br>
               <p>Colombia</p>
             </div>
             <div class="Profile-description my-3">
@@ -85,7 +75,7 @@
               </div>
               <div class="Profile-description-contact">
                 <p>Email</p>
-                <p><a href="/">idgrafica1@outlook.com</a></p>
+                <p><a href="/">{email}</a></p>
               </div>
             </div>
           </div>
