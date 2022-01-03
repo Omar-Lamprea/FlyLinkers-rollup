@@ -9,7 +9,7 @@
   } */
 </style>
 
-<div class="Timeline col-6">
+<div class="Timeline col-12 col-lg-6">
   <div class="Timeline-container">
     <AddPost/>
     <Post/>

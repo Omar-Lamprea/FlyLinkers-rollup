@@ -1,6 +1,7 @@
 <script>
   import { Router, Link, Route } from "svelte-routing";
   import HeaderNav from "./navbar/HeaderNav.svelte";
+  import HeaderNavMobile from "./navbar/HeaderNavMobile.svelte"
 </script>
 
 <style>
@@ -19,13 +20,22 @@
     width: 15rem;
     margin: 0;
   }
+  @media screen and (max-width: 768px){
+    .Header-input input{
+    width: 90%
+    }
+    .Header h1 {
+      display: none;
+    }
+  }
+
 </style>
 
 <div class="Header container-fluid">
   <div class="Header-container container">
     <div class="Header-content d-flex align-items-center justify-content-between">
 
-      <div class="Header-logo d-flex align-items-center p-3">
+      <div class="Header-logo d-flex align-items-center px-3">
         <Router>
           <Link to="/" class="d-flex align-items-center">
             <img src="./img/flylinkers-logo-blanco.png" alt="logo" width="100">
@@ -38,9 +48,16 @@
         <input type="text" placeholder="Search">
       </div>
 
-      <div class="Header-nav d-flex">
-        <HeaderNav/>
-      </div>
+      {#if window.innerWidth > 920}
+        <div class="Header-nav d-flex">
+          <HeaderNav/>
+        </div>
+      {:else}
+        <div class="Header-menu fs-3">
+          <HeaderNavMobile/>
+        </div>
+      {/if}
+
 
     </div>
   </div>

@@ -66,7 +66,7 @@
           <div class="Profile-card-info mt-2">
             <div class="Profile-card-user">
               <h2>{name}</h2>
-              <span>title{title}</span>
+              <span>{title}</span>
               <p>Colombia</p>
             </div>
             <div class="Profile-description my-3">

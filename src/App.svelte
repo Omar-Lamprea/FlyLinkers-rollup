@@ -77,6 +77,12 @@
     padding-top: 14rem;
     padding-bottom: 5rem;
   }
+
+  @media screen and (max-width: 768px){
+    main{
+      padding-top: 8rem;
+    }
+  }
 </style>
 
 <Header/>

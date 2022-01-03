@@ -59,7 +59,7 @@
     <div class="Header-nav-grip-vertical mx-3 fs-3">
       <Link to="/">
         <div class="dropdown">
-            <i class="fas fa-grip-vertical dropdown-toggle" id="settings" data-bs-toggle="dropdown" aria-expanded="false" ></i>
+          <i class="fas fa-grip-vertical dropdown-toggle" id="settings" data-bs-toggle="dropdown" aria-expanded="false" ></i>
           <ul class="dropdown-menu" aria-labelledby="settings">
             <li><span class="dropdown-item">Settings</span></li>
             <li><span class="dropdown-item" on:click={logOut}>Log Out</span></li>

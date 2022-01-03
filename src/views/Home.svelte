@@ -8,9 +8,13 @@
 </script>
 
 <div class="row">
-
-    <SidebarLeft {name} {title} {photo}/>
-    <TimelineH />
-    <SidebarRight />
+    {#if window.innerWidth > 920}
+      <SidebarLeft {name} {title} {photo}/>
+      <TimelineH />
+      <SidebarRight />
+    {:else}
+      <TimelineH />
+    {/if}
+    
     
 </div>
