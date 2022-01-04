@@ -13,6 +13,7 @@
   .Profile-card-avatar img {
   width: 90px;
   height: 90px;
+  object-fit: cover;
   border-radius: 50%;
   border: 1px solid var(--main-color);
   padding: .1rem;

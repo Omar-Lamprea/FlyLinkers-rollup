@@ -1,35 +1,63 @@
 <script>
 
-  let photoB64;
+  let coverPhotoB64;
   let urlCoverPhoto;
   let idCoverPhoto;
+
+  let profilePhotoB64;
+  let urlProfilePhoto;
+  let idProfilePhoto
+
   let validateProfile;
   export let id;
 
-  const showImg = ()=>{
+  const showCoverImg = ()=>{
     const render = new FileReader();
     render.readAsDataURL(coverPhoto.files[0])
     render.onloadend = ()=>{
-      // console.log(render.result)
       showImage.style.display = 'flex'
       showImage.src = render.result
-      photoB64 = render.result
+      coverPhotoB64 = render.result
     }
   }
 
-  const convertB64 = async ()=> {
+  const showProfileImg = () =>{
+    const render = new FileReader();
+    render.readAsDataURL(profilePhoto.files[0])
+    render.onloadend = ()=>{
+      showProfileImage.style.display = 'flex'
+      showProfileImage.src = render.result
+      profilePhotoB64 = render.result
+    }
+  }
+
+  const convertCoverB64 = async ()=> {
     const response = await fetch('http://18.118.50.78:8000/resources/img/',{
       method : 'POST',
       headers : {
         'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          img: photoB64
+          img: coverPhotoB64
         })
     })
     const content = await response.json()
     urlCoverPhoto = content.img
     idCoverPhoto = content.id
+  }
+  const convertProfileB64 = async ()=> {
+    const response = await fetch('http://18.118.50.78:8000/resources/img/',{
+      method : 'POST',
+      headers : {
+        'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          img: profilePhotoB64
+        })
+    })
+    const content = await response.json()
+    urlProfilePhoto = content.img
+    idProfilePhoto = content.id
   }
 
   const getProfile = async (id)=>{
@@ -47,7 +75,7 @@
   }
 
   const createDataDescription = async ()=>{
-    await convertB64()
+    await convertCoverB64()
 
     const sendData = await fetch('http://18.118.50.78:8000/user/profile/', {
       method: 'POST',
@@ -64,7 +92,7 @@
   }
 
   const upDateDataDescription = async ()=>{
-    await convertB64()
+    await convertCoverB64()
     const sendData = await fetch(`http://18.118.50.78:8000/user/profile/?user_id=${id}`, {
       method: 'PUT',
       headers : {
@@ -84,13 +112,38 @@
     }
   }
 
+  const updateProfile = async(id)=>{
+    await convertProfileB64()
+    const response = await fetch(`http://18.118.50.78:8000/user/create/?id=${id}`,{
+      method : 'PUT',
+      headers : {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        first_name: "Omar",
+        title: "Developer",
+        middle_name: "",
+        last_name: "Lamprea",
+        mobile: 3218718605,
+        email: "lampreaomar@gmail.com",
+        password_hash: "omar123",
+        photo: urlProfilePhoto
+      })
+    })
+    const content = await response.json()
+    if (content) {
+      localStorage.removeItem('profilePhoto')
+      window.location.reload()
+    }
+  }
+
 </script>
 
 <style>
   .modal-body textarea{
     width: 100%;
   }
-  .coverPhotoLoaded{
+  .photoLoaded{
     display: none;
     width: 100%;
   }
@@ -113,14 +166,19 @@
         </div>
         <div class="cover-photo">
           <label for="coverPhoto">Cover photo</label>
-          <input type="file" name="coverPhoto" id="coverPhoto" accept=".png, .jpg, .jpeg" on:change={showImg}>
-          <img src="" alt="" id="showImage" class="coverPhotoLoaded">
+          <input type="file" name="coverPhoto" id="coverPhoto" accept=".png, .jpg, .jpeg" on:change={showCoverImg}>
+          <img src="" alt="" id="showImage" class="photoLoaded">
+
+          <label for="profilePhoto">Profile photo</label>
+          <input type="file" name="profilePhoto" id="profilePhoto" accept=".png, .jpg, .jpeg" on:change={showProfileImg}>
+          <img src="" alt="" id="showProfileImage" class="photoLoaded">
         </div>
       </div>
 
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" on:click={getProfile(id)}>Save changes</button>
+        <button type="button" class="btn btn-primary" on:click={updateProfile(id)}>Update Profile</button>
       </div>
 
     </div>
