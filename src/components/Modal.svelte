@@ -3,6 +3,7 @@
   let photoB64;
   let urlCoverPhoto;
   let idCoverPhoto;
+  let validateProfile;
   export let id;
 
   const showImg = ()=>{
@@ -31,7 +32,21 @@
     idCoverPhoto = content.id
   }
 
-  const uploadDataDescription = async ()=>{
+  const getProfile = async (id)=>{
+      const response = await fetch(`http://18.118.50.78:8000/user/profile/?user_id=${id}`)
+      const content = await response.json()
+
+      if (content.Detail === 'User does not exist') {
+        createDataDescription()
+      } else {
+        upDateDataDescription()
+      }
+      // let data = content[0]
+      // coverPhoto = `http://18.118.50.78:8000${data.cover_img}`
+      // aboutMe = data.about
+  }
+
+  const createDataDescription = async ()=>{
     await convertB64()
 
     const sendData = await fetch('http://18.118.50.78:8000/user/profile/', {
@@ -43,9 +58,30 @@
         user_id : id,
         about: description.value,
         resource_id : idCoverPhoto,
-        profile_img: urlCoverPhoto
+        cover_img: urlCoverPhoto
       })
     })
+  }
+
+  const upDateDataDescription = async ()=>{
+    await convertB64()
+    const sendData = await fetch(`http://18.118.50.78:8000/user/profile/?user_id=${id}`, {
+      method: 'PUT',
+      headers : {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        user_id : id,
+        about: description.value,
+        resource_id : idCoverPhoto,
+        cover_img: urlCoverPhoto
+      })
+    })
+    const content = await sendData.json()
+    if (content) {
+      localStorage.removeItem('coverPhoto')
+      window.location.reload()
+    }
   }
 
 </script>
@@ -84,7 +120,7 @@
 
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" on:click={uploadDataDescription}>Save changes</button>
+        <button type="button" class="btn btn-primary" on:click={getProfile(id)}>Save changes</button>
       </div>
 
     </div>

@@ -15,7 +15,7 @@
       const response = await fetch(`http://18.118.50.78:8000/user/profile/?user_id=${id}`)
       const content = await response.json()
       let data = content[0]
-      coverPhoto = `http://18.118.50.78:8000${data.profile_img}`
+      coverPhoto = `http://18.118.50.78:8000${data.cover_img}`
       aboutMe = data.about
       localStorage.setItem('coverPhoto', coverPhoto)
     }, 1000);

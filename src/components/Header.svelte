@@ -9,6 +9,7 @@
     background-color: var(--main-color);
     color: white;
     position: fixed;
+    z-index: 1000;
   }
   .Header-logo h1{
     font-weight: 100;

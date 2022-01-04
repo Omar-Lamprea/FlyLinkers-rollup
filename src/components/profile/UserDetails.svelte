@@ -67,7 +67,7 @@
             <div class="Profile-card-user">
               <h2>{name}</h2>
               <span>{title}</span>
-              <p>Colombia</p>
+              <!-- <p>Colombia</p> -->
             </div>
             <div class="Profile-description my-3">
               <p><i class="fas fa-pen"></i> About me</p>
