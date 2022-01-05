@@ -121,9 +121,9 @@
       },
       body: JSON.stringify({
         first_name: "Omar",
-        title: "Developer",
         middle_name: "",
         last_name: "Lamprea",
+        title: "Developer",
         mobile: 3218718605,
         email: "lampreaomar@gmail.com",
         password_hash: "omar123",

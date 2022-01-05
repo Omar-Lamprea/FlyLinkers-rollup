@@ -1,5 +1,9 @@
 <script>
   // import Comments from './Comments.svelte'
+
+  export let name, desc, title, photo, love, like, img, comments;
+
+  console.log(`http://18.118.50.78:8000${photo}`);
 </script>
 
 <style>
@@ -18,6 +22,7 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    object-fit: cover;
     border: 1px solid var(--main-color);
     padding: .1rem;
   }
@@ -82,10 +87,10 @@
   <div class="Card-container">
     <div class="Card-Header">
       <div class="Card-user">
-        <img src="./img/pilot.jpg" alt="">
+        <img src="http://18.118.50.78:8000{photo}" alt="">
         <h2>
-          SAM ANDERSON
-          <span>Front-end Developer at Memed</span>
+          {name}
+          <span>{title}</span>
           <span>8h</span>
         </h2>
       </div>
@@ -95,13 +100,13 @@
     </div>
 
     <div class="Card-description">
-      <span>Hi!</span>
+      <span>{desc}</span>
     </div>
   </div>
 
     <div class="Card-photo">
       <figure>
-        <img src="https://midamericajet.com/wp-content/uploads/2020/10/Flying-Private-1.jpg" alt="">
+        <img src="{img}" alt="img post">
       </figure>
     </div>
 
@@ -115,13 +120,13 @@
         <div class="Header-nav-heart mx-3">
           <a href="/">
             <i class="fas fa-heart"></i>
-            <span>1.1k</span>
+            <span>{like}</span>
           </a>
         </div>
         <div class="Header-nav-comment mx-3">
           <a href="/">
             <i class="fas fa-comment"></i>
-            <span>6.9k Comments</span>
+            <span>{comments} Comments</span>
           </a>
         </div>
       </div>

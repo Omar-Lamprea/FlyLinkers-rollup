@@ -26,6 +26,7 @@
     })
     const content = await response.json();
     data = content[0]
+    // localStorage.setItem("user_id", data.id)
   }
 
 </script>
@@ -98,15 +99,17 @@
 <Header {...data}/>
 
 <main class="container" on:load={getData()}>
+  {#if data}
+    <Router>
+      <Route path="/">
+        <Home {...data}/>
+      </Route>
 
-	<Router>
-		<Route path="/">
-			<Home {...data}/>
-		</Route>
-
-		<Route path="/profile">
-			<Profile {...data}/>
-		</Route>
-	</Router>
+      <Route path="/profile">
+        <Profile {...data}/>
+      </Route>
+    </Router>
+  {/if}
+	
 
 </main>
