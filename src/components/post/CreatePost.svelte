@@ -1,3 +1,14 @@
+<script>
+
+  let rowsArea = 2
+  const postValue = (e)=>{
+    if (e.key === 'Enter') {
+      rowsArea++
+    }
+  }
+
+</script>
+
 <style>
   .Post-container, .Post-content i{
     color: var(--main-color);
@@ -7,6 +18,11 @@
   }
   .Post-title{
     font-weight: 600;
+  }
+  .Post-content textarea{
+    width: 100%;
+    border: none;
+    background: #fafafa;
   }
   
 </style>
@@ -18,7 +34,7 @@
     </div>
     <div class="Default-containers Post-content">
       <p class="mb-3"><i class="fas fa-pen"></i> Create post</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis, ipsum? Necessitatibus, earum laboriosam dignissimos soluta sapiente fugiat obcaecati quos officia.</p>
+      <textarea name="" id="" cols="30" rows={rowsArea} on:keyup={postValue} placeholder="......"></textarea>
     </div>
 
     <div class="Nav-add-post d-flex">

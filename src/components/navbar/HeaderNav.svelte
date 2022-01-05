@@ -7,6 +7,10 @@
     const redirect = 'http://localhost:3000/'
     window.location.href = redirect
   }
+
+  export let photo;
+
+
 </script>
 
 <style>
@@ -19,6 +23,12 @@
   }
   .dropdown-item:active{
     background-color: var(--main-color);
+  }
+  .Header-nav-user img{
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    object-fit: cover;
   }
 
 </style>
@@ -53,7 +63,11 @@
     </div>
     <div class="Header-nav-user mx-3 fs-3">
       <Link to="/profile">
-        <i class="fas fa-user"></i>
+        {#if localStorage.getItem('profilePhoto')}
+           <img src="{localStorage.getItem('profilePhoto')}" alt="">
+        {:else}
+          <img src="http://18.118.50.78:8000{photo}" alt="">
+        {/if}
       </Link>
     </div>
     <div class="Header-nav-grip-vertical mx-3 fs-3">

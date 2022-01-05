@@ -73,6 +73,16 @@
     padding: 1.2rem 2rem;
     margin-bottom: 1.2rem;
   }
+  :global(.btn-flylinkers){
+    border-radius: 0.5rem;
+    color: grey;
+    border: 1px solid #199aaf;
+  }
+  :global(.btn-flylinkers:hover){
+    background-color: inherit;
+    color: var(--main-color);
+    border: 1px solid #199aaf;
+  }
   main{
     padding-top: 14rem;
     padding-bottom: 5rem;
@@ -85,7 +95,7 @@
   }
 </style>
 
-<Header/>
+<Header {...data}/>
 
 <main class="container" on:load={getData()}>
 

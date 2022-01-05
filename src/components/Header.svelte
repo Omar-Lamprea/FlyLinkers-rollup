@@ -2,6 +2,8 @@
   import { Router, Link, Route } from "svelte-routing";
   import HeaderNav from "./navbar/HeaderNav.svelte";
   import HeaderNavMobile from "./navbar/HeaderNavMobile.svelte"
+
+  export let photo;
 </script>
 
 <style>
@@ -51,7 +53,7 @@
 
       {#if window.innerWidth > 920}
         <div class="Header-nav d-flex">
-          <HeaderNav/>
+          <HeaderNav {photo}/>
         </div>
       {:else}
         <div class="Header-menu fs-3">

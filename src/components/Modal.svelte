@@ -8,7 +8,6 @@
   let urlProfilePhoto;
   let idProfilePhoto
 
-  let validateProfile;
   export let id;
 
   const showCoverImg = ()=>{
@@ -45,6 +44,7 @@
     urlCoverPhoto = content.img
     idCoverPhoto = content.id
   }
+
   const convertProfileB64 = async ()=> {
     const response = await fetch('http://18.118.50.78:8000/resources/img/',{
       method : 'POST',
@@ -177,8 +177,8 @@
 
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" on:click={getProfile(id)}>Save changes</button>
-        <button type="button" class="btn btn-primary" on:click={updateProfile(id)}>Update Profile</button>
+        <button type="button" class="btn btn-outline-primary btn-flylinkers" on:click={getProfile(id)}>Save changes</button>
+        <button type="button" class="btn btn-outline-primary btn-flylinkers" on:click={updateProfile(id)}>Update Profile</button>
       </div>
 
     </div>

@@ -4,6 +4,19 @@
 
   export let name, title, email , photo, id, aboutMe;
 
+  const editDescription = ()=>{
+    editAboutMe.classList.toggle('d-none')
+    // console.log(editAboutMe);
+  }
+
+  const value = (e) =>{
+    console.log(e.key);
+  }
+
+  const updateDescription = () =>{
+    console.log("updating info...");
+  }
+
 </script>
 
 <style>
@@ -35,6 +48,10 @@
   .Profile-description i{
     color: var(--main-color);
   }
+  .Profile-description .edit-description{
+    cursor: pointer;
+    width: max-content;
+  }
 
   .Profile-card-text i, .Profile-card-text span{
     color: var(--main-color);
@@ -44,16 +61,6 @@
     margin: 2rem 0;
   }
 
-  .btn-flylinkers{
-    border-radius: 0.5rem;
-    color: grey;
-    border: 1px solid #199aaf;
-    margin-top: 2rem;
-  }
-  .btn-flylinkers:hover{
-    background-color: inherit;
-    border: 2px solid #199aaf;
-  }
 
 </style>
 <div class="UserDetails Default-containers mt-3">
@@ -70,9 +77,16 @@
               <!-- <p>Colombia</p> -->
             </div>
             <div class="Profile-description my-3">
-              <p><i class="fas fa-pen"></i> About me</p>
+              <p class="edit-description" on:click={editDescription}>
+                <i class="fas fa-pen"></i>
+                 About me
+              </p>
               <div class="Profile-description-text my-2">
                 <p>{aboutMe}</p>
+                <div id="editAboutMe" class="d-none d-flex flex-column">
+                  <textarea name="" id="textArea" on:keyup={value} cols="30" rows="3" style="width: 100%;" value={aboutMe}></textarea>
+                  <button class="btn btn-outline-primary btn-flylinkers m-0 d-flex align-self-end" on:click={updateDescription}>Update</button>
+                </div>
               </div>
               <div class="Profile-description-contact">
                 <p>Email</p>

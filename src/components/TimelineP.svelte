@@ -1,7 +1,7 @@
 <script>
   import CoverPhoto from './profile/CoverPhoto.svelte'
   import UserDetails from './profile/UserDetails.svelte'
-  import CreatePost from './profile/CreatePost.svelte'
+  import CreatePost from './post/CreatePost.svelte'
   import Experience from './profile//Experience.svelte'
   import Panel from './profile/Panel.svelte'
 
