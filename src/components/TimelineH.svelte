@@ -1,5 +1,5 @@
 <script>
-  import AddPost from './post/AddPost.svelte'
+  import AddPost from './post/AddPostHome.svelte'
   import Post from './post/Post.svelte'
 
   export let id

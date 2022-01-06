@@ -1,4 +1,5 @@
 <script>
+  import NavPost from './NavPost.svelte'
 
   let rowsArea = 2
   const postValue = (e)=>{
@@ -6,7 +7,6 @@
       rowsArea++
     }
   }
-
 </script>
 
 <style>
@@ -37,31 +37,7 @@
       <textarea name="" id="" cols="30" rows={rowsArea} on:keyup={postValue} placeholder="......"></textarea>
     </div>
 
-    <div class="Nav-add-post d-flex">
-      <div class="Header-nav-image mx-3">
-        <a href="/">
-          <i class="fas fa-image"></i>
-          <span>Photo</span>
-        </a>
-      </div>
-      <div class="Header-nav-film mx-3">
-        <a href="/">
-          <i class="fas fa-film"></i>
-          <span>Video</span>
-        </a>
-      </div>
-      <div class="Header-nav-calendar mx-3">
-        <a href="/">
-          <i class="fas fa-calendar"></i>
-          <span>Event</span>
-        </a>
-      </div>
-      <div class="Header-nav-file-alt mx-3">
-        <a href="/">
-          <i class="fas fa-file-alt"></i>
-          <span>Write article</span>
-        </a>
-      </div>
-    </div>
+    <NavPost/>
+
   </div>
 </div>
