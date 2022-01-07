@@ -8,8 +8,12 @@
       img : postImg.src
     }
     console.log(dataPost);
+    loadPhoto()
   }
 
+  const loadPhoto = ()=>{
+    console.log(postImg.src);
+  }
 
 </script>
 
@@ -41,11 +45,11 @@
   <div class="Add-post-input mx-3 d-flex flex-column justify-content-center">
     <textarea name="" cols="" rows="1" id="postDescription" class="Default-containers" placeholder="Start a post..." on:keyup={expandTextArea}></textarea>
     <!-- <input id="postDescription" class="Default-containers" type="text" placeholder="Start a post..." on:keyup={createPost}> -->
-    <img src="" alt="postImg" id="postImg" class="d-none">
+    <img alt="postImg" id="postImg" class="d-none mb-3">
   </div>
 
   <NavPost/>
 
-  <button class="btn btn-outline-primary btn-flylinkers btn-post mt-3" on:click={sendPost}>Post</button>
+  <button id="btn-sendPost" class="btn btn-outline-primary btn-flylinkers btn-post mt-3" disabled on:click={sendPost}>Post</button>
 
 </div>  

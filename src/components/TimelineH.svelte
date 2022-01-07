@@ -12,9 +12,7 @@
     const content = await response.json()
     // console.log(content.results);
     post = content.results
-    console.log(post);
   }
-
 
 </script>
 

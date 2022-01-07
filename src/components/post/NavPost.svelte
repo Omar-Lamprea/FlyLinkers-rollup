@@ -10,18 +10,20 @@
       postImg.classList.remove('d-none')
       postImg.src = render.result
       // coverPhotoB64 = render.result
+
+      ableBtn()
     }
   }
 
-  const loadPhoto = ()=>{
-    
-    console.log(loadPhotoPost,postImg);
-
+  const ableBtn = ()=>{
+    const btnsendPost = document.getElementById('btn-sendPost')
+    btnsendPost.removeAttribute('disabled')
   }
+
 </script>
 
 <style>
-  .Header-nav-image{
+  .Header-nav-image label{
     cursor: pointer;
   }
   i, span{

@@ -1,9 +1,50 @@
 <script>
   // import Comments from './Comments.svelte'
 
-  export let name, desc, title, photo, love, like, img, comments;
+  export let name, desc, title, photo, love, like, img, comments, create_time;
 
-  console.log(`http://18.118.50.78:8000${photo}`);
+  let datePost;
+
+  const getPostDate = ()=> {
+    const postDate = new Date(create_time)
+    const dateNow = new Date()
+    const substractDate = (dateNow - postDate)
+
+    const minute = 60_000
+    const hour = minute * 60
+    const days = hour * 24
+    const week = days * 7
+    const month = week * 4
+    const year = month * 12
+
+    let daysCount = (1 * substractDate)/ days;
+    let timePost;
+
+    if (daysCount < 1){
+      timePost = (1 * substractDate)/ hour 
+      datePost = Math.floor(timePost) + 'H'
+    }
+    if (daysCount >= 1) {
+      timePost = daysCount
+      datePost = Math.ceil(timePost) + ' D'
+    }
+    if (daysCount >= 7){
+      timePost = (1 * substractDate)/ week 
+      datePost = Math.floor(timePost) + ' W'
+
+      if (timePost >= 4) {
+        timePost = (1 * substractDate)/ month 
+        datePost = Math.floor(timePost) + ' M'
+        if (timePost >= 12) {
+          timePost = (1 * substractDate)/ year 
+          datePost = Math.floor(timePost) + ' Year'
+        }
+      }
+    }
+  }
+
+  getPostDate()
+
 </script>
 
 <style>
@@ -91,7 +132,7 @@
         <h2>
           {name}
           <span>{title}</span>
-          <span>8h</span>
+          <span>{datePost}</span>
         </h2>
       </div>
       <div class="Card-settings">
@@ -112,15 +153,16 @@
 
     <div class="Card-board-icons">
       <div class="Card-board-icons-first d-flex">
-        <div class="Header-nav-user mx-3">
+        <div class="Header-nav-like mx-3">
           <a href="/">
-            <i class="fas fa-user"></i>
+            <i class="far fa-thumbs-up"></i>
+            <span>{like}</span>
           </a>
         </div>
         <div class="Header-nav-heart mx-3">
           <a href="/">
             <i class="fas fa-heart"></i>
-            <span>{like}</span>
+            <span>{love}</span>
           </a>
         </div>
         <div class="Header-nav-comment mx-3">
