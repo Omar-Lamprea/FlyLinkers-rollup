@@ -35,10 +35,10 @@
       method : 'POST',
       headers : {
         'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          img: coverPhotoB64
-        })
+      },
+      body: JSON.stringify({
+        img: coverPhotoB64
+      })
     })
     const content = await response.json()
     urlCoverPhoto = content.img
@@ -83,9 +83,9 @@
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        user_id : id,
-        about: description.value,
+        user: id,
         resource_id : idCoverPhoto,
+        about: description.value,
         cover_img: urlCoverPhoto
       })
     })
@@ -93,13 +93,17 @@
 
   const upDateDataDescription = async ()=>{
     await convertCoverB64()
-    const sendData = await fetch(`http://18.118.50.78:8000/user/profile/?user_id=${id}`, {
+    let dataDescription;
+    if (description.value === '') {
+      const userDescription = document.getElementById('userDescription').textContent
+      description.value = userDescription
+    }
+    const sendData = await fetch(`http://18.118.50.78:8000/user/profile/?user=${id}`, {
       method: 'PUT',
       headers : {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        user_id : id,
         about: description.value,
         resource_id : idCoverPhoto,
         cover_img: urlCoverPhoto
@@ -120,13 +124,6 @@
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        first_name: "Omar",
-        middle_name: "",
-        last_name: "Lamprea",
-        title: "Developer",
-        mobile: 3218718605,
-        email: "lampreaomar@gmail.com",
-        password_hash: "omar123",
         photo: urlProfilePhoto
       })
     })
@@ -177,8 +174,8 @@
 
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-outline-primary btn-flylinkers" on:click={getProfile(id)}>Save changes</button>
-        <button type="button" class="btn btn-outline-primary btn-flylinkers" on:click={updateProfile(id)}>Update Profile</button>
+        <button type="button" class="btn btn-outline-primary btn-flylinkers" on:click={getProfile(id)}>Save description</button>
+        <button type="button" class="btn btn-outline-primary btn-flylinkers" on:click={updateProfile(id)}>Save Profile</button>
       </div>
 
     </div>

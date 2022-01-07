@@ -4,7 +4,8 @@
   import CreatePost from './post/CreatePost.svelte'
   import Experience from './profile//Experience.svelte'
   import Panel from './profile/Panel.svelte'
-import AddPostHome from './post/AddPostHome.svelte';
+  import AddPostHome from './post/AddPostHome.svelte';
+  import PostP from './post/PostProfile.svelte'
 
   export let name, title, email , photo , id;
 
@@ -12,14 +13,24 @@ import AddPostHome from './post/AddPostHome.svelte';
   let aboutMe;
 
   const getProfile = async ()=>{
-    setTimeout(async() => {
-      const response = await fetch(`http://18.118.50.78:8000/user/profile/?user_id=${id}`)
-      const content = await response.json()
-      let data = content[0]
-      coverPhoto = `http://18.118.50.78:8000${data.cover_img}`
-      aboutMe = data.about
-      localStorage.setItem('coverPhoto', coverPhoto)
-    }, 1000);
+    const response = await fetch(`http://18.118.50.78:8000/user/profile/?user_id=${id}`)
+    const content = await response.json()
+    let data = content[0]
+    coverPhoto = `http://18.118.50.78:8000${data.cover_img}`
+    aboutMe = data.about
+    localStorage.setItem('coverPhoto', coverPhoto)
+  }
+
+  let post;
+  let userPost;
+  const getPost = async()=>{
+    await id
+    const response = await fetch(`http://18.118.50.78:8000/post/create/?user=${id}`)
+    const content = await response.json()
+    post = content.splice(1)
+    userPost = content[0]
+    console.log(post);
+    console.log(userPost);
   }
 
 </script>
@@ -42,9 +53,17 @@ import AddPostHome from './post/AddPostHome.svelte';
     <CoverPhoto {coverPhoto}/>
     <UserDetails {name} {title} {email} {photo} {id} {aboutMe}/>
     <!-- <CreatePost/> -->
-    <div class="Background-post-profile">
+    <div class="Background-post-profile" on:load={getPost()}>
       <p class="my-2">Post</p>
       <AddPostHome/>
+      <PostP {...userPost}/>
+      {#if post}
+        <!-- {#each post as dataPost}
+          <Post {...dataPost}/>
+        {:else}
+          <p>Loading...</p>
+        {/each} -->
+      {/if}
     </div>
     <Experience/>
     <Panel/>

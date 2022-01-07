@@ -9,12 +9,28 @@
     // console.log(editAboutMe);
   }
 
+  let dataDescription;
+
   const value = (e) =>{
-    console.log(e.key);
+    dataDescription = e.target.value
+    console.log(dataDescription);
   }
 
-  const updateDescription = () =>{
+  const updateDescription = async () =>{
     console.log("updating info...");
+     const response = await fetch(`http://18.118.50.78:8000/user/profile/?user=${id}`,{
+       method : 'PUT',
+      headers : {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        about: dataDescription
+      })
+     })
+     const content = response.json()
+     if (content) {
+      editAboutMe.classList.toggle('d-none')
+     }
   }
 
 </script>
@@ -79,10 +95,10 @@
             <div class="Profile-description my-3">
               <p class="edit-description" on:click={editDescription}>
                 <i class="fas fa-pen"></i>
-                 About me
+                 About me...
               </p>
               <div class="Profile-description-text my-2">
-                <p>{aboutMe}</p>
+                <p id="userDescription">{aboutMe}</p>
                 <div id="editAboutMe" class="d-none d-flex flex-column">
                   <textarea name="" id="textArea" on:keyup={value} cols="30" rows="3" style="width: 100%;" value={aboutMe}></textarea>
                   <button class="btn btn-outline-primary btn-flylinkers m-0 d-flex align-self-end" on:click={updateDescription}>Update</button>
