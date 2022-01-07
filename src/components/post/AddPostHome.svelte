@@ -1,14 +1,6 @@
 <script>
   import NavPost from './NavPost.svelte'
-  // import CreatePost, {postValue} from './CreatePost.svelte';
-
-  //cómo importar una función de otro compónente? 
-  let rowsArea = 1
-  const postValue = (e)=>{
-    if (e.key === 'Enter') {
-      rowsArea++
-    }
-  }
+  import expandTextArea from '../../js/expandTextArea.js'
 
   const sendPost = ()=>{
     const dataPost = {
@@ -47,7 +39,7 @@
 <div class="Add-post Default-containers px-5 d-flex flex-column">
 
   <div class="Add-post-input mx-3 d-flex flex-column justify-content-center">
-    <textarea name="" cols="" rows={rowsArea} id="postDescription" class="Default-containers" placeholder="Start a post..." on:keyup={postValue}></textarea>
+    <textarea name="" cols="" rows="1" id="postDescription" class="Default-containers" placeholder="Start a post..." on:keyup={expandTextArea}></textarea>
     <!-- <input id="postDescription" class="Default-containers" type="text" placeholder="Start a post..." on:keyup={createPost}> -->
     <img src="" alt="postImg" id="postImg" class="d-none">
   </div>

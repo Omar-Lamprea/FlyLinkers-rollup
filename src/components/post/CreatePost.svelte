@@ -1,12 +1,8 @@
 <script>
   import NavPost from './NavPost.svelte'
+  import expandTextArea from '../../js/expandTextArea.js'
 
-  let rowsArea = 2
-  const postValue = (e)=>{
-    if (e.key === 'Enter') {
-      rowsArea++
-    }
-  }
+
 </script>
 
 <style>
@@ -21,23 +17,30 @@
   }
   .Post-content textarea{
     width: 100%;
-    border: none;
+    border: 1px solid var(--main-color);
+    border-radius: 1rem;
     background: #fafafa;
+  }
+  .btn-post{
+    width: 50%;
+    background-color: #199aaf;
+    color: #fefefe;
   }
   
 </style>
 
 <div class="Post Default-containers-grey">
-  <div class="Post-container">
+  <div class="Post-container d-flex flex-column">
     <div class="Post-title">
       <p class="my-2">Post</p>
     </div>
     <div class="Default-containers Post-content">
       <p class="mb-3"><i class="fas fa-pen"></i> Create post</p>
-      <textarea name="" id="" cols="30" rows={rowsArea} on:keyup={postValue} placeholder="......"></textarea>
+      <textarea name="" id="" cols="30" rows="1" on:keyup={expandTextArea} placeholder="......"></textarea>
+      <img src="" alt="postImg" id="postImg" class="d-none mb-3" style="width: 100%;">
     </div>
 
     <NavPost/>
-
+    <button class="btn btn-outline-primary btn-flylinkers btn-post mt-3">Post</button>
   </div>
 </div>

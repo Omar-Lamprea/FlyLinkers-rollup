@@ -24,6 +24,9 @@
   .Header-nav-image{
     cursor: pointer;
   }
+  i, span{
+    color:var(--main-color)
+  }
 </style>
 
 <div class="Nav-add-post d-flex justify-content-center">
