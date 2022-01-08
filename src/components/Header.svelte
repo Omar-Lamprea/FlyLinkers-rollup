@@ -3,7 +3,7 @@
   import HeaderNav from "./navbar/HeaderNav.svelte";
   import HeaderNavMobile from "./navbar/HeaderNavMobile.svelte"
 
-  export let photo;
+  export let photo = ''
 </script>
 
 <style>

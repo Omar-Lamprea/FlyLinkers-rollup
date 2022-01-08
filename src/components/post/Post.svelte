@@ -1,6 +1,7 @@
 <script>
   // import Comments from './Comments.svelte'
-  export let desc, reactions, img, comments, create_time, user;
+  export let desc, reactions, img, comments, create_time, user, id;
+
 
   let datePost;
 
@@ -152,7 +153,9 @@
 
     <div class="Card-photo">
       <figure>
-        <img src="{img}" alt="img post">
+        {#if !!img}
+           <img src="http://18.118.50.78:8000{img}" alt="img post">
+        {/if}
       </figure>
     </div>
 

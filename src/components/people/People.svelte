@@ -1,20 +1,15 @@
 <script>
   import User from './User.svelte'
 
-  const data = [
-    {
-      img: 'https://scontent.feoh4-3.fna.fbcdn.net/v/t1.6435-9/127117374_10225413017775737_3815254072231742375_n.jpg?_nc_cat=100&ccb=1-5&_nc_sid=09cbfe&_nc_eui2=AeE19bI-5yVUK7SutFpZunHWJ6wLAiwEawInrAsCLARrAnqS44ZXL6rQPIEhWQYj0hw&_nc_ohc=_vixEsFl92cAX8w7EG0&_nc_ht=scontent.feoh4-3.fna&oh=00_AT8OstSfaMQ4Um4lBJp4zXlUxB7qjZyXWxR6RZh0SI2Mnw&oe=61FA6518',
-      name: 'Ben Morey',
-      workTitle: 'Recrutier at Pilot',
-      city: 'San Francisco, Ca'
-    },
-    {
-      img: 'https://scontent.feoh4-3.fna.fbcdn.net/v/t1.6435-9/127117374_10225413017775737_3815254072231742375_n.jpg?_nc_cat=100&ccb=1-5&_nc_sid=09cbfe&_nc_eui2=AeE19bI-5yVUK7SutFpZunHWJ6wLAiwEawInrAsCLARrAnqS44ZXL6rQPIEhWQYj0hw&_nc_ohc=_vixEsFl92cAX8w7EG0&_nc_ht=scontent.feoh4-3.fna&oh=00_AT8OstSfaMQ4Um4lBJp4zXlUxB7qjZyXWxR6RZh0SI2Mnw&oe=61FA6518',
-      name: 'Jessica Mckellar',
-      workTitle: 'Pilot',
-      city: 'San Francisco, Ca'
-    },
-  ]
+  export let id;
+
+  let data;
+  const getFriends = async()=>{
+    const response = await fetch(`http://18.118.50.78:8000/friend/user/?user=${id}`)
+    const content = await response.json()
+    data = content
+  }
+  getFriends()
 </script>
 
 <style>
@@ -29,9 +24,11 @@
   </div>
   <div class="People-column">
     <div class="User">
-      {#each data as UserDetails}
-        <User {...UserDetails}/>
-      {/each}
+      {#if data}
+         {#each data as UserDetails}
+           <User {...UserDetails}/>
+         {/each}
+      {/if}
     </div>
   </div>
 </div>

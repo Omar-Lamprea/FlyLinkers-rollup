@@ -2,7 +2,7 @@
   import UserPotho from './UserPhoto.svelte'
   import Modal from '../Modal.svelte'
 
-  export let name, title, email , photo, id, aboutMe;
+  export let name, last_name, title, email , photo, id, aboutMe;
 
   const editDescription = ()=>{
     editAboutMe.classList.toggle('d-none')
@@ -88,7 +88,7 @@
           <UserPotho {photo}/>
           <div class="Profile-card-info mt-2">
             <div class="Profile-card-user">
-              <h2>{name}</h2>
+              <h2>{name} {last_name}</h2>
               <span>{title}</span>
               <!-- <p>Colombia</p> -->
             </div>

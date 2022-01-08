@@ -1,5 +1,5 @@
 <script>
-  export let photo
+  export let photo = '';
 
   let image;
   const urlImage = setTimeout(() => {

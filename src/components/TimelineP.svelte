@@ -7,7 +7,7 @@
   import AddPostHome from './post/AddPostHome.svelte';
   import PostP from './post/PostProfile.svelte'
 
-  export let name, title, email , photo , id;
+  export let name, last_name, title, email , photo , id = '';
 
   let coverPhoto;
   let aboutMe;
@@ -24,13 +24,11 @@
   let post;
   let userPost;
   const getPost = async()=>{
-    await id
+    // await id
     const response = await fetch(`http://18.118.50.78:8000/post/create/?user=${id}`)
     const content = await response.json()
-    post = content.splice(1)
+    post = content.splice(1).reverse()
     userPost = content[0]
-    console.log(post);
-    console.log(userPost);
   }
 
 </script>
@@ -51,21 +49,20 @@
 <div class="Profile col-9" on:load={getProfile()}>
   <div class="Profile-container">
     <CoverPhoto {coverPhoto}/>
-    <UserDetails {name} {title} {email} {photo} {id} {aboutMe}/>
+    <UserDetails {name} {last_name} {title} {email} {photo} {id} {aboutMe}/>
     <!-- <CreatePost/> -->
     <div class="Background-post-profile" on:load={getPost()}>
       <p class="my-2">Post</p>
-      <AddPostHome/>
-      <PostP {...userPost}/>
-      {#if post}
-        <!-- {#each post as dataPost}
-          <Post {...dataPost}/>
-        {:else}
-          <p>Loading...</p>
-        {/each} -->
-      {/if}
+      <AddPostHome {id}/>
     </div>
     <Experience/>
     <Panel/>
+    {#if post}
+        {#each post as dataPost}
+          <PostP {...userPost} {...dataPost}/>
+        {:else}
+          <p>Loading...</p>
+        {/each}
+      {/if}
   </div>
 </div>

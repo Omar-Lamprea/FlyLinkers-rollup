@@ -26,7 +26,6 @@
     })
     const content = await response.json();
     data = content[0]
-    // localStorage.setItem("user_id", data.id)
   }
 
 </script>

@@ -1,5 +1,5 @@
 <script>
-  export let name, workTitle, city, img
+  export let name, middle_name, last_name, title, photo, email, id = '';
 </script>
 
 <style>
@@ -32,11 +32,11 @@
 
 <div class="User py-3 d-flex justify-content-around align-items-center">
   <div class="User-photo">
-    <img src="{img}" alt="">
+    <img src="http://18.118.50.78:8000{photo}" alt="">
   </div>
   <div class="User-detail d-flex flex-column">
-    <p>{name}</p>
-    <span>{workTitle}</span>
-    <span>{city}</span>
+    <p>{name} {last_name}</p>
+    <span>{title}</span>
+    <span>{email}</span>
   </div>
 </div>

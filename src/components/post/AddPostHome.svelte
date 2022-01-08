@@ -2,17 +2,53 @@
   import NavPost from './NavPost.svelte'
   import expandTextArea from '../../js/expandTextArea.js'
 
-  const sendPost = ()=>{
-    const dataPost = {
-      description : postDescription.value,
-      img : postImg.src
-    }
-    console.log(dataPost);
-    loadPhoto()
-  }
+  export let id
 
-  const loadPhoto = ()=>{
-    console.log(postImg.src);
+  const sendPost = async()=>{
+    let imagePost = '';
+    if (!!postImg.src) {
+      // imagePost = postImg.src
+      const convertImageB64 = await fetch('http://18.118.50.78:8000/resources/img/', {
+        method : 'POST',
+        headers : {
+          'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify({
+          img: postImg.src
+        })
+      })
+      const content =await convertImageB64.json()
+      imagePost = content.img
+    }
+
+    if (
+      postDescription.value !== '' && imagePost === '' || 
+      postDescription.value === '' && imagePost !== '' || 
+      postDescription.value !== '' && imagePost !== '') 
+      {
+      //   const dataPost = {
+      //     id : id,
+      //     description : postDescription.value,
+      //     img : imagePost
+      //   }
+      // console.log(dataPost);
+
+        const post = await fetch('http://18.118.50.78:8000/post/create/',{
+          method : 'POST',
+          headers : {
+            'Content-Type' : 'application/json'
+          },
+          body: JSON.stringify({
+            user: id,
+            img: imagePost,
+            desc : postDescription.value
+          })
+        })
+        const content = await post.json()
+        if (content) {
+          window.location.reload()
+        }
+    }
   }
 
 </script>
@@ -52,4 +88,4 @@
 
   <button id="btn-sendPost" class="btn btn-outline-primary btn-flylinkers btn-post mt-3" disabled on:click={sendPost}>Post</button>
 
-</div>  
+</div>

@@ -1,58 +1,55 @@
 <script>
-  // import Comments from './Comments.svelte'
-  // export let name;
+  import Comments from './Comments.svelte'
+  export let name, middle_name, last_name, title, photo, email, id = '';
+  export let user_id, update_time, comments, create_time, desc, img = '';
 
-  // setTimeout(() => {
-  //   console.log(name);
-  // }, 2000);
+  let datePost = '';
 
-  // let datePost;
+  const getPostDate = ()=> {
+    const postDate = new Date(create_time)
+    const dateNow = new Date()
+    const substractDate = (dateNow - postDate)
 
-  // const getPostDate = ()=> {
-  //   const postDate = new Date(create_time)
-  //   const dateNow = new Date()
-  //   const substractDate = (dateNow - postDate)
+    const minute = 60_000
+    const hour = minute * 60
+    const days = hour * 24
+    const week = days * 7
+    const month = week * 4
+    const year = month * 12
 
-  //   const minute = 60_000
-  //   const hour = minute * 60
-  //   const days = hour * 24
-  //   const week = days * 7
-  //   const month = week * 4
-  //   const year = month * 12
+    let daysCount = (1 * substractDate)/ days;
+    let timePost;
 
-  //   let daysCount = (1 * substractDate)/ days;
-  //   let timePost;
+    // console.log(Math.round(daysCount));
+    if (substractDate < hour) {
+      timePost = (1 * substractDate)/ minute 
+      datePost = Math.floor(timePost) + 'Min'
+    }
+    if (daysCount < 1 && substractDate > hour){
+      timePost = (1 * substractDate)/ hour 
+      datePost = Math.floor(timePost) + 'H'
+    }
+    if (daysCount >= 1) {
+      timePost = daysCount
+      datePost = Math.ceil(timePost) + ' D'
+    }
+    if (daysCount >= 7){
+      timePost = (1 * substractDate)/ week 
+      datePost = Math.floor(timePost) + ' W'
 
-  //   // console.log(Math.round(daysCount));
-  //   if (substractDate < hour) {
-  //     timePost = (1 * substractDate)/ minute 
-  //     datePost = Math.floor(timePost) + 'Min'
-  //   }
-  //   if (daysCount < 1 && substractDate > hour){
-  //     timePost = (1 * substractDate)/ hour 
-  //     datePost = Math.floor(timePost) + 'H'
-  //   }
-  //   if (daysCount >= 1) {
-  //     timePost = daysCount
-  //     datePost = Math.ceil(timePost) + ' D'
-  //   }
-  //   if (daysCount >= 7){
-  //     timePost = (1 * substractDate)/ week 
-  //     datePost = Math.floor(timePost) + ' W'
+      if (timePost >= 4) {
+        timePost = (1 * substractDate)/ month 
+        datePost = Math.floor(timePost) + ' M'
 
-  //     if (timePost >= 4) {
-  //       timePost = (1 * substractDate)/ month 
-  //       datePost = Math.floor(timePost) + ' M'
+        if (timePost >= 12) {
+          timePost = (1 * substractDate)/ year 
+          datePost = Math.floor(timePost) + ' Year'
+        }
+      }
+    }
+  }
 
-  //       if (timePost >= 12) {
-  //         timePost = (1 * substractDate)/ year 
-  //         datePost = Math.floor(timePost) + ' Year'
-  //       }
-  //     }
-  //   }
-  // }
-
-  // getPostDate()
+  getPostDate()
 
 </script>
 
@@ -137,11 +134,11 @@
   <div class="Card-container">
     <div class="Card-Header">
       <div class="Card-user">
-        <img src="" alt="">
+        <img src="http://18.118.50.78:8000{photo}" alt="">
         <h2>
-          hola
-          <span>tittle</span>
-          <span>fecha</span>
+          {name} {last_name}
+          <span>{title}</span>
+          <span>{datePost}</span>
         </h2>
       </div>
       <div class="Card-settings">
@@ -150,13 +147,15 @@
     </div>
 
     <div class="Card-description">
-      <span>desc</span>
+      <span>{desc}</span>
     </div>
   </div>
 
     <div class="Card-photo">
       <figure>
-        <img src="" alt="img post">
+        {#if !!img}
+           <img src="http://18.118.50.78:8000{img}" alt="img post">
+        {/if}
       </figure>
     </div>
 
@@ -177,7 +176,7 @@
         <div class="Header-nav-comment mx-3">
           <a href="/">
             <i class="fas fa-comment"></i>
-            <span>Comments</span>
+            <span>{comments}</span>
           </a>
         </div>
       </div>
