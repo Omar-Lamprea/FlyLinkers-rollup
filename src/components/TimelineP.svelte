@@ -6,11 +6,13 @@
   import Panel from './profile/Panel.svelte'
   import AddPostHome from './post/AddPostHome.svelte';
   import PostP from './post/PostProfile.svelte'
+  import Post from './post/Post.svelte'
 
   export let name, last_name, title, email , photo , id = '';
 
   let coverPhoto;
   let aboutMe;
+  let userId = id
 
   const getProfile = async ()=>{
     const response = await fetch(`http://18.118.50.78:8000/user/profile/?user_id=${id}`)
@@ -58,11 +60,12 @@
     <Experience/>
     <Panel/>
     {#if post}
-        {#each post as dataPost}
-          <PostP {...userPost} {...dataPost}/>
-        {:else}
-          <p>Loading...</p>
-        {/each}
-      {/if}
+      {#each post as dataPost}
+        <Post {...userPost} {...dataPost} {userId}/>
+        <!-- <PostP {...userPost} {...dataPost}/> -->
+      {:else}
+        <p>Loading...</p>
+      {/each}
+    {/if}
   </div>
 </div>

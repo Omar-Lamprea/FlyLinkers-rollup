@@ -97,7 +97,7 @@
 
 <Header {...data}/>
 
-<main class="container" on:load={getData()}>
+<main id="main" class="container" on:load={getData()}>
   {#if data}
     <Router>
       <Route path="/">
