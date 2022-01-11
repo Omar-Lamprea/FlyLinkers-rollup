@@ -11,31 +11,33 @@
     const response = await fetch(`http://18.118.50.78:8000/post/home/?page=${page}&user_id=${id}`)
     const content = await response.json()
     post = content.results
-    post.reverse()
+    // post.reverse()
   }
 
-  let morePost;
+  let morePost = [];
+  let newPost;
   let errorPage;
   
-  document.addEventListener('scroll', async (e)=>{
-    if ((window.innerHeight + window.scrollY) === main.offsetHeight){
-      loadMorePost()
-    }
-  })
+  // document.addEventListener('scroll', async (e)=>{
+  //   if ((window.innerHeight + window.scrollY) === main.offsetHeight){
+  //     loadMorePost()
+  //   }
+  // })
 
   const loadMorePost = async ()=>{
     page += 1
     const response = await fetch(`http://18.118.50.78:8000/post/home/?page=${page}&user_id=${id}`)
     const content = await response.json()
-    morePost = content.results
+    newPost = content.results
 
-    morePost.forEach(el => {
+    newPost.forEach(el => {
       morePost.push(el)
     });
 
     console.log(morePost);
-    errorPage = content.detail
+    // errorPage = content.detail
   }
+  
 
 </script>
 
@@ -57,15 +59,13 @@
     {/if}
 
     {#if morePost}
-      {#each morePost as dataPost}
+      {#each morePost as dataPost, i}
         <Post {...dataPost} {userId}/>
-      {:else}
-        <p>Loading...</p>
       {/each}
     {/if}
     {#if errorPage}
        <p>no more...</p>
     {/if}
-
+   <button on:click={loadMorePost}>cargar mas...</button>
   </div>
 </div>

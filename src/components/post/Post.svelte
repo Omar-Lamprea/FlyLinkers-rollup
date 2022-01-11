@@ -4,7 +4,9 @@
   export let desc, reactions, img, comments, create_time, user, id, user_id, update_time = '';
   export let name, middle_name, last_name, title, photo, email = "";
 
-  // console.log('user id: ',userId, 'id post:',id);
+  console.log(userId, id);  
+  const likeValue = `likeValue${id}`
+  const loveValue = `loveValue${id}`
 
   let datePost;
 
@@ -52,46 +54,82 @@
     }
   }
 
+  const reactionUser = async()=>{
+    const getIdReaction = await fetch(`http://18.118.50.78:8000/post/like/?post_id=${id}`)
+    .then(async ()=>{
+      // const content = await getIdReaction.json()
+      // console.log(content);
+    })
+    .catch((error)=>{
+      console.log(error);
+    })
+  }
+
   const changeReaction = async(e)=>{
+    const likeAcount = document.getElementById(likeValue)
+    const loveAcount = document.getElementById(loveValue)
     const element = e.target.parentNode.childNodes[0]
     const reactionType = element.classList[0]
     const reactionElement = element.classList[1]
 
-    let countLike = 0;
-    let countLove = 0;
+    const getIdReaction = await fetch(`http://18.118.50.78:8000/post/like/?post_id=${id}`)
+    const content = await getIdReaction.json()
 
     if (reactionType === 'fa-thumbs-up' && reactionElement === 'far') {
       console.log('like in process..');
-      console.dir(likeValue);
-      // const response = await fetch('http://18.118.50.78:8000/post/like/',{
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type' : 'application/json'
-      //   },
-      //   body: JSON.stringify({
-      //     user_id: userId,
-      //     post_id: id,
-      //     like: countLike,
-      //     love: countLove
-      //   })
-      // })
-      // const content = response.json()
-      // if (content) { }
-      likeValue.textContent = reactions.like + 1
-      toggleReaction()
+
+      if(!!content.Error === true){
+       const createReaction = await fetch('http://18.118.50.78:8000/post/like/',{
+        method: 'POST',
+        headers: {
+          'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify({
+          user_id: userId,
+          post_id: id,
+          like: 1,
+        })
+      })
+      const response = createReaction.json()
+        if (response) {
+          likeAcount.textContent = reactions.like + 1
+          toggleReaction()
+        }
+      }else{
+        const like = await fetch(`http://18.118.50.78:8000/post/like/?post_id=${id}&user=${userId}`,{
+          method: 'PUT',
+          headers: {
+            'Content-Type' : 'application/json'
+          },
+          body: JSON.stringify({
+            like: 1,
+          })
+        })
+
+        const response = like.json()
+        if (response) {
+          likeAcount.textContent = reactions.like + 1
+          toggleReaction()
+        }
+      }
     }
+
     if(reactionType === 'fa-thumbs-up' && reactionElement === 'fas'){
       console.log('dislike in process..');
-      likeValue.textContent = reactions.like //-1
+      likeAcount.textContent = reactions.like //-1
       toggleReaction()
     }
 
+
+
     if (reactionType === 'fa-heart' && reactionElement === 'far') {
       console.log('love in process...');
+      loveAcount.textContent = reactions.love + 1
       toggleReaction()
     }
     if (reactionType === 'fa-heart' && reactionElement === 'fas') {
       console.log('dislove in process...');
+      loveAcount.textContent = reactions.love
       toggleReaction()
     }
 
@@ -212,7 +250,7 @@
           {/if}
           {#if user === undefined}
             {name} {last_name}
-            {title}
+            <span>{title}</span>
           {/if}
           <span>{datePost}</span>
         </h2>
@@ -241,19 +279,19 @@
         <div class="Reaction Header-nav-like mx-2">
             <i class="fas fa-thumbs-up"></i>
             {#if reactions}
-              <span id="likeValue">{reactions.like}</span>
+              <span id={likeValue}>{reactions.like}</span>
             {/if}
             {#if reactions === undefined}
-              <span id="likeValue">0</span>
+              <span id={likeValue}>0</span>
             {/if}
         </div>
         <div class="Reaction Header-nav-heart mx-2">
           <i class="fas fa-heart"></i>
           {#if reactions}
-            <span>{reactions.love}</span>
+            <span id={loveValue}>{reactions.love}</span>
           {/if}
           {#if reactions === undefined}
-            <span>0</span>
+            <span id={loveValue}>0</span>
           {/if}
         </div>
         <div class="Reaction Header-nav-comment mx-2">

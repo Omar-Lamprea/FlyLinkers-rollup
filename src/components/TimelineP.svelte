@@ -17,10 +17,29 @@
   const getProfile = async ()=>{
     const response = await fetch(`http://18.118.50.78:8000/user/profile/?user_id=${id}`)
     const content = await response.json()
+    console.log(content);
+    if (content.Detail) {
+      // createprofile()
+    }
     let data = content[0]
     coverPhoto = `http://18.118.50.78:8000${data.cover_img}`
     aboutMe = data.about
     localStorage.setItem('coverPhoto', coverPhoto)
+  }
+
+  const createprofile = async ()=>{
+    const response = await fetch('http://18.118.50.78:8000/user/profile/', {
+      method: 'POST',
+      headers : {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        user: id,
+        resource_id : 0,
+        about: '',
+        cover_img: ''
+      })
+    })
   }
 
   let post;
@@ -49,23 +68,25 @@
 </style>
 
 <div class="Profile col-9" on:load={getProfile()}>
-  <div class="Profile-container">
-    <CoverPhoto {coverPhoto}/>
-    <UserDetails {name} {last_name} {title} {email} {photo} {id} {aboutMe}/>
-    <!-- <CreatePost/> -->
-    <div class="Background-post-profile" on:load={getPost()}>
-      <p class="my-2">Post</p>
-      <AddPostHome {id}/>
+  <!-- {#if aboutMe} -->
+    <div class="Profile-container">
+      <CoverPhoto {coverPhoto}/>
+      <UserDetails {name} {last_name} {title} {email} {photo} {id} {aboutMe}/>
+      <!-- <CreatePost/> -->
+      <div class="Background-post-profile" on:load={getPost()}>
+        <p class="my-2">Post</p>
+        <AddPostHome {id}/>
+      </div>
+      <Experience/>
+      <Panel/>
+      {#if post}
+        {#each post as dataPost}
+          <Post {...userPost} {...dataPost} {userId}/>
+          <!-- <PostP {...userPost} {...dataPost}/> -->
+        {:else}
+          <p>Loading...</p>
+        {/each}
+      {/if}
     </div>
-    <Experience/>
-    <Panel/>
-    {#if post}
-      {#each post as dataPost}
-        <Post {...userPost} {...dataPost} {userId}/>
-        <!-- <PostP {...userPost} {...dataPost}/> -->
-      {:else}
-        <p>Loading...</p>
-      {/each}
-    {/if}
-  </div>
+  <!-- {/if} -->
 </div>

@@ -93,10 +93,14 @@
 
   const upDateDataDescription = async ()=>{
     await convertCoverB64()
+    console.log('id:', idCoverPhoto, 'url:', urlCoverPhoto);
     let dataDescription;
+    
+    const userDescription = document.getElementById('userDescription').textContent
     if (description.value === '') {
-      const userDescription = document.getElementById('userDescription').textContent
-      description.value = userDescription
+      dataDescription = userDescription 
+    }else{
+      dataDescription = description.value
     }
     const sendData = await fetch(`http://18.118.50.78:8000/user/profile/?user=${id}`, {
       method: 'PUT',
@@ -104,8 +108,8 @@
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        about: description.value,
-        resource_id : idCoverPhoto,
+        about: dataDescription,
+        // resource_id : idCoverPhoto,
         cover_img: urlCoverPhoto
       })
     })

@@ -98,7 +98,9 @@
                  About me...
               </p>
               <div class="Profile-description-text my-2">
-                <p id="userDescription">{aboutMe}</p>
+                {#if aboutMe}
+                  <p id="userDescription">{aboutMe}</p>
+                {/if}
                 <div id="editAboutMe" class="d-none d-flex flex-column">
                   <textarea name="" id="textArea" on:keyup={value} cols="30" rows="3" style="width: 100%;" value={aboutMe}></textarea>
                   <button class="btn btn-outline-primary btn-flylinkers m-0 d-flex align-self-end" on:click={updateDescription}>Update</button>
