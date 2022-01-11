@@ -1,20 +1,24 @@
 <script>
   import AddPost from './post/AddPostHome.svelte'
   import Post from './post/Post.svelte'
+  import Loader from './Loader.svelte'
 
   export let id = '';
   const userId = id;
 
   let post;
-  let page = 1;
+  let page = 0;
+
   const getPost = async()=>{
+    page += 1
     const response = await fetch(`http://18.118.50.78:8000/post/home/?page=${page}&user_id=${id}`)
     const content = await response.json()
-    post = content.results
-    // post.reverse()
+    if (content) {
+      post = content.results
+    }
   }
 
-  let morePost = [];
+  let morePost = [{}];
   let newPost;
   let errorPage;
   
@@ -24,28 +28,19 @@
   //   }
   // })
 
-  const loadMorePost = async ()=>{
+  const loadMorePost = async (e)=>{
     page += 1
     const response = await fetch(`http://18.118.50.78:8000/post/home/?page=${page}&user_id=${id}`)
     const content = await response.json()
     newPost = content.results
-
     newPost.forEach(el => {
-      morePost.push(el)
+      post.push(el)
     });
-
-    console.log(morePost);
-    // errorPage = content.detail
+    console.log(post);
+    console.log(newPost);
   }
-  
 
 </script>
-
-<style>
-  /* .Timeline{
-    padding: 4em 0 0 0;
-  } */
-</style>
 
 <div class="Timeline col-12 col-lg-6" on:load={getPost()}>
   <div class="Timeline-container">
@@ -53,18 +48,17 @@
     {#if post}
       {#each post as dataPost}
         <Post {...dataPost} {userId}/>
-      {:else}
-        <p>Loading...</p>
       {/each}
+    {:else}
+      <Loader/>
     {/if}
 
-    {#if morePost}
-      {#each morePost as dataPost, i}
+    {#if newPost}
+      {#each newPost as dataPost}
         <Post {...dataPost} {userId}/>
       {/each}
-    {/if}
-    {#if errorPage}
-       <p>no more...</p>
+    <!-- {:else}
+      <Loader/> -->
     {/if}
    <button on:click={loadMorePost}>cargar mas...</button>
   </div>

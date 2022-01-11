@@ -3,6 +3,7 @@
 	import Header from './components/Header.svelte'
 	import Home from './views/Home.svelte';
 	import Profile from "./views/Profile.svelte";
+  import Loader from './components/Loader.svelte'
 
   if(!localStorage.getItem('user') || localStorage.getItem('user') === 'null'){
     const param = window.location.search
@@ -108,5 +109,7 @@
         <Profile {...data}/>
       </Route>
     </Router>
+  {:else}
+    <Loader/>
   {/if}
 </main>

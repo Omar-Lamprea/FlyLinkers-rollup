@@ -7,8 +7,9 @@
   import AddPostHome from './post/AddPostHome.svelte';
   import PostP from './post/PostProfile.svelte'
   import Post from './post/Post.svelte'
+  import Loader from './Loader.svelte'
 
-  export let name, last_name, title, email , photo , id = '';
+  export let name, last_name, title, email , photo , id;
 
   let coverPhoto;
   let aboutMe;
@@ -17,7 +18,6 @@
   const getProfile = async ()=>{
     const response = await fetch(`http://18.118.50.78:8000/user/profile/?user_id=${id}`)
     const content = await response.json()
-    console.log(content);
     if (content.Detail) {
       // createprofile()
     }
@@ -45,11 +45,10 @@
   let post;
   let userPost;
   const getPost = async()=>{
-    // await id
     const response = await fetch(`http://18.118.50.78:8000/post/create/?user=${id}`)
     const content = await response.json()
-    post = content.splice(1).reverse()
-    userPost = content[0]
+    post = content.results.splice(1)
+    userPost = content.results[0]
   }
 
 </script>
@@ -83,9 +82,9 @@
         {#each post as dataPost}
           <Post {...userPost} {...dataPost} {userId}/>
           <!-- <PostP {...userPost} {...dataPost}/> -->
-        {:else}
-          <p>Loading...</p>
         {/each}
+      {:else}
+        <Loader/>
       {/if}
     </div>
   <!-- {/if} -->

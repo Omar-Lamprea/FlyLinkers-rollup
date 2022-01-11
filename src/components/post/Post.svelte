@@ -1,12 +1,16 @@
 <script>
   // import Comments from './Comments.svelte'
   export let userId;
-  export let desc, reactions, img, comments, create_time, user, id, user_id, update_time = '';
-  export let name, middle_name, last_name, title, photo, email = "";
+  export let desc, reactions, img, comments, create_time, user, id, user_id, update_time;
+  export let name, middle_name, last_name, title, photo, email;
 
-  console.log(userId, id);  
-  const likeValue = `likeValue${id}`
-  const loveValue = `loveValue${id}`
+  if (user) {
+    name = '', middle_name= '', last_name='', title='', photo='', email = '', update_time='', user_id=''
+  }else{
+  }
+
+
+
 
   let datePost;
 
@@ -54,15 +58,31 @@
     }
   }
 
+  
+  const likeValue = `likeValue${id}`
+  const loveValue = `loveValue${id}`
+
   const reactionUser = async()=>{
-    const getIdReaction = await fetch(`http://18.118.50.78:8000/post/like/?post_id=${id}`)
-    .then(async ()=>{
-      // const content = await getIdReaction.json()
-      // console.log(content);
-    })
-    .catch((error)=>{
-      console.log(error);
-    })
+    const spanLikeValue = document.getElementById(`likeValue${id}`)
+    const spanLoveValue = document.getElementById(`loveValue${id}`)
+    const btnLike = document.getElementById(`btnLike${id}`)
+    const btnLove = document.getElementById(`btnLove${id}`)
+
+    if (spanLikeValue.textContent !== '0' || spanLoveValue.textContent !== '0') {
+      const getIdReaction = await fetch(`http://18.118.50.78:8000/post/like/?post_id=${id}`)
+      const response = await getIdReaction.json()
+
+      response.forEach(reaction => {
+        if (reaction.id === userId && reaction.like) {
+          btnLike.classList.remove('far')
+          btnLike.classList.add('fas')
+        }
+        if (reaction.id === userId && reaction.love) {
+          btnLove.classList.remove('far')
+          btnLove.classList.add('fas')
+        }
+      });
+    }
   }
 
   const changeReaction = async(e)=>{
@@ -75,6 +95,7 @@
     const getIdReaction = await fetch(`http://18.118.50.78:8000/post/like/?post_id=${id}`)
     const content = await getIdReaction.json()
 
+    //like
     if (reactionType === 'fa-thumbs-up' && reactionElement === 'far') {
       console.log('like in process..');
 
@@ -108,35 +129,114 @@
 
         const response = like.json()
         if (response) {
-          likeAcount.textContent = reactions.like + 1
+          likeAcount.textContent = reactions.like++
           toggleReaction()
+
+          const btnLove = document.getElementById(`btnLove${id}`)
+          const loveValue = document.getElementById(`loveValue${id}`)
+          
+          if (btnLove.classList[1] === 'fas') {
+            btnLove.classList.add('far')
+            btnLove.classList.remove('fas')
+            loveValue.textContent -= 1
+          }
         }
       }
     }
 
+    //dislike
     if(reactionType === 'fa-thumbs-up' && reactionElement === 'fas'){
       console.log('dislike in process..');
-      likeAcount.textContent = reactions.like //-1
-      toggleReaction()
+
+      const dislike = await fetch(`http://18.118.50.78:8000/post/like/?post_id=${id}&user=${userId}`,{
+        method: 'PUT',
+        headers: {
+          'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify({})
+      })
+
+      const response = dislike.json()
+      if (response) {
+        likeAcount.textContent = reactions.like - 1
+        toggleReaction()
+      }
     }
 
 
-
+    //love
     if (reactionType === 'fa-heart' && reactionElement === 'far') {
       console.log('love in process...');
-      loveAcount.textContent = reactions.love + 1
-      toggleReaction()
+      if(!!content.Error === true){
+       const createReaction = await fetch('http://18.118.50.78:8000/post/like/',{
+        method: 'POST',
+        headers: {
+          'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify({
+          user_id: userId,
+          post_id: id,
+          love: 1,
+        })
+      })
+      const response = createReaction.json()
+        if (response) {
+          likeAcount.textContent = reactions.love + 1
+          toggleReaction()
+        }
+      }else{
+        const love = await fetch(`http://18.118.50.78:8000/post/like/?post_id=${id}&user=${userId}`,{
+          method: 'PUT',
+          headers: {
+            'Content-Type' : 'application/json'
+          },
+          body: JSON.stringify({
+            love: 1,
+          })
+        })
+        const response = love.json()
+        if (response) {
+          loveAcount.textContent = reactions.love++
+          // likeAcount.textContent = reactions.like-1
+          toggleReaction()
+
+          const btnLike = document.getElementById(`btnLike${id}`)
+          const likeValue = document.getElementById(`likeValue${id}`)
+
+          if (btnLike.classList[1] === 'fas') {
+            btnLike.classList.add('far')
+            btnLike.classList.remove('fas')
+            likeValue.textContent -= 1
+          }
+
+        }
+      }
     }
+
+    //dislove
     if (reactionType === 'fa-heart' && reactionElement === 'fas') {
       console.log('dislove in process...');
-      loveAcount.textContent = reactions.love
-      toggleReaction()
+      
+      const dislove = await fetch(`http://18.118.50.78:8000/post/like/?post_id=${id}&user=${userId}`,{
+        method: 'PUT',
+        headers: {
+          'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify({})
+      })
+
+      const response = dislove.json()
+      if (response) {
+        loveAcount.textContent = reactions.love-1
+        // likeAcount.textContent = reactions.like++
+        toggleReaction()
+      }
     }
 
     function toggleReaction(){
-        element.classList.toggle('far')
-        element.classList.toggle('fas')
-      }
+      element.classList.toggle('far')
+      element.classList.toggle('fas')
+    }
   }
 
 </script>
@@ -236,7 +336,7 @@
     <div class="Card-Header">
 
       <div class="Card-user">
-        {#if user}
+        {#if user !== undefined}
           <img src="http://18.118.50.78:8000{user.photo}" alt="">
         {/if}
         {#if user === undefined}
@@ -306,13 +406,13 @@
     </div>
 
     <div class="Card-board-actions">
-      <div class="Card-board-actions d-flex">
+      <div class="Card-board-actions d-flex" on:load={reactionUser()}>
         <div class="Action Header-nav-thumbs-up mx-3" on:click={changeReaction}>
-          <i class="fa-thumbs-up far"></i>
+          <i id="btnLike{id}" class="fa-thumbs-up far"></i>
           <span>Like</span>
         </div>
         <div class="Action Header-nav-heart mx-3" on:click={changeReaction}>
-          <i class="fa-heart far"></i>
+          <i id="btnLove{id}"class="fa-heart far"></i>
           <span>love</span>
         </div>
         <div class="Action Header-nav-comments mx-3">
