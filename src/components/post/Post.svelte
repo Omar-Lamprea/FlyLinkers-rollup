@@ -1,15 +1,12 @@
 <script>
-  // import Comments from './Comments.svelte'
+  import Comment from './Comment.svelte'
   export let userId;
   export let desc, reactions, img, comments, create_time, user, id, user_id, update_time;
   export let name, middle_name, last_name, title, photo, email;
 
   if (user) {
     name = '', middle_name= '', last_name='', title='', photo='', email = '', update_time='', user_id=''
-  }else{
   }
-
-
 
 
   let datePost;
@@ -239,6 +236,54 @@
     }
   }
 
+
+  const showComments = ()=>{
+    const comment = document.getElementById(`comment${id}`)
+    comment.classList.remove('d-none')
+    getCommets()
+  }
+
+  let dataComment;
+
+  const getCommets = async()=>{
+    if (comments >= 1) {
+      const response = await fetch(`http://18.118.50.78:8000/post/comment/?post_id=${id}`)
+      const content = await response.json()
+      dataComment = content
+    }
+  }
+
+  const commentAbled = (e)=>{
+    const btnSendComment = document.getElementById(`btn-sendComment${id}`)
+    if (e.target.value !== '') {
+      btnSendComment.removeAttribute('disabled')
+    }else{
+      btnSendComment.setAttribute('disabled', '')
+    }
+  }
+  
+  const addComment = async (e)=>{
+    e.preventDefault()
+    const inputAddComment = document.getElementById(`inputAddComment${id}`)
+    const response = await fetch('http://18.118.50.78:8000/post/comment/',{
+      method: 'POST',
+        headers: {
+          'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify({
+          comment: inputAddComment.value,
+          user_id: userId,
+          post_id: id
+        })
+    })
+    const content = await response.json()
+    if (content) {
+      inputAddComment.value = ''
+      comments += 1
+      getCommets()
+    }
+  }
+
 </script>
 
 <style>
@@ -328,6 +373,46 @@
   }
 
 
+
+
+  .Comments-add {
+    padding: 1rem 0;
+    border-top: 1px solid rgba(219, 219, 219, 0.8);
+  }
+  .Comments-add img{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--main-color);
+    padding: 0.1rem;
+  }
+  .Comments-add form {
+    display: flex;
+    align-items: center;
+    width: 90%;
+  }
+
+  .Comments-input {
+    border: solid 1px #e9e9e9;
+    border-radius: 5px;
+    color: #696969;
+    border: 1px solid transparent;
+    font-size: 12px;
+    outline: none;
+    width: 100%;
+    display: flex;
+  }
+  .btn-sendComment {
+    border: none;
+    color: white;
+    background-color: var(--main-color);
+    font-size: 12px;
+    outline: none;
+    cursor: pointer;
+  }
+
+
 </style>
 
 
@@ -354,6 +439,7 @@
           {/if}
           <span>{datePost}</span>
         </h2>
+
       </div>
       
       <div class="Card-settings">
@@ -396,7 +482,8 @@
         </div>
         <div class="Reaction Header-nav-comment mx-2">
           <i class="fas fa-comment"></i>
-          <span>{comments} Comments</span>
+          <span on:click={showComments}>
+            <span>{comments}</span> Comments</span>
         </div>
       </div>
       <!-- <div class="Card-board-icons-second">
@@ -415,7 +502,7 @@
           <i id="btnLove{id}"class="fa-heart far"></i>
           <span>love</span>
         </div>
-        <div class="Action Header-nav-comments mx-3">
+        <div class="Action Header-nav-comments mx-3" on:click={showComments}>
           <i class="fa-comments far"></i>
           <span>Comment</span>
         </div>
@@ -433,5 +520,20 @@
       </div> -->
     </div>
 
-  <!-- <Comments/> -->
+    <div id="comment{id}" class="comments d-none">
+      <div class="Comments-add d-flex justify-content-between">
+        <img src="http://18.118.50.78:8000{localStorage.getItem('profilePhoto')}" alt="img">
+        <form>
+          <input id="inputAddComment{id}" type="text" class="Comments-input" placeholder="Write a comment..." on:keyup={commentAbled}>
+          <button id="btn-sendComment{id}" class="btn-sendComment" disabled on:click={addComment}>Post</button>
+        </form>
+      </div>
+
+      {#if dataComment}
+        {#each dataComment as comment}
+          <Comment {comment}/>
+        {/each}
+      {/if}
+    </div>
+
 </div>

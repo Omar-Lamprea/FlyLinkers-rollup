@@ -1,5 +1,5 @@
 <script>
-  import Comments from './Comments.svelte'
+  import Comment from './Comment.svelte'
   export let name, middle_name, last_name, title, photo, email, id = '';
   export let user_id, update_time, comments, create_time, desc, img = '';
 

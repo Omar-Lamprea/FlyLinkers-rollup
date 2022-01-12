@@ -27,6 +27,9 @@
     })
     const content = await response.json();
     data = content[0]
+    if (!localStorage.getItem('profilePhoto')) {
+      localStorage.setItem('profilePhoto', data.photo)
+    }
   }
 
 </script>

@@ -1,12 +1,5 @@
 <script>
-  export let photo = '';
-
-  let image;
-  const urlImage = setTimeout(() => {
-    image = `http://18.118.50.78:8000${photo}`
-    localStorage.setItem('profilePhoto', image)
-  }, 1000);
-
+  export let photo;
 </script>
 
 <style>
@@ -25,9 +18,11 @@
 <div class="Profile-card-avatar dropdown">
 
   {#if localStorage.getItem('profilePhoto')}
-    <img src={localStorage.getItem('profilePhoto')} alt="" class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    <img src='http://18.118.50.78:8000{localStorage.getItem('profilePhoto')}' alt="" class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
   {:else}
-    <img src={image} alt="" class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    {#if photo}
+      <img src='http://18.118.50.78:8000{photo}' alt="" class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    {/if}
   {/if}
 
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">

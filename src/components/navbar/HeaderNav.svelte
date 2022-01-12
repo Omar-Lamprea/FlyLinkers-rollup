@@ -89,7 +89,7 @@
     <div class="Header-nav-user mx-3 fs-3">
       <Link to="/profile">
         {#if localStorage.getItem('profilePhoto')}
-           <img src="{localStorage.getItem('profilePhoto')}" alt="">
+           <img src="http://18.118.50.78:8000{localStorage.getItem('profilePhoto')}" alt="">
         {:else}
           <img src="http://18.118.50.78:8000{photo}" alt="">
         {/if}
