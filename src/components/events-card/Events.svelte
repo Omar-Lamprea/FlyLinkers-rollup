@@ -4,7 +4,7 @@
   const data = [
     {
       title: 'Flight Operation Conferences',
-      eventLogo: 'https://arepa.s3.amazonaws.com/elmo002.jpg',
+      eventLogo: 'https://us.123rf.com/450wm/kesu87/kesu871901/kesu87190100275/116469322-airplane-taking-off-from-the-airport-.jpg?ver=6',
       date : '10/12/2021',
       start: '9:00am',
       end: '11:00pm',
@@ -14,7 +14,7 @@
     },
     {
       title: 'Comercial Avitaion Conferences',
-      eventLogo: 'https://scontent.feoh4-3.fna.fbcdn.net/v/t1.6435-9/127117374_10225413017775737_3815254072231742375_n.jpg?_nc_cat=100&ccb=1-5&_nc_sid=09cbfe&_nc_eui2=AeE19bI-5yVUK7SutFpZunHWJ6wLAiwEawInrAsCLARrAnqS44ZXL6rQPIEhWQYj0hw&_nc_ohc=_vixEsFl92cAX8w7EG0&_nc_ht=scontent.feoh4-3.fna&oh=00_AT8OstSfaMQ4Um4lBJp4zXlUxB7qjZyXWxR6RZh0SI2Mnw&oe=61FA6518',
+      eventLogo: 'http://koreabizwire.com/wp/wp-content/uploads/2019/11/12268963_m.jpg',
       date : '10/12/2021',
       start: '9:00am',
       end: '11:00pm',
@@ -24,7 +24,7 @@
     },
     {
       title: 'Comercial Aviation Safety',
-      eventLogo: 'https://arepa.s3.amazonaws.com/elmo002.jpg',
+      eventLogo: 'https://www.aircargonews.net/wp-content/uploads/2019/08/jetblue-tailfins-blueberries.jpg',
       date : '10/12/2021',
       start: '9:00am',
       end: '11:00pm',

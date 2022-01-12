@@ -8,6 +8,9 @@
   import PostP from './post/PostProfile.svelte'
   import Post from './post/Post.svelte'
   import Loader from './Loader.svelte'
+  
+  import {onMount} from 'svelte'
+  import { writable } from 'svelte/store';
 
   export let name, last_name, title, email , photo , id;
 
@@ -81,10 +84,7 @@
       {#if post}
         {#each post as dataPost}
           <Post {...userPost} {...dataPost} {userId}/>
-          <!-- <PostP {...userPost} {...dataPost}/> -->
         {/each}
-      {:else}
-        <Loader/>
       {/if}
     </div>
   <!-- {/if} -->

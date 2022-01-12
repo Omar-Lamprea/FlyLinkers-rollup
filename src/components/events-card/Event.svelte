@@ -12,7 +12,9 @@
   }
   .Event-img img{
     width: 80%;
+    height: 100%;
     border-radius: 1rem;
+    object-fit: cover;
   }
   .Event-link{
     font-size: 11px;
