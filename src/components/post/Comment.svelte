@@ -2,7 +2,6 @@
   import UserPhoto from '../profile/UserPhoto.svelte'
 
   export let comment;
-  console.log(comment);
 
 </script>
 

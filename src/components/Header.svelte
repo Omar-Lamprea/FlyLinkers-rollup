@@ -41,7 +41,7 @@
       <div class="Header-logo d-flex align-items-center px-3">
         <Router>
           <Link to="/" class="d-flex align-items-center">
-            <img src="./img/flylinkers-logo-blanco.png" alt="logo" width="100">
+            <img src="../img/flylinkers-logo-blanco.png" alt="logo" width="100">
             <h1>FlyLinkers</h1>
           </Link>
         </Router>

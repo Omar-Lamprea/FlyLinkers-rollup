@@ -1,5 +1,9 @@
 <script>
   export let coverPhoto;
+
+  const urlUser = window.location.pathname
+  const urluserProfile = urlUser.slice(9)
+
 </script>
 
 <style>
@@ -16,9 +20,9 @@
 </style>
 
 <div class="CoverPhoto">
-  {#if localStorage.getItem('coverPhoto')}
+  <!-- {#if localStorage.getItem('coverPhoto')}
     <img src={localStorage.getItem('coverPhoto')} alt="">
-  {:else}
+  {:else} -->
     <img src={coverPhoto} alt="">
-  {/if}
+  <!-- {/if} -->
 </div>

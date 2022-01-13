@@ -92,11 +92,12 @@
     const getIdReaction = await fetch(`http://18.118.50.78:8000/post/like/?post_id=${id}`)
     const content = await getIdReaction.json()
 
+    console.log(content);
     //like
     if (reactionType === 'fa-thumbs-up' && reactionElement === 'far') {
       console.log('like in process..');
 
-      if(!!content.Error === true){
+      if(content.length === 0 || content.Error){
        const createReaction = await fetch('http://18.118.50.78:8000/post/like/',{
         method: 'POST',
         headers: {
@@ -164,7 +165,7 @@
     //love
     if (reactionType === 'fa-heart' && reactionElement === 'far') {
       console.log('love in process...');
-      if(!!content.Error === true){
+      if(content.length === 0 || content.Error){
        const createReaction = await fetch('http://18.118.50.78:8000/post/like/',{
         method: 'POST',
         headers: {
@@ -178,7 +179,7 @@
       })
       const response = createReaction.json()
         if (response) {
-          likeAcount.textContent = reactions.love + 1
+          loveAcount.textContent = reactions.love + 1
           toggleReaction()
         }
       }else{

@@ -18,7 +18,7 @@
   }
 </style>
 
-<div class="People Default-containers">
+<div class="People Default-containers px-3">
   <div class="People-Ttitle mb-3 text-center">
     <h4>People</h4>
   </div>

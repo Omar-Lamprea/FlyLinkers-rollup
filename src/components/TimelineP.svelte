@@ -71,14 +71,16 @@
 
 <div class="Profile col-9" on:load={getProfile()}>
   <!-- {#if aboutMe} -->
-    <div class="Profile-container">
-      <CoverPhoto {coverPhoto}/>
-      <UserDetails {name} {last_name} {title} {email} {photo} {id} {aboutMe}/>
+    <div class="Profile-container" on:load={getPost()}>
+        <CoverPhoto {coverPhoto}/>
+        <UserDetails {name} {last_name} {title} {email} {photo} {id} {aboutMe}/>
       <!-- <CreatePost/> -->
-      <div class="Background-post-profile" on:load={getPost()}>
-        <p class="my-2">Post</p>
-        <AddPostHome {id}/>
-      </div>
+      {#if email === localStorage.getItem('user')}
+        <div class="Background-post-profile" on:load={getPost()}>
+          <p class="my-2">Post</p>
+          <AddPostHome {id}/>
+        </div>
+      {/if}
       <Experience/>
       <Panel/>
       {#if post}

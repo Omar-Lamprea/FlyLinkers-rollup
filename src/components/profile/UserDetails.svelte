@@ -93,10 +93,12 @@
               <!-- <p>Colombia</p> -->
             </div>
             <div class="Profile-description my-3">
-              <p class="edit-description" on:click={editDescription}>
-                <i class="fas fa-pen"></i>
-                 About me...
-              </p>
+              {#if email === localStorage.getItem('user')}
+                <p class="edit-description" on:click={editDescription}>
+                  <i class="fas fa-pen"></i>
+                  About me...
+                </p>
+              {/if}
               <div class="Profile-description-text my-2">
                 {#if aboutMe}
                   <p id="userDescription">{aboutMe}</p>
@@ -117,16 +119,18 @@
     </div>
     <div class="col-6">
       <div class="Profile-card-text text-end d-flex flex-column align-items-end">
-        <p type="button" class="mb-3" data-bs-toggle="modal" data-bs-target="#editProfile"><i class="fas fa-pen"></i> Edit profile</p>
-        <Modal {id}/>
-        <div class="Profile-card-statistics">
-          <p>Who viewed your profile-card <span>3.8K</span></p> 
-          <p>Views of your post <span>3.8K</span></p> 
-        </div>
-        <div class="Profile-card-buttons mt-5">
-          <button class="btn btn-outline-primary btn-flylinkers"><i class="fas fa-pen"></i> I have interest in...</button>
-          <button class="btn btn-outline-primary btn-flylinkers">Add selection</button>
-        </div>
+        {#if email === localStorage.getItem('user')}
+          <p type="button" class="mb-3" data-bs-toggle="modal" data-bs-target="#editProfile"><i class="fas fa-pen"></i> Edit profile</p>
+          <Modal {id}/>
+          <div class="Profile-card-statistics">
+            <p>Who viewed your profile-card <span>3.8K</span></p> 
+            <p>Views of your post <span>3.8K</span></p> 
+          </div>
+          <div class="Profile-card-buttons mt-5">
+            <button class="btn btn-outline-primary btn-flylinkers"><i class="fas fa-pen"></i> I have interest in...</button>
+            <button class="btn btn-outline-primary btn-flylinkers">Add selection</button>
+          </div>
+        {/if}
       </div>
     </div>
   </div>

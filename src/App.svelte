@@ -3,7 +3,11 @@
 	import Header from './components/Header.svelte'
 	import Home from './views/Home.svelte';
 	import Profile from "./views/Profile.svelte";
+  import UserProfile from "./views/UserProfile.svelte";
   import Loader from './components/Loader.svelte'
+
+  const urlUser = window.location.pathname
+  const urluserProfile = urlUser.slice(9)
 
   if(!localStorage.getItem('user') || localStorage.getItem('user') === 'null'){
     const param = window.location.search
@@ -111,6 +115,11 @@
       <Route path="/profile">
         <Profile {...data}/>
       </Route>
+
+      <Route path="/profile/{urluserProfile}">
+        <UserProfile/>
+      </Route>
+
     </Router>
   {:else}
     <Loader/>
