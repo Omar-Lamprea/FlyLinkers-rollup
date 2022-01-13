@@ -178,8 +178,8 @@
 
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-outline-primary btn-flylinkers" on:click={getProfile(id)}>Save description</button>
-        <button type="button" class="btn btn-outline-primary btn-flylinkers" on:click={updateProfile(id)}>Save Profile</button>
+        <button type="button" class="btn btn-outline-primary btn-flylinkers" on:click={getProfile(id)}>Save cover photo</button>
+        <button type="button" class="btn btn-outline-primary btn-flylinkers" on:click={updateProfile(id)}>Save Profile photo</button>
       </div>
 
     </div>

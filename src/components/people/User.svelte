@@ -17,11 +17,12 @@
   .User-detail{
     color: var(--main-color);
     font-weight: 700;
+    margin-left: 1rem;
   }
   .User-detail span{
     color: grey;
     font-weight: 500;
-    font-size: .9rem;
+    font-size: .7rem;
   }
   .User-photo{
     width: 60px;
@@ -37,7 +38,7 @@
   }
 </style>
 
-<div class="User my-3 pb-3 d-flex justify-content-around align-items-center" on:click={viewUserProfile(email)}>
+<div class="User my-3 pb-3 d-flex align-items-center" on:click={viewUserProfile(email)}>
   <div class="User-photo">
     <img src="http://18.118.50.78:8000{photo}" alt="">
   </div>

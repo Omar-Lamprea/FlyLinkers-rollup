@@ -61,7 +61,7 @@
       </Link>
     </div>
     <div class="Header-nav-bell mx-3 fs-3 notification" id="notification">
-      <Notifications {id}/>
+        <Notifications {id}/>
     </div>
     <div class="Header-nav-user mx-3 fs-3">
       <Link to="/profile">

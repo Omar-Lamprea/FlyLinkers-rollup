@@ -38,6 +38,10 @@
 </script>
 
 <style>
+
+  .dropdown{
+    cursor: pointer;
+  }
   .dropdown-toggle:empty::after{
       content: initial
     }

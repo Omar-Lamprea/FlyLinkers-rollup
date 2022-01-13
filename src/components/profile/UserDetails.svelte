@@ -12,13 +12,11 @@
 
   let dataDescription;
 
-  const value = (e) =>{
+  const valueTextArea = (e) =>{
     dataDescription = e.target.value
-    console.log(dataDescription);
   }
 
   const updateDescription = async () =>{
-    console.log("updating info...");
      const response = await fetch(`http://18.118.50.78:8000/user/profile/?user=${id}`,{
        method : 'PUT',
       headers : {
@@ -30,6 +28,7 @@
      })
      const content = response.json()
      if (content) {
+      userDescription.textContent = dataDescription
       editAboutMe.classList.toggle('d-none')
      }
   }
@@ -139,7 +138,7 @@
                   <p id="userDescription">{aboutMe}</p>
                 {/if}
                 <div id="editAboutMe" class="d-none d-flex flex-column">
-                  <textarea name="" id="textArea" on:keyup={value} cols="30" rows="3" style="width: 100%;" value={aboutMe}></textarea>
+                  <textarea name="" id="textArea" on:keyup={valueTextArea} cols="30" rows="3" style="width: 100%;" value={aboutMe}></textarea>
                   <button class="btn btn-outline-primary btn-flylinkers m-0 d-flex align-self-end" on:click={updateDescription}>Update</button>
                 </div>
               </div>
