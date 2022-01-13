@@ -4,17 +4,16 @@
 
   const urlUser = window.location.pathname
   const urluserProfile = urlUser.slice(9)
-  console.log(urluserProfile);
 
   let userProfile;
   let dataProfile;
   let id, name, last_name, title, email , photo;
+  export let userMain;
 
   const getUser = async()=>{
     const response = await fetch(`http://18.118.50.78:8000/user/create/?email=${urluserProfile}`)
     const content = await response.json()
     userProfile = content[0]
-    console.log(userProfile);
     id = userProfile.id
     name = userProfile.name
     last_name = userProfile.last_name
@@ -29,7 +28,6 @@
     const response = await fetch(`http://18.118.50.78:8000/user/profile/?user_id=${id}`)
     const content = await response.json()
     dataProfile = content[0]
-    console.log(dataProfile);
   }
 
   getUser()
@@ -40,7 +38,7 @@
 
 <div class="row">
   {#if dataProfile}
-    <TimelineP {name} {last_name} {title} {email} {photo} {id}/>
+    <TimelineP {name} {last_name} {title} {email} {photo} {id} {userMain}/>
     <SidebarRight {id}/>
   {/if}
 </div>

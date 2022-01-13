@@ -8,6 +8,11 @@
     name = '', middle_name= '', last_name='', title='', photo='', email = '', update_time='', user_id=''
   }
 
+  const viewUserProfile = () => {
+    const userEmail = user.email;
+    window.location.href = `http://localhost:5000/profile/${userEmail}`
+  }
+
 
   let datePost;
 
@@ -295,9 +300,11 @@
     padding: 0 1em;
   }
   .Card-user {
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    margin-bottom: .5rem;
   }
   .Card-user img {
     width: 50px;
@@ -308,6 +315,7 @@
     padding: .1rem;
   }
   .Card-user h2 {
+    cursor: pointer;
     margin: 0;
     padding: 0;
     font-size: 14px;
@@ -421,7 +429,7 @@
   <div class="Card-container">
     <div class="Card-Header">
 
-      <div class="Card-user">
+      <div class="Card-user" on:click={viewUserProfile}>
         {#if user !== undefined}
           <img src="http://18.118.50.78:8000{user.photo}" alt="">
         {/if}
@@ -429,11 +437,12 @@
           <img src="http://18.118.50.78:8000{photo}" alt="">
         {/if}
 
-        <h2>
+        <h2 on:click={viewUserProfile}>
           {#if user}
             {user.name} {user.last_name}
             <span>{user.title}</span>
           {/if}
+
           {#if user === undefined}
             {name} {last_name}
             <span>{title}</span>

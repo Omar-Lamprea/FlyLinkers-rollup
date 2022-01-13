@@ -21,7 +21,8 @@
   }, 1000);
 
   let data;
-  
+  let userMain;
+
   const getData = async ()=>{
     const response = await fetch(`http://18.118.50.78:8000/user/create/?email=${localStorage.getItem('user')}`,{
       method : 'GET',
@@ -34,6 +35,7 @@
     if (!localStorage.getItem('profilePhoto')) {
       localStorage.setItem('profilePhoto', data.photo)
     }
+    userMain = data.id
   }
 
 </script>
@@ -102,8 +104,9 @@
     }
   }
 </style>
-
-<Header {...data}/>
+{#if data}
+   <Header {...data}/>
+{/if}
 
 <main id="main" class="container" on:load={getData()}>
   {#if data}
@@ -117,7 +120,7 @@
       </Route>
 
       <Route path="/profile/{urluserProfile}">
-        <UserProfile/>
+        <UserProfile {userMain}/>
       </Route>
 
     </Router>

@@ -1,11 +1,18 @@
 <script>
   export let name, middle_name, last_name, title, photo, email, id = '';
+
+
+
+  const viewUserProfile = (email) => {
+    window.location.href = `http://localhost:5000/profile/${email}`
+  }
+
 </script>
 
 <style>
   .User{
     border-bottom: 1px solid var(--main-color);
-
+    cursor: pointer;
   }
   .User-detail{
     color: var(--main-color);
@@ -30,7 +37,7 @@
   }
 </style>
 
-<div class="User py-3 d-flex justify-content-around align-items-center">
+<div class="User my-3 pb-3 d-flex justify-content-around align-items-center" on:click={viewUserProfile(email)}>
   <div class="User-photo">
     <img src="http://18.118.50.78:8000{photo}" alt="">
   </div>

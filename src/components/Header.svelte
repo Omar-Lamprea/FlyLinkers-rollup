@@ -3,7 +3,8 @@
   import HeaderNav from "./navbar/HeaderNav.svelte";
   import HeaderNavMobile from "./navbar/HeaderNavMobile.svelte"
 
-  export let photo
+  export let photo, id;
+  export let name = '', title = '', email = '', last_name = '', middle_name = '';
 </script>
 
 <style>
@@ -53,7 +54,7 @@
 
       {#if window.innerWidth > 920}
         <div class="Header-nav d-flex">
-          <HeaderNav {photo}/>
+          <HeaderNav {photo} {id}/>
         </div>
       {:else}
         <div class="Header-menu fs-3">

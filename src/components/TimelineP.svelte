@@ -13,6 +13,7 @@
   import { writable } from 'svelte/store';
 
   export let name, last_name, title, email , photo , id;
+  export let userMain;
 
   let coverPhoto;
   let aboutMe;
@@ -73,7 +74,7 @@
   <!-- {#if aboutMe} -->
     <div class="Profile-container" on:load={getPost()}>
         <CoverPhoto {coverPhoto}/>
-        <UserDetails {name} {last_name} {title} {email} {photo} {id} {aboutMe}/>
+        <UserDetails {name} {last_name} {title} {email} {photo} {id} {aboutMe} {userMain}/>
       <!-- <CreatePost/> -->
       {#if email === localStorage.getItem('user')}
         <div class="Background-post-profile" on:load={getPost()}>

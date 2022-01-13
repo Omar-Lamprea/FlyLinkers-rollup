@@ -3,6 +3,7 @@
   import Modal from '../Modal.svelte'
 
   export let name, last_name, title, email , photo, id, aboutMe;
+  export let userMain;
 
   const editDescription = ()=>{
     editAboutMe.classList.toggle('d-none')
@@ -31,6 +32,40 @@
      if (content) {
       editAboutMe.classList.toggle('d-none')
      }
+  }
+
+
+  let friend = false;
+  // console.log(userMain, id);
+
+  const searchFriends = async ()=>{
+    const response = await fetch(`http://18.118.50.78:8000/friend/user/?user=${userMain}`)
+    const content = await response.json()
+    content.forEach(el => {
+      if (el.id === id) {
+        console.log(el);
+        friend = true
+      }
+    });
+  }
+
+  const sendFriendRequest = async()=>{
+    const response = await fetch('http://18.118.50.78:8000/friend/request/',{
+      method: 'POST',
+      headers : {
+        'Content-Type': 'application/json'
+      },
+      body:JSON.stringify({
+        sender_id: userMain,
+	      receptor_id: id
+      })
+    })
+    const content = await response.json()
+    console.log(content);
+    if (content.Detail === 'OK') {
+      btnSendFriendRequest.textContent = "request sent"
+      btnSendFriendRequest.setAttribute('disabled','')
+    }
   }
 
 </script>
@@ -130,6 +165,13 @@
             <button class="btn btn-outline-primary btn-flylinkers"><i class="fas fa-pen"></i> I have interest in...</button>
             <button class="btn btn-outline-primary btn-flylinkers">Add selection</button>
           </div>
+        {:else}
+          <div class="d-none" on:load={searchFriends()}></div>
+          {#if !friend}
+            <button id="btnSendFriendRequest" class="btn btn-outline-primary btn-flylinkers align-self-end mt-1" on:click={sendFriendRequest}>Send friend request</button>
+          {:else}
+            <button class="btn btn-outline-primary btn-flylinkers align-self-end mt-1">Friends</button>
+          {/if}
         {/if}
       </div>
     </div>

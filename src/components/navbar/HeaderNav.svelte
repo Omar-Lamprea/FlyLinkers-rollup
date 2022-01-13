@@ -1,8 +1,6 @@
 <script>
   import { Router, Link, Route } from "svelte-routing";
-
-
-  let notification = 2;
+  import Notifications from './NotificationsHeader.svelte'
 
   const logOut = ()=>{
     localStorage.clear();
@@ -10,7 +8,7 @@
     window.location.href = redirect
   }
 
-  export let photo;
+  export let photo, id;
 
 
 </script>
@@ -35,19 +33,6 @@
 
   .notification{
     position: relative;
-  }
-  .notifications{
-    position: absolute;
-    top: 6px;
-    left: 14px;
-    background-color: #d70000;
-    border-radius: 50%;
-    font-size: .8rem;
-    font-weight: 500;
-    height: 20px;
-    width: 20px;
-    text-align: center;
-    color: white;
   }
 
 </style>
@@ -76,15 +61,7 @@
       </Link>
     </div>
     <div class="Header-nav-bell mx-3 fs-3 notification" id="notification">
-      <Link to="/">
-        <div class="dropdown">
-          <i class="fas fa-bell dropdown-toggle" id="settings" data-bs-toggle="dropdown" aria-expanded="false"></i>
-          <div class="notifications">{notification}</div>
-          <ul class="dropdown-menu" aria-labelledby="settings">
-            <li><span class="dropdown-item">notifications....</span></li>
-          </ul>
-        </div>
-      </Link>
+      <Notifications {id}/>
     </div>
     <div class="Header-nav-user mx-3 fs-3">
       <Link to="/profile">
