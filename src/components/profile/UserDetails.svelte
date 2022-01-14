@@ -42,7 +42,6 @@
     const content = await response.json()
     content.forEach(el => {
       if (el.id === id) {
-        console.log(el);
         friend = true
       }
     });

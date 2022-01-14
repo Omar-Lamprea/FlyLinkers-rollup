@@ -3,6 +3,15 @@
   export let userId;
   export let desc, reactions, img, comments, create_time, user, id, user_id, update_time;
   export let name, middle_name, last_name, title, photo, email;
+  export let userMain;
+
+  if (userId === undefined) {
+    userId = userMain
+  }
+
+  if (userMain === undefined) {
+    userMain = userId
+  }
 
   if (user) {
     name = '', middle_name= '', last_name='', title='', photo='', email = '', update_time='', user_id=''
@@ -441,9 +450,7 @@
           {#if user}
             {user.name} {user.last_name}
             <span>{user.title}</span>
-          {/if}
-
-          {#if user === undefined}
+          {:else}
             {name} {last_name}
             <span>{title}</span>
           {/if}

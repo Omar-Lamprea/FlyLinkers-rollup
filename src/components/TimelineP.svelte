@@ -15,6 +15,10 @@
   export let name, last_name, title, email , photo , id;
   export let userMain;
 
+  if (userMain === undefined) {
+    userMain =''
+  }
+
   let coverPhoto;
   let aboutMe;
   let userId = id
@@ -55,6 +59,31 @@
     userPost = content.results[0]
   }
 
+
+  const posts = writable([])
+  let page = 1;
+
+  async function getPosts (){
+    page += 1
+    const response = await fetch(`http://18.118.50.78:8000/post/create/?page=${page}&user=${id}`)
+    const content = await response.json()
+    try {
+      if (content) {
+        posts.set([...$posts, ...content.results])
+      }
+    } catch (error) {
+      endPosts.classList.remove('d-none')
+    }
+  }
+
+  
+  document.addEventListener('scroll', async (e)=>{
+    if ((window.innerHeight + window.scrollY) === main.offsetHeight){
+      getPosts()
+    }
+  })
+
+
 </script>
 
 <style>
@@ -71,7 +100,6 @@
 </style>
 
 <div class="Profile col-9" on:load={getProfile()}>
-  <!-- {#if aboutMe} -->
     <div class="Profile-container" on:load={getPost()}>
         <CoverPhoto {coverPhoto}/>
         <UserDetails {name} {last_name} {title} {email} {photo} {id} {aboutMe} {userMain}/>
@@ -85,10 +113,38 @@
       <Experience/>
       <Panel/>
       {#if post}
-        {#each post as dataPost}
-          <Post {...userPost} {...dataPost} {userId}/>
-        {/each}
+        {#if userMain}
+
+          {#each post as dataPost}
+            <Post {...userPost} {...dataPost} {userMain}/>
+          {/each}
+
+        {:else}
+
+          {#each post as dataPost}
+            <Post {...userPost} {...dataPost} {userId}/>
+          {/each}
+
+        {/if}
       {/if}
+
+
+      {#if $posts}
+        {#if userMain}
+
+          {#each $posts as dataPost}
+            <Post {...userPost} {...dataPost} {userMain}/>
+          {/each}
+
+        {:else}
+
+          {#each $posts as dataPost}
+            <Post {...userPost} {...dataPost} {userId}/>
+          {/each}
+
+        {/if}
+      {/if}
+
+      <div id="endPosts" class="d-none text-center">No more posts =(</div>
     </div>
-  <!-- {/if} -->
 </div>
