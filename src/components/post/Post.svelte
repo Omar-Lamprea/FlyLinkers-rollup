@@ -3,7 +3,7 @@
   export let userId;
   export let desc, reactions, img, comments, create_time, user, id, user_id, update_time;
   export let name, middle_name, last_name, title, photo, email;
-  export let userMain;
+  export let userMain, urlAPI;
 
   if (userId === undefined) {
     userId = userMain
@@ -19,7 +19,7 @@
 
   const viewUserProfile = () => {
     const userEmail = user.email;
-    window.location.href = `http://localhost:5000/profile/${userEmail}`
+    window.location.pathname = `profile/${userEmail}`
   }
 
 
@@ -80,7 +80,7 @@
     const btnLove = document.getElementById(`btnLove${id}`)
 
     if (spanLikeValue.textContent !== '0' || spanLoveValue.textContent !== '0') {
-      const getIdReaction = await fetch(`http://18.118.50.78:8000/post/like/?post_id=${id}`)
+      const getIdReaction = await fetch(`${urlAPI}/post/like/?post_id=${id}`)
       const response = await getIdReaction.json()
 
       response.forEach(reaction => {
@@ -103,7 +103,7 @@
     const reactionType = element.classList[0]
     const reactionElement = element.classList[1]
 
-    const getIdReaction = await fetch(`http://18.118.50.78:8000/post/like/?post_id=${id}`)
+    const getIdReaction = await fetch(`${urlAPI}/post/like/?post_id=${id}`)
     const content = await getIdReaction.json()
 
     console.log(content);
@@ -112,7 +112,7 @@
       console.log('like in process..');
 
       if(content.length === 0 || content.Error){
-       const createReaction = await fetch('http://18.118.50.78:8000/post/like/',{
+       const createReaction = await fetch(`${urlAPI}/post/like/`,{
         method: 'POST',
         headers: {
           'Content-Type' : 'application/json'
@@ -129,7 +129,7 @@
           toggleReaction()
         }
       }else{
-        const like = await fetch(`http://18.118.50.78:8000/post/like/?post_id=${id}&user=${userId}`,{
+        const like = await fetch(`${urlAPI}/post/like/?post_id=${id}&user=${userId}`,{
           method: 'PUT',
           headers: {
             'Content-Type' : 'application/json'
@@ -160,7 +160,7 @@
     if(reactionType === 'fa-thumbs-up' && reactionElement === 'fas'){
       console.log('dislike in process..');
 
-      const dislike = await fetch(`http://18.118.50.78:8000/post/like/?post_id=${id}&user=${userId}`,{
+      const dislike = await fetch(`${urlAPI}/post/like/?post_id=${id}&user=${userId}`,{
         method: 'PUT',
         headers: {
           'Content-Type' : 'application/json'
@@ -180,7 +180,7 @@
     if (reactionType === 'fa-heart' && reactionElement === 'far') {
       console.log('love in process...');
       if(content.length === 0 || content.Error){
-       const createReaction = await fetch('http://18.118.50.78:8000/post/like/',{
+       const createReaction = await fetch(`${urlAPI}/post/like/`,{
         method: 'POST',
         headers: {
           'Content-Type' : 'application/json'
@@ -197,7 +197,7 @@
           toggleReaction()
         }
       }else{
-        const love = await fetch(`http://18.118.50.78:8000/post/like/?post_id=${id}&user=${userId}`,{
+        const love = await fetch(`${urlAPI}/post/like/?post_id=${id}&user=${userId}`,{
           method: 'PUT',
           headers: {
             'Content-Type' : 'application/json'
@@ -229,7 +229,7 @@
     if (reactionType === 'fa-heart' && reactionElement === 'fas') {
       console.log('dislove in process...');
       
-      const dislove = await fetch(`http://18.118.50.78:8000/post/like/?post_id=${id}&user=${userId}`,{
+      const dislove = await fetch(`${urlAPI}/post/like/?post_id=${id}&user=${userId}`,{
         method: 'PUT',
         headers: {
           'Content-Type' : 'application/json'
@@ -262,7 +262,7 @@
 
   const getCommets = async()=>{
     if (comments >= 1) {
-      const response = await fetch(`http://18.118.50.78:8000/post/comment/?post_id=${id}`)
+      const response = await fetch(`${urlAPI}/post/comment/?post_id=${id}`)
       const content = await response.json()
       dataComment = content
     }
@@ -280,7 +280,7 @@
   const addComment = async (e)=>{
     e.preventDefault()
     const inputAddComment = document.getElementById(`inputAddComment${id}`)
-    const response = await fetch('http://18.118.50.78:8000/post/comment/',{
+    const response = await fetch(`${urlAPI}/post/comment/`,{
       method: 'POST',
         headers: {
           'Content-Type' : 'application/json'
@@ -440,10 +440,10 @@
 
       <div class="Card-user" on:click={viewUserProfile}>
         {#if user !== undefined}
-          <img src="http://18.118.50.78:8000{user.photo}" alt="">
+          <img src="{urlAPI}{user.photo}" alt="">
         {/if}
         {#if user === undefined}
-          <img src="http://18.118.50.78:8000{photo}" alt="">
+          <img src="{urlAPI}{photo}" alt="">
         {/if}
 
         <h2 on:click={viewUserProfile}>
@@ -472,7 +472,7 @@
     <div class="Card-photo">
       <figure>
         {#if !!img}
-           <img src="http://18.118.50.78:8000{img}" alt="img post">
+           <img src="{urlAPI}{img}" alt="img post">
         {/if}
       </figure>
     </div>
@@ -503,10 +503,6 @@
             <span>{comments}</span> Comments</span>
         </div>
       </div>
-      <!-- <div class="Card-board-icons-second">
-        <i class="fas fa-paper-plane"></i>
-        <i class="fas fa-bookmark"></i>
-      </div> -->
     </div>
 
     <div class="Card-board-actions">
@@ -532,14 +528,11 @@
           <span>Send</span>
         </div>
       </div>
-      <!-- <div class="Card-board-icons-second">
-        <i class="fas fa-bookmark"></i>
-      </div> -->
     </div>
 
     <div id="comment{id}" class="comments d-none">
       <div class="Comments-add d-flex justify-content-between">
-        <img src="http://18.118.50.78:8000{localStorage.getItem('profilePhoto')}" alt="img">
+        <img src="{urlAPI}{localStorage.getItem('profilePhoto')}" alt="img">
         <form>
           <input id="inputAddComment{id}" type="text" class="Comments-input" placeholder="Write a comment..." on:keyup={commentAbled}>
           <button id="btn-sendComment{id}" class="btn-sendComment" disabled on:click={addComment}>Post</button>
@@ -548,7 +541,7 @@
 
       {#if dataComment}
         {#each dataComment as comment}
-          <Comment {comment}/>
+          <Comment {comment} {urlAPI}/>
         {/each}
       {/if}
     </div>

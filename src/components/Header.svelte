@@ -5,7 +5,7 @@
 
   export let photo, id;
   export let name = '', title = '', email = '', last_name = '', middle_name = '';
-  export let urlLogOut;
+  export let urlLogOut, urlAPI;
 </script>
 
 <style>
@@ -55,7 +55,7 @@
 
       {#if window.innerWidth > 920}
         <div class="Header-nav d-flex">
-          <HeaderNav {photo} {id} {urlLogOut}/>
+          <HeaderNav {photo} {id} {urlLogOut} {urlAPI}/>
         </div>
       {:else}
         <div class="Header-menu fs-3">

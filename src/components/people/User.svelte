@@ -1,10 +1,10 @@
 <script>
-  export let name, middle_name, last_name, title, photo, email, id = '';
+  export let name, middle_name, last_name, title, photo, email, id, urlAPI;
 
 
 
   const viewUserProfile = (email) => {
-    window.location.href = `http://localhost:5000/profile/${email}`
+    window.location.pathname = `profile/${email}`
   }
 
 </script>
@@ -40,7 +40,7 @@
 
 <div class="User my-3 pb-3 d-flex align-items-center" on:click={viewUserProfile(email)}>
   <div class="User-photo">
-    <img src="http://18.118.50.78:8000{photo}" alt="">
+    <img src="{urlAPI}{photo}" alt="">
   </div>
   <div class="User-detail d-flex flex-column">
     <p>{name} {last_name}</p>

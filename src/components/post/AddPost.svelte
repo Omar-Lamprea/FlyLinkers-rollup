@@ -2,13 +2,13 @@
   import NavPost from './NavPost.svelte'
   import expandTextArea from '../../js/expandTextArea.js'
 
-  export let id
+  export let id, urlAPI;
 
   const sendPost = async()=>{
     let imagePost = '';
     if (!!postImg.src) {
       // imagePost = postImg.src
-      const convertImageB64 = await fetch('http://18.118.50.78:8000/resources/img/', {
+      const convertImageB64 = await fetch(`${urlAPI}/resources/img/`, {
         method : 'POST',
         headers : {
           'Content-Type' : 'application/json'
@@ -33,7 +33,7 @@
       //   }
       // console.log(dataPost);
 
-        const post = await fetch('http://18.118.50.78:8000/post/create/',{
+        const post = await fetch(`${urlAPI}/post/create/`,{
           method : 'POST',
           headers : {
             'Content-Type' : 'application/json'
@@ -80,7 +80,6 @@
 
   <div class="Add-post-input mx-3 d-flex flex-column justify-content-center">
     <textarea name="" cols="" rows="1" id="postDescription" class="Default-containers" placeholder="Start a post..." on:keyup={expandTextArea}></textarea>
-    <!-- <input id="postDescription" class="Default-containers" type="text" placeholder="Start a post..." on:keyup={createPost}> -->
     <img alt="postImg" id="postImg" class="d-none mb-3">
   </div>
 

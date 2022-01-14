@@ -1,18 +1,16 @@
 <script>
   import CoverPhoto from './profile/CoverPhoto.svelte'
   import UserDetails from './profile/UserDetails.svelte'
-  import CreatePost from './post/CreatePost.svelte'
   import Experience from './profile//Experience.svelte'
   import Panel from './profile/Panel.svelte'
-  import AddPostHome from './post/AddPostHome.svelte';
-  import PostP from './post/PostProfile.svelte'
+  import AddPost from './post/AddPost.svelte';
   import Post from './post/Post.svelte'
   import Loader from './Loader.svelte'
   
   import {onMount} from 'svelte'
   import { writable } from 'svelte/store';
 
-  export let name, last_name, title, email , photo , id;
+  export let name, last_name, title, email , photo , id, urlAPI;
   export let userMain;
 
   if (userMain === undefined) {
@@ -24,19 +22,19 @@
   let userId = id
 
   const getProfile = async ()=>{
-    const response = await fetch(`http://18.118.50.78:8000/user/profile/?user_id=${id}`)
+    const response = await fetch(`${urlAPI}/user/profile/?user_id=${id}`)
     const content = await response.json()
     if (content.Detail) {
       // createprofile()
     }
     let data = content[0]
-    coverPhoto = `http://18.118.50.78:8000${data.cover_img}`
+    coverPhoto = `${urlAPI}${data.cover_img}`
     aboutMe = data.about
     localStorage.setItem('coverPhoto', coverPhoto)
   }
 
   const createprofile = async ()=>{
-    const response = await fetch('http://18.118.50.78:8000/user/profile/', {
+    const response = await fetch(`${urlAPI}/user/profile/`, {
       method: 'POST',
       headers : {
         'Content-Type': 'application/json'
@@ -53,7 +51,7 @@
   let post;
   let userPost;
   const getPost = async()=>{
-    const response = await fetch(`http://18.118.50.78:8000/post/create/?user=${id}`)
+    const response = await fetch(`${urlAPI}/post/create/?user=${id}`)
     const content = await response.json()
     post = content.results.splice(1)
     userPost = content.results[0]
@@ -65,7 +63,7 @@
 
   async function getPosts (){
     page += 1
-    const response = await fetch(`http://18.118.50.78:8000/post/create/?page=${page}&user=${id}`)
+    const response = await fetch(`${urlAPI}/post/create/?page=${page}&user=${id}`)
     const content = await response.json()
     try {
       if (content) {
@@ -101,28 +99,29 @@
 
 <div class="Profile col-9" on:load={getProfile()}>
     <div class="Profile-container" on:load={getPost()}>
-        <CoverPhoto {coverPhoto}/>
-        <UserDetails {name} {last_name} {title} {email} {photo} {id} {aboutMe} {userMain}/>
-      <!-- <CreatePost/> -->
+      <CoverPhoto {coverPhoto}/>
+      <UserDetails {name} {last_name} {title} {email} {photo} {id} {aboutMe} {userMain} {urlAPI}/>
+
       {#if email === localStorage.getItem('user')}
         <div class="Background-post-profile" on:load={getPost()}>
           <p class="my-2">Post</p>
-          <AddPostHome {id}/>
+          <AddPost {id} {urlAPI}/>
         </div>
       {/if}
+
       <Experience/>
       <Panel/>
       {#if post}
         {#if userMain}
 
           {#each post as dataPost}
-            <Post {...userPost} {...dataPost} {userMain}/>
+            <Post {...userPost} {...dataPost} {userMain} {urlAPI}/>
           {/each}
 
         {:else}
 
           {#each post as dataPost}
-            <Post {...userPost} {...dataPost} {userId}/>
+            <Post {...userPost} {...dataPost} {userId} {urlAPI}/>
           {/each}
 
         {/if}
@@ -133,13 +132,13 @@
         {#if userMain}
 
           {#each $posts as dataPost}
-            <Post {...userPost} {...dataPost} {userMain}/>
+            <Post {...userPost} {...dataPost} {userMain} {urlAPI}/>
           {/each}
 
         {:else}
 
           {#each $posts as dataPost}
-            <Post {...userPost} {...dataPost} {userId}/>
+            <Post {...userPost} {...dataPost} {userId} {urlAPI}/>
           {/each}
 
         {/if}

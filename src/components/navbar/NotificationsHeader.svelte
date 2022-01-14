@@ -1,12 +1,12 @@
 <script>
   let notifications = 0;
 
-  export let id;
+  export let id, urlAPI;
 
   let friendRequest = [];
 
   const showFriendRequest = async () =>{
-    const response = await fetch(`http://18.118.50.78:8000/friend/request/?user_id=${id}`)
+    const response = await fetch(`${urlAPI}/friend/request/?user_id=${id}`)
     const content = await response.json()
     friendRequest = content
     notifications = friendRequest.length
@@ -15,7 +15,7 @@
   showFriendRequest()
 
   const acceptRequest = async(Friendid) =>{
-    const response = await fetch(`http://18.118.50.78:8000/friend/request/`, {
+    const response = await fetch(`${urlAPI}/friend/request/`, {
       method : 'PUT',
       headers : {
         'Content-Type': 'application/json'
@@ -32,7 +32,7 @@
   }
 
   const viewUserProfile = (email) => {
-    window.location.href = `http://localhost:5000/profile/${email}`
+    window.location.pathname = `profile/${email}`
   }
 
 </script>
@@ -116,7 +116,7 @@
        <li>
          <span class="dropdown-item">
            <div class="userData" on:click={viewUserProfile(request.email)}>
-             <img src="http://18.118.50.78:8000{request.photo}" alt="">
+             <img src="{urlAPI}{request.photo}" alt="">
              <span>{request.name} {request.last_name}</span>
            </div>
            <div class="btns-request">

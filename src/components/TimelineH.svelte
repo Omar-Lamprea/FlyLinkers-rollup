@@ -1,11 +1,13 @@
 <script>
-  import AddPost from './post/AddPostHome.svelte'
+  import AddPost from './post/AddPost.svelte'
   import Post from './post/Post.svelte'
   import Loader from './Loader.svelte'
   import {onMount} from 'svelte'
   import { writable } from 'svelte/store';
 
   export let id = '';
+  export let urlAPI;
+
   const userId = id;
   const posts = writable([])
 
@@ -13,7 +15,7 @@
 
   async function getPosts (){
     page += 1
-    const response = await fetch(`http://18.118.50.78:8000/post/home/?page=${page}&user_id=${id}`)
+    const response = await fetch(`${urlAPI}/post/home/?page=${page}&user_id=${id}`)
     const content = await response.json()
     try {
       if (content) {
@@ -36,9 +38,9 @@
 
 <div class="Timeline col-12 col-lg-6">
   <div class="Timeline-container">
-    <AddPost {id}/>
+    <AddPost {id} {urlAPI}/>
       {#each $posts as dataPost}
-        <Post {...dataPost} {userId}/>
+        <Post {...dataPost} {userId} {urlAPI}/>
       {/each}
 
       <div id="endPosts" class="d-none text-center">No more posts =(</div>

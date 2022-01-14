@@ -3,7 +3,7 @@
   import Groups from './groups-card/Groups.svelte'
   import Hashtags from './hashtags-card/Hashtags.svelte'
 
-  export let name, title, photo, last_name;
+  export let name, title, photo, last_name, urlAPI;
 
 </script>
 
@@ -16,7 +16,7 @@
 
 <div class="Sidebar col-3">
   <div class="Sidebar-container">
-    <ProfileCard {name} {last_name} {title} {photo}/>
+    <ProfileCard {name} {last_name} {title} {photo} {urlAPI}/>
     <Groups/>
     <Hashtags/>
   </div>

@@ -1,7 +1,7 @@
 <script>
   import UserPhoto from '../profile/UserPhoto.svelte'
 
-  export let comment;
+  export let comment, urlAPI;
 
 </script>
 
@@ -40,7 +40,7 @@
 <div class="Comments">
   <div class="Comments-content">
     <div class="Comments-users">
-      <img src="http://18.118.50.78:8000{comment.user.photo}" alt="">
+      <img src="{urlAPI}{comment.user.photo}" alt="">
       <span>
         <div class="userInfo mb-1 d-flex justify-content-between">
           <p>{comment.user.name} {comment.user.last_name}</p>

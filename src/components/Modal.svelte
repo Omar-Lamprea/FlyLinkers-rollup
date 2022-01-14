@@ -8,7 +8,7 @@
   let urlProfilePhoto;
   let idProfilePhoto
 
-  export let id;
+  export let id, urlAPI;
 
   const showCoverImg = ()=>{
     const render = new FileReader();
@@ -31,7 +31,7 @@
   }
 
   const convertCoverB64 = async ()=> {
-    const response = await fetch('http://18.118.50.78:8000/resources/img/',{
+    const response = await fetch(`${urlAPI}/resources/img/`,{
       method : 'POST',
       headers : {
         'Content-Type': 'application/json'
@@ -46,7 +46,7 @@
   }
 
   const convertProfileB64 = async ()=> {
-    const response = await fetch('http://18.118.50.78:8000/resources/img/',{
+    const response = await fetch(`${urlAPI}/resources/img/`,{
       method : 'POST',
       headers : {
         'Content-Type': 'application/json'
@@ -61,7 +61,7 @@
   }
 
   const getProfile = async (id)=>{
-      const response = await fetch(`http://18.118.50.78:8000/user/profile/?user_id=${id}`)
+      const response = await fetch(`${urlAPI}/user/profile/?user_id=${id}`)
       const content = await response.json()
 
       if (content.Detail === 'User does not exist') {
@@ -69,15 +69,12 @@
       } else {
         upDateDataDescription()
       }
-      // let data = content[0]
-      // coverPhoto = `http://18.118.50.78:8000${data.cover_img}`
-      // aboutMe = data.about
   }
 
   const createDataDescription = async ()=>{
     await convertCoverB64()
 
-    const sendData = await fetch('http://18.118.50.78:8000/user/profile/', {
+    const sendData = await fetch('${urlAPI}/user/profile/', {
       method: 'POST',
       headers : {
         'Content-Type': 'application/json'
@@ -102,7 +99,7 @@
     }else{
       dataDescription = description.value
     }
-    const sendData = await fetch(`http://18.118.50.78:8000/user/profile/?user=${id}`, {
+    const sendData = await fetch(`${urlAPI}/user/profile/?user=${id}`, {
       method: 'PUT',
       headers : {
         'Content-Type': 'application/json'
@@ -122,7 +119,7 @@
 
   const updateProfile = async(id)=>{
     await convertProfileB64()
-    const response = await fetch(`http://18.118.50.78:8000/user/create/?id=${id}`,{
+    const response = await fetch(`${urlAPI}/user/create/?id=${id}`,{
       method : 'PUT',
       headers : {
         'Content-Type': 'application/json'

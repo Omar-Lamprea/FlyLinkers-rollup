@@ -3,7 +3,7 @@
   import Sponsors from './sponsors-card/Sponsors.svelte'
   import People from './People/People.svelte'
 
-  export let id = '';
+  export let id = '', urlAPI;
 </script>
 
 <style>
@@ -18,7 +18,7 @@
     <Events/>
     <Sponsors/>
     {#if window.location.pathname.includes('profile')}
-       <People {id}/>
+       <People {id} {urlAPI}/>
     {/if}
 
   </div>

@@ -12,6 +12,9 @@
   const urlLogOut = 'http://localhost:3000/'
   // const urlLogOut = 'https://dev.flylinkers.com/'
 
+  const urlAPI = 'http://18.118.50.78:8000'
+
+
   if(!localStorage.getItem('user') || localStorage.getItem('user') === 'null'){
     const param = window.location.search
     const urlParams = new URLSearchParams(param)
@@ -27,7 +30,7 @@
   let userMain;
 
   const getData = async ()=>{
-    const response = await fetch(`http://18.118.50.78:8000/user/create/?email=${localStorage.getItem('user')}`,{
+    const response = await fetch(`${urlAPI}/user/create/?email=${localStorage.getItem('user')}`,{
       method : 'GET',
       headers : {
         'Content-Type': 'application/json'
@@ -108,22 +111,22 @@
   }
 </style>
 {#if data}
-   <Header {...data} {urlLogOut}/>
+   <Header {...data} {urlLogOut} {urlAPI}/>
 {/if}
 
 <main id="main" class="container" on:load={getData()}>
   {#if data}
     <Router>
       <Route path="/">
-        <Home {...data}/>
+        <Home {...data} {urlAPI}/>
       </Route>
 
       <Route path="/profile">
-        <Profile {...data}/>
+        <Profile {...data} {urlAPI}/>
       </Route>
 
       <Route path="/profile/{urluserProfile}">
-        <UserProfile {userMain}/>
+        <UserProfile {userMain} {urlAPI}/>
       </Route>
 
     </Router>

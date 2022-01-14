@@ -2,7 +2,7 @@
   import UserPotho from './UserPhoto.svelte'
   import Modal from '../Modal.svelte'
 
-  export let name, last_name, title, email , photo, id, aboutMe;
+  export let name, last_name, title, email , photo, id, aboutMe, urlAPI;
   export let userMain;
 
   const editDescription = ()=>{
@@ -17,7 +17,7 @@
   }
 
   const updateDescription = async () =>{
-     const response = await fetch(`http://18.118.50.78:8000/user/profile/?user=${id}`,{
+     const response = await fetch(`${urlAPI}/user/profile/?user=${id}`,{
        method : 'PUT',
       headers : {
         'Content-Type': 'application/json'
@@ -38,7 +38,7 @@
   // console.log(userMain, id);
 
   const searchFriends = async ()=>{
-    const response = await fetch(`http://18.118.50.78:8000/friend/user/?user=${userMain}`)
+    const response = await fetch(`${urlAPI}/friend/user/?user=${userMain}`)
     const content = await response.json()
     content.forEach(el => {
       if (el.id === id) {
@@ -48,7 +48,7 @@
   }
 
   const sendFriendRequest = async()=>{
-    const response = await fetch('http://18.118.50.78:8000/friend/request/',{
+    const response = await fetch(`${urlAPI}/friend/request/`,{
       method: 'POST',
       headers : {
         'Content-Type': 'application/json'
@@ -118,7 +118,7 @@
 
       <div class="Profile-card">
         <div class="Profile-card-content d-flex flex-column">
-          <UserPotho {photo}/>
+          <UserPotho {photo} {urlAPI}/>
           <div class="Profile-card-info mt-2">
             <div class="Profile-card-user">
               <h2>{name} {last_name}</h2>
@@ -143,7 +143,7 @@
               </div>
               <div class="Profile-description-contact">
                 <p>Email</p>
-                <p><a href="/">{email}</a></p>
+                <p><a href="#">{email}</a></p>
               </div>
             </div>
           </div>
@@ -153,8 +153,10 @@
     <div class="col-6">
       <div class="Profile-card-text text-end d-flex flex-column align-items-end">
         {#if email === localStorage.getItem('user')}
+
           <p type="button" class="mb-3" data-bs-toggle="modal" data-bs-target="#editProfile"><i class="fas fa-pen"></i> Edit profile</p>
-          <Modal {id}/>
+          <Modal {id} {urlAPI}/>
+
           <div class="Profile-card-statistics">
             <p>Who viewed your profile-card <span>3.8K</span></p> 
             <p>Views of your post <span>3.8K</span></p> 

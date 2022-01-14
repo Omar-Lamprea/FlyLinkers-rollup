@@ -3,12 +3,11 @@
   import Notifications from './NotificationsHeader.svelte'
 
   export let photo, id;
-  export let urlLogOut;
+  export let urlLogOut, urlAPI;
 
   const logOut = ()=>{
     localStorage.clear();
-    const redirect = urlLogOut;
-    window.location.href = redirect;
+    window.location.href = urlLogOut;
   }
 
 
@@ -64,14 +63,14 @@
       </Link>
     </div>
     <div class="Header-nav-bell mx-3 fs-3 notification" id="notification">
-        <Notifications {id}/>
+        <Notifications {id} {urlAPI}/>
     </div>
     <div class="Header-nav-user mx-3 fs-3">
       <Link to="/profile">
         {#if localStorage.getItem('profilePhoto')}
-           <img src="http://18.118.50.78:8000{localStorage.getItem('profilePhoto')}" alt="">
+           <img src="{urlAPI}{localStorage.getItem('profilePhoto')}" alt="">
         {:else}
-          <img src="http://18.118.50.78:8000{photo}" alt="">
+          <img src="{urlAPI}{photo}" alt="">
         {/if}
       </Link>
     </div>
