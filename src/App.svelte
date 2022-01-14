@@ -9,6 +9,9 @@
   const urlUser = window.location.pathname
   const urluserProfile = urlUser.slice(9)
 
+  const urlLogOut = 'http://localhost:3000/'
+  // const urlLogOut = 'https://dev.flylinkers.com/'
+
   if(!localStorage.getItem('user') || localStorage.getItem('user') === 'null'){
     const param = window.location.search
     const urlParams = new URLSearchParams(param)
@@ -17,7 +20,7 @@
   }
 
   setTimeout(() => {
-    if(localStorage.getItem('user') === 'null') window.location.href = 'http://localhost:3000/'
+    if(localStorage.getItem('user') === 'null') window.location.href = urlLogOut
   }, 1000);
 
   let data;
@@ -105,7 +108,7 @@
   }
 </style>
 {#if data}
-   <Header {...data}/>
+   <Header {...data} {urlLogOut}/>
 {/if}
 
 <main id="main" class="container" on:load={getData()}>

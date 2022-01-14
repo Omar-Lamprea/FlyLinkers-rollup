@@ -2,13 +2,16 @@
   import { Router, Link, Route } from "svelte-routing";
   import Notifications from './NotificationsHeader.svelte'
 
+  export let photo, id;
+  export let urlLogOut;
+
   const logOut = ()=>{
     localStorage.clear();
-    const redirect = 'http://localhost:3000/'
-    window.location.href = redirect
+    const redirect = urlLogOut;
+    window.location.href = redirect;
   }
 
-  export let photo, id;
+
 
 
 </script>
