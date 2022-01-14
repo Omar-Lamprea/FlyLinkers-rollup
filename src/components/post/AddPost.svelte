@@ -1,8 +1,21 @@
 <script>
   import NavPost from './NavPost.svelte'
-  import expandTextArea from '../../js/expandTextArea.js'
 
   export let id, urlAPI;
+
+  const validateInfoPost = (e) =>{
+    if (e.key === 'Enter') {
+      e.target.rows ++
+    }
+    if (e.target.value !== '') {
+      btnSendPost.removeAttribute('disabled')
+    }else{
+      btnSendPost.setAttribute('disabled', '')
+      if (postImg.src) {
+        btnSendPost.removeAttribute('disabled')
+      }
+    }
+  }
 
   const sendPost = async()=>{
     let imagePost = '';
@@ -79,12 +92,12 @@
 <div class="Add-post Default-containers px-5 d-flex flex-column">
 
   <div class="Add-post-input mx-3 d-flex flex-column justify-content-center">
-    <textarea name="" cols="" rows="1" id="postDescription" class="Default-containers" placeholder="Start a post..." on:keyup={expandTextArea}></textarea>
+    <textarea name="" cols="" rows="1" id="postDescription" class="Default-containers" placeholder="Start a post..." on:keyup={validateInfoPost}></textarea>
     <img alt="postImg" id="postImg" class="d-none mb-3">
   </div>
 
   <NavPost/>
 
-  <button id="btn-sendPost" class="btn btn-outline-primary btn-flylinkers btn-post mt-3" disabled on:click={sendPost}>Post</button>
+  <button id="btnSendPost" class="btn btn-outline-primary btn-flylinkers btn-post mt-3" disabled on:click={sendPost}>Post</button>
 
 </div>

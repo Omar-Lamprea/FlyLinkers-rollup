@@ -1,7 +1,9 @@
 <script>
   import UserPhoto from '../profile/UserPhoto.svelte'
+  import startTime from '../../js/startTime.js'
 
   export let comment, urlAPI;
+
 
 </script>
 
@@ -44,7 +46,7 @@
       <span>
         <div class="userInfo mb-1 d-flex justify-content-between">
           <p>{comment.user.name} {comment.user.last_name}</p>
-          <p>1W</p>
+          <p>{startTime(comment.create_time)}</p>
         </div>
         {comment.comment}
       </span>

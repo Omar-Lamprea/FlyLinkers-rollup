@@ -9,14 +9,12 @@
     render.onloadend = ()=>{
       postImg.classList.remove('d-none')
       postImg.src = render.result
-      // coverPhotoB64 = render.result
-
       ableBtn()
     }
   }
 
   const ableBtn = ()=>{
-    const btnsendPost = document.getElementById('btn-sendPost')
+    const btnsendPost = document.getElementById('btnSendPost')
     btnsendPost.removeAttribute('disabled')
   }
 
