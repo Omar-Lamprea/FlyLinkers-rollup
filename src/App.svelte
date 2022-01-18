@@ -9,8 +9,8 @@
   const urlUser = window.location.pathname
   const urluserProfile = urlUser.slice(9)
 
-  const urlLogOut = 'http://localhost:3000/'
-  // const urlLogOut = 'https://dev.flylinkers.com/'
+  // const urlLogOut = 'http://localhost:3000/'
+  const urlLogOut = 'https://flylinkers.com/'
 
   const urlAPI = 'http://18.118.50.78:8000'
 
