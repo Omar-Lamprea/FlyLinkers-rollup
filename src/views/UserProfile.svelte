@@ -6,7 +6,6 @@
   const urluserProfile = urlUser.slice(9)
 
   export let userMain, urlAPI;
-  console.log(urlAPI);
 
   let userProfile;
   let dataProfile;

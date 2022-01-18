@@ -5,6 +5,12 @@
 	import Profile from "./views/Profile.svelte";
   import UserProfile from "./views/UserProfile.svelte";
   import Loader from './components/Loader.svelte'
+  import Login from './views/Login.svelte'
+
+  import { initializeApp } from "firebase/app";
+  import { getFirestore, collection, getDocs, setDoc, addDoc, doc, updateDoc} from 'firebase/firestore';
+
+  import {getUserToFirestore} from './js/firebase/config.js'
 
   const urlUser = window.location.pathname
   const urluserProfile = urlUser.slice(9)
@@ -13,6 +19,7 @@
   // const urlLogOut = 'https://dev.flylinkers.com/'
 
   const urlAPI = 'http://18.118.50.78:8000'
+
 
 
   if(!localStorage.getItem('user') || localStorage.getItem('user') === 'null'){
@@ -42,7 +49,10 @@
       localStorage.setItem('profilePhoto', data.photo)
     }
     userMain = data.id
+    getUserToFirestore(data)
   }
+
+  
 
 </script>
 
@@ -115,22 +125,36 @@
 {/if}
 
 <main id="main" class="container" on:load={getData()}>
-  {#if data}
-    <Router>
-      <Route path="/">
-        <Home {...data} {urlAPI}/>
-      </Route>
 
-      <Route path="/profile">
-        <Profile {...data} {urlAPI}/>
-      </Route>
 
-      <Route path="/profile/{urluserProfile}">
-        <UserProfile {userMain} {urlAPI}/>
-      </Route>
+  <button id="btn-initChat">iniciar chat</button>
 
-    </Router>
+
+  {#if localStorage.getItem('user')}
+    {#if data}
+      <Router>
+        <Route path="/">
+          <Home {...data} {urlAPI}/>
+        </Route>
+  
+        <Route path="/profile">
+          <Profile {...data} {urlAPI}/>
+        </Route>
+  
+        <Route path="/profile/{urluserProfile}">
+          <UserProfile {userMain} {urlAPI}/>
+        </Route>
+      </Router>
+    {:else}
+      <Loader/>
+    {/if}
+
   {:else}
-    <Loader/>
+    <Router>
+      <Route path="/login">
+        <Login/>
+      </Route>
+    </Router>
   {/if}
+
 </main>
