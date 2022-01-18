@@ -1,7 +1,7 @@
 <script>
   import Events from './events-card/Events.svelte'
   import Sponsors from './sponsors-card/Sponsors.svelte'
-  import People from './People/People.svelte'
+  import People from './people/People.svelte'
 
   export let id = '', urlAPI;
 </script>
