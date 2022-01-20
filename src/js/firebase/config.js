@@ -17,6 +17,10 @@ const db = getFirestore(app);
 
 let user;
 let user2;
+let groupId;
+
+
+
 
 export async function getUserToFirestore(data) {
   const userRef = collection(db, 'user')
@@ -38,10 +42,11 @@ export async function getUserToFirestore(data) {
   }else{
     // getGroups(user)
   }
+  return user
 }
 
 
-async function getUser(uid){
+export async function getUser(uid){
   const userRef = collection(db, 'user')
   const getDoc = await getDocs(userRef)
   const users = getDoc.docs.map(doc => doc.data());
@@ -51,9 +56,9 @@ async function getUser(uid){
       user2 = user
     }
   })
-  console.log(user2);
+  // console.log(user2);
+  return user2
 }
-getUser(1)
 
 
 
@@ -65,48 +70,76 @@ async function saveUserToFirestore(data, group) {
 
   const userRef = await setDoc(doc(db, 'user', collectionId), {
     uid: data.id,
-    name: data.name + data.last_name,
+    name: `${data.name} ${data.last_name}`,
     email: data.email,
     groups: []
   });
 }
 
-async function newGroup(user1, user2){
-  const date = new Date()
-  let flag = false 
-  let groupId;
 
-  for (let i = 0; i < user1.groups.length; i++) {
+let flagGroups = false
+
+const validateGroup = (user, user2) =>{
+  
+  for (let i = 0; i < user.groups.length; i++) {
     for (let j = 0; j < user2.groups.length; j++) {
-      if (user2.groups[j] === user1.groups[i]) {
-        flag = true
-        groupId = user1.groups[i]
+      if (user2.groups[j] === user.groups[i] && user.groups[i].length > 0) {
+        flagGroups = true
+        console.log(user.groups[i]);
+        console.log(user2.groups[j]);
+        groupId = user.groups[i]
       }
     }
   }
+  handleMessage(groupId, flagGroups, user, user2)
+}
 
-  console.log(flag);
 
-  if (!flag) {
-    const groupRef = await addDoc(collection(db, "group"), {
-      created_by : user1.name,
-      users: [user1.uid, user2.uid]
-    });
-    
-    console.log(groupRef.id);
-    updateUser(groupRef.id, user1)
-    updateUser(groupRef.id, user2)
 
-    createNewMessageGroup(groupId)
+const handleMessage = async(groupId, flagGroups, user, user2)=>{
+  let sentBy = user.name
+  let messageText = 'Hola cómo estas hoy =)'
+
+  console.log(flagGroups);
+  if (!flagGroups) {
+    console.log(flagGroups);
+    //usuario da enter para crear documentos de grupos y mensaje
+    //validar enter{
+      await newGroup(user, user2)
+      console.log(groupId);
+      // await newMessage(groupId, sentBy, messageText)
+
+    // }
 
   }else{
-    //getgroup
-    console.log('grupo ya existe');
-    console.log(groupId);
-
-    getMessageGroup(groupId)
-
+    await getMessages(groupId)
+    //enter{
+      await newMessage(groupId, sentBy, messageText)
+    // }
   }
+}
+
+async function newGroup(user1, user2){
+  const date = new Date()
+
+  const groupRef = await addDoc(collection(db, "group"), {
+    created_by : user1.name,
+    users: [user1.uid, user2.uid]
+  });
+  
+  // console.log(groupRef.id);
+  groupId = groupRef.id
+  await updateUser(groupRef.id, user1)
+  await updateUser(groupRef.id, user2)
+
+
+  await newMessage(groupRef.id, user1.name, 'messageText')
+  // else{
+  //   //getgroup
+  //   console.log('grupo ya existe');
+  //   console.log(groupId);
+  //   // getMessageGroup(groupId)
+  // }
 }
 
 const updateUser = async(groupId, user)=>{
@@ -125,27 +158,22 @@ const updateUser = async(groupId, user)=>{
 
 
 
-const createNewMessageGroup = async (groupId) =>{
+const newMessage = async (groupId, sentBy, messageText) =>{
   // addDoc(collection(db, "group"
+  console.log(groupId);
   const date = new Date()
   const messages = await addDoc(collection(db, `message/${groupId}/messages`), {
-    messageText : 'whaat?',
-    sentBy: 'Omar',
+    messageText : messageText,
+    sentBy: sentBy,
     sentAt: date
   })
 
   const collectionMessage = await setDoc(doc(db, 'message', groupId), messages)
 }
 
-const getMessageGroup = async (groupId) =>{
-
-
-  // const userRef = collection(db, 'user')
-  // const getDoc = await getDocs(userRef)
-  // const users = getDoc.docs.map(doc => doc.data());
+export const getMessages = async (groupId) =>{
 
   console.log(typeof(groupId));
-  // db.collection("stories").where("author", "==", user.uid).get()
 
   const messageRef = collection(db, `message/${groupId}/messages`)
   const getMessages = await getDocs(messageRef)
@@ -156,10 +184,38 @@ const getMessageGroup = async (groupId) =>{
 }
 
 
+export const getGroupUser = async (groupId)=>{
+  let chatWhith;
+  const groupRef = collection(db, 'group')
+  const groupRefId = await getDocs(groupRef)
+  groupRefId.docs.forEach(el => {
+    if (el.id === groupId) {
+      const members = el._document.data.value.mapValue.fields.users.arrayValue.values
+      members.forEach(id => {
+        if (id.integerValue !== user.uid.toString()) {
+          chatWhith = id.integerValue
+        }
+      });
+    }
+  });
+  return parseInt(chatWhith)
+}
 
-setTimeout(() => {
-  const initChat = document.getElementById('btn-initChat')
-  initChat.addEventListener('click', e =>{
-    newGroup(user, user2)
-  })
-}, 1000);
+
+
+
+
+export const  usersChat = async ()=>{
+  const users = {
+    user1: await user,
+    user2: await user2
+  }
+  return users
+}
+
+// setTimeout(() => {
+//   const initChat = document.getElementById('btn-initChat')
+//   initChat.addEventListener('click', e =>{
+//     validateGroup(user, user2)
+//   })
+// }, 1000);

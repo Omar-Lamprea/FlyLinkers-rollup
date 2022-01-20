@@ -1,6 +1,10 @@
 <script>
   import UserPotho from './UserPhoto.svelte'
   import Modal from '../Modal.svelte'
+  import Chat from '../../views/Chat.svelte'
+
+  import {openChat} from '../../js/openChat.js'
+  import {getUser} from '../../js/firebase/config.js'
 
   export let name, last_name, title, email , photo, id, aboutMe, urlAPI;
   export let userMain;
@@ -65,6 +69,19 @@
       btnSendFriendRequest.setAttribute('disabled','')
     }
   }
+
+  // let chat = false
+  // const initChat = async () =>{
+  //   openChat(id)
+  //   if (openChat(id) || localStorage.getItem('chat')) {
+  //     chat = true
+  //   }
+    // await getUser(id)
+    // if (getUser(id)) {
+    //   console.log(await getUser(id));
+    // }
+  // }
+
 
 </script>
 
@@ -172,6 +189,12 @@
           {:else}
             <button class="btn btn-outline-primary btn-flylinkers align-self-end mt-1">Friends</button>
           {/if}
+          <button id="btInitChat" data-chat={id} class="btn btn-outline-primary btn-flylinkers align-self-end mt-1">Send a Message</button>
+
+          <!-- {#if chat}
+             <Chat {id}/>
+          {/if} -->
+
         {/if}
       </div>
     </div>

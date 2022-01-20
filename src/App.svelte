@@ -6,11 +6,15 @@
   import UserProfile from "./views/UserProfile.svelte";
   import Loader from './components/Loader.svelte'
   import Login from './views/Login.svelte'
+  import Chat from './views/Chat.svelte'
 
-  import { initializeApp } from "firebase/app";
-  import { getFirestore, collection, getDocs, setDoc, addDoc, doc, updateDoc} from 'firebase/firestore';
+  // import { initializeApp } from "firebase/app";
+  // import { getFirestore, collection, getDocs, setDoc, addDoc, doc, updateDoc} from 'firebase/firestore';
 
-  import {getUserToFirestore} from './js/firebase/config.js'
+  import {getUserToFirestore, usersChat} from './js/firebase/config.js'
+  import {openChat} from './js/openChat.js'
+
+  
 
   const urlUser = window.location.pathname
   const urluserProfile = urlUser.slice(9)
@@ -35,6 +39,7 @@
 
   let data;
   let userMain;
+  let getUserMainToFirestore;
 
   const getData = async ()=>{
     const response = await fetch(`${urlAPI}/user/create/?email=${localStorage.getItem('user')}`,{
@@ -49,11 +54,31 @@
       localStorage.setItem('profilePhoto', data.photo)
     }
     userMain = data.id
-    getUserToFirestore(data)
+
+    getUserMainToFirestore = await getUserToFirestore(data)
+    // console.log(getUserMainToFirestore);
+    // console.log(await usersChat());
   }
 
-  
+  let chatFlag = false
+  let id;
+  const loadChatList = ()=>{
+    document.addEventListener('click', e =>{
+      if (e.target.id === 'chat' || e.target.id === 'btInitChat') {
+        id = parseInt(e.target.dataset.chat)
+        openChat(id)
+        if (openChat(id) || localStorage.getItem('chat')) {
+          chatFlag = true
+        }
+      }
+      if (e.target.id === 'closeChat') {
+        localStorage.removeItem('chat')
+        chatFlag = false
+      }
+    })
+  }
 
+  loadChatList()
 </script>
 
 <style>
@@ -120,8 +145,10 @@
     }
   }
 </style>
-{#if data}
-   <Header {...data} {urlLogOut} {urlAPI}/>
+
+
+{#if data && getUserMainToFirestore}
+   <Header {...data} {urlLogOut} {urlAPI} {getUserMainToFirestore}/>
 {/if}
 
 <main id="main" class="container" on:load={getData()}>
@@ -131,7 +158,7 @@
 
 
   {#if localStorage.getItem('user')}
-    {#if data}
+    {#if data && getUserMainToFirestore}
       <Router>
         <Route path="/">
           <Home {...data} {urlAPI}/>
@@ -149,6 +176,10 @@
       <Loader/>
     {/if}
 
+    {#if chatFlag && data}
+       <Chat {id}/>
+    {/if}
+
   {:else}
     <Router>
       <Route path="/login">
@@ -156,5 +187,6 @@
       </Route>
     </Router>
   {/if}
+
 
 </main>
