@@ -18,8 +18,8 @@
       flagChat = true
     }, 500);
 
-    const userr = getUser(await getGroupUser(group))
-    console.log(await userr);
+    // const userr = getUser(await getGroupUser(group))
+    // console.log(await userr);
   })
 
 
@@ -77,7 +77,6 @@
       <ul class="dropdown-menu" aria-labelledby="chats">
         {#if flagChat}
           {#each chatList as chatId}
-            <!-- <li><span class="dropdown-item">{chat}</span></li> -->
             <ChatList {chatId} {urlAPI}/>
           {/each}
         {/if}

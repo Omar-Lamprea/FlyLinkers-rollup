@@ -1,7 +1,9 @@
 <script>
-  import {getUser} from '../js/firebase/config.js'
+  import {getUser, validateGroup , messages} from '../js/firebase/config.js'
+  import Loader from '../components/Loader.svelte'
 
-  export let id;
+  export let id, userMain;
+
   const pickUpTab = ()=>{
     chatContainer.classList.toggle('minimize-chat')
     if (chatContainer.className.includes('minimize-chat')) {
@@ -11,17 +13,16 @@
     }
   }
 
-  const closeChat = ()=>{
-    // const chatContainer = document.getElementById('chatContainer')
-    // localStorage.removeItem('chat')
-    // chatContainer.remove()
-    // chatContainer.style.display = 'none'
-  }
-
-  let data;
+  let user1;
+  let user2;
+  let showMessages;
   const getUserChat = async()=>{
-    data = await getUser(id)
-    console.log(data);
+    user1 =  await getUser(userMain)
+    user2 = await getUser(id)
+    validateGroup(user1, user2)
+    if (messages) {
+      showMessages = messages
+    }
   }
 
   getUserChat()
@@ -110,19 +111,24 @@
   <div class="chat col-3">
 
     <div class="header-chat d-flex justify-content-between align-items-center">
-      {#if data}
-        <h6>Chatting with {data.name}</h6>
+      {#if user2}
+        <h6>Chatting with {user2.name}</h6>
       {/if}
       <div class="chat-controller">
         <i id="arrow" class="fas fa-arrow-up px-1 rotate" on:click={pickUpTab}></i>
-        <i id="closeChat" class="fas fa-times " on:click={closeChat}></i>
+        <i id="closeChat" class="fas fa-times "></i>
       </div>
     </div>
 
     <div class="messages p-3 pb-0 d-flex flex-column">
-      <p class="friend">hola!</p>
-      <p class="friend">cómo estás</p>
-      <p class="me">Super bien! =D</p>
+      {#if showMessages}
+        {console.log(showMessages)}
+        <p class="friend">hola!</p>
+        <p class="friend">cómo estás</p>
+        <p class="me">Super bien! =D</p>
+      {:else}
+        <Loader/>
+      {/if}
     </div>
 
     <div class="messageText d-flex">

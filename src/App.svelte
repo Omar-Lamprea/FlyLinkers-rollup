@@ -177,7 +177,7 @@
     {/if}
 
     {#if chatFlag && data}
-       <Chat {id}/>
+       <Chat {id} {userMain}/>
     {/if}
 
   {:else}

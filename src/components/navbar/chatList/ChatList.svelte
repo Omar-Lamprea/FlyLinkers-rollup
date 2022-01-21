@@ -8,7 +8,6 @@
     const response = await fetch(`${urlAPI}/user/create/?id=${chatId}`)
     const content = await response.json()
     data = content[0]
-    console.log(data);
     name = `${data.name} ${data.last_name}`
   }
   getUserChat()

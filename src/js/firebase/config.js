@@ -79,7 +79,7 @@ async function saveUserToFirestore(data, group) {
 
 let flagGroups = false
 
-const validateGroup = (user, user2) =>{
+export const validateGroup = (user, user2) =>{
   
   for (let i = 0; i < user.groups.length; i++) {
     for (let j = 0; j < user2.groups.length; j++) {
@@ -114,7 +114,7 @@ const handleMessage = async(groupId, flagGroups, user, user2)=>{
   }else{
     await getMessages(groupId)
     //enter{
-      await newMessage(groupId, sentBy, messageText)
+      //await newMessage(groupId, sentBy, messageText)
     // }
   }
 }
@@ -171,15 +171,14 @@ const newMessage = async (groupId, sentBy, messageText) =>{
   const collectionMessage = await setDoc(doc(db, 'message', groupId), messages)
 }
 
+export let messages; 
 export const getMessages = async (groupId) =>{
-
-  console.log(typeof(groupId));
 
   const messageRef = collection(db, `message/${groupId}/messages`)
   const getMessages = await getDocs(messageRef)
-  const messages = getMessages.docs.map(doc => doc.data())
+  messages = getMessages.docs.map(doc => doc.data())
   console.log(messages);
-
+  return messages
   // const users = getDoc.docs.map(doc => doc.data());
 }
 
@@ -213,9 +212,10 @@ export const  usersChat = async ()=>{
   return users
 }
 
-// setTimeout(() => {
-//   const initChat = document.getElementById('btn-initChat')
-//   initChat.addEventListener('click', e =>{
-//     validateGroup(user, user2)
-//   })
-// }, 1000);
+setTimeout(() => {
+  const initChat = document.getElementById('btn-initChat')
+  initChat.addEventListener('click', e =>{
+    console.log(user,user2);
+    // validateGroup(user, user2)
+  })
+}, 1000);
