@@ -1,17 +1,14 @@
 <script>
-	import { Router, Link, Route } from "svelte-routing";
-	import Header from './components/Header.svelte'
-	import Home from './views/Home.svelte';
-	import Profile from "./views/Profile.svelte";
+  import { Router, Link, Route } from "svelte-routing";
+  import Header from './components/Header.svelte'
+  import Home from './views/Home.svelte';
+  import Profile from "./views/Profile.svelte";
   import UserProfile from "./views/UserProfile.svelte";
   import Loader from './components/Loader.svelte'
   import Login from './views/Login.svelte'
   import Chat from './views/Chat.svelte'
 
-  // import { initializeApp } from "firebase/app";
-  // import { getFirestore, collection, getDocs, setDoc, addDoc, doc, updateDoc} from 'firebase/firestore';
-
-  import {getUserToFirestore, usersChat} from './js/firebase/config.js'
+  import {getUserToFirestore} from './js/firebase/config.js'
   import {openChat} from './js/openChat.js'
 
   
@@ -54,15 +51,15 @@
       localStorage.setItem('profilePhoto', data.photo)
     }
     userMain = data.id
-
     getUserMainToFirestore = await getUserToFirestore(data)
-    // console.log(getUserMainToFirestore);
-    // console.log(await usersChat());
   }
 
+
   let chatFlag = false
-  let id;
+
+  let id = parseInt(localStorage.getItem('chat'));
   const loadChatList = ()=>{
+    chatFlag = false
     document.addEventListener('click', e =>{
       if (e.target.id === 'chat' || e.target.id === 'btInitChat') {
         id = parseInt(e.target.dataset.chat)
@@ -75,10 +72,19 @@
         localStorage.removeItem('chat')
         chatFlag = false
       }
+      // if (e.target.id === 'btInitChat') {
+      //   id = parseInt(e.target.dataset.chat)
+      //   console.log('chat =)');
+      // }
     })
   }
-
   loadChatList()
+
+  if (window.location.reload) {
+    localStorage.removeItem('chat')
+  }
+
+  console.log(id, userMain);
 </script>
 
 <style>
@@ -154,9 +160,6 @@
 <main id="main" class="container" on:load={getData()}>
 
 
-  <button id="btn-initChat">iniciar chat</button>
-
-
   {#if localStorage.getItem('user')}
     {#if data && getUserMainToFirestore}
       <Router>
@@ -172,12 +175,13 @@
           <UserProfile {userMain} {urlAPI}/>
         </Route>
       </Router>
+
     {:else}
       <Loader/>
     {/if}
 
-    {#if chatFlag && data}
-       <Chat {id} {userMain}/>
+    {#if chatFlag && userMain}
+        <Chat {id} {userMain}/>
     {/if}
 
   {:else}

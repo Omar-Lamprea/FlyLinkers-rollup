@@ -1,5 +1,6 @@
+import { async } from "@firebase/util";
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, where, query, getDocs, setDoc, addDoc, doc, updateDoc} from 'firebase/firestore';
+import { getFirestore, collection, where, query, getDocs, setDoc, addDoc, doc, updateDoc, orderBy, onSnapshot} from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyB8KpNHJILsB2erTcBgMuhTHWGJd_rSttk",
@@ -19,9 +20,6 @@ let user;
 let user2;
 let groupId;
 
-
-
-
 export async function getUserToFirestore(data) {
   const userRef = collection(db, 'user')
   const getDoc = await getDocs(userRef)
@@ -36,15 +34,11 @@ export async function getUserToFirestore(data) {
     }
   });
 
-
   if (flag === false) {
     saveUserToFirestore(data)
-  }else{
-    // getGroups(user)
   }
   return user
 }
-
 
 export async function getUser(uid){
   const userRef = collection(db, 'user')
@@ -56,14 +50,10 @@ export async function getUser(uid){
       user2 = user
     }
   })
-  // console.log(user2);
   return user2
 }
 
-
-
-
-async function saveUserToFirestore(data, group) {
+async function saveUserToFirestore(data) {
   console.log(data);
 
   const collectionId = data.id.toString(16)
@@ -76,25 +66,23 @@ async function saveUserToFirestore(data, group) {
   });
 }
 
-
 let flagGroups = false
-
 export const validateGroup = (user, user2) =>{
-  
+  flagGroups = false
+  groupId = null
   for (let i = 0; i < user.groups.length; i++) {
     for (let j = 0; j < user2.groups.length; j++) {
       if (user2.groups[j] === user.groups[i] && user.groups[i].length > 0) {
         flagGroups = true
-        console.log(user.groups[i]);
-        console.log(user2.groups[j]);
+        // console.log(user.groups[i]);
+        // console.log(user2.groups[j]);
         groupId = user.groups[i]
       }
     }
   }
   handleMessage(groupId, flagGroups, user, user2)
+  return groupId
 }
-
-
 
 const handleMessage = async(groupId, flagGroups, user, user2)=>{
   let sentBy = user.name
@@ -105,21 +93,22 @@ const handleMessage = async(groupId, flagGroups, user, user2)=>{
     console.log(flagGroups);
     //usuario da enter para crear documentos de grupos y mensaje
     //validar enter{
-      await newGroup(user, user2)
-      console.log(groupId);
-      // await newMessage(groupId, sentBy, messageText)
 
+      //await newGroup(user, user2)
+      console.log(groupId);
+
+      // await newMessage(groupId, sentBy, messageText)
     // }
 
   }else{
-    await getMessages(groupId)
+    // getMessages(groupId)
     //enter{
       //await newMessage(groupId, sentBy, messageText)
     // }
   }
 }
 
-async function newGroup(user1, user2){
+export async function newGroup(user1, user2, messageText){
   const date = new Date()
 
   const groupRef = await addDoc(collection(db, "group"), {
@@ -128,18 +117,13 @@ async function newGroup(user1, user2){
   });
   
   // console.log(groupRef.id);
-  groupId = groupRef.id
+  // groupId = groupRef.id
   await updateUser(groupRef.id, user1)
   await updateUser(groupRef.id, user2)
 
 
-  await newMessage(groupRef.id, user1.name, 'messageText')
-  // else{
-  //   //getgroup
-  //   console.log('grupo ya existe');
-  //   console.log(groupId);
-  //   // getMessageGroup(groupId)
-  // }
+  await newMessage(groupRef.id, user1.name, messageText)
+
 }
 
 const updateUser = async(groupId, user)=>{
@@ -158,29 +142,41 @@ const updateUser = async(groupId, user)=>{
 
 
 
-const newMessage = async (groupId, sentBy, messageText) =>{
-  // addDoc(collection(db, "group"
-  console.log(groupId);
+export const newMessage = async (groupId, sentBy, messageText) =>{
   const date = new Date()
   const messages = await addDoc(collection(db, `message/${groupId}/messages`), {
     messageText : messageText,
     sentBy: sentBy,
     sentAt: date
   })
-
-  const collectionMessage = await setDoc(doc(db, 'message', groupId), messages)
 }
 
-export let messages; 
 export const getMessages = async (groupId) =>{
-
   const messageRef = collection(db, `message/${groupId}/messages`)
-  const getMessages = await getDocs(messageRef)
-  messages = getMessages.docs.map(doc => doc.data())
-  console.log(messages);
+  const orderMessages = query(messageRef, orderBy('sentAt'))
+  const getMessages = await getDocs(orderMessages)
+  const messages = getMessages.docs.map(doc => doc.data())
   return messages
-  // const users = getDoc.docs.map(doc => doc.data());
 }
+
+// export const getMessages = async(groupId) =>{
+//   const messageRef = collection(db, `message/${groupId}/messages`)
+//   const orderMessages = query(messageRef, orderBy('sentAt'))
+//   let messages =[];
+
+//   onSnapshot(orderMessages, (doc)=>{
+
+//     const ref = doc.docs.map(ms => {
+//       return messages.push(ms.data())
+//     })
+//     return messages
+//   })
+//   console.log(messages);
+//   return messages
+// }
+
+// getMessages('Iry2GjhPNPQivekdHfnq')
+
 
 
 export const getGroupUser = async (groupId)=>{
@@ -199,23 +195,3 @@ export const getGroupUser = async (groupId)=>{
   });
   return parseInt(chatWhith)
 }
-
-
-
-
-
-export const  usersChat = async ()=>{
-  const users = {
-    user1: await user,
-    user2: await user2
-  }
-  return users
-}
-
-setTimeout(() => {
-  const initChat = document.getElementById('btn-initChat')
-  initChat.addEventListener('click', e =>{
-    console.log(user,user2);
-    // validateGroup(user, user2)
-  })
-}, 1000);
