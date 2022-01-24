@@ -135,8 +135,8 @@
                         <p style="color: grey;">{user.title} </p>
                         <p style="color: grey;">{user.email}</p>
                       </div>
-                      <!-- <img src="{urlAPI}{user.photo}" alt="img"> -->
-                      <img src="https://scontent.feoh4-4.fna.fbcdn.net/v/t39.30808-6/271137374_10228424277815356_6016010503555489093_n.jpg?_nc_cat=109&ccb=1-5&_nc_sid=730e14&_nc_eui2=AeEPGGOJtYS82hwXSLqvwlUTpFsWbmg_ry2kWxZuaD-vLVhZkvSrY9Lx3iCOplVUYHU&_nc_ohc=BdVM-TqKntcAX_Zg3mB&_nc_ht=scontent.feoh4-4.fna&oh=00_AT-Uc_8YXxJoE6SjEhdhsTF6SpLp5hUpbx6_aaXQskm95Q&oe=61F3A6E9" alt="img">
+                      <img src="{urlAPI}{user.photo}" alt="img">
+                      <!-- <img src="https://scontent.feoh4-4.fna.fbcdn.net/v/t39.30808-6/271137374_10228424277815356_6016010503555489093_n.jpg?_nc_cat=109&ccb=1-5&_nc_sid=730e14&_nc_eui2=AeEPGGOJtYS82hwXSLqvwlUTpFsWbmg_ry2kWxZuaD-vLVhZkvSrY9Lx3iCOplVUYHU&_nc_ohc=BdVM-TqKntcAX_Zg3mB&_nc_ht=scontent.feoh4-4.fna&oh=00_AT-Uc_8YXxJoE6SjEhdhsTF6SpLp5hUpbx6_aaXQskm95Q&oe=61F3A6E9" alt="img"> -->
                     </span>
                   </li>
                 {:else}
