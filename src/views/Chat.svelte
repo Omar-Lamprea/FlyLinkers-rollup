@@ -1,6 +1,7 @@
 <script>
-  import {getUser, validateGroup , getMessages, newMessage, newGroup} from '../js/firebase/config.js'
+  import {getUser, validateGroup , getMessages, getMessage, newMessage, newGroup} from '../js/firebase/config.js'
   import Loader from '../components/Loader.svelte'
+  import {onMount} from 'svelte'
 
   export let id, userMain;
   console.log(id,userMain);
@@ -16,7 +17,7 @@
 
   let user1;
   let user2;
-  let showMessages;
+  let showMessages= [];
   let groupId;
 
   const getUserChat = async()=>{
@@ -25,39 +26,32 @@
     groupId = validateGroup(user1, user2)
 
     if (groupId) {
-      console.log(groupId);
       showMessages = await getMessages(groupId)
-      console.log(showMessages);
     }else{
-      console.log('no existe el grupo');
-      // newGroup()
+      console.log('group not found');
     }
   }
-
-  getUserChat()
-
 
   const sendMessage = async (e) => {
     if (e.key === 'Enter') {
       if (e.target.value !== '') {
+
         if (groupId) {
           newMessage(groupId, user1.name, e.target.value)
-
-
-          
-
-
-
         }else{
           newGroup(user1, user2, e.target.value)
           getUserChat()
         }
 
         e.target.value = ''
-        await getUserChat()
-
+        await getUserChat() // acá debo actualizar los mensajes? no, debo escuchar los cambios en firestore y actualizar cada que llegue un mensaje 
+        // console.log(showMessages);
+        // const messaje = await getMessage(groupId)
+        // messaje.forEach(el => {
+        //   showMessages.push(el)
+        // });
+        // console.log(showMessages);
         scrollChat()
-
       }
     }
   }
@@ -66,6 +60,11 @@
     const scrollWindow = document.getElementById('messagesContainer')
     scrollWindow.scrollTop = scrollWindow.scrollHeight - scrollWindow.clientHeight
   }
+
+  onMount( async () =>{
+    await getUserChat()
+    scrollChat()
+  })
 
 </script>
 
@@ -111,6 +110,7 @@
   .messages{
     height: 80%;
     overflow-y: auto;
+    scroll-behavior: smooth
   }
   .messages p{
     border: 1px solid var(--main-color);
@@ -192,7 +192,7 @@
 
     <div id="messagesContainer" class="messages p-3  d-flex flex-column">
       {#if groupId}
-        {#if showMessages}
+        <!-- {#if showMessages} -->
           {#each showMessages as message}
             {#if message.sentBy === user2.name}
               <p class="friend">{message.messageText}</p>
@@ -200,9 +200,9 @@
               <p class="me">{message.messageText}</p>
             {/if}
           {/each}
-        {:else}
+        <!-- {:else}
           <Loader/>
-        {/if}
+        {/if} -->
       
       {:else}
         <!-- <p class="empty-chat">Do you want start a new conversation with this person?</p>

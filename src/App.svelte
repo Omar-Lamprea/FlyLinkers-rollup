@@ -57,7 +57,7 @@
 
   let chatFlag = false
 
-  let id = parseInt(localStorage.getItem('chat'));
+  let id;
   const loadChatList = ()=>{
     chatFlag = false
     document.addEventListener('click', e =>{
@@ -84,7 +84,6 @@
     localStorage.removeItem('chat')
   }
 
-  console.log(id, userMain);
 </script>
 
 <style>

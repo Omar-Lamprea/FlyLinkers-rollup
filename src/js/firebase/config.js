@@ -1,6 +1,6 @@
 import { async } from "@firebase/util";
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, where, query, getDocs, setDoc, addDoc, doc, updateDoc, orderBy, onSnapshot} from 'firebase/firestore';
+import { getFirestore, collection, where, query, getDocs, getDoc, setDoc, addDoc, doc, updateDoc, orderBy, onSnapshot, limit} from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyB8KpNHJILsB2erTcBgMuhTHWGJd_rSttk",
@@ -157,6 +157,14 @@ export const getMessages = async (groupId) =>{
   const getMessages = await getDocs(orderMessages)
   const messages = getMessages.docs.map(doc => doc.data())
   return messages
+}
+
+export const getMessage = async (groupId) =>{
+  const messageRef = collection(db, `message/${groupId}/messages`)
+  const orderMessages = query(messageRef, orderBy('sentAt', 'desc'), limit(1))
+  const getMessages = await getDocs(orderMessages)
+  const message = getMessages.docs.map(doc => doc.data())
+  return message
 }
 
 // export const getMessages = async(groupId) =>{
