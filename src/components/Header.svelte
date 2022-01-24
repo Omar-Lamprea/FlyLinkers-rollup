@@ -47,6 +47,13 @@
     window.location.pathname = `profile/${email}`
   }
 
+  document.addEventListener('click', e =>{
+    if (e.target.id !== "searchList") {
+      searchList.classList.add('d-none')
+      usersFound = false;
+    }
+  })
+
 </script>
 
 <style>
