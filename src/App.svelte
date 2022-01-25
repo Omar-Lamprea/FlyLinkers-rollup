@@ -12,7 +12,9 @@
   // const urlLogOut = 'http://localhost:3000/'
   const urlLogOut = 'https://flylinkers.com/'
 
-  const urlAPI = 'http://18.118.50.78:8000'
+  // const urlAPI = 'http://18.118.50.78:8000'
+  const urlAPI = 'https://api.flylinkers.com'
+
 
 
   if(!localStorage.getItem('user') || localStorage.getItem('user') === 'null'){
