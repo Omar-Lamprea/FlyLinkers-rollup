@@ -20,6 +20,7 @@
   // const urlLogOut = 'https://dev.flylinkers.com/'
 
   const urlAPI = 'http://18.118.50.78:8000'
+  // const urlAPI = 'https://api.flylinkers.com'
 
 
 
@@ -43,8 +44,9 @@
       method : 'GET',
       headers : {
         'Content-Type': 'application/json'
-      }
+      },
     })
+    console.log(response);
     const content = await response.json();
     data = content[0]
     if (!localStorage.getItem('profilePhoto')) {

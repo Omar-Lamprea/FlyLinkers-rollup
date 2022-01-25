@@ -144,6 +144,6 @@
         {/if}
       {/if}
 
-      <div id="endPosts" class="d-none text-center">No more posts =(</div>
+      <div id="endPosts" class="d-none text-center fw-bold" style="color: var(--main-color);">Sorry! there aren't more posts.</div>
     </div>
 </div>

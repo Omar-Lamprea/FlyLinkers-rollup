@@ -1,10 +1,20 @@
 <script>
-  import {getUser, validateGroup , getMessages, getMessage, newMessage, newGroup} from '../js/firebase/config.js'
+  import {db, getUser, validateGroup , getMessages, getMessage, newMessage, newGroup} from '../js/firebase/config.js'
+  import {collectionData} from 'rxfire/firestore'
+  import {startWith} from 'rxjs/operators'
   import Loader from '../components/Loader.svelte'
+  import { collection,orderBy, query} from 'firebase/firestore';
+  import { writable } from 'svelte/store';
+
+
   import {onMount} from 'svelte'
+  
+
+
+
+  console.log(db);
 
   export let id, userMain;
-  console.log(id,userMain);
 
   const pickUpTab = ()=>{
     chatContainer.classList.toggle('minimize-chat')
@@ -30,7 +40,9 @@
     }else{
       console.log('group not found');
     }
+
   }
+
 
   const sendMessage = async (e) => {
     if (e.key === 'Enter') {
@@ -42,15 +54,8 @@
           newGroup(user1, user2, e.target.value)
           getUserChat()
         }
-
         e.target.value = ''
-        await getUserChat() // acá debo actualizar los mensajes? no, debo escuchar los cambios en firestore y actualizar cada que llegue un mensaje 
-        // console.log(showMessages);
-        // const messaje = await getMessage(groupId)
-        // messaje.forEach(el => {
-        //   showMessages.push(el)
-        // });
-        // console.log(showMessages);
+
         scrollChat()
       }
     }
@@ -61,10 +66,22 @@
     scrollWindow.scrollTop = scrollWindow.scrollHeight - scrollWindow.clientHeight
   }
 
+
+  let chats = writable([]);
+
+
   onMount( async () =>{
     await getUserChat()
+    
+    console.log(groupId);
+    const messageRef = collection(db, `message/${groupId}/messages`)
+    const q = query(messageRef, orderBy('sentAt'))
+    chats = collectionData(q, 'id').pipe(startWith([]))
+    console.log(chats);
+
     scrollChat()
   })
+
 
 </script>
 
@@ -193,22 +210,37 @@
     <div id="messagesContainer" class="messages p-3  d-flex flex-column">
       {#if groupId}
         <!-- {#if showMessages} -->
-          {#each showMessages as message}
-            {#if message.sentBy === user2.name}
+
+          <!-- {#each showMessages as message}
+            {#if message.sentBy !== user1.name}
+              <p class="friend">{message.messageText}</p>
+            {:else}
+              <p class="me">{message.messageText}</p>
+            {/if}
+          {/each} -->
+
+          {#each $chats as message}
+            {#if message.sentBy !== user1.name}
               <p class="friend">{message.messageText}</p>
             {:else}
               <p class="me">{message.messageText}</p>
             {/if}
           {/each}
+
         <!-- {:else}
           <Loader/>
         {/if} -->
-      
       {:else}
         <!-- <p class="empty-chat">Do you want start a new conversation with this person?</p>
         <button class="btn-empty-chat btn-start" on:click={}>Yes</button>
         <button class="btn-empty-chat">No</button> -->
       {/if}
+
+      <!-- <FirebaseApp {firebase}>
+        <Collection path={`message${groupId}/messages`} let:data={messages}>
+          {console.log(messages)}
+        </Collection>
+      </FirebaseApp> -->
 
 
     </div>

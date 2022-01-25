@@ -20,8 +20,10 @@
   }
 
   const viewUserProfile = () => {
-    const userEmail = user.email;
-    window.location.pathname = `profile/${userEmail}`
+    if (user) {
+      const userEmail = user.email;
+      window.location.pathname = `profile/${userEmail}`
+    }
   }
   
   const likeValue = `likeValue${id}`

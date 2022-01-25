@@ -17,7 +17,6 @@
 
     if (content.count > 0) {
       usersFound = content.results
-      console.log(usersFound);
     }else{
       usersFound = [{ details: 'User not found'}]
     }

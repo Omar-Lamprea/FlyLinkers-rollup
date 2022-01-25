@@ -41,6 +41,6 @@
 <div class="row">
   {#if dataProfile}
     <TimelineP {name} {last_name} {title} {email} {photo} {id} {userMain} {urlAPI}/>
-    <SidebarRight {id}/>
+    <SidebarRight {id} {urlAPI}/>
   {/if}
 </div>
