@@ -101,7 +101,7 @@
     height: 65px;
     border-radius: 30%;
     object-fit: cover;
-    margin-left: 0.5rem;
+    margin-right: 0.5rem;
   }
 
   @media screen and (max-width: 768px){
@@ -135,13 +135,14 @@
              {#each usersFound as user}
                 {#if user.name}
                   <li on:click={viewUser(user.email)}>
-                    <span class="dropdown-item d-flex justify-content-between align-items-center">
+                    <span class="dropdown-item d-flex align-items-center">
+                      <img src="{urlAPI}{user.photo}" alt="img">
                       <div class="userInfo">
                         <h6>{user.name} {user.last_name}</h6>
                         <p style="color: grey;">{user.title} </p>
                         <p style="color: grey;">{user.email}</p>
                       </div>
-                      <img src="{urlAPI}{user.photo}" alt="img">
+                      
                       <!-- <img src="https://scontent.feoh4-4.fna.fbcdn.net/v/t39.30808-6/271137374_10228424277815356_6016010503555489093_n.jpg?_nc_cat=109&ccb=1-5&_nc_sid=730e14&_nc_eui2=AeEPGGOJtYS82hwXSLqvwlUTpFsWbmg_ry2kWxZuaD-vLVhZkvSrY9Lx3iCOplVUYHU&_nc_ohc=BdVM-TqKntcAX_Zg3mB&_nc_ht=scontent.feoh4-4.fna&oh=00_AT-Uc_8YXxJoE6SjEhdhsTF6SpLp5hUpbx6_aaXQskm95Q&oe=61F3A6E9" alt="img"> -->
                     </span>
                   </li>

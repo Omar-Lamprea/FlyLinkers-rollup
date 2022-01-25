@@ -43,6 +43,13 @@
 
   }
 
+  const scrollChat = () =>{
+    const scrollWindow = document.getElementById('messagesContainer')
+    console.dir(scrollWindow);
+    scrollWindow.scrollTop = scrollWindow.scrollHeight + scrollWindow.clientHeight
+    // scrollWindow.scrollTop = 1000
+    console.log(scrollWindow.scrollTop, scrollWindow.scrollHeight , scrollWindow.clientHeight);
+  }
 
   const sendMessage = async (e) => {
     if (e.key === 'Enter') {
@@ -61,10 +68,7 @@
     }
   }
 
-  const scrollChat = () =>{
-    const scrollWindow = document.getElementById('messagesContainer')
-    scrollWindow.scrollTop = scrollWindow.scrollHeight - scrollWindow.clientHeight
-  }
+
 
 
   let chats = writable([]);
@@ -82,6 +86,8 @@
     scrollChat()
   })
 
+
+  
 
 </script>
 
@@ -127,7 +133,7 @@
   .messages{
     height: 80%;
     overflow-y: auto;
-    scroll-behavior: smooth
+    /* scroll-behavior: smooth */
   }
   .messages p{
     border: 1px solid var(--main-color);

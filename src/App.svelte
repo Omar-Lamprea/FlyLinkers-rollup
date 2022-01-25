@@ -19,8 +19,8 @@
   const urlLogOut = 'http://localhost:3000/'
   // const urlLogOut = 'https://dev.flylinkers.com/'
 
-  const urlAPI = 'http://18.118.50.78:8000'
-  // const urlAPI = 'https://api.flylinkers.com'
+  // const urlAPI = 'http://18.118.50.78:8000'
+  const urlAPI = 'https://api.flylinkers.com'
 
 
 
@@ -38,13 +38,10 @@
   let data;
   let userMain;
   let getUserMainToFirestore;
-
+// 
   const getData = async ()=>{
     const response = await fetch(`${urlAPI}/user/create/?email=${localStorage.getItem('user')}`,{
-      method : 'GET',
-      headers : {
-        'Content-Type': 'application/json'
-      },
+      method: 'GET'
     })
     console.log(response);
     const content = await response.json();

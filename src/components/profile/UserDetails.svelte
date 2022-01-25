@@ -49,6 +49,10 @@
         friend = true
       }
     });
+
+    const getfriendRequest = await fetch(`${urlAPI}/friend/request/?user_id=${id}`)
+    const requests = await getfriendRequest.json()
+    console.log(requests);
   }
 
   const sendFriendRequest = async()=>{

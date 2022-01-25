@@ -13,7 +13,6 @@
 
   getUserMainToFirestore.groups.forEach(async group =>{
     chatList.push(await getGroupUser(group))
-
     setTimeout(() => {
       flagChat = true
     }, 500);
@@ -21,7 +20,6 @@
     // const userr = getUser(await getGroupUser(group))
     // console.log(await userr);
   })
-
 
   const logOut = ()=>{
     localStorage.clear();
@@ -77,7 +75,7 @@
       <ul class="dropdown-menu" aria-labelledby="chats">
         {#if flagChat}
           {#each chatList as chatId}
-            <ChatList {chatId} {urlAPI}/>
+            <ChatList {chatId} {urlAPI} {id}/>
           {/each}
         {/if}
       </ul>
