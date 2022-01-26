@@ -15,6 +15,7 @@
 
   const urlUser = window.location.pathname
   const urluserProfile = urlUser.slice(9)
+  const visitProfile = localStorage.getItem('visitProfile')
 
   const urlLogOut = 'http://localhost:3000/'
   // const urlLogOut = 'https://dev.flylinkers.com/'
@@ -43,7 +44,6 @@
     const response = await fetch(`${urlAPI}/user/create/?email=${localStorage.getItem('user')}`,{
       method: 'GET'
     })
-    console.log(response);
     const content = await response.json();
     data = content[0]
     if (!localStorage.getItem('profilePhoto')) {
@@ -71,10 +71,6 @@
         localStorage.removeItem('chat')
         chatFlag = false
       }
-      // if (e.target.id === 'btInitChat') {
-      //   id = parseInt(e.target.dataset.chat)
-      //   console.log('chat =)');
-      // }
     })
   }
   loadChatList()
@@ -189,6 +185,4 @@
       </Route>
     </Router>
   {/if}
-
-
 </main>

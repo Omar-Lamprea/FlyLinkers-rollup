@@ -1,4 +1,5 @@
 <script>
+  import { Router, Link, Route } from "svelte-routing";
   import Comment from './Comment.svelte'
   import startTime from '../../js/startTime.js'
 
@@ -24,6 +25,9 @@
       const userEmail = user.email;
       window.location.pathname = `profile/${userEmail}`
     }
+  }
+  const visitProfile = () =>{
+    localStorage.setItem('visitProfile', user.email)
   }
   
   const likeValue = `likeValue${id}`
@@ -62,11 +66,8 @@
     const getIdReaction = await fetch(`${urlAPI}/post/like/?post_id=${id}`)
     const content = await getIdReaction.json()
 
-    console.log(content);
     //like
     if (reactionType === 'fa-thumbs-up' && reactionElement === 'far') {
-      console.log('like in process..');
-
       if(content.length === 0 || content.Error){
        const createReaction = await fetch(`${urlAPI}/post/like/`,{
         method: 'POST',
@@ -114,8 +115,6 @@
 
     //dislike
     if(reactionType === 'fa-thumbs-up' && reactionElement === 'fas'){
-      console.log('dislike in process..');
-
       const dislike = await fetch(`${urlAPI}/post/like/?post_id=${id}&user=${userId}`,{
         method: 'PUT',
         headers: {
@@ -134,7 +133,6 @@
 
     //love
     if (reactionType === 'fa-heart' && reactionElement === 'far') {
-      console.log('love in process...');
       if(content.length === 0 || content.Error){
        const createReaction = await fetch(`${urlAPI}/post/like/`,{
         method: 'POST',
@@ -165,7 +163,6 @@
         const response = love.json()
         if (response) {
           loveAcount.textContent = reactions.love++
-          // likeAcount.textContent = reactions.like-1
           toggleReaction()
 
           const btnLike = document.getElementById(`btnLike${id}`)
@@ -183,8 +180,6 @@
 
     //dislove
     if (reactionType === 'fa-heart' && reactionElement === 'fas') {
-      console.log('dislove in process...');
-      
       const dislove = await fetch(`${urlAPI}/post/like/?post_id=${id}&user=${userId}`,{
         method: 'PUT',
         headers: {
@@ -196,7 +191,6 @@
       const response = dislove.json()
       if (response) {
         loveAcount.textContent = reactions.love-1
-        // likeAcount.textContent = reactions.like++
         toggleReaction()
       }
     }
@@ -346,9 +340,6 @@
     cursor: pointer;
   }
 
-
-
-
   .Comments-add {
     padding: 1rem 0;
     border-top: 1px solid rgba(219, 219, 219, 0.8);
@@ -394,26 +385,32 @@
   <div class="Card-container">
     <div class="Card-Header">
 
-      <div class="Card-user" on:click={viewUserProfile}>
-        {#if user !== undefined}
-          <img src="{urlAPI}{user.photo}" alt="">
+      <Router>
+        {#if user}
+           <Link to="/profile/{user.email}">
+             <div class="Card-user" on:click={viewUserProfile}>
+               {#if user !== undefined}
+                 <img src="{urlAPI}{user.photo}" alt="">
+               {/if}
+               {#if user === undefined}
+                 <img src="{urlAPI}{photo}" alt="">
+               {/if}
+       
+               <h2>
+                 {#if user}
+                   {user.name} {user.last_name}
+                   <span>{user.title}</span>
+                 {:else}
+                   {name} {last_name}
+                   <span>{title}</span>
+                 {/if}
+                 <span>{startTime(create_time)}</span>
+               </h2>
+             </div>
+           </Link>
         {/if}
-        {#if user === undefined}
-          <img src="{urlAPI}{photo}" alt="">
-        {/if}
-
-        <h2 on:click={viewUserProfile}>
-          {#if user}
-            {user.name} {user.last_name}
-            <span>{user.title}</span>
-          {:else}
-            {name} {last_name}
-            <span>{title}</span>
-          {/if}
-          <span>{startTime(create_time)}</span>
-        </h2>
-
-      </div>
+      </Router>
+      
       
       <div class="Card-settings">
         <i class="fas fa-ellipsis-h"></i>
@@ -501,5 +498,4 @@
         {/each}
       {/if}
     </div>
-
 </div>

@@ -47,6 +47,5 @@
       {/each}
 
       <div id="endPosts" class="d-none text-center fw-bold" style="color: var(--main-color);">Sorry! there aren't more posts.</div>
-   <!-- <button on:click={getPosts}>cargar mas...</button> -->
   </div>
 </div>

@@ -5,14 +5,7 @@
   import Loader from '../components/Loader.svelte'
   import { collection,orderBy, query} from 'firebase/firestore';
   import { writable } from 'svelte/store';
-
-
   import {onMount} from 'svelte'
-  
-
-
-
-  console.log(db);
 
   export let id, userMain;
 
@@ -27,7 +20,6 @@
 
   let user1;
   let user2;
-  let showMessages= [];
   let groupId;
 
   const getUserChat = async()=>{
@@ -36,7 +28,7 @@
     groupId = validateGroup(user1, user2)
 
     if (groupId) {
-      showMessages = await getMessages(groupId)
+      getContainerMessages()
     }else{
       console.log('group not found');
     }
@@ -45,50 +37,41 @@
 
   const scrollChat = () =>{
     const scrollWindow = document.getElementById('messagesContainer')
-    console.dir(scrollWindow);
-    scrollWindow.scrollTop = scrollWindow.scrollHeight + scrollWindow.clientHeight
-    // scrollWindow.scrollTop = 1000
-    console.log(scrollWindow.scrollTop, scrollWindow.scrollHeight , scrollWindow.clientHeight);
+    scrollWindow.scrollTop = scrollWindow.scrollHeight - scrollWindow.clientHeight
   }
 
   const sendMessage = async (e) => {
-    if (e.key === 'Enter') {
-      if (e.target.value !== '') {
-
+    if (e.key === 'Enter' || e.type === 'click') {
+      if (inputMessage.value !== '') {
         if (groupId) {
-          newMessage(groupId, user1.name, e.target.value)
+          newMessage(groupId, user1.name, inputMessage.value)
         }else{
-          newGroup(user1, user2, e.target.value)
-          getUserChat()
+          await newGroup(user1, user2, inputMessage.value)
+          await getUserChat()
         }
-        e.target.value = ''
+        inputMessage.value = ''
 
-        scrollChat()
+        setTimeout(() => {
+          scrollChat()
+        }, 50);
       }
     }
   }
 
-
-
-
   let chats = writable([]);
-
-
-  onMount( async () =>{
-    await getUserChat()
-    
-    console.log(groupId);
+  const getContainerMessages = ()=>{
     const messageRef = collection(db, `message/${groupId}/messages`)
     const q = query(messageRef, orderBy('sentAt'))
     chats = collectionData(q, 'id').pipe(startWith([]))
-    console.log(chats);
+  }
 
-    scrollChat()
+  onMount( async () =>{
+    await getUserChat()
+    getContainerMessages()
+    setTimeout(() => {
+      scrollChat()
+    }, 300);
   })
-
-
-  
-
 </script>
 
 <style>
@@ -133,7 +116,7 @@
   .messages{
     height: 80%;
     overflow-y: auto;
-    /* scroll-behavior: smooth */
+    scroll-behavior: smooth
   }
   .messages p{
     border: 1px solid var(--main-color);
@@ -142,7 +125,7 @@
     max-width: 13rem;
     padding: .5rem;
   }
-  .empty-chat{
+  /* .empty-chat{
     border: 1px solid var(--main-color);
     margin: 0.2rem 0;
     width: 14rem;
@@ -164,7 +147,7 @@
   }
   .btn-start{
     background-color: #4f92ff;
-  }
+  } */
 
   .friend{
     background-color: var(--main-color);
@@ -215,16 +198,6 @@
 
     <div id="messagesContainer" class="messages p-3  d-flex flex-column">
       {#if groupId}
-        <!-- {#if showMessages} -->
-
-          <!-- {#each showMessages as message}
-            {#if message.sentBy !== user1.name}
-              <p class="friend">{message.messageText}</p>
-            {:else}
-              <p class="me">{message.messageText}</p>
-            {/if}
-          {/each} -->
-
           {#each $chats as message}
             {#if message.sentBy !== user1.name}
               <p class="friend">{message.messageText}</p>
@@ -232,28 +205,16 @@
               <p class="me">{message.messageText}</p>
             {/if}
           {/each}
-
-        <!-- {:else}
-          <Loader/>
-        {/if} -->
       {:else}
         <!-- <p class="empty-chat">Do you want start a new conversation with this person?</p>
         <button class="btn-empty-chat btn-start" on:click={}>Yes</button>
         <button class="btn-empty-chat">No</button> -->
       {/if}
-
-      <!-- <FirebaseApp {firebase}>
-        <Collection path={`message${groupId}/messages`} let:data={messages}>
-          {console.log(messages)}
-        </Collection>
-      </FirebaseApp> -->
-
-
     </div>
 
     <div class="messageText d-flex">
-      <input type="text" placeholder="write a message" on:keyup={sendMessage}>
-      <button class="btn-sendMessage">
+      <input id="inputMessage" type="text" placeholder="write a message" on:keyup={sendMessage}>
+      <button id="btnSentMessage" class="btn-sendMessage" on:click={sendMessage}>
         <i class="fas fa-paper-plane"></i>
       </button>
     </div>

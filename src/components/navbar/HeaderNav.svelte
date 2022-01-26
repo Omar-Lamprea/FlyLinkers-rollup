@@ -16,9 +16,6 @@
     setTimeout(() => {
       flagChat = true
     }, 500);
-
-    // const userr = getUser(await getGroupUser(group))
-    // console.log(await userr);
   })
 
   const logOut = ()=>{

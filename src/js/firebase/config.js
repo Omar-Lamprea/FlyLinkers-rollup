@@ -88,7 +88,7 @@ const handleMessage = async(groupId, flagGroups, user, user2)=>{
   let sentBy = user.name
   let messageText = 'Hola cómo estas hoy =)'
 
-  console.log(flagGroups);
+  // console.log(flagGroups);
   if (!flagGroups) {
     console.log(flagGroups);
     //usuario da enter para crear documentos de grupos y mensaje
