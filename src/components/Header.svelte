@@ -45,6 +45,12 @@
   const viewUser = (email)=>{
     window.location.pathname = `profile/${email}`
   }
+  const visitProfile = (email) =>{
+    localStorage.setItem('visitProfile', email)
+    setTimeout(() => {
+      localStorage.setItem('visitProfile', 'userProfile')
+    }, 2000);
+  }
 
   document.addEventListener('click', e =>{
     if (e.target.id !== "searchList") {
@@ -134,7 +140,7 @@
           {#if usersFound}
              {#each usersFound as user}
                 {#if user.name}
-                  <li on:click={viewUser(user.email)}>
+                  <!-- <li on:click={viewUser(user.email)}>
                     <span class="dropdown-item d-flex align-items-center">
                       <img src="{urlAPI}{user.photo}" alt="img">
                       <div class="userInfo">
@@ -143,6 +149,20 @@
                         <p style="color: grey;">{user.email}</p>
                       </div>
                     </span>
+                  </li> -->
+                  <li>
+                    <Router>
+                      <Link on:click={visitProfile(user.email)} to="/profile/{localStorage.getItem('visitProfile')}" class="d-flex">
+                        <span class="dropdown-item d-flex align-items-center">
+                          <img src="{urlAPI}{user.photo}" alt="img">
+                          <div class="userInfo">
+                            <h6>{user.name} {user.last_name}</h6>
+                            <p style="color: grey;">{user.title} </p>
+                            <p style="color: grey;">{user.email}</p>
+                          </div>
+                        </span>
+                      </Link>
+                    </Router>
                   </li>
                 {:else}
                 <li>

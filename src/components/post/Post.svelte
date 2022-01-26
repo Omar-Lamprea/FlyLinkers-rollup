@@ -8,6 +8,8 @@
   export let name, middle_name, last_name, title, photo, email;
   export let userMain, urlAPI;
 
+  let userLink;
+
   if (userId === undefined) {
     userId = userMain
   }
@@ -17,7 +19,9 @@
   }
 
   if (user) {
-    name = '', middle_name= '', last_name='', title='', photo='', email = '', update_time='', user_id=''
+    name = '', middle_name= '', last_name='', title='', photo='', email = '', update_time='', user_id='', userLink = user.email
+  }else{
+    userLink = email
   }
 
   const viewUserProfile = () => {
@@ -27,7 +31,12 @@
     }
   }
   const visitProfile = () =>{
-    localStorage.setItem('visitProfile', user.email)
+    if (user) {
+      localStorage.setItem('visitProfile', user.email)
+      setTimeout(() => {
+        localStorage.setItem('visitProfile', 'userProfile')
+      }, 2000);
+    }
   }
   
   const likeValue = `likeValue${id}`
@@ -385,32 +394,29 @@
   <div class="Card-container">
     <div class="Card-Header">
 
-      <Router>
         {#if user}
-           <Link to="/profile/{user.email}">
-             <div class="Card-user" on:click={viewUserProfile}>
-               {#if user !== undefined}
-                 <img src="{urlAPI}{user.photo}" alt="">
-               {/if}
-               {#if user === undefined}
-                 <img src="{urlAPI}{photo}" alt="">
-               {/if}
-       
-               <h2>
-                 {#if user}
-                   {user.name} {user.last_name}
-                   <span>{user.title}</span>
-                 {:else}
-                   {name} {last_name}
-                   <span>{title}</span>
-                 {/if}
-                 <span>{startTime(create_time)}</span>
-               </h2>
-             </div>
-           </Link>
+          <div class="Card-user" on:click={visitProfile}>
+            <Router>
+              <Link on:click={visitProfile} to="/profile/{localStorage.getItem('visitProfile')}" class="d-flex">
+                <img src="{urlAPI}{user.photo}" alt="" on:click={visitProfile}>
+                <h2 on:click={visitProfile}>
+                  {user.name} {user.last_name}
+                  <span>{user.title}</span>
+                  <span>{startTime(create_time)}</span>
+                </h2>
+              </Link>
+            </Router>
+          </div>
+        {:else}
+          <div class="Card-user">
+            <img src="{urlAPI}{photo}" alt="">
+            <h2>
+              {name} {last_name}
+              <span>{title}</span>
+              <span>{startTime(create_time)}</span>
+            </h2>
+          </div>
         {/if}
-      </Router>
-      
       
       <div class="Card-settings">
         <i class="fas fa-ellipsis-h"></i>

@@ -1,4 +1,6 @@
 <script>
+  import { Router, Link, Route } from "svelte-routing";
+
   let notifications = 0;
 
   export let id, urlAPI;
@@ -33,6 +35,12 @@
 
   const viewUserProfile = (email) => {
     window.location.pathname = `profile/${email}`
+  }
+  const visitProfile = (email) =>{
+    localStorage.setItem('visitProfile', email)
+    setTimeout(() => {
+      localStorage.setItem('visitProfile', 'userProfile')
+    }, 2000);
   }
 
 </script>
@@ -113,7 +121,7 @@
   
   <ul class="dropdown-menu" aria-labelledby="notifications">
     {#each friendRequest as request}
-       <li>
+       <!-- <li>
          <span class="dropdown-item">
            <div class="userData" on:click={viewUserProfile(request.email)}>
              <img src="{urlAPI}{request.photo}" alt="">
@@ -124,7 +132,23 @@
              <button id="declineRequest" class="btn-request btn-decline">Decline</button>
            </div>
          </span>
-       </li>
+       </li> -->
+       <li>
+         <Router>
+           <Link on:click={visitProfile(request.email)} to="/profile/{localStorage.getItem('visitProfile')}" class="d-flex">
+            <span class="dropdown-item">
+              <div class="userData">
+                <img src="{urlAPI}{request.photo}" alt="">
+                <span>{request.name} {request.last_name}</span>
+              </div>
+              <div class="btns-request">
+                <button class="btn-request btn-success" on:click={acceptRequest(request.id)}>Accept</button>
+                <button id="declineRequest" class="btn-request btn-decline">Decline</button>
+              </div>
+            </span>
+          </Link>
+         </Router>
+      </li>
     {:else}
        <p class="text-center">you haven't news</p>
     {/each}

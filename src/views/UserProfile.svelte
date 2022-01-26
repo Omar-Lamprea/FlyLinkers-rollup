@@ -3,7 +3,8 @@
   import SidebarRight from '../components/SidebarRight.svelte'
 
   const urlUser = window.location.pathname
-  const urluserProfile = urlUser.slice(9)
+  // const urluserProfile = urlUser.slice(9)
+  const urluserProfile = localStorage.getItem('visitProfile')
 
   export let userMain, urlAPI;
 

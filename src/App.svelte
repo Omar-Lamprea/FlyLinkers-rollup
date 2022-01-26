@@ -15,6 +15,7 @@
 
   const urlUser = window.location.pathname
   const urluserProfile = urlUser.slice(9)
+  localStorage.setItem('visitProfile', 'userProfile')
   const visitProfile = localStorage.getItem('visitProfile')
 
   // const urlLogOut = 'http://localhost:3000/'
@@ -165,10 +166,12 @@
         <Route path="/profile">
           <Profile {...data} {urlAPI}/>
         </Route>
-  
-        <Route path="/profile/{urluserProfile}">
-          <UserProfile {userMain} {urlAPI}/>
-        </Route>
+
+        {#if localStorage.getItem('visitProfile')}
+           <Route path="/profile/{localStorage.getItem('visitProfile')}">
+             <UserProfile {userMain} {urlAPI}/>
+           </Route>
+        {/if}
       </Router>
 
     {:else}
