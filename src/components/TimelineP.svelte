@@ -6,8 +6,6 @@
   import AddPost from './post/AddPost.svelte';
   import Post from './post/Post.svelte'
   import Loader from './Loader.svelte'
-  
-  import {onMount} from 'svelte'
   import { writable } from 'svelte/store';
 
   export let name, last_name, title, email , photo , id, urlAPI;
@@ -144,6 +142,6 @@
         {/if}
       {/if}
 
-      <div id="endPosts" class="d-none text-center">No more posts =(</div>
+      <div id="endPosts" class="d-none text-center fw-bold" style="color: var(--main-color);">Sorry! there aren't more posts.</div>
     </div>
 </div>

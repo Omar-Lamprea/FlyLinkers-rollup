@@ -6,7 +6,6 @@
   const urluserProfile = urlUser.slice(9)
 
   export let userMain, urlAPI;
-  console.log(urlAPI);
 
   let userProfile;
   let dataProfile;
@@ -42,6 +41,6 @@
 <div class="row">
   {#if dataProfile}
     <TimelineP {name} {last_name} {title} {email} {photo} {id} {userMain} {urlAPI}/>
-    <SidebarRight {id}/>
+    <SidebarRight {id} {urlAPI}/>
   {/if}
 </div>

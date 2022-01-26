@@ -1,13 +1,21 @@
 <script>
-	import { Router, Link, Route } from "svelte-routing";
-	import Header from './components/Header.svelte'
-	import Home from './views/Home.svelte';
-	import Profile from "./views/Profile.svelte";
+  import { Router, Link, Route } from "svelte-routing";
+  import Header from './components/Header.svelte'
+  import Home from './views/Home.svelte';
+  import Profile from "./views/Profile.svelte";
   import UserProfile from "./views/UserProfile.svelte";
   import Loader from './components/Loader.svelte'
+  import Login from './views/Login.svelte'
+  import Chat from './views/Chat.svelte'
+
+  import {getUserToFirestore} from './js/firebase/config.js'
+  import {openChat} from './js/openChat.js'
+
+  
 
   const urlUser = window.location.pathname
   const urluserProfile = urlUser.slice(9)
+  const visitProfile = localStorage.getItem('visitProfile')
 
   // const urlLogOut = 'http://localhost:3000/'
   const urlLogOut = 'https://flylinkers.com/'
@@ -30,13 +38,11 @@
 
   let data;
   let userMain;
-
+  let getUserMainToFirestore;
+// 
   const getData = async ()=>{
     const response = await fetch(`${urlAPI}/user/create/?email=${localStorage.getItem('user')}`,{
-      method : 'GET',
-      headers : {
-        'Content-Type': 'application/json'
-      }
+      method: 'GET'
     })
     const content = await response.json();
     data = content[0]
@@ -44,6 +50,33 @@
       localStorage.setItem('profilePhoto', data.photo)
     }
     userMain = data.id
+    getUserMainToFirestore = await getUserToFirestore(data)
+  }
+
+
+  let chatFlag = false
+
+  let id;
+  const loadChatList = ()=>{
+    chatFlag = false
+    document.addEventListener('click', e =>{
+      if (e.target.id === 'chat' || e.target.id === 'btInitChat') {
+        id = parseInt(e.target.dataset.chat)
+        openChat(id)
+        if (openChat(id) || localStorage.getItem('chat')) {
+          chatFlag = true
+        }
+      }
+      if (e.target.id === 'closeChat') {
+        localStorage.removeItem('chat')
+        chatFlag = false
+      }
+    })
+  }
+  loadChatList()
+
+  if (window.location.reload) {
+    localStorage.removeItem('chat')
   }
 
 </script>
@@ -112,27 +145,44 @@
     }
   }
 </style>
-{#if data}
-   <Header {...data} {urlLogOut} {urlAPI}/>
+
+
+{#if data && getUserMainToFirestore}
+   <Header {...data} {urlLogOut} {urlAPI} {getUserMainToFirestore}/>
 {/if}
 
 <main id="main" class="container" on:load={getData()}>
-  {#if data}
-    <Router>
-      <Route path="/">
-        <Home {...data} {urlAPI}/>
-      </Route>
 
-      <Route path="/profile">
-        <Profile {...data} {urlAPI}/>
-      </Route>
 
-      <Route path="/profile/{urluserProfile}">
-        <UserProfile {userMain} {urlAPI}/>
-      </Route>
+  {#if localStorage.getItem('user')}
+    {#if data && getUserMainToFirestore}
+      <Router>
+        <Route path="/">
+          <Home {...data} {urlAPI}/>
+        </Route>
+  
+        <Route path="/profile">
+          <Profile {...data} {urlAPI}/>
+        </Route>
+  
+        <Route path="/profile/{urluserProfile}">
+          <UserProfile {userMain} {urlAPI}/>
+        </Route>
+      </Router>
 
-    </Router>
+    {:else}
+      <Loader/>
+    {/if}
+
+    {#if chatFlag && userMain}
+        <Chat {id} {userMain}/>
+    {/if}
+
   {:else}
-    <Loader/>
+    <Router>
+      <Route path="/login">
+        <Login/>
+      </Route>
+    </Router>
   {/if}
 </main>

@@ -11,7 +11,7 @@
     {#if window.innerWidth > 920}
       <SidebarLeft {name} {last_name} {title} {photo} {urlAPI}/>
       <TimelineH {id} {urlAPI}/>
-      <SidebarRight/>
+      <SidebarRight {urlAPI}/>
     {:else}
       <TimelineH />
     {/if}

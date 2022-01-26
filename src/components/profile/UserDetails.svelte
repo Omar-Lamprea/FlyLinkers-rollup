@@ -7,7 +7,6 @@
 
   const editDescription = ()=>{
     editAboutMe.classList.toggle('d-none')
-    // console.log(editAboutMe);
   }
 
   let dataDescription;
@@ -35,8 +34,7 @@
 
 
   let friend = false;
-  // console.log(userMain, id);
-
+  let friendRequest = false
   const searchFriends = async ()=>{
     const response = await fetch(`${urlAPI}/friend/user/?user=${userMain}`)
     const content = await response.json()
@@ -45,6 +43,14 @@
         friend = true
       }
     });
+
+    const getfriendRequest = await fetch(`${urlAPI}/friend/request/?user_id=${id}`)
+    const requests = await getfriendRequest.json()
+    requests.forEach(el =>{
+      if (el.id === userMain) {
+        friendRequest = true
+      }
+    })
   }
 
   const sendFriendRequest = async()=>{
@@ -65,7 +71,6 @@
       btnSendFriendRequest.setAttribute('disabled','')
     }
   }
-
 </script>
 
 <style>
@@ -109,7 +114,11 @@
   .Profile-card-text{
     margin: 2rem 0;
   }
-
+  
+  .btn-outline-primary:disabled{
+    color: gray;
+    border: 1px solid grey;
+  }
 
 </style>
 <div class="UserDetails Default-containers mt-3">
@@ -143,7 +152,7 @@
               </div>
               <div class="Profile-description-contact">
                 <p>Email</p>
-                <p><a href="#">{email}</a></p>
+                <p style="color: var(--main-color); cursor:pointer">{email}</p>
               </div>
             </div>
           </div>
@@ -153,7 +162,6 @@
     <div class="col-6">
       <div class="Profile-card-text text-end d-flex flex-column align-items-end">
         {#if email === localStorage.getItem('user')}
-
           <p type="button" class="mb-3" data-bs-toggle="modal" data-bs-target="#editProfile"><i class="fas fa-pen"></i> Edit profile</p>
           <Modal {id} {urlAPI}/>
 
@@ -168,10 +176,15 @@
         {:else}
           <div class="d-none" on:load={searchFriends()}></div>
           {#if !friend}
-            <button id="btnSendFriendRequest" class="btn btn-outline-primary btn-flylinkers align-self-end mt-1" on:click={sendFriendRequest}>Send friend request</button>
+            {#if friendRequest}
+              <button id="btnSendFriendRequest" class="btn btn-outline-primary btn-flylinkers align-self-end mt-1" disabled>Send friend request</button>
+              {:else}
+                <button id="btnSendFriendRequest" class="btn btn-outline-primary btn-flylinkers align-self-end mt-1" on:click={sendFriendRequest}>Send friend request</button>
+            {/if}
           {:else}
             <button class="btn btn-outline-primary btn-flylinkers align-self-end mt-1">Friends</button>
           {/if}
+          <button id="btInitChat" data-chat={id} class="btn btn-outline-primary btn-flylinkers align-self-end mt-1">Send a Message</button>
         {/if}
       </div>
     </div>

@@ -16,6 +16,7 @@ export default function startTime (create_time){
   let timePost;
 
   // console.log(Math.round(daysCount));
+
   if (substractDate < hour) {
     timePost = (1 * substractDate)/ minute 
     datePost = Math.floor(timePost) + 'Min'
@@ -26,11 +27,12 @@ export default function startTime (create_time){
     datePost = Math.floor(timePost) + 'H'
     return datePost
   }
-  if (daysCount >= 1) {
+  if (daysCount >= 1 && daysCount < 7) {
     timePost = daysCount
     datePost = Math.ceil(timePost) + ' D'
     return datePost
   }
+
   if (daysCount >= 7){
     timePost = (1 * substractDate)/ week 
     datePost = Math.floor(timePost) + ' W'

@@ -1,5 +1,6 @@
 <script>
   import Event from './Event.svelte'
+  import Chat from '../../views/Chat.svelte'
 
   const data = [
     {
@@ -54,4 +55,7 @@
         {/each}
       </div>
     </div>
+    {#if localStorage.getItem('chat')}
+      <Chat/>
+    {/if}
 </div>

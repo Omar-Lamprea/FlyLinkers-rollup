@@ -1,17 +1,27 @@
 <script>
   import { Router, Link, Route } from "svelte-routing";
   import Notifications from './NotificationsHeader.svelte'
+  import {getMessages, getGroupUser, getUser} from '../../js/firebase/config.js'
+  import ChatList from './chatList/ChatList.svelte'
 
   export let photo, id;
   export let urlLogOut, urlAPI;
+  export let getUserMainToFirestore;
+
+  const chatList = [];
+  let flagChat = false
+
+  getUserMainToFirestore.groups.forEach(async group =>{
+    chatList.push(await getGroupUser(group))
+    setTimeout(() => {
+      flagChat = true
+    }, 500);
+  })
 
   const logOut = ()=>{
     localStorage.clear();
     window.location.href = urlLogOut;
   }
-
-
-
 
 </script>
 
@@ -58,9 +68,14 @@
       </Link>
     </div>
     <div class="Header-nav-comment mx-3 fs-3">
-      <Link to="/">
-        <i class="fas fa-comment"></i>
-      </Link>
+      <i class="fas fa-comment dropdown-toggle" id="chats" data-bs-toggle="dropdown" aria-expanded="false"></i>
+      <ul class="dropdown-menu" aria-labelledby="chats">
+        {#if flagChat}
+          {#each chatList as chatId}
+            <ChatList {chatId} {urlAPI} {id}/>
+          {/each}
+        {/if}
+      </ul>
     </div>
     <div class="Header-nav-bell mx-3 fs-3 notification" id="notification">
         <Notifications {id} {urlAPI}/>

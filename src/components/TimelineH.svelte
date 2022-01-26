@@ -15,14 +15,17 @@
 
   async function getPosts (){
     page += 1
+    try {
     const response = await fetch(`${urlAPI}/post/home/?page=${page}&user_id=${id}`)
     const content = await response.json()
-    try {
-      if (content) {
+      if (content.results) {
         posts.set([...$posts, ...content.results])
+      }else{
+        endPosts.classList.remove('d-none')
       }
     } catch (error) {
-      endPosts.classList.remove('d-none')
+      console.log(error);
+      
     }
   }
 
@@ -43,7 +46,6 @@
         <Post {...dataPost} {userId} {urlAPI}/>
       {/each}
 
-      <div id="endPosts" class="d-none text-center">No more posts =(</div>
-   <!-- <button on:click={getPosts}>cargar mas...</button> -->
+      <div id="endPosts" class="d-none text-center fw-bold" style="color: var(--main-color);">Sorry! there aren't more posts.</div>
   </div>
 </div>
