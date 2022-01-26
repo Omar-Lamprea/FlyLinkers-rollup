@@ -59,7 +59,8 @@
         })
         const content = await post.json()
         if (content) {
-          window.location.reload()
+          postDescription.value = ''
+          // window.location.reload()
         }
     }
   }
