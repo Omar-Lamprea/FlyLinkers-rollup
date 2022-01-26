@@ -23,7 +23,7 @@
     const response = await fetch(`${urlAPI}/user/profile/?user_id=${id}`)
     const content = await response.json()
     if (content.Detail) {
-      // createprofile()
+      createprofile()
     }
     let data = content[0]
     coverPhoto = `${urlAPI}${data.cover_img}`
@@ -40,10 +40,11 @@
       body: JSON.stringify({
         user: id,
         resource_id : 0,
-        about: '',
-        cover_img: ''
+        about: '...',
+        cover_img: '/archivos/fotos/5484ff7d-8848-4b47-87d6-367ca3ebe8aa.png'
       })
     })
+    getProfile()
   }
 
   let post;
@@ -51,8 +52,10 @@
   const getPost = async()=>{
     const response = await fetch(`${urlAPI}/post/create/?user=${id}`)
     const content = await response.json()
-    post = content.results.splice(1)
-    userPost = content.results[0]
+    if (content.results) {
+      post = content.results.splice(1)
+      userPost = content.results[0]
+    }
   }
 
 
