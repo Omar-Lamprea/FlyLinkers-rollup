@@ -5,7 +5,7 @@
   const data = [
     {
       title: 'Flight Operation Conferences',
-      eventLogo: 'https://us.123rf.com/450wm/kesu87/kesu871901/kesu87190100275/116469322-airplane-taking-off-from-the-airport-.jpg?ver=6',
+      eventLogo: '../img/airplane.jpg',
       date : '10/12/2021',
       start: '9:00am',
       end: '11:00pm',
@@ -15,7 +15,7 @@
     },
     {
       title: 'Comercial Avitaion Conferences',
-      eventLogo: 'http://koreabizwire.com/wp/wp-content/uploads/2019/11/12268963_m.jpg',
+      eventLogo: '../img/airplane.jpg',
       date : '10/12/2021',
       start: '9:00am',
       end: '11:00pm',
@@ -25,7 +25,7 @@
     },
     {
       title: 'Comercial Aviation Safety',
-      eventLogo: 'https://www.aircargonews.net/wp-content/uploads/2019/08/jetblue-tailfins-blueberries.jpg',
+      eventLogo: '../img/airplane.jpg',
       date : '10/12/2021',
       start: '9:00am',
       end: '11:00pm',
@@ -55,7 +55,4 @@
         {/each}
       </div>
     </div>
-    {#if localStorage.getItem('chat')}
-      <Chat/>
-    {/if}
 </div>
