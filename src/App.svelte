@@ -18,7 +18,8 @@
   const visitProfile = localStorage.getItem('visitProfile')
 
   // const urlLogOut = 'http://localhost:3000/'
-  const urlLogOut = 'https://flylinkers.com/'
+  // const urlLogOut = 'https://flylinkers.com/'
+  const urlLogOut = 'https://omar-lamprea.github.io/FlyLinkers-Login/'
 
   // const urlAPI = 'http://18.118.50.78:8000'
   const urlAPI = 'https://api.flylinkers.com'
