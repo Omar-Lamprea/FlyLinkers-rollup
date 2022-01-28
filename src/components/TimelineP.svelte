@@ -7,6 +7,7 @@
   import Post from './post/Post.svelte'
   import Loader from './Loader.svelte'
   import { writable } from 'svelte/store';
+  import {onMount} from 'svelte'
 
   export let name, last_name, title, email , photo , id, urlAPI;
   export let userMain;
@@ -25,10 +26,11 @@
     if (content.Detail) {
       createprofile()
     }
-    let data = content[0]
-    coverPhoto = `${urlAPI}${data.cover_img}`
-    aboutMe = data.about
-    localStorage.setItem('coverPhoto', coverPhoto)
+    if (content[0]) {
+      let data = content[0]
+      coverPhoto = `${urlAPI}${data.cover_img}`
+      aboutMe = data.about
+    }
   }
 
   const createprofile = async ()=>{
@@ -44,18 +46,36 @@
         cover_img: '/archivos/fotos/5484ff7d-8848-4b47-87d6-367ca3ebe8aa.png'
       })
     })
-    getProfile()
+    const content = await response.json()
+    await getProfile()
   }
 
   let post;
   let userPost;
+  let countPost = 0
+
   const getPost = async()=>{
-    const response = await fetch(`${urlAPI}/post/create/?user=${id}`)
-    const content = await response.json()
-    if (content.results) {
-      post = content.results.splice(1)
-      userPost = content.results[0]
-    }
+    const response = await fetch(`${urlAPI}/post/create/?user=${id}`).then(res =>{
+      if (res.ok) {
+        return res.json()
+      }else{
+        throw new Error("Sorry, there isn't posts to show")
+      }
+    })
+    .then(json =>{
+      const content = json
+      countPost = content.count
+
+      if (!content.Detail) {
+        if (content.results) {
+          post = content.results.splice(1)
+          userPost = content.results[0]
+        }
+      }
+    })
+    .catch((error) =>{
+      console.error(error);
+    })
   }
 
 
@@ -66,6 +86,7 @@
     page += 1
     const response = await fetch(`${urlAPI}/post/create/?page=${page}&user=${id}`)
     const content = await response.json()
+    countPost = content.count
     try {
       if (content) {
         posts.set([...$posts, ...content.results])
@@ -78,10 +99,17 @@
   
   document.addEventListener('scroll', async (e)=>{
     if ((window.innerHeight + window.scrollY) === main.offsetHeight){
-      getPosts()
+      if (countPost > 3) {
+        getPosts()
+      }
     }
   })
 
+
+  onMount(()=>{
+    getProfile()
+    getPost()
+  })
 
 </script>
 
@@ -98,13 +126,13 @@
   }
 </style>
 
-<div class="Profile col-9" on:load={getProfile()}>
-    <div class="Profile-container" on:load={getPost()}>
+<div class="Profile col-9">
+    <div class="Profile-container">
       <CoverPhoto {coverPhoto}/>
       <UserDetails {name} {last_name} {title} {email} {photo} {id} {aboutMe} {userMain} {urlAPI}/>
 
       {#if email === localStorage.getItem('user')}
-        <div class="Background-post-profile" on:load={getPost()}>
+        <div class="Background-post-profile">
           <p class="my-2">Post</p>
           <AddPost {id} {urlAPI}/>
         </div>

@@ -20,16 +20,6 @@
     }
   }
 
-  const showProfileImg = () =>{
-    const render = new FileReader();
-    render.readAsDataURL(profilePhoto.files[0])
-    render.onloadend = ()=>{
-      showProfileImage.style.display = 'flex'
-      showProfileImage.src = render.result
-      profilePhotoB64 = render.result
-    }
-  }
-
   const convertCoverB64 = async ()=> {
     const response = await fetch(`${urlAPI}/resources/img/`,{
       method : 'POST',
@@ -43,21 +33,6 @@
     const content = await response.json()
     urlCoverPhoto = content.img
     idCoverPhoto = content.id
-  }
-
-  const convertProfileB64 = async ()=> {
-    const response = await fetch(`${urlAPI}/resources/img/`,{
-      method : 'POST',
-      headers : {
-        'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          img: profilePhotoB64
-        })
-    })
-    const content = await response.json()
-    urlProfilePhoto = content.img
-    idProfilePhoto = content.id
   }
 
   const getProfile = async (id)=>{
@@ -111,27 +86,15 @@
       })
     })
     const content = await sendData.json()
+    
     if (content) {
       localStorage.removeItem('coverPhoto')
-      window.location.reload()
-    }
-  }
-
-  const updateProfile = async(id)=>{
-    await convertProfileB64()
-    const response = await fetch(`${urlAPI}/user/create/?id=${id}`,{
-      method : 'PUT',
-      headers : {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        photo: urlProfilePhoto
-      })
-    })
-    const content = await response.json()
-    if (content) {
-      localStorage.removeItem('profilePhoto')
-      window.location.reload()
+      // window.location.reload()
+      const cover = document.getElementById('coverPhotoProfile')
+      const getNewProfile = await fetch(`${urlAPI}/user/profile/?user=${id}`)
+      const contentProfile = await getNewProfile.json()
+      const data = contentProfile[0]
+      cover.setAttribute('src', `${urlAPI}${data.cover_img}`)
     }
   }
 
@@ -141,9 +104,13 @@
   .modal-body textarea{
     width: 100%;
   }
-  .photoLoaded{
+  .coverPhotoLoaded{
     display: none;
-    width: 100%;
+    height: 350px;
+    max-height: 400px;
+    max-width: 80%;
+    margin: 1rem auto;
+    object-fit: cover;
   }
 </style>
 
@@ -160,23 +127,18 @@
       <div class="modal-body text-start">
         <div class="description-user">
           <label for="description">Edit description</label>
-          <textarea name="" id="description" cols="30" rows="5"></textarea>
+          <textarea name="" id="description" cols="30" rows="2"></textarea>
         </div>
         <div class="cover-photo">
           <label for="coverPhoto">Cover photo</label>
           <input type="file" name="coverPhoto" id="coverPhoto" accept=".png, .jpg, .jpeg" on:change={showCoverImg}>
-          <img src="" alt="" id="showImage" class="photoLoaded">
-
-          <label for="profilePhoto">Profile photo</label>
-          <input type="file" name="profilePhoto" id="profilePhoto" accept=".png, .jpg, .jpeg" on:change={showProfileImg}>
-          <img src="" alt="" id="showProfileImage" class="photoLoaded">
+          <img src="" alt="" id="showImage" class="coverPhotoLoaded">
         </div>
       </div>
 
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-outline-primary btn-flylinkers" on:click={getProfile(id)}>Save cover photo</button>
-        <button type="button" class="btn btn-outline-primary btn-flylinkers" on:click={updateProfile(id)}>Save Profile photo</button>
+        <button type="button" class="btn btn-outline-primary btn-flylinkers" data-bs-dismiss="modal" on:click={getProfile(id)}>Save cover photo</button>
       </div>
 
     </div>

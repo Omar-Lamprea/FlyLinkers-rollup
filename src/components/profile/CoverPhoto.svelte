@@ -23,6 +23,6 @@
   <!-- {#if localStorage.getItem('coverPhoto')}
     <img src={localStorage.getItem('coverPhoto')} alt="">
   {:else} -->
-    <img src={coverPhoto} alt="">
+    <img id="coverPhotoProfile" src={coverPhoto} alt="">
   <!-- {/if} -->
 </div>

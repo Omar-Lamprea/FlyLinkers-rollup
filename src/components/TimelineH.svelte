@@ -12,12 +12,14 @@
   const posts = writable([])
 
   let page = 0;
+  let countPost = 0
 
   async function getPosts (){
     page += 1
     try {
-    const response = await fetch(`${urlAPI}/post/home/?page=${page}&user_id=${id}`)
-    const content = await response.json()
+      const response = await fetch(`${urlAPI}/post/home/?page=${page}&user_id=${id}`)
+      const content = await response.json()
+      countPost = content.count
       if (content.results) {
         posts.set([...$posts, ...content.results])
       }else{
@@ -33,7 +35,9 @@
 
   document.addEventListener('scroll', async (e)=>{
     if ((window.innerHeight + window.scrollY) === main.offsetHeight){
-      getPosts()
+      if (countPost > 3) {
+        getPosts()
+      }
     }
   })
 

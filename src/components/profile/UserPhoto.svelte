@@ -1,5 +1,9 @@
 <script>
-  export let photo, urlAPI;
+  import ProfilePhotoModal from '../Modals/ProfilePhotoModal.svelte'
+  export let photo, urlAPI, id;
+  if (id === undefined) {
+    id = ''
+  }
 </script>
 
 <style>
@@ -21,7 +25,7 @@
   {/if}
 
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <li><a class="dropdown-item" href="/">View profile photo</a></li>
-    <li><a class="dropdown-item" href="/" data-bs-toggle="modal" data-bs-target="#editProfile">Change profile photo</a></li>
+    <!-- <li><a class="dropdown-item" href="/">View profile photo</a></li> -->
+    <li><a class="dropdown-item" href="/" data-bs-toggle="modal" data-bs-target="#ModalProfile">Update profile photo</a></li>
   </ul>
 </div>

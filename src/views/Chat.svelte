@@ -30,7 +30,7 @@
     if (groupId) {
       getContainerMessages()
     }else{
-      console.log('group not found');
+      // console.log('group not found');
     }
 
   }

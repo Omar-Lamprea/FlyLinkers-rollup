@@ -1,6 +1,7 @@
 <script>
   import UserPotho from './UserPhoto.svelte'
-  import Modal from '../Modal.svelte'
+  import CoverPhotoModal from '../Modals/CoverPhotoModal.svelte'
+  import ProfilePhotoModal from '../Modals/ProfilePhotoModal.svelte'
 
   export let name, last_name, title, email , photo, id, aboutMe, urlAPI;
   export let userMain;
@@ -127,7 +128,7 @@
 
       <div class="Profile-card">
         <div class="Profile-card-content d-flex flex-column">
-          <UserPotho {photo} {urlAPI}/>
+          <UserPotho {photo} {urlAPI} {id}/>
           <div class="Profile-card-info mt-2">
             <div class="Profile-card-user">
               <h2>{name} {last_name}</h2>
@@ -163,7 +164,8 @@
       <div class="Profile-card-text text-end d-flex flex-column align-items-end">
         {#if email === localStorage.getItem('user')}
           <p type="button" class="mb-3" data-bs-toggle="modal" data-bs-target="#editProfile"><i class="fas fa-pen"></i> Edit profile</p>
-          <Modal {id} {urlAPI}/>
+          <CoverPhotoModal {id} {urlAPI}/>
+          <ProfilePhotoModal {id} {urlAPI}/>
 
           <div class="Profile-card-statistics">
             <p>Who viewed your profile-card <span>3.8K</span></p> 

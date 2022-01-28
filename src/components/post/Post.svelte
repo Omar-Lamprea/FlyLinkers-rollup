@@ -77,7 +77,18 @@
 
     //like
     if (reactionType === 'fa-thumbs-up' && reactionElement === 'far') {
-      if(content.length === 0 || content.Error){
+      let myLike = true
+      console.log(userId);
+      content.forEach(like => {
+        if (like.id !== userId) {
+          console.log(like);
+          myLike = false
+        }
+        if (like.id === userId) {
+          let myLike = true
+        }
+      });
+      if(content.length === 0 || content.Error || !myLike){
        const createReaction = await fetch(`${urlAPI}/post/like/`,{
         method: 'POST',
         headers: {
@@ -91,9 +102,10 @@
       })
       const response = createReaction.json()
         if (response) {
-          likeAcount.textContent = reactions.like + 1
+          likeAcount.textContent = reactions.like ++
           toggleReaction()
         }
+
       }else{
         const like = await fetch(`${urlAPI}/post/like/?post_id=${id}&user=${userId}`,{
           method: 'PUT',
@@ -134,7 +146,7 @@
 
       const response = dislike.json()
       if (response) {
-        likeAcount.textContent = reactions.like - 1
+        likeAcount.textContent = reactions.like --
         toggleReaction()
       }
     }
@@ -142,7 +154,17 @@
 
     //love
     if (reactionType === 'fa-heart' && reactionElement === 'far') {
-      if(content.length === 0 || content.Error){
+      let myLove = true
+      content.forEach(love => {
+        if (love.id !== userId) {
+          console.log(love);
+          myLove = false
+        }
+        if (love.id === userId) {
+          let myLove = true
+        }
+      });
+      if(content.length === 0 || content.Error || !myLove){
        const createReaction = await fetch(`${urlAPI}/post/like/`,{
         method: 'POST',
         headers: {

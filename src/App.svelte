@@ -15,12 +15,14 @@
 
   const urlUser = window.location.pathname
   const urluserProfile = urlUser.slice(9)
+
   localStorage.setItem('visitProfile', 'userProfile')
   const visitProfile = localStorage.getItem('visitProfile')
 
-  // const urlLogOut = 'http://localhost:3000/'
-  // const urlLogOut = 'https://flylinkers.com/'
-  const urlLogOut = 'https://omar-lamprea.github.io/FlyLinkers-Login/'
+
+  const urlLogOut = 'http://localhost:3000/'
+  // const urlLogOut = 'https://flylinkers.com'
+  // const urlLogOut = 'https://omar-lamprea.github.io/FlyLinkers-Login/'
 
   // const urlAPI = 'http://18.118.50.78:8000'
   const urlAPI = 'https://api.flylinkers.com'
@@ -43,16 +45,21 @@
   let getUserMainToFirestore;
 // 
   const getData = async ()=>{
-    const response = await fetch(`${urlAPI}/user/create/?email=${localStorage.getItem('user')}`,{
-      method: 'GET'
-    })
-    const content = await response.json();
-    data = content[0]
-    if (!localStorage.getItem('profilePhoto')) {
-      localStorage.setItem('profilePhoto', data.photo)
+    if (localStorage.getItem('user')) {
+      const response = await fetch(`${urlAPI}/user/create/?email=${localStorage.getItem('user')}`,{
+        method: 'GET'
+      })
+      const content = await response.json();
+      data = content[0]
+      await getUserToFirestore(data)
+      getUserMainToFirestore = await getUserToFirestore(data)
+
+      if (!localStorage.getItem('profilePhoto')) {
+        localStorage.setItem('profilePhoto', data.photo)
+      }
+      userMain = data.id
+      
     }
-    userMain = data.id
-    getUserMainToFirestore = await getUserToFirestore(data)
   }
 
 
@@ -181,12 +188,5 @@
     {#if chatFlag && userMain}
         <Chat {id} {userMain}/>
     {/if}
-
-  {:else}
-    <Router>
-      <Route path="/login">
-        <Login/>
-      </Route>
-    </Router>
   {/if}
 </main>

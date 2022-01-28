@@ -54,7 +54,6 @@ export async function getUser(uid){
 }
 
 async function saveUserToFirestore(data) {
-  console.log(data);
 
   const collectionId = data.id.toString(16)
 
@@ -80,7 +79,7 @@ export const validateGroup = (user, user2) =>{
       }
     }
   }
-  handleMessage(groupId, flagGroups, user, user2)
+  // handleMessage(groupId, flagGroups, user, user2)
   return groupId
 }
 
@@ -90,12 +89,12 @@ const handleMessage = async(groupId, flagGroups, user, user2)=>{
 
   // console.log(flagGroups);
   if (!flagGroups) {
-    console.log(flagGroups);
+    // console.log(flagGroups);
     //usuario da enter para crear documentos de grupos y mensaje
     //validar enter{
 
       //await newGroup(user, user2)
-      console.log(groupId);
+      // console.log(groupId);
 
       // await newMessage(groupId, sentBy, messageText)
     // }
@@ -127,14 +126,14 @@ export async function newGroup(user1, user2, messageText){
 }
 
 const updateUser = async(groupId, user)=>{
-  console.log(user);
+  // console.log(user);
   const collectionId = user.uid.toString(16)
 
   let aux = user.groups
   aux.push(groupId)
 
   const userDoc = doc(db, 'user', collectionId)
-  console.log(userDoc);
+  // console.log(userDoc);
   await updateDoc(userDoc, {
     groups: aux
   })
