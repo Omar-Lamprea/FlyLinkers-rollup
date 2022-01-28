@@ -74,20 +74,22 @@
 
     const getIdReaction = await fetch(`${urlAPI}/post/like/?post_id=${id}`)
     const content = await getIdReaction.json()
+    
 
     //like
     if (reactionType === 'fa-thumbs-up' && reactionElement === 'far') {
       let myLike = true
-      console.log(userId);
-      content.forEach(like => {
-        if (like.id !== userId) {
-          console.log(like);
-          myLike = false
-        }
-        if (like.id === userId) {
-          let myLike = true
-        }
-      });
+      if (content.results) {
+        content.forEach(like => {
+          if (like.id !== userId) {
+            console.log(like);
+            myLike = false
+          }
+          if (like.id === userId) {
+            let myLike = true
+          }
+        });
+      }
       if(content.length === 0 || content.Error || !myLike){
        const createReaction = await fetch(`${urlAPI}/post/like/`,{
         method: 'POST',
@@ -155,15 +157,17 @@
     //love
     if (reactionType === 'fa-heart' && reactionElement === 'far') {
       let myLove = true
-      content.forEach(love => {
-        if (love.id !== userId) {
-          console.log(love);
-          myLove = false
-        }
-        if (love.id === userId) {
-          let myLove = true
-        }
-      });
+      if (content.results) {
+        content.forEach(love => {
+          if (love.id !== userId) {
+            console.log(love);
+            myLove = false
+          }
+          if (love.id === userId) {
+            let myLove = true
+          }
+        });
+      }
       if(content.length === 0 || content.Error || !myLove){
        const createReaction = await fetch(`${urlAPI}/post/like/`,{
         method: 'POST',
