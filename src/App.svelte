@@ -16,10 +16,16 @@
   const urlUser = window.location.pathname
   const urluserProfile = urlUser.slice(9)
 
-  let flagVisitProfile = false
-  if (localStorage.getItem('visitProfile') !== 'null') {
-      flagVisitProfile = true
-  }
+  localStorage.setItem('visitProfile', 'userProfile')
+  const visitProfile = localStorage.getItem('visitProfile')
+
+  // let flagVisitProfile = false
+  // if (localStorage.getItem('visitProfile') !== 'null') {
+  //     console.log(urluserProfile);
+  //     visitUser = localStorage.getItem('visitProfile')
+  //     flagVisitProfile = true
+  // }
+
   // localStorage.setItem('visitProfile', 'userProfile')
   // const visitProfile = localStorage.getItem('visitProfile')
 
@@ -178,11 +184,12 @@
           <Profile {...data} {urlAPI}/>
         </Route>
 
-        {#if flagVisitProfile}
-           <Route path="/profile/{urluserProfile}">
-             <UserProfile {userMain} {urlAPI}/>
-           </Route>
-        {/if}
+        {#if localStorage.getItem('visitProfile')}
+          <Route path="/profile/{localStorage.getItem('visitProfile')}">
+            <UserProfile {userMain} {urlAPI}/>
+          </Route>
+       {/if}
+
       </Router>
 
     {:else}

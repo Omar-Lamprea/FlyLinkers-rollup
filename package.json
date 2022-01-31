@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "rollup -c -s",
+    "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public --no-clear -s"
+    "start": "--host 0.0.0.0 public --no-clear -s"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",

@@ -2,6 +2,7 @@
   import { Router, Link, Route } from "svelte-routing";
   import Comment from './Comment.svelte'
   import startTime from '../../js/startTime.js'
+  import UserProfile from '../../views/UserProfile.svelte'
 
   export let userId;
   export let desc, reactions, img, comments, create_time, user, id, user_id, update_time;
@@ -21,6 +22,7 @@
   if (user) {
     name = '', middle_name= '', last_name='', title='', photo='', email = '', update_time='', user_id='', userLink = user.email
   }else{
+    user = ''
     userLink = email
   }
 
@@ -31,12 +33,12 @@
     }
   }
   const visitProfile = () =>{
+    localStorage.setItem('visitProfile', user.email)
     if (user) {
-      window.location.pathname = `profile/${user.email}`
       localStorage.setItem('visitProfile', user.email)
-      // setTimeout(() => {
-      //   localStorage.removeItem('visitProfile')
-      // }, 2000);
+      setTimeout(() => {
+        localStorage.setItem('visitProfile', 'userProfile')
+      }, 2000);
     }
   }
   const likeValue = `likeValue${id}`
@@ -569,21 +571,23 @@
 
 
 <div class="Card Default-containers">
+
+
   <div class="Card-container">
     <div class="Card-Header">
 
         {#if user}
           <div class="Card-user" on:click={visitProfile}>
-            <!-- <Router> -->
-              <!-- <Link on:click={visitProfile} to="/profile/{user.email}" class="d-flex"> -->
+            <Router>
+              <Link on:click={visitProfile} to="/profile/{localStorage.getItem('visitProfile')}" class="d-flex">
                 <img src="{urlAPI}{user.photo}" alt="" on:click={visitProfile}>
                 <h2 on:click={visitProfile}>
                   {user.name} {user.last_name}
                   <span>{user.title}</span>
                   <span>{startTime(create_time)}</span>
                 </h2>
-              <!-- </Link> -->
-            <!-- </Router> -->
+              </Link>
+            </Router>
           </div>
         {:else}
           <div class="Card-user">
@@ -673,3 +677,4 @@
       {/if}
     </div>
 </div>
+

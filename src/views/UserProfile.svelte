@@ -3,11 +3,11 @@
   import SidebarRight from '../components/SidebarRight.svelte'
   import Loader from '../components/Loader.svelte'
 
+  export let userMain, urlAPI;
+
   const urlUser = window.location.pathname
   // const urluserProfile = urlUser.slice(9)
-  const urluserProfile = localStorage.getItem('visitProfile') || urlUser.slice(9)
-
-  export let userMain, urlAPI;
+  const urluserProfile = localStorage.getItem('visitProfile')
 
   let userProfile;
   let dataProfile;
@@ -15,19 +15,17 @@
 
 
   const getUser = async()=>{
-    if (urluserProfile.includes('@')) {
-      const response = await fetch(`${urlAPI}/user/create/?email=${urluserProfile}`)
-      const content = await response.json()
-      userProfile = content[0]
-      id = userProfile.id
-      name = userProfile.name
-      last_name = userProfile.last_name
-      title = userProfile.title
-      email = userProfile.email
-      photo = userProfile.photo
-  
-      getUserProfile(userProfile.id)
-    }
+    const response = await fetch(`${urlAPI}/user/create/?email=${urluserProfile}`)
+    const content = await response.json()
+    userProfile = content[0]
+    id = userProfile.id
+    name = userProfile.name
+    last_name = userProfile.last_name
+    title = userProfile.title
+    email = userProfile.email
+    photo = userProfile.photo
+
+    getUserProfile(userProfile.id)
   }
 
   const getUserProfile = async(id)=>{
