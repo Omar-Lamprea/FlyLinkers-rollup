@@ -14,8 +14,12 @@
   let page = 0;
   let countPost = 0
 
-  async function getPosts (){
-    page += 1
+  export async function getPosts (page1){
+    if (page1) {
+      page = page1
+    }else{
+      page += 1
+    }
     try {
       const response = await fetch(`${urlAPI}/post/home/?page=${page}&user_id=${id}`)
       const content = await response.json()
@@ -27,11 +31,23 @@
       }
     } catch (error) {
       console.log(error);
-      
     }
   }
 
+  async function clearPost(){
+    posts.set([])
+  }
+
   onMount(getPosts)
+  
+  setTimeout(() => {
+    btnSendPost.addEventListener('click', e =>{
+      setTimeout(() => {
+        clearPost()
+        getPosts(1)
+      }, 1000);
+    })
+  }, 1000);
 
   document.addEventListener('scroll', async (e)=>{
     if ((window.innerHeight + window.scrollY) === main.offsetHeight){

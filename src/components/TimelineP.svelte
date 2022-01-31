@@ -23,9 +23,9 @@
   const getProfile = async ()=>{
     const response = await fetch(`${urlAPI}/user/profile/?user_id=${id}`)
     const content = await response.json()
-    if (content.Detail) {
-      createprofile()
-    }
+    // if (content.Detail) {
+    //   createprofile()
+    // }
     if (content[0]) {
       let data = content[0]
       coverPhoto = `${urlAPI}${data.cover_img}`
@@ -33,22 +33,22 @@
     }
   }
 
-  const createprofile = async ()=>{
-    const response = await fetch(`${urlAPI}/user/profile/`, {
-      method: 'POST',
-      headers : {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        user: id,
-        resource_id : 0,
-        about: '...',
-        cover_img: '/archivos/fotos/5484ff7d-8848-4b47-87d6-367ca3ebe8aa.png'
-      })
-    })
-    const content = await response.json()
-    await getProfile()
-  }
+  // const createprofile = async ()=>{
+  //   const response = await fetch(`${urlAPI}/user/profile/`, {
+  //     method: 'POST',
+  //     headers : {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify({
+  //       user: id,
+  //       resource_id : 0,
+  //       about: '...',
+  //       cover_img: '/archivos/fotos/5484ff7d-8848-4b47-87d6-367ca3ebe8aa.png'
+  //     })
+  //   })
+  //   const content = await response.json()
+  //   await getProfile()
+  // }
 
   let post;
   let userPost;

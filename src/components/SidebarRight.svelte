@@ -20,6 +20,5 @@
     {#if window.location.pathname.includes('profile')}
        <People {id} {urlAPI}/>
     {/if}
-
   </div>
 </div>

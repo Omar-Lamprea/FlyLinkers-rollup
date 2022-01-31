@@ -4,10 +4,6 @@
   let urlCoverPhoto;
   let idCoverPhoto;
 
-  let profilePhotoB64;
-  let urlProfilePhoto;
-  let idProfilePhoto
-
   export let id, urlAPI;
 
   const showCoverImg = ()=>{
@@ -65,7 +61,7 @@
 
   const upDateDataDescription = async ()=>{
     await convertCoverB64()
-    console.log('id:', idCoverPhoto, 'url:', urlCoverPhoto);
+    // console.log('id:', idCoverPhoto, 'url:', urlCoverPhoto);
     let dataDescription;
     
     const userDescription = document.getElementById('userDescription').textContent
@@ -74,6 +70,7 @@
     }else{
       dataDescription = description.value
     }
+
     const sendData = await fetch(`${urlAPI}/user/profile/?user=${id}`, {
       method: 'PUT',
       headers : {
@@ -86,15 +83,10 @@
       })
     })
     const content = await sendData.json()
-    
     if (content) {
       localStorage.removeItem('coverPhoto')
-      // window.location.reload()
       const cover = document.getElementById('coverPhotoProfile')
-      const getNewProfile = await fetch(`${urlAPI}/user/profile/?user=${id}`)
-      const contentProfile = await getNewProfile.json()
-      const data = contentProfile[0]
-      cover.setAttribute('src', `${urlAPI}${data.cover_img}`)
+      cover.setAttribute('src', `${urlAPI}${urlCoverPhoto}`)
     }
   }
 

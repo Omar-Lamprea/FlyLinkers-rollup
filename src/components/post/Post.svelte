@@ -32,26 +32,27 @@
   }
   const visitProfile = () =>{
     if (user) {
+      window.location.pathname = `profile/${user.email}`
       localStorage.setItem('visitProfile', user.email)
-      setTimeout(() => {
-        localStorage.setItem('visitProfile', 'userProfile')
-      }, 2000);
+      // setTimeout(() => {
+      //   localStorage.removeItem('visitProfile')
+      // }, 2000);
     }
   }
-  
   const likeValue = `likeValue${id}`
   const loveValue = `loveValue${id}`
-
+  
+  let reactionsPost = '';
   const reactionUser = async()=>{
     const spanLikeValue = document.getElementById(`likeValue${id}`)
     const spanLoveValue = document.getElementById(`loveValue${id}`)
     const btnLike = document.getElementById(`btnLike${id}`)
     const btnLove = document.getElementById(`btnLove${id}`)
-
+    
     if (spanLikeValue.textContent !== '0' || spanLoveValue.textContent !== '0') {
       const getIdReaction = await fetch(`${urlAPI}/post/like/?post_id=${id}`)
       const response = await getIdReaction.json()
-
+      reactionsPost = response
       response.forEach(reaction => {
         if (reaction.id === userId && reaction.like) {
           btnLike.classList.remove('far')
@@ -64,172 +65,323 @@
       });
     }
   }
-
+  
   const changeReaction = async(e)=>{
+    await reactionUser()
     const likeAcount = document.getElementById(likeValue)
     const loveAcount = document.getElementById(loveValue)
     const element = e.target.parentNode.childNodes[0]
     const reactionType = element.classList[0]
     const reactionElement = element.classList[1]
-
-    const getIdReaction = await fetch(`${urlAPI}/post/like/?post_id=${id}`)
-    const content = await getIdReaction.json()
     
-
-    //like
-    if (reactionType === 'fa-thumbs-up' && reactionElement === 'far') {
-      let myLike = true
-      if (content.results) {
-        content.forEach(like => {
-          if (like.id !== userId) {
+    let myLike;
+    console.log(reactionsPost);
+    
+    if (reactionsPost !== '') {
+      reactionsPost.forEach(like => {
+        if (like.id !== userId) {
+          myLike = false
+        }
+        if(like.id === userId){
+          if (like.like === 1) {
             console.log(like);
+            myLike = true
+          }else{
             myLike = false
           }
-          if (like.id === userId) {
-            let myLike = true
-          }
-        });
-      }
-      if(content.length === 0 || content.Error || !myLike){
-       const createReaction = await fetch(`${urlAPI}/post/like/`,{
-        method: 'POST',
-        headers: {
-          'Content-Type' : 'application/json'
-        },
-        body: JSON.stringify({
-          user_id: userId,
-          post_id: id,
-          like: 1,
-        })
-      })
-      const response = createReaction.json()
-        if (response) {
-          likeAcount.textContent = reactions.like ++
-          toggleReaction()
         }
+      });
+    }
 
-      }else{
-        const like = await fetch(`${urlAPI}/post/like/?post_id=${id}&user=${userId}`,{
-          method: 'PUT',
+    let myLove;
+    if (reactionsPost !== '') {
+      reactionsPost.forEach(love => {
+        if (love.id !== userId) {
+          myLove = false
+        }
+        if (love.id === userId) {
+          if (love.love === 1) {
+            console.log(love);
+            myLove = true
+          }else{
+            myLove = false
+          }
+        }
+      });
+    }
+
+    if (reactionsPost === '') {
+      const getIdReaction = await fetch(`${urlAPI}/post/like/?post_id=${id}`)
+      const content = await getIdReaction.json()
+      if (content === []) {
+        if (reactionType === 'fa-thumbs-up') {
+          myLike = true
+        }
+        if (reactionType === 'fa-heart') {
+          myLove = true
+        }
+      }
+    }
+
+    console.log(reactions, myLike,myLove);
+
+      // update like reaction
+      if (myLike && !myLove) {
+        if (reactionType === 'fa-thumbs-up' && reactionElement === 'far') {
+          const like = await fetch(`${urlAPI}/post/like/?post_id=${id}&user=${userId}`,{
+            method: 'PUT',
+            headers: {
+              'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify({
+              like: 1
+            })
+          })
+          const response = like.json()
+          if (response) {
+            reactions.like += 1
+            likeAcount.textContent = reactions.like
+            toggleReaction()
+            await reactionUser()
+          }
+        }
+        if (reactionType === 'fa-thumbs-up' && reactionElement === 'fas') {
+          const dislike = await fetch(`${urlAPI}/post/like/?post_id=${id}&user=${userId}`,{
+            method: 'PUT',
+            headers: {
+              'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify({})
+          })
+          const response = dislike.json()
+          if (response) {
+            reactions.like -= 1
+            likeAcount.textContent = reactions.like
+            toggleReaction()
+            await reactionUser()
+          }
+        }
+    }
+
+    //new like
+    if (reactionType === 'fa-thumbs-up' && reactionElement === 'far') {
+      if (reactions.like === 0 && reactions.love === 0 || !myLike && !myLove) {
+        console.log('creando like');
+        const createReaction = await fetch(`${urlAPI}/post/like/`,{
+          method: 'POST',
           headers: {
             'Content-Type' : 'application/json'
           },
           body: JSON.stringify({
+            user_id: userId,
+            post_id: id,
             like: 1,
           })
         })
-
-        const response = like.json()
-        if (response) {
-          likeAcount.textContent = reactions.like++
-          toggleReaction()
-
-          const btnLove = document.getElementById(`btnLove${id}`)
-          const loveValue = document.getElementById(`loveValue${id}`)
-          
-          if (btnLove.classList[1] === 'fas') {
-            btnLove.classList.add('far')
-            btnLove.classList.remove('fas')
-            loveValue.textContent -= 1
+        const response = createReaction.json()
+          if (response) {
+            reactions.like += 1
+            likeAcount.textContent = reactions.like
+            toggleReaction()
           }
-        }
       }
     }
-
-    //dislike
-    if(reactionType === 'fa-thumbs-up' && reactionElement === 'fas'){
-      const dislike = await fetch(`${urlAPI}/post/like/?post_id=${id}&user=${userId}`,{
-        method: 'PUT',
-        headers: {
-          'Content-Type' : 'application/json'
-        },
-        body: JSON.stringify({})
-      })
-
-      const response = dislike.json()
-      if (response) {
-        likeAcount.textContent = reactions.like --
-        toggleReaction()
-      }
-    }
-
-
-    //love
-    if (reactionType === 'fa-heart' && reactionElement === 'far') {
-      let myLove = true
-      if (content.results) {
-        content.forEach(love => {
-          if (love.id !== userId) {
-            console.log(love);
-            myLove = false
-          }
-          if (love.id === userId) {
-            let myLove = true
-          }
-        });
-      }
-      if(content.length === 0 || content.Error || !myLove){
-       const createReaction = await fetch(`${urlAPI}/post/like/`,{
-        method: 'POST',
-        headers: {
-          'Content-Type' : 'application/json'
-        },
-        body: JSON.stringify({
-          user_id: userId,
-          post_id: id,
-          love: 1,
-        })
-      })
-      const response = createReaction.json()
-        if (response) {
-          loveAcount.textContent = reactions.love + 1
-          toggleReaction()
-        }
-      }else{
-        const love = await fetch(`${urlAPI}/post/like/?post_id=${id}&user=${userId}`,{
-          method: 'PUT',
+    // new love
+    if (reactionType === 'fa-heart' && reactionElement === 'far'){
+      if (reactions.like === 0 && reactions.love === 0 || !myLike && !myLove) {
+        console.log('creando love');
+        const createReaction = await fetch(`${urlAPI}/post/like/`,{
+          method: 'POST',
           headers: {
             'Content-Type' : 'application/json'
           },
           body: JSON.stringify({
+            user_id: userId,
+            post_id: id,
             love: 1,
           })
         })
-        const response = love.json()
+        const response = createReaction.json()
         if (response) {
-          loveAcount.textContent = reactions.love++
+          reactions.love += 1
+          loveAcount.textContent = reactions.love
           toggleReaction()
-
-          const btnLike = document.getElementById(`btnLike${id}`)
-          const likeValue = document.getElementById(`likeValue${id}`)
-
-          if (btnLike.classList[1] === 'fas') {
-            btnLike.classList.add('far')
-            btnLike.classList.remove('fas')
-            likeValue.textContent -= 1
-          }
-
         }
       }
     }
 
-    //dislove
-    if (reactionType === 'fa-heart' && reactionElement === 'fas') {
-      const dislove = await fetch(`${urlAPI}/post/like/?post_id=${id}&user=${userId}`,{
-        method: 'PUT',
-        headers: {
-          'Content-Type' : 'application/json'
-        },
-        body: JSON.stringify({})
-      })
+    // // update love reaction
+    // if (reactionType === 'fa-heart' && reactionElement === 'fas'){
+    //   if (!myLike && myLove ) {
+    //     if(reactionType === 'fa-heart' && reactionElement === 'fas'){
+    //       const dislove = await fetch(`${urlAPI}/post/like/?post_id=${id}&user=${userId}`,{
+    //         method: 'PUT',
+    //         headers: {
+    //           'Content-Type' : 'application/json'
+    //         },
+    //         body: JSON.stringify({})
+    //       })
+    //       const response = dislove.json()
+    //       if (response) {
+    //         reactions.love -= 1
+    //         loveAcount.textContent = reactions.love
+    //         toggleReaction()
+    //       }
+    //     }
+    //   }
+    // }
 
-      const response = dislove.json()
-      if (response) {
-        loveAcount.textContent = reactions.love-1
-        toggleReaction()
-      }
-    }
 
+
+    // const likeAcount = document.getElementById(likeValue)
+    // const loveAcount = document.getElementById(loveValue)
+    // const element = e.target.parentNode.childNodes[0]
+    // const reactionType = element.classList[0]
+    // const reactionElement = element.classList[1]
+    // const getIdReaction = await fetch(`${urlAPI}/post/like/?post_id=${id}`)
+    // const content = await getIdReaction.json()
+    
+    // //like
+    // if (reactionType === 'fa-thumbs-up' && reactionElement === 'far') {
+    //   let myLike = true
+    //   if (content.results) {
+    //     content.forEach(like => {
+    //       if (like.id !== userId) {
+    //         console.log(like);
+    //         myLike = false
+    //       }
+    //       if (like.id === userId) {
+    //         let myLike = true
+    //       }
+    //     });
+    //   }
+    //   if(content.length === 0 || content.Error || !myLike){
+    //    const createReaction = await fetch(`${urlAPI}/post/like/`,{
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type' : 'application/json'
+    //     },
+    //     body: JSON.stringify({
+    //       user_id: userId,
+    //       post_id: id,
+    //       like: 1,
+    //     })
+    //   })
+    //   const response = createReaction.json()
+    //     if (response) {
+    //       likeAcount.textContent = reactions.like ++
+    //       toggleReaction()
+    //     }
+    //   }else{
+    //     const like = await fetch(`${urlAPI}/post/like/?post_id=${id}&user=${userId}`,{
+    //       method: 'PUT',
+    //       headers: {
+    //         'Content-Type' : 'application/json'
+    //       },
+    //       body: JSON.stringify({
+    //         like: 1,
+    //       })
+    //     })
+    //     const response = like.json()
+    //     if (response) {
+    //       likeAcount.textContent = reactions.like++
+    //       toggleReaction()
+    //       const btnLove = document.getElementById(`btnLove${id}`)
+    //       const loveValue = document.getElementById(`loveValue${id}`)
+          
+    //       if (btnLove.classList[1] === 'fas') {
+    //         btnLove.classList.add('far')
+    //         btnLove.classList.remove('fas')
+    //         loveValue.textContent -= 1
+    //       }
+    //     }
+    //   }
+    // }
+    // //dislike
+    // if(reactionType === 'fa-thumbs-up' && reactionElement === 'fas'){
+    //   const dislike = await fetch(`${urlAPI}/post/like/?post_id=${id}&user=${userId}`,{
+    //     method: 'PUT',
+    //     headers: {
+    //       'Content-Type' : 'application/json'
+    //     },
+    //     body: JSON.stringify({})
+    //   })
+    //   const response = dislike.json()
+    //   if (response) {
+    //     likeAcount.textContent = reactions.like --
+    //     toggleReaction()
+    //   }
+    // }
+    // //love
+    // if (reactionType === 'fa-heart' && reactionElement === 'far') {
+    //   let myLove = true
+    //   if (content.results) {
+    //     content.forEach(love => {
+    //       if (love.id !== userId) {
+    //         console.log(love);
+    //         myLove = false
+    //       }
+    //       if (love.id === userId) {
+    //         let myLove = true
+    //       }
+    //     });
+    //   }
+    //   if(content.length === 0 || content.Error || !myLove){
+    //    const createReaction = await fetch(`${urlAPI}/post/like/`,{
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type' : 'application/json'
+    //     },
+    //     body: JSON.stringify({
+    //       user_id: userId,
+    //       post_id: id,
+    //       love: 1,
+    //     })
+    //   })
+    //   const response = createReaction.json()
+    //     if (response) {
+    //       loveAcount.textContent = reactions.love + 1
+    //       toggleReaction()
+    //     }
+    //   }else{
+    //     const love = await fetch(`${urlAPI}/post/like/?post_id=${id}&user=${userId}`,{
+    //       method: 'PUT',
+    //       headers: {
+    //         'Content-Type' : 'application/json'
+    //       },
+    //       body: JSON.stringify({
+    //         love: 1,
+    //       })
+    //     })
+    //     const response = love.json()
+    //     if (response) {
+    //       loveAcount.textContent = reactions.love++
+    //       toggleReaction()
+    //       const btnLike = document.getElementById(`btnLike${id}`)
+    //       const likeValue = document.getElementById(`likeValue${id}`)
+    //       if (btnLike.classList[1] === 'fas') {
+    //         btnLike.classList.add('far')
+    //         btnLike.classList.remove('fas')
+    //         likeValue.textContent -= 1
+    //       }
+    //     }
+    //   }
+    // }
+    // //dislove
+    // if (reactionType === 'fa-heart' && reactionElement === 'fas') {
+    //   const dislove = await fetch(`${urlAPI}/post/like/?post_id=${id}&user=${userId}`,{
+    //     method: 'PUT',
+    //     headers: {
+    //       'Content-Type' : 'application/json'
+    //     },
+    //     body: JSON.stringify({})
+    //   })
+    //   const response = dislove.json()
+    //   if (response) {
+    //     loveAcount.textContent = reactions.love-1
+    //     toggleReaction()
+    //   }
+    // }
     function toggleReaction(){
       element.classList.toggle('far')
       element.classList.toggle('fas')
@@ -422,16 +574,16 @@
 
         {#if user}
           <div class="Card-user" on:click={visitProfile}>
-            <Router>
-              <Link on:click={visitProfile} to="/profile/{localStorage.getItem('visitProfile')}" class="d-flex">
+            <!-- <Router> -->
+              <!-- <Link on:click={visitProfile} to="/profile/{user.email}" class="d-flex"> -->
                 <img src="{urlAPI}{user.photo}" alt="" on:click={visitProfile}>
                 <h2 on:click={visitProfile}>
                   {user.name} {user.last_name}
                   <span>{user.title}</span>
                   <span>{startTime(create_time)}</span>
                 </h2>
-              </Link>
-            </Router>
+              <!-- </Link> -->
+            <!-- </Router> -->
           </div>
         {:else}
           <div class="Card-user">
@@ -466,21 +618,11 @@
       <div class="Card-board-icons-first d-flex">
         <div class="Reaction Header-nav-like mx-2">
             <i class="fas fa-thumbs-up"></i>
-            {#if reactions}
-              <span id={likeValue}>{reactions.like}</span>
-            {/if}
-            {#if reactions === undefined}
-              <span id={likeValue}>0</span>
-            {/if}
+            <span id={likeValue}>{reactions.like}</span>
         </div>
         <div class="Reaction Header-nav-heart mx-2">
           <i class="fas fa-heart"></i>
-          {#if reactions}
-            <span id={loveValue}>{reactions.love}</span>
-          {/if}
-          {#if reactions === undefined}
-            <span id={loveValue}>0</span>
-          {/if}
+          <span id={loveValue}>{reactions.love}</span>
         </div>
         <div class="Reaction Header-nav-comment mx-2">
           <i class="fas fa-comment"></i>

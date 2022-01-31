@@ -83,7 +83,7 @@
     <div class="Header-nav-user mx-3 fs-3">
       <Link to="/profile">
         {#if localStorage.getItem('profilePhoto')}
-           <img src="{urlAPI}{localStorage.getItem('profilePhoto')}" alt="">
+          <img src="{urlAPI}{localStorage.getItem('profilePhoto')}" alt="">
         {:else}
           <img src="{urlAPI}{photo}" alt="">
         {/if}

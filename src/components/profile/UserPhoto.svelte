@@ -4,6 +4,7 @@
   if (id === undefined) {
     id = ''
   }
+
 </script>
 
 <style>
@@ -20,12 +21,13 @@
 </style>
 
 <div class="Profile-card-avatar dropdown">
-  {#if photo}
+  {#if id}
     <img src='{urlAPI}{photo}' alt="" class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-  {/if}
-
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
     <!-- <li><a class="dropdown-item" href="/">View profile photo</a></li> -->
-    <li><a class="dropdown-item" href="/" data-bs-toggle="modal" data-bs-target="#ModalProfile">Update profile photo</a></li>
-  </ul>
+      <li><a class="dropdown-item" href="/" data-bs-toggle="modal" data-bs-target="#ModalProfile">Update profile photo</a></li>
+    </ul>
+  {:else}
+    <img src='{urlAPI}{photo}' alt="">
+  {/if}
 </div>

@@ -2,7 +2,6 @@
   import NavPost from './NavPost.svelte'
 
   export let id, urlAPI;
-
   const validateInfoPost = (e) =>{
     if (e.key === 'Enter') {
       e.target.rows ++
@@ -60,7 +59,10 @@
         const content = await post.json()
         if (content) {
           postDescription.value = ''
-          // window.location.reload()
+          if (postImg.src) {
+            postImg.setAttribute('src', '')
+            postImg.classList.toggle('d-none')
+          }
         }
     }
   }

@@ -1,10 +1,11 @@
 <script>
   import TimelineP from '../components/TimelineP.svelte'
   import SidebarRight from '../components/SidebarRight.svelte'
+  import Loader from '../components/Loader.svelte'
 
   const urlUser = window.location.pathname
   // const urluserProfile = urlUser.slice(9)
-  const urluserProfile = localStorage.getItem('visitProfile')
+  const urluserProfile = localStorage.getItem('visitProfile') || urlUser.slice(9)
 
   export let userMain, urlAPI;
 
@@ -14,17 +15,19 @@
 
 
   const getUser = async()=>{
-    const response = await fetch(`${urlAPI}/user/create/?email=${urluserProfile}`)
-    const content = await response.json()
-    userProfile = content[0]
-    id = userProfile.id
-    name = userProfile.name
-    last_name = userProfile.last_name
-    title = userProfile.title
-    email = userProfile.email
-    photo = userProfile.photo
-
-    getUserProfile(userProfile.id)
+    if (urluserProfile.includes('@')) {
+      const response = await fetch(`${urlAPI}/user/create/?email=${urluserProfile}`)
+      const content = await response.json()
+      userProfile = content[0]
+      id = userProfile.id
+      name = userProfile.name
+      last_name = userProfile.last_name
+      title = userProfile.title
+      email = userProfile.email
+      photo = userProfile.photo
+  
+      getUserProfile(userProfile.id)
+    }
   }
 
   const getUserProfile = async(id)=>{
@@ -43,5 +46,7 @@
   {#if dataProfile}
     <TimelineP {name} {last_name} {title} {email} {photo} {id} {userMain} {urlAPI}/>
     <SidebarRight {id} {urlAPI}/>
+  {:else}
+     <Loader/>
   {/if}
 </div>

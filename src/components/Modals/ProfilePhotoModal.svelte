@@ -7,7 +7,6 @@
 
 
   const showProfileImg = () =>{
-    console.log(profilePhoto);
     const render = new FileReader();
     render.readAsDataURL(profilePhoto.files[0])
     render.onloadend = ()=>{
@@ -46,12 +45,8 @@
     const content = await response.json()
     if (content) {
       localStorage.removeItem('profilePhoto')
-      // window.location.reload()
       const profileImg = document.getElementById('dropdownMenuButton1')
-      const getNewProfile = await fetch(`${urlAPI}/user/create/?id=${id}`)
-      const contentProfile = await getNewProfile.json()
-      const data = contentProfile[0]
-      profileImg.setAttribute('src', `${urlAPI}${data.photo}`)
+      profileImg.setAttribute('src', `${urlAPI}${urlProfilePhoto}`)
     }
   }
 
