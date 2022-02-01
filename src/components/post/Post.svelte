@@ -1,5 +1,7 @@
 <script>
-  import { Router, Link, Route } from "svelte-routing";
+  import {link} from "svelte-spa-router";
+  import active from 'svelte-spa-router/active'
+
   import Comment from './Comment.svelte'
   import startTime from '../../js/startTime.js'
   import UserProfile from '../../views/UserProfile.svelte'
@@ -578,16 +580,14 @@
 
         {#if user}
           <div class="Card-user" on:click={visitProfile}>
-            <Router>
-              <Link on:click={visitProfile} to="/profile/{localStorage.getItem('visitProfile')}" class="d-flex">
-                <img src="{urlAPI}{user.photo}" alt="" on:click={visitProfile}>
-                <h2 on:click={visitProfile}>
-                  {user.name} {user.last_name}
-                  <span>{user.title}</span>
-                  <span>{startTime(create_time)}</span>
-                </h2>
-              </Link>
-            </Router>
+            <a on:click={visitProfile} href="/profile/{localStorage.getItem('visitProfile')}" class="d-flex" use:link use:active>
+              <img src="{urlAPI}{user.photo}" alt="" on:click={visitProfile}>
+              <h2 on:click={visitProfile}>
+                {user.name} {user.last_name}
+                <span>{user.title}</span>
+                <span>{startTime(create_time)}</span>
+              </h2>
+            </a>
           </div>
         {:else}
           <div class="Card-user">

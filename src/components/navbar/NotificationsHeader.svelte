@@ -1,5 +1,5 @@
 <script>
-  import { Router, Link, Route } from "svelte-routing";
+  // import { Router, Link, Route } from "svelte-spa-router";
 
   let notifications = 0;
 
@@ -134,7 +134,7 @@
          </span>
        </li> -->
        <li>
-         <Router>
+         <!-- <Router>
            <Link on:click={visitProfile(request.email)} to="/profile/{localStorage.getItem('visitProfile')}" class="d-flex">
             <span class="dropdown-item">
               <div class="userData">
@@ -147,7 +147,7 @@
               </div>
             </span>
           </Link>
-         </Router>
+         </Router> -->
       </li>
     {:else}
        <p class="text-center">you haven't news</p>

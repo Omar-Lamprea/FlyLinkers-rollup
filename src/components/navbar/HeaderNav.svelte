@@ -1,5 +1,7 @@
 <script>
-  import { Router, Link, Route } from "svelte-routing";
+  import {link} from 'svelte-spa-router';
+  import active from 'svelte-spa-router/active'
+  
   import Notifications from './NotificationsHeader.svelte'
   import {getMessages, getGroupUser, getUser} from '../../js/firebase/config.js'
   import ChatList from './chatList/ChatList.svelte'
@@ -51,58 +53,58 @@
 
 
 
-  <Router>
-    <div class="Header-nav-home mx-3 fs-3">
-      <Link to="/">
-        <i class="fas fa-home"></i>
-      </Link>
-    </div>
-    <div class="Header-nav-user-plus mx-3 fs-3">
-      <Link to="/">
-        <i class="fas fa-user-plus"></i>
-      </Link>
-    </div>
-    <div class="Header-nav-briefcase mx-3 fs-3">
-      <Link to="/">
-        <i class="fas fa-briefcase"></i>
-      </Link>
-    </div>
-    <div class="Header-nav-comment mx-3 fs-3">
-      <i class="fas fa-comment dropdown-toggle" id="chats" data-bs-toggle="dropdown" aria-expanded="false"></i>
-      <ul class="dropdown-menu" aria-labelledby="chats">
-        {#if flagChat}
-          {#each chatList as chatId}
-            <ChatList {chatId} {urlAPI} {id}/>
-          {/each}
-        {/if}
-      </ul>
-    </div>
-    <div class="Header-nav-bell mx-3 fs-3 notification" id="notification">
-        <Notifications {id} {urlAPI}/>
-    </div>
-    <div class="Header-nav-user mx-3 fs-3">
-      <Link to="/profile">
-        {#if localStorage.getItem('profilePhoto')}
-          <img src="{urlAPI}{localStorage.getItem('profilePhoto')}" alt="">
-        {:else}
-          <img src="{urlAPI}{photo}" alt="">
-        {/if}
-      </Link>
-    </div>
-    <div class="Header-nav-grip-vertical mx-3 fs-3">
-      <Link to="/">
-        <div class="dropdown">
-          <i class="fas fa-grip-vertical dropdown-toggle" id="settings" data-bs-toggle="dropdown" aria-expanded="false" ></i>
-          <ul class="dropdown-menu" aria-labelledby="settings">
-            <li><span class="dropdown-item">Settings</span></li>
-            <li><span class="dropdown-item" on:click={logOut}>Log Out</span></li>
-          </ul>
-        </div>
-      </Link>
-    </div>
-    <div class="Header-nav-calendar-week mx-3 fs-3">
-      <Link to="/">
-        <i class="fas fa-calendar-week"></i>
-      </Link>
-    </div>
-  </Router>
+<nav class="nav-container d-flex">
+  <div class="Header-nav-home mx-3 fs-3">
+    <a href="/" use:link use:active>
+      <i class="fas fa-home"></i>
+    </a>
+  </div>
+  <div class="Header-nav-user-plus mx-3 fs-3">
+    <a href="/" use:link use:active>
+      <i class="fas fa-user-plus"></i>
+    </a>
+  </div>
+  <div class="Header-nav-briefcase mx-3 fs-3">
+    <a href="/" use:link use:active>
+      <i class="fas fa-briefcase"></i>
+    </a>
+  </div>
+  <div class="Header-nav-comment mx-3 fs-3">
+    <i class="fas fa-comment dropdown-toggle" id="chats" data-bs-toggle="dropdown" aria-expanded="false"></i>
+    <ul class="dropdown-menu" aria-labelledby="chats">
+      {#if flagChat}
+        {#each chatList as chatId}
+          <ChatList {chatId} {urlAPI} {id}/>
+        {/each}
+      {/if}
+    </ul>
+  </div>
+  <div class="Header-nav-bell mx-3 fs-3 notification" id="notification">
+      <Notifications {id} {urlAPI}/>
+  </div>
+  <div class="Header-nav-user mx-3 fs-3">
+    <a href="/profile" use:link use:active>
+      {#if localStorage.getItem('profilePhoto')}
+        <img src="{urlAPI}{localStorage.getItem('profilePhoto')}" alt="">
+      {:else}
+        <img src="{urlAPI}{photo}" alt="">
+      {/if}
+    </a>
+  </div>
+  <div class="Header-nav-grip-vertical mx-3 fs-3">
+    <a href="/" use:link use:active>
+      <div class="dropdown">
+        <i class="fas fa-grip-vertical dropdown-toggle" id="settings" data-bs-toggle="dropdown" aria-expanded="false" ></i>
+        <ul class="dropdown-menu" aria-labelledby="settings">
+          <li><span class="dropdown-item">Settings</span></li>
+          <li><span class="dropdown-item" on:click={logOut}>Log Out</span></li>
+        </ul>
+      </div>
+    </a>
+  </div>
+  <div class="Header-nav-calendar-week mx-3 fs-3">
+    <a href="/" use:link use:active>
+      <i class="fas fa-calendar-week"></i>
+    </a>
+  </div>
+</nav>

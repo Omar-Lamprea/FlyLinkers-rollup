@@ -1,5 +1,8 @@
 <script>
-  import { Router, Link, Route } from "svelte-routing";
+  // import { Router, Link, Route} from "svelte-spa-router";
+  import Router from "svelte-spa-router";
+  import routes from './Routes'
+
   import Header from './components/Header.svelte'
   import Home from './views/Home.svelte';
   import Profile from "./views/Profile.svelte";
@@ -8,10 +11,9 @@
   import Login from './views/Login.svelte'
   import Chat from './views/Chat.svelte'
 
+
   import {getUserToFirestore} from './js/firebase/config.js'
   import {openChat} from './js/openChat.js'
-
-  
 
   const urlUser = window.location.pathname
   const urluserProfile = urlUser.slice(9)
@@ -175,8 +177,8 @@
 
   {#if localStorage.getItem('user')}
     {#if data && getUserMainToFirestore}
-      <Router>
-        <Route path="/">
+      <Router {routes}>
+        <!-- <Route path="/">
           <Home {...data} {urlAPI}/>
         </Route>
   
@@ -187,8 +189,8 @@
         {#if localStorage.getItem('visitProfile')}
           <Route path="/profile/{localStorage.getItem('visitProfile')}">
             <UserProfile {userMain} {urlAPI}/>
-          </Route>
-       {/if}
+          </Route> -->
+       <!-- {/if} -->
 
       </Router>
 

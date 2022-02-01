@@ -1,5 +1,7 @@
 <script>
-  import { Router, Link, Route } from "svelte-routing";
+  import {link} from 'svelte-spa-router';
+  import active from 'svelte-spa-router/active'
+
   import HeaderNav from "./navbar/HeaderNav.svelte";
   import HeaderNavMobile from "./navbar/HeaderNavMobile.svelte"
   import Loader from './Loader.svelte'
@@ -126,12 +128,10 @@
     <div class="Header-content d-flex align-items-center justify-content-between">
 
       <div class="Header-logo d-flex align-items-center px-3">
-        <Router>
-          <Link to="/" class="d-flex align-items-center">
-            <img src="../img/flylinkers-logo-blanco.png" alt="logo" width="100">
-            <h1>FlyLinkers</h1>
-          </Link>
-        </Router>
+        <a href="/" use:link use:active class="d-flex align-items-center">
+          <img src="../img/flylinkers-logo-blanco.png" alt="logo" width="100">
+          <h1>FlyLinkers</h1>
+        </a>
       </div>
 
       <div class="Header-input">
@@ -140,7 +140,7 @@
           {#if usersFound}
              {#each usersFound as user}
                 {#if user.name}
-                  <!-- <li on:click={viewUser(user.email)}>
+                  <li on:click={viewUser(user.email)}>
                     <span class="dropdown-item d-flex align-items-center">
                       <img src="{urlAPI}{user.photo}" alt="img">
                       <div class="userInfo">
@@ -149,20 +149,18 @@
                         <p style="color: grey;">{user.email}</p>
                       </div>
                     </span>
-                  </li> -->
+                  </li>
                   <li>
-                    <Router>
-                      <Link on:click={visitProfile(user.email)} to="/profile/{localStorage.getItem('visitProfile')}" class="d-flex">
-                        <span class="dropdown-item d-flex align-items-center">
-                          <img src="{urlAPI}{user.photo}" alt="img">
-                          <div class="userInfo">
-                            <h6>{user.name} {user.last_name}</h6>
-                            <p style="color: grey;">{user.title} </p>
-                            <p style="color: grey;">{user.email}</p>
-                          </div>
-                        </span>
-                      </Link>
-                    </Router>
+                    <a href="/profile/{localStorage.getItem('visitProfile')}" use:link use:active on:click={visitProfile(user.email)} class="d-flex">
+                      <span class="dropdown-item d-flex align-items-center">
+                        <img src="{urlAPI}{user.photo}" alt="img">
+                        <div class="userInfo">
+                          <h6>{user.name} {user.last_name}</h6>
+                          <p style="color: grey;">{user.title} </p>
+                          <p style="color: grey;">{user.email}</p>
+                        </div>
+                      </span>
+                    </a>
                   </li>
                 {:else}
                 <li>

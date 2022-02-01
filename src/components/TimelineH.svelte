@@ -5,7 +5,7 @@
   import {onMount} from 'svelte'
   import { writable } from 'svelte/store';
 
-  export let id = '';
+  export let id;
   export let urlAPI;
 
   const userId = id;

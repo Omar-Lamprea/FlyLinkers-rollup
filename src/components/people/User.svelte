@@ -1,5 +1,5 @@
 <script>
-  import { Router, Link, Route } from "svelte-routing";
+  // import { Router, Link, Route } from "svelte-spa-router";
   export let name, middle_name, last_name, title, photo, email, id, urlAPI;
 
 
@@ -58,7 +58,7 @@
 
 
 <div class="User my-3 pb-3 d-flex align-items-center" on:click={visitProfile}>
-  <Router>
+  <!-- <Router>
     <Link on:click={visitProfile} to="/profile/{localStorage.getItem('visitProfile')}" class="d-flex">
       <div class="User-photo">
         <img src="{urlAPI}{photo}" alt="">
@@ -69,5 +69,5 @@
         <span>{email}</span>
       </div>
     </Link>
-  </Router>
+  </Router> -->
 </div>

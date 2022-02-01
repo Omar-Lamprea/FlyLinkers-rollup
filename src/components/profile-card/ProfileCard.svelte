@@ -1,6 +1,6 @@
 <script>
   import UserPotho from '../profile/UserPhoto.svelte'
-	import { Router, Link, Route } from "svelte-routing";
+	// import { Router, Link, Route } from "svelte-spa-router";
 
   export let name, title, photo, last_name, urlAPI;
 
@@ -60,14 +60,14 @@
     <div class="Profile-card-edit">
       <p>
         <!-- <a href="./profile-card.html">Edit profile-card</a> -->
-        <Router>
+        <!-- <Router>
           <Link to="/profile" class="d-flex align-items-center">
             <div class="Profile-edit-profile">
               <i class="fas fa-bookmark"></i>
               Edit profile
             </div>
           </Link>
-        </Router>
+        </Router> -->
       </p>
     </div>
   </div>

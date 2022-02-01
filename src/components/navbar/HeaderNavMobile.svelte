@@ -1,5 +1,5 @@
 <script>
-  import { Router, Link, Route } from "svelte-routing";
+  // import { Router, Link, Route } from "svelte-spa-router";
 </script>
 
 <style>
@@ -18,7 +18,7 @@
 
 <nav class="burger-menu">
   <i class="fas fa-bars dropdown-toggle" id="settings" data-bs-toggle="dropdown" aria-expanded="false" ></i>
-  <Router>
+  <!-- <Router>
     <ul class="dropdown-menu" aria-labelledby="settings">
       <div class="Header-nav-home mx-3 fs-3">
         <Link to="/">
@@ -56,5 +56,5 @@
         </Link>
       </div>
     </ul>
-  </Router>
+  </Router> -->
 </nav>
