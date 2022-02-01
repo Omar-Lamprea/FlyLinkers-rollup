@@ -49,9 +49,7 @@
   }
   const visitProfile = (email) =>{
     localStorage.setItem('visitProfile', email)
-    setTimeout(() => {
-      localStorage.setItem('visitProfile', 'userProfile')
-    }, 2000);
+    window.location.reload()
   }
 
   document.addEventListener('click', e =>{
@@ -140,18 +138,8 @@
           {#if usersFound}
              {#each usersFound as user}
                 {#if user.name}
-                  <li on:click={viewUser(user.email)}>
-                    <span class="dropdown-item d-flex align-items-center">
-                      <img src="{urlAPI}{user.photo}" alt="img">
-                      <div class="userInfo">
-                        <h6>{user.name} {user.last_name}</h6>
-                        <p style="color: grey;">{user.title} </p>
-                        <p style="color: grey;">{user.email}</p>
-                      </div>
-                    </span>
-                  </li>
                   <li>
-                    <a href="/profile/{localStorage.getItem('visitProfile')}" use:link use:active on:click={visitProfile(user.email)} class="d-flex">
+                    <a href="/profile/{user.email}" use:link use:active on:click={visitProfile(user.email)} class="d-flex">
                       <span class="dropdown-item d-flex align-items-center">
                         <img src="{urlAPI}{user.photo}" alt="img">
                         <div class="userInfo">
@@ -176,15 +164,9 @@
         </ul>
       </div>
 
-      {#if window.innerWidth > 920}
-        <div class="Header-nav d-flex">
-          <HeaderNav {photo} {id} {urlLogOut} {urlAPI} {getUserMainToFirestore}/>
-        </div>
-      {:else}
-        <div class="Header-menu fs-3">
-          <HeaderNavMobile/>
-        </div>
-      {/if}
+      <div class="Header-nav d-flex">
+        <HeaderNav {photo} {id} {urlLogOut} {urlAPI} {getUserMainToFirestore}/>
+      </div>
     </div>
   </div>
 </div>

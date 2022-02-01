@@ -55,7 +55,7 @@ export async function getUser(uid){
 
 async function saveUserToFirestore(data) {
 
-  const collectionId = data.id.toString(16)
+  const collectionId = data.id.toString()
 
   const userRef = await setDoc(doc(db, 'user', collectionId), {
     uid: data.id,
@@ -127,7 +127,7 @@ export async function newGroup(user1, user2, messageText){
 
 const updateUser = async(groupId, user)=>{
   // console.log(user);
-  const collectionId = user.uid.toString(16)
+  const collectionId = user.uid.toString()
 
   let aux = user.groups
   aux.push(groupId)

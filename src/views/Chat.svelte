@@ -26,8 +26,9 @@
     user1 =  await getUser(userMain)
     user2 = await getUser(id)
     groupId = validateGroup(user1, user2)
-
+    console.log(groupId);
     if (groupId) {
+      console.log('entré al grupo:', groupId);
       getContainerMessages()
     }else{
       // console.log('group not found');
@@ -43,6 +44,7 @@
   const sendMessage = async (e) => {
     if (e.key === 'Enter' || e.type === 'click') {
       if (inputMessage.value !== '') {
+        console.log(groupId);
         if (groupId) {
           newMessage(groupId, user1.name, inputMessage.value)
         }else{

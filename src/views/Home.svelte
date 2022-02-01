@@ -3,6 +3,7 @@
   import TimelineH from '../components/TimelineH.svelte';
   import SidebarRight from '../components/SidebarRight.svelte'
   import Loader from '../components/Loader.svelte'
+  import {onMount} from 'svelte'
   import {getUserToFirestore} from '../js/firebase/config.js'
 
 
@@ -45,10 +46,9 @@
     }
   }
 
-  getData()
-
-
-
+  onMount(()=>{
+    getData()
+  })
 
 </script>
 

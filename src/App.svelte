@@ -10,6 +10,7 @@
   import Loader from './components/Loader.svelte'
   import Login from './views/Login.svelte'
   import Chat from './views/Chat.svelte'
+  import {onMount} from 'svelte'
 
 
   import {getUserToFirestore} from './js/firebase/config.js'
@@ -18,8 +19,8 @@
   const urlUser = window.location.pathname
   const urluserProfile = urlUser.slice(9)
 
-  localStorage.setItem('visitProfile', 'userProfile')
-  const visitProfile = localStorage.getItem('visitProfile')
+  // localStorage.setItem('visitProfile', 'userProfile')
+  // const visitProfile = localStorage.getItem('visitProfile')
 
   // let flagVisitProfile = false
   // if (localStorage.getItem('visitProfile') !== 'null') {
@@ -70,6 +71,7 @@
         localStorage.setItem('profilePhoto', data.photo)
       }
       userMain = data.id
+      localStorage.setItem('userId', userMain)
       
     }
   }
@@ -99,6 +101,10 @@
   if (window.location.reload) {
     localStorage.removeItem('chat')
   }
+
+  onMount(()=>{
+    getData()
+  })
 
 </script>
 
@@ -172,34 +178,9 @@
    <Header {...data} {urlLogOut} {urlAPI} {getUserMainToFirestore}/>
 {/if}
 
-<main id="main" class="container" on:load={getData()}>
-
-
-  {#if localStorage.getItem('user')}
-    {#if data && getUserMainToFirestore}
-      <Router {routes}>
-        <!-- <Route path="/">
-          <Home {...data} {urlAPI}/>
-        </Route>
-  
-        <Route path="/profile">
-          <Profile {...data} {urlAPI}/>
-        </Route>
-
-        {#if localStorage.getItem('visitProfile')}
-          <Route path="/profile/{localStorage.getItem('visitProfile')}">
-            <UserProfile {userMain} {urlAPI}/>
-          </Route> -->
-       <!-- {/if} -->
-
-      </Router>
-
-    {:else}
-      <Loader/>
-    {/if}
-
+<main id="main" class="container">
+    <Router {routes}/>
     {#if chatFlag && userMain}
         <Chat {id} {userMain}/>
     {/if}
-  {/if}
 </main>

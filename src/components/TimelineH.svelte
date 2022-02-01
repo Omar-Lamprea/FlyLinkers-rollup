@@ -39,7 +39,7 @@
   }
 
   onMount(getPosts)
-  
+
   setTimeout(() => {
     btnSendPost.addEventListener('click', e =>{
       setTimeout(() => {
@@ -47,7 +47,7 @@
         getPosts(1)
       }, 1000);
     })
-  }, 1000);
+  }, 3000);
 
   document.addEventListener('scroll', async (e)=>{
     if ((window.innerHeight + window.scrollY) === main.offsetHeight){
@@ -61,11 +61,13 @@
 
 <div class="Timeline col-12 col-lg-6">
   <div class="Timeline-container">
-    <AddPost {id} {urlAPI}/>
-      {#each $posts as dataPost}
-        <Post {...dataPost} {userId} {urlAPI}/>
-      {/each}
+    {#if id}
+       <AddPost {id} {urlAPI}/>
+    {/if}
+    {#each $posts as dataPost}
+      <Post {...dataPost} {userId} {urlAPI}/>
+    {/each}
 
-      <div id="endPosts" class="d-none text-center fw-bold" style="color: var(--main-color);">Sorry! there aren't more posts.</div>
+    <div id="endPosts" class="d-none text-center fw-bold" style="color: var(--main-color);">Sorry! there aren't more posts.</div>
   </div>
 </div>

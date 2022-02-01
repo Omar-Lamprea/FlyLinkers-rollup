@@ -2,7 +2,6 @@
   import User from './User.svelte'
 
   export let id, urlAPI;
-
   let data;
   const getFriends = async()=>{
     const response = await fetch(`${urlAPI}/friend/user/?user=${id}`)

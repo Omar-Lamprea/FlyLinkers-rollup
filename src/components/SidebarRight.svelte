@@ -4,6 +4,7 @@
   import People from './people/People.svelte'
 
   export let id = '', urlAPI;
+
 </script>
 
 <style>
@@ -17,7 +18,7 @@
   <div class="Sidebar-container">
     <Events/>
     <Sponsors/>
-    {#if window.location.pathname.includes('profile')}
+    {#if window.location.href.includes('profile')}
        <People {id} {urlAPI}/>
     {/if}
   </div>

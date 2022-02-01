@@ -2,6 +2,7 @@
   import TimelineP from '../components/TimelineP.svelte'
   import SidebarRight from '../components/SidebarRight.svelte'
   import {getUserToFirestore} from '../js/firebase/config.js'
+  import Loader from '../components/Loader.svelte'
 
 
   const urlAPI = 'https://api.flylinkers.com'
@@ -42,5 +43,7 @@
   {#if id && getUserMainToFirestore}
     <TimelineP {name} {last_name} {title} {email} {photo} {id} {urlAPI}/>
     <SidebarRight {id} {urlAPI}/>
+  {:else}
+     <Loader/>
   {/if}
 </div>

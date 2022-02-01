@@ -1,5 +1,7 @@
 <script>
-  // import { Router, Link, Route } from "svelte-spa-router";
+  import {link} from "svelte-spa-router";
+  import active from 'svelte-spa-router/active'
+
 
   let notifications = 0;
 
@@ -38,9 +40,6 @@
   }
   const visitProfile = (email) =>{
     localStorage.setItem('visitProfile', email)
-    setTimeout(() => {
-      localStorage.setItem('visitProfile', 'userProfile')
-    }, 2000);
   }
 
 </script>
@@ -134,20 +133,18 @@
          </span>
        </li> -->
        <li>
-         <!-- <Router>
-           <Link on:click={visitProfile(request.email)} to="/profile/{localStorage.getItem('visitProfile')}" class="d-flex">
-            <span class="dropdown-item">
-              <div class="userData">
-                <img src="{urlAPI}{request.photo}" alt="">
-                <span>{request.name} {request.last_name}</span>
-              </div>
-              <div class="btns-request">
-                <button class="btn-request btn-success" on:click={acceptRequest(request.id)}>Accept</button>
-                <button id="declineRequest" class="btn-request btn-decline">Decline</button>
-              </div>
-            </span>
-          </Link>
-         </Router> -->
+        <a on:click={visitProfile(request.email)} href="/profile/{request.email}" use:link use:active class="d-flex">
+          <span class="dropdown-item">
+            <div class="userData">
+              <img src="{urlAPI}{request.photo}" alt="">
+              <span>{request.name} {request.last_name}</span>
+            </div>
+            <div class="btns-request">
+              <button class="btn-request btn-success" on:click={acceptRequest(request.id)}>Accept</button>
+              <button id="declineRequest" class="btn-request btn-decline">Decline</button>
+            </div>
+          </span>
+        </a>
       </li>
     {:else}
        <p class="text-center">you haven't news</p>

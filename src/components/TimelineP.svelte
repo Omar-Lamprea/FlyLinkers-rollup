@@ -19,6 +19,7 @@
   let coverPhoto;
   let aboutMe;
   let userId = id
+  let data
 
   const getProfile = async ()=>{
     const response = await fetch(`${urlAPI}/user/profile/?user_id=${id}`)
@@ -27,7 +28,7 @@
     //   createprofile()
     // }
     if (content[0]) {
-      let data = content[0]
+      data = content[0]
       coverPhoto = `${urlAPI}${data.cover_img}`
       aboutMe = data.about
     }
@@ -106,9 +107,11 @@
   })
 
 
-  onMount(()=>{
-    getProfile()
-    getPost()
+  onMount(async ()=>{
+    await getProfile()
+    if (data.posts) {
+      getPost()
+    }
   })
 
 </script>

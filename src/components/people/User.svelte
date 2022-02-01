@@ -1,5 +1,7 @@
 <script>
-  // import { Router, Link, Route } from "svelte-spa-router";
+  import {link} from "svelte-spa-router";
+  import active from 'svelte-spa-router/active'
+
   export let name, middle_name, last_name, title, photo, email, id, urlAPI;
 
 
@@ -9,9 +11,7 @@
   }
   const visitProfile = () =>{
     localStorage.setItem('visitProfile', email)
-    setTimeout(() => {
-      localStorage.setItem('visitProfile', 'userProfile')
-    }, 2000);
+    window.location.reload()
   }
 
 </script>
@@ -58,16 +58,15 @@
 
 
 <div class="User my-3 pb-3 d-flex align-items-center" on:click={visitProfile}>
-  <!-- <Router>
-    <Link on:click={visitProfile} to="/profile/{localStorage.getItem('visitProfile')}" class="d-flex">
-      <div class="User-photo">
-        <img src="{urlAPI}{photo}" alt="">
-      </div>
-      <div class="User-detail d-flex flex-column">
-        <p>{name} {last_name}</p>
-        <span>{title}</span>
-        <span>{email}</span>
-      </div>
-    </Link>
-  </Router> -->
+  <a href="/profile/{email}" class="d-flex" use:link use:active>
+    <div class="User-photo">
+      <img src="{urlAPI}{photo}" alt="">
+    </div>
+    <div class="User-detail d-flex flex-column">
+      <p>{name} {last_name}</p>
+      <span>{title}</span>
+      <span>{email}</span>
+    </div>
+  </a>
+
 </div>

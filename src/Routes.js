@@ -10,7 +10,7 @@ const userProfile = localStorage.getItem('visitProfile')
 const routes = {
   '/': Home,
   '/profile': Profile,
-  // `/profile/${userProfile}`: UserProfile
+  '/profile/:user': UserProfile
 }
 
 export default routes
