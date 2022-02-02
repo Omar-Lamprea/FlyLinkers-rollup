@@ -2,10 +2,10 @@
   import {db, getUser, validateGroup , getMessages, getMessage, newMessage, newGroup} from '../js/firebase/config.js'
   import {collectionData} from 'rxfire/firestore'
   import {startWith} from 'rxjs/operators'
-  import Loader from '../components/Loader.svelte'
   import { collection,orderBy, query} from 'firebase/firestore';
   import { writable } from 'svelte/store';
   import {onMount} from 'svelte'
+  import Loader from '../components/Loader.svelte'
 
   export let id, userMain;
 
@@ -26,9 +26,9 @@
     user1 =  await getUser(userMain)
     user2 = await getUser(id)
     groupId = validateGroup(user1, user2)
-    console.log(groupId);
+    // console.log(groupId);
     if (groupId) {
-      console.log('entré al grupo:', groupId);
+      // console.log('entré al grupo:', groupId);
       getContainerMessages()
     }else{
       // console.log('group not found');
@@ -44,7 +44,7 @@
   const sendMessage = async (e) => {
     if (e.key === 'Enter' || e.type === 'click') {
       if (inputMessage.value !== '') {
-        console.log(groupId);
+        // console.log(groupId);
         if (groupId) {
           newMessage(groupId, user1.name, inputMessage.value)
         }else{
@@ -109,6 +109,9 @@
     cursor: pointer;
     transition: all ease-in .5s;
   }
+  .header-chat h6{
+    cursor: pointer;
+  }
   .rotate{
     transform:rotate(180deg);
     transition: all ease-in .5s;
@@ -127,29 +130,6 @@
     max-width: 13rem;
     padding: .5rem;
   }
-  /* .empty-chat{
-    border: 1px solid var(--main-color);
-    margin: 0.2rem 0;
-    width: 14rem;
-    padding: 0.5rem;
-    align-self: center;
-    border-radius: 30px;
-    text-align: center;
-    background-color: #199aaf;
-    color: #fefefe;
-    font-weight: 500;
-  }
-  .btn-empty-chat{
-    background-color: #d70000;
-    color: #fff;
-    border: none;
-    margin: .25rem 2rem;
-    border-radius: 50px;
-    font-weight: bold;
-  }
-  .btn-start{
-    background-color: #4f92ff;
-  } */
 
   .friend{
     background-color: var(--main-color);
@@ -190,7 +170,7 @@
 
     <div class="header-chat d-flex justify-content-between align-items-center">
       {#if user2}
-        <h6 style="color: #fff;">Chatting with {user2.name}</h6>
+        <h6 style="color: #fff;">{user2.name}</h6>
       {/if}
       <div class="chat-controller">
         <i id="arrow" class="fas fa-arrow-up px-1 rotate" on:click={pickUpTab}></i>

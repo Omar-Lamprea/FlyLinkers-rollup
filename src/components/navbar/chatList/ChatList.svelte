@@ -1,17 +1,19 @@
 
 <script>
   import {onMount} from 'svelte'
-  import {validateGroup, getUser, getMessage} from '../../../js/firebase/config.js'
-  export let chatId, urlAPI, id;
+  import {validateGroup, getUser, getMessage, getGroupUser} from '../../../js/firebase/config.js'
+  export let urlAPI, id, groups;
   let data;
   let name;
-  let message = 'hola......'
+  let message;
   let user1;
   let user2;
 
-  // console.log(id, chatId);
+  // console.log(id, groups);
+  let chatId;
 
   const getLastMessage = async () =>{
+    chatId = await getGroupUser(groups)
     user1 = await getUser(id)
     user2 = await getUser(chatId)
     const groupId = await validateGroup(user1, user2)
@@ -21,6 +23,7 @@
   }
 
   const getUserChat = async() =>{
+    await getLastMessage()
     const response = await fetch(`${urlAPI}/user/create/?id=${chatId}`)
     const content = await response.json()
     data = content[0]
@@ -31,7 +34,7 @@
   
   onMount(()=>{
     getUserChat()
-    getLastMessage()
+    // getLastMessage()
   })
 
 </script>

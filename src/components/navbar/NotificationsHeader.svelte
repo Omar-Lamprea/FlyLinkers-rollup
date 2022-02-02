@@ -120,18 +120,6 @@
   
   <ul class="dropdown-menu" aria-labelledby="notifications">
     {#each friendRequest as request}
-       <!-- <li>
-         <span class="dropdown-item">
-           <div class="userData" on:click={viewUserProfile(request.email)}>
-             <img src="{urlAPI}{request.photo}" alt="">
-             <span>{request.name} {request.last_name}</span>
-           </div>
-           <div class="btns-request">
-             <button class="btn-request btn-success" on:click={acceptRequest(request.id)}>Accept</button>
-             <button id="declineRequest" class="btn-request btn-decline">Decline</button>
-           </div>
-         </span>
-       </li> -->
        <li>
         <a on:click={visitProfile(request.email)} href="/profile/{request.email}" use:link use:active class="d-flex">
           <span class="dropdown-item">

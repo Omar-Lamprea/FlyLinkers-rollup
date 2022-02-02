@@ -97,6 +97,15 @@
     }
   }
 
+  setTimeout(() => {
+    btnSendPost.addEventListener('click', e =>{
+      setTimeout(() => {
+        posts.set([])
+        getPost()
+      }, 1000);
+    })
+  }, 3000);
+
   
   document.addEventListener('scroll', async (e)=>{
     if ((window.innerHeight + window.scrollY) === main.offsetHeight){
@@ -105,6 +114,8 @@
       }
     }
   })
+
+
 
 
   onMount(async ()=>{

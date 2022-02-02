@@ -46,7 +46,9 @@
     if (content) {
       localStorage.removeItem('profilePhoto')
       const profileImg = document.getElementById('dropdownMenuButton1')
+      const headerUserImage = document.getElementById('headerUserImage')
       profileImg.setAttribute('src', `${urlAPI}${urlProfilePhoto}`)
+      headerUserImage.setAttribute('src', `${urlAPI}${urlProfilePhoto}`)
     }
   }
 

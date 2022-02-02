@@ -9,7 +9,7 @@
   export let photo, id;
   export let name = '', title = '', email = '', last_name = '', middle_name = '';
   export let urlLogOut, urlAPI;
-  export let getUserMainToFirestore;
+  // export let getUserMainToFirestore;
 
   let usersFound = false;
 
@@ -165,7 +165,7 @@
       </div>
 
       <div class="Header-nav d-flex">
-        <HeaderNav {photo} {id} {urlLogOut} {urlAPI} {getUserMainToFirestore}/>
+        <HeaderNav {photo} {id} {urlLogOut} {urlAPI}/>
       </div>
     </div>
   </div>

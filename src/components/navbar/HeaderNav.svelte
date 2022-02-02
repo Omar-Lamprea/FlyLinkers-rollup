@@ -1,24 +1,30 @@
 <script>
   import {link} from 'svelte-spa-router';
   import active from 'svelte-spa-router/active'
+
+  import {db} from '../../js/firebase/config.js'
+  import {collectionData} from 'rxfire/firestore'
+  import {startWith} from 'rxjs/operators'
+  import { collection,orderBy, query, doc, onSnapshot} from 'firebase/firestore';
+  import { writable } from 'svelte/store';
   
   import Notifications from './NotificationsHeader.svelte'
-  import {getMessages, getGroupUser, getUser} from '../../js/firebase/config.js'
   import ChatList from './chatList/ChatList.svelte'
 
   export let photo, id;
   export let urlLogOut, urlAPI;
-  export let getUserMainToFirestore;
 
-  const chatList = [];
-  let flagChat = false
+  let usergroups = writable([]);
+  let idStr = id.toString()
 
-  getUserMainToFirestore.groups.forEach(async group =>{
-    chatList.push(await getGroupUser(group))
-    setTimeout(() => {
-      flagChat = true
-    }, 500);
-  })
+  let newChat;
+  function getUserDoc(){
+    const userDoc = onSnapshot(doc(db, 'user', idStr), (doc) => {
+      usergroups.set(doc.data().groups)
+      newChat = doc.data().groups.length
+    })
+  }
+  getUserDoc(usergroups)
 
   const logOut = ()=>{
     localStorage.clear();
@@ -49,6 +55,20 @@
     position: relative;
   }
 
+  .notificacions-chats{
+    position: absolute;
+    top: 6px;
+    left: 14px;
+    background-color: #d70000;
+    border-radius: 50%;
+    font-size: .8rem;
+    font-weight: 500;
+    height: 20px;
+    width: 20px;
+    text-align: center;
+    color: white;
+  }
+
 </style>
 
 
@@ -69,25 +89,31 @@
       <i class="fas fa-briefcase"></i>
     </a>
   </div>
-  <div class="Header-nav-comment mx-3 fs-3">
+  <div class="Header-nav-comment mx-3 fs-3 position-relative">
+    {#if newChat}
+      <div class="notificacions-chats">{newChat}</div>
+    {/if}
+
     <i class="fas fa-comment dropdown-toggle" id="chats" data-bs-toggle="dropdown" aria-expanded="false"></i>
     <ul class="dropdown-menu" aria-labelledby="chats">
-      {#if flagChat}
-        {#each chatList as chatId}
-          <ChatList {chatId} {urlAPI} {id}/>
-        {/each}
-      {/if}
+      {#each $usergroups as groups}
+         <ChatList {groups} {urlAPI} {id}/>
+      {:else}
+        <li class="dropdown-item chatList d-flex">
+          <span>You haven't started any chat</span>
+        </li>
+      {/each}
     </ul>
   </div>
   <div class="Header-nav-bell mx-3 fs-3 notification" id="notification">
-      <Notifications {id} {urlAPI}/>
+    <Notifications {id} {urlAPI}/>
   </div>
   <div class="Header-nav-user mx-3 fs-3">
     <a href="/profile" use:link use:active>
       {#if localStorage.getItem('profilePhoto')}
-        <img src="{urlAPI}{localStorage.getItem('profilePhoto')}" alt="">
+        <img id="headerUserImage" src="{urlAPI}{localStorage.getItem('profilePhoto')}" alt="">
       {:else}
-        <img src="{urlAPI}{photo}" alt="">
+        <img id="headerUserImage" src="{urlAPI}{photo}" alt="">
       {/if}
     </a>
   </div>

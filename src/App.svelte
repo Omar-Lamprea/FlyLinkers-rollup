@@ -33,8 +33,8 @@
   // const visitProfile = localStorage.getItem('visitProfile')
 
 
-  // const urlLogOut = 'http://localhost:3000/'
-  const urlLogOut = 'https://flylinkers.com'
+  const urlLogOut = 'http://localhost:3000/'
+  // const urlLogOut = 'https://flylinkers.com'
   // const urlLogOut = 'https://omar-lamprea.github.io/FlyLinkers-Login/'
 
   // const urlAPI = 'http://18.118.50.78:8000'
@@ -47,16 +47,18 @@
     const urlParams = new URLSearchParams(param)
     const user = urlParams.get('user')
     const savedUser = localStorage.setItem('user', user)
+    // window.location.search = ''
   }
-
   setTimeout(() => {
     if(localStorage.getItem('user') === 'null') window.location.href = urlLogOut
   }, 1000);
 
+
   let data;
   let userMain;
-  let getUserMainToFirestore;
-// 
+  // let getUserMainToFirestore;
+  
+
   const getData = async ()=>{
     if (localStorage.getItem('user')) {
       const response = await fetch(`${urlAPI}/user/create/?email=${localStorage.getItem('user')}`,{
@@ -65,7 +67,7 @@
       const content = await response.json();
       data = content[0]
       await getUserToFirestore(data)
-      getUserMainToFirestore = await getUserToFirestore(data)
+      // getUserMainToFirestore = await getUserToFirestore(data)
 
       if (!localStorage.getItem('profilePhoto')) {
         localStorage.setItem('profilePhoto', data.photo)
@@ -82,11 +84,11 @@
   let id;
   const loadChatList = ()=>{
     chatFlag = false
-    document.addEventListener('click', e =>{
+    document.addEventListener('click', async e =>{
       if (e.target.id === 'chat' || e.target.id === 'btInitChat') {
         id = parseInt(e.target.dataset.chat)
-        openChat(id)
-        if (openChat(id) || localStorage.getItem('chat')) {
+        await openChat(id)
+        if (localStorage.getItem('chat')) {
           chatFlag = true
         }
       }
@@ -96,14 +98,14 @@
       }
     })
   }
-  loadChatList()
-
+  
   if (window.location.reload) {
     localStorage.removeItem('chat')
   }
-
+  
   onMount(()=>{
     getData()
+    loadChatList()
   })
 
 </script>
@@ -174,8 +176,8 @@
 </style>
 
 
-{#if data && getUserMainToFirestore}
-   <Header {...data} {urlLogOut} {urlAPI} {getUserMainToFirestore}/>
+{#if data}
+   <Header {...data} {urlLogOut} {urlAPI}/>
 {/if}
 
 <main id="main" class="container">

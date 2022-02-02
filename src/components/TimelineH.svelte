@@ -40,14 +40,16 @@
 
   onMount(getPosts)
 
-  setTimeout(() => {
-    btnSendPost.addEventListener('click', e =>{
-      setTimeout(() => {
-        clearPost()
-        getPosts(1)
-      }, 1000);
-    })
-  }, 3000);
+  if (id) {
+    setTimeout(() => {
+      btnSendPost.addEventListener('click', e =>{
+        setTimeout(() => {
+          clearPost()
+          getPosts(1)
+        }, 1000);
+      })
+    }, 3000);
+  }
 
   document.addEventListener('scroll', async (e)=>{
     if ((window.innerHeight + window.scrollY) === main.offsetHeight){
