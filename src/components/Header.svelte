@@ -70,6 +70,7 @@
   }
   .Header-logo h1{
     font-weight: 100;
+    margin-bottom: 0.5rem;
   }
   .Header-input input{
     border-radius: .5rem;
@@ -112,10 +113,17 @@
 
   @media screen and (max-width: 768px){
     .Header-input input{
-    width: 90%
+      width: 90%
     }
     .Header h1 {
       display: none;
+    }
+    .Header-logo{
+      width: 110px;
+      margin-top: 1rem;
+    }
+    .Header-logo img{
+      width: 100%;
     }
   }
 
@@ -123,7 +131,7 @@
 
 <div class="Header container-fluid">
   <div class="Header-container container">
-    <div class="Header-content d-flex align-items-center justify-content-between">
+    <div class="Header-content d-flex flex-wrap align-items-center justify-content-between">
 
       <div class="Header-logo d-flex align-items-center px-3">
         <a href="/" use:link use:active class="d-flex align-items-center">
@@ -164,7 +172,7 @@
         </ul>
       </div>
 
-      <div class="Header-nav d-flex">
+      <div class="Header-nav d-flex m-auto">
         <HeaderNav {photo} {id} {urlLogOut} {urlAPI}/>
       </div>
     </div>

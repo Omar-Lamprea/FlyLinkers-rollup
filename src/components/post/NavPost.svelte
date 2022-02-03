@@ -27,6 +27,13 @@
   i, span{
     color:var(--main-color)
   }
+
+  @media screen and (max-width: 768px){
+    .hidden{
+      display: none;
+    }
+  }
+
 </style>
 
 <div class="Nav-add-post d-flex justify-content-center">
@@ -49,7 +56,7 @@
       <span>Event</span>
     </a>
   </div>
-  <div class="Header-nav-file-alt mx-3">
+  <div class="Header-nav-file-alt mx-3 hidden">
     <a href="/">
       <i class="fas fa-file-alt"></i>
       <span>Write article</span>

@@ -77,7 +77,7 @@
     }
   }
 
-  if (id === localStorage.getItem('userId')) {
+  if (id === parseInt(localStorage.getItem('userId'))) {
     setTimeout(() => {
       const btnSendPost = document.getElementById('btnSendPost')
       btnSendPost.addEventListener('click', e =>{

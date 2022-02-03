@@ -61,7 +61,6 @@
       });
     }
   }
-  
   const changeReaction = async(e)=>{
     await reactionUser()
     const likeAcount = document.getElementById(likeValue)
@@ -72,6 +71,7 @@
     const btnLike = document.getElementById(`btnLike${id}`)
     const btnLove = document.getElementById(`btnLove${id}`)
     
+    console.log(reactionsPost);
     let myLike = false    
     if (reactionsPost !== '') {
       reactionsPost.forEach(like => {
@@ -418,6 +418,11 @@
     cursor: pointer;
   }
 
+  @media screen and (max-width: 768px){
+    .hidden{
+      display: none;
+    }
+  }
 
 </style>
 
@@ -500,11 +505,11 @@
           <i class="fa-comments far"></i>
           <span>Comment</span>
         </div>
-        <div class="Action Header-nav-share mx-3">
+        <div class="Action Header-nav-share mx-3 hidden">
           <i class="fas fa-share"></i>
           <span>Share</span>
         </div>
-        <div class="Action Header-nav-paper-plane mx-3">
+        <div class="Action Header-nav-paper-plane mx-3 hidden">
           <i class="fas fa-paper-plane"></i>
           <span>Send</span>
         </div>

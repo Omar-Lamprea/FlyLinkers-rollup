@@ -1,6 +1,7 @@
 <script>
   import UserPotho from '../profile/UserPhoto.svelte'
-	// import { Router, Link, Route } from "svelte-spa-router";
+  import {link} from 'svelte-spa-router';
+  import active from 'svelte-spa-router/active'
 
   export let name, title, photo, last_name, urlAPI;
 
@@ -42,6 +43,12 @@
     color: grey;
     font-weight: 600;
   }
+
+  @media screen and (max-width: 768px){
+    .Profile-card{
+      margin-top: 4rem;
+    }
+  }
 </style>
 
 <div class="Profile-card Default-containers px-0">
@@ -59,15 +66,12 @@
     </div>
     <div class="Profile-card-edit">
       <p>
-        <!-- <a href="./profile-card.html">Edit profile-card</a> -->
-        <!-- <Router>
-          <Link to="/profile" class="d-flex align-items-center">
-            <div class="Profile-edit-profile">
-              <i class="fas fa-bookmark"></i>
-              Edit profile
-            </div>
-          </Link>
-        </Router> -->
+        <a href="/profile" use:link use:active class="d-flex align-items-center">
+          <div class="Profile-edit-profile">
+            <i class="fas fa-bookmark"></i>
+            Edit profile
+          </div>
+        </a>
       </p>
     </div>
   </div>

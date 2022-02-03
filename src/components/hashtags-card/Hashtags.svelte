@@ -54,7 +54,7 @@
   }
 </style>
 
-<div class="Hashtags Default-containers px-0 pb-0">
+<div class="Hashtags d-none d-lg-block Default-containers px-0 pb-0">
   <h6>Followed Hashtags</h6>
   {#each data as hashtag}
     <Hashtag {...hashtag}/>

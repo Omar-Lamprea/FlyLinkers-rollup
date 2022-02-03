@@ -69,27 +69,37 @@
     color: white;
   }
 
+  @media screen and (max-width: 480px){
+    .hidden{
+      display: none;
+    }
+    .icon{
+      font-size: 1.7rem !important;
+      margin: 0 0.8rem !important;
+    }
+  }
+
 </style>
 
 
 
 <nav class="nav-container d-flex">
-  <div class="Header-nav-home mx-3 fs-3">
+  <div class="icon Header-nav-home mx-3 fs-3">
     <a href="/" use:link use:active>
       <i class="fas fa-home"></i>
     </a>
   </div>
-  <div class="Header-nav-user-plus mx-3 fs-3">
+  <div class="icon Header-nav-user-plus mx-3 fs-3">
     <a href="/" use:link use:active>
       <i class="fas fa-user-plus"></i>
     </a>
   </div>
-  <div class="Header-nav-briefcase mx-3 fs-3">
+  <div class="icon Header-nav-briefcase hidden mx-3 fs-3">
     <a href="/" use:link use:active>
       <i class="fas fa-briefcase"></i>
     </a>
   </div>
-  <div class="Header-nav-comment mx-3 fs-3 position-relative">
+  <div class="icon Header-nav-comment mx-3 fs-3 position-relative">
     {#if newChat}
       <div class="notificacions-chats">{newChat}</div>
     {/if}
@@ -105,10 +115,10 @@
       {/each}
     </ul>
   </div>
-  <div class="Header-nav-bell mx-3 fs-3 notification" id="notification">
+  <div class="icon Header-nav-bell mx-3 fs-3 notification" id="notification">
     <Notifications {id} {urlAPI}/>
   </div>
-  <div class="Header-nav-user mx-3 fs-3">
+  <div class="icon Header-nav-user mx-3 fs-3">
     <a href="/profile" use:link use:active>
       {#if localStorage.getItem('profilePhoto')}
         <img id="headerUserImage" src="{urlAPI}{localStorage.getItem('profilePhoto')}" alt="">
@@ -117,7 +127,7 @@
       {/if}
     </a>
   </div>
-  <div class="Header-nav-grip-vertical mx-3 fs-3">
+  <div class="icon Header-nav-grip-vertical mx-3 fs-3">
     <a href="/" use:link use:active>
       <div class="dropdown">
         <i class="fas fa-grip-vertical dropdown-toggle" id="settings" data-bs-toggle="dropdown" aria-expanded="false" ></i>
@@ -128,7 +138,7 @@
       </div>
     </a>
   </div>
-  <div class="Header-nav-calendar-week mx-3 fs-3">
+  <div class="icon Header-nav-calendar-week hidden mx-3 fs-3">
     <a href="/" use:link use:active>
       <i class="fas fa-calendar-week"></i>
     </a>

@@ -14,7 +14,7 @@
   } */
 </style>
 
-<div class="Sidebar col-3">
+<div class="Sidebar col-12 col-lg-3">
   <div class="Sidebar-container">
     <ProfileCard {name} {last_name} {title} {photo} {urlAPI}/>
     <Groups/>

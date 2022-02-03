@@ -38,9 +38,7 @@
     posts.set([])
   }
 
-  onMount(getPosts)
-
-  if (id === localStorage.getItem('userId')) {
+  if (id === parseInt(localStorage.getItem('userId'))) {
     setTimeout(() => {
       btnSendPost.addEventListener('click', e =>{
         setTimeout(() => {
@@ -59,6 +57,7 @@
     }
   })
 
+  onMount(getPosts)
 </script>
 
 <div class="Timeline col-12 col-lg-6">
