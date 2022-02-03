@@ -19,27 +19,12 @@
   const urlUser = window.location.pathname
   const urluserProfile = urlUser.slice(9)
 
-  // localStorage.setItem('visitProfile', 'userProfile')
-  // const visitProfile = localStorage.getItem('visitProfile')
-
-  // let flagVisitProfile = false
-  // if (localStorage.getItem('visitProfile') !== 'null') {
-  //     console.log(urluserProfile);
-  //     visitUser = localStorage.getItem('visitProfile')
-  //     flagVisitProfile = true
-  // }
-
-  // localStorage.setItem('visitProfile', 'userProfile')
-  // const visitProfile = localStorage.getItem('visitProfile')
-
-
-  const urlLogOut = 'http://localhost:3000/'
-  // const urlLogOut = 'https://flylinkers.com'
+  // const urlLogOut = 'http://localhost:3000/'
+  const urlLogOut = 'https://flylinkers.com'
   // const urlLogOut = 'https://omar-lamprea.github.io/FlyLinkers-Login/'
 
   // const urlAPI = 'http://18.118.50.78:8000'
   const urlAPI = 'https://api.flylinkers.com'
-
 
 
   if(!localStorage.getItem('user') || localStorage.getItem('user') === 'null'){
@@ -47,17 +32,18 @@
     const urlParams = new URLSearchParams(param)
     const user = urlParams.get('user')
     const savedUser = localStorage.setItem('user', user)
-    // window.location.search = ''
   }
   setTimeout(() => {
     if(localStorage.getItem('user') === 'null') window.location.href = urlLogOut
   }, 1000);
 
+  if (localStorage.getItem('user') && window.location.search.includes('@')) {
+    window.location.search = ''
+  }
 
   let data;
   let userMain;
   // let getUserMainToFirestore;
-  
 
   const getData = async ()=>{
     if (localStorage.getItem('user')) {
@@ -120,7 +106,6 @@
   :global(body){
     background-color: #fafafa;
     color: rgba(38, 38, 38, 07);
-    /* font-family: 'Lato', sans-serif; */
     margin: 0;
     padding: 0;
   }
@@ -136,7 +121,6 @@
 
   :global(a:hover){
     text-decoration: none;
-    /* color: var(--main-color); */
   }
 
   :global(.Default-containers){

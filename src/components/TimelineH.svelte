@@ -40,7 +40,7 @@
 
   onMount(getPosts)
 
-  if (id) {
+  if (id === localStorage.getItem('userId')) {
     setTimeout(() => {
       btnSendPost.addEventListener('click', e =>{
         setTimeout(() => {
@@ -48,7 +48,7 @@
           getPosts(1)
         }, 1000);
       })
-    }, 3000);
+    }, 2000);
   }
 
   document.addEventListener('scroll', async (e)=>{

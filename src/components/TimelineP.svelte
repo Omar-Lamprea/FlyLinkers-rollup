@@ -24,32 +24,12 @@
   const getProfile = async ()=>{
     const response = await fetch(`${urlAPI}/user/profile/?user_id=${id}`)
     const content = await response.json()
-    // if (content.Detail) {
-    //   createprofile()
-    // }
     if (content[0]) {
       data = content[0]
       coverPhoto = `${urlAPI}${data.cover_img}`
       aboutMe = data.about
     }
   }
-
-  // const createprofile = async ()=>{
-  //   const response = await fetch(`${urlAPI}/user/profile/`, {
-  //     method: 'POST',
-  //     headers : {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       user: id,
-  //       resource_id : 0,
-  //       about: '...',
-  //       cover_img: '/archivos/fotos/5484ff7d-8848-4b47-87d6-367ca3ebe8aa.png'
-  //     })
-  //   })
-  //   const content = await response.json()
-  //   await getProfile()
-  // }
 
   let post;
   let userPost;
@@ -97,14 +77,17 @@
     }
   }
 
-  setTimeout(() => {
-    btnSendPost.addEventListener('click', e =>{
-      setTimeout(() => {
-        posts.set([])
-        getPost()
-      }, 1000);
-    })
-  }, 3000);
+  if (id === localStorage.getItem('userId')) {
+    setTimeout(() => {
+      const btnSendPost = document.getElementById('btnSendPost')
+      btnSendPost.addEventListener('click', e =>{
+        setTimeout(() => {
+          posts.set([])
+          getPost()
+        }, 1000);
+      })
+    }, 2000);
+  }
 
   
   document.addEventListener('scroll', async (e)=>{

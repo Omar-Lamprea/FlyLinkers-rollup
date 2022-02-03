@@ -11,7 +11,6 @@
 
   // console.log(id, groups);
   let chatId;
-
   const getLastMessage = async () =>{
     chatId = await getGroupUser(groups)
     user1 = await getUser(id)
@@ -34,7 +33,6 @@
   
   onMount(()=>{
     getUserChat()
-    // getLastMessage()
   })
 
 </script>
