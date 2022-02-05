@@ -14,7 +14,7 @@
 </style>
 
 <div class="Default-containers Experience">
-  <div class="Experience-content">
+  <div class="Experience-content mx-3 mx-md-0">
     <div class="Experience-title">
       <p>Experience</p>
     </div>

@@ -297,7 +297,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 1em;
+    /* padding: 0 1em; */
   }
   .Card-user {
     cursor: pointer;
@@ -331,7 +331,7 @@
     color: rgba(38, 38, 38, 0.7);
   }
   .Card-photo {
-    padding: 0;
+    padding: 0 1rem;
     margin: 0;
   }
   .Card-photo img {
@@ -349,7 +349,7 @@
     font-size: 20px;
   }
   .Card-board-icons {
-    padding: 1em;
+    padding: 1em 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -363,7 +363,7 @@
 
   .Card-board-actions{
     font-size: 1rem;
-    margin: 1rem 0;
+    margin-top: 1rem;
     color: var(--main-color);
   }
   .Card-board-actions span, .Reaction span {
@@ -379,6 +379,7 @@
 
   .Action{
     cursor: pointer;
+    margin-right: 1rem;
   }
 
   .Comments-add {
@@ -422,6 +423,9 @@
     .hidden{
       display: none;
     }
+    .Action{
+      margin: 0 1rem;
+    }
   }
 
 </style>
@@ -431,7 +435,7 @@
 
 
   <div class="Card-container">
-    <div class="Card-Header">
+    <div class="Card-Header px-3 px-md-0">
 
         {#if user}
           <div class="Card-user" on:click={visitProfile}>
@@ -460,12 +464,12 @@
       </div>
     </div>
 
-    <div class="Card-description">
-      <span>{desc}</span>
+    <div class="Card-description mx-3 mx-md-0">
+      <span class="mx-0">{desc}</span>
     </div>
   </div>
 
-    <div class="Card-photo">
+    <div class="Card-photo px-0">
       <figure>
         {#if !!img}
            <img src="{urlAPI}{img}" alt="img post">
@@ -474,7 +478,7 @@
     </div>
 
     <div class="Card-board-icons">
-      <div class="Card-board-icons-first d-flex">
+      <div class="Card-board-icons-first d-flex px-3 px-md-0">
         <div class="Reaction Header-nav-like mx-2">
             <i class="fas fa-thumbs-up"></i>
             <span id={likeValue}>{reactions.like}</span>
@@ -492,24 +496,24 @@
     </div>
 
     <div class="Card-board-actions">
-      <div class="Card-board-actions d-flex" on:load={reactionUser()}>
-        <div class="Action Header-nav-thumbs-up mx-3" on:click={changeReaction}>
+      <div class="Card-board-actions d-flex justify-content-center justify-content-md-start" on:load={reactionUser()}>
+        <div class="Action Header-nav-thumbs-up" on:click={changeReaction}>
           <i id="btnLike{id}" class="fa-thumbs-up far"></i>
           <span>Like</span>
         </div>
-        <div class="Action Header-nav-heart mx-3" on:click={changeReaction}>
+        <div class="Action Header-nav-heart" on:click={changeReaction}>
           <i id="btnLove{id}"class="fa-heart far"></i>
           <span>love</span>
         </div>
-        <div class="Action Header-nav-comments mx-3" on:click={showComments}>
+        <div class="Action Header-nav-comments" on:click={showComments}>
           <i class="fa-comments far"></i>
           <span>Comment</span>
         </div>
-        <div class="Action Header-nav-share mx-3 hidden">
+        <div class="Action Header-nav-share hidden">
           <i class="fas fa-share"></i>
           <span>Share</span>
         </div>
-        <div class="Action Header-nav-paper-plane mx-3 hidden">
+        <div class="Action Header-nav-paper-plane hidden">
           <i class="fas fa-paper-plane"></i>
           <span>Send</span>
         </div>

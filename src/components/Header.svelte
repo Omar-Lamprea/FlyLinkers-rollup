@@ -120,7 +120,10 @@
     }
     .Header-logo{
       width: 110px;
-      margin-top: 1rem;
+    }
+    .Header-content{
+      margin-top: .5rem;
+      margin-bottom: .5rem;
     }
     .Header-logo img{
       width: 100%;

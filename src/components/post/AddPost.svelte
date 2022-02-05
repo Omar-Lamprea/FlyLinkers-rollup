@@ -75,13 +75,13 @@
     padding: .5rem;
     width: 100%;
   }
-  .Add-post a{
+  /* .Add-post a{
     text-decoration: none;
     color: var(--main-color);
   }
   .Add-post span{
     color: grey;
-  }
+  } */
 
   .btn-post{
     width: 50%;
@@ -92,7 +92,7 @@
 </style>
 
 
-<div class="Add-post Default-containers px-5 d-flex flex-column">
+<div class="Add-post Default-containers px-lg-5 d-flex flex-column">
 
   <div class="Add-post-input mx-3 d-flex flex-column justify-content-center">
     <textarea name="" cols="" rows="1" id="postDescription" class="Default-containers" placeholder="Start a post..." on:keyup={validateInfoPost}></textarea>

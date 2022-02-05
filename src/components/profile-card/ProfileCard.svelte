@@ -55,8 +55,8 @@
   <div class="Profile-card-content d-flex flex-column justify-content-center align-items-center">
     <UserPotho {photo} {urlAPI}/>
     <div class="Profile-card-info text-center mt-2">
-      <div class="Profile-card-user">
-        <h2>{name} {last_name}</h2>
+      <div class="Profile-card-user mt-4 mt-lg-0">
+        <h2 class="pt-2 pt-lg-0">{name} {last_name}</h2>
         <span>{title}</span>
       </div>
       <div class="Profile-card-text my-2">

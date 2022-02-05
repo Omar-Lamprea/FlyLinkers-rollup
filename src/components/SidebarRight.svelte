@@ -14,7 +14,7 @@
   } */
 </style>
 
-<div class="Sidebar col-3">
+<div class="Sidebar d-none d-lg-block col-3">
   <div class="Sidebar-container">
     <Events/>
     <Sponsors/>

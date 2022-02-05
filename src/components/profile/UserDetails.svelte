@@ -124,18 +124,18 @@
 </style>
 <div class="UserDetails Default-containers mt-3">
   <div class="row">
-    <div class="col-6">
+    <div class="col-12 col-lg-6">
 
       <div class="Profile-card">
         <div class="Profile-card-content d-flex flex-column">
           <UserPotho {photo} {urlAPI} {id}/>
           <div class="Profile-card-info mt-2">
-            <div class="Profile-card-user">
+            <div class="Profile-card-user p-3 p-md-0">
               <h2>{name} {last_name}</h2>
               <span>{title}</span>
               <!-- <p>Colombia</p> -->
             </div>
-            <div class="Profile-description my-3">
+            <div class="Profile-description px-3 px-md-0 my-3">
               {#if email === localStorage.getItem('user')}
                 <p class="edit-description" on:click={editDescription}>
                   <i class="fas fa-pen"></i>
@@ -160,8 +160,8 @@
         </div>
       </div>
     </div>
-    <div class="col-6">
-      <div class="Profile-card-text text-end d-flex flex-column align-items-end">
+    <div class="col-12 col-lg-6">
+      <div class="Profile-card-text text-end d-flex flex-column align-items-end mt-0 mt-md-3 px-3 px-md-0">
         {#if email === localStorage.getItem('user')}
           <p type="button" class="mb-3" data-bs-toggle="modal" data-bs-target="#editProfile"><i class="fas fa-pen"></i> Edit profile</p>
           <CoverPhotoModal {id} {urlAPI}/>

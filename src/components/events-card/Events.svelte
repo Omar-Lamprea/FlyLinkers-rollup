@@ -11,7 +11,7 @@
       end: '11:00pm',
       place: 'virtual',
       href: '/',
-      linkName: 'https://www.linkedin.com/in/flylinkers.com'
+      linkName: 'linkedin.com/in/flylinkers.com'
     },
     {
       title: 'Comercial Avitaion Conferences',
@@ -21,7 +21,7 @@
       end: '11:00pm',
       place: 'virtual',
       href: '/',
-      linkName: 'https://www.linkedin.com/in/flylinkers.com'
+      linkName: 'linkedin.com/in/flylinkers.com'
     },
     {
       title: 'Comercial Aviation Safety',
@@ -31,7 +31,7 @@
       end: '11:00pm',
       place: 'virtual',
       href: '/',
-      linkName: 'https://www.linkedin.com/in/flylinkers.com'
+      linkName: 'linkedin.com/in/flylinkers.com'
     },
   ]
 

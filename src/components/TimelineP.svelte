@@ -121,9 +121,14 @@
     color: var(--main-color);
     font-weight: 600;
   }
+  @media screen and (max-width: 768px){
+    .Background-post-profile{
+      padding: 1.2rem 1rem;
+    }
+  }
 </style>
 
-<div class="Profile col-9">
+<div class="Profile col-12 col-lg-9">
     <div class="Profile-container">
       <CoverPhoto {coverPhoto}/>
       <UserDetails {name} {last_name} {title} {email} {photo} {id} {aboutMe} {userMain} {urlAPI}/>

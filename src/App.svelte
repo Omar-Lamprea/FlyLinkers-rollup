@@ -43,7 +43,7 @@
 
   let data;
   let userMain;
-  // let getUserMainToFirestore;
+  let getUserMainToFirestore;
 
   const getData = async ()=>{
     if (localStorage.getItem('user')) {
@@ -53,7 +53,7 @@
       const content = await response.json();
       data = content[0]
       await getUserToFirestore(data)
-      // getUserMainToFirestore = await getUserToFirestore(data)
+      getUserMainToFirestore = await getUserToFirestore(data)
 
       if (!localStorage.getItem('profilePhoto')) {
         localStorage.setItem('profilePhoto', data.photo)
@@ -154,8 +154,14 @@
 
   @media screen and (max-width: 768px){
     main{
-      padding-top: 8rem;
+      padding-top: 9rem;
     }
+    :global(.Default-containers){
+      padding: 1rem 0;
+    }
+  :global(.Default-containers-grey){
+    padding: 1rem 0;
+  }
   }
 </style>
 
@@ -164,9 +170,9 @@
    <Header {...data} {urlLogOut} {urlAPI}/>
 {/if}
 
-<main id="main" class="container">
+<main id="main" class="container-fluid container-lg">
     <Router {routes}/>
-    {#if chatFlag && userMain}
+    {#if chatFlag && userMain && getUserMainToFirestore}
         <Chat {id} {userMain}/>
     {/if}
 </main>
