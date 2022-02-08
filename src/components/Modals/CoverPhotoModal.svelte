@@ -77,7 +77,7 @@
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        about: dataDescription,
+        // about: dataDescription,
         // resource_id : idCoverPhoto,
         cover_img: urlCoverPhoto
       })
@@ -117,10 +117,10 @@
       </div>
 
       <div class="modal-body text-start">
-        <div class="description-user">
+        <!-- <div class="description-user">
           <label for="description">Edit description</label>
           <textarea name="" id="description" cols="30" rows="2"></textarea>
-        </div>
+        </div> -->
         <div class="cover-photo">
           <label for="coverPhoto">Cover photo</label>
           <input type="file" name="coverPhoto" id="coverPhoto" accept=".png, .jpg, .jpeg" on:change={showCoverImg}>

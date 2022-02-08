@@ -121,6 +121,10 @@
     border: 1px solid grey;
   }
 
+  .disabled i{
+    color: gray;
+  }
+
 </style>
 <div class="UserDetails Default-containers mt-3">
   <div class="row">
@@ -172,8 +176,8 @@
             <p>Views of your post <span>3.8K</span></p> 
           </div>
           <div class="Profile-card-buttons mt-5">
-            <button class="btn btn-outline-primary btn-flylinkers"><i class="fas fa-pen"></i> I have interest in...</button>
-            <button class="btn btn-outline-primary btn-flylinkers">Add selection</button>
+            <button class="btn btn-outline-primary btn-flylinkers disabled" disabled><i class="fas fa-pen"></i> I have interest in...</button>
+            <button class="btn btn-outline-primary btn-flylinkers disabled" disabled>Add selection</button>
           </div>
         {:else}
           <div class="d-none" on:load={searchFriends()}></div>

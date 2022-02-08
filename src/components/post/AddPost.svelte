@@ -2,17 +2,29 @@
   import NavPost from './NavPost.svelte'
 
   export let id, urlAPI;
+
+  let characterCount = 0
   const validateInfoPost = (e) =>{
-    if (e.key === 'Enter') {
-      e.target.rows ++
-    }
-    if (e.target.value !== '') {
-      btnSendPost.removeAttribute('disabled')
+    e.target.style.height = (e.target.scrollHeight > e.target.clientHeight) ? (e.target.scrollHeight)+"px" : "60px"; 
+    // console.log(e.target.value.length);
+    characterCount = e.target.value.length
+
+    if (e.target.value.length <= 255) {
+      characterCountSpan.classList.add('characterCount-active')
+      if (e.key === 'Enter') {
+        e.target.rows ++
+      }
+      if (e.target.value !== '') {
+        btnSendPost.removeAttribute('disabled')
+      }else{
+        btnSendPost.setAttribute('disabled', '')
+        if (postImg.src) {
+          btnSendPost.removeAttribute('disabled')
+        }
+      }
     }else{
       btnSendPost.setAttribute('disabled', '')
-      if (postImg.src) {
-        btnSendPost.removeAttribute('disabled')
-      }
+      characterCountSpan.classList.remove('characterCount-active')
     }
   }
 
@@ -74,14 +86,22 @@
     margin-top: .5rem;
     padding: .5rem;
     width: 100%;
+    overflow-y: auto; 
+    word-wrap:break-word
   }
-  /* .Add-post a{
-    text-decoration: none;
-    color: var(--main-color);
+  .Add-post textarea:focus-visible{
+    outline-color: var(--main-color);
   }
-  .Add-post span{
+  .characterCount{
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+    font-size: 12px;
+    color: red;
+  }
+  .characterCount-active{
     color: grey;
-  } */
+  }
 
   .btn-post{
     width: 50%;
@@ -94,8 +114,11 @@
 
 <div class="Add-post Default-containers px-lg-5 d-flex flex-column">
 
-  <div class="Add-post-input mx-3 d-flex flex-column justify-content-center">
-    <textarea name="" cols="" rows="1" id="postDescription" class="Default-containers" placeholder="Start a post..." on:keyup={validateInfoPost}></textarea>
+  <div class="Add-post-input mx-3 d-flex flex-column justify-content-center position-relative">
+    <textarea name="" cols="" rows="1" id="postDescription" class="Default-containers" placeholder="Start a post..." on:keydown={validateInfoPost}></textarea>
+    <div id="characterCountSpan" class="characterCount characterCount-active">
+      {characterCount}/255
+    </div>
     <img alt="postImg" id="postImg" class="d-none mb-3">
   </div>
 

@@ -29,7 +29,7 @@ export default function startTime (create_time){
   }
   if (daysCount >= 1 && daysCount < 7) {
     timePost = daysCount
-    datePost = Math.ceil(timePost) + ' D'
+    datePost = Math.round(timePost) + ' D'
     return datePost
   }
 

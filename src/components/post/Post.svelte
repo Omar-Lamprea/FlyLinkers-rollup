@@ -418,6 +418,10 @@
     outline: none;
     cursor: pointer;
   }
+  .disabled{
+    color: grey;
+    cursor: default;
+  }
 
   @media screen and (max-width: 768px){
     .hidden{
@@ -426,6 +430,10 @@
     .Action{
       margin: 0 1rem;
     }
+    .Comments-add {
+      padding-left: .5rem;
+    }
+
   }
 
 </style>
@@ -509,18 +517,18 @@
           <i class="fa-comments far"></i>
           <span>Comment</span>
         </div>
-        <div class="Action Header-nav-share hidden">
+        <div class="Action Header-nav-share hidden disabled">
           <i class="fas fa-share"></i>
           <span>Share</span>
         </div>
-        <div class="Action Header-nav-paper-plane hidden">
+        <div class="Action Header-nav-paper-plane hidden disabled">
           <i class="fas fa-paper-plane"></i>
           <span>Send</span>
         </div>
       </div>
     </div>
 
-    <div id="comment{id}" class="comments d-none">
+    <div id="comment{id}" class="comments mt-3 d-none">
       <div class="Comments-add d-flex justify-content-between">
         <img src="{urlAPI}{localStorage.getItem('profilePhoto')}" alt="img">
         <form>

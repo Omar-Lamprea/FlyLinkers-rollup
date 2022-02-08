@@ -1,9 +1,10 @@
 <script>
+  import {link} from "svelte-spa-router";
+  import active from 'svelte-spa-router/active'
   import UserPhoto from '../profile/UserPhoto.svelte'
   import startTime from '../../js/startTime.js'
 
   export let comment, urlAPI;
-
 
 </script>
 
@@ -17,7 +18,7 @@
     padding: .5rem 1rem;
   }
   .Comments-users {
-    margin: 0 0 0.5em 0;
+    margin: 0 0 0.5rem 0.5rem;
     display: flex;
     justify-content: space-between;
   }
@@ -28,25 +29,35 @@
     object-fit: cover;
     border: 1px solid var(--main-color);
     padding: 0.1rem;
+    margin-right: .5rem;
   }
   .Comments-users span p{
     color: var(--main-color);
     font-weight: 600;
   }
-  .userInfo p:last-child{
+  .userInfo .startTime{
     color: grey;
     font-weight: inherit;
   }
+
+  /* .User-comment{
+    cursor: pointer;
+    color: var(--main-color)
+  } */
 </style>
 
 <div class="Comments">
   <div class="Comments-content">
     <div class="Comments-users">
-      <img src="{urlAPI}{comment.user.photo}" alt="">
+      <a href="/profile/{comment.user.email}" class="d-flex" use:link use:active>
+        <img src="{urlAPI}{comment.user.photo}" alt="">
+      </a>
       <span>
         <div class="userInfo mb-1 d-flex justify-content-between">
-          <p>{comment.user.name} {comment.user.last_name}</p>
-          <p>{startTime(comment.create_time)}</p>
+          <a href="/profile/{comment.user.email}" class="d-flex" use:link use:active>
+            <p class="User-comment">{comment.user.name} {comment.user.last_name}</p>
+          </a>
+          <p class="startTime">{startTime(comment.create_time)}</p>
         </div>
         {comment.comment}
       </span>

@@ -50,7 +50,7 @@
   }
 
   document.addEventListener('scroll', async (e)=>{
-    if ((window.innerHeight + window.scrollY) === main.offsetHeight){
+    if ((window.innerHeight + window.scrollY) >= main.offsetHeight - 1){
       if (countPost > 3) {
         getPosts()
       }

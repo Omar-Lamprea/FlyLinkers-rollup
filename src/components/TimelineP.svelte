@@ -19,13 +19,16 @@
   let coverPhoto;
   let aboutMe;
   let userId = id
-  let data
+  let data;
+  let experiences;
 
   const getProfile = async ()=>{
     const response = await fetch(`${urlAPI}/user/profile/?user_id=${id}`)
     const content = await response.json()
     if (content[0]) {
       data = content[0]
+      console.log(data);
+      experiences = data.experiences
       coverPhoto = `${urlAPI}${data.cover_img}`
       aboutMe = data.about
     }
@@ -91,7 +94,7 @@
 
   
   document.addEventListener('scroll', async (e)=>{
-    if ((window.innerHeight + window.scrollY) === main.offsetHeight){
+    if ((window.innerHeight + window.scrollY) >= main.offsetHeight - 1){
       if (countPost > 3) {
         getPosts()
       }
@@ -130,7 +133,7 @@
 
 <div class="Profile col-12 col-lg-9">
     <div class="Profile-container">
-      <CoverPhoto {coverPhoto}/>
+      <CoverPhoto {coverPhoto} {userId}/>
       <UserDetails {name} {last_name} {title} {email} {photo} {id} {aboutMe} {userMain} {urlAPI}/>
 
       {#if email === localStorage.getItem('user')}
@@ -139,8 +142,11 @@
           <AddPost {id} {urlAPI}/>
         </div>
       {/if}
+      
+      {#if experiences !== undefined}
+         <Experience {urlAPI} {id} {experiences}/>
+      {/if}
 
-      <Experience/>
       <Panel/>
       {#if post}
         {#if userMain}

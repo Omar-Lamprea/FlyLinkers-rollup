@@ -31,7 +31,6 @@
   {#if id}
     <img src='{urlAPI}{photo}' alt="profilePhoto" class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <!-- <li><a class="dropdown-item" href="/">View profile photo</a></li> -->
       <li><a class="dropdown-item" href="/" data-bs-toggle="modal" data-bs-target="#ModalProfile">Update profile photo</a></li>
     </ul>
   {:else}

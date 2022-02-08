@@ -16,6 +16,7 @@
   import {getUserToFirestore} from './js/firebase/config.js'
   import {openChat} from './js/openChat.js'
 
+
   const urlUser = window.location.pathname
   const urluserProfile = urlUser.slice(9)
 
