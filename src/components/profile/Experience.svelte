@@ -1,4 +1,5 @@
 <script>
+  import ExperiencesModal from '../Modals/ExperiencesModal.svelte'
   import { onMount } from "svelte";
   export let urlAPI, id, experiences
 
@@ -11,7 +12,7 @@
     console.log(content);
     data = content
   }
-  if (experiences && id === parseInt(localStorage.getItem('userId'))) {
+  if (experiences) {
     getExperiences()
   }
 
@@ -40,9 +41,9 @@
   }
 </style>
 
-<div class="Default-containers Experience">
-  <div class="Experience-content mx-3 mx-md-0">
-    {#if data}
+{#if data}
+  <div class="Default-containers Experience">
+    <div class="Experience-content mx-3 mx-md-0">
        {#each data as experience}
           <div class="Experience-title">
           <p>Experience</p>
@@ -54,13 +55,22 @@
           <p>Title: <span>{experience.title}</span></p>
           <p>job type: <span>{experience.employment_type}</span></p>
           <p>{experience.description}</p>
-       {/each}
+        {/each}
+    </div>
+  </div>
     {:else}
-      <div class="addExperiences text-center">
-        <p>Add a new experience!</p>
-        <i class="fas fa-plus-circle"></i>
+      {#if id === parseInt(localStorage.getItem('userId'))}
+      <div class="Default-containers Experience">
+        <div class="Experience-content mx-3 mx-md-0">
+          <div class="addExperiences text-center">
+            <p>Add position</p>
+            <i class="fas fa-plus-circle" data-bs-toggle="modal" data-bs-target="#modalExperience"></i>
+            <ExperiencesModal/>
+         </div>
+        </div>
       </div>
+      {:else}
+         <!-- else content here -->
+      {/if}
     {/if}
 
-  </div>
-</div>

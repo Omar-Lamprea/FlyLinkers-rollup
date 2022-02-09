@@ -3,6 +3,7 @@
   import active from 'svelte-spa-router/active'
   import Comment from './Comment.svelte'
   import startTime from '../../js/startTime.js'
+  import { onMount } from "svelte";
 
   export let userId;
   export let desc, reactions, img, comments, create_time, user, id, user_id, update_time;
@@ -62,7 +63,19 @@
     }
   }
   const changeReaction = async(e)=>{
-    await reactionUser()
+    const btnReactionLike = document.getElementById(`btnReactionLike${id}`)
+    const btnReactionLove = document.getElementById(`btnReactionLove${id}`)
+    btnReactionLike.setAttribute('disabled', '')
+    btnReactionLove.setAttribute('disabled', '')
+
+    const spanLikeValue = document.getElementById(`likeValue${id}`)
+    const spanLoveValue = document.getElementById(`loveValue${id}`)
+    if (spanLikeValue.textContent === '0' || spanLoveValue.textContent === '0') {
+      const getIdReaction = await fetch(`${urlAPI}/post/like/?post_id=${id}`)
+      const response = await getIdReaction.json()
+      reactionsPost = response
+      // console.log(reactionsPost);
+    }
     const likeAcount = document.getElementById(likeValue)
     const loveAcount = document.getElementById(loveValue)
     const element = e.target.parentNode.childNodes[0]
@@ -70,10 +83,9 @@
     const reactionElement = element.classList[1]
     const btnLike = document.getElementById(`btnLike${id}`)
     const btnLove = document.getElementById(`btnLove${id}`)
-    
-    console.log(reactionsPost);
-    let myLike = false    
-    if (reactionsPost !== '') {
+
+    let myLike = false
+    if (reactionsPost !== '' && !reactionsPost.Error) {
       reactionsPost.forEach(like => {
         if (like.id !== userId) {
           myLike = false
@@ -85,7 +97,7 @@
     }
 
     let myLove = false
-    if (reactionsPost !== '') {
+    if (reactionsPost !== '' && !reactionsPost.Error) {
       reactionsPost.forEach(love => {
         if (love.id !== userId) {
           myLove = false
@@ -97,8 +109,8 @@
     }
 
     // update like reaction
-    if (myLike) {
-      if (reactionType === 'fa-thumbs-up' && reactionElement === 'far') {
+    if (myLike && reactionType === 'fa-thumbs-up') {
+      if (reactionElement === 'far') {
         // console.log('actualizando like');
         const like = await fetch(`${urlAPI}/post/like/?post_id=${id}&user=${userId}`,{
           method: 'PUT',
@@ -123,7 +135,7 @@
           // await reactionUser()
         }
       }
-      if (reactionType === 'fa-thumbs-up' && reactionElement === 'fas') {
+      if (reactionElement === 'fas') {
         // console.log('actualizando dislike');
         const dislike = await fetch(`${urlAPI}/post/like/?post_id=${id}&user=${userId}`,{
           method: 'PUT',
@@ -143,8 +155,8 @@
     }
 
     // update love reaction
-    if (myLove) {
-      if (reactionType === 'fa-heart' && reactionElement === 'far'){
+    if (myLove && reactionType === 'fa-heart') {
+      if (reactionElement === 'far'){
         // console.log('actualizando love');
         const dislove = await fetch(`${urlAPI}/post/like/?post_id=${id}&user=${userId}`,{
           method: 'PUT',
@@ -169,7 +181,8 @@
         }
       }
 
-      if (reactionType === 'fa-heart' && reactionElement === 'fas'){
+      // console.log(reactionsPost, reactionType, reactionElement, userId);
+      if (reactionElement === 'fas'){
         // console.log('actualizando dislove');
         const dislove = await fetch(`${urlAPI}/post/like/?post_id=${id}&user=${userId}`,{
           method: 'PUT',
@@ -183,7 +196,7 @@
           reactions.love -= 1
           loveAcount.textContent = reactions.love
           toggleReaction()
-          await reactionUser()
+          // await reactionUser()
         }
       }
     }
@@ -236,10 +249,19 @@
       }
     }
 
+    
     function toggleReaction(){
-      element.classList.toggle('far')
-      element.classList.toggle('fas')
+      if (element.classList[1] === 'far'){
+        element.classList.remove('far')
+        element.classList.add('fas')
+      }else{
+        element.classList.remove('fas')
+        element.classList.add('far')
+      }
     }
+    await reactionUser()
+    btnReactionLike.removeAttribute('disabled')
+    btnReactionLove.removeAttribute('disabled')
   }
 
 
@@ -290,6 +312,9 @@
     }
   }
 
+  onMount(()=>{
+    reactionUser()
+  })
 </script>
 
 <style>
@@ -361,10 +386,16 @@
     color: var(--main-color);
   }
 
-  .Card-board-actions{
+  .Card-board-actions {
     font-size: 1rem;
     margin-top: 1rem;
     color: var(--main-color);
+  }
+  .Card-board-actions button{
+    color: var(--main-color);
+    padding: 0;
+    background-color: transparent;
+    border: none;
   }
   .Card-board-actions span, .Reaction span {
     color: rgba(38, 38, 38, 0.7);
@@ -504,15 +535,15 @@
     </div>
 
     <div class="Card-board-actions">
-      <div class="Card-board-actions d-flex justify-content-center justify-content-md-start" on:load={reactionUser()}>
-        <div class="Action Header-nav-thumbs-up" on:click={changeReaction}>
+      <div class="Card-board-actions d-flex justify-content-center justify-content-md-start">
+        <button id="btnReactionLike{id}" class="Action Header-nav-thumbs-up" on:click={changeReaction}>
           <i id="btnLike{id}" class="fa-thumbs-up far"></i>
           <span>Like</span>
-        </div>
-        <div class="Action Header-nav-heart" on:click={changeReaction}>
+        </button>
+        <button id="btnReactionLove{id}" class="Action Header-nav-heart" on:click={changeReaction}>
           <i id="btnLove{id}"class="fa-heart far"></i>
           <span>love</span>
-        </div>
+        </button>
         <div class="Action Header-nav-comments" on:click={showComments}>
           <i class="fa-comments far"></i>
           <span>Comment</span>
