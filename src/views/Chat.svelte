@@ -48,8 +48,10 @@
         if (groupId) {
           newMessage(groupId, user1.name, inputMessage.value)
         }else{
+          inputMessage.setAttribute('disabled', '')
           await newGroup(user1, user2, inputMessage.value)
           await getUserChat()
+          inputMessage.removeAttribute('disabled')
         }
         inputMessage.value = ''
 
