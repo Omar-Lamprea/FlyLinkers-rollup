@@ -1,16 +1,28 @@
 <script>
-  export let userProfile, urlAPI;
+  export let userProfile, urlAPI, experience;
+  console.log(experience);
+  const yearData = experience.start_date.split('-')[0]
+  const monthData = experience.start_date.split('-')[1]
+
+  let yearEndData
+  let monthEndData
+  if (experience.end_date) {
+    yearEndData = experience.end_date.split('-')[0]
+    monthEndData = experience.end_date.split('-')[1]
+  }
+  console.log(yearEndData, monthEndData);
+
   const months = [
     {value: '0', month : 'Please select'},
-    {value: '1', month : 'January'},
-    {value: '2', month : 'February'},
-    {value: '3', month : 'March'},
-    {value: '4', month : 'April'},
-    {value: '5', month : 'May'},
-    {value: '6', month : 'June'},
-    {value: '7', month : 'July'},
-    {value: '8', month : 'August'},
-    {value: '9', month : 'September'},
+    {value: '01', month : 'January'},
+    {value: '02', month : 'February'},
+    {value: '03', month : 'March'},
+    {value: '04', month : 'April'},
+    {value: '05', month : 'May'},
+    {value: '06', month : 'June'},
+    {value: '07', month : 'July'},
+    {value: '08', month : 'August'},
+    {value: '09', month : 'September'},
     {value: '10', month : 'October'},
     {value: '11', month : 'November'},
     {value: '12', month : 'December'}    
@@ -33,18 +45,23 @@
 
   const addExpreience = ()=>{
     const company_name = companyName.value
+    const startUpdateDate = document.getElementById(`startDate${experience.id}`)
+    const startUpdateYear = document.getElementById(`startYear${experience.id}`)
+    const endUpdateDate = document.getElementById(`endDate${experience.id}`)
+    const endUpdateYear = document.getElementById(`endYear${experience.id}`)
+    const working = document.getElementById(`working${experience.id}`)
 
     let start_date = ''
-    startYear.value !== "0" && startDate.value !== "0" 
-      ? start_date = [parseInt(startYear.value), parseInt(startDate.value)] 
+    startUpdateYear.value !== "0" && startUpdateDate.value !== "0" 
+      ? start_date = [parseInt(startUpdateYear.value), parseInt(startUpdateDate.value)] 
       : start_date = ''
 
     let workingCheck = 0
     working.checked ? workingCheck = 1 : workingCheck = 0
 
     let end_date = '';
-    endYear.value !== '0' && endDate.value !== '0' 
-      ? end_date = [parseInt(endYear.value), parseInt(endDate.value)]
+    endUpdateYear.value !== '0' && endUpdateDate.value !== '0' 
+      ? end_date = [parseInt(endUpdateYear.value), parseInt(endUpdateDate.value)]
       : end_date = ''
 
     const location = country.value
@@ -106,12 +123,18 @@
   }
 
   const toggleEndDate = ()=>{
+    const working = document.getElementById(`working${experience.id}`)
+    const endUpdateYear = document.getElementById(`endYear${experience.id}`)
+    const endUpdateDate = document.getElementById(`endDate${experience.id}`)
+
+
+    console.log(endUpdateYear, endUpdateDate, working);
     if (working.checked) {
-      endYear.setAttribute('disabled', '')
-      endDate.setAttribute('disabled', '')
+      endUpdateYear.setAttribute('disabled', '')
+      endUpdateDate.setAttribute('disabled', '')
     }else{
-      endYear.removeAttribute('disabled', '')
-      endDate.removeAttribute('disabled', '')
+      endUpdateYear.removeAttribute('disabled', '')
+      endUpdateDate.removeAttribute('disabled', '')
     }
   }
 
@@ -149,11 +172,11 @@
   }
 </style>
 
-<div class="modal fade" id="modalExperience" tabindex="-1" aria-labelledby="modalExperienceLabel" aria-hidden="true">
+<div class="modal fade" id="modalUpdateExperience" tabindex="-1" aria-labelledby="modalUpdateExperienceLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalExperienceLabel">Add Experience</h5>
+        <h5 class="modal-title" id="modalUpdateExperienceLabel">Set Experience</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body text-start">
@@ -167,21 +190,27 @@
           <form action="">
             <div class="companyName">
               <label for="companyName">Company Name*</label>
-                <input type="text" name="companyName" id="companyName" placeholder="Ex: FlyLinkers">
+                <input type="text" value={experience.company_name} name="companyName" id="companyName" placeholder="Ex: FlyLinkers">
             </div>
 
             <div class="dates">
               <div class="start me-md-1">
                 <label for="startDate">Start date*</label>
                 <div class="workStartDate d-md-flex justify-content-between">
-                  <select name="startDate" id="startDate" class="me-md-1 mb-3">
+                  <select name="startDate" id="startDate{experience.id}" class="me-md-1 mb-3">
                     {#each months as month}
-                       <option value={month.value}>{month.month}</option>
+                      {#if monthData === month.value}
+                        <option selected value={month.value}>{month.month}</option>
+                      {/if}
+                      <option value={month.value}>{month.month}</option>
                     {/each}
                   </select>
                   <select name="startYear" id="startYear" class="mb-3">
                     <option value=0>Year</option>
                     {#each yearList as year}
+                      {#if parseInt(yearData) === year}
+                        <option selected value={year}>{year}</option>
+                      {/if}
                       <option value={year}>{year}</option>
                     {/each}
                   </select>
@@ -191,33 +220,51 @@
               <div class="end">
                 <label for="endDate">end date*</label>
                 <div class="workEndDate d-md-flex justify-content-between">
-                  <select name="endDate" id="endDate" class="me-md-1 mb-3">
-                    {#each months as month}
-                       <option value={month.value}>{month.month}</option>
-                    {/each}
-                  </select>
-                  <select name="endYear" id="endYear" class="mb-3">
-                    <option value=0>Year</option>
-                    {#each yearList as year}
-                      <option value={year}>{year}</option>
-                    {/each}
-                  </select>
+                  {#if experience.working === true}
+                     <select name="endDate{experience.id}" id="endDate{experience.id}" class="me-md-1 mb-3" disabled>
+                      {#each months as month}
+                         <option value={month.value}>{month.month}</option>
+                      {/each}
+                    </select>
+                    <select name="endYear{experience.id}" id="endYear{experience.id}" class="mb-3" disabled>
+                      <option value=0>Year</option>
+                      {#each yearList as year}
+                        <option value={year}>{year}</option>
+                      {/each}
+                    </select>
+                  {:else}
+                     <select name="endDate{experience.id}" id="endDate{experience.id}" class="me-md-1 mb-3">
+                       {#each months as month}
+                          <option value={month.value}>{month.month}</option>
+                       {/each}
+                     </select>
+                     <select name="endYear{experience.id}" id="endYear{experience.id}" class="mb-3">
+                      <option value=0>Year</option>
+                      {console.log(parseInt(yearEndData))}
+                      {#each yearList as year}
+                        {#if parseInt(yearEndData) === year}
+                          <option selected value={year}>{year}</option>
+                        {/if}
+                        <option value={year}>{year}</option>
+                      {/each}
+                     </select>
+                  {/if}
                 </div>
               </div>
             </div>
 
             <div class="working d-flex align-items-center">
-              <input type="checkbox" name="working" id="working" on:click={toggleEndDate}>
-              <label for="working">
+              <input type="checkbox" checked={experience.working} name="working{experience.id}" id="working{experience.id}" on:click={toggleEndDate}>
+              <label for="working{experience.id}">
                 I am currently working in this role
               </label>
             </div>
 
             <label for="country">Location*</label>
-            <input type="text" name="country" id="country" placeholder="Ex: Colombia">
+            <input type="text" name="country" id="country" value={experience.location} placeholder="Ex: Colombia">
 
             <label for="title">Title*</label>
-            <input type="text" name="title" id="title" placeholder="Ex: Manager">
+            <input type="text" name="title" id="title" value={experience.title} placeholder="Ex: Manager">
 
             <label for="employmentType">Employment type*</label>
             <select name="employmentType" id="employmentType">
@@ -228,7 +275,7 @@
             </select>
 
             <label for="description">Description*</label>
-            <textarea name="description" id="description" cols="30" rows="5"></textarea>
+            <textarea name="description" id="description" value={experience.description} cols="30" rows="5"></textarea>
           </form>
         </div>
 
