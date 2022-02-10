@@ -4,7 +4,6 @@
   import { onMount } from "svelte";
   export let urlAPI, id, experiences, userProfile
 
-  console.log(urlAPI, id, experiences);
   let data;
   const getExperiences = async()=>{
     const response = await fetch(`${urlAPI}/user/experience/?profile_id=${userProfile}`)
@@ -16,8 +15,8 @@
     getExperiences()
   }
 
-  const updateExperience = (profileId)=>{
-    
+  const showExperience = (experience)=>{
+    console.log(experience);
   }
 
 </script>
@@ -64,7 +63,7 @@
        {#each data as experience}
           <div class="experience position-relative">
             {#if id === parseInt(localStorage.getItem('userId'))}
-               <div class="updateExperience" data-bs-toggle="modal" data-bs-target="#modalUpdateExperience">
+               <div class="updateExperience" data-bs-toggle="modal" data-bs-target="#modalUpdateExperience{experience.id}">
                  <i class="fas fa-pen"></i>
                </div>
             {/if}

@@ -32,30 +32,30 @@
   }
 
   const addExpreience = ()=>{
-    const company_name = companyName.value
+    const company_name = postCompanyName.value
 
     let start_date = ''
-    startYear.value !== "0" && startDate.value !== "0" 
-      ? start_date = [parseInt(startYear.value), parseInt(startDate.value)] 
+    postStartYear.value !== "0" && postStartDate.value !== "0" 
+      ? start_date = [parseInt(postStartYear.value), parseInt(postStartDate.value)] 
       : start_date = ''
 
     let workingCheck = 0
-    working.checked ? workingCheck = 1 : workingCheck = 0
+    postWorking.checked ? workingCheck = 1 : workingCheck = 0
 
     let end_date = '';
-    endYear.value !== '0' && endDate.value !== '0' 
-      ? end_date = [parseInt(endYear.value), parseInt(endDate.value)]
+    postEndYear.value !== '0' && postEndDate.value !== '0' 
+      ? end_date = [parseInt(postEndYear.value), parseInt(postEndDate.value)]
       : end_date = ''
 
-    const location = country.value
-    const titleJob = title.value
+    const location = postCountry.value
+    const titleJob = postTitle.value
 
     let employment_type = ''
-    employmentType.value === 'pleaseSelect'
+    postEmploymentType.value === 'pleaseSelect'
       ? employment_type = ''
-      : employment_type = employmentType.value
+      : employment_type = postEmploymentType.value
 
-    const descriptionJob = description.value
+    const descriptionJob = postDescriptionExperience.value
 
     // console.log(
     //   userProfile,
@@ -72,11 +72,12 @@
     if (userProfile !== '' && company_name !== '' && start_date !== '' && workingCheck !== '' &&
     end_date !== '' && location !== '' && titleJob !== '' && employment_type !== '' && descriptionJob) {
       let templateExperience;
+      
       if (workingCheck === 0) {
         templateExperience = {
           "profile": userProfile,
           "company_name": company_name,
-          "start_date": start_date,
+          "start_date": [2020, 2],
           "working": 0,
           "end_date": end_date,
           "location": location,
@@ -89,7 +90,7 @@
         templateExperience = {
           "profile": userProfile,
           "company_name": company_name,
-          "start_date": start_date,
+          "start_date": [2020, 2],
           "working": 1,
           "location": location,
           "title": titleJob,
@@ -101,17 +102,18 @@
       addNewExperience(templateExperience)
       
     }else{
-      console.log('please complete all the fields');
+      console.error('please complete all the fields');
+      alert('please complete all the fields');
     }
   }
 
   const toggleEndDate = ()=>{
-    if (working.checked) {
-      endYear.setAttribute('disabled', '')
-      endDate.setAttribute('disabled', '')
+    if (postWorking.checked) {
+      postEndYear.setAttribute('disabled', '')
+      postEndDate.setAttribute('disabled', '')
     }else{
-      endYear.removeAttribute('disabled', '')
-      endDate.removeAttribute('disabled', '')
+      postEndYear.removeAttribute('disabled', '')
+      postEndDate.removeAttribute('disabled', '')
     }
   }
 
@@ -122,7 +124,7 @@
       headers:{
         "Content-Type" : "application/json"
       },
-      body: JSON.stringify({templateExperience})
+      body: JSON.stringify(templateExperience)
     })
     const content = await postExperience.json()
     console.log(content);
@@ -166,20 +168,20 @@
         <div class="formExperience">
           <form action="">
             <div class="companyName">
-              <label for="companyName">Company Name*</label>
-                <input type="text" name="companyName" id="companyName" placeholder="Ex: FlyLinkers">
+              <label for="postCompanyName">Company Name*</label>
+                <input type="text" name="postCompanyName" id="postCompanyName" placeholder="Ex: FlyLinkers">
             </div>
 
             <div class="dates">
               <div class="start me-md-1">
-                <label for="startDate">Start date*</label>
+                <label for="postStartDate">Start date*</label>
                 <div class="workStartDate d-md-flex justify-content-between">
-                  <select name="startDate" id="startDate" class="me-md-1 mb-3">
+                  <select name="postStartDate" id="postStartDate" class="me-md-1 mb-3">
                     {#each months as month}
                        <option value={month.value}>{month.month}</option>
                     {/each}
                   </select>
-                  <select name="startYear" id="startYear" class="mb-3">
+                  <select name="postStartYear" id="postStartYear" class="mb-3">
                     <option value=0>Year</option>
                     {#each yearList as year}
                       <option value={year}>{year}</option>
@@ -189,14 +191,14 @@
               </div>
 
               <div class="end">
-                <label for="endDate">end date*</label>
+                <label for="postEndDate">end date*</label>
                 <div class="workEndDate d-md-flex justify-content-between">
-                  <select name="endDate" id="endDate" class="me-md-1 mb-3">
+                  <select name="postEndDate" id="postEndDate" class="me-md-1 mb-3">
                     {#each months as month}
                        <option value={month.value}>{month.month}</option>
                     {/each}
                   </select>
-                  <select name="endYear" id="endYear" class="mb-3">
+                  <select name="postEndYear" id="postEndYear" class="mb-3">
                     <option value=0>Year</option>
                     {#each yearList as year}
                       <option value={year}>{year}</option>
@@ -207,35 +209,35 @@
             </div>
 
             <div class="working d-flex align-items-center">
-              <input type="checkbox" name="working" id="working" on:click={toggleEndDate}>
-              <label for="working">
+              <input type="checkbox" name="postWorking" id="postWorking" on:click={toggleEndDate}>
+              <label for="postWorking">
                 I am currently working in this role
               </label>
             </div>
 
-            <label for="country">Location*</label>
-            <input type="text" name="country" id="country" placeholder="Ex: Colombia">
+            <label for="postCountry">Location*</label>
+            <input type="text" name="postCountry" id="postCountry" placeholder="Ex: Colombia">
 
-            <label for="title">Title*</label>
-            <input type="text" name="title" id="title" placeholder="Ex: Manager">
+            <label for="postTitle">Title*</label>
+            <input type="text" name="postTitle" id="postTitle" placeholder="Ex: Manager">
 
-            <label for="employmentType">Employment type*</label>
-            <select name="employmentType" id="employmentType">
+            <label for="postEmploymentType">Employment type*</label>
+            <select name="postEmploymentType" id="postEmploymentType">
               <option value="pleaseSelect">Please select</option>
               {#each employmentTypeList as employment}
                 <option value={employment}>{employment}</option>
               {/each}
             </select>
 
-            <label for="description">Description*</label>
-            <textarea name="description" id="description" cols="30" rows="5"></textarea>
+            <label for="postDescriptionExperience">Description*</label>
+            <textarea name="postDescriptionExperience" id="postDescriptionExperience" cols="30" rows="5"></textarea>
           </form>
         </div>
 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button id="btnAddExperience" type="button" class="btn btn-primary" on:click={addExpreience}>Add experience</button>
+        <button id="btnAddExperience" type="button" class="btn btn-primary" on:click={addExpreience}>Save</button>
       </div>
     </div>
   </div>

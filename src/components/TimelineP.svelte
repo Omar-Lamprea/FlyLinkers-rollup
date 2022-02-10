@@ -28,7 +28,6 @@
     const content = await response.json()
     if (content[0]) {
       data = content[0]
-      console.log(data);
       userProfile = data.id
       experiences = data.experiences
       coverPhoto = `${urlAPI}${data.cover_img}`

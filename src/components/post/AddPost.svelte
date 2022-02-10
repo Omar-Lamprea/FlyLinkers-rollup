@@ -4,7 +4,7 @@
   export let id, urlAPI;
 
   let characterCount = 0
-  const validateInfoPost = (e) =>{
+  const validateInfoPost = async (e) =>{
     e.target.style.height = (e.target.scrollHeight > e.target.clientHeight) ? (e.target.scrollHeight)+"px" : "60px"; 
     // console.log(e.target.value.length);
     characterCount = e.target.value.length
@@ -25,6 +25,21 @@
     }else{
       btnSendPost.setAttribute('disabled', '')
       characterCountSpan.classList.remove('characterCount-active')
+    }
+
+    if(e.target.value.includes('https')){
+      // console.log(e.target.value);
+      // const getMeta = await fetch(`${urlAPI}/post/meta/`,{
+      //   method: 'GET',
+      //   headers:{
+      //     "Content-Type" : "application/json"
+      //   },
+      //   body: JSON.stringify({
+      //     url: e.target.value
+      //   })
+      // })
+      // const response = await getMeta.json()
+      // console.log(response);
     }
   }
 
