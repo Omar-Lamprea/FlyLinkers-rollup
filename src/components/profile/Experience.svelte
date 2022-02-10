@@ -1,24 +1,62 @@
 <script>
   import ExperiencesModal from '../Modals/ExperiencesModal.svelte'
   import UpdateExperiencesModal from '../Modals/UpdateExperienceModal.svelte'
-  import { onMount } from "svelte";
+  import {getExperiences} from '../../js/getExperiences'
+  import { writable } from 'svelte/store';
+  import {onMount} from 'svelte'
+import { async } from 'rxjs';
+
   export let urlAPI, id, experiences, userProfile
 
-  let data;
-  const getExperiences = async()=>{
-    const response = await fetch(`${urlAPI}/user/experience/?profile_id=${userProfile}`)
-    const content = await response.json()
-    // console.log(content);
-    data = content
-  }
-  if (experiences) {
-    getExperiences()
+  let data = writable([])
+  let experienceId;
+
+
+  // export async function getExperiences(){
+  //   const response = await fetch(`${urlAPI}/user/experience/?profile_id=${userProfile}`)
+  //   const content = await response.json()
+  //   data.set(content)
+  // }
+  const getDataexperiences = async ()=>{
+    if (experiences) {
+      data.set(await getExperiences(urlAPI, userProfile))
+    }
   }
 
-  const showExperience = (experience)=>{
-    console.log(experience);
+  const sendDataExperience = (id)=>{
+    console.log(id);
+    const btnUpdateExperience = document.getElementById(`btnUpdateExperience${id}`)
+    btnUpdateExperience.addEventListener('click', e =>{
+      setTimeout(() => {
+        getDataexperiences()
+      }, 1000);
+    })
+  }
+  const addDataExperience = ()=>{
+    btnAddExperience.addEventListener('click', e =>{
+      setTimeout(() => {
+        getDataexperiences()
+      }, 1000);
+    })
   }
 
+  const removeExpeprience = async(id)=>{
+    const container = document.getElementById(`experience${id}`)
+    const deleteExperience = await fetch(`${urlAPI}/user/experience/?experience_id=${id}`,{
+      method: 'DELETE',
+      headers:{
+        "Content-Type" : "application/json"
+      }
+    })
+    const content = await deleteExperience.json()
+    if (content) {
+      container.parentNode.removeChild(container)
+    }
+  }
+  
+  onMount(()=>{
+    getDataexperiences()
+  })
 </script>
 
 <style>
@@ -52,6 +90,17 @@
     color: var(--main-color);
     cursor: pointer;
   }
+
+  .deleteExperience{
+    position: absolute;
+    top: 50px;
+    right: 5px;
+  }
+  .deleteExperience i{
+    font-size: 1.3rem;
+    color: #c61f1f;
+    cursor: pointer;
+  }
 </style>
 
 {#if data}
@@ -60,12 +109,15 @@
       <div class="Experience-title">
         <p>Experience</p>
       </div>
-       {#each data as experience}
-          <div class="experience position-relative">
+       {#each $data as experience}
+          <div id="experience{experience.id}" data-experienceId={experience.id} class="experience position-relative">
             {#if id === parseInt(localStorage.getItem('userId'))}
-               <div class="updateExperience" data-bs-toggle="modal" data-bs-target="#modalUpdateExperience{experience.id}">
+               <div class="updateExperience" data-bs-toggle="modal" data-bs-target="#modalUpdateExperience{experience.id}" on:click={sendDataExperience(experience.id)}>
                  <i class="fas fa-pen"></i>
                </div>
+               <div class="deleteExperience" on:click={removeExpeprience(experience.id)}>
+                <i class="fa-solid fa-trash"></i>
+              </div>
             {/if}
             <p>Company Name: <span>{experience.company_name}</span></p>
             {#if !experience.working}
@@ -86,7 +138,7 @@
   {#if id === parseInt(localStorage.getItem('userId'))}
     <div class="addExperiences text-center">
       <p>Add position</p>
-      <i class="fas fa-plus-circle" data-bs-toggle="modal" data-bs-target="#modalExperience"></i>
+      <i class="fas fa-plus-circle" data-bs-toggle="modal" data-bs-target="#modalExperience" on:click={addDataExperience()}></i>
       <ExperiencesModal {userProfile} {urlAPI}/>
     </div>
   {/if}
@@ -97,7 +149,7 @@
       <div class="Experience-content mx-3 mx-md-0">
         <div class="addExperiences text-center">
           <p>Add position</p>
-          <i class="fas fa-plus-circle" data-bs-toggle="modal" data-bs-target="#modalExperience"></i>
+          <i class="fas fa-plus-circle" data-bs-toggle="modal" data-bs-target="#modalExperience" on:click={addDataExperience()}></i>
           <ExperiencesModal {userProfile} {urlAPI}/>
         </div>
       </div>

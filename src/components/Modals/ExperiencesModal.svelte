@@ -1,5 +1,6 @@
 <script>
   export let userProfile, urlAPI;
+  import {closeModal} from '../../js/closeModals'
   const months = [
     {value: '0', month : 'Please select'},
     {value: '1', month : 'January'},
@@ -128,6 +129,9 @@
     })
     const content = await postExperience.json()
     console.log(content);
+    if (content) {
+      closeModal('modalExperience')
+    }
   }
 
 </script>

@@ -28,18 +28,18 @@
     }
 
     if(e.target.value.includes('https')){
-      // console.log(e.target.value);
-      // const getMeta = await fetch(`${urlAPI}/post/meta/`,{
-      //   method: 'GET',
-      //   headers:{
-      //     "Content-Type" : "application/json"
-      //   },
-      //   body: JSON.stringify({
-      //     url: e.target.value
-      //   })
-      // })
-      // const response = await getMeta.json()
-      // console.log(response);
+      console.log(e.target.value);
+      const getMeta = await fetch(`${urlAPI}/post/meta/`,{
+        method: 'POST',
+        headers:{
+          "Content-Type" : "application/json"
+        },
+        body: JSON.stringify({
+          url: e.target.value
+        })
+      })
+      const response = await getMeta.json()
+      console.log(response);
     }
   }
 

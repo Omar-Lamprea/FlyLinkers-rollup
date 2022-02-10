@@ -1,4 +1,6 @@
 <script>
+  import {getExperiences} from '../../js/getExperiences'
+  import {closeUpdateModal} from '../../js/closeModals'
   export let userProfile, urlAPI, experience;
   // console.log(experience);
 
@@ -101,7 +103,7 @@
       employment_type,
       descriptionJob
     );
-    
+
     if (userProfile !== '' && company_name !== '' && start_date !== '' && workingCheck !== '' &&
     end_date !== '' && location !== '' && titleJob !== '' && employment_type !== '' && descriptionJob) {
       let templateExperience;
@@ -160,9 +162,11 @@
       body: JSON.stringify(templateExperience)
     })
     const content = await postExperience.json()
-    console.log(content);
+    if (content) {
+      closeUpdateModal(experience.id)
+    }
   }
-
+  
 </script>
 
 <style>
@@ -305,7 +309,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button id="btnAddExperience" type="button" class="btn btn-primary" on:click={addExpreience}>Save</button>
+        <button id="btnUpdateExperience{experience.id}" type="button" class="btn btn-primary" on:click={addExpreience}>Save</button>
       </div>
     </div>
   </div>
