@@ -1,13 +1,13 @@
 <script>
   import ExperiencesModal from '../Modals/ExperiencesModal.svelte'
   import { onMount } from "svelte";
-  export let urlAPI, id, experiences
+  export let urlAPI, id, experiences, userProfile
 
   console.log(urlAPI, id, experiences);
   let data;
 
   const getExperiences = async()=>{
-    const response = await fetch(`${urlAPI}/user/experience/?profile_id=${id}`)
+    const response = await fetch(`${urlAPI}/user/experience/?profile_id=${userProfile}`)
     const content = await response.json()
     console.log(content);
     data = content
@@ -49,28 +49,40 @@
           <p>Experience</p>
           </div>
           <p>Company Name: <span>{experience.company_name}</span></p>
-          <p>Dates of employments: <span>{experience.start_date} - {experience.end_date}</span></p>
+          {#if !experience.working}
+             <p>Dates of employments: <span>{experience.start_date} - {experience.end_date}</span></p>
+          {:else}
+             <p>Dates of employments: <span>{experience.start_date} - currently</span></p>
+          {/if}
           <p>Ubication: <span>{experience.location}</span></p>
 
           <p>Title: <span>{experience.title}</span></p>
           <p>job type: <span>{experience.employment_type}</span></p>
           <p>{experience.description}</p>
+          <hr>
         {/each}
     </div>
+  {#if id === parseInt(localStorage.getItem('userId'))}
+  <div class="addExperiences text-center">
+    <p>Add position</p>
+    <i class="fas fa-plus-circle" data-bs-toggle="modal" data-bs-target="#modalExperience"></i>
+    <ExperiencesModal {userProfile} {urlAPI}/>
   </div>
-    {:else}
-      {#if id === parseInt(localStorage.getItem('userId'))}
-      <div class="Default-containers Experience">
-        <div class="Experience-content mx-3 mx-md-0">
-          <div class="addExperiences text-center">
-            <p>Add position</p>
-            <i class="fas fa-plus-circle" data-bs-toggle="modal" data-bs-target="#modalExperience"></i>
-            <ExperiencesModal/>
-         </div>
-        </div>
+  {/if}
+  </div>
+{:else}
+  {#if id === parseInt(localStorage.getItem('userId'))}
+  <div class="Default-containers Experience">
+    <div class="Experience-content mx-3 mx-md-0">
+      <div class="addExperiences text-center">
+        <p>Add position</p>
+        <i class="fas fa-plus-circle" data-bs-toggle="modal" data-bs-target="#modalExperience"></i>
+        <ExperiencesModal {userProfile} {urlAPI}/>
       </div>
-      {:else}
-         <!-- else content here -->
-      {/if}
-    {/if}
+    </div>
+  </div>
+  {:else}
+      <!-- else content here -->
+  {/if}
+{/if}
 

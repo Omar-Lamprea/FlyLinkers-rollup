@@ -21,6 +21,7 @@
   let userId = id
   let data;
   let experiences;
+  let userProfile;
 
   const getProfile = async ()=>{
     const response = await fetch(`${urlAPI}/user/profile/?user_id=${id}`)
@@ -28,6 +29,7 @@
     if (content[0]) {
       data = content[0]
       console.log(data);
+      userProfile = data.id
       experiences = data.experiences
       coverPhoto = `${urlAPI}${data.cover_img}`
       aboutMe = data.about
@@ -144,7 +146,7 @@
       {/if}
       
       {#if experiences !== undefined}
-         <Experience {urlAPI} {id} {experiences}/>
+         <Experience {urlAPI} {id} {experiences} {userProfile}/>
       {/if}
 
       <Panel/>
