@@ -1,6 +1,7 @@
 <script>
   export let userProfile, urlAPI, experience;
   console.log(experience);
+  
   const yearData = experience.start_date.split('-')[0]
   const monthData = experience.start_date.split('-')[1]
 
