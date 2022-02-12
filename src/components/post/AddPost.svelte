@@ -1,7 +1,11 @@
 <script>
   import NavPost from './NavPost.svelte'
+  import Loader from '../Loader.svelte'
 
   export let id, urlAPI;
+
+  let urlLink;
+  let validUrl = '';
 
   let characterCount = 0
   const validateInfoPost = async (e) =>{
@@ -26,27 +30,94 @@
       btnSendPost.setAttribute('disabled', '')
       characterCountSpan.classList.remove('characterCount-active')
     }
+  }
 
-    if(e.target.value.includes('https')){
-      console.log(e.target.value);
+  const validateUrl = (e)=>{
+    urlLink = ''
+    if (urlContent) {
+      metaTitle.value = ''
+      metaDescription.value = ''
+      metaImage.src = ''
+      urlContent = ''
+      searchMeta = ''
+      urlLink = ''
+    }
+    if(e.target.value.includes('https') || e.target.value.includes('http')){
+      let searchUrl = e.target.value.split(' ')
+      let link;
+
+      for (let i = 0; i < searchUrl.length; i++) {
+        if (searchUrl[i].includes('https://') || searchUrl[i].includes('http://')) {
+          link = searchUrl[i]
+          urlLink = searchUrl[i]
+        }
+      }
+      if (isValidHttpUrl(link) === true){
+        showMetaData(link)
+      }
+    }else{
+      urlMeta.classList.add('d-none')
+    }
+
+
+    if (e.target.value !== '') {
+      btnSendPost.removeAttribute('disabled')
+    }else{
+      btnSendPost.setAttribute('disabled', '')
+      validUrl = ''
+    }
+  }
+
+  let searchMeta = false;
+  let urlContent;
+
+  const showMetaData = async (url) =>{
+    if (!searchMeta || url !== searchMeta) {
+      searchMeta = url
+      const urlMeta = document.getElementById('urlMeta')
+      console.log();
+      urlMeta.classList.remove('d-none')
       const getMeta = await fetch(`${urlAPI}/post/meta/`,{
         method: 'POST',
         headers:{
           "Content-Type" : "application/json"
         },
         body: JSON.stringify({
-          url: e.target.value
+          url: searchMeta
         })
       })
-      const response = await getMeta.json()
-      console.log(response);
+      const content = await getMeta.json()
+      if (content) {
+        urlContent = content
+        validUrl = url
+      }
     }
+  }
+  function isValidHttpUrl(string) {
+    let url;
+    try {
+      url = new URL(string);
+    }catch (_) {
+      return false;
+    }
+    return(url.protocol === "http:" || url.protocol === "https:");
+  }
+
+  const closeMetaData = ()=>{
+    urlMeta.classList.add('d-none')
+    metaTitle.value = ''
+    metaDescription.value = ''
+    metaImage.src = ''
+    urlContent = ''
+    searchMeta = ''
+    urlLink = ''
+    validUrl = ''
   }
 
   const sendPost = async()=>{
     let imagePost = '';
     if (!!postImg.src) {
-      // imagePost = postImg.src
+      console.log('envia solo foto')
       const convertImageB64 = await fetch(`${urlAPI}/resources/img/`, {
         method : 'POST',
         headers : {
@@ -65,13 +136,7 @@
       postDescription.value === '' && imagePost !== '' || 
       postDescription.value !== '' && imagePost !== '') 
       {
-      //   const dataPost = {
-      //     id : id,
-      //     description : postDescription.value,
-      //     img : imagePost
-      //   }
-      // console.log(dataPost);
-
+        console.log('envia img y description de la caja +', validUrl)
         const post = await fetch(`${urlAPI}/post/create/`,{
           method : 'POST',
           headers : {
@@ -123,6 +188,23 @@
     background-color: #199aaf;
     color: #fefefe;
   }
+  .urlMeta{
+    padding: 1rem;
+    margin: 1rem;
+    border: 1px solid var(--main-color);
+    border-radius: 1rem;
+  }
+  .urlMeta img{
+    width: 100%;
+    margin-top: 1rem;
+  }
+  .urlMeta i{
+    color: red;
+    padding: 0.2rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: end;
+  }
 
 </style>
 
@@ -130,14 +212,26 @@
 <div class="Add-post Default-containers px-lg-5 d-flex flex-column">
 
   <div class="Add-post-input mx-3 d-flex flex-column justify-content-center position-relative">
-    <textarea name="" cols="" rows="1" id="postDescription" class="Default-containers" placeholder="Start a post..." on:keydown={validateInfoPost}></textarea>
+    <textarea name="" cols="" rows="1" id="postDescription" class="Default-containers" placeholder="Start a post..." on:keyup={validateUrl} on:keydown={validateInfoPost}></textarea>
     <div id="characterCountSpan" class="characterCount characterCount-active">
       {characterCount}/255
     </div>
     <img alt="postImg" id="postImg" class="d-none mb-3">
   </div>
 
+  <div id="urlMeta" class="urlMeta d-flex flex-column d-none">
+      {#if urlContent && urlLink.includes('https://')}
+        <i class="fa-solid fa-xmark d-flex- align-self-end" on:click={closeMetaData}></i>
+        <h6 id="metaTitle">{urlContent.title}</h6>
+        <p id="metaDescription">{urlContent.description}</p>
+        <img id="metaImage" src={urlContent.image} alt="">
+      {:else}
+        <Loader/>
+      {/if}
+  </div>
+
   <NavPost/>
+
 
   <button id="btnSendPost" class="btn btn-outline-primary btn-flylinkers btn-post mt-3" disabled on:click={sendPost}>Post</button>
 

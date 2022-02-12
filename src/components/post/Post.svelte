@@ -312,6 +312,7 @@
     }
   }
 
+  let urlMeta;
   onMount(()=>{
     reactionUser()
   })
@@ -454,6 +455,17 @@
     cursor: default;
   }
 
+  .urlMeta{
+    padding: 1rem;
+    margin-top: 1rem;
+    border: 1px solid var(--main-color);
+    border-radius: 1rem;
+  }
+  .urlMeta img{
+    width: 100%;
+    margin-top: 1rem;
+  }
+
   @media screen and (max-width: 768px){
     .hidden{
       display: none;
@@ -509,11 +521,19 @@
   </div>
 
     <div class="Card-photo px-0">
-      <figure>
-        {#if !!img}
+      {#if !!img}
+        <figure>
            <img src="{urlAPI}{img}" alt="img post">
-        {/if}
-      </figure>
+          </figure>
+      {/if}
+
+      {#if urlMeta}
+        <div class="urlMeta d-flex flex-column">
+          <h6>Azul presentó su primer Embraer E195 convertido a carguero</h6>
+          <p>Azul Cargo presentó ayer miércoles (9) su primer Embraer E195 convertido a carguero. La innovadora iniciativa desarrollada por Azul ocurrió en asociación con LHColus Technology en un proyecto que pasó</p>
+          <img src="https://news.flylinkers.com/wp-content/uploads/2022/02/Airbus-2.jpeg" alt="">
+        </div>
+      {/if}
     </div>
 
     <div class="Card-board-icons">
