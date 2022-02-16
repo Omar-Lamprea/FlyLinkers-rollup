@@ -11,6 +11,8 @@
   const userId = id;
   const posts = writable([])
 
+  let colorbox = 'boxHome'
+
   let page = 0;
   let countPost = 0
 
@@ -23,6 +25,7 @@
     try {
       const response = await fetch(`${urlAPI}/post/home/?page=${page}&user_id=${id}`)
       const content = await response.json()
+      // console.log(content);
       countPost = content.count
       if (content.results) {
         posts.set([...$posts, ...content.results])
@@ -44,7 +47,7 @@
         setTimeout(() => {
           clearPost()
           getPosts(1)
-        }, 1000);
+        }, 1500);
       })
     }, 2000);
   }
@@ -63,7 +66,7 @@
 <div class="Timeline col-12 col-lg-6">
   <div class="Timeline-container">
     {#if id}
-       <AddPost {id} {urlAPI}/>
+       <AddPost {id} {urlAPI} {colorbox}/>
     {/if}
     {#each $posts as dataPost}
       <Post {...dataPost} {userId} {urlAPI}/>

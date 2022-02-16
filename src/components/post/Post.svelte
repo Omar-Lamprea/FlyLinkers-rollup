@@ -8,8 +8,8 @@
   export let userId;
   export let desc, reactions, img, comments, create_time, user, id, user_id, update_time;
   export let name, middle_name, last_name, title, photo, email;
-  export let userMain, urlAPI;
-
+  export let userMain, urlAPI, url;
+  // console.log(url);
   let userLink;
 
   if (userId === undefined) {
@@ -26,6 +26,9 @@
     user = ''
     userLink = email
   }
+
+  userId = parseInt(userId)
+  userMain = parseInt(userMain)
 
   const viewUserProfile = () => {
     if (user) {
@@ -74,7 +77,6 @@
       const getIdReaction = await fetch(`${urlAPI}/post/like/?post_id=${id}`)
       const response = await getIdReaction.json()
       reactionsPost = response
-      // console.log(reactionsPost);
     }
     const likeAcount = document.getElementById(likeValue)
     const loveAcount = document.getElementById(loveValue)
@@ -312,7 +314,30 @@
     }
   }
 
+  
   let urlMeta;
+  let urlLink;
+  const getUrlPost = async(url)=>{
+    const urlData = await fetch(`${urlAPI}/post/meta/`, {
+      method: 'POST',
+      headers:{
+        'Content-Type' : 'application/json'
+      },
+      body: JSON.stringify({
+        url: url
+      })
+    })
+    const content = await urlData.json()
+    if(urlData.status === 200){
+      urlMeta = content
+      urlLink = url
+    }
+  }
+  let validateDesc = []
+  if(url){
+    getUrlPost(url)
+  }
+  
   onMount(()=>{
     reactionUser()
   })
@@ -465,6 +490,9 @@
     width: 100%;
     margin-top: 1rem;
   }
+  .urlMeta a{
+    color: #000;
+  }
 
   @media screen and (max-width: 768px){
     .hidden{
@@ -516,23 +544,44 @@
     </div>
 
     <div class="Card-description mx-3 mx-md-0">
-      <span class="mx-0">{desc}</span>
+      {#if validateDesc.length === 0}
+         <!-- content here -->
+         <span class="mx-0">{desc}</span>
+      {:else}
+        <span class="mx-0">
+          {#each validateDesc as stringData}
+            {#if stringData.includes('https://') || stringData.includes('http://')}
+                <!-- <a href={stringData} target="_blank">{stringData}</a> -->
+            {:else}
+                {stringData} {' '}
+            {/if}
+          {/each}
+        </span>
+      {/if}
     </div>
   </div>
 
     <div class="Card-photo px-0">
+      {#if urlMeta}
+        <div class="urlMeta d-flex flex-column mb-3">
+          <a href={urlLink} target="_blank">
+            {#if urlMeta.title[0]}
+               <h6>{urlMeta.title[0]}</h6>
+            {/if}
+            {#if urlMeta.description[0]}
+               <p>{urlMeta.description[0]}</p>
+            {/if}
+            {#if urlMeta.image[0]}
+               <img src="{urlMeta.image[0]}" alt="">
+            {/if}
+          </a>
+        </div>
+      {/if}
+
       {#if !!img}
         <figure>
            <img src="{urlAPI}{img}" alt="img post">
           </figure>
-      {/if}
-
-      {#if urlMeta}
-        <div class="urlMeta d-flex flex-column">
-          <h6>Azul presentó su primer Embraer E195 convertido a carguero</h6>
-          <p>Azul Cargo presentó ayer miércoles (9) su primer Embraer E195 convertido a carguero. La innovadora iniciativa desarrollada por Azul ocurrió en asociación con LHColus Technology en un proyecto que pasó</p>
-          <img src="https://news.flylinkers.com/wp-content/uploads/2022/02/Airbus-2.jpeg" alt="">
-        </div>
       {/if}
     </div>
 

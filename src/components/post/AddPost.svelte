@@ -2,7 +2,11 @@
   import NavPost from './NavPost.svelte'
   import Loader from '../Loader.svelte'
 
-  export let id, urlAPI;
+  export let id, urlAPI, colorbox;
+
+  if (!colorbox) {
+    colorbox = ''
+  }
 
   let urlLink;
   let validUrl = '';
@@ -50,6 +54,8 @@
         if (searchUrl[i].includes('https://') || searchUrl[i].includes('http://')) {
           link = searchUrl[i]
           urlLink = searchUrl[i]
+        }else{
+
         }
       }
       if (isValidHttpUrl(link) === true){
@@ -75,7 +81,6 @@
     if (!searchMeta || url !== searchMeta) {
       searchMeta = url
       const urlMeta = document.getElementById('urlMeta')
-      console.log();
       urlMeta.classList.remove('d-none')
       const getMeta = await fetch(`${urlAPI}/post/meta/`,{
         method: 'POST',
@@ -104,20 +109,22 @@
   }
 
   const closeMetaData = ()=>{
-    urlMeta.classList.add('d-none')
-    metaTitle.value = ''
-    metaDescription.value = ''
-    metaImage.src = ''
-    urlContent = ''
-    searchMeta = ''
-    urlLink = ''
-    validUrl = ''
+    if(urlContent){
+      urlMeta.classList.add('d-none')
+      metaTitle.value = ''
+      metaDescription.value = ''
+      metaImage.src = ''
+      urlContent = ''
+      searchMeta = ''
+      urlLink = ''
+      validUrl = ''
+    }
   }
 
   const sendPost = async()=>{
     let imagePost = '';
     if (!!postImg.src) {
-      console.log('envia solo foto')
+      // console.log('envia solo foto')
       const convertImageB64 = await fetch(`${urlAPI}/resources/img/`, {
         method : 'POST',
         headers : {
@@ -127,7 +134,7 @@
           img: postImg.src
         })
       })
-      const content =await convertImageB64.json()
+      const content = await convertImageB64.json()
       imagePost = content.img
     }
 
@@ -136,7 +143,19 @@
       postDescription.value === '' && imagePost !== '' || 
       postDescription.value !== '' && imagePost !== '') 
       {
-        console.log('envia img y description de la caja +', validUrl)
+        let postDescriptionClean = []
+        if(postDescription.value.includes('https') || postDescription.value.includes('http')){
+          const descriptionUrl = postDescription.value.split(' ')
+          descriptionUrl.forEach(string => {
+            if(!string.includes('https') || !string.includes('http')){
+              postDescriptionClean.push(string)
+            }
+          });
+        }else{
+          postDescriptionClean.push(postDescription.value)
+        }
+        const joinPostDescriptionClean = postDescriptionClean.join(' ')
+
         const post = await fetch(`${urlAPI}/post/create/`,{
           method : 'POST',
           headers : {
@@ -145,7 +164,8 @@
           body: JSON.stringify({
             user: id,
             img: imagePost,
-            desc : postDescription.value
+            desc : joinPostDescriptionClean,
+            url: validUrl
           })
         })
         const content = await post.json()
@@ -155,6 +175,7 @@
             postImg.setAttribute('src', '')
             postImg.classList.toggle('d-none')
           }
+          closeMetaData()
         }
     }
   }
@@ -205,11 +226,14 @@
     display: flex;
     justify-content: end;
   }
+  .boxHome{
+    background-color: #EFEFEF;
+  }
 
 </style>
 
 
-<div class="Add-post Default-containers px-lg-5 d-flex flex-column">
+<div class="Add-post {colorbox} Default-containers px-lg-5 d-flex flex-column">
 
   <div class="Add-post-input mx-3 d-flex flex-column justify-content-center position-relative">
     <textarea name="" cols="" rows="1" id="postDescription" class="Default-containers" placeholder="Start a post..." on:keyup={validateUrl} on:keydown={validateInfoPost}></textarea>

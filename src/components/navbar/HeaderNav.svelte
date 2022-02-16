@@ -68,7 +68,11 @@
     text-align: center;
     color: white;
   }
-
+  @media screen and (max-width: 1200px){
+    .nav-container{
+      margin: .5rem 0;
+    }
+  }
   @media screen and (max-width: 480px){
     .hidden{
       display: none;

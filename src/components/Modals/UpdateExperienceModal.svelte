@@ -92,17 +92,17 @@
     const descriptionJob = document.getElementById(`description${experience.id}`).value
 
 
-    console.log(
-      userProfile,
-      company_name,
-      start_date,
-      workingCheck,
-      end_date,
-      location,
-      titleJob,
-      employment_type,
-      descriptionJob
-    );
+    // console.log(
+    //   userProfile,
+    //   company_name,
+    //   start_date,
+    //   workingCheck,
+    //   end_date,
+    //   location,
+    //   titleJob,
+    //   employment_type,
+    //   descriptionJob
+    // );
 
     if (userProfile !== '' && company_name !== '' && start_date !== '' && workingCheck !== '' &&
     end_date !== '' && location !== '' && titleJob !== '' && employment_type !== '' && descriptionJob) {
@@ -130,7 +130,7 @@
           "description": descriptionJob
         }
       }
-      console.log(templateExperience);
+      // console.log(templateExperience);
       updateExperience(templateExperience)
       
     }else{
@@ -278,7 +278,7 @@
             </div>
 
             <div class="working d-flex align-items-center">
-              <input type="checkbox" name="working{experience.id}" id="working{experience.id}" checked={experience.working} on:click={toggleEndDate}>
+              <input type="checkbox" name="working{experience.id}" id="working{experience.id}" checked={experience.working} disabled on:click={toggleEndDate}>
               <label for="working{experience.id}">
                 I am currently working in this role
               </label>

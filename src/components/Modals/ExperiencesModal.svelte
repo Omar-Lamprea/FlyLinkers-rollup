@@ -129,7 +129,7 @@
     })
     const content = await postExperience.json()
     console.log(content);
-    if (content) {
+    if (postExperience.status === 200) {
       closeModal('modalExperience')
     }
   }
@@ -213,7 +213,7 @@
             </div>
 
             <div class="working d-flex align-items-center">
-              <input type="checkbox" name="postWorking" id="postWorking" on:click={toggleEndDate}>
+              <input type="checkbox" name="postWorking" id="postWorking" on:click={toggleEndDate} disabled>
               <label for="postWorking">
                 I am currently working in this role
               </label>

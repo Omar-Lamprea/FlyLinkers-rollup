@@ -12,31 +12,30 @@ import { async } from 'rxjs';
   let experienceId;
 
 
-  // export async function getExperiences(){
-  //   const response = await fetch(`${urlAPI}/user/experience/?profile_id=${userProfile}`)
-  //   const content = await response.json()
-  //   data.set(content)
-  // }
-  const getDataexperiences = async ()=>{
-    if (experiences) {
+  
+  // console.log(experiences);
+  const getDataexperiences = async (updateExperiences)=>{
+    if (experiences || updateExperiences) {
       data.set(await getExperiences(urlAPI, userProfile))
     }
   }
 
   const sendDataExperience = (id)=>{
-    console.log(id);
+    // console.log(id);
     const btnUpdateExperience = document.getElementById(`btnUpdateExperience${id}`)
     btnUpdateExperience.addEventListener('click', e =>{
       setTimeout(() => {
-        getDataexperiences()
-      }, 1000);
+        let updateExperiences = true
+        getDataexperiences(updateExperiences)
+      }, 2000);
     })
   }
   const addDataExperience = ()=>{
     btnAddExperience.addEventListener('click', e =>{
       setTimeout(() => {
-        getDataexperiences()
-      }, 1000);
+        let updateExperiences = true
+        getDataexperiences(updateExperiences)
+      }, 2000);
     })
   }
 
@@ -79,6 +78,7 @@ import { async } from 'rxjs';
   .addExperiences i{
     font-size: 3rem;
     color: #199aaf;
+    cursor: pointer;
   }
   .updateExperience{
     position: absolute;
