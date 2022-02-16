@@ -33,7 +33,6 @@ import UpdateExperiencesModal from '../Modals/UpdateExperienceModal.svelte.js';
 import { getExperiences } from '../../js/getExperiences.js';
 import { writable } from '../../../_snowpack/pkg/svelte/store.js';
 import { onMount } from '../../../_snowpack/pkg/svelte.js';
-import { async } from '../../../_snowpack/pkg/rxjs.js';
 
 function get_each_context(ctx, list, i) {
 	const child_ctx = ctx.slice();
@@ -41,7 +40,7 @@ function get_each_context(ctx, list, i) {
 	return child_ctx;
 }
 
-// (157:2) {:else}
+// (156:2) {:else}
 function create_else_block_1(ctx) {
 	return {
 		c: noop,
@@ -53,7 +52,7 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (147:2) {#if id === parseInt(localStorage.getItem('userId'))}
+// (146:2) {#if id === parseInt(localStorage.getItem('userId'))}
 function create_if_block_4(ctx) {
 	let div2;
 	let div1;
@@ -133,7 +132,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (106:0) {#if data}
+// (105:0) {#if data}
 function create_if_block(ctx) {
 	let div2;
 	let div1;
@@ -268,7 +267,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (114:12) {#if id === parseInt(localStorage.getItem('userId'))}
+// (113:12) {#if id === parseInt(localStorage.getItem('userId'))}
 function create_if_block_3(ctx) {
 	let div0;
 	let i0;
@@ -327,7 +326,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (125:12) {:else}
+// (124:12) {:else}
 function create_else_block(ctx) {
 	let p;
 	let t0;
@@ -362,7 +361,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (123:12) {#if !experience.working}
+// (122:12) {#if !experience.working}
 function create_if_block_2(ctx) {
 	let p;
 	let t0;
@@ -402,7 +401,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (112:7) {#each $data as experience}
+// (111:7) {#each $data as experience}
 function create_each_block(ctx) {
 	let div;
 	let show_if = /*id*/ ctx[1] === parseInt(localStorage.getItem('userId'));
@@ -608,7 +607,7 @@ function create_each_block(ctx) {
 	};
 }
 
-// (138:2) {#if id === parseInt(localStorage.getItem('userId'))}
+// (137:2) {#if id === parseInt(localStorage.getItem('userId'))}
 function create_if_block_1(ctx) {
 	let div;
 	let p;
@@ -789,7 +788,7 @@ function instance($$self, $$props, $$invalidate) {
 					let updateExperiences = true;
 					getDataexperiences(updateExperiences);
 				},
-				2000
+				1000
 			);
 		});
 	};
