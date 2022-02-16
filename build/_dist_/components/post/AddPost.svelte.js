@@ -57,7 +57,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (247:6) {#if urlContent && urlLink.includes('https://')}
+// (260:6) {#if urlContent && urlLink.includes('https://')}
 function create_if_block(ctx) {
 	let i;
 	let t0;
@@ -357,6 +357,20 @@ function instance($$self, $$props, $$invalidate) {
 
 		if (e.target.value.includes('https') || e.target.value.includes('http')) {
 			let searchUrl = e.target.value.split(' ');
+
+			searchUrl.forEach(url => {
+				if (url.includes('\n')) {
+					searchUrl = url.replace('\n', ' ');
+					const splitUrl = searchUrl.split(' ');
+
+					splitUrl.forEach(el => {
+						if (el.includes('https://') || el.includes('http://')) {
+							searchUrl = [el];
+						}
+					});
+				}
+			});
+
 			let link;
 
 			for (let i = 0; i < searchUrl.length; i++) {

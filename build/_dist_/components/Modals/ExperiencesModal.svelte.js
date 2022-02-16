@@ -49,7 +49,7 @@ function get_each_context_4(ctx, list, i) {
 	return child_ctx;
 }
 
-// (184:20) {#each months as month}
+// (185:20) {#each months as month}
 function create_each_block_4(ctx) {
 	let option;
 	let t_value = /*month*/ ctx[16].month + "";
@@ -74,7 +74,7 @@ function create_each_block_4(ctx) {
 	};
 }
 
-// (190:20) {#each yearList as year}
+// (191:20) {#each yearList as year}
 function create_each_block_3(ctx) {
 	let option;
 	let t_value = /*year*/ ctx[13] + "";
@@ -99,7 +99,7 @@ function create_each_block_3(ctx) {
 	};
 }
 
-// (201:20) {#each months as month}
+// (202:20) {#each months as month}
 function create_each_block_2(ctx) {
 	let option;
 	let t_value = /*month*/ ctx[16].month + "";
@@ -124,7 +124,7 @@ function create_each_block_2(ctx) {
 	};
 }
 
-// (207:20) {#each yearList as year}
+// (208:20) {#each yearList as year}
 function create_each_block_1(ctx) {
 	let option;
 	let t_value = /*year*/ ctx[13] + "";
@@ -149,7 +149,7 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (231:14) {#each employmentTypeList as employment}
+// (232:14) {#each employmentTypeList as employment}
 function create_each_block(ctx) {
 	let option;
 	let t_value = /*employment*/ ctx[10] + "";
@@ -434,6 +434,7 @@ function create_fragment(ctx) {
 			attr(textarea, "cols", "30");
 			attr(textarea, "rows", "5");
 			attr(textarea, "class", "svelte-1r8fjdo");
+			attr(form, "id", "formAddNewExperience");
 			attr(form, "action", "");
 			attr(form, "class", "svelte-1r8fjdo");
 			attr(div9, "class", "formExperience");
@@ -819,6 +820,7 @@ function instance($$self, $$props, $$invalidate) {
 		console.log(content);
 
 		if (postExperience.status === 200) {
+			formAddNewExperience.reset();
 			closeModal('modalExperience');
 		}
 	}
