@@ -36,7 +36,7 @@ function get_each_context(ctx, list, i) {
 	return child_ctx;
 }
 
-// (65:4) {#if id}
+// (68:4) {#if id}
 function create_if_block(ctx) {
 	let addpost;
 	let current;
@@ -44,7 +44,8 @@ function create_if_block(ctx) {
 	addpost = new AddPost({
 			props: {
 				id: /*id*/ ctx[0],
-				urlAPI: /*urlAPI*/ ctx[1]
+				urlAPI: /*urlAPI*/ ctx[1],
+				colorbox
 			}
 		});
 
@@ -77,7 +78,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (68:4) {#each $posts as dataPost}
+// (71:4) {#each $posts as dataPost}
 function create_each_block(ctx) {
 	let post;
 	let current;
@@ -262,6 +263,8 @@ function create_fragment(ctx) {
 	};
 }
 
+let colorbox = 'boxHome';
+
 function instance($$self, $$props, $$invalidate) {
 	let $posts;
 	let { id } = $$props;
@@ -282,6 +285,8 @@ function instance($$self, $$props, $$invalidate) {
 		try {
 			const response = await fetch(`${urlAPI}/post/home/?page=${page}&user_id=${id}`);
 			const content = await response.json();
+
+			// console.log(content);
 			countPost = content.count;
 
 			if (content.results) {
@@ -307,7 +312,7 @@ function instance($$self, $$props, $$invalidate) {
 							clearPost();
 							getPosts(1);
 						},
-						1000
+						1500
 					);
 				});
 			},

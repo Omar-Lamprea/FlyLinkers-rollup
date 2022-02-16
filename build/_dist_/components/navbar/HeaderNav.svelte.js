@@ -43,7 +43,7 @@ function get_each_context(ctx, list, i) {
 	return child_ctx;
 }
 
-// (103:4) {#if newChat}
+// (107:4) {#if newChat}
 function create_if_block_1(ctx) {
 	let div;
 	let t;
@@ -52,7 +52,7 @@ function create_if_block_1(ctx) {
 		c() {
 			div = element("div");
 			t = text(/*newChat*/ ctx[3]);
-			attr(div, "class", "notificacions-chats svelte-cg5i0q");
+			attr(div, "class", "notificacions-chats svelte-1wpps5d");
 		},
 		m(target, anchor) {
 			insert(target, div, anchor);
@@ -67,7 +67,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (111:6) {:else}
+// (115:6) {:else}
 function create_else_block_1(ctx) {
 	let li;
 
@@ -78,7 +78,7 @@ function create_else_block_1(ctx) {
 			li.innerHTML = `<span>You haven&#39;t started any chat</span> 
         `;
 
-			attr(li, "class", "dropdown-item chatList d-flex svelte-cg5i0q");
+			attr(li, "class", "dropdown-item chatList d-flex svelte-1wpps5d");
 		},
 		m(target, anchor) {
 			insert(target, li, anchor);
@@ -89,7 +89,7 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (109:6) {#each $usergroups as groups}
+// (113:6) {#each $usergroups as groups}
 function create_each_block(ctx) {
 	let chatlist;
 	let current;
@@ -132,7 +132,7 @@ function create_each_block(ctx) {
 	};
 }
 
-// (125:6) {:else}
+// (129:6) {:else}
 function create_else_block(ctx) {
 	let img;
 	let img_src_value;
@@ -143,7 +143,7 @@ function create_else_block(ctx) {
 			attr(img, "id", "headerUserImage");
 			if (!src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[2] + /*photo*/ ctx[0]))) attr(img, "src", img_src_value);
 			attr(img, "alt", "");
-			attr(img, "class", "svelte-cg5i0q");
+			attr(img, "class", "svelte-1wpps5d");
 		},
 		m(target, anchor) {
 			insert(target, img, anchor);
@@ -159,7 +159,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (123:6) {#if localStorage.getItem('profilePhoto')}
+// (127:6) {#if localStorage.getItem('profilePhoto')}
 function create_if_block(ctx) {
 	let img;
 	let img_src_value;
@@ -170,7 +170,7 @@ function create_if_block(ctx) {
 			attr(img, "id", "headerUserImage");
 			if (!src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[2] + localStorage.getItem('profilePhoto')))) attr(img, "src", img_src_value);
 			attr(img, "alt", "");
-			attr(img, "class", "svelte-cg5i0q");
+			attr(img, "class", "svelte-1wpps5d");
 		},
 		m(target, anchor) {
 			insert(target, img, anchor);
@@ -276,15 +276,15 @@ function create_fragment(ctx) {
 			nav = element("nav");
 			div0 = element("div");
 			a0 = element("a");
-			a0.innerHTML = `<i class="fas fa-home svelte-cg5i0q"></i>`;
+			a0.innerHTML = `<i class="fas fa-home svelte-1wpps5d"></i>`;
 			t0 = space();
 			div1 = element("div");
 			a1 = element("a");
-			a1.innerHTML = `<i class="fas fa-user-plus svelte-cg5i0q"></i>`;
+			a1.innerHTML = `<i class="fas fa-user-plus svelte-1wpps5d"></i>`;
 			t1 = space();
 			div2 = element("div");
 			a2 = element("a");
-			a2.innerHTML = `<i class="fas fa-briefcase svelte-cg5i0q"></i>`;
+			a2.innerHTML = `<i class="fas fa-briefcase svelte-1wpps5d"></i>`;
 			t2 = space();
 			div3 = element("div");
 			if (if_block0) if_block0.c();
@@ -316,7 +316,7 @@ function create_fragment(ctx) {
 			t8 = space();
 			ul1 = element("ul");
 			li0 = element("li");
-			li0.innerHTML = `<span class="dropdown-item svelte-cg5i0q">Settings</span>`;
+			li0.innerHTML = `<span class="dropdown-item svelte-1wpps5d">Settings</span>`;
 			t10 = space();
 			li1 = element("li");
 			span1 = element("span");
@@ -324,37 +324,37 @@ function create_fragment(ctx) {
 			t12 = space();
 			div8 = element("div");
 			a5 = element("a");
-			a5.innerHTML = `<i class="fas fa-calendar-week svelte-cg5i0q"></i>`;
+			a5.innerHTML = `<i class="fas fa-calendar-week svelte-1wpps5d"></i>`;
 			attr(a0, "href", "/");
-			attr(div0, "class", "icon Header-nav-home mx-3 fs-3 svelte-cg5i0q");
+			attr(div0, "class", "icon Header-nav-home mx-3 fs-3 svelte-1wpps5d");
 			attr(a1, "href", "/");
-			attr(div1, "class", "icon Header-nav-user-plus mx-3 fs-3 svelte-cg5i0q");
+			attr(div1, "class", "icon Header-nav-user-plus mx-3 fs-3 svelte-1wpps5d");
 			attr(a2, "href", "/");
-			attr(div2, "class", "icon Header-nav-briefcase hidden mx-3 fs-3 svelte-cg5i0q");
-			attr(i3, "class", "fas fa-comment dropdown-toggle svelte-cg5i0q");
+			attr(div2, "class", "icon Header-nav-briefcase hidden mx-3 fs-3 svelte-1wpps5d");
+			attr(i3, "class", "fas fa-comment dropdown-toggle svelte-1wpps5d");
 			attr(i3, "id", "chats");
 			attr(i3, "data-bs-toggle", "dropdown");
 			attr(i3, "aria-expanded", "false");
 			attr(ul0, "class", "dropdown-menu");
 			attr(ul0, "aria-labelledby", "chats");
-			attr(div3, "class", "icon Header-nav-comment mx-3 fs-3 position-relative svelte-cg5i0q");
-			attr(div4, "class", "icon Header-nav-bell mx-3 fs-3 notification svelte-cg5i0q");
+			attr(div3, "class", "icon Header-nav-comment mx-3 fs-3 position-relative svelte-1wpps5d");
+			attr(div4, "class", "icon Header-nav-bell mx-3 fs-3 notification svelte-1wpps5d");
 			attr(div4, "id", "notification");
 			attr(a3, "href", "/profile");
-			attr(div5, "class", "icon Header-nav-user mx-3 fs-3 svelte-cg5i0q");
-			attr(i4, "class", "fas fa-grip-vertical dropdown-toggle svelte-cg5i0q");
+			attr(div5, "class", "icon Header-nav-user mx-3 fs-3 svelte-1wpps5d");
+			attr(i4, "class", "fas fa-grip-vertical dropdown-toggle svelte-1wpps5d");
 			attr(i4, "id", "settings");
 			attr(i4, "data-bs-toggle", "dropdown");
 			attr(i4, "aria-expanded", "false");
-			attr(span1, "class", "dropdown-item svelte-cg5i0q");
+			attr(span1, "class", "dropdown-item svelte-1wpps5d");
 			attr(ul1, "class", "dropdown-menu");
 			attr(ul1, "aria-labelledby", "settings");
-			attr(div6, "class", "dropdown svelte-cg5i0q");
+			attr(div6, "class", "dropdown svelte-1wpps5d");
 			attr(a4, "href", "/");
-			attr(div7, "class", "icon Header-nav-grip-vertical mx-3 fs-3 svelte-cg5i0q");
+			attr(div7, "class", "icon Header-nav-grip-vertical mx-3 fs-3 svelte-1wpps5d");
 			attr(a5, "href", "/");
-			attr(div8, "class", "icon Header-nav-calendar-week hidden mx-3 fs-3 svelte-cg5i0q");
-			attr(nav, "class", "nav-container d-flex");
+			attr(div8, "class", "icon Header-nav-calendar-week hidden mx-3 fs-3 svelte-1wpps5d");
+			attr(nav, "class", "nav-container d-flex svelte-1wpps5d");
 		},
 		m(target, anchor) {
 			insert(target, nav, anchor);

@@ -57,16 +57,16 @@ function create_else_block(ctx) {
 	};
 }
 
-// (223:6) {#if urlContent && urlLink.includes('https://')}
+// (247:6) {#if urlContent && urlLink.includes('https://')}
 function create_if_block(ctx) {
 	let i;
 	let t0;
 	let h6;
-	let t1_value = /*urlContent*/ ctx[2].title + "";
+	let t1_value = /*urlContent*/ ctx[3].title + "";
 	let t1;
 	let t2;
 	let p;
-	let t3_value = /*urlContent*/ ctx[2].description + "";
+	let t3_value = /*urlContent*/ ctx[3].description + "";
 	let t3;
 	let t4;
 	let img;
@@ -85,13 +85,13 @@ function create_if_block(ctx) {
 			t3 = text(t3_value);
 			t4 = space();
 			img = element("img");
-			attr(i, "class", "fa-solid fa-xmark d-flex- align-self-end svelte-1jepya9");
+			attr(i, "class", "fa-solid fa-xmark d-flex- align-self-end svelte-1v7lf9i");
 			attr(h6, "id", "metaTitle");
 			attr(p, "id", "metaDescription");
 			attr(img, "id", "metaImage");
-			if (!src_url_equal(img.src, img_src_value = /*urlContent*/ ctx[2].image)) attr(img, "src", img_src_value);
+			if (!src_url_equal(img.src, img_src_value = /*urlContent*/ ctx[3].image)) attr(img, "src", img_src_value);
 			attr(img, "alt", "");
-			attr(img, "class", "svelte-1jepya9");
+			attr(img, "class", "svelte-1v7lf9i");
 		},
 		m(target, anchor) {
 			insert(target, i, anchor);
@@ -105,15 +105,15 @@ function create_if_block(ctx) {
 			insert(target, img, anchor);
 
 			if (!mounted) {
-				dispose = listen(i, "click", /*closeMetaData*/ ctx[5]);
+				dispose = listen(i, "click", /*closeMetaData*/ ctx[6]);
 				mounted = true;
 			}
 		},
 		p(ctx, dirty) {
-			if (dirty & /*urlContent*/ 4 && t1_value !== (t1_value = /*urlContent*/ ctx[2].title + "")) set_data(t1, t1_value);
-			if (dirty & /*urlContent*/ 4 && t3_value !== (t3_value = /*urlContent*/ ctx[2].description + "")) set_data(t3, t3_value);
+			if (dirty & /*urlContent*/ 8 && t1_value !== (t1_value = /*urlContent*/ ctx[3].title + "")) set_data(t1, t1_value);
+			if (dirty & /*urlContent*/ 8 && t3_value !== (t3_value = /*urlContent*/ ctx[3].description + "")) set_data(t3, t3_value);
 
-			if (dirty & /*urlContent*/ 4 && !src_url_equal(img.src, img_src_value = /*urlContent*/ ctx[2].image)) {
+			if (dirty & /*urlContent*/ 8 && !src_url_equal(img.src, img_src_value = /*urlContent*/ ctx[3].image)) {
 				attr(img, "src", img_src_value);
 			}
 		},
@@ -152,6 +152,7 @@ function create_fragment(ctx) {
 	let navpost;
 	let t6;
 	let button;
+	let div3_class_value;
 	let current;
 	let mounted;
 	let dispose;
@@ -159,8 +160,8 @@ function create_fragment(ctx) {
 	const if_blocks = [];
 
 	function select_block_type(ctx, dirty) {
-		if (dirty & /*urlContent, urlLink*/ 5) show_if = null;
-		if (show_if == null) show_if = !!(/*urlContent*/ ctx[2] && /*urlLink*/ ctx[0].includes('https://'));
+		if (dirty & /*urlContent, urlLink*/ 10) show_if = null;
+		if (show_if == null) show_if = !!(/*urlContent*/ ctx[3] && /*urlLink*/ ctx[1].includes('https://'));
 		if (show_if) return 0;
 		return 1;
 	}
@@ -176,7 +177,7 @@ function create_fragment(ctx) {
 			textarea = element("textarea");
 			t0 = space();
 			div0 = element("div");
-			t1 = text(/*characterCount*/ ctx[1]);
+			t1 = text(/*characterCount*/ ctx[2]);
 			t2 = text("/255");
 			t3 = space();
 			img = element("img");
@@ -192,20 +193,20 @@ function create_fragment(ctx) {
 			attr(textarea, "cols", "");
 			attr(textarea, "rows", "1");
 			attr(textarea, "id", "postDescription");
-			attr(textarea, "class", "Default-containers svelte-1jepya9");
+			attr(textarea, "class", "Default-containers svelte-1v7lf9i");
 			attr(textarea, "placeholder", "Start a post...");
 			attr(div0, "id", "characterCountSpan");
-			attr(div0, "class", "characterCount characterCount-active svelte-1jepya9");
+			attr(div0, "class", "characterCount characterCount-active svelte-1v7lf9i");
 			attr(img, "alt", "postImg");
 			attr(img, "id", "postImg");
-			attr(img, "class", "d-none mb-3");
+			attr(img, "class", "d-none mb-3 svelte-1v7lf9i");
 			attr(div1, "class", "Add-post-input mx-3 d-flex flex-column justify-content-center position-relative");
 			attr(div2, "id", "urlMeta");
-			attr(div2, "class", "urlMeta d-flex flex-column d-none svelte-1jepya9");
+			attr(div2, "class", "urlMeta d-flex flex-column d-none svelte-1v7lf9i");
 			attr(button, "id", "btnSendPost");
-			attr(button, "class", "btn btn-outline-primary btn-flylinkers btn-post mt-3 svelte-1jepya9");
+			attr(button, "class", "btn btn-outline-primary btn-flylinkers btn-post mt-3 svelte-1v7lf9i");
 			button.disabled = true;
-			attr(div3, "class", "Add-post Default-containers px-lg-5 d-flex flex-column svelte-1jepya9");
+			attr(div3, "class", div3_class_value = "Add-post " + /*colorbox*/ ctx[0] + " Default-containers px-lg-5 d-flex flex-column" + " svelte-1v7lf9i");
 		},
 		m(target, anchor) {
 			insert(target, div3, anchor);
@@ -228,16 +229,16 @@ function create_fragment(ctx) {
 
 			if (!mounted) {
 				dispose = [
-					listen(textarea, "keyup", /*validateUrl*/ ctx[4]),
-					listen(textarea, "keydown", /*validateInfoPost*/ ctx[3]),
-					listen(button, "click", /*sendPost*/ ctx[6])
+					listen(textarea, "keyup", /*validateUrl*/ ctx[5]),
+					listen(textarea, "keydown", /*validateInfoPost*/ ctx[4]),
+					listen(button, "click", /*sendPost*/ ctx[7])
 				];
 
 				mounted = true;
 			}
 		},
 		p(ctx, [dirty]) {
-			if (!current || dirty & /*characterCount*/ 2) set_data(t1, /*characterCount*/ ctx[1]);
+			if (!current || dirty & /*characterCount*/ 4) set_data(t1, /*characterCount*/ ctx[2]);
 			let previous_block_index = current_block_type_index;
 			current_block_type_index = select_block_type(ctx, dirty);
 
@@ -262,6 +263,10 @@ function create_fragment(ctx) {
 
 				transition_in(if_block, 1);
 				if_block.m(div2, null);
+			}
+
+			if (!current || dirty & /*colorbox*/ 1 && div3_class_value !== (div3_class_value = "Add-post " + /*colorbox*/ ctx[0] + " Default-containers px-lg-5 d-flex flex-column" + " svelte-1v7lf9i")) {
+				attr(div3, "class", div3_class_value);
 			}
 		},
 		i(local) {
@@ -298,7 +303,12 @@ function isValidHttpUrl(string) {
 }
 
 function instance($$self, $$props, $$invalidate) {
-	let { id, urlAPI } = $$props;
+	let { id, urlAPI, colorbox } = $$props;
+
+	if (!colorbox) {
+		colorbox = '';
+	}
+
 	let urlLink;
 	let validUrl = '';
 	let characterCount = 0;
@@ -309,7 +319,7 @@ function instance($$self, $$props, $$invalidate) {
 		: "60px";
 
 		// console.log(e.target.value.length);
-		$$invalidate(1, characterCount = e.target.value.length);
+		$$invalidate(2, characterCount = e.target.value.length);
 
 		if (e.target.value.length <= 255) {
 			characterCountSpan.classList.add('characterCount-active');
@@ -334,15 +344,15 @@ function instance($$self, $$props, $$invalidate) {
 	};
 
 	const validateUrl = e => {
-		$$invalidate(0, urlLink = '');
+		$$invalidate(1, urlLink = '');
 
 		if (urlContent) {
 			metaTitle.value = '';
 			metaDescription.value = '';
 			metaImage.src = '';
-			$$invalidate(2, urlContent = '');
+			$$invalidate(3, urlContent = '');
 			searchMeta = '';
-			$$invalidate(0, urlLink = '');
+			$$invalidate(1, urlLink = '');
 		}
 
 		if (e.target.value.includes('https') || e.target.value.includes('http')) {
@@ -352,7 +362,9 @@ function instance($$self, $$props, $$invalidate) {
 			for (let i = 0; i < searchUrl.length; i++) {
 				if (searchUrl[i].includes('https://') || searchUrl[i].includes('http://')) {
 					link = searchUrl[i];
-					$$invalidate(0, urlLink = searchUrl[i]);
+					$$invalidate(1, urlLink = searchUrl[i]);
+				} else {
+					
 				}
 			}
 
@@ -378,7 +390,6 @@ function instance($$self, $$props, $$invalidate) {
 		if (!searchMeta || url !== searchMeta) {
 			searchMeta = url;
 			const urlMeta = document.getElementById('urlMeta');
-			console.log();
 			urlMeta.classList.remove('d-none');
 
 			const getMeta = await fetch(`${urlAPI}/post/meta/`, {
@@ -390,29 +401,30 @@ function instance($$self, $$props, $$invalidate) {
 			const content = await getMeta.json();
 
 			if (content) {
-				$$invalidate(2, urlContent = content);
+				$$invalidate(3, urlContent = content);
 				validUrl = url;
 			}
 		}
 	};
 
 	const closeMetaData = () => {
-		urlMeta.classList.add('d-none');
-		metaTitle.value = '';
-		metaDescription.value = '';
-		metaImage.src = '';
-		$$invalidate(2, urlContent = '');
-		searchMeta = '';
-		$$invalidate(0, urlLink = '');
-		validUrl = '';
+		if (urlContent) {
+			urlMeta.classList.add('d-none');
+			metaTitle.value = '';
+			metaDescription.value = '';
+			metaImage.src = '';
+			$$invalidate(3, urlContent = '');
+			searchMeta = '';
+			$$invalidate(1, urlLink = '');
+			validUrl = '';
+		}
 	};
 
 	const sendPost = async () => {
 		let imagePost = '';
 
 		if (!!postImg.src) {
-			console.log('envia solo foto');
-
+			// console.log('envia solo foto')
 			const convertImageB64 = await fetch(`${urlAPI}/resources/img/`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
@@ -424,7 +436,21 @@ function instance($$self, $$props, $$invalidate) {
 		}
 
 		if (postDescription.value !== '' && imagePost === '' || postDescription.value === '' && imagePost !== '' || postDescription.value !== '' && imagePost !== '') {
-			console.log('envia img y description de la caja +', validUrl);
+			let postDescriptionClean = [];
+
+			if (postDescription.value.includes('https') || postDescription.value.includes('http')) {
+				const descriptionUrl = postDescription.value.split(' ');
+
+				descriptionUrl.forEach(string => {
+					if (!string.includes('https') || !string.includes('http')) {
+						postDescriptionClean.push(string);
+					}
+				});
+			} else {
+				postDescriptionClean.push(postDescription.value);
+			}
+
+			const joinPostDescriptionClean = postDescriptionClean.join(' ');
 
 			const post = await fetch(`${urlAPI}/post/create/`, {
 				method: 'POST',
@@ -432,7 +458,8 @@ function instance($$self, $$props, $$invalidate) {
 				body: JSON.stringify({
 					user: id,
 					img: imagePost,
-					desc: postDescription.value
+					desc: joinPostDescriptionClean,
+					url: validUrl
 				})
 			});
 
@@ -445,16 +472,20 @@ function instance($$self, $$props, $$invalidate) {
 					postImg.setAttribute('src', '');
 					postImg.classList.toggle('d-none');
 				}
+
+				closeMetaData();
 			}
 		}
 	};
 
 	$$self.$$set = $$props => {
-		if ('id' in $$props) $$invalidate(7, id = $$props.id);
-		if ('urlAPI' in $$props) $$invalidate(8, urlAPI = $$props.urlAPI);
+		if ('id' in $$props) $$invalidate(8, id = $$props.id);
+		if ('urlAPI' in $$props) $$invalidate(9, urlAPI = $$props.urlAPI);
+		if ('colorbox' in $$props) $$invalidate(0, colorbox = $$props.colorbox);
 	};
 
 	return [
+		colorbox,
 		urlLink,
 		characterCount,
 		urlContent,
@@ -470,7 +501,7 @@ function instance($$self, $$props, $$invalidate) {
 class AddPost extends SvelteComponent {
 	constructor(options) {
 		super();
-		init(this, options, instance, create_fragment, safe_not_equal, { id: 7, urlAPI: 8 });
+		init(this, options, instance, create_fragment, safe_not_equal, { id: 8, urlAPI: 9, colorbox: 0 });
 	}
 }
 

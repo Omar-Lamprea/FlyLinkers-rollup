@@ -85,13 +85,13 @@ function create_if_block_4(ctx) {
 			i = element("i");
 			t2 = space();
 			create_component(experiencesmodal.$$.fragment);
-			attr(p, "class", "svelte-1g8ohdw");
-			attr(i, "class", "fas fa-plus-circle svelte-1g8ohdw");
+			attr(p, "class", "svelte-8oqcys");
+			attr(i, "class", "fas fa-plus-circle svelte-8oqcys");
 			attr(i, "data-bs-toggle", "modal");
 			attr(i, "data-bs-target", "#modalExperience");
-			attr(div0, "class", "addExperiences text-center svelte-1g8ohdw");
-			attr(div1, "class", "Experience-content mx-3 mx-md-0 svelte-1g8ohdw");
-			attr(div2, "class", "Default-containers Experience svelte-1g8ohdw");
+			attr(div0, "class", "addExperiences text-center svelte-8oqcys");
+			attr(div1, "class", "Experience-content mx-3 mx-md-0 svelte-8oqcys");
+			attr(div2, "class", "Default-containers Experience svelte-8oqcys");
 		},
 		m(target, anchor) {
 			insert(target, div2, anchor);
@@ -160,7 +160,7 @@ function create_if_block(ctx) {
 			div2 = element("div");
 			div1 = element("div");
 			div0 = element("div");
-			div0.innerHTML = `<p class="svelte-1g8ohdw">Experience</p>`;
+			div0.innerHTML = `<p class="svelte-8oqcys">Experience</p>`;
 			t1 = space();
 
 			for (let i = 0; i < each_blocks.length; i += 1) {
@@ -169,9 +169,9 @@ function create_if_block(ctx) {
 
 			t2 = space();
 			if (if_block) if_block.c();
-			attr(div0, "class", "Experience-title svelte-1g8ohdw");
-			attr(div1, "class", "Experience-content mx-3 mx-md-0 svelte-1g8ohdw");
-			attr(div2, "class", "Default-containers Experience svelte-1g8ohdw");
+			attr(div0, "class", "Experience-title svelte-8oqcys");
+			attr(div1, "class", "Experience-content mx-3 mx-md-0 svelte-8oqcys");
+			attr(div2, "class", "Default-containers Experience svelte-8oqcys");
 		},
 		m(target, anchor) {
 			insert(target, div2, anchor);
@@ -284,12 +284,12 @@ function create_if_block_3(ctx) {
 			i0 = element("i");
 			t = space();
 			div1 = element("div");
-			div1.innerHTML = `<i class="fa-solid fa-trash svelte-1g8ohdw"></i>`;
-			attr(i0, "class", "fas fa-pen svelte-1g8ohdw");
-			attr(div0, "class", "updateExperience svelte-1g8ohdw");
+			div1.innerHTML = `<i class="fa-solid fa-trash svelte-8oqcys"></i>`;
+			attr(i0, "class", "fas fa-pen svelte-8oqcys");
+			attr(div0, "class", "updateExperience svelte-8oqcys");
 			attr(div0, "data-bs-toggle", "modal");
 			attr(div0, "data-bs-target", div0_data_bs_target_value = "#modalUpdateExperience" + /*experience*/ ctx[11].id);
-			attr(div1, "class", "deleteExperience svelte-1g8ohdw");
+			attr(div1, "class", "deleteExperience svelte-8oqcys");
 		},
 		m(target, anchor) {
 			insert(target, div0, anchor);
@@ -343,8 +343,8 @@ function create_else_block(ctx) {
 			span = element("span");
 			t1 = text(t1_value);
 			t2 = text(" - currently");
-			attr(span, "class", "svelte-1g8ohdw");
-			attr(p, "class", "svelte-1g8ohdw");
+			attr(span, "class", "svelte-8oqcys");
+			attr(p, "class", "svelte-8oqcys");
 		},
 		m(target, anchor) {
 			insert(target, p, anchor);
@@ -381,8 +381,8 @@ function create_if_block_2(ctx) {
 			t1 = text(t1_value);
 			t2 = text(" - ");
 			t3 = text(t3_value);
-			attr(span, "class", "svelte-1g8ohdw");
-			attr(p, "class", "svelte-1g8ohdw");
+			attr(span, "class", "svelte-8oqcys");
+			attr(p, "class", "svelte-8oqcys");
 		},
 		m(target, anchor) {
 			insert(target, p, anchor);
@@ -493,15 +493,15 @@ function create_each_block(ctx) {
 			hr = element("hr");
 			t16 = space();
 			create_component(updateexperiencesmodal.$$.fragment);
-			attr(span0, "class", "svelte-1g8ohdw");
-			attr(p0, "class", "svelte-1g8ohdw");
-			attr(span1, "class", "svelte-1g8ohdw");
-			attr(p1, "class", "svelte-1g8ohdw");
-			attr(span2, "class", "svelte-1g8ohdw");
-			attr(p2, "class", "svelte-1g8ohdw");
-			attr(span3, "class", "svelte-1g8ohdw");
-			attr(p3, "class", "svelte-1g8ohdw");
-			attr(p4, "class", "svelte-1g8ohdw");
+			attr(span0, "class", "svelte-8oqcys");
+			attr(p0, "class", "svelte-8oqcys");
+			attr(span1, "class", "svelte-8oqcys");
+			attr(p1, "class", "svelte-8oqcys");
+			attr(span2, "class", "svelte-8oqcys");
+			attr(p2, "class", "svelte-8oqcys");
+			attr(span3, "class", "svelte-8oqcys");
+			attr(p3, "class", "svelte-8oqcys");
+			attr(p4, "class", "svelte-8oqcys");
 			attr(div, "id", div_id_value = "experience" + /*experience*/ ctx[11].id);
 			attr(div, "data-experienceid", div_data_experienceid_value = /*experience*/ ctx[11].id);
 			attr(div, "class", "experience position-relative");
@@ -636,11 +636,11 @@ function create_if_block_1(ctx) {
 			i = element("i");
 			t2 = space();
 			create_component(experiencesmodal.$$.fragment);
-			attr(p, "class", "svelte-1g8ohdw");
-			attr(i, "class", "fas fa-plus-circle svelte-1g8ohdw");
+			attr(p, "class", "svelte-8oqcys");
+			attr(i, "class", "fas fa-plus-circle svelte-8oqcys");
 			attr(i, "data-bs-toggle", "modal");
 			attr(i, "data-bs-target", "#modalExperience");
-			attr(div, "class", "addExperiences text-center svelte-1g8ohdw");
+			attr(div, "class", "addExperiences text-center svelte-8oqcys");
 		},
 		m(target, anchor) {
 			insert(target, div, anchor);
@@ -760,27 +760,24 @@ function instance($$self, $$props, $$invalidate) {
 	component_subscribe($$self, data, value => $$invalidate(3, $data = value));
 	let experienceId;
 
-	// export async function getExperiences(){
-	//   const response = await fetch(`${urlAPI}/user/experience/?profile_id=${userProfile}`)
-	//   const content = await response.json()
-	//   data.set(content)
-	// }
-	const getDataexperiences = async () => {
-		if (experiences) {
+	// console.log(experiences);
+	const getDataexperiences = async updateExperiences => {
+		if (experiences || updateExperiences) {
 			data.set(await getExperiences(urlAPI, userProfile));
 		}
 	};
 
 	const sendDataExperience = id => {
-		console.log(id);
+		// console.log(id);
 		const btnUpdateExperience = document.getElementById(`btnUpdateExperience${id}`);
 
 		btnUpdateExperience.addEventListener('click', e => {
 			setTimeout(
 				() => {
-					getDataexperiences();
+					let updateExperiences = true;
+					getDataexperiences(updateExperiences);
 				},
-				1000
+				2000
 			);
 		});
 	};
@@ -789,9 +786,10 @@ function instance($$self, $$props, $$invalidate) {
 		btnAddExperience.addEventListener('click', e => {
 			setTimeout(
 				() => {
-					getDataexperiences();
+					let updateExperiences = true;
+					getDataexperiences(updateExperiences);
 				},
-				1000
+				2000
 			);
 		});
 	};

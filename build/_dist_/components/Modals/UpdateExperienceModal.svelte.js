@@ -1063,6 +1063,7 @@ function create_fragment(ctx) {
 			attr(input1, "name", input1_name_value = "working" + /*experience*/ ctx[0].id);
 			attr(input1, "id", input1_id_value = "working" + /*experience*/ ctx[0].id);
 			input1.checked = input1_checked_value = /*experience*/ ctx[0].working;
+			input1.disabled = true;
 			attr(input1, "class", "svelte-1r8fjdo");
 			attr(label3, "for", label3_for_value = "working" + /*experience*/ ctx[0].id);
 			attr(div8, "class", "working d-flex align-items-center");
@@ -1530,8 +1531,18 @@ function instance($$self, $$props, $$invalidate) {
 		: employment_type = employmentType;
 
 		const descriptionJob = document.getElementById(`description${experience.id}`).value;
-		console.log(userProfile, company_name, start_date, workingCheck, end_date, location, titleJob, employment_type, descriptionJob);
 
+		// console.log(
+		//   userProfile,
+		//   company_name,
+		//   start_date,
+		//   workingCheck,
+		//   end_date,
+		//   location,
+		//   titleJob,
+		//   employment_type,
+		//   descriptionJob
+		// );
 		if (userProfile !== '' && company_name !== '' && start_date !== '' && workingCheck !== '' && end_date !== '' && location !== '' && titleJob !== '' && employment_type !== '' && descriptionJob) {
 			let templateExperience;
 
@@ -1560,7 +1571,7 @@ function instance($$self, $$props, $$invalidate) {
 				};
 			}
 
-			console.log(templateExperience);
+			// console.log(templateExperience);
 			updateExperience(templateExperience);
 		} else {
 			console.error('please complete all the fields');

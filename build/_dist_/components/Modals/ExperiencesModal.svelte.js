@@ -406,6 +406,7 @@ function create_fragment(ctx) {
 			attr(input1, "type", "checkbox");
 			attr(input1, "name", "postWorking");
 			attr(input1, "id", "postWorking");
+			input1.disabled = true;
 			attr(input1, "class", "svelte-1r8fjdo");
 			attr(label3, "for", "postWorking");
 			attr(div8, "class", "working d-flex align-items-center");
@@ -817,7 +818,7 @@ function instance($$self, $$props, $$invalidate) {
 		const content = await postExperience.json();
 		console.log(content);
 
-		if (content) {
+		if (postExperience.status === 200) {
 			closeModal('modalExperience');
 		}
 	}

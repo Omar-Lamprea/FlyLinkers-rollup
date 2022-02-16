@@ -4,7 +4,6 @@
   import {getExperiences} from '../../js/getExperiences'
   import { writable } from 'svelte/store';
   import {onMount} from 'svelte'
-import { async } from 'rxjs';
 
   export let urlAPI, id, experiences, userProfile
 
@@ -35,7 +34,7 @@ import { async } from 'rxjs';
       setTimeout(() => {
         let updateExperiences = true
         getDataexperiences(updateExperiences)
-      }, 2000);
+      }, 1000);
     })
   }
 
