@@ -48,6 +48,19 @@
     }
     if(e.target.value.includes('https') || e.target.value.includes('http')){
       let searchUrl = e.target.value.split(' ')
+
+      searchUrl.forEach(url => {
+        if (url.includes('\n')) {
+          searchUrl = url.replace('\n', ' ')
+          const splitUrl = searchUrl.split(' ')
+          splitUrl.forEach(el => {
+            if (el.includes('https://') || el.includes('http://')){
+              searchUrl = [el]
+            }
+          });
+
+        }
+      });
       let link;
 
       for (let i = 0; i < searchUrl.length; i++) {

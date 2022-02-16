@@ -130,6 +130,7 @@
     const content = await postExperience.json()
     console.log(content);
     if (postExperience.status === 200) {
+      formAddNewExperience.reset()
       closeModal('modalExperience')
     }
   }
@@ -170,7 +171,7 @@
         </div>
 
         <div class="formExperience">
-          <form action="">
+          <form id="formAddNewExperience" action="">
             <div class="companyName">
               <label for="postCompanyName">Company Name*</label>
                 <input type="text" name="postCompanyName" id="postCompanyName" placeholder="Ex: FlyLinkers">
