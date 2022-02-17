@@ -1,6 +1,9 @@
 <script>
+  import getDataexperiences from '../profile/Experience.svelte'
   export let userProfile, urlAPI;
   import {closeModal} from '../../js/closeModals'
+
+
   const months = [
     {value: '0', month : 'Please select'},
     {value: '1', month : 'January'},
@@ -70,15 +73,16 @@
     //   descriptionJob
     // );
 
-    if (userProfile !== '' && company_name !== '' && start_date !== '' && workingCheck !== '' &&
-    end_date !== '' && location !== '' && titleJob !== '' && employment_type !== '' && descriptionJob) {
-      let templateExperience;
-      
-      if (workingCheck === 0) {
+    let templateExperience = {};
+    const experienceIncompleteMessage = 'please complete all the fields'
+    
+    if (workingCheck === 0) {
+      if (userProfile !== '' && company_name !== '' && start_date !== '' && end_date !== '' && location !== '' 
+      && titleJob !== '' && employment_type !== '' && descriptionJob){
         templateExperience = {
           "profile": userProfile,
           "company_name": company_name,
-          "start_date": [2020, 2],
+          "start_date": start_date,
           "working": 0,
           "end_date": end_date,
           "location": location,
@@ -86,25 +90,34 @@
           "employment_type": employment_type,
           "description": descriptionJob
         }
+        // console.log(templateExperience);
+        addNewExperience(templateExperience)
+      }else{
+        console.error(experienceIncompleteMessage);
+        alert(experienceIncompleteMessage);
       }
-      if (workingCheck === 1) {
+    }
+
+    if (workingCheck === 1) {
+      if (userProfile !== '' && company_name !== '' && start_date !== '' && location !== '' 
+      && titleJob !== '' && employment_type !== '' && descriptionJob){
         templateExperience = {
           "profile": userProfile,
           "company_name": company_name,
-          "start_date": [2020, 2],
+          "start_date": start_date,
           "working": 1,
+          "end_date": [0,0],
           "location": location,
           "title": titleJob,
           "employment_type": employment_type,
           "description": descriptionJob
         }
+        // console.log(templateExperience);
+        addNewExperience(templateExperience)
+      }else{
+        console.error(experienceIncompleteMessage);
+        alert(experienceIncompleteMessage);
       }
-      console.log(templateExperience);
-      addNewExperience(templateExperience)
-      
-    }else{
-      console.error('please complete all the fields');
-      alert('please complete all the fields');
     }
   }
 
@@ -119,7 +132,7 @@
   }
 
   async function addNewExperience (templateExperience){
-    console.log(templateExperience);
+    // console.log(templateExperience);
     const postExperience = await fetch(`${urlAPI}/user/experience/`, {
       method: 'POST',
       headers:{
@@ -128,10 +141,11 @@
       body: JSON.stringify(templateExperience)
     })
     const content = await postExperience.json()
-    console.log(content);
+    // console.log(content);
     if (postExperience.status === 200) {
       formAddNewExperience.reset()
       closeModal('modalExperience')
+      //llamar exps
     }
   }
 
@@ -214,7 +228,7 @@
             </div>
 
             <div class="working d-flex align-items-center">
-              <input type="checkbox" name="postWorking" id="postWorking" on:click={toggleEndDate} disabled>
+              <input type="checkbox" name="postWorking" id="postWorking" on:click={toggleEndDate}>
               <label for="postWorking">
                 I am currently working in this role
               </label>

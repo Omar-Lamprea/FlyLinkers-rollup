@@ -1,5 +1,4 @@
 <script>
-  import {getExperiences} from '../../js/getExperiences'
   import {closeUpdateModal} from '../../js/closeModals'
   export let userProfile, urlAPI, experience;
   // console.log(experience);
@@ -104,11 +103,14 @@
     //   descriptionJob
     // );
 
-    if (userProfile !== '' && company_name !== '' && start_date !== '' && workingCheck !== '' &&
-    end_date !== '' && location !== '' && titleJob !== '' && employment_type !== '' && descriptionJob) {
-      let templateExperience;
-      if (workingCheck === 0) {
+    let templateExperience = {};
+    const experienceIncompleteMessage = 'please complete all the fields'
+    
+    if (workingCheck === 0) {
+      if (userProfile !== '' && company_name !== '' && start_date !== '' && end_date !== '' && location !== '' 
+      && titleJob !== '' && employment_type !== '' && descriptionJob){
         templateExperience = {
+          "profile": userProfile,
           "company_name": company_name,
           "start_date": start_date,
           "working": 0,
@@ -118,24 +120,34 @@
           "employment_type": employment_type,
           "description": descriptionJob
         }
+        // console.log(templateExperience);
+        updateExperience(templateExperience)
+      }else{
+        console.error(experienceIncompleteMessage);
+        alert(experienceIncompleteMessage);
       }
-      if (workingCheck === 1) {
+    }
+
+    if (workingCheck === 1) {
+      if (userProfile !== '' && company_name !== '' && start_date !== '' && location !== '' 
+      && titleJob !== '' && employment_type !== '' && descriptionJob){
         templateExperience = {
+          "profile": userProfile,
           "company_name": company_name,
           "start_date": start_date,
           "working": 1,
+          "end_date": [0,0],
           "location": location,
           "title": titleJob,
           "employment_type": employment_type,
           "description": descriptionJob
         }
+        // console.log(templateExperience);
+        updateExperience(templateExperience)
+      }else{
+        console.error(experienceIncompleteMessage);
+        alert(experienceIncompleteMessage);
       }
-      // console.log(templateExperience);
-      updateExperience(templateExperience)
-      
-    }else{
-      console.error('please complete all the fields');
-      alert('please complete all the fields');
     }
   }
 
@@ -162,7 +174,7 @@
       body: JSON.stringify(templateExperience)
     })
     const content = await postExperience.json()
-    if (content) {
+    if (postExperience.status === 200) {
       closeUpdateModal(experience.id)
     }
   }
@@ -278,7 +290,7 @@
             </div>
 
             <div class="working d-flex align-items-center">
-              <input type="checkbox" name="working{experience.id}" id="working{experience.id}" checked={experience.working} disabled on:click={toggleEndDate}>
+              <input type="checkbox" name="working{experience.id}" id="working{experience.id}" checked={experience.working} on:click={toggleEndDate}>
               <label for="working{experience.id}">
                 I am currently working in this role
               </label>

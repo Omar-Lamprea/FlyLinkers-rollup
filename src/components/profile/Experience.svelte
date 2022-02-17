@@ -7,6 +7,7 @@
 
   export let urlAPI, id, experiences, userProfile
 
+  console.log(experiences);
   let data = writable([])
   let experienceId;
 
@@ -15,14 +16,32 @@
   // console.log(experiences);
   const getDataexperiences = async (updateExperiences)=>{
     if (experiences || updateExperiences) {
-      data.set(await getExperiences(urlAPI, userProfile))
+      console.log('run xps..');
+      const experiences = []
+      const getXp = await getExperiences(urlAPI, userProfile)
+
+      getXp.forEach(xp => {
+        const dateStart1 = xp.start_date
+        const dateStart2 = dateStart1.slice(0, -3)
+        xp.start_date = dateStart2
+
+        if (xp.end_date !== null) {
+          const dateEnd1 = xp.end_date
+          const dateEnd2 = dateEnd1.slice(0, -3)
+          xp.end_date = dateEnd2
+        }
+        
+        experiences.push(xp)
+      });
+      console.log(experiences);
+      data.set(experiences)
     }
   }
 
   const sendDataExperience = (id)=>{
     // console.log(id);
     const btnUpdateExperience = document.getElementById(`btnUpdateExperience${id}`)
-    btnUpdateExperience.addEventListener('click', e =>{
+    btnUpdateExperience.addEventListener('click', async e =>{
       setTimeout(() => {
         let updateExperiences = true
         getDataexperiences(updateExperiences)
@@ -30,11 +49,13 @@
     })
   }
   const addDataExperience = ()=>{
-    btnAddExperience.addEventListener('click', e =>{
-      setTimeout(() => {
+    const btnAddExperience = document.getElementById('btnAddExperience')
+    btnAddExperience.addEventListener('click',  e =>{
+      setTimeout( async() => {
+        console.log(btnAddExperience);
         let updateExperiences = true
-        getDataexperiences(updateExperiences)
-      }, 1000);
+        await getDataexperiences(updateExperiences)
+      }, 3000)
     })
   }
 
@@ -51,7 +72,7 @@
       container.parentNode.removeChild(container)
     }
   }
-  
+
   onMount(()=>{
     getDataexperiences()
   })
@@ -102,7 +123,8 @@
   }
 </style>
 
-{#if data}
+
+{#if experiences}
   <div class="Default-containers Experience">
     <div class="Experience-content mx-3 mx-md-0">
       <div class="Experience-title">
@@ -120,9 +142,9 @@
             {/if}
             <p>Company Name: <span>{experience.company_name}</span></p>
             {#if !experience.working}
-               <p>Dates of employments: <span>{experience.start_date} - {experience.end_date}</span></p>
+               <p>Dates of employments: <span>{experience.start_date} / {experience.end_date}</span></p>
             {:else}
-               <p>Dates of employments: <span>{experience.start_date} - currently</span></p>
+               <p>Dates of employments: <span>{experience.start_date} / currently</span></p>
             {/if}
             <p>Ubication: <span>{experience.location}</span></p>
   

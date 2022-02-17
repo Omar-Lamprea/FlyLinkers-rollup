@@ -86,34 +86,44 @@
     const btnLike = document.getElementById(`btnLike${id}`)
     const btnLove = document.getElementById(`btnLove${id}`)
 
+    
     let myLike = false
+    let userlike = []
     if (reactionsPost !== '' && !reactionsPost.Error) {
       reactionsPost.forEach(like => {
-        if (like.id !== userId) {
-          myLike = false
-        }
-        if(like.id === userId){
+        if (like.id === userId) {
           myLike = true
+          userlike.push(like)
+        }else{
+          myLike = false
         }
       });
     }
 
     let myLove = false
+    let userLove = []
     if (reactionsPost !== '' && !reactionsPost.Error) {
       reactionsPost.forEach(love => {
-        if (love.id !== userId) {
-          myLove = false
-        }
         if (love.id === userId) {
           myLove = true
+          userLove.push(love)
+        }else{
+          myLove = false
         }
       });
     }
 
+    if (userlike.length > 0 && userlike[0].id === userId) {
+      myLike = true
+    }
+    if (userLove.length > 0 && userLove[0].id === userId) {
+      myLove = true
+    }
+    console.log(myLike, reactionType);
     // update like reaction
     if (myLike && reactionType === 'fa-thumbs-up') {
       if (reactionElement === 'far') {
-        // console.log('actualizando like');
+        console.log('actualizando like');
         const like = await fetch(`${urlAPI}/post/like/?post_id=${id}&user=${userId}`,{
           method: 'PUT',
           headers: {
@@ -138,7 +148,7 @@
         }
       }
       if (reactionElement === 'fas') {
-        // console.log('actualizando dislike');
+        console.log('actualizando dislike');
         const dislike = await fetch(`${urlAPI}/post/like/?post_id=${id}&user=${userId}`,{
           method: 'PUT',
           headers: {
@@ -159,7 +169,7 @@
     // update love reaction
     if (myLove && reactionType === 'fa-heart') {
       if (reactionElement === 'far'){
-        // console.log('actualizando love');
+        console.log('actualizando love');
         const dislove = await fetch(`${urlAPI}/post/like/?post_id=${id}&user=${userId}`,{
           method: 'PUT',
           headers: {
@@ -185,7 +195,7 @@
 
       // console.log(reactionsPost, reactionType, reactionElement, userId);
       if (reactionElement === 'fas'){
-        // console.log('actualizando dislove');
+        console.log('actualizando dislove');
         const dislove = await fetch(`${urlAPI}/post/like/?post_id=${id}&user=${userId}`,{
           method: 'PUT',
           headers: {
@@ -207,7 +217,7 @@
     //new like
     if (reactionType === 'fa-thumbs-up' && reactionElement === 'far') {
       if (reactions.like === 0 && reactions.love === 0 || !myLike && !myLove) {
-        // console.log('creando like');
+        console.log('creando like');
         const createReaction = await fetch(`${urlAPI}/post/like/`,{
           method: 'POST',
           headers: {
@@ -230,7 +240,7 @@
     // new love
     if (reactionType === 'fa-heart' && reactionElement === 'far'){
       if (reactions.like === 0 && reactions.love === 0 || !myLike && !myLove) {
-        // console.log('creando love');
+        console.log('creando love');
         const createReaction = await fetch(`${urlAPI}/post/like/`,{
           method: 'POST',
           headers: {
