@@ -2,6 +2,7 @@
   import UserPotho from './UserPhoto.svelte'
   import CoverPhotoModal from '../Modals/CoverPhotoModal.svelte'
   import ProfilePhotoModal from '../Modals/ProfilePhotoModal.svelte'
+  import {friendsRequestFirebase} from '../../js/firebase/friendsRequestFirebase'
 
   export let name, last_name, title, email , photo, id, aboutMe, urlAPI;
   export let userMain;
@@ -70,7 +71,14 @@
     if (content.Detail === 'OK') {
       btnSendFriendRequest.textContent = "request sent"
       btnSendFriendRequest.setAttribute('disabled','')
+      const template = {
+        userMain : parseInt(userMain),
+        seen: false
+      }
+      friendsRequestFirebase(template, id)
     }
+
+
   }
 </script>
 

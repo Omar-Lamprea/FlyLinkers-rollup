@@ -3,6 +3,7 @@
   import active from 'svelte-spa-router/active'
   import UserPhoto from '../profile/UserPhoto.svelte'
   import startTime from '../../js/startTime.js'
+  // import {commentsFirebase} from '../../js/firebase/commentsFirebase.js'
 
   export let comment, urlAPI;
 

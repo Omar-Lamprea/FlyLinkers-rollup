@@ -17,6 +17,7 @@ import {
 	text
 } from "../../../_snowpack/pkg/svelte/internal.js";
 
+import getDataexperiences from '../profile/Experience.svelte.js';
 import { closeModal } from '../../js/closeModals.js';
 
 function get_each_context(ctx, list, i) {
@@ -49,7 +50,7 @@ function get_each_context_4(ctx, list, i) {
 	return child_ctx;
 }
 
-// (185:20) {#each months as month}
+// (199:20) {#each months as month}
 function create_each_block_4(ctx) {
 	let option;
 	let t_value = /*month*/ ctx[16].month + "";
@@ -74,7 +75,7 @@ function create_each_block_4(ctx) {
 	};
 }
 
-// (191:20) {#each yearList as year}
+// (205:20) {#each yearList as year}
 function create_each_block_3(ctx) {
 	let option;
 	let t_value = /*year*/ ctx[13] + "";
@@ -99,7 +100,7 @@ function create_each_block_3(ctx) {
 	};
 }
 
-// (202:20) {#each months as month}
+// (216:20) {#each months as month}
 function create_each_block_2(ctx) {
 	let option;
 	let t_value = /*month*/ ctx[16].month + "";
@@ -124,7 +125,7 @@ function create_each_block_2(ctx) {
 	};
 }
 
-// (208:20) {#each yearList as year}
+// (222:20) {#each yearList as year}
 function create_each_block_1(ctx) {
 	let option;
 	let t_value = /*year*/ ctx[13] + "";
@@ -149,7 +150,7 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (232:14) {#each employmentTypeList as employment}
+// (246:14) {#each employmentTypeList as employment}
 function create_each_block(ctx) {
 	let option;
 	let t_value = /*employment*/ ctx[10] + "";
@@ -406,7 +407,6 @@ function create_fragment(ctx) {
 			attr(input1, "type", "checkbox");
 			attr(input1, "name", "postWorking");
 			attr(input1, "id", "postWorking");
-			input1.disabled = true;
 			attr(input1, "class", "svelte-1r8fjdo");
 			attr(label3, "for", "postWorking");
 			attr(div8, "class", "working d-flex align-items-center");
@@ -759,14 +759,16 @@ function instance($$self, $$props, $$invalidate) {
 		//   employment_type,
 		//   descriptionJob
 		// );
-		if (userProfile !== '' && company_name !== '' && start_date !== '' && workingCheck !== '' && end_date !== '' && location !== '' && titleJob !== '' && employment_type !== '' && descriptionJob) {
-			let templateExperience;
+		let templateExperience = {};
 
-			if (workingCheck === 0) {
+		const experienceIncompleteMessage = 'please complete all the fields';
+
+		if (workingCheck === 0) {
+			if (userProfile !== '' && company_name !== '' && start_date !== '' && end_date !== '' && location !== '' && titleJob !== '' && employment_type !== '' && descriptionJob) {
 				templateExperience = {
 					"profile": userProfile,
 					company_name,
-					"start_date": [2020, 2],
+					start_date,
 					"working": 0,
 					end_date,
 					location,
@@ -774,26 +776,35 @@ function instance($$self, $$props, $$invalidate) {
 					employment_type,
 					"description": descriptionJob
 				};
-			}
 
-			if (workingCheck === 1) {
+				// console.log(templateExperience);
+				addNewExperience(templateExperience);
+			} else {
+				console.error(experienceIncompleteMessage);
+				alert(experienceIncompleteMessage);
+			}
+		}
+
+		if (workingCheck === 1) {
+			if (userProfile !== '' && company_name !== '' && start_date !== '' && location !== '' && titleJob !== '' && employment_type !== '' && descriptionJob) {
 				templateExperience = {
 					"profile": userProfile,
 					company_name,
-					"start_date": [2020, 2],
+					start_date,
 					"working": 1,
+					"end_date": [0, 0],
 					location,
 					"title": titleJob,
 					employment_type,
 					"description": descriptionJob
 				};
-			}
 
-			console.log(templateExperience);
-			addNewExperience(templateExperience);
-		} else {
-			console.error('please complete all the fields');
-			alert('please complete all the fields');
+				// console.log(templateExperience);
+				addNewExperience(templateExperience);
+			} else {
+				console.error(experienceIncompleteMessage);
+				alert(experienceIncompleteMessage);
+			}
 		}
 	};
 
@@ -808,8 +819,7 @@ function instance($$self, $$props, $$invalidate) {
 	};
 
 	async function addNewExperience(templateExperience) {
-		console.log(templateExperience);
-
+		// console.log(templateExperience);
 		const postExperience = await fetch(`${urlAPI}/user/experience/`, {
 			method: 'POST',
 			headers: { "Content-Type": "application/json" },
@@ -817,12 +827,12 @@ function instance($$self, $$props, $$invalidate) {
 		});
 
 		const content = await postExperience.json();
-		console.log(content);
 
+		// console.log(content);
 		if (postExperience.status === 200) {
 			formAddNewExperience.reset();
 			closeModal('modalExperience');
-		}
+		} //llamar exps
 	}
 
 	$$self.$$set = $$props => {

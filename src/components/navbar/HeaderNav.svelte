@@ -31,6 +31,15 @@
     window.location.href = urlLogOut;
   }
 
+
+  //read comments notifications
+  function getNotificacionComment(){
+    const comment = onSnapshot(doc(db, 'user', idStr), (doc) =>{
+      console.log(doc.data());
+    })
+  }
+  getNotificacionComment()
+
 </script>
 
 <style>

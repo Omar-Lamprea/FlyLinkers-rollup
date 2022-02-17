@@ -46,7 +46,7 @@ function get_each_context_1(ctx, list, i) {
 	return child_ctx;
 }
 
-// (530:8) {:else}
+// (540:8) {:else}
 function create_else_block_2(ctx) {
 	let div;
 	let img_1;
@@ -118,7 +118,7 @@ function create_else_block_2(ctx) {
 	};
 }
 
-// (519:8) {#if user}
+// (529:8) {#if user}
 function create_if_block_8(ctx) {
 	let div;
 	let a;
@@ -219,7 +219,7 @@ function create_if_block_8(ctx) {
 	};
 }
 
-// (550:6) {:else}
+// (560:6) {:else}
 function create_else_block(ctx) {
 	let span;
 	let each_value_1 = /*validateDesc*/ ctx[22];
@@ -277,7 +277,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (547:6) {#if validateDesc.length === 0}
+// (557:6) {#if validateDesc.length === 0}
 function create_if_block_6(ctx) {
 	let span;
 	let t;
@@ -301,7 +301,7 @@ function create_if_block_6(ctx) {
 	};
 }
 
-// (555:12) {:else}
+// (565:12) {:else}
 function create_else_block_1(ctx) {
 	let t0_value = /*stringData*/ ctx[39] + "";
 	let t0;
@@ -329,12 +329,12 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (553:12) {#if stringData.includes('https://') || stringData.includes('http://')}
+// (563:12) {#if stringData.includes('https://') || stringData.includes('http://')}
 function create_if_block_7(ctx) {
 	return { c: noop, m: noop, p: noop, d: noop };
 }
 
-// (552:10) {#each validateDesc as stringData}
+// (562:10) {#each validateDesc as stringData}
 function create_each_block_1(ctx) {
 	let show_if;
 	let if_block_anchor;
@@ -366,7 +366,7 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (565:6) {#if urlMeta}
+// (575:6) {#if urlMeta}
 function create_if_block_2(ctx) {
 	let div;
 	let a;
@@ -452,7 +452,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (568:12) {#if urlMeta.title[0]}
+// (578:12) {#if urlMeta.title[0]}
 function create_if_block_5(ctx) {
 	let h6;
 	let t_value = /*urlMeta*/ ctx[13].title[0] + "";
@@ -476,7 +476,7 @@ function create_if_block_5(ctx) {
 	};
 }
 
-// (571:12) {#if urlMeta.description[0]}
+// (581:12) {#if urlMeta.description[0]}
 function create_if_block_4(ctx) {
 	let p;
 	let t_value = /*urlMeta*/ ctx[13].description[0] + "";
@@ -500,7 +500,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (574:12) {#if urlMeta.image[0]}
+// (584:12) {#if urlMeta.image[0]}
 function create_if_block_3(ctx) {
 	let img_1;
 	let img_1_src_value;
@@ -526,7 +526,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (581:6) {#if !!img}
+// (591:6) {#if !!img}
 function create_if_block_1(ctx) {
 	let figure;
 	let img_1;
@@ -556,7 +556,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (640:6) {#if dataComment}
+// (650:6) {#if dataComment}
 function create_if_block(ctx) {
 	let each_1_anchor;
 	let current;
@@ -640,7 +640,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (641:8) {#each dataComment as comment}
+// (651:8) {#each dataComment as comment}
 function create_each_block(ctx) {
 	let comment;
 	let current;
@@ -1202,37 +1202,48 @@ function instance($$self, $$props, $$invalidate) {
 		const btnLike = document.getElementById(`btnLike${id}`);
 		const btnLove = document.getElementById(`btnLove${id}`);
 		let myLike = false;
+		let userlike = [];
 
 		if (reactionsPost !== '' && !reactionsPost.Error) {
 			reactionsPost.forEach(like => {
-				if (like.id !== userId) {
-					myLike = false;
-				}
-
 				if (like.id === userId) {
 					myLike = true;
+					userlike.push(like);
+				} else {
+					myLike = false;
 				}
 			});
 		}
 
 		let myLove = false;
+		let userLove = [];
 
 		if (reactionsPost !== '' && !reactionsPost.Error) {
 			reactionsPost.forEach(love => {
-				if (love.id !== userId) {
-					myLove = false;
-				}
-
 				if (love.id === userId) {
 					myLove = true;
+					userLove.push(love);
+				} else {
+					myLove = false;
 				}
 			});
 		}
 
+		if (userlike.length > 0 && userlike[0].id === userId) {
+			myLike = true;
+		}
+
+		if (userLove.length > 0 && userLove[0].id === userId) {
+			myLove = true;
+		}
+
+		console.log(myLike, reactionType);
+
 		// update like reaction
 		if (myLike && reactionType === 'fa-thumbs-up') {
 			if (reactionElement === 'far') {
-				// console.log('actualizando like');
+				console.log('actualizando like');
+
 				const like = await fetch(`${urlAPI}/post/like/?post_id=${id}&user=${userId}`, {
 					method: 'PUT',
 					headers: { 'Content-Type': 'application/json' },
@@ -1256,7 +1267,8 @@ function instance($$self, $$props, $$invalidate) {
 			}
 
 			if (reactionElement === 'fas') {
-				// console.log('actualizando dislike');
+				console.log('actualizando dislike');
+
 				const dislike = await fetch(`${urlAPI}/post/like/?post_id=${id}&user=${userId}`, {
 					method: 'PUT',
 					headers: { 'Content-Type': 'application/json' },
@@ -1276,7 +1288,8 @@ function instance($$self, $$props, $$invalidate) {
 		// update love reaction
 		if (myLove && reactionType === 'fa-heart') {
 			if (reactionElement === 'far') {
-				// console.log('actualizando love');
+				console.log('actualizando love');
+
 				const dislove = await fetch(`${urlAPI}/post/like/?post_id=${id}&user=${userId}`, {
 					method: 'PUT',
 					headers: { 'Content-Type': 'application/json' },
@@ -1301,7 +1314,8 @@ function instance($$self, $$props, $$invalidate) {
 
 			// console.log(reactionsPost, reactionType, reactionElement, userId);
 			if (reactionElement === 'fas') {
-				// console.log('actualizando dislove');
+				console.log('actualizando dislove');
+
 				const dislove = await fetch(`${urlAPI}/post/like/?post_id=${id}&user=${userId}`, {
 					method: 'PUT',
 					headers: { 'Content-Type': 'application/json' },
@@ -1321,7 +1335,8 @@ function instance($$self, $$props, $$invalidate) {
 		//new like
 		if (reactionType === 'fa-thumbs-up' && reactionElement === 'far') {
 			if (reactions.like === 0 && reactions.love === 0 || !myLike && !myLove) {
-				// console.log('creando like');
+				console.log('creando like');
+
 				const createReaction = await fetch(`${urlAPI}/post/like/`, {
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json' },
@@ -1341,7 +1356,8 @@ function instance($$self, $$props, $$invalidate) {
 		// new love
 		if (reactionType === 'fa-heart' && reactionElement === 'far') {
 			if (reactions.like === 0 && reactions.love === 0 || !myLike && !myLove) {
-				// console.log('creando love');
+				console.log('creando love');
+
 				const createReaction = await fetch(`${urlAPI}/post/like/`, {
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json' },

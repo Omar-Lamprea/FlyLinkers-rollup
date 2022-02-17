@@ -40,7 +40,7 @@ function get_each_context(ctx, list, i) {
 	return child_ctx;
 }
 
-// (156:2) {:else}
+// (178:2) {:else}
 function create_else_block_1(ctx) {
 	return {
 		c: noop,
@@ -52,7 +52,7 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (146:2) {#if id === parseInt(localStorage.getItem('userId'))}
+// (168:2) {#if id === parseInt(localStorage.getItem('userId'))}
 function create_if_block_4(ctx) {
 	let div2;
 	let div1;
@@ -68,7 +68,7 @@ function create_if_block_4(ctx) {
 
 	experiencesmodal = new ExperiencesModal({
 			props: {
-				userProfile: /*userProfile*/ ctx[2],
+				userProfile: /*userProfile*/ ctx[3],
 				urlAPI: /*urlAPI*/ ctx[0]
 			}
 		});
@@ -104,13 +104,13 @@ function create_if_block_4(ctx) {
 			current = true;
 
 			if (!mounted) {
-				dispose = listen(i, "click", /*addDataExperience*/ ctx[6]());
+				dispose = listen(i, "click", /*addDataExperience*/ ctx[7]());
 				mounted = true;
 			}
 		},
 		p(ctx, dirty) {
 			const experiencesmodal_changes = {};
-			if (dirty & /*userProfile*/ 4) experiencesmodal_changes.userProfile = /*userProfile*/ ctx[2];
+			if (dirty & /*userProfile*/ 8) experiencesmodal_changes.userProfile = /*userProfile*/ ctx[3];
 			if (dirty & /*urlAPI*/ 1) experiencesmodal_changes.urlAPI = /*urlAPI*/ ctx[0];
 			experiencesmodal.$set(experiencesmodal_changes);
 		},
@@ -132,7 +132,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (105:0) {#if data}
+// (127:0) {#if experiences}
 function create_if_block(ctx) {
 	let div2;
 	let div1;
@@ -141,7 +141,7 @@ function create_if_block(ctx) {
 	let t2;
 	let show_if = /*id*/ ctx[1] === parseInt(localStorage.getItem('userId'));
 	let current;
-	let each_value = /*$data*/ ctx[3];
+	let each_value = /*$data*/ ctx[4];
 	let each_blocks = [];
 
 	for (let i = 0; i < each_value.length; i += 1) {
@@ -187,8 +187,8 @@ function create_if_block(ctx) {
 			current = true;
 		},
 		p(ctx, dirty) {
-			if (dirty & /*userProfile, urlAPI, $data, removeExpeprience, sendDataExperience, id, parseInt, localStorage*/ 175) {
-				each_value = /*$data*/ ctx[3];
+			if (dirty & /*userProfile, urlAPI, $data, removeExpeprience, sendDataExperience, id, parseInt, localStorage*/ 347) {
+				each_value = /*$data*/ ctx[4];
 				let i;
 
 				for (i = 0; i < each_value.length; i += 1) {
@@ -267,7 +267,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (113:12) {#if id === parseInt(localStorage.getItem('userId'))}
+// (135:12) {#if id === parseInt(localStorage.getItem('userId'))}
 function create_if_block_3(ctx) {
 	let div0;
 	let i0;
@@ -299,10 +299,10 @@ function create_if_block_3(ctx) {
 			if (!mounted) {
 				dispose = [
 					listen(div0, "click", function () {
-						if (is_function(/*sendDataExperience*/ ctx[5](/*experience*/ ctx[11].id))) /*sendDataExperience*/ ctx[5](/*experience*/ ctx[11].id).apply(this, arguments);
+						if (is_function(/*sendDataExperience*/ ctx[6](/*experience*/ ctx[11].id))) /*sendDataExperience*/ ctx[6](/*experience*/ ctx[11].id).apply(this, arguments);
 					}),
 					listen(div1, "click", function () {
-						if (is_function(/*removeExpeprience*/ ctx[7](/*experience*/ ctx[11].id))) /*removeExpeprience*/ ctx[7](/*experience*/ ctx[11].id).apply(this, arguments);
+						if (is_function(/*removeExpeprience*/ ctx[8](/*experience*/ ctx[11].id))) /*removeExpeprience*/ ctx[8](/*experience*/ ctx[11].id).apply(this, arguments);
 					})
 				];
 
@@ -312,7 +312,7 @@ function create_if_block_3(ctx) {
 		p(new_ctx, dirty) {
 			ctx = new_ctx;
 
-			if (dirty & /*$data*/ 8 && div0_data_bs_target_value !== (div0_data_bs_target_value = "#modalUpdateExperience" + /*experience*/ ctx[11].id)) {
+			if (dirty & /*$data*/ 16 && div0_data_bs_target_value !== (div0_data_bs_target_value = "#modalUpdateExperience" + /*experience*/ ctx[11].id)) {
 				attr(div0, "data-bs-target", div0_data_bs_target_value);
 			}
 		},
@@ -326,7 +326,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (124:12) {:else}
+// (146:12) {:else}
 function create_else_block(ctx) {
 	let p;
 	let t0;
@@ -341,7 +341,7 @@ function create_else_block(ctx) {
 			t0 = text("Dates of employments: ");
 			span = element("span");
 			t1 = text(t1_value);
-			t2 = text(" - currently");
+			t2 = text(" / currently");
 			attr(span, "class", "svelte-8oqcys");
 			attr(p, "class", "svelte-8oqcys");
 		},
@@ -353,7 +353,7 @@ function create_else_block(ctx) {
 			append(span, t2);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*$data*/ 8 && t1_value !== (t1_value = /*experience*/ ctx[11].start_date + "")) set_data(t1, t1_value);
+			if (dirty & /*$data*/ 16 && t1_value !== (t1_value = /*experience*/ ctx[11].start_date + "")) set_data(t1, t1_value);
 		},
 		d(detaching) {
 			if (detaching) detach(p);
@@ -361,7 +361,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (122:12) {#if !experience.working}
+// (144:12) {#if !experience.working}
 function create_if_block_2(ctx) {
 	let p;
 	let t0;
@@ -378,7 +378,7 @@ function create_if_block_2(ctx) {
 			t0 = text("Dates of employments: ");
 			span = element("span");
 			t1 = text(t1_value);
-			t2 = text(" - ");
+			t2 = text(" / ");
 			t3 = text(t3_value);
 			attr(span, "class", "svelte-8oqcys");
 			attr(p, "class", "svelte-8oqcys");
@@ -392,8 +392,8 @@ function create_if_block_2(ctx) {
 			append(span, t3);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*$data*/ 8 && t1_value !== (t1_value = /*experience*/ ctx[11].start_date + "")) set_data(t1, t1_value);
-			if (dirty & /*$data*/ 8 && t3_value !== (t3_value = /*experience*/ ctx[11].end_date + "")) set_data(t3, t3_value);
+			if (dirty & /*$data*/ 16 && t1_value !== (t1_value = /*experience*/ ctx[11].start_date + "")) set_data(t1, t1_value);
+			if (dirty & /*$data*/ 16 && t3_value !== (t3_value = /*experience*/ ctx[11].end_date + "")) set_data(t3, t3_value);
 		},
 		d(detaching) {
 			if (detaching) detach(p);
@@ -401,7 +401,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (111:7) {#each $data as experience}
+// (133:7) {#each $data as experience}
 function create_each_block(ctx) {
 	let div;
 	let show_if = /*id*/ ctx[1] === parseInt(localStorage.getItem('userId'));
@@ -453,7 +453,7 @@ function create_each_block(ctx) {
 
 	updateexperiencesmodal = new UpdateExperiencesModal({
 			props: {
-				userProfile: /*userProfile*/ ctx[2],
+				userProfile: /*userProfile*/ ctx[3],
 				urlAPI: /*urlAPI*/ ctx[0],
 				experience: /*experience*/ ctx[11]
 			}
@@ -555,7 +555,7 @@ function create_each_block(ctx) {
 				if_block0 = null;
 			}
 
-			if ((!current || dirty & /*$data*/ 8) && t2_value !== (t2_value = /*experience*/ ctx[11].company_name + "")) set_data(t2, t2_value);
+			if ((!current || dirty & /*$data*/ 16) && t2_value !== (t2_value = /*experience*/ ctx[11].company_name + "")) set_data(t2, t2_value);
 
 			if (current_block_type === (current_block_type = select_block_type_1(ctx, dirty)) && if_block1) {
 				if_block1.p(ctx, dirty);
@@ -569,23 +569,23 @@ function create_each_block(ctx) {
 				}
 			}
 
-			if ((!current || dirty & /*$data*/ 8) && t6_value !== (t6_value = /*experience*/ ctx[11].location + "")) set_data(t6, t6_value);
-			if ((!current || dirty & /*$data*/ 8) && t9_value !== (t9_value = /*experience*/ ctx[11].title + "")) set_data(t9, t9_value);
-			if ((!current || dirty & /*$data*/ 8) && t12_value !== (t12_value = /*experience*/ ctx[11].employment_type + "")) set_data(t12, t12_value);
-			if ((!current || dirty & /*$data*/ 8) && t14_value !== (t14_value = /*experience*/ ctx[11].description + "")) set_data(t14, t14_value);
+			if ((!current || dirty & /*$data*/ 16) && t6_value !== (t6_value = /*experience*/ ctx[11].location + "")) set_data(t6, t6_value);
+			if ((!current || dirty & /*$data*/ 16) && t9_value !== (t9_value = /*experience*/ ctx[11].title + "")) set_data(t9, t9_value);
+			if ((!current || dirty & /*$data*/ 16) && t12_value !== (t12_value = /*experience*/ ctx[11].employment_type + "")) set_data(t12, t12_value);
+			if ((!current || dirty & /*$data*/ 16) && t14_value !== (t14_value = /*experience*/ ctx[11].description + "")) set_data(t14, t14_value);
 
-			if (!current || dirty & /*$data*/ 8 && div_id_value !== (div_id_value = "experience" + /*experience*/ ctx[11].id)) {
+			if (!current || dirty & /*$data*/ 16 && div_id_value !== (div_id_value = "experience" + /*experience*/ ctx[11].id)) {
 				attr(div, "id", div_id_value);
 			}
 
-			if (!current || dirty & /*$data*/ 8 && div_data_experienceid_value !== (div_data_experienceid_value = /*experience*/ ctx[11].id)) {
+			if (!current || dirty & /*$data*/ 16 && div_data_experienceid_value !== (div_data_experienceid_value = /*experience*/ ctx[11].id)) {
 				attr(div, "data-experienceid", div_data_experienceid_value);
 			}
 
 			const updateexperiencesmodal_changes = {};
-			if (dirty & /*userProfile*/ 4) updateexperiencesmodal_changes.userProfile = /*userProfile*/ ctx[2];
+			if (dirty & /*userProfile*/ 8) updateexperiencesmodal_changes.userProfile = /*userProfile*/ ctx[3];
 			if (dirty & /*urlAPI*/ 1) updateexperiencesmodal_changes.urlAPI = /*urlAPI*/ ctx[0];
-			if (dirty & /*$data*/ 8) updateexperiencesmodal_changes.experience = /*experience*/ ctx[11];
+			if (dirty & /*$data*/ 16) updateexperiencesmodal_changes.experience = /*experience*/ ctx[11];
 			updateexperiencesmodal.$set(updateexperiencesmodal_changes);
 		},
 		i(local) {
@@ -607,7 +607,7 @@ function create_each_block(ctx) {
 	};
 }
 
-// (137:2) {#if id === parseInt(localStorage.getItem('userId'))}
+// (159:2) {#if id === parseInt(localStorage.getItem('userId'))}
 function create_if_block_1(ctx) {
 	let div;
 	let p;
@@ -621,7 +621,7 @@ function create_if_block_1(ctx) {
 
 	experiencesmodal = new ExperiencesModal({
 			props: {
-				userProfile: /*userProfile*/ ctx[2],
+				userProfile: /*userProfile*/ ctx[3],
 				urlAPI: /*urlAPI*/ ctx[0]
 			}
 		});
@@ -651,13 +651,13 @@ function create_if_block_1(ctx) {
 			current = true;
 
 			if (!mounted) {
-				dispose = listen(i, "click", /*addDataExperience*/ ctx[6]());
+				dispose = listen(i, "click", /*addDataExperience*/ ctx[7]());
 				mounted = true;
 			}
 		},
 		p(ctx, dirty) {
 			const experiencesmodal_changes = {};
-			if (dirty & /*userProfile*/ 4) experiencesmodal_changes.userProfile = /*userProfile*/ ctx[2];
+			if (dirty & /*userProfile*/ 8) experiencesmodal_changes.userProfile = /*userProfile*/ ctx[3];
 			if (dirty & /*urlAPI*/ 1) experiencesmodal_changes.urlAPI = /*urlAPI*/ ctx[0];
 			experiencesmodal.$set(experiencesmodal_changes);
 		},
@@ -690,7 +690,7 @@ function create_fragment(ctx) {
 
 	function select_block_type(ctx, dirty) {
 		if (dirty & /*id*/ 2) show_if = null;
-		if (/*data*/ ctx[4]) return 0;
+		if (/*experiences*/ ctx[2]) return 0;
 		if (show_if == null) show_if = !!(/*id*/ ctx[1] === parseInt(localStorage.getItem('userId')));
 		if (show_if) return 1;
 		return 2;
@@ -755,14 +755,34 @@ function create_fragment(ctx) {
 function instance($$self, $$props, $$invalidate) {
 	let $data;
 	let { urlAPI, id, experiences, userProfile } = $$props;
+	console.log(experiences);
 	let data = writable([]);
-	component_subscribe($$self, data, value => $$invalidate(3, $data = value));
+	component_subscribe($$self, data, value => $$invalidate(4, $data = value));
 	let experienceId;
 
 	// console.log(experiences);
 	const getDataexperiences = async updateExperiences => {
 		if (experiences || updateExperiences) {
-			data.set(await getExperiences(urlAPI, userProfile));
+			console.log('run xps..');
+			const experiences = [];
+			const getXp = await getExperiences(urlAPI, userProfile);
+
+			getXp.forEach(xp => {
+				const dateStart1 = xp.start_date;
+				const dateStart2 = dateStart1.slice(0, -3);
+				xp.start_date = dateStart2;
+
+				if (xp.end_date !== null) {
+					const dateEnd1 = xp.end_date;
+					const dateEnd2 = dateEnd1.slice(0, -3);
+					xp.end_date = dateEnd2;
+				}
+
+				experiences.push(xp);
+			});
+
+			console.log(experiences);
+			data.set(experiences);
 		}
 	};
 
@@ -770,7 +790,7 @@ function instance($$self, $$props, $$invalidate) {
 		// console.log(id);
 		const btnUpdateExperience = document.getElementById(`btnUpdateExperience${id}`);
 
-		btnUpdateExperience.addEventListener('click', e => {
+		btnUpdateExperience.addEventListener('click', async e => {
 			setTimeout(
 				() => {
 					let updateExperiences = true;
@@ -782,13 +802,16 @@ function instance($$self, $$props, $$invalidate) {
 	};
 
 	const addDataExperience = () => {
+		const btnAddExperience = document.getElementById('btnAddExperience');
+
 		btnAddExperience.addEventListener('click', e => {
 			setTimeout(
-				() => {
+				async () => {
+					console.log(btnAddExperience);
 					let updateExperiences = true;
-					getDataexperiences(updateExperiences);
+					await getDataexperiences(updateExperiences);
 				},
-				1000
+				3000
 			);
 		});
 	};
@@ -815,20 +838,20 @@ function instance($$self, $$props, $$invalidate) {
 	$$self.$$set = $$props => {
 		if ('urlAPI' in $$props) $$invalidate(0, urlAPI = $$props.urlAPI);
 		if ('id' in $$props) $$invalidate(1, id = $$props.id);
-		if ('experiences' in $$props) $$invalidate(8, experiences = $$props.experiences);
-		if ('userProfile' in $$props) $$invalidate(2, userProfile = $$props.userProfile);
+		if ('experiences' in $$props) $$invalidate(2, experiences = $$props.experiences);
+		if ('userProfile' in $$props) $$invalidate(3, userProfile = $$props.userProfile);
 	};
 
 	return [
 		urlAPI,
 		id,
+		experiences,
 		userProfile,
 		$data,
 		data,
 		sendDataExperience,
 		addDataExperience,
-		removeExpeprience,
-		experiences
+		removeExpeprience
 	];
 }
 
@@ -839,8 +862,8 @@ class Experience extends SvelteComponent {
 		init(this, options, instance, create_fragment, safe_not_equal, {
 			urlAPI: 0,
 			id: 1,
-			experiences: 8,
-			userProfile: 2
+			experiences: 2,
+			userProfile: 3
 		});
 	}
 }

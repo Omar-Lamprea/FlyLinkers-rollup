@@ -4,12 +4,17 @@
   import Comment from './Comment.svelte'
   import startTime from '../../js/startTime.js'
   import { onMount } from "svelte";
+  import {commentsFirebase} from '../../js/firebase/commentsFirebase.js'
+
 
   export let userId;
   export let desc, reactions, img, comments, create_time, user, id, user_id, update_time;
   export let name, middle_name, last_name, title, photo, email;
   export let userMain, urlAPI, url;
   // console.log(url);
+
+  
+
   let userLink;
 
   if (userId === undefined) {
@@ -26,6 +31,8 @@
     user = ''
     userLink = email
   }
+
+  
 
   userId = parseInt(userId)
   userMain = parseInt(userMain)
@@ -304,6 +311,7 @@
   
   const addComment = async (e)=>{
     e.preventDefault()
+
     const inputAddComment = document.getElementById(`inputAddComment${id}`)
     const response = await fetch(`${urlAPI}/post/comment/`,{
       method: 'POST',
@@ -316,12 +324,48 @@
           post_id: id
         })
     })
+    
     const content = await response.json()
     if (content) {
       inputAddComment.value = ''
       comments += 1
-      getCommets()
+      await getCommets()
+
+      let aux;
+      if (user.length === 0) {
+        aux = user_id
+        console.log('llegue al else');
+      }else{
+        aux = user.id
+      }
+      
+      console.log('despues del if:', aux, userId);
+      if (aux !== userId ) {
+        
+        let userDataComment = 0
+        if (dataComment.length > 0) {
+          userDataComment = dataComment[dataComment.length - 1]
+        }else{
+          userDataComment = dataComment[0]
+        }
+
+        const commentUserFirebase = {
+          userId: userId,
+          comment: userDataComment.comment,
+          nombre: userDataComment.user.name + userDataComment.user.last_name,
+          photo: userDataComment.user.photo,
+          idPost: id,
+          seen: false
+        }
+
+        commentsFirebase(commentUserFirebase, aux)
+      }
     }
+
+    // console.log(user_id);
+    // console.log('antes del if:', user.id, userId);
+    
+    
   }
 
   

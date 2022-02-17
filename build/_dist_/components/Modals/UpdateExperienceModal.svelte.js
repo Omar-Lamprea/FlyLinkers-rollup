@@ -17,7 +17,6 @@ import {
 	text
 } from "../../../_snowpack/pkg/svelte/internal.js";
 
-import { getExperiences } from '../../js/getExperiences.js';
 import { closeUpdateModal } from '../../js/closeModals.js';
 
 function get_each_context(ctx, list, i) {
@@ -62,7 +61,7 @@ function get_each_context_6(ctx, list, i) {
 	return child_ctx;
 }
 
-// (218:22) {#if joinStartMonth === month.value}
+// (230:22) {#if joinStartMonth === month.value}
 function create_if_block_7(ctx) {
 	let option;
 	let t_value = /*month*/ ctx[24].month + "";
@@ -88,7 +87,7 @@ function create_if_block_7(ctx) {
 	};
 }
 
-// (217:20) {#each months as month}
+// (229:20) {#each months as month}
 function create_each_block_6(ctx) {
 	let option;
 	let t_value = /*month*/ ctx[24].month + "";
@@ -119,7 +118,7 @@ function create_each_block_6(ctx) {
 	};
 }
 
-// (227:22) {#if parseInt(dataStartYear) === year}
+// (239:22) {#if parseInt(dataStartYear) === year}
 function create_if_block_6(ctx) {
 	let option;
 	let t_value = /*year*/ ctx[21] + "";
@@ -145,7 +144,7 @@ function create_if_block_6(ctx) {
 	};
 }
 
-// (226:20) {#each yearList as year}
+// (238:20) {#each yearList as year}
 function create_each_block_5(ctx) {
 	let show_if = parseInt(/*dataStartYear*/ ctx[3]) === /*year*/ ctx[21];
 	let option;
@@ -177,7 +176,7 @@ function create_each_block_5(ctx) {
 	};
 }
 
-// (257:18) {:else}
+// (269:18) {:else}
 function create_else_block(ctx) {
 	let select0;
 	let select0_name_value;
@@ -317,7 +316,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (239:18) {#if !experience.working}
+// (251:18) {#if !experience.working}
 function create_if_block_1(ctx) {
 	let select0;
 	let select0_name_value;
@@ -455,7 +454,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (260:24) {#if joinEndMonth === month.value}
+// (272:24) {#if joinEndMonth === month.value}
 function create_if_block_5(ctx) {
 	let option;
 	let t_value = /*month*/ ctx[24].month + "";
@@ -481,7 +480,7 @@ function create_if_block_5(ctx) {
 	};
 }
 
-// (259:22) {#each months as month}
+// (271:22) {#each months as month}
 function create_each_block_4(ctx) {
 	let option;
 	let t_value = /*month*/ ctx[24].month + "";
@@ -523,7 +522,7 @@ function create_each_block_4(ctx) {
 	};
 }
 
-// (269:24) {#if parseInt(dataEndYear) === year}
+// (281:24) {#if parseInt(dataEndYear) === year}
 function create_if_block_4(ctx) {
 	let option;
 	let t_value = /*year*/ ctx[21] + "";
@@ -549,7 +548,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (268:22) {#each yearList as year}
+// (280:22) {#each yearList as year}
 function create_each_block_3(ctx) {
 	let show_if = parseInt(/*dataEndYear*/ ctx[1]) === /*year*/ ctx[21];
 	let option;
@@ -594,7 +593,7 @@ function create_each_block_3(ctx) {
 	};
 }
 
-// (242:25) {#if joinEndMonth === month.value}
+// (254:25) {#if joinEndMonth === month.value}
 function create_if_block_3(ctx) {
 	let option;
 	let t_value = /*month*/ ctx[24].month + "";
@@ -620,7 +619,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (241:23) {#each months as month}
+// (253:23) {#each months as month}
 function create_each_block_2(ctx) {
 	let option;
 	let t_value = /*month*/ ctx[24].month + "";
@@ -662,7 +661,7 @@ function create_each_block_2(ctx) {
 	};
 }
 
-// (251:25) {#if parseInt(dataEndYear) === year}
+// (263:25) {#if parseInt(dataEndYear) === year}
 function create_if_block_2(ctx) {
 	let option;
 	let t_value = /*year*/ ctx[21] + "";
@@ -688,7 +687,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (250:23) {#each yearList as year}
+// (262:23) {#each yearList as year}
 function create_each_block_1(ctx) {
 	let show_if = parseInt(/*dataEndYear*/ ctx[1]) === /*year*/ ctx[21];
 	let option;
@@ -733,7 +732,7 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (297:16) {#if experience.employment_type === employment}
+// (309:16) {#if experience.employment_type === employment}
 function create_if_block(ctx) {
 	let option;
 	let t_value = /*employment*/ ctx[18] + "";
@@ -759,7 +758,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (296:14) {#each employmentTypeList as employment}
+// (308:14) {#each employmentTypeList as employment}
 function create_each_block(ctx) {
 	let option;
 	let t_value = /*employment*/ ctx[18] + "";
@@ -1063,7 +1062,6 @@ function create_fragment(ctx) {
 			attr(input1, "name", input1_name_value = "working" + /*experience*/ ctx[0].id);
 			attr(input1, "id", input1_id_value = "working" + /*experience*/ ctx[0].id);
 			input1.checked = input1_checked_value = /*experience*/ ctx[0].working;
-			input1.disabled = true;
 			attr(input1, "class", "svelte-1r8fjdo");
 			attr(label3, "for", label3_for_value = "working" + /*experience*/ ctx[0].id);
 			attr(div8, "class", "working d-flex align-items-center");
@@ -1543,11 +1541,14 @@ function instance($$self, $$props, $$invalidate) {
 		//   employment_type,
 		//   descriptionJob
 		// );
-		if (userProfile !== '' && company_name !== '' && start_date !== '' && workingCheck !== '' && end_date !== '' && location !== '' && titleJob !== '' && employment_type !== '' && descriptionJob) {
-			let templateExperience;
+		let templateExperience = {};
 
-			if (workingCheck === 0) {
+		const experienceIncompleteMessage = 'please complete all the fields';
+
+		if (workingCheck === 0) {
+			if (userProfile !== '' && company_name !== '' && start_date !== '' && end_date !== '' && location !== '' && titleJob !== '' && employment_type !== '' && descriptionJob) {
 				templateExperience = {
+					"profile": userProfile,
 					company_name,
 					start_date,
 					"working": 0,
@@ -1557,25 +1558,35 @@ function instance($$self, $$props, $$invalidate) {
 					employment_type,
 					"description": descriptionJob
 				};
-			}
 
-			if (workingCheck === 1) {
+				// console.log(templateExperience);
+				updateExperience(templateExperience);
+			} else {
+				console.error(experienceIncompleteMessage);
+				alert(experienceIncompleteMessage);
+			}
+		}
+
+		if (workingCheck === 1) {
+			if (userProfile !== '' && company_name !== '' && start_date !== '' && location !== '' && titleJob !== '' && employment_type !== '' && descriptionJob) {
 				templateExperience = {
+					"profile": userProfile,
 					company_name,
 					start_date,
 					"working": 1,
+					"end_date": [0, 0],
 					location,
 					"title": titleJob,
 					employment_type,
 					"description": descriptionJob
 				};
-			}
 
-			// console.log(templateExperience);
-			updateExperience(templateExperience);
-		} else {
-			console.error('please complete all the fields');
-			alert('please complete all the fields');
+				// console.log(templateExperience);
+				updateExperience(templateExperience);
+			} else {
+				console.error(experienceIncompleteMessage);
+				alert(experienceIncompleteMessage);
+			}
 		}
 	};
 
@@ -1602,7 +1613,7 @@ function instance($$self, $$props, $$invalidate) {
 
 		const content = await postExperience.json();
 
-		if (content) {
+		if (postExperience.status === 200) {
 			closeUpdateModal(experience.id);
 		}
 	}
