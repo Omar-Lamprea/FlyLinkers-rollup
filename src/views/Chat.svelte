@@ -197,7 +197,7 @@
     </div>
 
     <div class="messageText d-flex">
-      <input id="inputMessage" type="text" placeholder="write a message" on:keyup={sendMessage}>
+      <input id="inputMessage" type="text" placeholder="write a message" autocomplete="off" on:keyup={sendMessage}>
       <button id="btnSentMessage" class="btn-sendMessage" on:click={sendMessage}>
         <i class="fas fa-paper-plane"></i>
       </button>

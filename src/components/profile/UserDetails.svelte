@@ -38,6 +38,7 @@
   let friend = false;
   let friendRequest = false
   const searchFriends = async ()=>{
+
     const response = await fetch(`${urlAPI}/friend/user/?user=${userMain}`)
     const content = await response.json()
     content.forEach(el => {
@@ -49,11 +50,20 @@
     const getfriendRequest = await fetch(`${urlAPI}/friend/request/?user_id=${id}`)
     const requests = await getfriendRequest.json()
     requests.forEach(el =>{
-      if (el.id === userMain) {
+      if (el.id === parseInt(userMain)) {
+        friendRequest = true
+      }
+    })
+
+    const getMyFriendsRequest = await fetch(`${urlAPI}/friend/request/?user_id=${userMain}`)
+    const requestsFriend = await getMyFriendsRequest.json()
+    requestsFriend.forEach(el =>{
+      if (el.id === id) {
         friendRequest = true
       }
     })
   }
+
 
   const sendFriendRequest = async()=>{
     const response = await fetch(`${urlAPI}/friend/request/`,{

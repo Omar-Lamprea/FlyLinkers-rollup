@@ -8,37 +8,59 @@
   import { collection,orderBy, query, doc, onSnapshot} from 'firebase/firestore';
   import { writable } from 'svelte/store';
   
-  import Notifications from './NotificationsHeader.svelte'
+  // import Notifications from './NotificationsHeader.svelte'
+  import Notifications from './notifications/Notifications.svelte'
+  import FriendRequest from './notifications/FriendRequest.svelte'
   import ChatList from './chatList/ChatList.svelte'
 
   export let photo, id;
   export let urlLogOut, urlAPI;
 
-  let usergroups = writable([]);
   let idStr = id.toString()
-
+  
+  let usergroups = writable([]);
+  let notificationsFriends = writable([])
+  let notificationsComments = writable([])
   let newChat;
-  function getUserDoc(){
+
+  //read chats notifications
+  function getGroupsChatNotificacions(){
     const userDoc = onSnapshot(doc(db, 'user', idStr), (doc) => {
       usergroups.set(doc.data().groups)
       newChat = doc.data().groups.length
     })
   }
-  getUserDoc(usergroups)
+  getGroupsChatNotificacions(usergroups)
+
+  //read comments notifications
+  function getCommentsNotifications(){
+    const comment = onSnapshot(doc(db, 'user', idStr), (doc) =>{
+      const commentsList = doc.data().comments
+      if (commentsList !== undefined) {
+        console.log('comments:', commentsList);
+        notificationsComments.set(commentsList)
+      }
+    })
+  }
+  getCommentsNotifications()
+
+
+  //read friend request notifications
+  function getFriendRequestNotificacions(){
+    const friendRequest = onSnapshot(doc(db, 'user', idStr), (doc) =>{
+      const friendsList = doc.data().friends
+      if (friendsList !== undefined) {
+        // console.log('requests:', friendsList);
+        notificationsFriends.set(friendsList)
+      }
+    })
+  }
+  getFriendRequestNotificacions()
 
   const logOut = ()=>{
     localStorage.clear();
     window.location.href = urlLogOut;
   }
-
-
-  //read comments notifications
-  function getNotificacionComment(){
-    const comment = onSnapshot(doc(db, 'user', idStr), (doc) =>{
-      console.log(doc.data());
-    })
-  }
-  getNotificacionComment()
 
 </script>
 
@@ -102,10 +124,8 @@
       <i class="fas fa-home"></i>
     </a>
   </div>
-  <div class="icon Header-nav-user-plus mx-3 fs-3">
-    <a href="/" use:link use:active>
-      <i class="fas fa-user-plus"></i>
-    </a>
+  <div class="icon Header-nav-user-plus notification mx-3 fs-3">
+    <FriendRequest {id} {urlAPI}/>
   </div>
   <div class="icon Header-nav-briefcase hidden mx-3 fs-3">
     <a href="/" use:link use:active>
@@ -129,7 +149,24 @@
     </ul>
   </div>
   <div class="icon Header-nav-bell mx-3 fs-3 notification" id="notification">
-    <Notifications {id} {urlAPI}/>
+    <div class="dropdown">
+      <i class="fas fa-bell dropdown-toggle" id="notifications" data-bs-toggle="dropdown" aria-expanded="false"></i>
+      <!-- {#if notifications >= 1}
+         <div class="notifications">{notifications}</div>
+      {/if} -->
+      
+      <ul class="dropdown-menu" aria-labelledby="notifications">
+        {#each $notificationsComments as comment}
+          <Notifications {comment}/>
+        {/each}
+        {#each $notificationsFriends as friend}
+          <Notifications {friend}/>
+        {/each}
+      </ul>
+    </div>
+
+
+    <!-- <Notifications {id} {urlAPI}/> -->
   </div>
   <div class="icon Header-nav-user mx-3 fs-3">
     <a href="/profile" use:link use:active>

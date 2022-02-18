@@ -3,7 +3,6 @@
   import active from 'svelte-spa-router/active'
 
   import HeaderNav from "./navbar/HeaderNav.svelte";
-  import HeaderNavMobile from "./navbar/HeaderNavMobile.svelte"
   import Loader from './Loader.svelte'
 
   export let photo, id;
@@ -94,6 +93,7 @@
     background-color: white;
     border-radius: 5px;
     padding: 4px 0;
+    z-index: 100;
   }
   .dropdown-search li{
     list-style: none;
