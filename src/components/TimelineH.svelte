@@ -69,6 +69,7 @@
        <AddPost {id} {urlAPI} {colorbox}/>
     {/if}
     {#each $posts as dataPost}
+    {console.log(dataPost)}
       <Post {...dataPost} {userId} {urlAPI}/>
     {/each}
 

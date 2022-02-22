@@ -30,6 +30,14 @@ label {
 	display: block;
 }
 
+.modal-backdrop{
+	position: relative;
+}
+.modal{
+	background-color: rgba(0, 0, 0, 0.5);
+	color: rgba(38, 38, 38, 07);
+}
+
 input, button, select, textarea {
 	font-family: inherit;
 	font-size: inherit;

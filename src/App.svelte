@@ -148,6 +148,7 @@
     color: var(--main-color);
     border: 1px solid #199aaf;
   }
+  
   main{
     padding-top: 14rem;
     padding-bottom: 5rem;
@@ -160,9 +161,9 @@
     :global(.Default-containers){
       padding: 1rem 0;
     }
-  :global(.Default-containers-grey){
-    padding: 1rem 0;
-  }
+    :global(.Default-containers-grey){
+      padding: 1rem 0;
+    }
   }
 </style>
 

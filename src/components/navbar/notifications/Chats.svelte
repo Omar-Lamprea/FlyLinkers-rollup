@@ -18,7 +18,6 @@
     const groupId = await validateGroup(user1, user2)
     const lastMessage = await getMessage(groupId)
     message = lastMessage[0].messageText
-    // console.log(lastMessage[0].messageText);
   }
 
   const getUserChat = async() =>{

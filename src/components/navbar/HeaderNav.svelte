@@ -1,6 +1,7 @@
 <script>
   import {link} from 'svelte-spa-router';
   import active from 'svelte-spa-router/active'
+  import { onMount } from 'svelte';
 
   import {db} from '../../js/firebase/config.js'
   import {collectionData} from 'rxfire/firestore'
@@ -11,7 +12,9 @@
   // import Notifications from './NotificationsHeader.svelte'
   import Notifications from './notifications/Notifications.svelte'
   import FriendRequest from './notifications/FriendRequest.svelte'
-  import ChatList from './chatList/ChatList.svelte'
+  import ChatList from './notifications/Chats.svelte'
+  import PostModal from '../Modals/PostModal.svelte'
+  
 
   export let photo, id;
   export let urlLogOut, urlAPI;
@@ -19,47 +22,103 @@
   let idStr = id.toString()
   
   let usergroups = writable([]);
-  let notificationsFriends = writable([])
-  let notificationsComments = writable([])
   let newChat;
 
-  //read chats notifications
-  function getGroupsChatNotificacions(){
-    const userDoc = onSnapshot(doc(db, 'user', idStr), (doc) => {
-      usergroups.set(doc.data().groups)
-      newChat = doc.data().groups.length
-    })
-  }
-  getGroupsChatNotificacions(usergroups)
+  let notificationsFriends = writable([])
+  let notificationsComments = writable([])
 
-  //read comments notifications
-  function getCommentsNotifications(){
-    const comment = onSnapshot(doc(db, 'user', idStr), (doc) =>{
-      const commentsList = doc.data().comments
-      if (commentsList !== undefined) {
-        console.log('comments:', commentsList);
-        notificationsComments.set(commentsList)
+  let notificationsList = []
+
+  function getUserNotifications(){
+    const notifications = onSnapshot(doc(db, 'user', idStr), (notification)=>{
+      notificationsList = []
+      const data = notification.data()
+      const idChats = data.groups
+      const friendsRequests = data.friends
+      const comments = data.comments
+      const reactions = data.reactions
+
+      //read Chats
+      if (idChats !== undefined) {
+        usergroups.set(idChats)
+        newChat = idChats.length
       }
-    })
-  }
-  getCommentsNotifications()
 
-
-  //read friend request notifications
-  function getFriendRequestNotificacions(){
-    const friendRequest = onSnapshot(doc(db, 'user', idStr), (doc) =>{
-      const friendsList = doc.data().friends
-      if (friendsList !== undefined) {
-        // console.log('requests:', friendsList);
-        notificationsFriends.set(friendsList)
+      //read Comments
+      if (comments !== undefined){
+        comments.forEach(comment => {
+          const obj = {
+            photo: comment.photo,
+            name: comment.name,
+            desc: 'has commented your post',
+            date : comment.create_at.toDate(),
+            id: comment.post_id
+          }
+          notificationsList.push(obj)
+        });
       }
+
+      //read friends requests
+      if (friendsRequests !== undefined) {
+        friendsRequests.forEach(request => {
+          const obj = {
+            photo: request.photo,
+            name: request.name,
+            desc: 'has sent you a friend request',
+            date : request.create_at.toDate(),
+            id: request.email,
+          }
+          notificationsList.push(obj)
+        });
+      }
+
+      //read reactions
+      if (reactions !== undefined) {
+        console.log(reactions);
+      }
+
+      updateNotifications()
     })
   }
-  getFriendRequestNotificacions()
+  
+
+  const updateNotifications = () =>{
+    notificationsList.sort(function(a, b){
+      return b.date - a.date
+    })
+    console.log(notificationsList);
+  }
+
+  // setTimeout(() => {
+  //   updateNotifications()
+  // }, 2000);
 
   const logOut = ()=>{
     localStorage.clear();
     window.location.href = urlLogOut;
+  }
+
+  onMount(()=>{
+    getUserNotifications()
+  })
+
+
+  function visitProfile(email){
+    localStorage.setItem('visitProfile', email)
+  }
+
+  let postId = 0
+  let data;
+  async function openPost(id){
+    postId = id
+    console.log(postId);
+
+    const response = await fetch(`${urlAPI}/post/create/?post_id=${postId}`)
+    if (response.status === 200) {
+      const content = await response.json()
+      data = content
+      console.log(data);
+    }
   }
 
 </script>
@@ -98,6 +157,24 @@
     width: 20px;
     text-align: center;
     color: white;
+  }
+
+  .notificationsList{
+    cursor: pointer;
+  }
+  .notificationsList img{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 30px;
+    margin-right: 1rem;
+  }
+  .notificationsList .notification-user-name{
+    color: var(--main-color);
+    font-weight: bold;
+  }
+  .notificationsList a{
+    color: inherit;
   }
   @media screen and (max-width: 1200px){
     .nav-container{
@@ -154,13 +231,29 @@
       <!-- {#if notifications >= 1}
          <div class="notifications">{notifications}</div>
       {/if} -->
-      
       <ul class="dropdown-menu" aria-labelledby="notifications">
-        {#each $notificationsComments as comment}
-          <Notifications {comment}/>
-        {/each}
-        {#each $notificationsFriends as friend}
-          <Notifications {friend}/>
+        {#each notificationsList as notification}
+          <!-- friendRequest -->
+          {#if typeof(notification.id) === 'string'}
+             <li class="d-flex notificationsList dropdown-item" data-email={notification.id}>
+              <a on:click={visitProfile(notification.id)} href="/profile/{notification.id}" use:link use:active class="d-flex">
+                <img src="{urlAPI}/{notification.photo}" alt="userImage">
+                <span>
+                  <p class="notification-user-name">{notification.name}</p>
+                  <p>{notification.desc}</p>
+                </span>
+              </a>
+            </li>
+          {:else}
+            <!-- comment or reaction post -->
+             <li class="d-flex notificationsList dropdown-item" data-id={notification.id} on:click={openPost(notification.id)} data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <img src="{urlAPI}/{notification.photo}" alt="userImage">
+              <span>
+                <p class="notification-user-name">{notification.name}</p>
+                <p>{notification.desc}</p>
+              </span>
+            </li>
+          {/if}
         {/each}
       </ul>
     </div>
@@ -194,3 +287,10 @@
     </a>
   </div>
 </nav>
+
+
+
+{#if data}
+   <!-- content here -->
+{/if}
+<PostModal {postId} {urlAPI} {data}/>

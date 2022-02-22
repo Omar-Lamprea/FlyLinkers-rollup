@@ -5,6 +5,7 @@
   import startTime from '../../js/startTime.js'
   import { onMount } from "svelte";
   import {commentsFirebase} from '../../js/firebase/commentsFirebase.js'
+  import {reactionsFirebase} from '../../js/firebase/reactionsFirebase.js'
 
 
   export let userId;
@@ -13,7 +14,8 @@
   export let userMain, urlAPI, url;
   // console.log(url);
 
-  
+  // console.log(userId, user);
+
 
   let userLink;
 
@@ -36,6 +38,7 @@
 
   userId = parseInt(userId)
   userMain = parseInt(userMain)
+
 
   const viewUserProfile = () => {
     if (user) {
@@ -237,11 +240,39 @@
           })
         })
         const response = createReaction.json()
-          if (response) {
-            reactions.like += 1
-            likeAcount.textContent = reactions.like
-            toggleReaction()
+        if (response) {
+          reactions.like += 1
+          likeAcount.textContent = reactions.like
+          toggleReaction()
+
+          let aux;
+          if (user.length === 0) {
+            aux = user_id
+          }else{
+            aux = user.id
           }
+          console.log(reactionsPost, aux);
+          if (aux !== userId ) {
+            let userDataReaction = 0
+            if (reactionsPost.length > 0) {
+              userDataReaction = reactionsPost[reactionsPost.length - 1]
+            }else{
+              userDataReaction = reactionsPost[0]
+            }
+
+            console.log(reactionsPost);
+            const template = {
+            user_id: userId,
+            name: userDataReaction.user.name + ' ' + userDataReaction.user.last_name,
+            photo: userDataReaction.user.photo,
+            create_at: new Date(),
+            seen: false,
+            post_id: id
+          }
+          console.log(template, aux);
+          // reactionsFirebase(template, aux)
+          }
+        }
       }
     }
     // new love
@@ -264,9 +295,12 @@
           reactions.love += 1
           loveAcount.textContent = reactions.love
           toggleReaction()
+          reactionsFirebase()
         }
       }
     }
+
+
 
     
     function toggleReaction(){
@@ -331,15 +365,14 @@
       comments += 1
       await getCommets()
 
+
       let aux;
       if (user.length === 0) {
         aux = user_id
-        console.log('llegue al else');
       }else{
         aux = user.id
       }
-      
-      console.log('despues del if:', aux, userId);
+
       if (aux !== userId ) {
         
         let userDataComment = 0
@@ -350,12 +383,13 @@
         }
 
         const commentUserFirebase = {
-          userId: userId,
+          user_id: userId,
           comment: userDataComment.comment,
-          nombre: userDataComment.user.name + userDataComment.user.last_name,
+          name: userDataComment.user.name + ' ' + userDataComment.user.last_name,
           photo: userDataComment.user.photo,
-          idPost: id,
-          seen: false
+          post_id: id,
+          seen: false,
+          create_at: new Date()
         }
 
         commentsFirebase(commentUserFirebase, aux)
@@ -368,6 +402,7 @@
     
   }
 
+  
   
   let urlMeta;
   let urlLink;

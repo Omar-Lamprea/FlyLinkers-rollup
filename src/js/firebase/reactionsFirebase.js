@@ -1,7 +1,7 @@
 import {db} from './config.js'
 import { getFirestore, collection, where, query, getDocs, getDoc, setDoc, addDoc, doc, updateDoc, orderBy, onSnapshot, limit} from 'firebase/firestore';
 
-export const commentsFirebase = async (template, author)=>{
+export const reactionsFirebase = async (template, author)=>{
 
   const docId = author.toString()
   const userDoc = doc(db, 'user', docId)
@@ -9,18 +9,18 @@ export const commentsFirebase = async (template, author)=>{
 
   if (docSnap.exists()) {
     console.log(docSnap.data());
-    
-    console.log(docSnap.data().comments);
-    if (docSnap.data().comments === undefined) {
+
+    console.log(docSnap.data().reactions);
+    if (docSnap.data().reactions === undefined) {
       updateDoc(userDoc,{
-        comments: [template]
+        reactions: [template]
       })
     }else{
-      let aux = await docSnap.data().comments
+      let aux = await docSnap.data().reactions
       aux.push(template)
   
       updateDoc(userDoc,{
-        comments: aux
+        reactions: aux
       })
     }
   }else{

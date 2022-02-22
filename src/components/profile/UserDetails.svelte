@@ -81,8 +81,16 @@
     if (content.Detail === 'OK') {
       btnSendFriendRequest.textContent = "request sent"
       btnSendFriendRequest.setAttribute('disabled','')
+
+      const getUserData = await fetch(`${urlAPI}/user/create/?id=${userMain}`)
+      const contentUserDate = await getUserData.json()
+
       const template = {
-        userMain : parseInt(userMain),
+        sender_id : parseInt(userMain),
+        name: `${contentUserDate[0].name} ${contentUserDate[0].last_name}`,
+        photo: contentUserDate[0].photo,
+        email: contentUserDate[0].email,
+        create_at: new Date(),
         seen: false
       }
       friendsRequestFirebase(template, id)

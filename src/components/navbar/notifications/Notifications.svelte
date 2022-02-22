@@ -4,7 +4,7 @@
 
 
   export let comment;
-  console.log(comment);
+  // console.log(comment);
 
 </script>
 
