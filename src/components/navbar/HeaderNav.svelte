@@ -6,7 +6,7 @@
   import {db} from '../../js/firebase/config.js'
   import {collectionData} from 'rxfire/firestore'
   import {startWith} from 'rxjs/operators'
-  import { collection,orderBy, query, doc, onSnapshot} from 'firebase/firestore';
+  import { collection,orderBy, getDoc, updateDoc, query, doc, onSnapshot} from 'firebase/firestore';
   import { writable } from 'svelte/store';
   
   // import Notifications from './NotificationsHeader.svelte'
@@ -25,14 +25,13 @@
   let usergroups = writable([]);
   let newChat;
 
-  let notificationsFriends = writable([])
-  let notificationsComments = writable([])
-
   let notificationsList = []
+  let countBubble = 0
 
   function getUserNotifications(){
     const notifications = onSnapshot(doc(db, 'user', idStr), (notification)=>{
       notificationsList = []
+      countBubble = 0
       const data = notification.data()
       const idChats = data.groups
       const friendsRequests = data.friends
@@ -53,7 +52,11 @@
             name: comment.name,
             desc: 'has commented your post',
             date : comment.create_at.toDate(),
-            id: comment.post_id
+            id: comment.post_id,
+            seen: comment.seen
+          }
+          if(!obj.seen){
+            countBubble += 1
           }
           notificationsList.push(obj)
         });
@@ -68,6 +71,10 @@
             desc: 'has sent you a friend request',
             date : request.create_at.toDate(),
             id: request.email,
+            seen: request.seen
+          }
+          if(!obj.seen){
+            countBubble += 1
           }
           notificationsList.push(obj)
         });
@@ -82,6 +89,10 @@
             desc: 'has reacted to your post',
             date : reaction.create_at.toDate(),
             id: reaction.post_id,
+            seen: reaction.seen
+          }
+          if(!obj.seen){
+            countBubble += 1
           }
           notificationsList.push(obj)
         });
@@ -97,6 +108,7 @@
       return b.date - a.date
     })
     console.log(notificationsList);
+    console.log(countBubble);
   }
 
   const logOut = ()=>{
@@ -108,8 +120,66 @@
     localStorage.setItem('visitProfile', email)
   }
 
-  function reload(){
+  async function reload(){
     window.location.reload()
+  }
+
+  async function counterBubble(){
+    if (notificationsList.length > 0) {
+      const userDoc = doc(db, 'user', idStr)
+      const docSnap = await getDoc(userDoc)
+  
+      if (docSnap.exists()) {
+        const userData = docSnap.data()
+        console.log(userData);
+        const reactionsList = []
+        const commentsList = []
+        
+        if (userData.reactions) {
+          userData.reactions.forEach(reaction => {
+            const template = {
+              create_at: reaction.create_at,
+              name: reaction.name,
+              photo: reaction.photo,
+              post_id: reaction.post_id,
+              seen: undefined,
+              user_id: reaction.user_id
+            }
+            if (!reaction.seen) {
+              template.seen = true
+            }else{
+              template.seen = true
+            }
+            reactionsList.push(template)
+          })
+        }
+        
+        if (userData.comments) {
+          userData.comments.forEach(comment => {
+            const template = {
+              comment: comment.comment,
+              create_at: comment.create_at,
+              name: comment.name,
+              photo: comment.photo,
+              post_id: comment.post_id,
+              seen: undefined,
+              user_id: comment.user_id
+            }
+            if (!comment.seen) {
+              template.seen = true
+            }else{
+              template.seen = true
+            }
+            commentsList.push(template)
+          })
+        }
+  
+        updateDoc(userDoc,{
+          reactions: reactionsList,
+          comments: commentsList
+        })
+      }
+    }
   }
 
   onMount(()=>{
@@ -140,7 +210,7 @@
     position: relative;
   }
 
-  .notificacions-chats{
+  .notificacions-bubble{
     position: absolute;
     top: 6px;
     left: 14px;
@@ -206,7 +276,7 @@
   </div>
   <div class="icon Header-nav-comment mx-3 fs-3 position-relative">
     {#if newChat}
-      <div class="notificacions-chats">{newChat}</div>
+      <div class="notificacions-bubble">{newChat}</div>
     {/if}
 
     <i class="fas fa-comment dropdown-toggle" id="chats" data-bs-toggle="dropdown" aria-expanded="false"></i>
@@ -220,12 +290,12 @@
       {/each}
     </ul>
   </div>
-  <div class="icon Header-nav-bell mx-3 fs-3 notification" id="notification">
+  <div class="icon Header-nav-bell mx-3 fs-3 notification" id="notification" on:click={counterBubble}>
     <div class="dropdown">
       <i class="fas fa-bell dropdown-toggle" id="notifications" data-bs-toggle="dropdown" aria-expanded="false"></i>
-      <!-- {#if notifications >= 1}
-         <div class="notifications">{notifications}</div>
-      {/if} -->
+      {#if countBubble >= 1}
+         <div class="notificacions-bubble">{countBubble}</div>
+      {/if}
       <ul class="dropdown-menu" aria-labelledby="notifications">
         {#each notificationsList as notification}
           <!-- friendRequest -->
