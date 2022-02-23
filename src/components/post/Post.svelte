@@ -12,6 +12,8 @@
   export let desc, reactions, img, comments, create_time, user, id, user_id, update_time;
   export let name, middle_name, last_name, title, photo, email;
   export let userMain, urlAPI, url;
+
+  const userStorage = JSON.parse(localStorage.getItem('data'))
   // console.log(url);
 
   // console.log(userId, user);
@@ -253,24 +255,18 @@
           }
           console.log(reactionsPost, aux);
           if (aux !== userId ) {
-            let userDataReaction = 0
-            if (reactionsPost.length > 0) {
-              userDataReaction = reactionsPost[reactionsPost.length - 1]
-            }else{
-              userDataReaction = reactionsPost[0]
-            }
-
+            
             console.log(reactionsPost);
             const template = {
             user_id: userId,
-            name: userDataReaction.user.name + ' ' + userDataReaction.user.last_name,
-            photo: userDataReaction.user.photo,
+            name: userStorage.name + ' ' + userStorage.last_name,
+            photo: userStorage.photo,
             create_at: new Date(),
             seen: false,
             post_id: id
           }
-          console.log(template, aux);
-          // reactionsFirebase(template, aux)
+          // console.log(template, aux);
+          reactionsFirebase(template, aux)
           }
         }
       }
@@ -385,8 +381,8 @@
         const commentUserFirebase = {
           user_id: userId,
           comment: userDataComment.comment,
-          name: userDataComment.user.name + ' ' + userDataComment.user.last_name,
-          photo: userDataComment.user.photo,
+          name: userStorage.name + ' ' + userStorage.last_name,
+          photo: userStorage.photo,
           post_id: id,
           seen: false,
           create_at: new Date()

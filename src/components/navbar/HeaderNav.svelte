@@ -14,6 +14,7 @@
   import FriendRequest from './notifications/FriendRequest.svelte'
   import ChatList from './notifications/Chats.svelte'
   import PostModal from '../Modals/PostModal.svelte'
+  import {openModal} from '../../js/closeModals'
   
 
   export let photo, id;
@@ -74,7 +75,16 @@
 
       //read reactions
       if (reactions !== undefined) {
-        console.log(reactions);
+        reactions.forEach(reaction => {
+          const obj = {
+            photo: reaction.photo,
+            name: reaction.name,
+            desc: 'has reacted to your post',
+            date : reaction.create_at.toDate(),
+            id: reaction.post_id,
+          }
+          notificationsList.push(obj)
+        });
       }
 
       updateNotifications()
@@ -89,37 +99,22 @@
     console.log(notificationsList);
   }
 
-  // setTimeout(() => {
-  //   updateNotifications()
-  // }, 2000);
-
   const logOut = ()=>{
     localStorage.clear();
     window.location.href = urlLogOut;
   }
 
-  onMount(()=>{
-    getUserNotifications()
-  })
-
-
   function visitProfile(email){
     localStorage.setItem('visitProfile', email)
   }
 
-  let postId = 0
-  let data;
-  async function openPost(id){
-    postId = id
-    console.log(postId);
-
-    const response = await fetch(`${urlAPI}/post/create/?post_id=${postId}`)
-    if (response.status === 200) {
-      const content = await response.json()
-      data = content
-      console.log(data);
-    }
+  function reload(){
+    window.location.reload()
   }
+
+  onMount(()=>{
+    getUserNotifications()
+  })
 
 </script>
 
@@ -246,14 +241,17 @@
             </li>
           {:else}
             <!-- comment or reaction post -->
-             <li class="d-flex notificationsList dropdown-item" data-id={notification.id} on:click={openPost(notification.id)} data-bs-toggle="modal" data-bs-target="#exampleModal">
-              <img src="{urlAPI}/{notification.photo}" alt="userImage">
-              <span>
-                <p class="notification-user-name">{notification.name}</p>
-                <p>{notification.desc}</p>
-              </span>
+             <!-- <li class="d-flex notificationsList dropdown-item" data-id={notification.id} data-bs-toggle="modal" data-bs-target="#exampleModal"> -->
+             <li class="d-flex notificationsList dropdown-item" data-id={notification.id}>
+              <a href="/post/{notification.id}" use:link use:active class="d-flex" on:click={reload}>
+                <img src="{urlAPI}/{notification.photo}" alt="userImage">
+                <span>
+                  <p class="notification-user-name">{notification.name}</p>
+                  <p>{notification.desc}</p>
+                </span>
+              </a>
             </li>
-          {/if}
+            {/if}
         {/each}
       </ul>
     </div>
@@ -288,9 +286,3 @@
   </div>
 </nav>
 
-
-
-{#if data}
-   <!-- content here -->
-{/if}
-<PostModal {postId} {urlAPI} {data}/>
