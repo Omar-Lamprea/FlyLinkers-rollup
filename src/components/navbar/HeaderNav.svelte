@@ -291,7 +291,7 @@
 
 
 <nav class="nav-container d-flex">
-  <div class="icon Header-nav-home mx-3 fs-3">
+  <div id="iconHome" class="icon Header-nav-home mx-3 fs-3">
     <a href="/" use:link use:active>
       <i class="fas fa-home"></i>
     </a>

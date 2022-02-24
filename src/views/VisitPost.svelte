@@ -25,7 +25,6 @@
       data = result
 
       let content = data.results
-
       name = content[0].name
       last_name = content[0].last_name
       title = content[0].title
@@ -40,7 +39,7 @@
         img: content[1].img,
         reactions: content[1].reactions,
         update_time: content[1].update_time,
-        url: content[1].url
+        url_id: content[1].url_id
       }
     }else{
       error = 'Ops... We have a problem, refresh this page or try again later.'

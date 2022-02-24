@@ -106,6 +106,7 @@
       })
       const content = await getMeta.json()
       if (content) {
+        console.log(url);
         urlContent = content
         validUrl = url
       }
@@ -169,17 +170,42 @@
         }
         const joinPostDescriptionClean = postDescriptionClean.join(' ')
 
+        let template;
+        if (urlContent === undefined) {
+          template = {
+            user: id,
+            img: imagePost,
+            desc: joinPostDescriptionClean,
+          }
+        }else{
+          if (urlContent.id) {
+            template = {
+              user: id,
+              img: imagePost,
+              desc: joinPostDescriptionClean,
+              url_id: urlContent.id
+            }
+          }else{
+            template = {
+              user: id,
+              img: imagePost,
+              desc: joinPostDescriptionClean,
+              meta: {
+                title: urlContent.title,
+                description: urlContent.description,
+                image: urlContent.image,
+                url: validUrl
+              }
+            }
+          }
+        }
+
         const post = await fetch(`${urlAPI}/post/create/`,{
           method : 'POST',
           headers : {
             'Content-Type' : 'application/json'
           },
-          body: JSON.stringify({
-            user: id,
-            img: imagePost,
-            desc : joinPostDescriptionClean,
-            url: validUrl
-          })
+          body: JSON.stringify(template)
         })
         const content = await post.json()
         if (content) {

@@ -11,12 +11,15 @@
   export let userId;
   export let desc, reactions, img, comments, create_time, user, id, user_id, update_time;
   export let name, middle_name, last_name, title, photo, email;
-  export let userMain, urlAPI, url;
+  export let userMain, urlAPI, url_id, meta;
 
   const userStorage = JSON.parse(localStorage.getItem('data'))
-  // console.log(url);
 
   // console.log(userId, user);
+  if (!meta) {
+    meta = false
+  }
+  // console.log(meta);
 
 
   let userLink;
@@ -422,28 +425,29 @@
 
   
   
-  let urlMeta;
-  let urlLink;
-  const getUrlPost = async(url)=>{
-    const urlData = await fetch(`${urlAPI}/post/meta/`, {
-      method: 'POST',
-      headers:{
-        'Content-Type' : 'application/json'
-      },
-      body: JSON.stringify({
-        url: url
-      })
-    })
-    const content = await urlData.json()
-    if(urlData.status === 200){
-      urlMeta = content
-      urlLink = url
-    }
-  }
-  let validateDesc = []
-  if(url){
-    getUrlPost(url)
-  }
+  // let urlMeta;
+  // let urlLink;
+  // const getUrlPost = async(url)=>{
+  //   const urlData = await fetch(`${urlAPI}/post/meta/`, {
+  //     method: 'POST',
+  //     headers:{
+  //       'Content-Type' : 'application/json'
+  //     },
+  //     body: JSON.stringify({
+  //       url: url
+  //     })
+  //   })
+  //   const content = await urlData.json()
+  //   if(urlData.status === 200){
+  //     urlMeta = content
+  //     urlLink = url
+  //   }
+  // }
+
+  // let validateDesc = []
+  // if(url){
+  //   getUrlPost(url)
+  // }
   
   onMount(()=>{
     reactionUser()
@@ -651,35 +655,34 @@
     </div>
 
     <div class="Card-description mx-3 mx-md-0">
-      {#if validateDesc.length === 0}
-         <!-- content here -->
-         <span class="mx-0">{desc}</span>
+      <span class="mx-0">{desc}</span>
+      <!-- {#if validateDesc.length === 0}
       {:else}
         <span class="mx-0">
           {#each validateDesc as stringData}
             {#if stringData.includes('https://') || stringData.includes('http://')}
-                <!-- <a href={stringData} target="_blank">{stringData}</a> -->
+                <a href={stringData} target="_blank">{stringData}</a>
             {:else}
                 {stringData} {' '}
             {/if}
           {/each}
         </span>
-      {/if}
+      {/if} -->
     </div>
   </div>
 
     <div class="Card-photo px-0">
-      {#if urlMeta}
+      {#if meta}
         <div class="urlMeta d-flex flex-column mb-3">
-          <a href={urlLink} target="_blank">
-            {#if urlMeta.title[0]}
-               <h6>{urlMeta.title[0]}</h6>
+          <a href={meta.url} target="_blank">
+            {#if meta.title}
+               <h6>{meta.title}</h6>
             {/if}
-            {#if urlMeta.description[0]}
-               <p>{urlMeta.description[0]}</p>
+            {#if meta.description}
+               <p>{meta.description}</p>
             {/if}
-            {#if urlMeta.image[0]}
-               <img src="{urlMeta.image[0]}" alt="">
+            {#if meta.image}
+               <img src="{meta.image}" alt="">
             {/if}
           </a>
         </div>

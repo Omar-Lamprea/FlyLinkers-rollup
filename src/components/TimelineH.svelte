@@ -60,6 +60,11 @@
     }
   })
 
+  iconHome.addEventListener('click', ()=>{
+    clearPost()
+    getPosts(1)
+  })
+
   onMount(getPosts)
 </script>
 
