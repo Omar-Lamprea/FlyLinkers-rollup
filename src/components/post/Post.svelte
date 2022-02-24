@@ -253,18 +253,18 @@
           }else{
             aux = user.id
           }
-          console.log(reactionsPost, aux);
+          // console.log(reactionsPost, aux);
           if (aux !== userId ) {
             
-            console.log(reactionsPost);
+            // console.log(reactionsPost);
             const template = {
-            user_id: userId,
-            name: userStorage.name + ' ' + userStorage.last_name,
-            photo: userStorage.photo,
-            create_at: new Date(),
-            seen: false,
-            post_id: id
-          }
+              user_id: userId,
+              name: userStorage.name + ' ' + userStorage.last_name,
+              photo: userStorage.photo,
+              create_at: new Date(),
+              seen: false,
+              post_id: id
+            }
           // console.log(template, aux);
           reactionsFirebase(template, aux)
           }
@@ -292,6 +292,28 @@
           loveAcount.textContent = reactions.love
           toggleReaction()
           reactionsFirebase()
+
+          let aux;
+          if (user.length === 0) {
+            aux = user_id
+          }else{
+            aux = user.id
+          }
+          // console.log(reactionsPost, aux);
+          if (aux !== userId ) {
+            
+            // console.log(reactionsPost);
+            const template = {
+              user_id: userId,
+              name: userStorage.name + ' ' + userStorage.last_name,
+              photo: userStorage.photo,
+              create_at: new Date(),
+              seen: false,
+              post_id: id
+            }
+          // console.log(template, aux);
+          reactionsFirebase(template, aux)
+          }
         }
       }
     }

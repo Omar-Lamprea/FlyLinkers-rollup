@@ -10,11 +10,10 @@
   import { writable } from 'svelte/store';
   
   // import Notifications from './NotificationsHeader.svelte'
-  import Notifications from './notifications/Notifications.svelte'
+  // import Notifications from './notifications/Notifications.svelte'
   import FriendRequest from './notifications/FriendRequest.svelte'
   import ChatList from './notifications/Chats.svelte'
-  import PostModal from '../Modals/PostModal.svelte'
-  import {openModal} from '../../js/closeModals'
+  import startTime from '../../js/startTime'
   
 
   export let photo, id;
@@ -47,11 +46,12 @@
       //read Comments
       if (comments !== undefined){
         comments.forEach(comment => {
+          // console.log(comment.create_at.toDate().toISOString());
           const obj = {
             photo: comment.photo,
             name: comment.name,
             desc: 'has commented your post',
-            date : comment.create_at.toDate(),
+            date : comment.create_at.toDate().toISOString(),
             id: comment.post_id,
             seen: comment.seen
           }
@@ -69,7 +69,7 @@
             photo: request.photo,
             name: request.name,
             desc: 'has sent you a friend request',
-            date : request.create_at.toDate(),
+            date : request.create_at.toDate().toISOString(),
             id: request.email,
             seen: request.seen
           }
@@ -87,7 +87,7 @@
             photo: reaction.photo,
             name: reaction.name,
             desc: 'has reacted to your post',
-            date : reaction.create_at.toDate(),
+            date : reaction.create_at.toDate().toISOString(),
             id: reaction.post_id,
             seen: reaction.seen
           }
@@ -108,7 +108,7 @@
       return b.date - a.date
     })
     console.log(notificationsList);
-    console.log(countBubble);
+    // console.log(countBubble);
   }
 
   const logOut = ()=>{
@@ -131,9 +131,9 @@
   
       if (docSnap.exists()) {
         const userData = docSnap.data()
-        console.log(userData);
         const reactionsList = []
         const commentsList = []
+        const friendsList = []
         
         if (userData.reactions) {
           userData.reactions.forEach(reaction => {
@@ -173,9 +173,29 @@
             commentsList.push(template)
           })
         }
-  
+
+        if (userData.friends) {
+          userData.friends.forEach(friend => {
+            const template = {
+              create_at: friend.create_at,
+              name: friend.name,
+              photo: friend.photo,
+              email: friend.email,
+              seen: undefined,
+              sender_id: friend.sender_id
+            }
+            if (!friend.seen) {
+              template.seen = true
+            }else{
+              template.seen = true
+            }
+            friendsList.push(template)
+          })
+        }
+        console.log(friendsList);
         updateDoc(userDoc,{
-          reactions: reactionsList,
+          friends: friendsList,
+          reactions: reactionsList, 
           comments: commentsList
         })
       }
@@ -198,6 +218,10 @@
   }
   .dropdown-item:active{
     background-color: var(--main-color);
+  }
+  .dropdown-menu{
+    max-height: 40vh;
+    overflow-y: auto;
   }
   .Header-nav-user img{
     width: 2rem;
@@ -222,6 +246,12 @@
     width: 20px;
     text-align: center;
     color: white;
+  }
+  .notification-time{
+    color: grey
+  }
+  .notification-desc{
+    width: 210.19px;
   }
 
   .notificationsList{
@@ -278,7 +308,6 @@
     {#if newChat}
       <div class="notificacions-bubble">{newChat}</div>
     {/if}
-
     <i class="fas fa-comment dropdown-toggle" id="chats" data-bs-toggle="dropdown" aria-expanded="false"></i>
     <ul class="dropdown-menu" aria-labelledby="chats">
       {#each $usergroups as groups}
@@ -290,6 +319,8 @@
       {/each}
     </ul>
   </div>
+
+  <!-- notifications icon -->
   <div class="icon Header-nav-bell mx-3 fs-3 notification" id="notification" on:click={counterBubble}>
     <div class="dropdown">
       <i class="fas fa-bell dropdown-toggle" id="notifications" data-bs-toggle="dropdown" aria-expanded="false"></i>
@@ -304,20 +335,25 @@
               <a on:click={visitProfile(notification.id)} href="/profile/{notification.id}" use:link use:active class="d-flex">
                 <img src="{urlAPI}/{notification.photo}" alt="userImage">
                 <span>
-                  <p class="notification-user-name">{notification.name}</p>
-                  <p>{notification.desc}</p>
+                  <div class="data-user-time d-flex justify-content-between">
+                    <p class="notification-user-name">{notification.name}</p>
+                    <p class="notification-time">{startTime(notification.date)}</p>
+                  </div>
+                  <p class="notification-desc">{notification.desc}</p>
                 </span>
               </a>
             </li>
           {:else}
             <!-- comment or reaction post -->
-             <!-- <li class="d-flex notificationsList dropdown-item" data-id={notification.id} data-bs-toggle="modal" data-bs-target="#exampleModal"> -->
              <li class="d-flex notificationsList dropdown-item" data-id={notification.id}>
               <a href="/post/{notification.id}" use:link use:active class="d-flex" on:click={reload}>
                 <img src="{urlAPI}/{notification.photo}" alt="userImage">
                 <span>
-                  <p class="notification-user-name">{notification.name}</p>
-                  <p>{notification.desc}</p>
+                  <div class="data-user-time d-flex justify-content-between">
+                    <p class="notification-user-name">{notification.name}</p>
+                    <p class="notification-time">{startTime(notification.date)}</p>
+                  </div>
+                  <p class="notification-desc">{notification.desc}</p>
                 </span>
               </a>
             </li>
@@ -325,10 +361,9 @@
         {/each}
       </ul>
     </div>
-
-
-    <!-- <Notifications {id} {urlAPI}/> -->
   </div>
+
+  <!-- profile icon -->
   <div class="icon Header-nav-user mx-3 fs-3">
     <a href="/profile" use:link use:active>
       {#if localStorage.getItem('profilePhoto')}
