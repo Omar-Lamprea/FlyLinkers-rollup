@@ -1,4 +1,6 @@
 <script>
+  import {link} from 'svelte-spa-router';
+  import active from 'svelte-spa-router/active'
   import UserPotho from './UserPhoto.svelte'
   import CoverPhotoModal from '../Modals/CoverPhotoModal.svelte'
   import ProfilePhotoModal from '../Modals/ProfilePhotoModal.svelte'
@@ -193,7 +195,9 @@
     <div class="col-12 col-lg-6">
       <div class="Profile-card-text text-end d-flex flex-column align-items-end mt-0 mt-md-3 px-3 px-md-0">
         {#if email === localStorage.getItem('user')}
-          <p type="button" class="mb-3" data-bs-toggle="modal" data-bs-target="#editProfile"><i class="fas fa-pen"></i> Edit profile</p>
+        <a href="/settings" use:link use:active>
+          <p type="button" class="mb-3" style="color:rgba(38, 38, 38, 07)"><i class="fas fa-pen"></i> Edit profile</p>
+        </a>
           <CoverPhotoModal {id} {urlAPI}/>
           <ProfilePhotoModal {id} {urlAPI}/>
 

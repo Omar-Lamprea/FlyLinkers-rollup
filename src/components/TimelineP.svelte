@@ -143,7 +143,6 @@
           <AddPost {id} {urlAPI}/>
         </div>
       {/if}
-      
       {#if experiences !== undefined}
          <Experience {urlAPI} {id} {experiences} {userProfile}/>
       {/if}

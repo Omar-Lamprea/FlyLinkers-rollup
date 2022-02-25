@@ -51,7 +51,7 @@
             photo: comment.photo,
             name: comment.name,
             desc: 'has commented your post',
-            date : comment.create_at.toDate().toISOString(),
+            date : comment.create_at.toDate(),
             id: comment.post_id,
             seen: comment.seen
           }
@@ -69,7 +69,7 @@
             photo: request.photo,
             name: request.name,
             desc: 'has sent you a friend request',
-            date : request.create_at.toDate().toISOString(),
+            date : request.create_at.toDate(),
             id: request.email,
             seen: request.seen
           }
@@ -87,7 +87,7 @@
             photo: reaction.photo,
             name: reaction.name,
             desc: 'has reacted to your post',
-            date : reaction.create_at.toDate().toISOString(),
+            date : reaction.create_at.toDate(),
             id: reaction.post_id,
             seen: reaction.seen
           }
@@ -99,6 +99,7 @@
       }
 
       updateNotifications()
+
     })
   }
   
@@ -337,7 +338,7 @@
                 <span>
                   <div class="data-user-time d-flex justify-content-between">
                     <p class="notification-user-name">{notification.name}</p>
-                    <p class="notification-time">{startTime(notification.date)}</p>
+                    <p class="notification-time">{startTime(notification.date.toISOString())}</p>
                   </div>
                   <p class="notification-desc">{notification.desc}</p>
                 </span>
@@ -351,7 +352,7 @@
                 <span>
                   <div class="data-user-time d-flex justify-content-between">
                     <p class="notification-user-name">{notification.name}</p>
-                    <p class="notification-time">{startTime(notification.date)}</p>
+                    <p class="notification-time">{startTime(notification.date.toISOString())}</p>
                   </div>
                   <p class="notification-desc">{notification.desc}</p>
                 </span>
@@ -374,15 +375,17 @@
     </a>
   </div>
   <div class="icon Header-nav-grip-vertical mx-3 fs-3">
-    <a href="/" use:link use:active>
       <div class="dropdown">
         <i class="fas fa-grip-vertical dropdown-toggle" id="settings" data-bs-toggle="dropdown" aria-expanded="false" ></i>
         <ul class="dropdown-menu" aria-labelledby="settings">
-          <li><span class="dropdown-item">Settings</span></li>
+          <li>
+            <a href="/settings" use:link use:active>
+              <span class="dropdown-item">Settings</span>
+            </a>
+          </li>
           <li><span class="dropdown-item" on:click={logOut}>Log Out</span></li>
         </ul>
       </div>
-    </a>
   </div>
   <div class="icon Header-nav-calendar-week hidden mx-3 fs-3">
     <a href="/" use:link use:active>

@@ -7,10 +7,9 @@
 
   export let urlAPI, id, experiences, userProfile
 
-  console.log(experiences);
+  // console.log(id, experiences, userProfile);
   let data = writable([])
   let experienceId;
-
 
   
   // console.log(experiences);

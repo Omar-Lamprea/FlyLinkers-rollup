@@ -61,6 +61,7 @@
       }
       userMain = data.id
       localStorage.setItem('userId', userMain)
+      console.log(data);
       localStorage.setItem('data', `{"title": "${data.title}", "name": "${data.name}", "last_name": "${data.last_name}", "photo": "${data.photo}", "id": ${data.id}}`)
     }
   }
