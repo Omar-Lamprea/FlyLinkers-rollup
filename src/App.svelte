@@ -27,11 +27,14 @@
   // const urlAPI = 'http://18.118.50.78:8000'
   const urlAPI = 'https://api.flylinkers.com'
 
-
   if(!localStorage.getItem('user') || localStorage.getItem('user') === 'null'){
     const param = window.location.search
     const urlParams = new URLSearchParams(param)
     const user = urlParams.get('user')
+    const searchNewUser = urlParams.get('newUser')
+    if (searchNewUser) {
+      localStorage.setItem('newUser', searchNewUser)
+    }
     const savedUser = localStorage.setItem('user', user)
   }
   setTimeout(() => {
@@ -61,11 +64,14 @@
       }
       userMain = data.id
       localStorage.setItem('userId', userMain)
-      console.log(data);
+      // console.log(data);
       localStorage.setItem('data', `{"title": "${data.title}", "name": "${data.name}", "last_name": "${data.last_name}", "photo": "${data.photo}", "id": ${data.id}}`)
+      if (localStorage.getItem('newUser')) {
+        window.location.hash = '#/settings'
+        localStorage.removeItem('newUser')
+      }
     }
   }
-
 
   let chatFlag = false
 

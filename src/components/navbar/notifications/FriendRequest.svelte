@@ -135,7 +135,7 @@
         </a>
       </li>
     {:else}
-       <p class="text-center">you haven't news</p>
+       <p class="text-center">You haven't news</p>
     {/each}
   </ul>
 </div>

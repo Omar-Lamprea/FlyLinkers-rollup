@@ -3,10 +3,10 @@
   import active from 'svelte-spa-router/active'
   import { onMount } from 'svelte';
 
-  import {db} from '../../js/firebase/config.js'
+  import {db, getGroupUser} from '../../js/firebase/config.js'
   import {collectionData} from 'rxfire/firestore'
   import {startWith} from 'rxjs/operators'
-  import { collection,orderBy, getDoc, updateDoc, query, doc, onSnapshot} from 'firebase/firestore';
+  import { collection, orderBy, getDoc, updateDoc, query, doc, onSnapshot, limit} from 'firebase/firestore';
   import { writable } from 'svelte/store';
   
   // import Notifications from './NotificationsHeader.svelte'
@@ -25,22 +25,39 @@
   let newChat;
 
   let notificationsList = []
+  let notificationsChats = []
   let countBubble = 0
+  let countMessages = 0
+
 
   function getUserNotifications(){
     const notifications = onSnapshot(doc(db, 'user', idStr), (notification)=>{
       notificationsList = []
+      notificationsChats = []
       countBubble = 0
+      countMessages = 0
+
       const data = notification.data()
-      const idChats = data.groups
+      const groups = data.groups
       const friendsRequests = data.friends
       const comments = data.comments
       const reactions = data.reactions
 
       //read Chats
-      if (idChats !== undefined) {
-        usergroups.set(idChats)
-        newChat = idChats.length
+      if (groups !== undefined) {
+        usergroups.set(groups.reverse())
+
+        groups.forEach(chat => {
+          const q = query(collection(db, `message/${chat}/messages`), orderBy('sentAt', 'desc'), limit(1))
+          const snapChatId = onSnapshot(q, col =>{
+            col.forEach(doc => {
+              const dataMessage = doc.data()
+              if (!dataMessage.seen) {
+                countMessages += 1
+              }
+            });
+          })
+        });
       }
 
       //read Comments
@@ -108,7 +125,7 @@
     notificationsList.sort(function(a, b){
       return b.date - a.date
     })
-    console.log(notificationsList);
+    // console.log(notificationsList);
     // console.log(countBubble);
   }
 
@@ -306,8 +323,8 @@
     </a>
   </div>
   <div class="icon Header-nav-comment mx-3 fs-3 position-relative">
-    {#if newChat}
-      <div class="notificacions-bubble">{newChat}</div>
+    {#if countMessages}
+      <div class="notificacions-bubble">{countMessages}</div>
     {/if}
     <i class="fas fa-comment dropdown-toggle" id="chats" data-bs-toggle="dropdown" aria-expanded="false"></i>
     <ul class="dropdown-menu" aria-labelledby="chats">
@@ -325,7 +342,7 @@
   <div class="icon Header-nav-bell mx-3 fs-3 notification" id="notification" on:click={counterBubble}>
     <div class="dropdown">
       <i class="fas fa-bell dropdown-toggle" id="notifications" data-bs-toggle="dropdown" aria-expanded="false"></i>
-      {#if countBubble >= 1}
+      {#if countBubble > 0}
          <div class="notificacions-bubble">{countBubble}</div>
       {/if}
       <ul class="dropdown-menu" aria-labelledby="notifications">

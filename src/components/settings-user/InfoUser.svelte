@@ -20,7 +20,7 @@
           'Content-Type' : 'application/json'
         },
         body: JSON.stringify({
-          name: firstName.value,
+          first_name: firstName.value,
           middle_name: middleName.value,
           last_name: lastName.value,
           title: title.value,
