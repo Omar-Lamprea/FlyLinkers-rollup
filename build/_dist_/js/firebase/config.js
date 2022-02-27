@@ -146,7 +146,8 @@ export const newMessage = async (groupId, sentBy, messageText) =>{
   const messages = await addDoc(collection(db, `message/${groupId}/messages`), {
     messageText : messageText,
     sentBy: sentBy,
-    sentAt: date
+    sentAt: date,
+    seen: false
   })
 }
 

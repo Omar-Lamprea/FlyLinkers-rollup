@@ -114,7 +114,7 @@ function create_if_block_5(ctx) {
 	};
 }
 
-// (147:6) {#if experiences !== undefined}
+// (146:6) {#if experiences !== undefined}
 function create_if_block_4(ctx) {
 	let experience;
 	let current;
@@ -159,7 +159,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (152:6) {#if post}
+// (151:6) {#if post}
 function create_if_block_2(ctx) {
 	let current_block_type_index;
 	let if_block;
@@ -229,7 +229,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (159:8) {:else}
+// (158:8) {:else}
 function create_else_block_1(ctx) {
 	let each_1_anchor;
 	let current;
@@ -313,7 +313,7 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (153:8) {#if userMain}
+// (152:8) {#if userMain}
 function create_if_block_3(ctx) {
 	let each_1_anchor;
 	let current;
@@ -397,7 +397,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (161:10) {#each post as dataPost}
+// (160:10) {#each post as dataPost}
 function create_each_block_3(ctx) {
 	let post_1;
 	let current;
@@ -452,7 +452,7 @@ function create_each_block_3(ctx) {
 	};
 }
 
-// (155:10) {#each post as dataPost}
+// (154:10) {#each post as dataPost}
 function create_each_block_2(ctx) {
 	let post_1;
 	let current;
@@ -507,7 +507,7 @@ function create_each_block_2(ctx) {
 	};
 }
 
-// (169:6) {#if $posts}
+// (168:6) {#if $posts}
 function create_if_block(ctx) {
 	let current_block_type_index;
 	let if_block;
@@ -577,7 +577,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (176:8) {:else}
+// (175:8) {:else}
 function create_else_block(ctx) {
 	let each_1_anchor;
 	let current;
@@ -661,7 +661,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (170:8) {#if userMain}
+// (169:8) {#if userMain}
 function create_if_block_1(ctx) {
 	let each_1_anchor;
 	let current;
@@ -745,7 +745,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (178:10) {#each $posts as dataPost}
+// (177:10) {#each $posts as dataPost}
 function create_each_block_1(ctx) {
 	let post_1;
 	let current;
@@ -800,7 +800,7 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (172:10) {#each $posts as dataPost}
+// (171:10) {#each $posts as dataPost}
 function create_each_block(ctx) {
 	let post_1;
 	let current;

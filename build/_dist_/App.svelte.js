@@ -81,7 +81,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (176:4) {#if chatFlag && userMain && getUserMainToFirestore}
+// (184:4) {#if chatFlag && userMain && getUserMainToFirestore}
 function create_if_block(ctx) {
 	let chat;
 	let current;
@@ -141,7 +141,7 @@ function create_fragment(ctx) {
 			t1 = space();
 			if (if_block1) if_block1.c();
 			attr(main, "id", "main");
-			attr(main, "class", "container-fluid container-lg svelte-1a9t7ki");
+			attr(main, "class", "container-fluid container-lg svelte-4xadag");
 		},
 		m(target, anchor) {
 			if (if_block0) if_block0.m(target, anchor);
@@ -236,6 +236,12 @@ function instance($$self, $$props, $$invalidate) {
 		const param = window.location.search;
 		const urlParams = new URLSearchParams(param);
 		const user = urlParams.get('user');
+		const searchNewUser = urlParams.get('newUser');
+
+		if (searchNewUser) {
+			localStorage.setItem('newUser', searchNewUser);
+		}
+
 		const savedUser = localStorage.setItem('user', user);
 	}
 
@@ -268,6 +274,14 @@ function instance($$self, $$props, $$invalidate) {
 
 			$$invalidate(1, userMain = data.id);
 			localStorage.setItem('userId', userMain);
+
+			// console.log(data);
+			localStorage.setItem('data', `{"title": "${data.title}", "name": "${data.name}", "last_name": "${data.last_name}", "photo": "${data.photo}", "id": ${data.id}}`);
+
+			if (localStorage.getItem('newUser')) {
+				window.location.hash = '#/settings';
+				localStorage.removeItem('newUser');
+			}
 		}
 	};
 

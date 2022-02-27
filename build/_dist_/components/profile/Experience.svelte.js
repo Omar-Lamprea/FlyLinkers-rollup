@@ -40,7 +40,7 @@ function get_each_context(ctx, list, i) {
 	return child_ctx;
 }
 
-// (178:2) {:else}
+// (177:2) {:else}
 function create_else_block_1(ctx) {
 	return {
 		c: noop,
@@ -52,7 +52,7 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (168:2) {#if id === parseInt(localStorage.getItem('userId'))}
+// (167:2) {#if id === parseInt(localStorage.getItem('userId'))}
 function create_if_block_4(ctx) {
 	let div2;
 	let div1;
@@ -132,7 +132,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (127:0) {#if experiences}
+// (126:0) {#if experiences}
 function create_if_block(ctx) {
 	let div2;
 	let div1;
@@ -267,7 +267,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (135:12) {#if id === parseInt(localStorage.getItem('userId'))}
+// (134:12) {#if id === parseInt(localStorage.getItem('userId'))}
 function create_if_block_3(ctx) {
 	let div0;
 	let i0;
@@ -326,7 +326,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (146:12) {:else}
+// (145:12) {:else}
 function create_else_block(ctx) {
 	let p;
 	let t0;
@@ -361,7 +361,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (144:12) {#if !experience.working}
+// (143:12) {#if !experience.working}
 function create_if_block_2(ctx) {
 	let p;
 	let t0;
@@ -401,7 +401,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (133:7) {#each $data as experience}
+// (132:7) {#each $data as experience}
 function create_each_block(ctx) {
 	let div;
 	let show_if = /*id*/ ctx[1] === parseInt(localStorage.getItem('userId'));
@@ -607,7 +607,7 @@ function create_each_block(ctx) {
 	};
 }
 
-// (159:2) {#if id === parseInt(localStorage.getItem('userId'))}
+// (158:2) {#if id === parseInt(localStorage.getItem('userId'))}
 function create_if_block_1(ctx) {
 	let div;
 	let p;
@@ -755,8 +755,10 @@ function create_fragment(ctx) {
 function instance($$self, $$props, $$invalidate) {
 	let $data;
 	let { urlAPI, id, experiences, userProfile } = $$props;
-	console.log(experiences);
+
+	// console.log(id, experiences, userProfile);
 	let data = writable([]);
+
 	component_subscribe($$self, data, value => $$invalidate(4, $data = value));
 	let experienceId;
 

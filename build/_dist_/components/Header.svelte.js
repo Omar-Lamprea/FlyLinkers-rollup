@@ -33,7 +33,6 @@ import {
 import { link } from '../../_snowpack/pkg/svelte-spa-router.js';
 import active from '../../_snowpack/pkg/svelte-spa-router/active.js';
 import HeaderNav from "./navbar/HeaderNav.svelte.js";
-import HeaderNavMobile from "./navbar/HeaderNavMobile.svelte.js";
 import Loader from './Loader.svelte.js';
 
 function get_each_context(ctx, list, i) {
@@ -145,7 +144,7 @@ function create_else_block(ctx) {
 			t0 = text(t0_value);
 			t1 = space();
 			attr(span, "class", "dropdown-item");
-			attr(li, "class", "svelte-ooiu59");
+			attr(li, "class", "svelte-17jelq4");
 		},
 		m(target, anchor) {
 			insert(target, li, anchor);
@@ -213,15 +212,15 @@ function create_if_block_1(ctx) {
 			t8 = space();
 			if (!src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[3] + /*user*/ ctx[15].photo))) attr(img, "src", img_src_value);
 			attr(img, "alt", "img");
-			attr(img, "class", "svelte-ooiu59");
-			attr(h6, "class", "svelte-ooiu59");
+			attr(img, "class", "svelte-17jelq4");
+			attr(h6, "class", "svelte-17jelq4");
 			set_style(p0, "color", "grey");
 			set_style(p1, "color", "grey");
 			attr(div, "class", "userInfo");
 			attr(span, "class", "dropdown-item d-flex align-items-center");
 			attr(a, "href", a_href_value = "/profile/" + /*user*/ ctx[15].email);
 			attr(a, "class", "d-flex");
-			attr(li, "class", "svelte-ooiu59");
+			attr(li, "class", "svelte-17jelq4");
 		},
 		m(target, anchor) {
 			insert(target, li, anchor);
@@ -368,8 +367,8 @@ function create_fragment(ctx) {
 			div0 = element("div");
 			a = element("a");
 
-			a.innerHTML = `<img src="../img/flylinkers-logo-blanco.png" alt="logo" width="100" class="svelte-ooiu59"/> 
-          <h1 class="svelte-ooiu59">FlyLinkers</h1>`;
+			a.innerHTML = `<img src="../img/flylinkers-logo-blanco.png" alt="logo" width="100" class="svelte-17jelq4"/> 
+          <h1 class="svelte-17jelq4">FlyLinkers</h1>`;
 
 			t2 = space();
 			div1 = element("div");
@@ -382,17 +381,17 @@ function create_fragment(ctx) {
 			create_component(headernav.$$.fragment);
 			attr(a, "href", "/");
 			attr(a, "class", "d-flex align-items-center");
-			attr(div0, "class", "Header-logo d-flex align-items-center px-3 svelte-ooiu59");
+			attr(div0, "class", "Header-logo d-flex align-items-center px-3 svelte-17jelq4");
 			attr(input, "type", "text");
 			attr(input, "placeholder", "Search");
-			attr(input, "class", "svelte-ooiu59");
-			attr(ul, "class", "dropdown-search d-none svelte-ooiu59");
+			attr(input, "class", "svelte-17jelq4");
+			attr(ul, "class", "dropdown-search d-none svelte-17jelq4");
 			attr(ul, "id", "searchList");
-			attr(div1, "class", "Header-input svelte-ooiu59");
+			attr(div1, "class", "Header-input svelte-17jelq4");
 			attr(div2, "class", "Header-nav d-flex m-auto");
-			attr(div3, "class", "Header-content d-flex flex-wrap align-items-center justify-content-between svelte-ooiu59");
+			attr(div3, "class", "Header-content d-flex flex-wrap align-items-center justify-content-between svelte-17jelq4");
 			attr(div4, "class", "Header-container container");
-			attr(div5, "class", "Header container-fluid svelte-ooiu59");
+			attr(div5, "class", "Header container-fluid svelte-17jelq4");
 		},
 		m(target, anchor) {
 			insert(target, div5, anchor);

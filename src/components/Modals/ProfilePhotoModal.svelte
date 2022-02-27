@@ -1,9 +1,12 @@
 <script>
+  import {closeModal} from '../../js/closeModals'
+
   let profilePhotoB64;
   let urlProfilePhoto;
   let idProfilePhoto
 
   export let id, urlAPI;
+  let saveProfilePhoto = 'Save profile photo'
 
 
   const showProfileImg = () =>{
@@ -32,6 +35,8 @@
   }
 
   const updateProfile = async(id)=>{
+    saveProfilePhoto = 'processing...'
+    btnProfilePhoto.setAttribute('disabled', '')
     await convertProfileB64()
     const response = await fetch(`${urlAPI}/user/create/?id=${id}`,{
       method : 'PUT',
@@ -42,13 +47,17 @@
         photo: urlProfilePhoto
       })
     })
-    const content = await response.json()
-    if (content) {
+    
+    if (response.ok) {
       localStorage.removeItem('profilePhoto')
       const profileImg = document.getElementById('dropdownMenuButton1')
       const headerUserImage = document.getElementById('headerUserImage')
       profileImg.setAttribute('src', `${urlAPI}${urlProfilePhoto}`)
       headerUserImage.setAttribute('src', `${urlAPI}${urlProfilePhoto}`)
+      closeModal('ModalProfile')
+      saveProfilePhoto = 'Save profile photo'
+      btnProfilePhoto.removeAttribute('disabled')
+      showProfileImage.style.display = 'none'
     }
   }
 
@@ -71,7 +80,7 @@
     <div class="modal-content">
 
       <div class="modal-header">
-        <h5 class="modal-title" id="ModalProfileModalLabel">Edit Profile</h5>
+        <h5 class="modal-title" id="ModalProfileModalLabel">Edit profile photo</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
@@ -85,7 +94,7 @@
 
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-outline-primary btn-flylinkers" data-bs-dismiss="modal" on:click={updateProfile(id)}>Save Profile photo</button>
+        <button id="btnProfilePhoto" type="button" class="btn btn-outline-primary btn-flylinkers" on:click={updateProfile(id)}>{saveProfilePhoto}</button>
       </div>
 
     </div>

@@ -1,10 +1,13 @@
 <script>
+  import {closeModal} from '../../js/closeModals'
 
   let coverPhotoB64;
   let urlCoverPhoto;
   let idCoverPhoto;
 
   export let id, urlAPI;
+
+  let btnSaveCoverPhoto = 'Save cover photo'
 
   const showCoverImg = ()=>{
     const render = new FileReader();
@@ -32,70 +35,43 @@
   }
 
   const getProfile = async (id)=>{
-      const response = await fetch(`${urlAPI}/user/profile/?user_id=${id}`)
-      const content = await response.json()
+    console.log('procesando info....');
+    btnUpdateCoverPhoto.setAttribute('disabled', '')
+    btnSaveCoverPhoto = 'processing...'
 
-      if (content.Detail === 'User does not exist') {
-        createDataDescription()
-      } else {
-        upDateDataDescription()
-      }
-  }
-
-  const createDataDescription = async ()=>{
-    await convertCoverB64()
-
-    const sendData = await fetch('${urlAPI}/user/profile/', {
-      method: 'POST',
-      headers : {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        user: id,
-        resource_id : idCoverPhoto,
-        about: description.value,
-        cover_img: urlCoverPhoto
-      })
-    })
+    upDateDataDescription()
   }
 
   const upDateDataDescription = async ()=>{
     await convertCoverB64()
     // console.log('id:', idCoverPhoto, 'url:', urlCoverPhoto);
-    let dataDescription;
-    
-    const userDescription = document.getElementById('userDescription').textContent
-    if (description.value === '') {
-      dataDescription = userDescription 
-    }else{
-      dataDescription = description.value
-    }
+    // const userDescription = document.getElementById('userDescription').textContent
 
+    console.log('actualizando a:', urlCoverPhoto);
     const sendData = await fetch(`${urlAPI}/user/profile/?user=${id}`, {
       method: 'PUT',
       headers : {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        // about: dataDescription,
-        // resource_id : idCoverPhoto,
         cover_img: urlCoverPhoto
       })
     })
     const content = await sendData.json()
-    if (content) {
+    if (sendData.ok) {
       localStorage.removeItem('coverPhoto')
       const cover = document.getElementById('coverPhotoProfile')
       cover.setAttribute('src', `${urlAPI}${urlCoverPhoto}`)
+      closeModal('editProfile')
+      btnSaveCoverPhoto = 'Save cover photo'
+      btnUpdateCoverPhoto.removeAttribute('disabled')
+      showImage.style.display = 'none'
     }
   }
 
 </script>
 
 <style>
-  .modal-body textarea{
-    width: 100%;
-  }
   .coverPhotoLoaded{
     display: none;
     height: 350px;
@@ -112,15 +88,11 @@
     <div class="modal-content">
 
       <div class="modal-header">
-        <h5 class="modal-title" id="editProfileLabel">Edit Profile</h5>
+        <h5 class="modal-title" id="editProfileLabel">Edit cover photo</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
       <div class="modal-body text-start">
-        <!-- <div class="description-user">
-          <label for="description">Edit description</label>
-          <textarea name="" id="description" cols="30" rows="2"></textarea>
-        </div> -->
         <div class="cover-photo">
           <label for="coverPhoto">Cover photo</label>
           <input type="file" name="coverPhoto" id="coverPhoto" accept=".png, .jpg, .jpeg" on:change={showCoverImg}>
@@ -130,7 +102,7 @@
 
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-outline-primary btn-flylinkers" data-bs-dismiss="modal" on:click={getProfile(id)}>Save cover photo</button>
+        <button id="btnUpdateCoverPhoto" type="button" class="btn btn-outline-primary btn-flylinkers" on:click={getProfile(id)}>{btnSaveCoverPhoto}</button>
       </div>
 
     </div>

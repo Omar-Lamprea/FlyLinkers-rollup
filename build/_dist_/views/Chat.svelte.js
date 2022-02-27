@@ -281,6 +281,7 @@ function create_fragment(ctx) {
 			attr(input, "id", "inputMessage");
 			attr(input, "type", "text");
 			attr(input, "placeholder", "write a message");
+			attr(input, "autocomplete", "off");
 			attr(input, "class", "svelte-18rr0de");
 			attr(button, "id", "btnSentMessage");
 			attr(button, "class", "btn-sendMessage svelte-18rr0de");

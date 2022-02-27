@@ -57,7 +57,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (260:6) {#if urlContent && urlLink.includes('https://')}
+// (286:6) {#if urlContent && urlLink.includes('https://')}
 function create_if_block(ctx) {
 	let i;
 	let t0;
@@ -415,6 +415,7 @@ function instance($$self, $$props, $$invalidate) {
 			const content = await getMeta.json();
 
 			if (content) {
+				console.log(url);
 				$$invalidate(3, urlContent = content);
 				validUrl = url;
 			}
@@ -465,16 +466,41 @@ function instance($$self, $$props, $$invalidate) {
 			}
 
 			const joinPostDescriptionClean = postDescriptionClean.join(' ');
+			let template;
+
+			if (urlContent === undefined) {
+				template = {
+					user: id,
+					img: imagePost,
+					desc: joinPostDescriptionClean
+				};
+			} else {
+				if (urlContent.id) {
+					template = {
+						user: id,
+						img: imagePost,
+						desc: joinPostDescriptionClean,
+						url_id: urlContent.id
+					};
+				} else {
+					template = {
+						user: id,
+						img: imagePost,
+						desc: joinPostDescriptionClean,
+						meta: {
+							title: urlContent.title,
+							description: urlContent.description,
+							image: urlContent.image,
+							url: validUrl
+						}
+					};
+				}
+			}
 
 			const post = await fetch(`${urlAPI}/post/create/`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({
-					user: id,
-					img: imagePost,
-					desc: joinPostDescriptionClean,
-					url: validUrl
-				})
+				body: JSON.stringify(template)
 			});
 
 			const content = await post.json();

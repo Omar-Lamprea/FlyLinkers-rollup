@@ -36,7 +36,7 @@ function get_each_context(ctx, list, i) {
 	return child_ctx;
 }
 
-// (68:4) {#if id}
+// (73:4) {#if id}
 function create_if_block(ctx) {
 	let addpost;
 	let current;
@@ -78,7 +78,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (71:4) {#each $posts as dataPost}
+// (76:4) {#each $posts as dataPost}
 function create_each_block(ctx) {
 	let post;
 	let current;
@@ -326,6 +326,11 @@ function instance($$self, $$props, $$invalidate) {
 				getPosts();
 			}
 		}
+	});
+
+	iconHome.addEventListener('click', () => {
+		clearPost();
+		getPosts(1);
 	});
 
 	onMount(getPosts);

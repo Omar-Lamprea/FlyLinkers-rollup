@@ -3,7 +3,7 @@
   import InfoUser from '../components/settings-user/InfoUser.svelte'
   import InfoProfile from '../components/settings-user/InfoProfile.svelte'
   import Experience from '../components/profile/Experience.svelte'
-  import InfoExperiences from '../components/settings-user/InfoExperiences.svelte'
+  // import InfoExperiences from '../components/settings-user/InfoExperiences.svelte'
   import Loader from '../components/Loader.svelte'
 
   const urlAPI = 'https://api.flylinkers.com'

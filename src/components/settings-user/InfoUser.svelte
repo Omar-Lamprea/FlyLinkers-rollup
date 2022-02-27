@@ -13,7 +13,7 @@
   // }
 
   const update = async()=>{
-    if (firstName.value !== '' && middleName.value !== '' && lastName.value !== '' && title.value !== '' && email.value) {
+    if (firstName.value !== '' && lastName.value !== '' && email.value) {
       const response = await fetch(`${urlAPI}/user/create/?id=${localStorage.getItem('userId')}`,{
         method: 'PUT',
         headers: {
@@ -24,7 +24,8 @@
           middle_name: middleName.value,
           last_name: lastName.value,
           title: title.value,
-          email: email.value
+          email: email.value,
+          mobile: mobile.value
         })
       })
       const content = await response.json()
@@ -86,7 +87,7 @@
    
          <div class="middleName">
            <label for="middleName">Middle name*</label>
-           <input id="middleName" type="text" placeholder="Middle name...." value={dataUser.middle_name} required>
+           <input id="middleName" type="text" placeholder="Middle name...." value={dataUser.middle_name}>
          </div>
    
          <div class="lastName">
@@ -98,7 +99,7 @@
        <div class="info mb-3 d-md-flex justify-content-between">
          <div class="title">
            <label for="title">Title*</label>
-           <input id="title" type="text" placeholder="Title...." value={dataUser.title} required>
+           <input id="title" type="text" placeholder="Title...." value={dataUser.title}>
          </div>
    
          <div class="mobile">
