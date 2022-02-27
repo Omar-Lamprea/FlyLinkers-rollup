@@ -142,9 +142,10 @@
     })
     const content = await postExperience.json()
     // console.log(content);
-    if (postExperience.status === 200) {
-      formAddNewExperience.reset()
-      closeModal('modalExperience')
+    if (postExperience.ok) {
+      // formAddNewExperience.reset()
+      // closeModal('modalExperience')
+      window.location.reload()
       //llamar exps
     }
   }

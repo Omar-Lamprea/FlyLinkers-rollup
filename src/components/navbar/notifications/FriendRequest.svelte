@@ -1,6 +1,8 @@
 <script>
   import {link} from "svelte-spa-router";
   import active from 'svelte-spa-router/active'
+  import {db} from '../../../js/firebase/config'
+  import { collection, orderBy, getDoc, updateDoc, query, doc, onSnapshot, limit} from 'firebase/firestore';
 
 
   let notifications = 0;
@@ -12,13 +14,22 @@
   const showFriendRequest = async () =>{
     const response = await fetch(`${urlAPI}/friend/request/?user_id=${id}`)
     const content = await response.json()
-    friendRequest = content
+    friendRequest = content.reverse()
     notifications = friendRequest.length
   }
 
-  showFriendRequest()
+  const snapFriends = onSnapshot(doc(db, 'user', id.toString()), (notification)=>{
+    const friendsRequests = notification.data().friends
 
-  const acceptRequest = async(Friendid) =>{
+    if (friendsRequests !== undefined) {
+        friendsRequests.forEach(request => {
+          showFriendRequest()
+        });
+      }
+  });
+
+  const acceptRequest = async(Friendid, email) =>{
+    const redirect = window.location.hash
     const response = await fetch(`${urlAPI}/friend/request/`, {
       method : 'PUT',
       headers : {
@@ -30,9 +41,27 @@
       })
     })
     const content = await response.json()
-    if (content.Detail === 'OK') {
-      window.location.reload()
+    if (response.ok) {
+      window.location.href = `${redirect}profile/${email}`
     }
+  }
+
+  const declineRequest = async(FriendId) =>{
+    console.log('eliminar', FriendId);
+    // const response = await fetch(`${urlAPI}/friend/request/`, {
+    //   method : 'DELETE',
+    //   headers : {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body:JSON.stringify({
+    //     sender_id: Friendid,
+	  //     receptor_id: id
+    //   })
+    // })
+    // const content = await response.json()
+    // if (response.ok) {
+    //   window.location.reload()
+    // }
   }
 
   const viewUserProfile = (email) => {
@@ -40,6 +69,7 @@
   }
   const visitProfile = (email) =>{
     localStorage.setItem('visitProfile', email)
+    window.location.reload()
   }
 
 </script>
@@ -55,6 +85,9 @@
   .dropdown-item:active{
     background-color: var(--main-color);
   }
+  .dropdown-item:active a{
+    color: #fefefe;
+  }
   .dropdown-item{
     display: flex;
     justify-content: space-between;
@@ -68,8 +101,12 @@
     border: 1px solid var(--main-color);
     padding: .1rem;
   }
+  .dropdown-item a{
+    color: var(--main-color);
+  }
+  
 
-  .notifications{
+  /* .notifications{
     position: absolute;
     top: 6px;
     left: 14px;
@@ -81,7 +118,7 @@
     width: 20px;
     text-align: center;
     color: white;
-  }
+  } */
   
   .userData{
     cursor: pointer;
@@ -121,18 +158,18 @@
   <ul class="dropdown-menu" aria-labelledby="notifications">
     {#each friendRequest as request}
        <li>
-        <a on:click={visitProfile(request.email)} href="/profile/{request.email}" use:link use:active class="d-flex">
           <span class="dropdown-item">
-            <div class="userData">
-              <img src="{urlAPI}{request.photo}" alt="">
-              <span>{request.name} {request.last_name}</span>
-            </div>
+            <a href="/profile/{request.email}" use:link use:active class="d-flex">
+              <div class="userData">
+                <img src="{urlAPI}{request.photo}" alt="">
+                <span>{request.name} {request.last_name}</span>
+              </div>
+            </a>
             <div class="btns-request">
-              <button class="btn-request btn-success" on:click={acceptRequest(request.id)}>Accept</button>
-              <button id="declineRequest" class="btn-request btn-decline">Decline</button>
+              <button class="btn-request btn-success" on:click={acceptRequest(request.id, request.email)}>Accept</button>
+              <button id="declineRequest" class="btn-request btn-decline" on:click={declineRequest(request.id)}>Decline</button>
             </div>
           </span>
-        </a>
       </li>
     {:else}
        <p class="text-center">You haven't news</p>

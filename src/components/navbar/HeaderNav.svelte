@@ -90,6 +90,8 @@
             id: request.email,
             seen: request.seen
           }
+          //recargar solicitudes
+
           if(!obj.seen){
             countBubble += 1
           }
@@ -210,7 +212,7 @@
             friendsList.push(template)
           })
         }
-        console.log(friendsList);
+        // console.log(friendsList);
         updateDoc(userDoc,{
           friends: friendsList,
           reactions: reactionsList, 
@@ -287,7 +289,11 @@
     font-weight: bold;
   }
   .notificationsList a{
+    width: 100%;
     color: inherit;
+  }
+  .notificationsList span{
+    width: 100%;
   }
   @media screen and (max-width: 1200px){
     .nav-container{

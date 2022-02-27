@@ -174,8 +174,10 @@
       body: JSON.stringify(templateExperience)
     })
     const content = await postExperience.json()
-    if (postExperience.status === 200) {
-      closeUpdateModal(experience.id)
+    if (postExperience.ok) {
+      // const btnUpdateExperience = document.getElementById(`btnUpdateExperience${experience.id}`)
+
+      window.location.reload()
     }
   }
   

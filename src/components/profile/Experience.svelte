@@ -4,6 +4,8 @@
   import {getExperiences} from '../../js/getExperiences'
   import { writable } from 'svelte/store';
   import {onMount} from 'svelte'
+  import {closeModal} from '../../js/closeModals'
+
 
   export let urlAPI, id, experiences, userProfile
 
@@ -13,7 +15,7 @@
 
   
   // console.log(experiences);
-  const getDataexperiences = async (updateExperiences)=>{
+  export async function getDataexperiences(updateExperiences){
     if (experiences || updateExperiences) {
       console.log('run xps..');
       const experiences = []
@@ -41,20 +43,20 @@
     // console.log(id);
     const btnUpdateExperience = document.getElementById(`btnUpdateExperience${id}`)
     btnUpdateExperience.addEventListener('click', async e =>{
-      setTimeout(() => {
-        let updateExperiences = true
-        getDataexperiences(updateExperiences)
-      }, 2000);
+      // setTimeout(() => {
+      //   let updateExperiences = true
+      //   getDataexperiences(updateExperiences)
+      // }, 2000); 
     })
   }
   const addDataExperience = ()=>{
     const btnAddExperience = document.getElementById('btnAddExperience')
     btnAddExperience.addEventListener('click',  e =>{
-      setTimeout( async() => {
-        console.log(btnAddExperience);
-        let updateExperiences = true
-        await getDataexperiences(updateExperiences)
-      }, 3000)
+      // setTimeout( async() => {
+      //   console.log(btnAddExperience);
+      //   let updateExperiences = true
+      //   await getDataexperiences(updateExperiences)
+      // }, 3000)
     })
   }
 
@@ -66,9 +68,10 @@
         "Content-Type" : "application/json"
       }
     })
-    const content = await deleteExperience.json()
-    if (content) {
+    
+    if (deleteExperience.ok) {
       container.parentNode.removeChild(container)
+      // closeModal('removeExperience')
     }
   }
 
@@ -100,23 +103,23 @@
     cursor: pointer;
   }
   .updateExperience{
-    position: absolute;
+    /* position: absolute; */
     top: 0;
     right: 5px;
   }
   .updateExperience i{
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     color: var(--main-color);
     cursor: pointer;
   }
 
   .deleteExperience{
-    position: absolute;
+    /* position: absolute; */
     top: 50px;
     right: 5px;
   }
   .deleteExperience i{
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     color: #c61f1f;
     cursor: pointer;
   }
@@ -131,14 +134,7 @@
       </div>
        {#each $data as experience}
           <div id="experience{experience.id}" data-experienceId={experience.id} class="experience position-relative">
-            {#if id === parseInt(localStorage.getItem('userId'))}
-               <div class="updateExperience" data-bs-toggle="modal" data-bs-target="#modalUpdateExperience{experience.id}" on:click={sendDataExperience(experience.id)}>
-                 <i class="fas fa-pen"></i>
-               </div>
-               <div class="deleteExperience" on:click={removeExpeprience(experience.id)}>
-                <i class="fa-solid fa-trash"></i>
-              </div>
-            {/if}
+            
             <p>Company Name: <span>{experience.company_name}</span></p>
             {#if !experience.working}
                <p>Dates of employments: <span>{experience.start_date} / {experience.end_date}</span></p>
@@ -150,6 +146,37 @@
             <p>Title: <span>{experience.title}</span></p>
             <p>job type: <span>{experience.employment_type}</span></p>
             <p>{experience.description}</p>
+
+            {#if id === parseInt(localStorage.getItem('userId'))}
+              <div class="settings-exps d-flex justify-content-center">
+                <div class="updateExperience mx-3" data-bs-toggle="modal" data-bs-target="#modalUpdateExperience{experience.id}" on:click={sendDataExperience(experience.id)}>
+                  <i class="fas fa-pen"></i>
+                </div>
+
+                <div class="deleteExperience mx-3" >
+                 <i class="fa-solid fa-trash" data-bs-toggle="modal" data-bs-target="#removeExperience"></i>
+                 <!-- modal remove xp -->
+                 <div class="modal fade" id="removeExperience" tabindex="-1" aria-labelledby="removeExperienceLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="removeExperienceLabel">Remove Experience</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        Are you sure you want to delete your experience?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" on:click={removeExpeprience(experience.id)}>Delete</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+               </div>
+              </div>
+            {/if}
+
             <hr>
           </div>
           <UpdateExperiencesModal {userProfile} {urlAPI} {experience}/>
@@ -168,7 +195,7 @@
     <div class="Default-containers Experience">
       <div class="Experience-content mx-3 mx-md-0">
         <div class="addExperiences text-center">
-          <p>Add position</p>
+          <p>Add your work experience</p>
           <i class="fas fa-plus-circle" data-bs-toggle="modal" data-bs-target="#modalExperience" on:click={addDataExperience()}></i>
           <ExperiencesModal {userProfile} {urlAPI}/>
         </div>
