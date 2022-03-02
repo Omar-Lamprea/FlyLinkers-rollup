@@ -134,11 +134,11 @@
     if (userLove.length > 0 && userLove[0].id === userId) {
       myLove = true
     }
-    console.log(myLike, reactionType);
+    // console.log(myLike, reactionType);
     // update like reaction
     if (myLike && reactionType === 'fa-thumbs-up') {
       if (reactionElement === 'far') {
-        console.log('actualizando like');
+        // console.log('actualizando like');
         const like = await fetch(`${urlAPI}/post/like/?post_id=${id}&user=${userId}`,{
           method: 'PUT',
           headers: {
@@ -163,7 +163,7 @@
         }
       }
       if (reactionElement === 'fas') {
-        console.log('actualizando dislike');
+        // console.log('actualizando dislike');
         const dislike = await fetch(`${urlAPI}/post/like/?post_id=${id}&user=${userId}`,{
           method: 'PUT',
           headers: {
@@ -184,7 +184,7 @@
     // update love reaction
     if (myLove && reactionType === 'fa-heart') {
       if (reactionElement === 'far'){
-        console.log('actualizando love');
+        // console.log('actualizando love');
         const dislove = await fetch(`${urlAPI}/post/like/?post_id=${id}&user=${userId}`,{
           method: 'PUT',
           headers: {
@@ -210,7 +210,7 @@
 
       // console.log(reactionsPost, reactionType, reactionElement, userId);
       if (reactionElement === 'fas'){
-        console.log('actualizando dislove');
+        // console.log('actualizando dislove');
         const dislove = await fetch(`${urlAPI}/post/like/?post_id=${id}&user=${userId}`,{
           method: 'PUT',
           headers: {
@@ -232,7 +232,7 @@
     //new like
     if (reactionType === 'fa-thumbs-up' && reactionElement === 'far') {
       if (reactions.like === 0 && reactions.love === 0 || !myLike && !myLove) {
-        console.log('creando like');
+        // console.log('creando like');
         const createReaction = await fetch(`${urlAPI}/post/like/`,{
           method: 'POST',
           headers: {
@@ -277,7 +277,7 @@
     // new love
     if (reactionType === 'fa-heart' && reactionElement === 'far'){
       if (reactions.like === 0 && reactions.love === 0 || !myLike && !myLove) {
-        console.log('creando love');
+        // console.log('creando love');
         const createReaction = await fetch(`${urlAPI}/post/like/`,{
           method: 'POST',
           headers: {
@@ -416,38 +416,7 @@
         commentsFirebase(commentUserFirebase, aux)
       }
     }
-
-    // console.log(user_id);
-    // console.log('antes del if:', user.id, userId);
-    
-    
   }
-
-  
-  
-  // let urlMeta;
-  // let urlLink;
-  // const getUrlPost = async(url)=>{
-  //   const urlData = await fetch(`${urlAPI}/post/meta/`, {
-  //     method: 'POST',
-  //     headers:{
-  //       'Content-Type' : 'application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       url: url
-  //     })
-  //   })
-  //   const content = await urlData.json()
-  //   if(urlData.status === 200){
-  //     urlMeta = content
-  //     urlLink = url
-  //   }
-  // }
-
-  // let validateDesc = []
-  // if(url){
-  //   getUrlPost(url)
-  // }
   
   onMount(()=>{
     reactionUser()

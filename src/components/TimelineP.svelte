@@ -40,6 +40,7 @@
   let countPost = 0
 
   const getPost = async()=>{
+    post = ''
     const response = await fetch(`${urlAPI}/post/create/?user=${id}`).then(res =>{
       if (res.ok) {
         return res.json()
@@ -69,6 +70,7 @@
 
   async function getPosts (){
     page += 1
+
     const response = await fetch(`${urlAPI}/post/create/?page=${page}&user=${id}`)
     const content = await response.json()
     countPost = content.count
@@ -81,17 +83,24 @@
     }
   }
 
-  if (id === parseInt(localStorage.getItem('userId'))) {
-    setTimeout(() => {
-      const btnSendPost = document.getElementById('btnSendPost')
-      btnSendPost.addEventListener('click', e =>{
-        setTimeout(() => {
-          posts.set([])
-          getPost()
-        }, 1000);
-      })
-    }, 2000);
-  }
+  setTimeout(() => {
+    const reloadPosts = document.getElementById('reloadPostCheck')
+    const observer = new MutationObserver(()=>{
+      // console.log('reloading post...');
+      post = ''
+      getPost(1)
+      reloadPosts.removeAttribute('data-reloading')
+    })
+    observer.observe(reloadPosts, {attributes:true})
+  }, 4000);
+
+  document.addEventListener('scroll', async (e)=>{
+    if ((window.innerHeight + window.scrollY) >= main.offsetHeight - 1 && !window.location.href.includes('settings')){
+      if (countPost > 3) {
+        getPosts()
+      }
+    }
+  })
 
   
   document.addEventListener('scroll', async (e)=>{
@@ -133,6 +142,7 @@
 </style>
 
 <div class="Profile col-12 col-lg-9">
+    <input type="checkbox" id="reloadPostCheck" name="reloadPost" class="d-none">
     <div class="Profile-container">
       <CoverPhoto {coverPhoto} {userId}/>
       <UserDetails {name} {last_name} {title} {email} {photo} {id} {aboutMe} {userMain} {urlAPI}/>

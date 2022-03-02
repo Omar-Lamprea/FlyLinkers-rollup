@@ -321,7 +321,7 @@ function instance($$self, $$props, $$invalidate) {
 	}
 
 	document.addEventListener('scroll', async e => {
-		if (window.innerHeight + window.scrollY >= main.offsetHeight - 1) {
+		if (window.innerHeight + window.scrollY >= main.offsetHeight - 1 && !window.location.href.includes('settings')) {
 			if (countPost > 3) {
 				getPosts();
 			}

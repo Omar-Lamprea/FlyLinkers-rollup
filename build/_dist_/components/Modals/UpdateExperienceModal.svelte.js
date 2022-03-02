@@ -61,7 +61,7 @@ function get_each_context_6(ctx, list, i) {
 	return child_ctx;
 }
 
-// (230:22) {#if joinStartMonth === month.value}
+// (232:22) {#if joinStartMonth === month.value}
 function create_if_block_7(ctx) {
 	let option;
 	let t_value = /*month*/ ctx[24].month + "";
@@ -87,7 +87,7 @@ function create_if_block_7(ctx) {
 	};
 }
 
-// (229:20) {#each months as month}
+// (231:20) {#each months as month}
 function create_each_block_6(ctx) {
 	let option;
 	let t_value = /*month*/ ctx[24].month + "";
@@ -118,7 +118,7 @@ function create_each_block_6(ctx) {
 	};
 }
 
-// (239:22) {#if parseInt(dataStartYear) === year}
+// (241:22) {#if parseInt(dataStartYear) === year}
 function create_if_block_6(ctx) {
 	let option;
 	let t_value = /*year*/ ctx[21] + "";
@@ -144,7 +144,7 @@ function create_if_block_6(ctx) {
 	};
 }
 
-// (238:20) {#each yearList as year}
+// (240:20) {#each yearList as year}
 function create_each_block_5(ctx) {
 	let show_if = parseInt(/*dataStartYear*/ ctx[3]) === /*year*/ ctx[21];
 	let option;
@@ -176,7 +176,7 @@ function create_each_block_5(ctx) {
 	};
 }
 
-// (269:18) {:else}
+// (271:18) {:else}
 function create_else_block(ctx) {
 	let select0;
 	let select0_name_value;
@@ -316,7 +316,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (251:18) {#if !experience.working}
+// (253:18) {#if !experience.working}
 function create_if_block_1(ctx) {
 	let select0;
 	let select0_name_value;
@@ -454,7 +454,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (272:24) {#if joinEndMonth === month.value}
+// (274:24) {#if joinEndMonth === month.value}
 function create_if_block_5(ctx) {
 	let option;
 	let t_value = /*month*/ ctx[24].month + "";
@@ -480,7 +480,7 @@ function create_if_block_5(ctx) {
 	};
 }
 
-// (271:22) {#each months as month}
+// (273:22) {#each months as month}
 function create_each_block_4(ctx) {
 	let option;
 	let t_value = /*month*/ ctx[24].month + "";
@@ -522,7 +522,7 @@ function create_each_block_4(ctx) {
 	};
 }
 
-// (281:24) {#if parseInt(dataEndYear) === year}
+// (283:24) {#if parseInt(dataEndYear) === year}
 function create_if_block_4(ctx) {
 	let option;
 	let t_value = /*year*/ ctx[21] + "";
@@ -548,7 +548,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (280:22) {#each yearList as year}
+// (282:22) {#each yearList as year}
 function create_each_block_3(ctx) {
 	let show_if = parseInt(/*dataEndYear*/ ctx[1]) === /*year*/ ctx[21];
 	let option;
@@ -593,7 +593,7 @@ function create_each_block_3(ctx) {
 	};
 }
 
-// (254:25) {#if joinEndMonth === month.value}
+// (256:25) {#if joinEndMonth === month.value}
 function create_if_block_3(ctx) {
 	let option;
 	let t_value = /*month*/ ctx[24].month + "";
@@ -619,7 +619,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (253:23) {#each months as month}
+// (255:23) {#each months as month}
 function create_each_block_2(ctx) {
 	let option;
 	let t_value = /*month*/ ctx[24].month + "";
@@ -661,7 +661,7 @@ function create_each_block_2(ctx) {
 	};
 }
 
-// (263:25) {#if parseInt(dataEndYear) === year}
+// (265:25) {#if parseInt(dataEndYear) === year}
 function create_if_block_2(ctx) {
 	let option;
 	let t_value = /*year*/ ctx[21] + "";
@@ -687,7 +687,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (262:23) {#each yearList as year}
+// (264:23) {#each yearList as year}
 function create_each_block_1(ctx) {
 	let show_if = parseInt(/*dataEndYear*/ ctx[1]) === /*year*/ ctx[21];
 	let option;
@@ -732,7 +732,7 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (309:16) {#if experience.employment_type === employment}
+// (311:16) {#if experience.employment_type === employment}
 function create_if_block(ctx) {
 	let option;
 	let t_value = /*employment*/ ctx[18] + "";
@@ -758,7 +758,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (308:14) {#each employmentTypeList as employment}
+// (310:14) {#each employmentTypeList as employment}
 function create_each_block(ctx) {
 	let option;
 	let t_value = /*employment*/ ctx[18] + "";
@@ -1613,8 +1613,9 @@ function instance($$self, $$props, $$invalidate) {
 
 		const content = await postExperience.json();
 
-		if (postExperience.status === 200) {
-			closeUpdateModal(experience.id);
+		if (postExperience.ok) {
+			// const btnUpdateExperience = document.getElementById(`btnUpdateExperience${experience.id}`)
+			window.location.reload();
 		}
 	}
 

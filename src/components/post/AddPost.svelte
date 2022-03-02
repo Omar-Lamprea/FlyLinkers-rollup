@@ -13,6 +13,7 @@
 
   let characterCount = 0
   const validateInfoPost = async (e) =>{
+    // console.dir(e.target.value);
     e.target.style.height = (e.target.scrollHeight > e.target.clientHeight) ? (e.target.scrollHeight)+"px" : "60px"; 
     // console.log(e.target.value.length);
     characterCount = e.target.value.length
@@ -22,7 +23,7 @@
       if (e.key === 'Enter') {
         e.target.rows ++
       }
-      if (e.target.value !== '') {
+      if (e.target.value.length >= 3) {
         btnSendPost.removeAttribute('disabled')
       }else{
         btnSendPost.setAttribute('disabled', '')
@@ -53,6 +54,7 @@
         if (url.includes('\n')) {
           searchUrl = url.replace('\n', ' ')
           const splitUrl = searchUrl.split(' ')
+
           splitUrl.forEach(el => {
             if (el.includes('https://') || el.includes('http://')){
               searchUrl = [el]
@@ -79,7 +81,7 @@
     }
 
 
-    if (e.target.value !== '') {
+    if (e.target.value.length >= 3) {
       btnSendPost.removeAttribute('disabled')
     }else{
       btnSendPost.setAttribute('disabled', '')
@@ -106,7 +108,7 @@
       })
       const content = await getMeta.json()
       if (content) {
-        console.log(url);
+        // console.log(url);
         urlContent = content
         validUrl = url
       }
@@ -123,6 +125,8 @@
   }
 
   const closeMetaData = ()=>{
+    postDescription.value = ''
+    btnSendPost.setAttribute('disabled', '')
     if(urlContent){
       urlMeta.classList.add('d-none')
       metaTitle.value = ''
@@ -148,74 +152,91 @@
           img: postImg.src
         })
       })
-      const content = await convertImageB64.json()
-      imagePost = content.img
+      if (convertImageB64.ok) {
+        const content = await convertImageB64.json()
+        imagePost = content.img
+      }
     }
 
     if (
       postDescription.value !== '' && imagePost === '' || 
       postDescription.value === '' && imagePost !== '' || 
       postDescription.value !== '' && imagePost !== '') 
-      {
-        let postDescriptionClean = []
-        if(postDescription.value.includes('https') || postDescription.value.includes('http')){
-          const descriptionUrl = postDescription.value.split(' ')
-          descriptionUrl.forEach(string => {
-            if(!string.includes('https') || !string.includes('http')){
-              postDescriptionClean.push(string)
-            }
-          });
-        }else{
-          postDescriptionClean.push(postDescription.value)
-        }
-        const joinPostDescriptionClean = postDescriptionClean.join(' ')
+    {
+      let postDescriptionClean = []
+      if(postDescription.value.includes('https') || postDescription.value.includes('http')){
 
-        let template;
-        if (urlContent === undefined) {
+        const descriptionUrl = postDescription.value.split(' ')
+        descriptionUrl.forEach(string => {
+
+          if(!string.includes('https') || !string.includes('http')){
+            postDescriptionClean.push(string)
+          }else{
+            if (string.includes('\n')) {
+              const stringReplace = string.replace('\n', ' ')
+              const newString = stringReplace.split(' ')
+              postDescriptionClean.push(newString[0])
+            }
+          }
+        })
+      }else{
+        postDescriptionClean.push(postDescription.value)
+      }
+      const joinPostDescriptionClean = postDescriptionClean.join(' ')
+
+      let template;
+
+      if (urlContent === undefined) {
+        template = {
+          user: id,
+          img: imagePost,
+          desc: joinPostDescriptionClean,
+        }
+      }else{
+        if (urlContent.id) {
           template = {
             user: id,
             img: imagePost,
             desc: joinPostDescriptionClean,
+            url_id: urlContent.id
           }
         }else{
-          if (urlContent.id) {
-            template = {
-              user: id,
-              img: imagePost,
-              desc: joinPostDescriptionClean,
-              url_id: urlContent.id
-            }
-          }else{
-            template = {
-              user: id,
-              img: imagePost,
-              desc: joinPostDescriptionClean,
-              meta: {
-                title: urlContent.title,
-                description: urlContent.description,
-                image: urlContent.image,
-                url: validUrl
-              }
+          template = {
+            user: id,
+            img: imagePost,
+            desc: joinPostDescriptionClean,
+            meta: {
+              title: urlContent.title,
+              description: urlContent.description,
+              image: urlContent.image,
+              url: validUrl
             }
           }
         }
+      }
 
-        const post = await fetch(`${urlAPI}/post/create/`,{
-          method : 'POST',
-          headers : {
-            'Content-Type' : 'application/json'
-          },
-          body: JSON.stringify(template)
-        })
-        const content = await post.json()
-        if (content) {
-          postDescription.value = ''
-          if (postImg.src) {
-            postImg.setAttribute('src', '')
-            postImg.classList.toggle('d-none')
-          }
-          closeMetaData()
+      // console.log(template);
+      const post = await fetch(`${urlAPI}/post/create/`,{
+        method : 'POST',
+        headers : {
+          'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify(template)
+      })
+      const content = await post.json()
+
+      if (post.ok) {
+        postDescription.value = ''
+        if (postImg.src) {
+          postImg.setAttribute('src', '')
+          postImg.classList.toggle('d-none')
         }
+        closeMetaData()
+
+        //recargar post
+        const reloadPost = document.getElementById('reloadPostCheck')
+        reloadPost.classList.toggle('data-reloading')
+      }
     }
   }
 
@@ -275,7 +296,7 @@
 <div class="Add-post {colorbox} Default-containers px-lg-5 d-flex flex-column">
 
   <div class="Add-post-input mx-3 d-flex flex-column justify-content-center position-relative">
-    <textarea name="" cols="" rows="1" id="postDescription" class="Default-containers" placeholder="Start a post..." on:keyup={validateUrl} on:keydown={validateInfoPost}></textarea>
+    <textarea name="" cols="" rows="1" id="postDescription" class="Default-containers" placeholder="Start a post..." on:keyup={validateUrl} on:keyup={validateInfoPost}></textarea>
     <div id="characterCountSpan" class="characterCount characterCount-active">
       {characterCount}/255
     </div>

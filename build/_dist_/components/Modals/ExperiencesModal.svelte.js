@@ -50,7 +50,7 @@ function get_each_context_4(ctx, list, i) {
 	return child_ctx;
 }
 
-// (199:20) {#each months as month}
+// (200:20) {#each months as month}
 function create_each_block_4(ctx) {
 	let option;
 	let t_value = /*month*/ ctx[16].month + "";
@@ -75,7 +75,7 @@ function create_each_block_4(ctx) {
 	};
 }
 
-// (205:20) {#each yearList as year}
+// (206:20) {#each yearList as year}
 function create_each_block_3(ctx) {
 	let option;
 	let t_value = /*year*/ ctx[13] + "";
@@ -100,7 +100,7 @@ function create_each_block_3(ctx) {
 	};
 }
 
-// (216:20) {#each months as month}
+// (217:20) {#each months as month}
 function create_each_block_2(ctx) {
 	let option;
 	let t_value = /*month*/ ctx[16].month + "";
@@ -125,7 +125,7 @@ function create_each_block_2(ctx) {
 	};
 }
 
-// (222:20) {#each yearList as year}
+// (223:20) {#each yearList as year}
 function create_each_block_1(ctx) {
 	let option;
 	let t_value = /*year*/ ctx[13] + "";
@@ -150,7 +150,7 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (246:14) {#each employmentTypeList as employment}
+// (247:14) {#each employmentTypeList as employment}
 function create_each_block(ctx) {
 	let option;
 	let t_value = /*employment*/ ctx[10] + "";
@@ -829,9 +829,10 @@ function instance($$self, $$props, $$invalidate) {
 		const content = await postExperience.json();
 
 		// console.log(content);
-		if (postExperience.status === 200) {
-			formAddNewExperience.reset();
-			closeModal('modalExperience');
+		if (postExperience.ok) {
+			// formAddNewExperience.reset()
+			// closeModal('modalExperience')
+			window.location.reload();
 		} //llamar exps
 	}
 

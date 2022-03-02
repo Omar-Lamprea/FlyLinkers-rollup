@@ -4,12 +4,20 @@
 
 
   const showPostImg = ()=>{
-    const render = new FileReader();
-    render.readAsDataURL(loadPhotoInput.files[0])
-    render.onloadend = ()=>{
-      postImg.classList.remove('d-none')
-      postImg.src = render.result
-      ableBtn()
+
+    if(loadPhotoInput.files[0].size > 3_145_728){
+      alert("File is too big! \nTry again with a file smaller than 3MB");
+      loadPhotoInput.value = "";
+    }
+
+    if (loadPhotoInput.value !== "") {
+      const render = new FileReader();
+      render.readAsDataURL(loadPhotoInput.files[0])
+      render.onloadend = ()=>{
+        postImg.classList.remove('d-none')
+        postImg.src = render.result
+        ableBtn()
+      }
     }
   }
 
@@ -45,7 +53,7 @@
     <label for="loadPhotoInput">
       <i class="fas fa-image"></i>
       <span>Photo</span>
-      <input type="file" name="loadPhotoInput" id="loadPhotoInput" class="d-none" accept=".png, .jpg, .jpeg, .gif" on:change={showPostImg}>
+      <input type="file" name="loadPhotoInput" id="loadPhotoInput" class="d-none" accept=".png, .jpg, .jpeg, .gif"  on:change={showPostImg}>
     </label>
   </div>
   <div class="Header-nav Header-nav-film mx-3 disabled">

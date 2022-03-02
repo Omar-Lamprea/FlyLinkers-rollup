@@ -13,9 +13,13 @@ import {
 	noop,
 	run_all,
 	safe_not_equal,
+	set_data,
 	space,
-	src_url_equal
+	src_url_equal,
+	text
 } from "../../../_snowpack/pkg/svelte/internal.js";
+
+import { closeModal } from '../../js/closeModals.js';
 
 function create_fragment(ctx) {
 	let div6;
@@ -36,6 +40,7 @@ function create_fragment(ctx) {
 	let button1;
 	let t8;
 	let button2;
+	let t9;
 	let mounted;
 	let dispose;
 
@@ -46,7 +51,7 @@ function create_fragment(ctx) {
 			div4 = element("div");
 			div0 = element("div");
 
-			div0.innerHTML = `<h5 class="modal-title" id="ModalProfileModalLabel">Edit Profile</h5> 
+			div0.innerHTML = `<h5 class="modal-title" id="ModalProfileModalLabel">Edit profile photo</h5> 
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>`;
 
 			t2 = space();
@@ -64,7 +69,7 @@ function create_fragment(ctx) {
 			button1.textContent = "Close";
 			t8 = space();
 			button2 = element("button");
-			button2.textContent = "Save Profile photo";
+			t9 = text(/*saveProfilePhoto*/ ctx[1]);
 			attr(div0, "class", "modal-header");
 			attr(label, "for", "profilePhoto");
 			attr(input, "type", "file");
@@ -80,9 +85,9 @@ function create_fragment(ctx) {
 			attr(button1, "type", "button");
 			attr(button1, "class", "btn btn-secondary");
 			attr(button1, "data-bs-dismiss", "modal");
+			attr(button2, "id", "btnProfilePhoto");
 			attr(button2, "type", "button");
 			attr(button2, "class", "btn btn-outline-primary btn-flylinkers");
-			attr(button2, "data-bs-dismiss", "modal");
 			attr(div3, "class", "modal-footer");
 			attr(div4, "class", "modal-content");
 			attr(div5, "class", "modal-dialog modal-dialog-centered modal-lg");
@@ -110,12 +115,13 @@ function create_fragment(ctx) {
 			append(div3, button1);
 			append(div3, t8);
 			append(div3, button2);
+			append(button2, t9);
 
 			if (!mounted) {
 				dispose = [
-					listen(input, "change", /*showProfileImg*/ ctx[1]),
+					listen(input, "change", /*showProfileImg*/ ctx[2]),
 					listen(button2, "click", function () {
-						if (is_function(/*updateProfile*/ ctx[2](/*id*/ ctx[0]))) /*updateProfile*/ ctx[2](/*id*/ ctx[0]).apply(this, arguments);
+						if (is_function(/*updateProfile*/ ctx[3](/*id*/ ctx[0]))) /*updateProfile*/ ctx[3](/*id*/ ctx[0]).apply(this, arguments);
 					})
 				];
 
@@ -124,6 +130,7 @@ function create_fragment(ctx) {
 		},
 		p(new_ctx, [dirty]) {
 			ctx = new_ctx;
+			if (dirty & /*saveProfilePhoto*/ 2) set_data(t9, /*saveProfilePhoto*/ ctx[1]);
 		},
 		i: noop,
 		o: noop,
@@ -140,6 +147,7 @@ function instance($$self, $$props, $$invalidate) {
 	let urlProfilePhoto;
 	let idProfilePhoto;
 	let { id, urlAPI } = $$props;
+	let saveProfilePhoto = 'Save profile photo';
 
 	const showProfileImg = () => {
 		const render = new FileReader();
@@ -165,6 +173,8 @@ function instance($$self, $$props, $$invalidate) {
 	};
 
 	const updateProfile = async id => {
+		$$invalidate(1, saveProfilePhoto = 'processing...');
+		btnProfilePhoto.setAttribute('disabled', '');
 		await convertProfileB64();
 
 		const response = await fetch(`${urlAPI}/user/create/?id=${id}`, {
@@ -173,29 +183,31 @@ function instance($$self, $$props, $$invalidate) {
 			body: JSON.stringify({ photo: urlProfilePhoto })
 		});
 
-		const content = await response.json();
-
-		if (content) {
+		if (response.ok) {
 			localStorage.removeItem('profilePhoto');
 			const profileImg = document.getElementById('dropdownMenuButton1');
 			const headerUserImage = document.getElementById('headerUserImage');
 			profileImg.setAttribute('src', `${urlAPI}${urlProfilePhoto}`);
 			headerUserImage.setAttribute('src', `${urlAPI}${urlProfilePhoto}`);
+			closeModal('ModalProfile');
+			$$invalidate(1, saveProfilePhoto = 'Save profile photo');
+			btnProfilePhoto.removeAttribute('disabled');
+			showProfileImage.style.display = 'none';
 		}
 	};
 
 	$$self.$$set = $$props => {
 		if ('id' in $$props) $$invalidate(0, id = $$props.id);
-		if ('urlAPI' in $$props) $$invalidate(3, urlAPI = $$props.urlAPI);
+		if ('urlAPI' in $$props) $$invalidate(4, urlAPI = $$props.urlAPI);
 	};
 
-	return [id, showProfileImg, updateProfile, urlAPI];
+	return [id, saveProfilePhoto, showProfileImg, updateProfile, urlAPI];
 }
 
 class ProfilePhotoModal extends SvelteComponent {
 	constructor(options) {
 		super();
-		init(this, options, instance, create_fragment, safe_not_equal, { id: 0, urlAPI: 3 });
+		init(this, options, instance, create_fragment, safe_not_equal, { id: 0, urlAPI: 4 });
 	}
 }
 

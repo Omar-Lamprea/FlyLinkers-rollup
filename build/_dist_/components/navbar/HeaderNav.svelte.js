@@ -68,7 +68,7 @@ function get_each_context_1(ctx, list, i) {
 	return child_ctx;
 }
 
-// (326:4) {#if countMessages}
+// (332:4) {#if countMessages}
 function create_if_block_3(ctx) {
 	let div;
 	let t;
@@ -77,7 +77,7 @@ function create_if_block_3(ctx) {
 		c() {
 			div = element("div");
 			t = text(/*countMessages*/ ctx[5]);
-			attr(div, "class", "notificacions-bubble svelte-1ph7jux");
+			attr(div, "class", "notificacions-bubble svelte-1kzdjg7");
 		},
 		m(target, anchor) {
 			insert(target, div, anchor);
@@ -92,7 +92,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (333:6) {:else}
+// (339:6) {:else}
 function create_else_block_2(ctx) {
 	let li;
 
@@ -103,7 +103,7 @@ function create_else_block_2(ctx) {
 			li.innerHTML = `<span>You haven&#39;t started any chat</span> 
         `;
 
-			attr(li, "class", "dropdown-item chatList d-flex svelte-1ph7jux");
+			attr(li, "class", "dropdown-item chatList d-flex svelte-1kzdjg7");
 		},
 		m(target, anchor) {
 			insert(target, li, anchor);
@@ -114,7 +114,7 @@ function create_else_block_2(ctx) {
 	};
 }
 
-// (331:6) {#each $usergroups as groups}
+// (337:6) {#each $usergroups as groups}
 function create_each_block_1(ctx) {
 	let chatlist;
 	let current;
@@ -157,7 +157,7 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (345:6) {#if countBubble > 0}
+// (351:6) {#if countBubble > 0}
 function create_if_block_2(ctx) {
 	let div;
 	let t;
@@ -166,7 +166,7 @@ function create_if_block_2(ctx) {
 		c() {
 			div = element("div");
 			t = text(/*countBubble*/ ctx[4]);
-			attr(div, "class", "notificacions-bubble svelte-1ph7jux");
+			attr(div, "class", "notificacions-bubble svelte-1kzdjg7");
 		},
 		m(target, anchor) {
 			insert(target, div, anchor);
@@ -181,7 +181,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (364:10) {:else}
+// (370:10) {:else}
 function create_else_block_1(ctx) {
 	let li;
 	let a;
@@ -228,14 +228,15 @@ function create_else_block_1(ctx) {
 			t6 = space();
 			if (!src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[2] + "/" + /*notification*/ ctx[16].photo))) attr(img, "src", img_src_value);
 			attr(img, "alt", "userImage");
-			attr(img, "class", "svelte-1ph7jux");
-			attr(p0, "class", "notification-user-name svelte-1ph7jux");
-			attr(p1, "class", "notification-time svelte-1ph7jux");
+			attr(img, "class", "svelte-1kzdjg7");
+			attr(p0, "class", "notification-user-name svelte-1kzdjg7");
+			attr(p1, "class", "notification-time svelte-1kzdjg7");
 			attr(div, "class", "data-user-time d-flex justify-content-between");
-			attr(p2, "class", "notification-desc svelte-1ph7jux");
+			attr(p2, "class", "notification-desc svelte-1kzdjg7");
+			attr(span, "class", "svelte-1kzdjg7");
 			attr(a, "href", a_href_value = "/post/" + /*notification*/ ctx[16].id);
-			attr(a, "class", "d-flex svelte-1ph7jux");
-			attr(li, "class", "d-flex notificationsList dropdown-item svelte-1ph7jux");
+			attr(a, "class", "d-flex svelte-1kzdjg7");
+			attr(li, "class", "d-flex notificationsList dropdown-item svelte-1kzdjg7");
 			attr(li, "data-id", li_data_id_value = /*notification*/ ctx[16].id);
 		},
 		m(target, anchor) {
@@ -290,7 +291,7 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (351:10) {#if typeof(notification.id) === 'string'}
+// (357:10) {#if typeof(notification.id) === 'string'}
 function create_if_block_1(ctx) {
 	let li;
 	let a;
@@ -337,14 +338,15 @@ function create_if_block_1(ctx) {
 			t6 = space();
 			if (!src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[2] + "/" + /*notification*/ ctx[16].photo))) attr(img, "src", img_src_value);
 			attr(img, "alt", "userImage");
-			attr(img, "class", "svelte-1ph7jux");
-			attr(p0, "class", "notification-user-name svelte-1ph7jux");
-			attr(p1, "class", "notification-time svelte-1ph7jux");
+			attr(img, "class", "svelte-1kzdjg7");
+			attr(p0, "class", "notification-user-name svelte-1kzdjg7");
+			attr(p1, "class", "notification-time svelte-1kzdjg7");
 			attr(div, "class", "data-user-time d-flex justify-content-between");
-			attr(p2, "class", "notification-desc svelte-1ph7jux");
+			attr(p2, "class", "notification-desc svelte-1kzdjg7");
+			attr(span, "class", "svelte-1kzdjg7");
 			attr(a, "href", a_href_value = "/profile/" + /*notification*/ ctx[16].id);
-			attr(a, "class", "d-flex svelte-1ph7jux");
-			attr(li, "class", "d-flex notificationsList dropdown-item svelte-1ph7jux");
+			attr(a, "class", "d-flex svelte-1kzdjg7");
+			attr(li, "class", "d-flex notificationsList dropdown-item svelte-1kzdjg7");
 			attr(li, "data-email", li_data_email_value = /*notification*/ ctx[16].id);
 		},
 		m(target, anchor) {
@@ -403,7 +405,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (349:8) {#each notificationsList as notification}
+// (355:8) {#each notificationsList as notification}
 function create_each_block(ctx) {
 	let if_block_anchor;
 
@@ -444,7 +446,7 @@ function create_each_block(ctx) {
 	};
 }
 
-// (389:6) {:else}
+// (395:6) {:else}
 function create_else_block(ctx) {
 	let img;
 	let img_src_value;
@@ -455,7 +457,7 @@ function create_else_block(ctx) {
 			attr(img, "id", "headerUserImage");
 			if (!src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[2] + /*photo*/ ctx[0]))) attr(img, "src", img_src_value);
 			attr(img, "alt", "");
-			attr(img, "class", "svelte-1ph7jux");
+			attr(img, "class", "svelte-1kzdjg7");
 		},
 		m(target, anchor) {
 			insert(target, img, anchor);
@@ -471,7 +473,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (387:6) {#if localStorage.getItem('profilePhoto')}
+// (393:6) {#if localStorage.getItem('profilePhoto')}
 function create_if_block(ctx) {
 	let img;
 	let img_src_value;
@@ -482,7 +484,7 @@ function create_if_block(ctx) {
 			attr(img, "id", "headerUserImage");
 			if (!src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[2] + localStorage.getItem('profilePhoto')))) attr(img, "src", img_src_value);
 			attr(img, "alt", "");
-			attr(img, "class", "svelte-1ph7jux");
+			attr(img, "class", "svelte-1kzdjg7");
 		},
 		m(target, anchor) {
 			insert(target, img, anchor);
@@ -599,14 +601,14 @@ function create_fragment(ctx) {
 			nav = element("nav");
 			div0 = element("div");
 			a0 = element("a");
-			a0.innerHTML = `<i class="fas fa-home svelte-1ph7jux"></i>`;
+			a0.innerHTML = `<i class="fas fa-home svelte-1kzdjg7"></i>`;
 			t0 = space();
 			div1 = element("div");
 			create_component(friendrequest.$$.fragment);
 			t1 = space();
 			div2 = element("div");
 			a1 = element("a");
-			a1.innerHTML = `<i class="fas fa-briefcase svelte-1ph7jux"></i>`;
+			a1.innerHTML = `<i class="fas fa-briefcase svelte-1kzdjg7"></i>`;
 			t2 = space();
 			div3 = element("div");
 			if (if_block0) if_block0.c();
@@ -648,7 +650,7 @@ function create_fragment(ctx) {
 			ul2 = element("ul");
 			li0 = element("li");
 			a3 = element("a");
-			a3.innerHTML = `<span class="dropdown-item svelte-1ph7jux">Settings</span>`;
+			a3.innerHTML = `<span class="dropdown-item svelte-1kzdjg7">Settings</span>`;
 			t12 = space();
 			li1 = element("li");
 			span1 = element("span");
@@ -656,44 +658,44 @@ function create_fragment(ctx) {
 			t14 = space();
 			div9 = element("div");
 			a4 = element("a");
-			a4.innerHTML = `<i class="fas fa-calendar-week svelte-1ph7jux"></i>`;
+			a4.innerHTML = `<i class="fas fa-calendar-week svelte-1kzdjg7"></i>`;
 			attr(a0, "href", "/");
 			attr(div0, "id", "iconHome");
-			attr(div0, "class", "icon Header-nav-home mx-3 fs-3 svelte-1ph7jux");
-			attr(div1, "class", "icon Header-nav-user-plus notification mx-3 fs-3 svelte-1ph7jux");
+			attr(div0, "class", "icon Header-nav-home mx-3 fs-3 svelte-1kzdjg7");
+			attr(div1, "class", "icon Header-nav-user-plus notification mx-3 fs-3 svelte-1kzdjg7");
 			attr(a1, "href", "/");
-			attr(div2, "class", "icon Header-nav-briefcase hidden mx-3 fs-3 svelte-1ph7jux");
-			attr(i2, "class", "fas fa-comment dropdown-toggle svelte-1ph7jux");
+			attr(div2, "class", "icon Header-nav-briefcase hidden mx-3 fs-3 svelte-1kzdjg7");
+			attr(i2, "class", "fas fa-comment dropdown-toggle svelte-1kzdjg7");
 			attr(i2, "id", "chats");
 			attr(i2, "data-bs-toggle", "dropdown");
 			attr(i2, "aria-expanded", "false");
-			attr(ul0, "class", "dropdown-menu svelte-1ph7jux");
+			attr(ul0, "class", "dropdown-menu svelte-1kzdjg7");
 			attr(ul0, "aria-labelledby", "chats");
-			attr(div3, "class", "icon Header-nav-comment mx-3 fs-3 position-relative svelte-1ph7jux");
-			attr(i3, "class", "fas fa-bell dropdown-toggle svelte-1ph7jux");
+			attr(div3, "class", "icon Header-nav-comment mx-3 fs-3 position-relative svelte-1kzdjg7");
+			attr(i3, "class", "fas fa-bell dropdown-toggle svelte-1kzdjg7");
 			attr(i3, "id", "notifications");
 			attr(i3, "data-bs-toggle", "dropdown");
 			attr(i3, "aria-expanded", "false");
-			attr(ul1, "class", "dropdown-menu svelte-1ph7jux");
+			attr(ul1, "class", "dropdown-menu svelte-1kzdjg7");
 			attr(ul1, "aria-labelledby", "notifications");
-			attr(div4, "class", "dropdown svelte-1ph7jux");
-			attr(div5, "class", "icon Header-nav-bell mx-3 fs-3 notification svelte-1ph7jux");
+			attr(div4, "class", "dropdown svelte-1kzdjg7");
+			attr(div5, "class", "icon Header-nav-bell mx-3 fs-3 notification svelte-1kzdjg7");
 			attr(div5, "id", "notification");
 			attr(a2, "href", "/profile");
-			attr(div6, "class", "icon Header-nav-user mx-3 fs-3 svelte-1ph7jux");
-			attr(i4, "class", "fas fa-grip-vertical dropdown-toggle svelte-1ph7jux");
+			attr(div6, "class", "icon Header-nav-user mx-3 fs-3 svelte-1kzdjg7");
+			attr(i4, "class", "fas fa-grip-vertical dropdown-toggle svelte-1kzdjg7");
 			attr(i4, "id", "settings");
 			attr(i4, "data-bs-toggle", "dropdown");
 			attr(i4, "aria-expanded", "false");
 			attr(a3, "href", "/settings");
-			attr(span1, "class", "dropdown-item svelte-1ph7jux");
-			attr(ul2, "class", "dropdown-menu svelte-1ph7jux");
+			attr(span1, "class", "dropdown-item svelte-1kzdjg7");
+			attr(ul2, "class", "dropdown-menu svelte-1kzdjg7");
 			attr(ul2, "aria-labelledby", "settings");
-			attr(div7, "class", "dropdown svelte-1ph7jux");
-			attr(div8, "class", "icon Header-nav-grip-vertical mx-3 fs-3 svelte-1ph7jux");
+			attr(div7, "class", "dropdown svelte-1kzdjg7");
+			attr(div8, "class", "icon Header-nav-grip-vertical mx-3 fs-3 svelte-1kzdjg7");
 			attr(a4, "href", "/");
-			attr(div9, "class", "icon Header-nav-calendar-week hidden mx-3 fs-3 svelte-1ph7jux");
-			attr(nav, "class", "nav-container d-flex svelte-1ph7jux");
+			attr(div9, "class", "icon Header-nav-calendar-week hidden mx-3 fs-3 svelte-1kzdjg7");
+			attr(nav, "class", "nav-container d-flex svelte-1kzdjg7");
 		},
 		m(target, anchor) {
 			insert(target, nav, anchor);
@@ -988,6 +990,7 @@ function instance($$self, $$props, $$invalidate) {
 						seen: request.seen
 					};
 
+					//recargar solicitudes
 					if (!obj.seen) {
 						$$invalidate(4, countBubble += 1);
 					}
@@ -1107,8 +1110,7 @@ function instance($$self, $$props, $$invalidate) {
 					});
 				}
 
-				console.log(friendsList);
-
+				// console.log(friendsList);
 				updateDoc(userDoc, {
 					friends: friendsList,
 					reactions: reactionsList,

@@ -41,16 +41,16 @@
     posts.set([])
   }
 
-  if (id === parseInt(localStorage.getItem('userId'))) {
-    setTimeout(() => {
-      btnSendPost.addEventListener('click', e =>{
-        setTimeout(() => {
-          clearPost()
-          getPosts(1)
-        }, 1500);
-      })
-    }, 2000);
-  }
+  setTimeout(() => {
+    const reloadPosts = document.getElementById('reloadPostCheck')
+    const observer = new MutationObserver(()=>{
+      // console.log('reloading post...');
+      clearPost()
+      getPosts(1)
+      reloadPosts.removeAttribute('data-reloading')
+    })
+    observer.observe(reloadPosts, {attributes:true})
+  }, 4000);
 
   document.addEventListener('scroll', async (e)=>{
     if ((window.innerHeight + window.scrollY) >= main.offsetHeight - 1 && !window.location.href.includes('settings')){
@@ -70,6 +70,7 @@
 
 <div class="Timeline col-12 col-lg-6">
   <div class="Timeline-container">
+    <input type="checkbox" id="reloadPostCheck" name="reloadPost" class="d-none">
     {#if id}
        <AddPost {id} {urlAPI} {colorbox}/>
     {/if}

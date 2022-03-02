@@ -13,9 +13,13 @@ import {
 	noop,
 	run_all,
 	safe_not_equal,
+	set_data,
 	space,
-	src_url_equal
+	src_url_equal,
+	text
 } from "../../../_snowpack/pkg/svelte/internal.js";
+
+import { closeModal } from '../../js/closeModals.js';
 
 function create_fragment(ctx) {
 	let div6;
@@ -36,6 +40,7 @@ function create_fragment(ctx) {
 	let button1;
 	let t8;
 	let button2;
+	let t9;
 	let mounted;
 	let dispose;
 
@@ -46,7 +51,7 @@ function create_fragment(ctx) {
 			div4 = element("div");
 			div0 = element("div");
 
-			div0.innerHTML = `<h5 class="modal-title" id="editProfileLabel">Edit Profile</h5> 
+			div0.innerHTML = `<h5 class="modal-title" id="editProfileLabel">Edit cover photo</h5> 
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>`;
 
 			t2 = space();
@@ -64,7 +69,7 @@ function create_fragment(ctx) {
 			button1.textContent = "Close";
 			t8 = space();
 			button2 = element("button");
-			button2.textContent = "Save cover photo";
+			t9 = text(/*btnSaveCoverPhoto*/ ctx[1]);
 			attr(div0, "class", "modal-header");
 			attr(label, "for", "coverPhoto");
 			attr(input, "type", "file");
@@ -74,15 +79,15 @@ function create_fragment(ctx) {
 			if (!src_url_equal(img.src, img_src_value = "")) attr(img, "src", img_src_value);
 			attr(img, "alt", "");
 			attr(img, "id", "showImage");
-			attr(img, "class", "coverPhotoLoaded svelte-1ulbmgd");
+			attr(img, "class", "coverPhotoLoaded svelte-1rxjrzs");
 			attr(div1, "class", "cover-photo");
 			attr(div2, "class", "modal-body text-start");
 			attr(button1, "type", "button");
 			attr(button1, "class", "btn btn-secondary");
 			attr(button1, "data-bs-dismiss", "modal");
+			attr(button2, "id", "btnUpdateCoverPhoto");
 			attr(button2, "type", "button");
 			attr(button2, "class", "btn btn-outline-primary btn-flylinkers");
-			attr(button2, "data-bs-dismiss", "modal");
 			attr(div3, "class", "modal-footer");
 			attr(div4, "class", "modal-content");
 			attr(div5, "class", "modal-dialog modal-dialog-centered modal-lg");
@@ -110,12 +115,13 @@ function create_fragment(ctx) {
 			append(div3, button1);
 			append(div3, t8);
 			append(div3, button2);
+			append(button2, t9);
 
 			if (!mounted) {
 				dispose = [
-					listen(input, "change", /*showCoverImg*/ ctx[1]),
+					listen(input, "change", /*showCoverImg*/ ctx[2]),
 					listen(button2, "click", function () {
-						if (is_function(/*getProfile*/ ctx[2](/*id*/ ctx[0]))) /*getProfile*/ ctx[2](/*id*/ ctx[0]).apply(this, arguments);
+						if (is_function(/*getProfile*/ ctx[3](/*id*/ ctx[0]))) /*getProfile*/ ctx[3](/*id*/ ctx[0]).apply(this, arguments);
 					})
 				];
 
@@ -124,6 +130,7 @@ function create_fragment(ctx) {
 		},
 		p(new_ctx, [dirty]) {
 			ctx = new_ctx;
+			if (dirty & /*btnSaveCoverPhoto*/ 2) set_data(t9, /*btnSaveCoverPhoto*/ ctx[1]);
 		},
 		i: noop,
 		o: noop,
@@ -140,6 +147,7 @@ function instance($$self, $$props, $$invalidate) {
 	let urlCoverPhoto;
 	let idCoverPhoto;
 	let { id, urlAPI } = $$props;
+	let btnSaveCoverPhoto = 'Save cover photo';
 
 	const showCoverImg = () => {
 		const render = new FileReader();
@@ -165,76 +173,50 @@ function instance($$self, $$props, $$invalidate) {
 	};
 
 	const getProfile = async id => {
-		const response = await fetch(`${urlAPI}/user/profile/?user_id=${id}`);
-		const content = await response.json();
-
-		if (content.Detail === 'User does not exist') {
-			createDataDescription();
-		} else {
-			upDateDataDescription();
-		}
-	};
-
-	const createDataDescription = async () => {
-		await convertCoverB64();
-
-		const sendData = await fetch('${urlAPI}/user/profile/', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
-				user: id,
-				resource_id: idCoverPhoto,
-				about: description.value,
-				cover_img: urlCoverPhoto
-			})
-		});
+		console.log('procesando info....');
+		btnUpdateCoverPhoto.setAttribute('disabled', '');
+		$$invalidate(1, btnSaveCoverPhoto = 'processing...');
+		upDateDataDescription();
 	};
 
 	const upDateDataDescription = async () => {
 		await convertCoverB64();
 
 		// console.log('id:', idCoverPhoto, 'url:', urlCoverPhoto);
-		let dataDescription;
-
-		const userDescription = document.getElementById('userDescription').textContent;
-
-		if (description.value === '') {
-			dataDescription = userDescription;
-		} else {
-			dataDescription = description.value;
-		}
+		// const userDescription = document.getElementById('userDescription').textContent
+		console.log('actualizando a:', urlCoverPhoto);
 
 		const sendData = await fetch(`${urlAPI}/user/profile/?user=${id}`, {
 			method: 'PUT',
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
-				// about: dataDescription,
-				// resource_id : idCoverPhoto,
-				cover_img: urlCoverPhoto
-			})
+			body: JSON.stringify({ cover_img: urlCoverPhoto })
 		});
 
 		const content = await sendData.json();
 
-		if (content) {
+		if (sendData.ok) {
 			localStorage.removeItem('coverPhoto');
 			const cover = document.getElementById('coverPhotoProfile');
 			cover.setAttribute('src', `${urlAPI}${urlCoverPhoto}`);
+			closeModal('editProfile');
+			$$invalidate(1, btnSaveCoverPhoto = 'Save cover photo');
+			btnUpdateCoverPhoto.removeAttribute('disabled');
+			showImage.style.display = 'none';
 		}
 	};
 
 	$$self.$$set = $$props => {
 		if ('id' in $$props) $$invalidate(0, id = $$props.id);
-		if ('urlAPI' in $$props) $$invalidate(3, urlAPI = $$props.urlAPI);
+		if ('urlAPI' in $$props) $$invalidate(4, urlAPI = $$props.urlAPI);
 	};
 
-	return [id, showCoverImg, getProfile, urlAPI];
+	return [id, btnSaveCoverPhoto, showCoverImg, getProfile, urlAPI];
 }
 
 class CoverPhotoModal extends SvelteComponent {
 	constructor(options) {
 		super();
-		init(this, options, instance, create_fragment, safe_not_equal, { id: 0, urlAPI: 3 });
+		init(this, options, instance, create_fragment, safe_not_equal, { id: 0, urlAPI: 4 });
 	}
 }
 
