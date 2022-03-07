@@ -5,9 +5,11 @@
   import CoverPhotoModal from '../Modals/CoverPhotoModal.svelte'
   import ProfilePhotoModal from '../Modals/ProfilePhotoModal.svelte'
   import {friendsRequestFirebase} from '../../js/firebase/friendsRequestFirebase'
+  import {addFriend} from '../../js/friendRequests'
 
   export let name, last_name, title, email , photo, id, aboutMe, urlAPI;
   export let userMain;
+
 
   const editDescription = ()=>{
     editAboutMe.classList.toggle('d-none')
@@ -97,8 +99,14 @@
       }
       friendsRequestFirebase(template, id)
     }
+  }
 
+  const acceptRequest = () =>{
+    addFriend(urlAPI, id.toString(), userMain, email)
+  }
 
+  const declineRequest = () =>{
+    console.log('decline');
   }
 </script>
 
@@ -151,6 +159,23 @@
 
   .disabled i{
     color: gray;
+  }
+
+  .accept-friend{
+    color: var(--main-color);
+  }
+  .accept-friend:hover{
+    color: #fff;
+    background-color: var(--main-color);
+  }
+
+  .decline-friend{
+    color: #d70000;
+    border-color: #d70000;
+  }
+  .decline-friend:hover{
+    color: #fff;
+    background-color: #d70000;
   }
 
 </style>
@@ -213,9 +238,12 @@
           <div class="d-none" on:load={searchFriends()}></div>
           {#if !friend}
             {#if friendRequest}
-              <button id="btnSendFriendRequest" class="btn btn-outline-primary btn-flylinkers align-self-end mt-1" disabled>Send friend request</button>
+            <div class="btn-friend-request mb-3">
+              <button id="btnSendFriendRequest" class="btn btn-outline-primary btn-flylinkers align-self-end mt-1 accept-friend" on:click={acceptRequest}>Accept friends request</button>
+              <button id="btnSendFriendRequest" class="btn btn-outline-primary btn-flylinkers align-self-end mt-1 decline-friend" on:click={declineRequest}>Decline friend request</button>
+            </div>
               {:else}
-                <button id="btnSendFriendRequest" class="btn btn-outline-primary btn-flylinkers align-self-end mt-1" on:click={sendFriendRequest}>Send friend request</button>
+                <button id="btnSendFriendRequest" class="btn btn-outline-primary btn-flylinkers align-self-end mt-1">Send friend request</button>
             {/if}
           {:else}
             <button class="btn btn-outline-primary btn-flylinkers align-self-end mt-1">Friends</button>

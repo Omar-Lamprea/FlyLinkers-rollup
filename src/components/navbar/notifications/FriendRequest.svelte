@@ -3,7 +3,7 @@
   import active from 'svelte-spa-router/active'
   import {db} from '../../../js/firebase/config'
   import { collection, orderBy, getDoc, updateDoc, query, doc, onSnapshot, limit} from 'firebase/firestore';
-
+  import {addFriend} from '../../../js/friendRequests'
 
   let notifications = 0;
 
@@ -28,22 +28,8 @@
       }
   });
 
-  const acceptRequest = async(Friendid, email) =>{
-    const redirect = window.location.hash
-    const response = await fetch(`${urlAPI}/friend/request/`, {
-      method : 'PUT',
-      headers : {
-        'Content-Type': 'application/json'
-      },
-      body:JSON.stringify({
-        sender_id: Friendid,
-	      receptor_id: id
-      })
-    })
-    const content = await response.json()
-    if (response.ok) {
-      window.location.href = `${redirect}profile/${email}`
-    }
+  const acceptRequest = async(friendId, email) =>{
+    addFriend(urlAPI, friendId, id, email)
   }
 
   const declineRequest = async(FriendId) =>{

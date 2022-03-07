@@ -16,7 +16,6 @@
       })
     })
     const content = await response.json()
-    console.log(response);
     if (response.ok) {
       successProfile.classList.remove('d-none')
     }else{

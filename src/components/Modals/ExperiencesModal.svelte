@@ -140,13 +140,10 @@
       },
       body: JSON.stringify(templateExperience)
     })
-    const content = await postExperience.json()
-    // console.log(content);
     if (postExperience.ok) {
-      // formAddNewExperience.reset()
-      // closeModal('modalExperience')
-      window.location.reload()
-      //llamar exps
+      formAddNewExperience.reset()
+      closeModal('modalExperience')
+      btnAddExperience.classList.toggle('reload-expereriences')
     }
   }
 
@@ -168,6 +165,10 @@
     width: fit-content;
     margin: 0 1rem 0 0.5rem;
     transform: scale(2);
+  }
+  .btn-save-experience{
+    background-color: var(--main-color);
+    color: #fff;
   }
 </style>
 
@@ -257,7 +258,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button id="btnAddExperience" type="button" class="btn btn-primary" on:click={addExpreience}>Save</button>
+        <button id="btnAddExperience" type="button" class="btn btn-outline-primary btn-flylinkers btn-save-experience" on:click={addExpreience}>Save</button>
       </div>
     </div>
   </div>

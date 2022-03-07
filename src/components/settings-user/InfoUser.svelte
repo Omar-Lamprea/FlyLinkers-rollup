@@ -86,7 +86,7 @@
          </div>
    
          <div class="middleName">
-           <label for="middleName">Middle name*</label>
+           <label for="middleName">Middle name</label>
            <input id="middleName" type="text" placeholder="Middle name...." value={dataUser.middle_name}>
          </div>
    

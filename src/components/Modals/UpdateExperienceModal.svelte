@@ -1,7 +1,7 @@
 <script>
-  import {closeUpdateModal} from '../../js/closeModals'
+  import {closeModal} from '../../js/closeModals'
   export let userProfile, urlAPI, experience;
-  // console.log(experience);
+  // console.log(experience.id);
 
   const dataStartYear = experience.start_date.split('-')[0]
   const dataStartMonth = experience.start_date.split('-')[1]
@@ -166,6 +166,7 @@
   }
 
   async function updateExperience (templateExperience){
+    // console.log(templateExperience);
     const postExperience = await fetch(`${urlAPI}/user/experience/?experience_id=${experience.id}`, {
       method: 'PUT',
       headers:{
@@ -175,9 +176,8 @@
     })
     const content = await postExperience.json()
     if (postExperience.ok) {
-      // const btnUpdateExperience = document.getElementById(`btnUpdateExperience${experience.id}`)
-
-      window.location.reload()
+      closeModal(`modalUpdateExperience${experience.id}`)
+      btnAddExperience.classList.toggle('reload-expereriences')
     }
   }
   
@@ -199,6 +199,11 @@
     width: fit-content;
     margin: 0 1rem 0 0.5rem;
     transform: scale(2);
+  }
+
+  .btn-save-experience{
+    background-color: var(--main-color);
+    color: #fff;
   }
 </style>
 
@@ -323,7 +328,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button id="btnUpdateExperience{experience.id}" type="button" class="btn btn-primary" on:click={addExpreience}>Save</button>
+        <button id="btnUpdateExperience{experience.id}" type="button" class="btn btn-outline-primary btn-flylinkers btn-save-experience" on:click={addExpreience}>Save</button>
       </div>
     </div>
   </div>
