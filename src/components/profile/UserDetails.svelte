@@ -5,7 +5,7 @@
   import CoverPhotoModal from '../Modals/CoverPhotoModal.svelte'
   import ProfilePhotoModal from '../Modals/ProfilePhotoModal.svelte'
   import {friendsRequestFirebase} from '../../js/firebase/friendsRequestFirebase'
-  import {addFriend} from '../../js/friendRequests'
+  import {addFriend, declineFriend} from '../../js/friendRequests'
 
   export let name, last_name, title, email , photo, id, aboutMe, urlAPI;
   export let userMain;
@@ -105,8 +105,11 @@
     addFriend(urlAPI, id.toString(), userMain, email)
   }
 
-  const declineRequest = () =>{
-    console.log('decline');
+  const declineRequest = async () =>{
+    let response = await declineFriend(urlAPI, id.toString(), userMain, email)
+    if (response) {
+      friendRequest = false
+    }
   }
 </script>
 
@@ -243,7 +246,7 @@
               <button id="btnSendFriendRequest" class="btn btn-outline-primary btn-flylinkers align-self-end mt-1 decline-friend" on:click={declineRequest}>Decline friend request</button>
             </div>
               {:else}
-                <button id="btnSendFriendRequest" class="btn btn-outline-primary btn-flylinkers align-self-end mt-1">Send friend request</button>
+                <button id="btnSendFriendRequest" class="btn btn-outline-primary btn-flylinkers align-self-end mt-1" on:click={sendFriendRequest}>Send friend request</button>
             {/if}
           {:else}
             <button class="btn btn-outline-primary btn-flylinkers align-self-end mt-1">Friends</button>

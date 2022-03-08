@@ -3,19 +3,20 @@
   import active from 'svelte-spa-router/active'
   import {db} from '../../../js/firebase/config'
   import { collection, orderBy, getDoc, updateDoc, query, doc, onSnapshot, limit} from 'firebase/firestore';
-  import {addFriend} from '../../../js/friendRequests'
+  import {addFriend, declineFriend} from '../../../js/friendRequests'
+  import { writable } from 'svelte/store';
 
   let notifications = 0;
 
   export let id, urlAPI;
 
-  let friendRequest = [];
+  let friendRequest = writable([]);
 
   const showFriendRequest = async () =>{
     const response = await fetch(`${urlAPI}/friend/request/?user_id=${id}`)
     const content = await response.json()
-    friendRequest = content.reverse()
-    notifications = friendRequest.length
+    friendRequest.set(content.reverse())
+    notifications = $friendRequest.length
   }
 
   const snapFriends = onSnapshot(doc(db, 'user', id.toString()), (notification)=>{
@@ -32,22 +33,13 @@
     addFriend(urlAPI, friendId, id, email)
   }
 
-  const declineRequest = async(FriendId) =>{
-    console.log('eliminar', FriendId);
-    // const response = await fetch(`${urlAPI}/friend/request/`, {
-    //   method : 'DELETE',
-    //   headers : {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body:JSON.stringify({
-    //     sender_id: Friendid,
-	  //     receptor_id: id
-    //   })
-    // })
-    // const content = await response.json()
-    // if (response.ok) {
-    //   window.location.reload()
-    // }
+  const declineRequest = async(friendId, email) =>{
+    let response = await declineFriend(urlAPI, friendId, id, email)
+    if (response) {
+      friendRequest.update(arr => {
+        return arr.filter(req => req.id !== friendId)
+      })
+    }
   }
 
   const viewUserProfile = (email) => {
@@ -142,7 +134,7 @@
   {/if}
   
   <ul class="dropdown-menu" aria-labelledby="notifications">
-    {#each friendRequest as request}
+    {#each $friendRequest as request}
        <li>
           <span class="dropdown-item">
             <a href="/profile/{request.email}" use:link use:active class="d-flex">
@@ -153,7 +145,7 @@
             </a>
             <div class="btns-request">
               <button class="btn-request btn-success" on:click={acceptRequest(request.id, request.email)}>Accept</button>
-              <button id="declineRequest" class="btn-request btn-decline" on:click={declineRequest(request.id)}>Decline</button>
+              <button id="declineRequest" class="btn-request btn-decline" on:click={declineRequest(request.id, request.email)}>Decline</button>
             </div>
           </span>
       </li>

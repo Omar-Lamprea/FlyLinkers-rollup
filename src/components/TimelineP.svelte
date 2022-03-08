@@ -91,7 +91,10 @@
       getPost(1)
       reloadPosts.removeAttribute('data-reloading')
     })
-    observer.observe(reloadPosts, {attributes:true})
+    if (!window.location.href.includes('settings')){
+      observer.observe(reloadPosts, {attributes:true})
+    }
+
   }, 4000);
 
   document.addEventListener('scroll', async (e)=>{

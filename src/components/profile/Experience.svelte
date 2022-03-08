@@ -66,7 +66,6 @@
   }
 
   if (localStorage.getItem('userId') === id.toString()) {
-    console.log('ok');
     setTimeout(() => {
       const reloadExperiences = document.getElementById('btnAddExperience')
       const observer = new MutationObserver(async ()=>{
@@ -75,7 +74,9 @@
         let updateExperiences = true
         await getDataexperiences(updateExperiences)
       })
-      observer.observe(reloadExperiences, {attributes:true})
+      if (window.location.href.includes('settings') || window.location.href.includes('profile')){
+        observer.observe(reloadExperiences, {attributes:true})
+      }
     }, 4000);
   }
 
