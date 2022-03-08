@@ -65,23 +65,26 @@
     }
   }
 
-  if (localStorage.getItem('userId') === id.toString()) {
-    setTimeout(() => {
-      const reloadExperiences = document.getElementById('btnAddExperience')
-      const observer = new MutationObserver(async ()=>{
-        // console.log('reloading exps...');
-        // reloadExperiences.removeAttribute('reload-expereriences')
-        let updateExperiences = true
-        await getDataexperiences(updateExperiences)
-      })
-      if (window.location.href.includes('settings') || window.location.href.includes('profile')){
-        observer.observe(reloadExperiences, {attributes:true})
-      }
-    }, 4000);
+  const reloadExperiences = () =>{
+    if (localStorage.getItem('userId') === id.toString()) {
+      // setTimeout(() => {
+        const reloadExperiences = document.getElementById('btnAddExperience')
+        const observer = new MutationObserver(async ()=>{
+          // console.log('reloading exps...');
+          // reloadExperiences.removeAttribute('reload-expereriences')
+          let updateExperiences = true
+          await getDataexperiences(updateExperiences)
+        })
+        if (window.location.href.includes('settings') || window.location.href.includes('profile')){
+          observer.observe(reloadExperiences, {attributes:true})
+        }
+      // }, 4000);
+    }
   }
 
   onMount(()=>{
     getDataexperiences()
+    reloadExperiences()
   })
 </script>
 

@@ -83,19 +83,21 @@
     }
   }
 
-  setTimeout(() => {
-    const reloadPosts = document.getElementById('reloadPostCheck')
-    const observer = new MutationObserver(()=>{
-      // console.log('reloading post...');
-      post = ''
-      getPost(1)
-      reloadPosts.removeAttribute('data-reloading')
-    })
-    if (!window.location.href.includes('settings')){
-      observer.observe(reloadPosts, {attributes:true})
-    }
-
-  }, 4000);
+  const reloadPosts = () =>{
+    // setTimeout(() => {
+      const reloadPosts = document.getElementById('reloadPostCheck')
+      const observer = new MutationObserver(()=>{
+        // console.log('reloading post...');
+        post = ''
+        getPost(1)
+        reloadPosts.removeAttribute('data-reloading')
+      })
+      if (!window.location.href.includes('settings')){
+        observer.observe(reloadPosts, {attributes:true})
+      }
+  
+    // }, 4000);
+  }
 
   document.addEventListener('scroll', async (e)=>{
     if ((window.innerHeight + window.scrollY) >= main.offsetHeight - 1 && !window.location.href.includes('settings')){
@@ -122,6 +124,7 @@
     if (data.posts) {
       getPost()
     }
+    reloadPosts()
   })
 
 </script>

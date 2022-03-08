@@ -370,14 +370,14 @@
     const inputAddComment = document.getElementById(`inputAddComment${id}`)
     const response = await fetch(`${urlAPI}/post/comment/`,{
       method: 'POST',
-        headers: {
-          'Content-Type' : 'application/json'
-        },
-        body: JSON.stringify({
-          comment: inputAddComment.value,
-          user_id: userId,
-          post_id: id
-        })
+      headers: {
+        'Content-Type' : 'application/json'
+      },
+      body: JSON.stringify({
+        comment: inputAddComment.value,
+        user_id: userId,
+        post_id: id
+      })
     })
     
     const content = await response.json()
@@ -415,6 +415,19 @@
 
         commentsFirebase(commentUserFirebase, aux)
       }
+    }
+  }
+
+  const deletePost = async(id)=>{
+    const response = await fetch(`${urlAPI}/post/create/?post_id=${id}`,{
+      method: 'DELETE',
+      headers: {
+        'Content-Type' : 'application/json'
+      },
+    })
+    if (response.ok) {
+      const reloadPost = document.getElementById('reloadPostCheck')
+      reloadPost.classList.toggle('data-reloading')
     }
   }
   
@@ -573,6 +586,16 @@
   .urlMeta a{
     color: #000;
   }
+  .dropdown-toggle:empty::after{
+    content: inherit;
+  }
+  .dropdown li{
+    cursor: pointer;
+  }
+  .dropdown a{
+    color: inherit;
+  }
+
 
   @media screen and (max-width: 768px){
     .hidden{
@@ -619,7 +642,18 @@
         {/if}
       
       <div class="Card-settings">
-        <i class="fas fa-ellipsis-h"></i>
+        <div class="dropdown">
+          <i class="fas fa-ellipsis-h dropdown-toggle" type="button" id="settings-post" data-bs-toggle="dropdown" aria-expanded="false"></i> 
+          <ul class="dropdown-menu" aria-labelledby="settings-post">
+            <li><a class="dropdown-item" href="/post/{id}" use:link use:active>View post</a></li>
+            {#if user}
+               {#if user.id.toString() === localStorage.getItem('userId')}
+                 <li class="dropdown-item" on:click={deletePost(id)}>Delete post</li>
+               {/if}
+            {/if}
+            {console.log(userMain)}
+          </ul>
+        </div>
       </div>
     </div>
 

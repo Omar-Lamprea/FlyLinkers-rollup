@@ -41,16 +41,20 @@
     posts.set([])
   }
 
-  setTimeout(() => {
-    const reloadPosts = document.getElementById('reloadPostCheck')
-    const observer = new MutationObserver(()=>{
-      // console.log('reloading post...');
-      clearPost()
-      getPosts(1)
-      reloadPosts.removeAttribute('data-reloading')
-    })
-    observer.observe(reloadPosts, {attributes:true})
-  }, 4000);
+  const reloadPosts = () =>{
+    // setTimeout(() => {
+      const reloadPosts = document.getElementById('reloadPostCheck')
+      const observer = new MutationObserver(()=>{
+        // console.log('reloading post...');
+        clearPost()
+        getPosts(1)
+        reloadPosts.removeAttribute('data-reloading')
+      })
+      if (!window.location.href.includes('settings')) {
+        observer.observe(reloadPosts, {attributes:true})
+      }
+    // }, 4000);
+  }
 
   document.addEventListener('scroll', async (e)=>{
     if ((window.innerHeight + window.scrollY) >= main.offsetHeight - 1 && !window.location.href.includes('settings')){
@@ -65,7 +69,10 @@
     getPosts(1)
   })
 
-  onMount(getPosts)
+  onMount(()=>{
+    getPosts()
+    reloadPosts()
+  })
 </script>
 
 <div class="Timeline col-12 col-lg-6">
