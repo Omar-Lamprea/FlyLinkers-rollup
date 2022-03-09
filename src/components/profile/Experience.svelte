@@ -1,6 +1,6 @@
 <script>
-  import ExperiencesModal from '../Modals/ExperiencesModal.svelte'
-  import UpdateExperiencesModal from '../Modals/UpdateExperienceModal.svelte'
+  import ExperiencesModal from '../Modals/experiences/ExperiencesModal.svelte'
+  import UpdateExperiencesModal from '../Modals/experiences/UpdateExperienceModal.svelte'
   import {getExperiences} from '../../js/getExperiences'
   import { writable } from 'svelte/store';
   import {onMount} from 'svelte'

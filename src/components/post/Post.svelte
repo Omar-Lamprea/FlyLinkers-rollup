@@ -2,6 +2,7 @@
   import {link} from "svelte-spa-router";
   import active from 'svelte-spa-router/active'
   import Comment from './Comment.svelte'
+  import SharePost from './actions/SharePost.svelte'
   import startTime from '../../js/startTime.js'
   import { onMount } from "svelte";
   import {commentsFirebase} from '../../js/firebase/commentsFirebase.js'
@@ -12,7 +13,9 @@
   export let desc, reactions, img, comments, create_time, user, id, user_id, update_time;
   export let name, middle_name, last_name, title, photo, email;
   export let userMain, urlAPI, url_id, meta;
+  export let share_id, share_count;
 
+  console.log(share_id, share_count);
   const userStorage = JSON.parse(localStorage.getItem('data'))
 
   // console.log(userId, user);
@@ -530,6 +533,7 @@
   .Action{
     cursor: pointer;
     margin-right: 1rem;
+    text-align: center;
   }
 
   .Comments-add {
@@ -650,8 +654,11 @@
                {#if user.id.toString() === localStorage.getItem('userId')}
                  <li class="dropdown-item" on:click={deletePost(id)}>Delete post</li>
                {/if}
+            {:else}
+              {#if userMain.toString() === localStorage.getItem('userId')}
+                <li class="dropdown-item" on:click={deletePost(id)}>Delete post</li>
+              {/if}
             {/if}
-            {console.log(userMain)}
           </ul>
         </div>
       </div>
@@ -730,9 +737,8 @@
           <i class="fa-comments far"></i>
           <span>Comment</span>
         </div>
-        <div class="Action Header-nav-share hidden disabled">
-          <i class="fas fa-share"></i>
-          <span>Share</span>
+        <div class="Action Header-nav-share">
+          <SharePost {id} {urlAPI}/>
         </div>
         <div class="Action Header-nav-paper-plane hidden disabled">
           <i class="fas fa-paper-plane"></i>

@@ -22,21 +22,21 @@ import {
 	space,
 	transition_in,
 	transition_out
-} from "../../_snowpack/pkg/svelte/internal.js";
+} from "svelte/internal";
 
 import AddPost from './post/AddPost.svelte.js';
 import Post from './post/Post.svelte.js';
 import Loader from './Loader.svelte.js';
-import { onMount } from '../../_snowpack/pkg/svelte.js';
-import { writable } from '../../_snowpack/pkg/svelte/store.js';
+import { onMount } from 'svelte';
+import { writable } from 'svelte/store';
 
 function get_each_context(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[9] = list[i];
+	child_ctx[10] = list[i];
 	return child_ctx;
 }
 
-// (73:4) {#if id}
+// (81:4) {#if id}
 function create_if_block(ctx) {
 	let addpost;
 	let current;
@@ -78,13 +78,13 @@ function create_if_block(ctx) {
 	};
 }
 
-// (76:4) {#each $posts as dataPost}
+// (84:4) {#each $posts as dataPost}
 function create_each_block(ctx) {
 	let post;
 	let current;
 
 	const post_spread_levels = [
-		/*dataPost*/ ctx[9],
+		/*dataPost*/ ctx[10],
 		{ userId: /*userId*/ ctx[3] },
 		{ urlAPI: /*urlAPI*/ ctx[1] }
 	];
@@ -108,7 +108,7 @@ function create_each_block(ctx) {
 		p(ctx, dirty) {
 			const post_changes = (dirty & /*$posts, userId, urlAPI*/ 14)
 			? get_spread_update(post_spread_levels, [
-					dirty & /*$posts*/ 4 && get_spread_object(/*dataPost*/ ctx[9]),
+					dirty & /*$posts*/ 4 && get_spread_object(/*dataPost*/ ctx[10]),
 					dirty & /*userId*/ 8 && { userId: /*userId*/ ctx[3] },
 					dirty & /*urlAPI*/ 2 && { urlAPI: /*urlAPI*/ ctx[1] }
 				])
@@ -134,8 +134,10 @@ function create_each_block(ctx) {
 function create_fragment(ctx) {
 	let div2;
 	let div1;
+	let input;
 	let t0;
 	let t1;
+	let t2;
 	let div0;
 	let current;
 	let if_block = /*id*/ ctx[0] && create_if_block(ctx);
@@ -154,16 +156,22 @@ function create_fragment(ctx) {
 		c() {
 			div2 = element("div");
 			div1 = element("div");
-			if (if_block) if_block.c();
+			input = element("input");
 			t0 = space();
+			if (if_block) if_block.c();
+			t1 = space();
 
 			for (let i = 0; i < each_blocks.length; i += 1) {
 				each_blocks[i].c();
 			}
 
-			t1 = space();
+			t2 = space();
 			div0 = element("div");
 			div0.textContent = "Sorry! there aren't more posts.";
+			attr(input, "type", "checkbox");
+			attr(input, "id", "reloadPostCheck");
+			attr(input, "name", "reloadPost");
+			attr(input, "class", "d-none");
 			attr(div0, "id", "endPosts");
 			attr(div0, "class", "d-none text-center fw-bold");
 			set_style(div0, "color", "var(--main-color)");
@@ -173,14 +181,16 @@ function create_fragment(ctx) {
 		m(target, anchor) {
 			insert(target, div2, anchor);
 			append(div2, div1);
-			if (if_block) if_block.m(div1, null);
+			append(div1, input);
 			append(div1, t0);
+			if (if_block) if_block.m(div1, null);
+			append(div1, t1);
 
 			for (let i = 0; i < each_blocks.length; i += 1) {
 				each_blocks[i].m(div1, null);
 			}
 
-			append(div1, t1);
+			append(div1, t2);
 			append(div1, div0);
 			current = true;
 		},
@@ -196,7 +206,7 @@ function create_fragment(ctx) {
 					if_block = create_if_block(ctx);
 					if_block.c();
 					transition_in(if_block, 1);
-					if_block.m(div1, t0);
+					if_block.m(div1, t1);
 				}
 			} else if (if_block) {
 				group_outros();
@@ -222,7 +232,7 @@ function create_fragment(ctx) {
 						each_blocks[i] = create_each_block(child_ctx);
 						each_blocks[i].c();
 						transition_in(each_blocks[i], 1);
-						each_blocks[i].m(div1, t1);
+						each_blocks[i].m(div1, t2);
 					}
 				}
 
@@ -303,22 +313,22 @@ function instance($$self, $$props, $$invalidate) {
 		posts.set([]);
 	}
 
-	if (id === parseInt(localStorage.getItem('userId'))) {
-		setTimeout(
-			() => {
-				btnSendPost.addEventListener('click', e => {
-					setTimeout(
-						() => {
-							clearPost();
-							getPosts(1);
-						},
-						1500
-					);
-				});
-			},
-			2000
-		);
-	}
+	const reloadPosts = () => {
+		// setTimeout(() => {
+		const reloadPosts = document.getElementById('reloadPostCheck');
+
+		const observer = new MutationObserver(() => {
+				// console.log('reloading post...');
+				clearPost();
+
+				getPosts(1);
+				reloadPosts.removeAttribute('data-reloading');
+			});
+
+		if (!window.location.href.includes('settings')) {
+			observer.observe(reloadPosts, { attributes: true });
+		}
+	}; // }, 4000);
 
 	document.addEventListener('scroll', async e => {
 		if (window.innerHeight + window.scrollY >= main.offsetHeight - 1 && !window.location.href.includes('settings')) {
@@ -333,7 +343,10 @@ function instance($$self, $$props, $$invalidate) {
 		getPosts(1);
 	});
 
-	onMount(getPosts);
+	onMount(() => {
+		getPosts();
+		reloadPosts();
+	});
 
 	$$self.$$set = $$props => {
 		if ('id' in $$props) $$invalidate(0, id = $$props.id);

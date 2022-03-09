@@ -1,5 +1,5 @@
 <script>
-  import {closeModal} from '../../js/closeModals'
+  import {closeModal} from '../../../js/closeModals'
 
   let coverPhotoB64;
   let urlCoverPhoto;

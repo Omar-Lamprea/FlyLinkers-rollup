@@ -14,7 +14,7 @@
   let characterCount = 0
   const validateInfoPost = async (e) =>{
     // console.dir(e.target.value);
-    e.target.style.height = (e.target.scrollHeight > e.target.clientHeight) ? (e.target.scrollHeight)+"px" : "60px"; 
+    e.target.style.height = (e.target.scrollHeight > e.target.clientHeight) ? (e.target.scrollHeight)+"px" : "41px"; 
     // console.log(e.target.value.length);
     characterCount = e.target.value.length
 

@@ -14,7 +14,7 @@ import {
 	space,
 	transition_in,
 	transition_out
-} from "../../_snowpack/pkg/svelte/internal.js";
+} from "svelte/internal";
 
 import Events from './events-card/Events.svelte.js';
 import Sponsors from './sponsors-card/Sponsors.svelte.js';

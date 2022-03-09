@@ -2,8 +2,8 @@
   import {link} from 'svelte-spa-router';
   import active from 'svelte-spa-router/active'
   import UserPotho from './UserPhoto.svelte'
-  import CoverPhotoModal from '../Modals/CoverPhotoModal.svelte'
-  import ProfilePhotoModal from '../Modals/ProfilePhotoModal.svelte'
+  import CoverPhotoModal from '../Modals/profile/CoverPhotoModal.svelte'
+  import ProfilePhotoModal from '../Modals/profile/ProfilePhotoModal.svelte'
   import {friendsRequestFirebase} from '../../js/firebase/friendsRequestFirebase'
   import {addFriend, declineFriend} from '../../js/friendRequests'
 

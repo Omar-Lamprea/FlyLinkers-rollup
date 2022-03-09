@@ -1,5 +1,5 @@
 <script>
-  import ProfilePhotoModal from '../Modals/ProfilePhotoModal.svelte'
+  import ProfilePhotoModal from '../Modals/profile/ProfilePhotoModal.svelte'
   export let photo, urlAPI, id;
   if (id === undefined) {
     id = ''
@@ -29,10 +29,14 @@
 
 <div class="Profile-card-avatar dropdown">
   {#if id}
-    <img src='{urlAPI}{photo}' alt="profilePhoto" class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-      <li><a class="dropdown-item" href="/" data-bs-toggle="modal" data-bs-target="#ModalProfile">Update profile photo</a></li>
-    </ul>
+    {#if id.toString() === localStorage.getItem('userId')}
+      <img src='{urlAPI}{photo}' alt="profilePhoto" class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li><a class="dropdown-item" href="/" data-bs-toggle="modal" data-bs-target="#ModalProfile">Update profile photo</a></li>
+      </ul>
+    {:else}
+      <img src='{urlAPI}{photo}' alt="profilePhoto">
+    {/if}
   {:else}
     <img src='{urlAPI}{photo}' alt="profilePhoto">
   {/if}

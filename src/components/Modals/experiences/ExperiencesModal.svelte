@@ -1,7 +1,7 @@
 <script>
-  import getDataexperiences from '../profile/Experience.svelte'
+  import getDataexperiences from '../../profile/Experience.svelte'
   export let userProfile, urlAPI;
-  import {closeModal} from '../../js/closeModals'
+  import {closeModal} from '../../../js/closeModals'
 
 
   const months = [

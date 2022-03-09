@@ -1,5 +1,5 @@
 <script>
-  import {closeModal} from '../../js/closeModals'
+  import {closeModal} from '../../../js/closeModals'
   export let userProfile, urlAPI, experience;
   // console.log(experience.id);
 
