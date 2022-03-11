@@ -9,8 +9,11 @@
   }
 
   const sharePost = async (user, info)=>{
+    const btnSharePost = document.getElementById(`btnSharePost-${id}`)
+    btnSharePost.setAttribute('disabled', '')
     const textDescriptionPost = document.getElementById(`descPost-${id}`)
     let urlPost = {}
+    let videoPost = {}
     let sharePost = {}
     let finalTemplate = {}
 
@@ -28,6 +31,12 @@
       template = Object.assign(template, urlPost)
     }
 
+    if (info.video) {
+      videoPost = {video : info.video}
+      template = Object.assign(template, videoPost)
+    }
+
+    // console.log(template);
     const response = await fetch(`${urlAPI}/post/create/`,{
       method : 'POST',
       headers : {
@@ -38,6 +47,7 @@
     if (response.ok) {
       textDescriptionPost.value = ''
       closeModal(`shareModal-${id}`)
+      btnSharePost.removeAttribute('disabled')
       const reloadPost = document.getElementById('reloadPostCheck')
       reloadPost.classList.toggle('data-reloading')
     }
@@ -99,7 +109,7 @@
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="shareModal-{id}Label">Share post {id}</h5>
+        <h5 class="modal-title" id="shareModal-{id}Label">Share post</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -122,6 +132,13 @@
                 <img src="{urlAPI}{infoPost.img}" alt="">
               {/if}
 
+              {#if infoPost.video}
+                <video  controls style="width: 100%;">
+                  <source src="{urlAPI}{infoPost.video}">
+                  <track kind="captions">
+                </video>
+              {/if}
+
               {#if infoPost.url_id !== 0}
                 <h6 class="mb-3">{infoPost.meta.title}</h6>
                 <img src={infoPost.meta.image} alt="">
@@ -135,7 +152,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-flylinkers" on:click={sharePost(userPost, infoPost)}>Save changes</button>
+        <button id="btnSharePost-{id}" type="button" class="btn btn-flylinkers" on:click={sharePost(userPost, infoPost)}>Share post</button>
       </div>
     </div>
   </div>

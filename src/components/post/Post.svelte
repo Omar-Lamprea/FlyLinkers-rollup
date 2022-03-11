@@ -668,18 +668,6 @@
 
     <div class="Card-description mx-3 mx-md-0">
       <span class="mx-0">{desc}</span>
-      <!-- {#if validateDesc.length === 0}
-      {:else}
-        <span class="mx-0">
-          {#each validateDesc as stringData}
-            {#if stringData.includes('https://') || stringData.includes('http://')}
-                <a href={stringData} target="_blank">{stringData}</a>
-            {:else}
-                {stringData} {' '}
-            {/if}
-          {/each}
-        </span>
-      {/if} -->
     </div>
   </div>
 
@@ -707,7 +695,7 @@
       {/if}
     </div>
 
-    {#if video}
+    {#if video && share === ''}
       <video  controls style="width: 100%;">
         <source src="{urlAPI}{video}">
         <track kind="captions">
@@ -715,7 +703,7 @@
     {/if}
 
     {#if share !== ''}
-    <hr>
+      <hr>
       <div class="">
         <div class="user-shared">
           <!-- <p>{share[0].first_name}</p> -->
@@ -724,7 +712,7 @@
             <a href="/profile/{share[0].email}" class="d-flex" use:link use:active>
               <img src="{urlAPI}{share[0].photo}" alt="">
               <h2>
-                {share[0].first_name} {user.last_name}
+                {share[0].name} {user.last_name}
                 <span>{share[0].title}</span>
                 <span>{startTime(share[0].create_time)}</span>
               </h2>
@@ -735,8 +723,13 @@
         <div class="info-shared">
           <span>{share[1].desc}</span>
           {#if share[1].img !== ''}
-             <!-- content here -->
              <img src="{urlAPI}{share[1].img}" alt="" style="width: 100%;">
+          {/if}
+          {#if share[1].video}
+            <video  controls style="width: 100%;">
+              <source src="{urlAPI}{video}">
+              <track kind="captions">
+            </video>
           {/if}
           {#if share[1].url_id !== 0}
             <div class="urlMeta d-flex flex-column mb-3">
