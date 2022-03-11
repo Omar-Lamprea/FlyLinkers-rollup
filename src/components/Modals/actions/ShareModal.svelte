@@ -1,46 +1,46 @@
 <script>
-  export let id, userPost, infoPost, urlAPI;
   import startTime from "../../../js/startTime";
+  import Loader from '../../Loader.svelte'
+  import {closeModal} from '../../../js/closeModals'
+  export let id, userPost, infoPost, urlAPI;
 
   const incrementTextArea = (e)=>{
     e.target.style.height = (e.target.scrollHeight > e.target.clientHeight) ? (e.target.scrollHeight)+"px" : "57px";
   }
 
-  // userPost = {
-  //   email: "user@gmail.com",
-  //   id: 7,
-  //   last_name: "Test",
-  //   middle_name: "",
-  //   name: "User",
-  //   photo: "/archivos/fotos/f41d330e-ff40-4467-acd5-134f693557ca.png",
-  //   title: "Tester"
-  // }
-  // infoPost = {
-  //   comments: 8,
-  //   create_time: "2022-01-10T23:24:43.246530Z",
-  //   desc: "Hi! I'm a super user",
-  //   id: 24,
-  //   img: "",
-  //   reactions:{
-  //     like: 4,
-  //     love: 2
-  //   },
-  //   share_count: 0,
-  //   share_id: 0,
-  //   update_time: "2022-01-10T23:24:43.246571Z",
-  //   url_id: 0,
-  //   user_id: 7
-  // }
-
-  const sharePost = ()=>{
+  const sharePost = async (user, info)=>{
     const textDescriptionPost = document.getElementById(`descPost-${id}`)
+    let urlPost = {}
+    let sharePost = {}
+    let finalTemplate = {}
+
     let template = {
       user: parseInt(localStorage.getItem('userId')),
       desc: textDescriptionPost.value,
       img: '',
       share_id: id,
     }
-    console.log(template);
+
+
+
+    if (info.url_id !== 0) {
+      urlPost = {url_id : info.url_id}
+      template = Object.assign(template, urlPost)
+    }
+
+    const response = await fetch(`${urlAPI}/post/create/`,{
+      method : 'POST',
+      headers : {
+        'Content-Type' : 'application/json'
+      },
+      body: JSON.stringify(template)
+    })
+    if (response.ok) {
+      textDescriptionPost.value = ''
+      closeModal(`shareModal-${id}`)
+      const reloadPost = document.getElementById('reloadPostCheck')
+      reloadPost.classList.toggle('data-reloading')
+    }
   }
 </script>
 
@@ -107,33 +107,35 @@
           <textarea name="descPost" id="descPost-{id}" class="Default-containers" cols="30" rows="1" placeholder="Start a post..." on:keyup={incrementTextArea}></textarea>
         </form>
         {#if userPost && infoPost}
-        <div class="post-shared Default-containers">
-          <div class="user d-flex align-items-center">
-            <img src="{urlAPI}{userPost.photo}" alt="">
-            <h2>
-              {userPost.name} {userPost.last_name}
-              <span>{userPost.title}</span>
-              <span>{startTime(infoPost.create_time)}</span>
-            </h2>
-          </div>
-          <div class="info text-start mt-3">
-            <p>{infoPost.desc}</p>
-            {#if infoPost.img !== ""}
-              <img src="{urlAPI}{infoPost.img}" alt="">
-            {/if}
+          <div class="post-shared Default-containers">
+            <div class="user d-flex align-items-center">
+              <img src="{urlAPI}{userPost.photo}" alt="">
+              <h2>
+                {userPost.name} {userPost.last_name}
+                <span>{userPost.title}</span>
+                <span>{startTime(infoPost.create_time)}</span>
+              </h2>
+            </div>
+            <div class="info text-start mt-3">
+              <p>{infoPost.desc}</p>
+              {#if infoPost.img !== ""}
+                <img src="{urlAPI}{infoPost.img}" alt="">
+              {/if}
 
-            {#if infoPost.url_id !== 0}
-              <h6 class="mb-3">{infoPost.meta.title}</h6>
-              <img src={infoPost.meta.image} alt="">
-              <p>{infoPost.meta.description}</p>
-            {/if}
+              {#if infoPost.url_id !== 0}
+                <h6 class="mb-3">{infoPost.meta.title}</h6>
+                <img src={infoPost.meta.image} alt="">
+                <p>{infoPost.meta.description}</p>
+              {/if}
+            </div>
           </div>
-        </div>
+        {:else}
+          <Loader/>
         {/if}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-flylinkers" on:click={sharePost}>Save changes</button>
+        <button type="button" class="btn btn-flylinkers" on:click={sharePost(userPost, infoPost)}>Save changes</button>
       </div>
     </div>
   </div>

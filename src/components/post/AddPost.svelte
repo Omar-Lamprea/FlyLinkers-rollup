@@ -140,6 +140,7 @@
   }
 
   const sendPost = async()=>{
+    loaderPost.classList.toggle('d-none')
     let imagePost = '';
     if (!!postImg.src) {
       // console.log('envia solo foto')
@@ -157,85 +158,125 @@
         imagePost = content.img
       }
     }
-
-    if (
-      postDescription.value !== '' && imagePost === '' || 
-      postDescription.value === '' && imagePost !== '' || 
-      postDescription.value !== '' && imagePost !== '') 
-    {
-      let postDescriptionClean = []
-      if(postDescription.value.includes('https') || postDescription.value.includes('http')){
-
-        const descriptionUrl = postDescription.value.split(' ')
-        descriptionUrl.forEach(string => {
-
-          if(!string.includes('https') || !string.includes('http')){
-            postDescriptionClean.push(string)
-          }else{
-            if (string.includes('\n')) {
-              const stringReplace = string.replace('\n', ' ')
-              const newString = stringReplace.split(' ')
-              postDescriptionClean.push(newString[0])
+    
+    if (!postVideo.src) {
+      if (
+        postDescription.value !== '' && imagePost === '' || 
+        postDescription.value === '' && imagePost !== '' || 
+        postDescription.value !== '' && imagePost !== '') 
+      {
+        let postDescriptionClean = []
+        if(postDescription.value.includes('https') || postDescription.value.includes('http')){
+  
+          const descriptionUrl = postDescription.value.split(' ')
+          descriptionUrl.forEach(string => {
+  
+            if(!string.includes('https') || !string.includes('http')){
+              postDescriptionClean.push(string)
+            }else{
+              if (string.includes('\n')) {
+                const stringReplace = string.replace('\n', ' ')
+                const newString = stringReplace.split(' ')
+                postDescriptionClean.push(newString[0])
+              }
             }
-          }
-        })
-      }else{
-        postDescriptionClean.push(postDescription.value)
-      }
-      const joinPostDescriptionClean = postDescriptionClean.join(' ')
-
-      let template;
-
-      if (urlContent === undefined) {
-        template = {
-          user: id,
-          img: imagePost,
-          desc: joinPostDescriptionClean,
+          })
+        }else{
+          postDescriptionClean.push(postDescription.value)
         }
-      }else{
-        if (urlContent.id) {
+        const joinPostDescriptionClean = postDescriptionClean.join(' ')
+  
+        let template;
+  
+        if (urlContent === undefined) {
           template = {
             user: id,
             img: imagePost,
             desc: joinPostDescriptionClean,
-            url_id: urlContent.id
           }
         }else{
-          template = {
-            user: id,
-            img: imagePost,
-            desc: joinPostDescriptionClean,
-            meta: {
-              title: urlContent.title,
-              description: urlContent.description,
-              image: urlContent.image,
-              url: validUrl
+          if (urlContent.id) {
+            template = {
+              user: id,
+              img: imagePost,
+              desc: joinPostDescriptionClean,
+              url_id: urlContent.id
+            }
+          }else{
+            template = {
+              user: id,
+              img: imagePost,
+              desc: joinPostDescriptionClean,
+              meta: {
+                title: urlContent.title,
+                description: urlContent.description,
+                image: urlContent.image,
+                url: validUrl
+              }
             }
           }
         }
-      }
-
-      // console.log(template);
-      const post = await fetch(`${urlAPI}/post/create/`,{
-        method : 'POST',
-        headers : {
-          'Content-Type' : 'application/json'
-        },
-        body: JSON.stringify(template)
-      })
-      const content = await post.json()
-
-      if (post.ok) {
-        postDescription.value = ''
-        if (postImg.src) {
-          postImg.setAttribute('src', '')
-          postImg.classList.toggle('d-none')
+  
+        console.log(template);
+        const post = await fetch(`${urlAPI}/post/create/`,{
+          method : 'POST',
+          headers : {
+            'Content-Type' : 'application/json'
+          },
+          body: JSON.stringify(template)
+        })
+  
+        if (post.ok) {
+          postDescription.value = ''
+          if (postImg.src) {
+            postImg.setAttribute('src', '')
+            postImg.classList.toggle('d-none')
+          }
+          closeMetaData()
+          loaderPost.classList.add('d-none')
+          //recargar post
+          const reloadPost = document.getElementById('reloadPostCheck')
+          reloadPost.classList.toggle('data-reloading')
         }
-        closeMetaData()
-
-        //recargar post
-        const reloadPost = document.getElementById('reloadPostCheck')
-        reloadPost.classList.toggle('data-reloading')
+      }
+      
+    }else{
+      const data = new FormData()
+      data.append('video', uploadVideo.files[0])
+  
+      const responseVideo = await fetch(`${urlAPI}/resources/video/`, {
+        method: 'POST',
+        body: data
+      })
+      if (responseVideo.ok) {
+        const content = await responseVideo.json()
+        console.log(content);
+        const templateVideo = {
+          user: id,
+          img: "",
+          desc: postDescription.value,
+          video: content.video
+        }
+  
+        const responsePostVideo = await fetch(`${urlAPI}/post/create/`,{
+          method : 'POST',
+          headers : {
+            'Content-Type' : 'application/json'
+          },
+          body: JSON.stringify(templateVideo)
+        })
+  
+        if (responsePostVideo.ok) {
+          postDescription.value = ''
+          if (postVideo.src) {
+            postVideo.setAttribute('src', '')
+            postVideo.classList.toggle('d-none')
+            btnSendPost.setAttribute('disabled', '')
+            loaderPost.classList.add('d-none')
+            const reloadPost = document.getElementById('reloadPostCheck')
+            reloadPost.classList.toggle('data-reloading')
+          }
+        }
       }
     }
   }
@@ -244,7 +285,7 @@
 
 <style>
   .Add-post textarea{
-    margin-top: .5rem;
+    margin: .5rem 0;
     padding: .5rem;
     width: 100%;
     overflow-y: auto; 
@@ -254,8 +295,10 @@
     outline-color: var(--main-color);
   }
   .characterCount{
-    position: absolute;
-    bottom: 0;
+    /* position: absolute; */
+    /* bottom: 0; */
+    text-align: end;
+    top: 3.5rem;
     right: 10px;
     font-size: 12px;
     color: red;
@@ -300,7 +343,12 @@
     <div id="characterCountSpan" class="characterCount characterCount-active">
       {characterCount}/255
     </div>
-    <img alt="postImg" id="postImg" class="d-none mb-3">
+    <img alt="postImg" id="postImg" class="d-none my-3">
+
+    <video controls id="postVideo" class="d-none my-3">
+      <track kind="captions">
+    </video>
+
   </div>
 
   <div id="urlMeta" class="urlMeta d-flex flex-column d-none">
@@ -316,7 +364,11 @@
 
   <NavPost/>
 
-
+  <div id="loaderPost" class="loader-content d-none">
+    <div class="loader">
+      <div></div>
+    </div>
+  </div>
   <button id="btnSendPost" class="btn btn-outline-primary btn-flylinkers btn-post mt-3" disabled on:click={sendPost}>Post</button>
 
 </div>

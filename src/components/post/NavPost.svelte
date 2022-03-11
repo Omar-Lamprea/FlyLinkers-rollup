@@ -21,6 +21,24 @@
     }
   }
 
+  const uploadVideoPost = (e) =>{
+    console.log(uploadVideo.files);
+    // postVideo.srx = uploadVideo.files[0]
+    if (uploadVideo.files[0].size > 52_428_800) {
+      alert("File is too big! \nTry again with a file smaller than 50MB");
+      loadPhotoInput.value = "";
+    }else{
+      const render = new FileReader();
+      render.readAsDataURL(uploadVideo.files[0])
+      render.onloadend = ()=>{
+        postVideo.classList.remove('d-none')
+        // console.log(render.result);
+        postVideo.src = render.result
+        ableBtn()
+      }
+    }
+  }
+
   const ableBtn = ()=>{
     const btnsendPost = document.getElementById('btnSendPost')
     btnsendPost.removeAttribute('disabled')
@@ -48,7 +66,7 @@
 
 </style>
 
-<div class="Nav-add-post d-flex justify-content-center">
+<div class="Nav-add-post d-flex justify-content-center mt-2 text-center">
   <div class="Header-nav Header-nav-image mx-3" id="loadPhotoPost" type="file">
     <label for="loadPhotoInput">
       <i class="fas fa-image"></i>
@@ -56,11 +74,12 @@
       <input type="file" name="loadPhotoInput" id="loadPhotoInput" class="d-none" accept=".png, .jpg, .jpeg, .gif"  on:change={showPostImg}>
     </label>
   </div>
-  <div class="Header-nav Header-nav-film mx-3 disabled">
-    <!-- <a href="/"> -->
+  <div class="Header-nav Header-nav-film mx-3">
+    <label for="uploadVideo">
       <i class="fas fa-film"></i>
       <span>Video</span>
-    <!-- </a> -->
+      <input type="file" name="uploadVideo" id="uploadVideo" class="d-none" accept="video/mp4,video/x-m4v,video/*"  on:change={uploadVideoPost}>
+    </label>
   </div>
   <div class="Header-nav Header-nav-calendar mx-3 disabled">
     <!-- <a href="/"> -->

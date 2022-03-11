@@ -1,9 +1,13 @@
 <script>
   import ShareModal from '../../Modals/actions/ShareModal.svelte'
-  export let id, urlAPI
+  export let id, urlAPI, shareId = ''
+
+  if (!id) id = shareId
 
   let userPost;
   let infoPost;
+
+  // console.log(id);
   const getPostShare = async() =>{
     const response = await fetch(`${urlAPI}/post/create/?post_id=${id}`)
     if (response.ok) {

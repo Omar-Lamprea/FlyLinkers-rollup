@@ -13,10 +13,13 @@
   export let desc, reactions, img, comments, create_time, user, id, user_id, update_time;
   export let name, middle_name, last_name, title, photo, email;
   export let userMain, urlAPI, url_id, meta;
-  export let share_id, share_count;
+  export let share_id, share_count, share = '';
+  export let video;
 
-  console.log(share_id, share_count);
   const userStorage = JSON.parse(localStorage.getItem('data'))
+
+  let shareId;
+  if (share !== '') shareId = share[1].id
 
   // console.log(userId, user);
   if (!meta) {
@@ -619,7 +622,6 @@
 
 <div class="Card Default-containers">
 
-
   <div class="Card-container">
     <div class="Card-Header px-3 px-md-0">
 
@@ -682,7 +684,7 @@
   </div>
 
     <div class="Card-photo px-0">
-      {#if meta}
+      {#if meta && share === ''}
         <div class="urlMeta d-flex flex-column mb-3">
           <a href={meta.url} target="_blank">
             {#if meta.title}
@@ -700,10 +702,60 @@
 
       {#if !!img}
         <figure>
-           <img src="{urlAPI}{img}" alt="img post">
-          </figure>
+          <img src="{urlAPI}{img}" alt="img post">
+        </figure>
       {/if}
     </div>
+
+    {#if video}
+      <video  controls style="width: 100%;">
+        <source src="{urlAPI}{video}">
+        <track kind="captions">
+      </video>
+    {/if}
+
+    {#if share !== ''}
+    <hr>
+      <div class="">
+        <div class="user-shared">
+          <!-- <p>{share[0].first_name}</p> -->
+
+          <div class="Card-user justify-content-start" on:click={visitProfile}>
+            <a href="/profile/{share[0].email}" class="d-flex" use:link use:active>
+              <img src="{urlAPI}{share[0].photo}" alt="">
+              <h2>
+                {share[0].first_name} {user.last_name}
+                <span>{share[0].title}</span>
+                <span>{startTime(share[0].create_time)}</span>
+              </h2>
+            </a>
+          </div>
+
+        </div>
+        <div class="info-shared">
+          <span>{share[1].desc}</span>
+          {#if share[1].img !== ''}
+             <!-- content here -->
+             <img src="{urlAPI}{share[1].img}" alt="" style="width: 100%;">
+          {/if}
+          {#if share[1].url_id !== 0}
+            <div class="urlMeta d-flex flex-column mb-3">
+              <a href={meta.url} target="_blank">
+                {#if meta.title}
+                  <h6>{meta.title}</h6>
+                {/if}
+                {#if meta.description}
+                  <p>{meta.description}</p>
+                {/if}
+                {#if meta.image}
+                  <img src="{meta.image}" alt="">
+                {/if}
+              </a>
+            </div>
+          {/if}
+        </div>
+      </div>
+    {/if}
 
     <div class="Card-board-icons">
       <div class="Card-board-icons-first d-flex px-3 px-md-0">
@@ -738,7 +790,11 @@
           <span>Comment</span>
         </div>
         <div class="Action Header-nav-share">
-          <SharePost {id} {urlAPI}/>
+          {#if share !== ''}
+            <SharePost {shareId} {urlAPI}/>
+          {:else}
+            <SharePost {id} {urlAPI}/>
+          {/if}
         </div>
         <div class="Action Header-nav-paper-plane hidden disabled">
           <i class="fas fa-paper-plane"></i>
