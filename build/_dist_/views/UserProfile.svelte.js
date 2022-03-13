@@ -16,12 +16,12 @@ import {
 	space,
 	transition_in,
 	transition_out
-} from "svelte/internal";
+} from "../../_snowpack/pkg/svelte/internal.js";
 
 import TimelineP from '../components/TimelineP.svelte.js';
 import SidebarRight from '../components/SidebarRight.svelte.js';
 import Loader from '../components/Loader.svelte.js';
-import { onMount } from 'svelte';
+import { onMount } from '../../_snowpack/pkg/svelte.js';
 
 function create_else_block(ctx) {
 	let loader;

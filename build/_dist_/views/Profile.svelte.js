@@ -16,7 +16,7 @@ import {
 	space,
 	transition_in,
 	transition_out
-} from "svelte/internal";
+} from "../../_snowpack/pkg/svelte/internal.js";
 
 import TimelineP from '../components/TimelineP.svelte.js';
 import SidebarRight from '../components/SidebarRight.svelte.js';

@@ -14,7 +14,7 @@ import {
 	space,
 	transition_in,
 	transition_out
-} from "svelte/internal";
+} from "../../_snowpack/pkg/svelte/internal.js";
 
 import ProfileCard from './profile-card/ProfileCard.svelte.js';
 import Groups from './groups-card/Groups.svelte.js';

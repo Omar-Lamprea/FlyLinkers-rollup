@@ -1,6 +1,6 @@
-import { async } from "@firebase/util";
-import { initializeApp } from "firebase/app";
-import { getFirestore, collection, where, query, getDocs, getDoc, setDoc, addDoc, doc, updateDoc, orderBy, onSnapshot, limit} from 'firebase/firestore';
+import { async } from "../../../_snowpack/pkg/@firebase/util.js";
+import { initializeApp } from "../../../_snowpack/pkg/firebase/app.js";
+import { getFirestore, collection, where, query, getDocs, getDoc, setDoc, addDoc, doc, updateDoc, orderBy, onSnapshot, limit} from '../../../_snowpack/pkg/firebase/firestore.js';
 
 const firebaseConfig = {
   apiKey: "AIzaSyB8KpNHJILsB2erTcBgMuhTHWGJd_rSttk",

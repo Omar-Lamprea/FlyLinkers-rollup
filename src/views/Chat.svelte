@@ -129,7 +129,7 @@
     border: 1px solid var(--main-color);
     margin: .2rem 0;
     width: fit-content;
-    max-width: 13rem;
+    max-width: 15rem;
     padding: .5rem;
   }
 

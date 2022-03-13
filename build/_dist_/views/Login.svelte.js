@@ -7,7 +7,7 @@ import {
 	insert,
 	noop,
 	safe_not_equal
-} from "svelte/internal";
+} from "../../_snowpack/pkg/svelte/internal.js";
 
 function create_fragment(ctx) {
 	let h1;

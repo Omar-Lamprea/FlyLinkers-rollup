@@ -15,16 +15,17 @@
   let last_name;
   let title;
   let photo;
-
+ 
 
   const userId = localStorage.getItem('userId')
   const getPost = async()=>{
     const response = await fetch(`${urlAPI}/post/create/?post_id=${params.id}`)
-    if (response.status === 200) {
+    if (response.ok) {
       const result = await response.json()
       data = result
 
       let content = data.results
+      console.log(content);
       name = content[0].name
       last_name = content[0].last_name
       title = content[0].title
@@ -39,7 +40,12 @@
         img: content[1].img,
         reactions: content[1].reactions,
         update_time: content[1].update_time,
-        url_id: content[1].url_id
+        url_id: content[1].url_id,
+        share: content[1].share,
+        video: content[1].video,
+        share_id: content[1].share_id,
+        share_count: content[1].share_count,
+        meta: content[1].meta
       }
     }else{
       error = 'Ops... We have a problem, refresh this page or try again later.'

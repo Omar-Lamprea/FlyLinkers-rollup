@@ -22,13 +22,13 @@ import {
 	space,
 	transition_in,
 	transition_out
-} from "svelte/internal";
+} from "../../_snowpack/pkg/svelte/internal.js";
 
 import AddPost from './post/AddPost.svelte.js';
 import Post from './post/Post.svelte.js';
 import Loader from './Loader.svelte.js';
-import { onMount } from 'svelte';
-import { writable } from 'svelte/store';
+import { onMount } from '../../_snowpack/pkg/svelte.js';
+import { writable } from '../../_snowpack/pkg/svelte/store.js';
 
 function get_each_context(ctx, list, i) {
 	const child_ctx = ctx.slice();

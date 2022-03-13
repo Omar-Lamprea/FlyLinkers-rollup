@@ -697,14 +697,14 @@
 
     {#if video && share === ''}
       <video  controls style="width: 100%;">
-        <source src="{urlAPI}{video}">
+        <source src="{urlAPI}{video}" autoplay autobuffer autobuffered>
         <track kind="captions">
       </video>
     {/if}
 
     {#if share !== ''}
       <hr>
-      <div class="">
+      <div class="px-3">
         <div class="user-shared">
           <!-- <p>{share[0].first_name}</p> -->
 
@@ -714,7 +714,7 @@
               <h2>
                 {share[0].name} {user.last_name}
                 <span>{share[0].title}</span>
-                <span>{startTime(share[0].create_time)}</span>
+                <span>{startTime(share[1].create_time)}</span>
               </h2>
             </a>
           </div>
@@ -727,7 +727,7 @@
           {/if}
           {#if share[1].video}
             <video  controls style="width: 100%;">
-              <source src="{urlAPI}{video}">
+              <source src="{urlAPI}{video}" autoplay autobuffer autobuffered>
               <track kind="captions">
             </video>
           {/if}

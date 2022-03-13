@@ -137,6 +137,7 @@
       urlLink = ''
       validUrl = ''
     }
+    urlContent = undefined
   }
 
   const sendPost = async()=>{
