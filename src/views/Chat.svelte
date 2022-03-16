@@ -2,7 +2,7 @@
   import {db, getUser, validateGroup , getMessages, getMessage, newMessage, newGroup} from '../js/firebase/config.js'
   import {collectionData} from 'rxfire/firestore'
   import {startWith} from 'rxjs/operators'
-  import { collection,orderBy, query} from 'firebase/firestore';
+  import { collection,onSnapshot,orderBy, query} from 'firebase/firestore';
   import { writable } from 'svelte/store';
   import {onMount} from 'svelte'
   import Loader from '../components/Loader.svelte'
@@ -33,7 +33,6 @@
     }else{
       // console.log('group not found');
     }
-
   }
 
   const scrollChat = () =>{
@@ -63,10 +62,20 @@
   }
 
   let chats = writable([]);
+  let arrChats = []
   const getContainerMessages = ()=>{
     const messageRef = collection(db, `message/${groupId}/messages`)
     const q = query(messageRef, orderBy('sentAt'))
     chats = collectionData(q, 'id').pipe(startWith([]))
+    scrollChat()
+    // const snapChats = onSnapshot(q, (doc) =>{
+    //   doc.forEach(msg => {
+    //     arrChats.push(msg.data());
+    //   });
+    // })
+    // setTimeout(() => {
+    //   console.log(arrChats);
+    // }, 2000);
   }
 
   onMount( async () =>{
@@ -125,12 +134,21 @@
     overflow-y: auto;
     scroll-behavior: smooth
   }
-  .messages p{
+  .messages p, .messages a{
     border: 1px solid var(--main-color);
     margin: .2rem 0;
     width: fit-content;
     max-width: 15rem;
     padding: .5rem;
+    word-break: break-all;
+  }
+
+  .messages a{
+    text-decoration: underline;
+    color: blue;
+  }
+  .messages .aLink{
+    color: #fff;
   }
 
   .friend{
@@ -143,17 +161,19 @@
     display: flex;
     align-self: flex-end;
     background-color: #f8f8f8;
+    color: rgba(38, 38, 38, 07);
   }
 
   .messageText{
     border-top: 1px solid var(--main-color);
     height: 10%;
   }
-  .messageText input{
+  .messageText textarea{
+    resize: none;
     width: 100%;
     border: none;
   }
-  .messageText input:focus-visible{
+  .messageText textarea:focus-visible{
     outline:none
   }
 
@@ -182,22 +202,26 @@
 
     <div id="messagesContainer" class="messages p-3  d-flex flex-column">
       {#if groupId}
-          {#each $chats as message}
-            {#if message.sentBy !== user1.name}
+        {#each $chats as message}
+          {#if message.sentBy !== user1.name}
+            {#if !message.messageText.includes('https://')}
               <p class="friend">{message.messageText}</p>
             {:else}
-              <p class="me">{message.messageText}</p>
+              <a href="{message.messageText}" target="_blank" class="friend aLink">{message.messageText}</a>
             {/if}
-          {/each}
-      {:else}
-        <!-- <p class="empty-chat">Do you want start a new conversation with this person?</p>
-        <button class="btn-empty-chat btn-start" on:click={}>Yes</button>
-        <button class="btn-empty-chat">No</button> -->
+          {:else}
+            {#if !message.messageText.includes('https://')}
+              <p class="me">{message.messageText}</p>
+            {:else}
+              <a href="{message.messageText}" target="_blank" class="me">{message.messageText}</a>
+            {/if}
+          {/if}
+        {/each}
       {/if}
     </div>
 
     <div class="messageText d-flex">
-      <input id="inputMessage" type="text" placeholder="write a message" autocomplete="off" on:keyup={sendMessage}>
+      <textarea id="inputMessage" type="text" placeholder="write a message" autocomplete="off" on:keyup={sendMessage}></textarea>
       <button id="btnSentMessage" class="btn-sendMessage" on:click={sendMessage}>
         <i class="fas fa-paper-plane"></i>
       </button>

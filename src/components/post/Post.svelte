@@ -704,7 +704,7 @@
 
     {#if share !== ''}
       <hr>
-      <div class="px-3">
+      <div class="px-3 px-lg-0">
         <div class="user-shared">
           <!-- <p>{share[0].first_name}</p> -->
 

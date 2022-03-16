@@ -55,7 +55,7 @@ function create_if_block_2(ctx) {
 			h6 = element("h6");
 			t = text(t_value);
 			set_style(h6, "color", "#fff");
-			attr(h6, "class", "svelte-18rr0de");
+			attr(h6, "class", "svelte-uia5zo");
 		},
 		m(target, anchor) {
 			insert(target, h6, anchor);
@@ -141,7 +141,7 @@ function create_else_block(ctx) {
 		c() {
 			p = element("p");
 			t = text(t_value);
-			attr(p, "class", "me svelte-18rr0de");
+			attr(p, "class", "me svelte-uia5zo");
 		},
 		m(target, anchor) {
 			insert(target, p, anchor);
@@ -166,7 +166,7 @@ function create_if_block_1(ctx) {
 		c() {
 			p = element("p");
 			t = text(t_value);
-			attr(p, "class", "friend svelte-18rr0de");
+			attr(p, "class", "friend svelte-uia5zo");
 		},
 		m(target, anchor) {
 			insert(target, p, anchor);
@@ -269,26 +269,26 @@ function create_fragment(ctx) {
 			input = element("input");
 			t4 = space();
 			button = element("button");
-			button.innerHTML = `<i class="fas fa-paper-plane svelte-18rr0de"></i>`;
+			button.innerHTML = `<i class="fas fa-paper-plane svelte-uia5zo"></i>`;
 			attr(i0, "id", "arrow");
-			attr(i0, "class", "fas fa-arrow-up px-1 rotate svelte-18rr0de");
+			attr(i0, "class", "fas fa-arrow-up px-1 rotate svelte-uia5zo");
 			attr(i1, "id", "closeChat");
-			attr(i1, "class", "fas fa-times  svelte-18rr0de");
+			attr(i1, "class", "fas fa-times  svelte-uia5zo");
 			attr(div0, "class", "chat-controller");
-			attr(div1, "class", "header-chat d-flex justify-content-between align-items-center svelte-18rr0de");
+			attr(div1, "class", "header-chat d-flex justify-content-between align-items-center svelte-uia5zo");
 			attr(div2, "id", "messagesContainer");
-			attr(div2, "class", "messages p-3 d-flex flex-column svelte-18rr0de");
+			attr(div2, "class", "messages p-3 d-flex flex-column svelte-uia5zo");
 			attr(input, "id", "inputMessage");
 			attr(input, "type", "text");
 			attr(input, "placeholder", "write a message");
 			attr(input, "autocomplete", "off");
-			attr(input, "class", "svelte-18rr0de");
+			attr(input, "class", "svelte-uia5zo");
 			attr(button, "id", "btnSentMessage");
-			attr(button, "class", "btn-sendMessage svelte-18rr0de");
-			attr(div3, "class", "messageText d-flex svelte-18rr0de");
-			attr(div4, "class", "chat col-3 svelte-18rr0de");
+			attr(button, "class", "btn-sendMessage svelte-uia5zo");
+			attr(div3, "class", "messageText d-flex svelte-uia5zo");
+			attr(div4, "class", "chat col-3 svelte-uia5zo");
 			attr(div5, "id", "chatContainer");
-			attr(div5, "class", "row chat-container minimize-chat svelte-18rr0de");
+			attr(div5, "class", "row chat-container minimize-chat svelte-uia5zo");
 		},
 		m(target, anchor) {
 			insert(target, div5, anchor);

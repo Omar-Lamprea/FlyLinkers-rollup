@@ -57,7 +57,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (355:6) {#if urlContent && urlLink.includes('https://')}
+// (356:6) {#if urlContent && urlLink.includes('https://')}
 function create_if_block(ctx) {
 	let i;
 	let t0;
@@ -457,6 +457,8 @@ function instance($$self, $$props, $$invalidate) {
 			$$invalidate(1, urlLink = '');
 			validUrl = '';
 		}
+
+		$$invalidate(3, urlContent = undefined);
 	};
 
 	const sendPost = async () => {

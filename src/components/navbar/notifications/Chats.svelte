@@ -5,27 +5,53 @@
   import { collection, orderBy, getDoc, updateDoc, query, doc, onSnapshot, limit} from 'firebase/firestore';
   import startTime from '../../../js/startTime'
 
-  export let urlAPI, id, groups;
+  export let urlAPI, id, groups
+
 
   let data;
   let name;
   let message;
   let user1;
   let user2;
+  let messageId;
 
   let lastMessage;
   let time;
+  let seen;
+
+  let template;
+  // console.log(notificacionsChatsBubble.innerHTML);
   const q = query(collection(db, `message/${groups}/messages`), orderBy('sentAt', 'desc'), limit(1))
   const snapChatId = onSnapshot(q, col =>{
     col.forEach(doc => {
+      messageId = doc.id
       const dataMessage = doc.data()
+      seen = dataMessage.seen
+      template = dataMessage
       lastMessage = dataMessage.messageText
       time = dataMessage.sentAt.toDate()
     });
   })
 
-  const seenMessage = () =>{
-    console.log('update seen =)');
+  const seenMessage = async() =>{
+    // console.log('update seen =)', groups, messageId);
+    if (!template.seen) {
+      const dataMain = JSON.parse(localStorage.getItem('data'))
+      const name = `${dataMain.name} ${dataMain.last_name}`
+      if(template.sentBy !== name){
+        console.log('actualizando visto');
+        const updateSeen = doc(db, `message/${groups}/messages/${messageId}`)
+        await updateDoc(updateSeen,{
+          seen : true
+        })
+        const notificacionsChatsBubble = document.getElementById('notificacionsChatsBubble')
+        notificacionsChatsBubble.innerHTML -= 1
+        if (notificacionsChatsBubble.innerHTML === '0') {
+          console.log('ocultar');
+          notificacionsChatsBubble.classList.add('d-none')
+        }
+      }
+    }
   }
 
   // console.log(id, groups);
@@ -45,7 +71,7 @@
     const response = await fetch(`${urlAPI}/user/create/?id=${chatId}`)
     const content = await response.json()
     data = content[0]
-    // console.log(data);
+
     name = `${data.name} ${data.last_name}`
   }
   
@@ -77,6 +103,7 @@
   .chatList .messageText{
     color: grey;
     font-weight: inherit;
+    overflow: hidden;
   }
   .chat-time{
     color: gray;
@@ -84,14 +111,27 @@
 </style>
 
 {#if data}
-  <li class="dropdown-item chatList d-flex" on:click={seenMessage}>
-    <img id='chat' data-chat={chatId} src="{urlAPI}{data.photo}" alt="img">
-    <span id='chat' data-chat={chatId}>
-      <div class="data-user-time d-flex justify-content-between">
-        <p class="chat-name" id='chat' data-chat={chatId}>{name}</p>
-        <p class="chat-time">{startTime(time.toISOString())}</p>
-      </div>
-      <p id='chat' data-chat={chatId} class="messageText">{lastMessage}</p>
-    </span>
-  </li>
+  {#if seen}
+     <li id="liChatMessage" class="dropdown-item chatList d-flex" on:click={seenMessage}>
+      <img id='chat' data-chat={chatId} src="{urlAPI}{data.photo}" alt="img">
+      <span id='chat' data-chat={chatId}>
+        <div class="data-user-time d-flex justify-content-between">
+          <p class="chat-name" id='chat' data-chat={chatId}>{name}</p>
+          <p class="chat-time">{startTime(time.toISOString())}</p>
+        </div>
+        <p id='chat' data-chat={chatId} class="messageText">{lastMessage}</p>
+      </span>
+    </li>
+  {:else}
+     <li id="liChatMessage" class="dropdown-item chatList d-flex" style="background-color: #e9ecef;" on:click={seenMessage}>
+      <img id='chat' data-chat={chatId} src="{urlAPI}{data.photo}" alt="img">
+      <span id='chat' data-chat={chatId}>
+        <div class="data-user-time d-flex justify-content-between">
+          <p class="chat-name" id='chat' data-chat={chatId}>{name}</p>
+          <p class="chat-time">{startTime(time.toISOString())}</p>
+        </div>
+        <p id='chat' data-chat={chatId} class="messageText">{lastMessage}</p>
+      </span>
+    </li>
+  {/if}
 {/if}

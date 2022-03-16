@@ -45,15 +45,24 @@
 
       //read Chats
       if (groups !== undefined) {
-        usergroups.set(groups.reverse())
+        usergroups.set(groups)
 
         groups.forEach(chat => {
           const q = query(collection(db, `message/${chat}/messages`), orderBy('sentAt', 'desc'), limit(1))
           const snapChatId = onSnapshot(q, col =>{
             col.forEach(doc => {
               const dataMessage = doc.data()
+              console.log(countMessages);
               if (!dataMessage.seen) {
-                countMessages += 1
+                const dataMain = JSON.parse(localStorage.getItem('data'))
+                const name = `${dataMain.name} ${dataMain.last_name}`
+                if (name !== dataMessage.sentBy) {
+                  notificacionsChatsBubble.classList.remove('d-none')
+                  countMessages += 1
+                }
+              }
+              if (countMessages <= 0) {
+                notificacionsChatsBubble.classList.add('d-none')
               }
             });
           })
@@ -329,9 +338,7 @@
     </a>
   </div>
   <div class="icon Header-nav-comment mx-3 fs-3 position-relative">
-    {#if countMessages}
-      <div class="notificacions-bubble">{countMessages}</div>
-    {/if}
+    <div id="notificacionsChatsBubble" class="notificacions-bubble d-none">{countMessages}</div>
     <i class="fas fa-comment dropdown-toggle" id="chats" data-bs-toggle="dropdown" aria-expanded="false"></i>
     <ul class="dropdown-menu" aria-labelledby="chats">
       {#each $usergroups as groups}

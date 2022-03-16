@@ -527,6 +527,9 @@ function create_if_block_9(ctx) {
 			source = element("source");
 			track = element("track");
 			if (!src_url_equal(source.src, source_src_value = "" + (/*urlAPI*/ ctx[13] + /*video*/ ctx[15]))) attr(source, "src", source_src_value);
+			attr(source, "autoplay", "");
+			attr(source, "autobuffer", "");
+			attr(source, "autobuffered", "");
 			attr(track, "kind", "captions");
 			video_1.controls = true;
 			set_style(video_1, "width", "100%");
@@ -570,7 +573,7 @@ function create_if_block_2(ctx) {
 	let t6;
 	let t7;
 	let span1;
-	let t8_value = startTime(/*share*/ ctx[14][0].create_time) + "";
+	let t8_value = startTime(/*share*/ ctx[14][1].create_time) + "";
 	let t8;
 	let a_href_value;
 	let link_action;
@@ -630,7 +633,7 @@ function create_if_block_2(ctx) {
 			attr(div0, "class", "Card-user justify-content-start svelte-54r9g1");
 			attr(div1, "class", "user-shared");
 			attr(div2, "class", "info-shared");
-			attr(div3, "class", "");
+			attr(div3, "class", "px-3");
 		},
 		m(target, anchor) {
 			insert(target, hr, anchor);
@@ -680,7 +683,7 @@ function create_if_block_2(ctx) {
 			if (dirty[0] & /*share*/ 16384 && t2_value !== (t2_value = /*share*/ ctx[14][0].name + "")) set_data(t2, t2_value);
 			if (dirty[0] & /*user*/ 4 && t4_value !== (t4_value = /*user*/ ctx[2].last_name + "")) set_data(t4, t4_value);
 			if (dirty[0] & /*share*/ 16384 && t6_value !== (t6_value = /*share*/ ctx[14][0].title + "")) set_data(t6, t6_value);
-			if (dirty[0] & /*share*/ 16384 && t8_value !== (t8_value = startTime(/*share*/ ctx[14][0].create_time) + "")) set_data(t8, t8_value);
+			if (dirty[0] & /*share*/ 16384 && t8_value !== (t8_value = startTime(/*share*/ ctx[14][1].create_time) + "")) set_data(t8, t8_value);
 
 			if (dirty[0] & /*share*/ 16384 && a_href_value !== (a_href_value = "/profile/" + /*share*/ ctx[14][0].email)) {
 				attr(a, "href", a_href_value);
@@ -779,6 +782,9 @@ function create_if_block_7(ctx) {
 			source = element("source");
 			track = element("track");
 			if (!src_url_equal(source.src, source_src_value = "" + (/*urlAPI*/ ctx[13] + /*video*/ ctx[15]))) attr(source, "src", source_src_value);
+			attr(source, "autoplay", "");
+			attr(source, "autobuffer", "");
+			attr(source, "autobuffered", "");
 			attr(track, "kind", "captions");
 			video_1.controls = true;
 			set_style(video_1, "width", "100%");

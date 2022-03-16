@@ -290,7 +290,8 @@
     padding: .5rem;
     width: 100%;
     overflow-y: auto; 
-    word-wrap:break-word
+    word-wrap:break-word;
+    resize: none;
   }
   .Add-post textarea:focus-visible{
     outline-color: var(--main-color);
@@ -340,7 +341,7 @@
 <div class="Add-post {colorbox} Default-containers px-lg-5 d-flex flex-column">
 
   <div class="Add-post-input mx-3 d-flex flex-column justify-content-center position-relative">
-    <textarea name="" cols="" rows="1" id="postDescription" class="Default-containers" placeholder="Start a post..." on:keyup={validateUrl} on:keyup={validateInfoPost}></textarea>
+    <textarea name="" cols="1" rows="1" id="postDescription" class="Default-containers" placeholder="Start a post..." on:keyup={validateUrl} on:keyup={validateInfoPost}></textarea>
     <div id="characterCountSpan" class="characterCount characterCount-active">
       {characterCount}/255
     </div>
