@@ -46,27 +46,51 @@
       //read Chats
       if (groups !== undefined) {
         usergroups.set(groups)
-
+        
         groups.forEach(chat => {
           const q = query(collection(db, `message/${chat}/messages`), orderBy('sentAt', 'desc'), limit(1))
           const snapChatId = onSnapshot(q, col =>{
             col.forEach(doc => {
-              const dataMessage = doc.data()
-              console.log(countMessages);
-              if (!dataMessage.seen) {
-                const dataMain = JSON.parse(localStorage.getItem('data'))
-                const name = `${dataMain.name} ${dataMain.last_name}`
-                if (name !== dataMessage.sentBy) {
-                  notificacionsChatsBubble.classList.remove('d-none')
-                  countMessages += 1
-                }
-              }
-              if (countMessages <= 0) {
-                notificacionsChatsBubble.classList.add('d-none')
+              // countMessages = 0
+              if (!doc.data().seen) {
+                // console.log(doc.data());
+                countMessages += 1
+                console.log(countMessages);
+                localStorage.setItem('countMessages', countMessages )
+                console.log(countMessages);
               }
             });
           })
         });
+
+
+
+
+        // groups.forEach(chat => {
+        //   const q = query(collection(db, `message/${chat}/messages`), orderBy('sentAt', 'desc'), limit(1))
+        //   const snapChatId = onSnapshot(q, col =>{
+        //     col.forEach(doc => {
+        //       // console.log(doc.data().sentAt);
+        //       const dataMessage = doc.data()
+        //       const liChatMessage = document.getElementsByClassName('unreadMessage')
+        //       console.log(liChatMessage);
+        //       countMessages = liChatMessage.length
+        //       if (!dataMessage.seen) {
+        //         console.log('nueva notificacion');
+        //         const dataMain = JSON.parse(localStorage.getItem('data'))
+        //         const name = `${dataMain.name} ${dataMain.last_name}`
+        //         if (name !== dataMessage.sentBy) {
+        //           notificacionsChatsBubble.classList.remove('d-none')
+        //           countMessages += 1
+        //         }
+        //       }
+        //       if (countMessages === 0) {
+        //         notificacionsChatsBubble.classList.add('d-none')
+        //       }
+        //       // console.log(countMessages);
+        //     });
+        //   })
+        // });
       }
 
       //read Comments
@@ -269,8 +293,8 @@
     left: 14px;
     background-color: #d70000;
     border-radius: 50%;
-    font-size: .8rem;
-    font-weight: 500;
+    font-size: .85rem;
+    font-weight: 700;
     height: 20px;
     width: 20px;
     text-align: center;
@@ -338,7 +362,7 @@
     </a>
   </div>
   <div class="icon Header-nav-comment mx-3 fs-3 position-relative">
-    <div id="notificacionsChatsBubble" class="notificacions-bubble d-none">{countMessages}</div>
+    <div id="notificacionsChatsBubble" class="notificacions-bubble d-none">!</div>
     <i class="fas fa-comment dropdown-toggle" id="chats" data-bs-toggle="dropdown" aria-expanded="false"></i>
     <ul class="dropdown-menu" aria-labelledby="chats">
       {#each $usergroups as groups}

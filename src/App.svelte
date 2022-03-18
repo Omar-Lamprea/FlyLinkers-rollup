@@ -79,15 +79,16 @@
   const loadChatList = ()=>{
     chatFlag = false
     document.addEventListener('click', async e =>{
-      if (e.target.id === 'chat' || e.target.id === 'btInitChat') {
+      if (e.target.id === `chat-${e.target.dataset.chat}` || e.target.id === `btInitChat-${e.target.dataset.chat}`) {
         id = parseInt(e.target.dataset.chat)
         await openChat(id)
-        if (localStorage.getItem('chat')) {
+        console.log(id);
+        if (localStorage.getItem(`chat-${id}`)) {
           chatFlag = true
         }
       }
-      if (e.target.id === 'closeChat') {
-        localStorage.removeItem('chat')
+      if (e.target.id === `closeChat-${e.target.dataset.chat}`) {
+        localStorage.removeItem(`chat-${id}`)
         chatFlag = false
       }
     })
@@ -183,5 +184,6 @@
     <Router {routes}/>
     {#if chatFlag && userMain && getUserMainToFirestore}
         <Chat {id} {userMain}/>
+        <!-- <Chat {id} {userMain}/> -->
     {/if}
 </main>

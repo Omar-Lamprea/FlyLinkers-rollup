@@ -9,7 +9,9 @@
 
   export let id, userMain;
 
+
   const pickUpTab = ()=>{
+    const chatContainer = document.getElementById(`chatContainer-${id}`)
     chatContainer.classList.toggle('minimize-chat')
     if (chatContainer.className.includes('minimize-chat')) {
       arrow.classList.add('rotate')
@@ -56,18 +58,21 @@
 
         setTimeout(() => {
           scrollChat()
-        }, 50);
+        }, 1000);
       }
     }
   }
 
   let chats = writable([]);
   let arrChats = []
-  const getContainerMessages = ()=>{
-    const messageRef = collection(db, `message/${groupId}/messages`)
-    const q = query(messageRef, orderBy('sentAt'))
+  const getContainerMessages = async ()=>{
+    const messageRef =collection(db, `message/${groupId}/messages`)
+    const q =  query(messageRef, orderBy('sentAt'))
     chats = collectionData(q, 'id').pipe(startWith([]))
-    scrollChat()
+    setTimeout(() => {
+      // console.log($chats)
+      scrollChat()
+    }, 1000);
     // const snapChats = onSnapshot(q, (doc) =>{
     //   doc.forEach(msg => {
     //     arrChats.push(msg.data());
@@ -83,7 +88,7 @@
     getContainerMessages()
     setTimeout(() => {
       scrollChat()
-    }, 300);
+    }, 1000);
   })
 </script>
 
@@ -185,9 +190,12 @@
   .btn-sendMessage i:hover{
     color: var(--main-color);
   }
+  .chat-controller .arrow{
+    font-size: 1.2rem;
+  }
 </style>
 
-<div id="chatContainer" class="row chat-container minimize-chat">
+<div id="chatContainer-{id}" class=" row chat-container minimize-chat">
   <div class="chat col-3">
 
     <div class="header-chat d-flex justify-content-between align-items-center">
@@ -195,8 +203,8 @@
         <h6 style="color: #fff;">{user2.name}</h6>
       {/if}
       <div class="chat-controller">
-        <i id="arrow" class="fas fa-arrow-up px-1 rotate" on:click={pickUpTab}></i>
-        <i id="closeChat" class="fas fa-times "></i>
+        <i id="arrow" class="fas fa-arrow-up px-1 rotate " on:click={pickUpTab}></i>
+        <i id="closeChat-{id}" data-chat={id} class="arrow fas fa-times mx-2"></i>
       </div>
     </div>
 

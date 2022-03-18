@@ -251,7 +251,7 @@
           {:else}
             <button class="btn btn-outline-primary btn-flylinkers align-self-end mt-1">Friends</button>
           {/if}
-          <button id="btInitChat" data-chat={id} class="btn btn-outline-primary btn-flylinkers align-self-end mt-1">Send a message</button>
+          <button id="btInitChat-{id}" data-chat={id} class="btn btn-outline-primary btn-flylinkers align-self-end mt-1">Send a message</button>
         {/if}
       </div>
     </div>
