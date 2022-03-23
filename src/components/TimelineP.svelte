@@ -13,8 +13,10 @@
   export let userMain;
 
   if (userMain === undefined) {
-    userMain =''
+    userMain = ""
   }
+
+  const dataJson = JSON.parse(localStorage.getItem('data'))
 
   let coverPhoto;
   let aboutMe;
@@ -116,7 +118,7 @@
     }
   })
 
-
+  
 
 
   onMount(async ()=>{
@@ -153,7 +155,7 @@
       <CoverPhoto {coverPhoto} {userId}/>
       <UserDetails {name} {last_name} {title} {email} {photo} {id} {aboutMe} {userMain} {urlAPI}/>
 
-      {#if email === localStorage.getItem('user')}
+      {#if email === dataJson.email}
         <div class="Background-post-profile">
           <p class="my-2">Post</p>
           <AddPost {id} {urlAPI}/>

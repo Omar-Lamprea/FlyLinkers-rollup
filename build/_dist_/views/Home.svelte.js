@@ -54,7 +54,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (56:4) {#if id && getUserMainToFirestore}
+// (54:4) {#if id && getUserMainToFirestore}
 function create_if_block(ctx) {
 	let sidebarleft;
 	let t0;
@@ -214,9 +214,9 @@ function instance($$self, $$props, $$invalidate) {
 	// 
 	const getData = async () => {
 		if (localStorage.getItem('user')) {
-			const response = await fetch(`${urlAPI}/user/create/?email=${localStorage.getItem('user')}`, { method: 'GET' });
+			const response = await fetch(`${urlAPI}/user/logout/?token=${localStorage.getItem('user')}`);
 			const content = await response.json();
-			data = content[0];
+			data = content.User;
 			await getUserToFirestore(data);
 			$$invalidate(5, getUserMainToFirestore = await getUserToFirestore(data));
 

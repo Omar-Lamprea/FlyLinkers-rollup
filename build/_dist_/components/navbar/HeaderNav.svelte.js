@@ -68,31 +68,7 @@ function get_each_context_1(ctx, list, i) {
 	return child_ctx;
 }
 
-// (332:4) {#if countMessages}
-function create_if_block_3(ctx) {
-	let div;
-	let t;
-
-	return {
-		c() {
-			div = element("div");
-			t = text(/*countMessages*/ ctx[5]);
-			attr(div, "class", "notificacions-bubble svelte-1kzdjg7");
-		},
-		m(target, anchor) {
-			insert(target, div, anchor);
-			append(div, t);
-		},
-		p(ctx, dirty) {
-			if (dirty & /*countMessages*/ 32) set_data(t, /*countMessages*/ ctx[5]);
-		},
-		d(detaching) {
-			if (detaching) detach(div);
-		}
-	};
-}
-
-// (339:6) {:else}
+// (370:6) {:else}
 function create_else_block_2(ctx) {
 	let li;
 
@@ -103,7 +79,7 @@ function create_else_block_2(ctx) {
 			li.innerHTML = `<span>You haven&#39;t started any chat</span> 
         `;
 
-			attr(li, "class", "dropdown-item chatList d-flex svelte-1kzdjg7");
+			attr(li, "class", "dropdown-item chatList d-flex svelte-43rfm0");
 		},
 		m(target, anchor) {
 			insert(target, li, anchor);
@@ -114,7 +90,7 @@ function create_else_block_2(ctx) {
 	};
 }
 
-// (337:6) {#each $usergroups as groups}
+// (368:6) {#each $usergroups as groups}
 function create_each_block_1(ctx) {
 	let chatlist;
 	let current;
@@ -137,7 +113,7 @@ function create_each_block_1(ctx) {
 		},
 		p(ctx, dirty) {
 			const chatlist_changes = {};
-			if (dirty & /*$usergroups*/ 64) chatlist_changes.groups = /*groups*/ ctx[19];
+			if (dirty & /*$usergroups*/ 32) chatlist_changes.groups = /*groups*/ ctx[19];
 			if (dirty & /*urlAPI*/ 4) chatlist_changes.urlAPI = /*urlAPI*/ ctx[2];
 			if (dirty & /*id*/ 2) chatlist_changes.id = /*id*/ ctx[1];
 			chatlist.$set(chatlist_changes);
@@ -157,7 +133,7 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (351:6) {#if countBubble > 0}
+// (382:6) {#if countBubble > 0}
 function create_if_block_2(ctx) {
 	let div;
 	let t;
@@ -166,7 +142,7 @@ function create_if_block_2(ctx) {
 		c() {
 			div = element("div");
 			t = text(/*countBubble*/ ctx[4]);
-			attr(div, "class", "notificacions-bubble svelte-1kzdjg7");
+			attr(div, "class", "notificacions-bubble svelte-43rfm0");
 		},
 		m(target, anchor) {
 			insert(target, div, anchor);
@@ -181,7 +157,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (370:10) {:else}
+// (401:10) {:else}
 function create_else_block_1(ctx) {
 	let li;
 	let a;
@@ -228,15 +204,15 @@ function create_else_block_1(ctx) {
 			t6 = space();
 			if (!src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[2] + "/" + /*notification*/ ctx[16].photo))) attr(img, "src", img_src_value);
 			attr(img, "alt", "userImage");
-			attr(img, "class", "svelte-1kzdjg7");
-			attr(p0, "class", "notification-user-name svelte-1kzdjg7");
-			attr(p1, "class", "notification-time svelte-1kzdjg7");
+			attr(img, "class", "svelte-43rfm0");
+			attr(p0, "class", "notification-user-name svelte-43rfm0");
+			attr(p1, "class", "notification-time svelte-43rfm0");
 			attr(div, "class", "data-user-time d-flex justify-content-between");
-			attr(p2, "class", "notification-desc svelte-1kzdjg7");
-			attr(span, "class", "svelte-1kzdjg7");
+			attr(p2, "class", "notification-desc svelte-43rfm0");
+			attr(span, "class", "svelte-43rfm0");
 			attr(a, "href", a_href_value = "/post/" + /*notification*/ ctx[16].id);
-			attr(a, "class", "d-flex svelte-1kzdjg7");
-			attr(li, "class", "d-flex notificationsList dropdown-item svelte-1kzdjg7");
+			attr(a, "class", "d-flex svelte-43rfm0");
+			attr(li, "class", "d-flex notificationsList dropdown-item svelte-43rfm0");
 			attr(li, "data-id", li_data_id_value = /*notification*/ ctx[16].id);
 		},
 		m(target, anchor) {
@@ -291,7 +267,7 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (357:10) {#if typeof(notification.id) === 'string'}
+// (388:10) {#if typeof(notification.id) === 'string'}
 function create_if_block_1(ctx) {
 	let li;
 	let a;
@@ -338,15 +314,15 @@ function create_if_block_1(ctx) {
 			t6 = space();
 			if (!src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[2] + "/" + /*notification*/ ctx[16].photo))) attr(img, "src", img_src_value);
 			attr(img, "alt", "userImage");
-			attr(img, "class", "svelte-1kzdjg7");
-			attr(p0, "class", "notification-user-name svelte-1kzdjg7");
-			attr(p1, "class", "notification-time svelte-1kzdjg7");
+			attr(img, "class", "svelte-43rfm0");
+			attr(p0, "class", "notification-user-name svelte-43rfm0");
+			attr(p1, "class", "notification-time svelte-43rfm0");
 			attr(div, "class", "data-user-time d-flex justify-content-between");
-			attr(p2, "class", "notification-desc svelte-1kzdjg7");
-			attr(span, "class", "svelte-1kzdjg7");
+			attr(p2, "class", "notification-desc svelte-43rfm0");
+			attr(span, "class", "svelte-43rfm0");
 			attr(a, "href", a_href_value = "/profile/" + /*notification*/ ctx[16].id);
-			attr(a, "class", "d-flex svelte-1kzdjg7");
-			attr(li, "class", "d-flex notificationsList dropdown-item svelte-1kzdjg7");
+			attr(a, "class", "d-flex svelte-43rfm0");
+			attr(li, "class", "d-flex notificationsList dropdown-item svelte-43rfm0");
 			attr(li, "data-email", li_data_email_value = /*notification*/ ctx[16].id);
 		},
 		m(target, anchor) {
@@ -405,7 +381,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (355:8) {#each notificationsList as notification}
+// (386:8) {#each notificationsList as notification}
 function create_each_block(ctx) {
 	let if_block_anchor;
 
@@ -446,7 +422,7 @@ function create_each_block(ctx) {
 	};
 }
 
-// (395:6) {:else}
+// (426:6) {:else}
 function create_else_block(ctx) {
 	let img;
 	let img_src_value;
@@ -457,7 +433,7 @@ function create_else_block(ctx) {
 			attr(img, "id", "headerUserImage");
 			if (!src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[2] + /*photo*/ ctx[0]))) attr(img, "src", img_src_value);
 			attr(img, "alt", "");
-			attr(img, "class", "svelte-1kzdjg7");
+			attr(img, "class", "svelte-43rfm0");
 		},
 		m(target, anchor) {
 			insert(target, img, anchor);
@@ -473,7 +449,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (393:6) {#if localStorage.getItem('profilePhoto')}
+// (424:6) {#if localStorage.getItem('profilePhoto')}
 function create_if_block(ctx) {
 	let img;
 	let img_src_value;
@@ -484,7 +460,7 @@ function create_if_block(ctx) {
 			attr(img, "id", "headerUserImage");
 			if (!src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[2] + localStorage.getItem('profilePhoto')))) attr(img, "src", img_src_value);
 			attr(img, "alt", "");
-			attr(img, "class", "svelte-1kzdjg7");
+			attr(img, "class", "svelte-43rfm0");
 		},
 		m(target, anchor) {
 			insert(target, img, anchor);
@@ -515,39 +491,40 @@ function create_fragment(ctx) {
 	let link_action_1;
 	let active_action_1;
 	let t2;
-	let div3;
-	let t3;
-	let i2;
-	let t4;
-	let ul0;
-	let t5;
-	let div5;
 	let div4;
-	let i3;
+	let div3;
+	let t4;
+	let i2;
+	let t5;
+	let ul0;
 	let t6;
-	let t7;
-	let ul1;
-	let t8;
 	let div6;
+	let div5;
+	let i3;
+	let t7;
+	let t8;
+	let ul1;
+	let t9;
+	let div7;
 	let a2;
 	let show_if;
 	let link_action_2;
 	let active_action_2;
-	let t9;
-	let div8;
-	let div7;
-	let i4;
 	let t10;
+	let div9;
+	let div8;
+	let i4;
+	let t11;
 	let ul2;
 	let li0;
 	let a3;
 	let link_action_3;
 	let active_action_3;
-	let t12;
+	let t13;
 	let li1;
 	let span1;
-	let t14;
-	let div9;
+	let t15;
+	let div10;
 	let a4;
 	let link_action_4;
 	let active_action_4;
@@ -562,8 +539,7 @@ function create_fragment(ctx) {
 			}
 		});
 
-	let if_block0 = /*countMessages*/ ctx[5] && create_if_block_3(ctx);
-	let each_value_1 = /*$usergroups*/ ctx[6];
+	let each_value_1 = /*$usergroups*/ ctx[5];
 	let each_blocks_1 = [];
 
 	for (let i = 0; i < each_value_1.length; i += 1) {
@@ -580,7 +556,7 @@ function create_fragment(ctx) {
 		each0_else = create_else_block_2(ctx);
 	}
 
-	let if_block1 = /*countBubble*/ ctx[4] > 0 && create_if_block_2(ctx);
+	let if_block0 = /*countBubble*/ ctx[4] > 0 && create_if_block_2(ctx);
 	let each_value = /*notificationsList*/ ctx[3];
 	let each_blocks = [];
 
@@ -594,27 +570,28 @@ function create_fragment(ctx) {
 	}
 
 	let current_block_type = select_block_type_1(ctx, -1);
-	let if_block2 = current_block_type(ctx);
+	let if_block1 = current_block_type(ctx);
 
 	return {
 		c() {
 			nav = element("nav");
 			div0 = element("div");
 			a0 = element("a");
-			a0.innerHTML = `<i class="fas fa-home svelte-1kzdjg7"></i>`;
+			a0.innerHTML = `<i class="fas fa-home svelte-43rfm0"></i>`;
 			t0 = space();
 			div1 = element("div");
 			create_component(friendrequest.$$.fragment);
 			t1 = space();
 			div2 = element("div");
 			a1 = element("a");
-			a1.innerHTML = `<i class="fas fa-briefcase svelte-1kzdjg7"></i>`;
+			a1.innerHTML = `<i class="fas fa-briefcase svelte-43rfm0"></i>`;
 			t2 = space();
+			div4 = element("div");
 			div3 = element("div");
-			if (if_block0) if_block0.c();
-			t3 = space();
-			i2 = element("i");
+			div3.textContent = "!";
 			t4 = space();
+			i2 = element("i");
+			t5 = space();
 			ul0 = element("ul");
 
 			for (let i = 0; i < each_blocks_1.length; i += 1) {
@@ -625,77 +602,79 @@ function create_fragment(ctx) {
 				each0_else.c();
 			}
 
-			t5 = space();
-			div5 = element("div");
-			div4 = element("div");
-			i3 = element("i");
 			t6 = space();
-			if (if_block1) if_block1.c();
+			div6 = element("div");
+			div5 = element("div");
+			i3 = element("i");
 			t7 = space();
+			if (if_block0) if_block0.c();
+			t8 = space();
 			ul1 = element("ul");
 
 			for (let i = 0; i < each_blocks.length; i += 1) {
 				each_blocks[i].c();
 			}
 
-			t8 = space();
-			div6 = element("div");
-			a2 = element("a");
-			if_block2.c();
 			t9 = space();
-			div8 = element("div");
 			div7 = element("div");
-			i4 = element("i");
+			a2 = element("a");
+			if_block1.c();
 			t10 = space();
+			div9 = element("div");
+			div8 = element("div");
+			i4 = element("i");
+			t11 = space();
 			ul2 = element("ul");
 			li0 = element("li");
 			a3 = element("a");
-			a3.innerHTML = `<span class="dropdown-item svelte-1kzdjg7">Settings</span>`;
-			t12 = space();
+			a3.innerHTML = `<span class="dropdown-item svelte-43rfm0">Settings</span>`;
+			t13 = space();
 			li1 = element("li");
 			span1 = element("span");
 			span1.textContent = "Log Out";
-			t14 = space();
-			div9 = element("div");
+			t15 = space();
+			div10 = element("div");
 			a4 = element("a");
-			a4.innerHTML = `<i class="fas fa-calendar-week svelte-1kzdjg7"></i>`;
+			a4.innerHTML = `<i class="fas fa-calendar-week svelte-43rfm0"></i>`;
 			attr(a0, "href", "/");
 			attr(div0, "id", "iconHome");
-			attr(div0, "class", "icon Header-nav-home mx-3 fs-3 svelte-1kzdjg7");
-			attr(div1, "class", "icon Header-nav-user-plus notification mx-3 fs-3 svelte-1kzdjg7");
+			attr(div0, "class", "icon Header-nav-home mx-3 fs-3 svelte-43rfm0");
+			attr(div1, "class", "icon Header-nav-user-plus notification mx-3 fs-3 svelte-43rfm0");
 			attr(a1, "href", "/");
-			attr(div2, "class", "icon Header-nav-briefcase hidden mx-3 fs-3 svelte-1kzdjg7");
-			attr(i2, "class", "fas fa-comment dropdown-toggle svelte-1kzdjg7");
+			attr(div2, "class", "icon Header-nav-briefcase hidden mx-3 fs-3 svelte-43rfm0");
+			attr(div3, "id", "notificacionsChatsBubble");
+			attr(div3, "class", "notificacions-bubble d-none svelte-43rfm0");
+			attr(i2, "class", "fas fa-comment dropdown-toggle svelte-43rfm0");
 			attr(i2, "id", "chats");
 			attr(i2, "data-bs-toggle", "dropdown");
 			attr(i2, "aria-expanded", "false");
-			attr(ul0, "class", "dropdown-menu svelte-1kzdjg7");
+			attr(ul0, "class", "dropdown-menu svelte-43rfm0");
 			attr(ul0, "aria-labelledby", "chats");
-			attr(div3, "class", "icon Header-nav-comment mx-3 fs-3 position-relative svelte-1kzdjg7");
-			attr(i3, "class", "fas fa-bell dropdown-toggle svelte-1kzdjg7");
+			attr(div4, "class", "icon Header-nav-comment mx-3 fs-3 position-relative svelte-43rfm0");
+			attr(i3, "class", "fas fa-bell dropdown-toggle svelte-43rfm0");
 			attr(i3, "id", "notifications");
 			attr(i3, "data-bs-toggle", "dropdown");
 			attr(i3, "aria-expanded", "false");
-			attr(ul1, "class", "dropdown-menu svelte-1kzdjg7");
+			attr(ul1, "class", "dropdown-menu svelte-43rfm0");
 			attr(ul1, "aria-labelledby", "notifications");
-			attr(div4, "class", "dropdown svelte-1kzdjg7");
-			attr(div5, "class", "icon Header-nav-bell mx-3 fs-3 notification svelte-1kzdjg7");
-			attr(div5, "id", "notification");
+			attr(div5, "class", "dropdown svelte-43rfm0");
+			attr(div6, "class", "icon Header-nav-bell mx-3 fs-3 notification svelte-43rfm0");
+			attr(div6, "id", "notification");
 			attr(a2, "href", "/profile");
-			attr(div6, "class", "icon Header-nav-user mx-3 fs-3 svelte-1kzdjg7");
-			attr(i4, "class", "fas fa-grip-vertical dropdown-toggle svelte-1kzdjg7");
+			attr(div7, "class", "icon Header-nav-user mx-3 fs-3 svelte-43rfm0");
+			attr(i4, "class", "fas fa-grip-vertical dropdown-toggle svelte-43rfm0");
 			attr(i4, "id", "settings");
 			attr(i4, "data-bs-toggle", "dropdown");
 			attr(i4, "aria-expanded", "false");
 			attr(a3, "href", "/settings");
-			attr(span1, "class", "dropdown-item svelte-1kzdjg7");
-			attr(ul2, "class", "dropdown-menu svelte-1kzdjg7");
+			attr(span1, "class", "dropdown-item svelte-43rfm0");
+			attr(ul2, "class", "dropdown-menu svelte-43rfm0");
 			attr(ul2, "aria-labelledby", "settings");
-			attr(div7, "class", "dropdown svelte-1kzdjg7");
-			attr(div8, "class", "icon Header-nav-grip-vertical mx-3 fs-3 svelte-1kzdjg7");
+			attr(div8, "class", "dropdown svelte-43rfm0");
+			attr(div9, "class", "icon Header-nav-grip-vertical mx-3 fs-3 svelte-43rfm0");
 			attr(a4, "href", "/");
-			attr(div9, "class", "icon Header-nav-calendar-week hidden mx-3 fs-3 svelte-1kzdjg7");
-			attr(nav, "class", "nav-container d-flex svelte-1kzdjg7");
+			attr(div10, "class", "icon Header-nav-calendar-week hidden mx-3 fs-3 svelte-43rfm0");
+			attr(nav, "class", "nav-container d-flex svelte-43rfm0");
 		},
 		m(target, anchor) {
 			insert(target, nav, anchor);
@@ -708,12 +687,12 @@ function create_fragment(ctx) {
 			append(nav, div2);
 			append(div2, a1);
 			append(nav, t2);
-			append(nav, div3);
-			if (if_block0) if_block0.m(div3, null);
-			append(div3, t3);
-			append(div3, i2);
-			append(div3, t4);
-			append(div3, ul0);
+			append(nav, div4);
+			append(div4, div3);
+			append(div4, t4);
+			append(div4, i2);
+			append(div4, t5);
+			append(div4, ul0);
 
 			for (let i = 0; i < each_blocks_1.length; i += 1) {
 				each_blocks_1[i].m(ul0, null);
@@ -723,37 +702,37 @@ function create_fragment(ctx) {
 				each0_else.m(ul0, null);
 			}
 
-			append(nav, t5);
-			append(nav, div5);
-			append(div5, div4);
-			append(div4, i3);
-			append(div4, t6);
-			if (if_block1) if_block1.m(div4, null);
-			append(div4, t7);
-			append(div4, ul1);
+			append(nav, t6);
+			append(nav, div6);
+			append(div6, div5);
+			append(div5, i3);
+			append(div5, t7);
+			if (if_block0) if_block0.m(div5, null);
+			append(div5, t8);
+			append(div5, ul1);
 
 			for (let i = 0; i < each_blocks.length; i += 1) {
 				each_blocks[i].m(ul1, null);
 			}
 
-			append(nav, t8);
-			append(nav, div6);
-			append(div6, a2);
-			if_block2.m(a2, null);
 			append(nav, t9);
-			append(nav, div8);
-			append(div8, div7);
-			append(div7, i4);
-			append(div7, t10);
-			append(div7, ul2);
+			append(nav, div7);
+			append(div7, a2);
+			if_block1.m(a2, null);
+			append(nav, t10);
+			append(nav, div9);
+			append(div9, div8);
+			append(div8, i4);
+			append(div8, t11);
+			append(div8, ul2);
 			append(ul2, li0);
 			append(li0, a3);
-			append(ul2, t12);
+			append(ul2, t13);
 			append(ul2, li1);
 			append(li1, span1);
-			append(nav, t14);
-			append(nav, div9);
-			append(div9, a4);
+			append(nav, t15);
+			append(nav, div10);
+			append(div10, a4);
 			current = true;
 
 			if (!mounted) {
@@ -762,12 +741,12 @@ function create_fragment(ctx) {
 					action_destroyer(active_action = active.call(null, a0)),
 					action_destroyer(link_action_1 = link.call(null, a1)),
 					action_destroyer(active_action_1 = active.call(null, a1)),
-					listen(div5, "click", /*counterBubble*/ ctx[9]),
+					listen(div6, "click", /*counterBubble*/ ctx[8]),
 					action_destroyer(link_action_2 = link.call(null, a2)),
 					action_destroyer(active_action_2 = active.call(null, a2)),
 					action_destroyer(link_action_3 = link.call(null, a3)),
 					action_destroyer(active_action_3 = active.call(null, a3)),
-					listen(span1, "click", /*logOut*/ ctx[8]),
+					listen(span1, "click", /*logOut*/ ctx[7]),
 					action_destroyer(link_action_4 = link.call(null, a4)),
 					action_destroyer(active_action_4 = active.call(null, a4))
 				];
@@ -781,21 +760,8 @@ function create_fragment(ctx) {
 			if (dirty & /*urlAPI*/ 4) friendrequest_changes.urlAPI = /*urlAPI*/ ctx[2];
 			friendrequest.$set(friendrequest_changes);
 
-			if (/*countMessages*/ ctx[5]) {
-				if (if_block0) {
-					if_block0.p(ctx, dirty);
-				} else {
-					if_block0 = create_if_block_3(ctx);
-					if_block0.c();
-					if_block0.m(div3, t3);
-				}
-			} else if (if_block0) {
-				if_block0.d(1);
-				if_block0 = null;
-			}
-
-			if (dirty & /*$usergroups, urlAPI, id*/ 70) {
-				each_value_1 = /*$usergroups*/ ctx[6];
+			if (dirty & /*$usergroups, urlAPI, id*/ 38) {
+				each_value_1 = /*$usergroups*/ ctx[5];
 				let i;
 
 				for (i = 0; i < each_value_1.length; i += 1) {
@@ -833,16 +799,16 @@ function create_fragment(ctx) {
 			}
 
 			if (/*countBubble*/ ctx[4] > 0) {
-				if (if_block1) {
-					if_block1.p(ctx, dirty);
+				if (if_block0) {
+					if_block0.p(ctx, dirty);
 				} else {
-					if_block1 = create_if_block_2(ctx);
-					if_block1.c();
-					if_block1.m(div4, t7);
+					if_block0 = create_if_block_2(ctx);
+					if_block0.c();
+					if_block0.m(div5, t8);
 				}
-			} else if (if_block1) {
-				if_block1.d(1);
-				if_block1 = null;
+			} else if (if_block0) {
+				if_block0.d(1);
+				if_block0 = null;
 			}
 
 			if (dirty & /*notificationsList, visitProfile, startTime, urlAPI, reload*/ 12) {
@@ -868,7 +834,7 @@ function create_fragment(ctx) {
 				each_blocks.length = each_value.length;
 			}
 
-			if_block2.p(ctx, dirty);
+			if_block1.p(ctx, dirty);
 		},
 		i(local) {
 			if (current) return;
@@ -893,12 +859,11 @@ function create_fragment(ctx) {
 		d(detaching) {
 			if (detaching) detach(nav);
 			destroy_component(friendrequest);
-			if (if_block0) if_block0.d();
 			destroy_each(each_blocks_1, detaching);
 			if (each0_else) each0_else.d();
-			if (if_block1) if_block1.d();
+			if (if_block0) if_block0.d();
 			destroy_each(each_blocks, detaching);
-			if_block2.d();
+			if_block1.d();
 			mounted = false;
 			run_all(dispose);
 		}
@@ -919,7 +884,7 @@ function instance($$self, $$props, $$invalidate) {
 	let { urlLogOut, urlAPI } = $$props;
 	let idStr = id.toString();
 	let usergroups = writable([]);
-	component_subscribe($$self, usergroups, value => $$invalidate(6, $usergroups = value));
+	component_subscribe($$self, usergroups, value => $$invalidate(5, $usergroups = value));
 	let newChat;
 	let notificationsList = [];
 	let notificationsChats = [];
@@ -931,7 +896,7 @@ function instance($$self, $$props, $$invalidate) {
 			$$invalidate(3, notificationsList = []);
 			notificationsChats = [];
 			$$invalidate(4, countBubble = 0);
-			$$invalidate(5, countMessages = 0);
+			countMessages = 0;
 			const data = notification.data();
 			const groups = data.groups;
 			const friendsRequests = data.friends;
@@ -940,23 +905,51 @@ function instance($$self, $$props, $$invalidate) {
 
 			//read Chats
 			if (groups !== undefined) {
-				usergroups.set(groups.reverse());
+				usergroups.set(groups);
 
 				groups.forEach(chat => {
 					const q = query(collection(db, `message/${chat}/messages`), orderBy('sentAt', 'desc'), limit(1));
 
 					const snapChatId = onSnapshot(q, col => {
 						col.forEach(doc => {
-							const dataMessage = doc.data();
+							// countMessages = 0
+							if (!doc.data().seen) {
+								// console.log(doc.data());
+								countMessages += 1;
 
-							if (!dataMessage.seen) {
-								$$invalidate(5, countMessages += 1);
+								console.log(countMessages);
+								localStorage.setItem('countMessages', countMessages);
+								console.log(countMessages);
 							}
 						});
 					});
 				});
-			}
+			} // groups.forEach(chat => {
+			//   const q = query(collection(db, `message/${chat}/messages`), orderBy('sentAt', 'desc'), limit(1))
 
+			//   const snapChatId = onSnapshot(q, col =>{
+			//     col.forEach(doc => {
+			//       // console.log(doc.data().sentAt);
+			//       const dataMessage = doc.data()
+			//       const liChatMessage = document.getElementsByClassName('unreadMessage')
+			//       console.log(liChatMessage);
+			//       countMessages = liChatMessage.length
+			//       if (!dataMessage.seen) {
+			//         console.log('nueva notificacion');
+			//         const dataMain = JSON.parse(localStorage.getItem('data'))
+			//         const name = `${dataMain.name} ${dataMain.last_name}`
+			//         if (name !== dataMessage.sentBy) {
+			//           notificacionsChatsBubble.classList.remove('d-none')
+			//           countMessages += 1
+			//         }
+			//       }
+			//       if (countMessages === 0) {
+			//         notificacionsChatsBubble.classList.add('d-none')
+			//       }
+			//       // console.log(countMessages);
+			//     });
+			//   })
+			// });
 			//read Comments
 			if (comments !== undefined) {
 				comments.forEach(comment => {
@@ -1127,7 +1120,7 @@ function instance($$self, $$props, $$invalidate) {
 	$$self.$$set = $$props => {
 		if ('photo' in $$props) $$invalidate(0, photo = $$props.photo);
 		if ('id' in $$props) $$invalidate(1, id = $$props.id);
-		if ('urlLogOut' in $$props) $$invalidate(10, urlLogOut = $$props.urlLogOut);
+		if ('urlLogOut' in $$props) $$invalidate(9, urlLogOut = $$props.urlLogOut);
 		if ('urlAPI' in $$props) $$invalidate(2, urlAPI = $$props.urlAPI);
 	};
 
@@ -1137,7 +1130,6 @@ function instance($$self, $$props, $$invalidate) {
 		urlAPI,
 		notificationsList,
 		countBubble,
-		countMessages,
 		$usergroups,
 		usergroups,
 		logOut,
@@ -1149,13 +1141,7 @@ function instance($$self, $$props, $$invalidate) {
 class HeaderNav extends SvelteComponent {
 	constructor(options) {
 		super();
-
-		init(this, options, instance, create_fragment, safe_not_equal, {
-			photo: 0,
-			id: 1,
-			urlLogOut: 10,
-			urlAPI: 2
-		});
+		init(this, options, instance, create_fragment, safe_not_equal, { photo: 0, id: 1, urlLogOut: 9, urlAPI: 2 });
 	}
 }
 

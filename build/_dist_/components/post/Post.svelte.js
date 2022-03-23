@@ -633,7 +633,7 @@ function create_if_block_2(ctx) {
 			attr(div0, "class", "Card-user justify-content-start svelte-54r9g1");
 			attr(div1, "class", "user-shared");
 			attr(div2, "class", "info-shared");
-			attr(div3, "class", "px-3");
+			attr(div3, "class", "px-3 px-lg-0");
 		},
 		m(target, anchor) {
 			insert(target, hr, anchor);

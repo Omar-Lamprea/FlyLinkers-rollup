@@ -81,7 +81,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (184:4) {#if chatFlag && userMain && getUserMainToFirestore}
+// (183:4) {#if chatFlag && userMain && getUserMainToFirestore}
 function create_if_block(ctx) {
 	let chat;
 	let current;
@@ -252,7 +252,7 @@ function instance($$self, $$props, $$invalidate) {
 		1000
 	);
 
-	if (localStorage.getItem('user') && window.location.search.includes('@')) {
+	if (localStorage.getItem('user') && window.location.search.includes('?user=')) {
 		window.location.search = '';
 	}
 
@@ -262,9 +262,9 @@ function instance($$self, $$props, $$invalidate) {
 
 	const getData = async () => {
 		if (localStorage.getItem('user')) {
-			const response = await fetch(`${urlAPI}/user/create/?email=${localStorage.getItem('user')}`, { method: 'GET' });
+			const response = await fetch(`${urlAPI}/user/logout/?token=${localStorage.getItem('user')}`);
 			const content = await response.json();
-			$$invalidate(0, data = content[0]);
+			$$invalidate(0, data = content.User);
 			await getUserToFirestore(data);
 			$$invalidate(2, getUserMainToFirestore = await getUserToFirestore(data));
 
@@ -292,17 +292,18 @@ function instance($$self, $$props, $$invalidate) {
 		$$invalidate(3, chatFlag = false);
 
 		document.addEventListener('click', async e => {
-			if (e.target.id === 'chat' || e.target.id === 'btInitChat') {
+			if (e.target.id === `chat-${e.target.dataset.chat}` || e.target.id === `btInitChat-${e.target.dataset.chat}`) {
 				$$invalidate(4, id = parseInt(e.target.dataset.chat));
 				await openChat(id);
+				console.log(id);
 
-				if (localStorage.getItem('chat')) {
+				if (localStorage.getItem(`chat-${id}`)) {
 					$$invalidate(3, chatFlag = true);
 				}
 			}
 
-			if (e.target.id === 'closeChat') {
-				localStorage.removeItem('chat');
+			if (e.target.id === `closeChat-${e.target.dataset.chat}`) {
+				localStorage.removeItem(`chat-${id}`);
 				$$invalidate(3, chatFlag = false);
 			}
 		});

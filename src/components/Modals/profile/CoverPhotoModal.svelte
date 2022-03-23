@@ -35,7 +35,7 @@
   }
 
   const getProfile = async (id)=>{
-    console.log('procesando info....');
+    // console.log('procesando info....');
     btnUpdateCoverPhoto.setAttribute('disabled', '')
     btnSaveCoverPhoto = 'processing...'
 
@@ -47,7 +47,7 @@
     // console.log('id:', idCoverPhoto, 'url:', urlCoverPhoto);
     // const userDescription = document.getElementById('userDescription').textContent
 
-    console.log('actualizando a:', urlCoverPhoto);
+    // console.log('actualizando a:', urlCoverPhoto);
     const sendData = await fetch(`${urlAPI}/user/profile/?user=${id}`, {
       method: 'PUT',
       headers : {

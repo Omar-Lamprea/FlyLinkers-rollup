@@ -57,7 +57,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (356:6) {#if urlContent && urlLink.includes('https://')}
+// (357:6) {#if urlContent && urlLink.includes('https://')}
 function create_if_block(ctx) {
 	let i;
 	let t0;
@@ -85,13 +85,13 @@ function create_if_block(ctx) {
 			t3 = text(t3_value);
 			t4 = space();
 			img = element("img");
-			attr(i, "class", "fa-solid fa-xmark d-flex- align-self-end svelte-of0jz3");
+			attr(i, "class", "fa-solid fa-xmark d-flex- align-self-end svelte-1ud6jqj");
 			attr(h6, "id", "metaTitle");
 			attr(p, "id", "metaDescription");
 			attr(img, "id", "metaImage");
 			if (!src_url_equal(img.src, img_src_value = /*urlContent*/ ctx[3].image)) attr(img, "src", img_src_value);
 			attr(img, "alt", "");
-			attr(img, "class", "svelte-of0jz3");
+			attr(img, "class", "svelte-1ud6jqj");
 		},
 		m(target, anchor) {
 			insert(target, i, anchor);
@@ -200,28 +200,28 @@ function create_fragment(ctx) {
 			button = element("button");
 			button.textContent = "Post";
 			attr(textarea, "name", "");
-			attr(textarea, "cols", "");
+			attr(textarea, "cols", "1");
 			attr(textarea, "rows", "1");
 			attr(textarea, "id", "postDescription");
-			attr(textarea, "class", "Default-containers svelte-of0jz3");
+			attr(textarea, "class", "Default-containers svelte-1ud6jqj");
 			attr(textarea, "placeholder", "Start a post...");
 			attr(div0, "id", "characterCountSpan");
-			attr(div0, "class", "characterCount characterCount-active svelte-of0jz3");
+			attr(div0, "class", "characterCount characterCount-active svelte-1ud6jqj");
 			attr(img, "alt", "postImg");
 			attr(img, "id", "postImg");
-			attr(img, "class", "d-none my-3 svelte-of0jz3");
+			attr(img, "class", "d-none my-3 svelte-1ud6jqj");
 			video.controls = true;
 			attr(video, "id", "postVideo");
 			attr(video, "class", "d-none my-3");
 			attr(div1, "class", "Add-post-input mx-3 d-flex flex-column justify-content-center position-relative");
 			attr(div2, "id", "urlMeta");
-			attr(div2, "class", "urlMeta d-flex flex-column d-none svelte-of0jz3");
+			attr(div2, "class", "urlMeta d-flex flex-column d-none svelte-1ud6jqj");
 			attr(div5, "id", "loaderPost");
 			attr(div5, "class", "loader-content d-none");
 			attr(button, "id", "btnSendPost");
-			attr(button, "class", "btn btn-outline-primary btn-flylinkers btn-post mt-3 svelte-of0jz3");
+			attr(button, "class", "btn btn-outline-primary btn-flylinkers btn-post mt-3 svelte-1ud6jqj");
 			button.disabled = true;
-			attr(div6, "class", div6_class_value = "Add-post " + /*colorbox*/ ctx[0] + " Default-containers px-lg-5 d-flex flex-column" + " svelte-of0jz3");
+			attr(div6, "class", div6_class_value = "Add-post " + /*colorbox*/ ctx[0] + " Default-containers px-lg-5 d-flex flex-column" + " svelte-1ud6jqj");
 		},
 		m(target, anchor) {
 			insert(target, div6, anchor);
@@ -284,7 +284,7 @@ function create_fragment(ctx) {
 				if_block.m(div2, null);
 			}
 
-			if (!current || dirty & /*colorbox*/ 1 && div6_class_value !== (div6_class_value = "Add-post " + /*colorbox*/ ctx[0] + " Default-containers px-lg-5 d-flex flex-column" + " svelte-of0jz3")) {
+			if (!current || dirty & /*colorbox*/ 1 && div6_class_value !== (div6_class_value = "Add-post " + /*colorbox*/ ctx[0] + " Default-containers px-lg-5 d-flex flex-column" + " svelte-1ud6jqj")) {
 				attr(div6, "class", div6_class_value);
 			}
 		},

@@ -98,6 +98,7 @@ function create_else_block(ctx) {
 	let t1;
 	let button;
 	let t2;
+	let button_id_value;
 	let mounted;
 	let dispose;
 
@@ -118,7 +119,7 @@ function create_else_block(ctx) {
 			button = element("button");
 			t2 = text("Send a message");
 			attr(div, "class", "d-none");
-			attr(button, "id", "btInitChat");
+			attr(button, "id", button_id_value = "btInitChat-" + /*id*/ ctx[5]);
 			attr(button, "data-chat", /*id*/ ctx[5]);
 			attr(button, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 svelte-1s725ch");
 		},
@@ -146,6 +147,10 @@ function create_else_block(ctx) {
 					if_block.c();
 					if_block.m(t1.parentNode, t1);
 				}
+			}
+
+			if (dirty & /*id*/ 32 && button_id_value !== (button_id_value = "btInitChat-" + /*id*/ ctx[5])) {
+				attr(button, "id", button_id_value);
 			}
 
 			if (dirty & /*id*/ 32) {

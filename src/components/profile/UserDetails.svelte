@@ -10,6 +10,7 @@
   export let name, last_name, title, email , photo, id, aboutMe, urlAPI;
   export let userMain;
 
+  const dataJson = JSON.parse(localStorage.getItem('data'))
 
   const editDescription = ()=>{
     editAboutMe.classList.toggle('d-none')
@@ -42,7 +43,6 @@
   let friend = false;
   let friendRequest = false
   const searchFriends = async ()=>{
-
     const response = await fetch(`${urlAPI}/friend/user/?user=${userMain}`)
     const content = await response.json()
     content.forEach(el => {
@@ -196,7 +196,7 @@
               <!-- <p>Colombia</p> -->
             </div>
             <div class="Profile-description px-3 px-md-0 my-3">
-              {#if email === localStorage.getItem('user')}
+              {#if email === dataJson.email}
                 <p class="edit-description" on:click={editDescription}>
                   <i class="fas fa-pen"></i>
                   About me...
@@ -222,7 +222,7 @@
     </div>
     <div class="col-12 col-lg-6">
       <div class="Profile-card-text text-end d-flex flex-column align-items-end mt-0 mt-md-3 px-3 px-md-0">
-        {#if email === localStorage.getItem('user')}
+        {#if email === dataJson.email}
         <a href="/settings" use:link use:active>
           <p type="button" class="mb-3" style="color:rgba(38, 38, 38, 07)"><i class="fas fa-pen"></i> Edit profile</p>
         </a>

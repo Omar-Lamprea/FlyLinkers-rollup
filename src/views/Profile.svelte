@@ -12,11 +12,9 @@
 
   const getData = async ()=>{
     if (localStorage.getItem('user')) {
-      const response = await fetch(`${urlAPI}/user/create/?email=${localStorage.getItem('user')}`,{
-        method: 'GET'
-      })
+      const response = await fetch(`${urlAPI}/user/logout/?token=${localStorage.getItem('user')}`)
       const content = await response.json();
-      data = content[0]
+      data = content.User
       await getUserToFirestore(data)
       getUserMainToFirestore = await getUserToFirestore(data)
 
