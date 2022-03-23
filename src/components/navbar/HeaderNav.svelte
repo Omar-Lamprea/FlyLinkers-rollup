@@ -164,10 +164,7 @@
     // console.log(countBubble);
   }
 
-  const logOut = ()=>{
-    localStorage.clear();
-    window.location.href = urlLogOut;
-  }
+  
 
   function visitProfile(email){
     localStorage.setItem('visitProfile', email)
@@ -255,6 +252,21 @@
     }
   }
 
+  const logOut = async()=>{
+    const logout = await fetch(`${urlAPI}/user/logout/?token=${localStorage.getItem('user')}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    if (logout.ok) {
+      const content = await logout.json()
+      console.log(content);
+      localStorage.clear();
+      window.location.href = urlLogOut;
+    }
+  }
+
   onMount(()=>{
     getUserNotifications()
   })
@@ -269,6 +281,9 @@
   .dropdown-toggle:empty::after{
     content: initial
   }
+  .dropdown-item{
+    cursor: pointer;
+  }
   .dropdown-item:active{
     background-color: var(--main-color);
   }
@@ -276,6 +291,7 @@
     max-height: 40vh;
     overflow-y: auto;
   }
+  
   .Header-nav-user img{
     width: 2rem;
     height: 2rem;

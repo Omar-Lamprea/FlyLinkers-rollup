@@ -712,7 +712,7 @@
             <a href="/profile/{share[0].email}" class="d-flex" use:link use:active>
               <img src="{urlAPI}{share[0].photo}" alt="">
               <h2>
-                {share[0].name} {user.last_name}
+                {share[0].name} {share[0].last_name}
                 <span>{share[0].title}</span>
                 <span>{startTime(share[1].create_time)}</span>
               </h2>

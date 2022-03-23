@@ -38,29 +38,29 @@ import { onMount } from '../../_snowpack/pkg/svelte.js';
 
 function get_each_context_1(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[24] = list[i];
+	child_ctx[25] = list[i];
 	return child_ctx;
 }
 
 function get_each_context(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[24] = list[i];
+	child_ctx[25] = list[i];
 	return child_ctx;
 }
 
 function get_each_context_3(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[24] = list[i];
+	child_ctx[25] = list[i];
 	return child_ctx;
 }
 
 function get_each_context_2(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[24] = list[i];
+	child_ctx[25] = list[i];
 	return child_ctx;
 }
 
-// (156:6) {#if email === localStorage.getItem('user')}
+// (158:6) {#if email === dataJson.email}
 function create_if_block_5(ctx) {
 	let div;
 	let p;
@@ -114,7 +114,7 @@ function create_if_block_5(ctx) {
 	};
 }
 
-// (162:6) {#if experiences !== undefined}
+// (164:6) {#if experiences !== undefined}
 function create_if_block_4(ctx) {
 	let experience;
 	let current;
@@ -159,7 +159,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (167:6) {#if post}
+// (169:6) {#if post}
 function create_if_block_2(ctx) {
 	let current_block_type_index;
 	let if_block;
@@ -229,7 +229,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (174:8) {:else}
+// (176:8) {:else}
 function create_else_block_1(ctx) {
 	let each_1_anchor;
 	let current;
@@ -261,7 +261,7 @@ function create_else_block_1(ctx) {
 			current = true;
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*userPost, post, userId, urlAPI*/ 45184) {
+			if (dirty[0] & /*userPost, post, userId, urlAPI*/ 77952) {
 				each_value_3 = /*post*/ ctx[12];
 				let i;
 
@@ -313,7 +313,7 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (168:8) {#if userMain}
+// (170:8) {#if userMain}
 function create_if_block_3(ctx) {
 	let each_1_anchor;
 	let current;
@@ -397,15 +397,15 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (176:10) {#each post as dataPost}
+// (178:10) {#each post as dataPost}
 function create_each_block_3(ctx) {
 	let post_1;
 	let current;
 
 	const post_1_spread_levels = [
 		/*userPost*/ ctx[13],
-		/*dataPost*/ ctx[24],
-		{ userId: /*userId*/ ctx[15] },
+		/*dataPost*/ ctx[25],
+		{ userId: /*userId*/ ctx[16] },
 		{ urlAPI: /*urlAPI*/ ctx[7] }
 	];
 
@@ -426,11 +426,11 @@ function create_each_block_3(ctx) {
 			current = true;
 		},
 		p(ctx, dirty) {
-			const post_1_changes = (dirty[0] & /*userPost, post, userId, urlAPI*/ 45184)
+			const post_1_changes = (dirty[0] & /*userPost, post, userId, urlAPI*/ 77952)
 			? get_spread_update(post_1_spread_levels, [
 					dirty[0] & /*userPost*/ 8192 && get_spread_object(/*userPost*/ ctx[13]),
-					dirty[0] & /*post*/ 4096 && get_spread_object(/*dataPost*/ ctx[24]),
-					dirty[0] & /*userId*/ 32768 && { userId: /*userId*/ ctx[15] },
+					dirty[0] & /*post*/ 4096 && get_spread_object(/*dataPost*/ ctx[25]),
+					dirty[0] & /*userId*/ 65536 && { userId: /*userId*/ ctx[16] },
 					dirty[0] & /*urlAPI*/ 128 && { urlAPI: /*urlAPI*/ ctx[7] }
 				])
 			: {};
@@ -452,14 +452,14 @@ function create_each_block_3(ctx) {
 	};
 }
 
-// (170:10) {#each post as dataPost}
+// (172:10) {#each post as dataPost}
 function create_each_block_2(ctx) {
 	let post_1;
 	let current;
 
 	const post_1_spread_levels = [
 		/*userPost*/ ctx[13],
-		/*dataPost*/ ctx[24],
+		/*dataPost*/ ctx[25],
 		{ userMain: /*userMain*/ ctx[0] },
 		{ urlAPI: /*urlAPI*/ ctx[7] }
 	];
@@ -484,7 +484,7 @@ function create_each_block_2(ctx) {
 			const post_1_changes = (dirty[0] & /*userPost, post, userMain, urlAPI*/ 12417)
 			? get_spread_update(post_1_spread_levels, [
 					dirty[0] & /*userPost*/ 8192 && get_spread_object(/*userPost*/ ctx[13]),
-					dirty[0] & /*post*/ 4096 && get_spread_object(/*dataPost*/ ctx[24]),
+					dirty[0] & /*post*/ 4096 && get_spread_object(/*dataPost*/ ctx[25]),
 					dirty[0] & /*userMain*/ 1 && { userMain: /*userMain*/ ctx[0] },
 					dirty[0] & /*urlAPI*/ 128 && { urlAPI: /*urlAPI*/ ctx[7] }
 				])
@@ -507,7 +507,7 @@ function create_each_block_2(ctx) {
 	};
 }
 
-// (184:6) {#if $posts}
+// (186:6) {#if $posts}
 function create_if_block(ctx) {
 	let current_block_type_index;
 	let if_block;
@@ -577,7 +577,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (191:8) {:else}
+// (193:8) {:else}
 function create_else_block(ctx) {
 	let each_1_anchor;
 	let current;
@@ -609,7 +609,7 @@ function create_else_block(ctx) {
 			current = true;
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*userPost, $posts, userId, urlAPI*/ 57472) {
+			if (dirty[0] & /*userPost, $posts, userId, urlAPI*/ 90240) {
 				each_value_1 = /*$posts*/ ctx[14];
 				let i;
 
@@ -661,7 +661,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (185:8) {#if userMain}
+// (187:8) {#if userMain}
 function create_if_block_1(ctx) {
 	let each_1_anchor;
 	let current;
@@ -745,15 +745,15 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (193:10) {#each $posts as dataPost}
+// (195:10) {#each $posts as dataPost}
 function create_each_block_1(ctx) {
 	let post_1;
 	let current;
 
 	const post_1_spread_levels = [
 		/*userPost*/ ctx[13],
-		/*dataPost*/ ctx[24],
-		{ userId: /*userId*/ ctx[15] },
+		/*dataPost*/ ctx[25],
+		{ userId: /*userId*/ ctx[16] },
 		{ urlAPI: /*urlAPI*/ ctx[7] }
 	];
 
@@ -774,11 +774,11 @@ function create_each_block_1(ctx) {
 			current = true;
 		},
 		p(ctx, dirty) {
-			const post_1_changes = (dirty[0] & /*userPost, $posts, userId, urlAPI*/ 57472)
+			const post_1_changes = (dirty[0] & /*userPost, $posts, userId, urlAPI*/ 90240)
 			? get_spread_update(post_1_spread_levels, [
 					dirty[0] & /*userPost*/ 8192 && get_spread_object(/*userPost*/ ctx[13]),
-					dirty[0] & /*$posts*/ 16384 && get_spread_object(/*dataPost*/ ctx[24]),
-					dirty[0] & /*userId*/ 32768 && { userId: /*userId*/ ctx[15] },
+					dirty[0] & /*$posts*/ 16384 && get_spread_object(/*dataPost*/ ctx[25]),
+					dirty[0] & /*userId*/ 65536 && { userId: /*userId*/ ctx[16] },
 					dirty[0] & /*urlAPI*/ 128 && { urlAPI: /*urlAPI*/ ctx[7] }
 				])
 			: {};
@@ -800,14 +800,14 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (187:10) {#each $posts as dataPost}
+// (189:10) {#each $posts as dataPost}
 function create_each_block(ctx) {
 	let post_1;
 	let current;
 
 	const post_1_spread_levels = [
 		/*userPost*/ ctx[13],
-		/*dataPost*/ ctx[24],
+		/*dataPost*/ ctx[25],
 		{ userMain: /*userMain*/ ctx[0] },
 		{ urlAPI: /*urlAPI*/ ctx[7] }
 	];
@@ -832,7 +832,7 @@ function create_each_block(ctx) {
 			const post_1_changes = (dirty[0] & /*userPost, $posts, userMain, urlAPI*/ 24705)
 			? get_spread_update(post_1_spread_levels, [
 					dirty[0] & /*userPost*/ 8192 && get_spread_object(/*userPost*/ ctx[13]),
-					dirty[0] & /*$posts*/ 16384 && get_spread_object(/*dataPost*/ ctx[24]),
+					dirty[0] & /*$posts*/ 16384 && get_spread_object(/*dataPost*/ ctx[25]),
 					dirty[0] & /*userMain*/ 1 && { userMain: /*userMain*/ ctx[0] },
 					dirty[0] & /*urlAPI*/ 128 && { urlAPI: /*urlAPI*/ ctx[7] }
 				])
@@ -864,7 +864,6 @@ function create_fragment(ctx) {
 	let t1;
 	let userdetails;
 	let t2;
-	let show_if = /*email*/ ctx[4] === localStorage.getItem('user');
 	let t3;
 	let t4;
 	let panel;
@@ -877,7 +876,7 @@ function create_fragment(ctx) {
 	coverphoto = new CoverPhoto({
 			props: {
 				coverPhoto: /*coverPhoto*/ ctx[8],
-				userId: /*userId*/ ctx[15]
+				userId: /*userId*/ ctx[16]
 			}
 		});
 
@@ -895,7 +894,7 @@ function create_fragment(ctx) {
 			}
 		});
 
-	let if_block0 = show_if && create_if_block_5(ctx);
+	let if_block0 = /*email*/ ctx[4] === /*dataJson*/ ctx[15].email && create_if_block_5(ctx);
 	let if_block1 = /*experiences*/ ctx[10] !== undefined && create_if_block_4(ctx);
 	panel = new Panel({});
 	let if_block2 = /*post*/ ctx[12] && create_if_block_2(ctx);
@@ -970,9 +969,8 @@ function create_fragment(ctx) {
 			if (dirty[0] & /*userMain*/ 1) userdetails_changes.userMain = /*userMain*/ ctx[0];
 			if (dirty[0] & /*urlAPI*/ 128) userdetails_changes.urlAPI = /*urlAPI*/ ctx[7];
 			userdetails.$set(userdetails_changes);
-			if (dirty[0] & /*email*/ 16) show_if = /*email*/ ctx[4] === localStorage.getItem('user');
 
-			if (show_if) {
+			if (/*email*/ ctx[4] === /*dataJson*/ ctx[15].email) {
 				if (if_block0) {
 					if_block0.p(ctx, dirty);
 
@@ -1104,9 +1102,10 @@ function instance($$self, $$props, $$invalidate) {
 	let { userMain } = $$props;
 
 	if (userMain === undefined) {
-		userMain = '';
+		userMain = "";
 	}
 
+	const dataJson = JSON.parse(localStorage.getItem('data'));
 	let coverPhoto;
 	let aboutMe;
 	let userId = id;
@@ -1244,6 +1243,7 @@ function instance($$self, $$props, $$invalidate) {
 		post,
 		userPost,
 		$posts,
+		dataJson,
 		userId,
 		posts
 	];

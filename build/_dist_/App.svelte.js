@@ -81,7 +81,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (183:4) {#if chatFlag && userMain && getUserMainToFirestore}
+// (190:4) {#if chatFlag && userMain && getUserMainToFirestore}
 function create_if_block(ctx) {
 	let chat;
 	let current;
@@ -276,7 +276,14 @@ function instance($$self, $$props, $$invalidate) {
 			localStorage.setItem('userId', userMain);
 
 			// console.log(data);
-			localStorage.setItem('data', `{"title": "${data.title}", "name": "${data.name}", "last_name": "${data.last_name}", "photo": "${data.photo}", "id": ${data.id}}`);
+			localStorage.setItem('data', `{
+        "title": "${data.title}", 
+        "name": "${data.name}", 
+        "last_name": "${data.last_name}", 
+        "photo": "${data.photo}", 
+        "email": "${data.email}", 
+        "id": ${data.id}
+      }`);
 
 			if (localStorage.getItem('newUser')) {
 				window.location.hash = '#/settings';

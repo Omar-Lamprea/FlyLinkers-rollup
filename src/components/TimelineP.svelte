@@ -39,7 +39,7 @@
 
   let post;
   let userPost;
-  let countPost = 0
+  let countPost = null
 
   const getPost = async()=>{
     post = ''
@@ -52,8 +52,7 @@
     })
     .then(json =>{
       const content = json
-      countPost = content.count
-
+      countPost = content.next
       if (!content.Detail) {
         if (content.results) {
           post = content.results.splice(1)
@@ -75,7 +74,7 @@
 
     const response = await fetch(`${urlAPI}/post/create/?page=${page}&user=${id}`)
     const content = await response.json()
-    countPost = content.count
+    countPost = content.next
     try {
       if (content) {
         posts.set([...$posts, ...content.results])
@@ -86,40 +85,29 @@
   }
 
   const reloadPosts = () =>{
-    // setTimeout(() => {
-      const reloadPosts = document.getElementById('reloadPostCheck')
-      const observer = new MutationObserver(()=>{
-        // console.log('reloading post...');
-        post = ''
-        getPost(1)
-        reloadPosts.removeAttribute('data-reloading')
-      })
-      if (!window.location.href.includes('settings')){
-        observer.observe(reloadPosts, {attributes:true})
-      }
-  
-    // }, 4000);
+    const reloadPosts = document.getElementById('reloadPostCheck')
+    const observer = new MutationObserver(()=>{
+      // console.log('reloading post...');
+      post = ''
+      getPost(1)
+      reloadPosts.removeAttribute('data-reloading')
+    })
+    if (!window.location.href.includes('settings')){
+      observer.observe(reloadPosts, {attributes:true})
+    }
   }
 
   document.addEventListener('scroll', async (e)=>{
-    if ((window.innerHeight + window.scrollY) >= main.offsetHeight - 1 && !window.location.href.includes('settings')){
-      if (countPost > 3) {
+    if ((window.innerHeight + window.scrollY) >= main.offsetHeight - 1 && !window.location.href.includes('settings') && window.location.hash.length === 9){
+      if (countPost !== null) {
         getPosts()
+      }else{
+        setTimeout(() => {
+          endPosts.classList.remove('d-none')
+        }, 1000);
       }
     }
   })
-
-  
-  document.addEventListener('scroll', async (e)=>{
-    if ((window.innerHeight + window.scrollY) >= main.offsetHeight - 1 && !window.location.href.includes('settings')){
-      if (countPost > 3) {
-        getPosts()
-      }
-    }
-  })
-
-  
-
 
   onMount(async ()=>{
     await getProfile()

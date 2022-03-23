@@ -14,7 +14,7 @@
   let colorbox = 'boxHome'
 
   let page = 0;
-  let countPost = 0
+  let countPost = null
 
   export async function getPosts (page1){
     if (page1) {
@@ -25,9 +25,8 @@
     try {
       const response = await fetch(`${urlAPI}/post/home/?page=${page}&user_id=${id}`)
       const content = await response.json()
-      // console.log(content);
-      countPost = content.count
-      if (content.results) {
+      countPost = content.next
+      if (response.ok) {
         posts.set([...$posts, ...content.results])
       }else{
         endPosts.classList.remove('d-none')
@@ -57,9 +56,13 @@
   }
 
   document.addEventListener('scroll', async (e)=>{
-    if ((window.innerHeight + window.scrollY) >= main.offsetHeight - 1 && !window.location.href.includes('settings')){
-      if (countPost > 3) {
+    if ((window.innerHeight + window.scrollY) >= main.offsetHeight - 1 && !window.location.href.includes('settings') && !window.location.href.includes('profile')){
+      if (countPost !== null) {
         getPosts()
+      }else{
+        setTimeout(() => {
+          endPosts.classList.remove('d-none')
+        }, 1000);
       }
     }
   })

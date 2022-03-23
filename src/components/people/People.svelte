@@ -12,12 +12,12 @@
 </script>
 
 <style>
-    .People h4{
+  .People-Ttitle h4{
     color: var(--main-color);
   }
 </style>
 
-<div class="People Default-containers px-3">
+<div class=" Default-containers px-3">
   <div class="People-Ttitle mb-3 text-center">
     <h4>People</h4>
   </div>

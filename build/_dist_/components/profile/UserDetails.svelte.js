@@ -53,7 +53,7 @@ function create_if_block_4(ctx) {
 			insert(target, p, anchor);
 
 			if (!mounted) {
-				dispose = listen(p, "click", /*editDescription*/ ctx[10]);
+				dispose = listen(p, "click", /*editDescription*/ ctx[11]);
 				mounted = true;
 			}
 		},
@@ -132,7 +132,7 @@ function create_else_block(ctx) {
 			append(button, t2);
 
 			if (!mounted) {
-				dispose = listen(div, "load", /*searchFriends*/ ctx[13]());
+				dispose = listen(div, "load", /*searchFriends*/ ctx[14]());
 				mounted = true;
 			}
 		},
@@ -171,7 +171,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (225:8) {#if email === localStorage.getItem('user')}
+// (225:8) {#if email === dataJson.email}
 function create_if_block(ctx) {
 	let a;
 	let link_action;
@@ -362,7 +362,7 @@ function create_else_block_1(ctx) {
 			insert(target, button, anchor);
 
 			if (!mounted) {
-				dispose = listen(button, "click", /*sendFriendRequest*/ ctx[14]);
+				dispose = listen(button, "click", /*sendFriendRequest*/ ctx[15]);
 				mounted = true;
 			}
 		},
@@ -406,8 +406,8 @@ function create_if_block_2(ctx) {
 
 			if (!mounted) {
 				dispose = [
-					listen(button0, "click", /*acceptRequest*/ ctx[15]),
-					listen(button1, "click", /*declineRequest*/ ctx[16])
+					listen(button0, "click", /*acceptRequest*/ ctx[16]),
+					listen(button1, "click", /*declineRequest*/ ctx[17])
 				];
 
 				mounted = true;
@@ -441,7 +441,6 @@ function create_fragment(ctx) {
 	let t5;
 	let t6;
 	let div4;
-	let show_if_1 = /*email*/ ctx[3] === localStorage.getItem('user');
 	let t7;
 	let div2;
 	let t8;
@@ -458,7 +457,6 @@ function create_fragment(ctx) {
 	let t15;
 	let div10;
 	let div9;
-	let show_if;
 	let current_block_type_index;
 	let if_block2;
 	let current;
@@ -473,15 +471,13 @@ function create_fragment(ctx) {
 			}
 		});
 
-	let if_block0 = show_if_1 && create_if_block_4(ctx);
+	let if_block0 = /*email*/ ctx[3] === /*dataJson*/ ctx[10].email && create_if_block_4(ctx);
 	let if_block1 = /*aboutMe*/ ctx[6] && create_if_block_3(ctx);
 	const if_block_creators = [create_if_block, create_else_block];
 	const if_blocks = [];
 
 	function select_block_type(ctx, dirty) {
-		if (dirty & /*email*/ 8) show_if = null;
-		if (show_if == null) show_if = !!(/*email*/ ctx[3] === localStorage.getItem('user'));
-		if (show_if) return 0;
+		if (/*email*/ ctx[3] === /*dataJson*/ ctx[10].email) return 0;
 		return 1;
 	}
 
@@ -599,8 +595,8 @@ function create_fragment(ctx) {
 
 			if (!mounted) {
 				dispose = [
-					listen(textarea, "keyup", /*valueTextArea*/ ctx[11]),
-					listen(button, "click", /*updateDescription*/ ctx[12])
+					listen(textarea, "keyup", /*valueTextArea*/ ctx[12]),
+					listen(button, "click", /*updateDescription*/ ctx[13])
 				];
 
 				mounted = true;
@@ -615,9 +611,8 @@ function create_fragment(ctx) {
 			if (!current || dirty & /*name*/ 1) set_data(t1, /*name*/ ctx[0]);
 			if (!current || dirty & /*last_name*/ 2) set_data(t3, /*last_name*/ ctx[1]);
 			if (!current || dirty & /*title*/ 4) set_data(t5, /*title*/ ctx[2]);
-			if (dirty & /*email*/ 8) show_if_1 = /*email*/ ctx[3] === localStorage.getItem('user');
 
-			if (show_if_1) {
+			if (/*email*/ ctx[3] === /*dataJson*/ ctx[10].email) {
 				if (if_block0) {
 					if_block0.p(ctx, dirty);
 				} else {
@@ -700,6 +695,7 @@ function create_fragment(ctx) {
 function instance($$self, $$props, $$invalidate) {
 	let { name, last_name, title, email, photo, id, aboutMe, urlAPI } = $$props;
 	let { userMain } = $$props;
+	const dataJson = JSON.parse(localStorage.getItem('data'));
 
 	const editDescription = () => {
 		editAboutMe.classList.toggle('d-none');
@@ -808,7 +804,7 @@ function instance($$self, $$props, $$invalidate) {
 		if ('id' in $$props) $$invalidate(5, id = $$props.id);
 		if ('aboutMe' in $$props) $$invalidate(6, aboutMe = $$props.aboutMe);
 		if ('urlAPI' in $$props) $$invalidate(7, urlAPI = $$props.urlAPI);
-		if ('userMain' in $$props) $$invalidate(17, userMain = $$props.userMain);
+		if ('userMain' in $$props) $$invalidate(18, userMain = $$props.userMain);
 	};
 
 	return [
@@ -822,6 +818,7 @@ function instance($$self, $$props, $$invalidate) {
 		urlAPI,
 		friend,
 		friendRequest,
+		dataJson,
 		editDescription,
 		valueTextArea,
 		updateDescription,
@@ -846,7 +843,7 @@ class UserDetails extends SvelteComponent {
 			id: 5,
 			aboutMe: 6,
 			urlAPI: 7,
-			userMain: 17
+			userMain: 18
 		});
 	}
 }

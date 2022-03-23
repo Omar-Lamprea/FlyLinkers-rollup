@@ -38,7 +38,10 @@
     const savedUser = localStorage.setItem('user', user)
   }
   setTimeout(() => {
-    if(localStorage.getItem('user') === 'null') window.location.href = urlLogOut
+    if(localStorage.getItem('user') === 'null'){
+      localStorage.clear()
+      window.location.href = urlLogOut
+    } 
   }, 1000);
 
   if (localStorage.getItem('user') && window.location.search.includes('?user=')) {
@@ -52,28 +55,34 @@
   const getData = async ()=>{
     if (localStorage.getItem('user')) {
       const response = await fetch(`${urlAPI}/user/logout/?token=${localStorage.getItem('user')}`)
-      const content = await response.json();
-      data = content.User
-      await getUserToFirestore(data)
-      getUserMainToFirestore = await getUserToFirestore(data)
+      // console.log(response);
+      if (response.ok) {
+        const content = await response.json();
+        data = content.User
+        await getUserToFirestore(data)
+        getUserMainToFirestore = await getUserToFirestore(data)
 
-      if (!localStorage.getItem('profilePhoto')) {
-        localStorage.setItem('profilePhoto', data.photo)
-      }
-      userMain = data.id
-      localStorage.setItem('userId', userMain)
-      // console.log(data);
-      localStorage.setItem('data', `{
-        "title": "${data.title}", 
-        "name": "${data.name}", 
-        "last_name": "${data.last_name}", 
-        "photo": "${data.photo}", 
-        "email": "${data.email}", 
-        "id": ${data.id}
-      }`)
-      if (localStorage.getItem('newUser')) {
-        window.location.hash = '#/settings'
-        localStorage.removeItem('newUser')
+        if (!localStorage.getItem('profilePhoto')) {
+          localStorage.setItem('profilePhoto', data.photo)
+        }
+        userMain = data.id
+        localStorage.setItem('userId', userMain)
+        // console.log(data);
+        localStorage.setItem('data', `{
+          "title": "${data.title}", 
+          "name": "${data.name}", 
+          "last_name": "${data.last_name}", 
+          "photo": "${data.photo}", 
+          "email": "${data.email}", 
+          "id": ${data.id}
+        }`)
+        if (localStorage.getItem('newUser')) {
+          window.location.hash = '#/settings'
+          localStorage.removeItem('newUser')
+        }
+      }else{
+        localStorage.clear()
+        window.location.href = urlLogOut
       }
     }
   }

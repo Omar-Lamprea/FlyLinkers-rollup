@@ -78,45 +78,52 @@
 <div class="Default-containers">
   <p class="section-title">User information</p>
   {#if dataUser}
-     <form action="" class="d-flex flex-column px-3 px-md-0">
-       <div class="name mb-3 d-md-flex justify-content-between">
-         <div class="firstName">
-           <label for="firstName">First name*</label>
-           <input id="firstName" type="text" placeholder="First name...." value={dataUser.name} required>
-         </div>
-   
-         <div class="middleName">
-           <label for="middleName">Middle name</label>
-           <input id="middleName" type="text" placeholder="Middle name...." value={dataUser.middle_name}>
-         </div>
-   
-         <div class="lastName">
-           <label for="lastName">Last name*</label>
-           <input id="lastName" type="text" placeholder="Last name...." value={dataUser.last_name} required>
-         </div>
-       </div>
-   
-       <div class="info mb-3 d-md-flex justify-content-between">
-         <div class="title">
-           <label for="title">Title*</label>
-           <input id="title" type="text" placeholder="Title...." value={dataUser.title}>
-         </div>
-   
-         <div class="mobile">
-           <label for="mobile">Mobile</label>
-           <input id="mobile" type="tel" placeholder="Mobile...." disabled>
-         </div>
-   
-         <div class="email">
-           <label for="email">Email*</label>
-           <input id="email" type="email" placeholder="Email...." value={dataUser.email} required>
-         </div>
-       </div>
-       
-       <i id="success" class="fa-solid fa-check text-center icon-success d-none"></i>
-       <i id="fail" class="fa-solid fa-bug text-center icon-success fail d-none"></i>
-       <button type="submit" class="btn btn-outline-primary btn-flylinkers btn-post mt-3" on:click={update}>Save</button>
-     </form>
+    <form action="" class="d-flex flex-column px-3 px-md-0">
+      <div class="name mb-3 d-md-flex justify-content-between">
+        <div class="firstName" style="width:100%">
+          <label for="firstName">First name*</label>
+          <input id="firstName" type="text" placeholder="First name...." value={dataUser.name} required>
+        </div>
+  
+        <div class="middleName mx-md-3" style="width:100%">
+          <label for="middleName">Middle name</label>
+          <input id="middleName" type="text" placeholder="Middle name...." value={dataUser.middle_name}>
+        </div>
+  
+        <div class="lastName" style="width:100%">
+          <label for="lastName">Last name*</label>
+          <input id="lastName" type="text" placeholder="Last name...." value={dataUser.last_name} required>
+        </div>
+      </div>
+  
+      <div class="info mb-3 d-md-flex justify-content-center">
+        <div class="title me-md-2" style="width:100%">
+          <label for="title">Title*</label>
+          <input id="title" type="text" placeholder="Title...." value={dataUser.title}>
+        </div>
+  
+        <div class="mobile ms-md-2"style="width:100%">
+          <label for="mobile">Mobile</label>
+          <input id="mobile" type="tel" placeholder="Mobile...." disabled>
+        </div>
+      </div>
+
+      <div class="username mb-3 d-md-flex justify-content-center">
+        <div class="username me-md-2"style="width:100%">
+          <label for="username">Username</label>
+          <input id="username" type="text" placeholder="username...." disabled>
+        </div>
+
+        <div class="email ms-md-2"style="width:100%">
+          <label for="email">Email*</label>
+          <input id="email" type="email" placeholder="Email...." value={dataUser.email} required>
+        </div>
+      </div>
+      
+      <i id="success" class="fa-solid fa-check text-center icon-success d-none"></i>
+      <i id="fail" class="fa-solid fa-bug text-center icon-success fail d-none"></i>
+      <button type="submit" class="btn btn-outline-primary btn-flylinkers btn-post mt-3" on:click={update}>Save</button>
+    </form>
   {:else}
     <Loader />
   {/if}
