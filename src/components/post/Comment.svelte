@@ -6,6 +6,7 @@
   // import {commentsFirebase} from '../../js/firebase/commentsFirebase.js'
 
   export let comment, urlAPI;
+  console.log(comment);
 
 </script>
 
@@ -50,12 +51,12 @@
 <div class="Comments">
   <div class="Comments-content">
     <div class="Comments-users">
-      <a href="/profile/{comment.user.email}" class="d-flex" use:link use:active>
+      <a href="/profile/{comment.user.username}" class="d-flex" use:link use:active>
         <img src="{urlAPI}{comment.user.photo}" alt="">
       </a>
       <span>
         <div class="userInfo mb-1 d-flex justify-content-between">
-          <a href="/profile/{comment.user.email}" class="d-flex" use:link use:active>
+          <a href="/profile/{comment.user.username}" class="d-flex" use:link use:active>
             <p class="User-comment">{comment.user.name} {comment.user.last_name}</p>
           </a>
           <p class="startTime">{startTime(comment.create_time)}</p>

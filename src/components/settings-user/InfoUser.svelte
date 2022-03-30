@@ -4,13 +4,6 @@
   export let urlAPI;
 
   export let dataUser;
-  // const getdata = async ()=>{
-  //   const response = await fetch(`${urlAPI}/user/create/?id=${localStorage.getItem('userId')}`)
-  //   const content = await response.json()
-  //   if (response.ok) {
-  //     data = content[0]
-  //   }
-  // }
 
   const update = async()=>{
     if (firstName.value !== '' && lastName.value !== '' && email.value) {
@@ -28,10 +21,11 @@
           mobile: mobile.value
         })
       })
-      const content = await response.json()
-      console.log(response);
       if (response.ok) {
         success.classList.remove('d-none')
+        setTimeout(() => {
+          dropdownUserInfo()
+        }, 500);
       }else{
         fail.classList.remove('d-none')
       }
@@ -40,15 +34,38 @@
     }
   }
 
+  const dropdownUserInfo = ()=>{
+    toggleDropUserInfo.classList.toggle('dropdown-active')
+    container.classList.toggle('container-active')
+  }
+
   onMount(()=>{
     // getdata()
   })
 </script>
 
 <style>
+  .Default-containers{
+    overflow: hidden;
+    height: 4rem;
+    transition: all ease-in .5s;
+  }
+  .container-active{
+    height: max-content;
+  }
+  .header-menu-user {
+    margin-bottom: 1rem;
+  }
+  .header-menu-user i{
+    color: var(--main-color);
+    font-size: 1.5rem;
+    transition: all ease-in .2s;
+  }
+  .dropdown-active{
+    transform: rotate(180deg);
+  }
   .section-title{
     color: var(--main-color);
-    margin-bottom: 1rem;
     font-weight: 700;
   }
   .btn-post{
@@ -75,8 +92,11 @@
   }
 </style>
 
-<div class="Default-containers">
-  <p class="section-title">User information</p>
+<div id="container" class="Default-containers container-active">
+  <div class="header-menu-user d-flex justify-content-between align-items-center">
+    <p class="section-title">User information</p>
+    <i id="toggleDropUserInfo" class="fa-solid fa-square-caret-down dropdown-active" on:click={dropdownUserInfo}></i>
+  </div>
   {#if dataUser}
     <form action="" class="d-flex flex-column px-3 px-md-0">
       <div class="name mb-3 d-md-flex justify-content-between">
@@ -104,14 +124,14 @@
   
         <div class="mobile ms-md-2"style="width:100%">
           <label for="mobile">Mobile</label>
-          <input id="mobile" type="tel" placeholder="Mobile...." disabled>
+          <input id="mobile" type="tel" placeholder="Mobile...." value={dataUser.phone}>
         </div>
       </div>
 
       <div class="username mb-3 d-md-flex justify-content-center">
         <div class="username me-md-2"style="width:100%">
           <label for="username">Username</label>
-          <input id="username" type="text" placeholder="username...." disabled>
+          <input id="username" type="text" placeholder="username...." value={dataUser.username} disabled>
         </div>
 
         <div class="email ms-md-2"style="width:100%">

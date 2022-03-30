@@ -36,7 +36,7 @@ function get_each_context(ctx, list, i) {
 	return child_ctx;
 }
 
-// (81:4) {#if id}
+// (84:4) {#if id}
 function create_if_block(ctx) {
 	let addpost;
 	let current;
@@ -78,7 +78,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (84:4) {#each $posts as dataPost}
+// (87:4) {#each $posts as dataPost}
 function create_each_block(ctx) {
 	let post;
 	let current;
@@ -283,7 +283,7 @@ function instance($$self, $$props, $$invalidate) {
 	const posts = writable([]);
 	component_subscribe($$self, posts, value => $$invalidate(2, $posts = value));
 	let page = 0;
-	let countPost = 0;
+	let countPost = null;
 
 	async function getPosts(page1) {
 		if (page1) {
@@ -295,11 +295,9 @@ function instance($$self, $$props, $$invalidate) {
 		try {
 			const response = await fetch(`${urlAPI}/post/home/?page=${page}&user_id=${id}`);
 			const content = await response.json();
+			countPost = content.next;
 
-			// console.log(content);
-			countPost = content.count;
-
-			if (content.results) {
+			if (response.ok) {
 				posts.set([...$posts, ...content.results]);
 			} else {
 				endPosts.classList.remove('d-none');
@@ -331,9 +329,16 @@ function instance($$self, $$props, $$invalidate) {
 	}; // }, 4000);
 
 	document.addEventListener('scroll', async e => {
-		if (window.innerHeight + window.scrollY >= main.offsetHeight - 1 && !window.location.href.includes('settings')) {
-			if (countPost > 3) {
+		if (window.innerHeight + window.scrollY >= main.offsetHeight - 1 && !window.location.href.includes('settings') && !window.location.href.includes('profile')) {
+			if (countPost !== null) {
 				getPosts();
+			} else {
+				setTimeout(
+					() => {
+						endPosts.classList.remove('d-none');
+					},
+					1000
+				);
 			}
 		}
 	});

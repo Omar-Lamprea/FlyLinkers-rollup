@@ -58,9 +58,13 @@
       // console.log(response);
       if (response.ok) {
         const content = await response.json();
+        // console.log(content);
         data = content.User
-        await getUserToFirestore(data)
+        // await getUserToFirestore(data)
         getUserMainToFirestore = await getUserToFirestore(data)
+        // localStorage.setItem('userFirebase', JSON.stringify(getUserMainToFirestore))
+        // console.log(data);
+        // console.log(getUserMainToFirestore);
 
         if (!localStorage.getItem('profilePhoto')) {
           localStorage.setItem('profilePhoto', data.photo)
@@ -190,14 +194,17 @@
 </style>
 
 
-{#if data}
-   <Header {...data} {urlLogOut} {urlAPI}/>
-{/if}
+{#if data && getUserMainToFirestore}
+   <Header {data} {urlLogOut} {urlAPI}/>
 
-<main id="main" class="container-fluid container-lg">
-    <Router {routes}/>
-    {#if chatFlag && userMain && getUserMainToFirestore}
-        <Chat {id} {userMain}/>
-        <!-- <Chat {id} {userMain}/> -->
-    {/if}
-</main>
+   
+   <main id="main" class="container-fluid container-lg">
+     <Router {routes}/>
+     {#if chatFlag && userMain && getUserMainToFirestore}
+         <Chat {id} {userMain}/>
+         <!-- <Chat {id} {userMain}/> -->
+     {/if}
+   </main>
+{:else}
+  <Loader/>
+{/if}

@@ -18,9 +18,17 @@
     const content = await response.json()
     if (response.ok) {
       successProfile.classList.remove('d-none')
+      setTimeout(() => {
+        dropdownUserInfo()
+      }, 500);
     }else{
       failProfile.classList.remove('d-none')
     }
+  }
+
+  const dropdownUserInfo = ()=>{
+    toggleDropDescriptionInfo.classList.toggle('dropdown-active')
+    containerDescription.classList.toggle('container-active')
   }
 
   onMount(()=>{
@@ -29,9 +37,28 @@
 </script>
 
 <style>
+
+  .Default-containers{
+    overflow: hidden;
+    height: 4rem;
+    transition: all ease-in .5s;
+  }
+  .container-active{
+    height: max-content;
+  }
+  .header-description-userMenu{
+    margin-bottom: 1rem;
+  }
+  .header-description-userMenu i{
+    color: var(--main-color);
+    font-size: 1.5rem;
+    transition: all ease-in .2s;
+  }
+  .dropdown-active{
+    transform: rotate(180deg);
+  }
   .section-title{
     color: var(--main-color);
-    margin-bottom: 1rem;
     font-weight: 700;
   }
   .btn-post{
@@ -61,8 +88,12 @@
   }
 </style>
 
-<div class="Default-containers">
-  <p class="section-title">About me</p>
+<div id="containerDescription" class="Default-containers container-active">
+  <div class="header-description-userMenu d-flex justify-content-between align-items-center">
+    <p class="section-title">About me</p>
+    <i id="toggleDropDescriptionInfo" class="fa-solid fa-square-caret-down dropdown-active" on:click={dropdownUserInfo}></i>
+  </div>
+
   <!-- {#if dataProfile} -->
      <form action="" class="d-flex flex-column px-3 px-md-0">
        <div class="about mb-3 d-md-flex justify-content-between">

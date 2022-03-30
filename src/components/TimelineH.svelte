@@ -55,18 +55,6 @@
     // }, 4000);
   }
 
-  document.addEventListener('scroll', async (e)=>{
-    if ((window.innerHeight + window.scrollY) >= main.offsetHeight - 1 && !window.location.href.includes('settings') && !window.location.href.includes('profile')){
-      if (countPost !== null) {
-        getPosts()
-      }else{
-        setTimeout(() => {
-          endPosts.classList.remove('d-none')
-        }, 1000);
-      }
-    }
-  })
-
   iconHome.addEventListener('click', ()=>{
     clearPost()
     getPosts(1)
@@ -75,6 +63,19 @@
   onMount(()=>{
     getPosts()
     reloadPosts()
+
+    document.addEventListener('scroll', async (e)=>{
+      if ((window.innerHeight + window.scrollY) >= main.offsetHeight - 1 && !window.location.href.includes('settings') && !window.location.href.includes('profile')){
+        if (countPost !== null) {
+          getPosts()
+        }else{
+          setTimeout(() => {
+            endPosts.classList.remove('d-none')
+          }, 1000);
+        }
+      }
+    })
+
   })
 </script>
 
@@ -88,6 +89,6 @@
       <Post {...dataPost} {userId} {urlAPI}/>
     {/each}
 
-    <div id="endPosts" class="d-none text-center fw-bold" style="color: var(--main-color);">Sorry! there aren't more posts.</div>
+    <div id="endPosts" class="d-none text-center fw-bold" style="color: var(--main-color);">Sorry!, we can't find more post to show you.</div>
   </div>
 </div>

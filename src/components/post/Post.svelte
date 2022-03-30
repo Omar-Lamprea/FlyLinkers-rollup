@@ -11,7 +11,7 @@
 
   export let userId;
   export let desc, reactions, img, comments, create_time, user, id, user_id, update_time;
-  export let name, middle_name, last_name, title, photo, email;
+  export let name, middle_name, last_name, title, photo, email, username = 0, phone = 0;
   export let userMain, urlAPI, url_id, meta;
   export let share_id, share_count, share = '';
   export let video;
@@ -58,7 +58,7 @@
     }
   }
   const visitProfile = () =>{
-    localStorage.setItem('visitProfile', user.email)
+    localStorage.setItem('visitProfile', user.username)
   }
   const likeValue = `likeValue${id}`
   const loveValue = `loveValue${id}`
@@ -627,7 +627,7 @@
 
         {#if user}
           <div class="Card-user" on:click={visitProfile}>
-            <a href="/profile/{user.email}" class="d-flex" use:link use:active>
+            <a href="/profile/{user.username}" class="d-flex" use:link use:active>
               <img src="{urlAPI}{user.photo}" alt="">
               <h2>
                 {user.name} {user.last_name}
@@ -696,8 +696,9 @@
     </div>
 
     {#if video && share === ''}
-      <video  controls style="width: 100%;">
-        <source src="{urlAPI}{video}" autoplay autobuffer autobuffered>
+      <!-- <video   style="width: 100%;" controls autoplay muted autobuffer autobuffered> -->
+        <video   style="width: 100%;" controls>
+        <source src="{urlAPI}{video}">
         <track kind="captions">
       </video>
     {/if}
@@ -709,7 +710,7 @@
           <!-- <p>{share[0].first_name}</p> -->
 
           <div class="Card-user justify-content-start" on:click={visitProfile}>
-            <a href="/profile/{share[0].email}" class="d-flex" use:link use:active>
+            <a href="/profile/{share[0].username}" class="d-flex" use:link use:active>
               <img src="{urlAPI}{share[0].photo}" alt="">
               <h2>
                 {share[0].name} {share[0].last_name}
@@ -726,6 +727,7 @@
              <img src="{urlAPI}{share[1].img}" alt="" style="width: 100%;">
           {/if}
           {#if share[1].video}
+        <!-- <video   style="width: 100%;" controls autoplay muted autobuffer autobuffered> -->
             <video  controls style="width: 100%;">
               <source src="{urlAPI}{video}" autoplay autobuffer autobuffered>
               <track kind="captions">

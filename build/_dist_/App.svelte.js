@@ -81,7 +81,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (190:4) {#if chatFlag && userMain && getUserMainToFirestore}
+// (199:4) {#if chatFlag && userMain && getUserMainToFirestore}
 function create_if_block(ctx) {
 	let chat;
 	let current;
@@ -247,7 +247,10 @@ function instance($$self, $$props, $$invalidate) {
 
 	setTimeout(
 		() => {
-			if (localStorage.getItem('user') === 'null') window.location.href = urlLogOut;
+			if (localStorage.getItem('user') === 'null') {
+				localStorage.clear();
+				window.location.href = urlLogOut;
+			}
 		},
 		1000
 	);
@@ -263,31 +266,38 @@ function instance($$self, $$props, $$invalidate) {
 	const getData = async () => {
 		if (localStorage.getItem('user')) {
 			const response = await fetch(`${urlAPI}/user/logout/?token=${localStorage.getItem('user')}`);
-			const content = await response.json();
-			$$invalidate(0, data = content.User);
-			await getUserToFirestore(data);
-			$$invalidate(2, getUserMainToFirestore = await getUserToFirestore(data));
 
-			if (!localStorage.getItem('profilePhoto')) {
-				localStorage.setItem('profilePhoto', data.photo);
-			}
+			// console.log(response);
+			if (response.ok) {
+				const content = await response.json();
+				$$invalidate(0, data = content.User);
+				await getUserToFirestore(data);
+				$$invalidate(2, getUserMainToFirestore = await getUserToFirestore(data));
 
-			$$invalidate(1, userMain = data.id);
-			localStorage.setItem('userId', userMain);
+				if (!localStorage.getItem('profilePhoto')) {
+					localStorage.setItem('profilePhoto', data.photo);
+				}
 
-			// console.log(data);
-			localStorage.setItem('data', `{
-        "title": "${data.title}", 
-        "name": "${data.name}", 
-        "last_name": "${data.last_name}", 
-        "photo": "${data.photo}", 
-        "email": "${data.email}", 
-        "id": ${data.id}
-      }`);
+				$$invalidate(1, userMain = data.id);
+				localStorage.setItem('userId', userMain);
 
-			if (localStorage.getItem('newUser')) {
-				window.location.hash = '#/settings';
-				localStorage.removeItem('newUser');
+				// console.log(data);
+				localStorage.setItem('data', `{
+          "title": "${data.title}", 
+          "name": "${data.name}", 
+          "last_name": "${data.last_name}", 
+          "photo": "${data.photo}", 
+          "email": "${data.email}", 
+          "id": ${data.id}
+        }`);
+
+				if (localStorage.getItem('newUser')) {
+					window.location.hash = '#/settings';
+					localStorage.removeItem('newUser');
+				}
+			} else {
+				localStorage.clear();
+				window.location.href = urlLogOut;
 			}
 		}
 	};

@@ -137,14 +137,14 @@
     {#each $friendRequest as request}
        <li>
           <span class="dropdown-item">
-            <a href="/profile/{request.email}" use:link use:active class="d-flex">
+            <a href="/profile/{request.username}" use:link use:active class="d-flex">
               <div class="userData">
                 <img src="{urlAPI}{request.photo}" alt="">
                 <span>{request.name} {request.last_name}</span>
               </div>
             </a>
             <div class="btns-request">
-              <button class="btn-request btn-success" on:click={acceptRequest(request.id, request.email)}>Accept</button>
+              <button class="btn-request btn-success" on:click={acceptRequest(request.id, request.username)}>Accept</button>
               <button id="declineRequest" class="btn-request btn-decline" on:click={declineRequest(request.id, request.email)}>Decline</button>
             </div>
           </span>

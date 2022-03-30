@@ -17,7 +17,7 @@
   let id, name, last_name, title, email , photo;
   
   const getUser = async()=>{
-    const response = await fetch(`${urlAPI}/user/create/?email=${params.user}`)
+    const response = await fetch(`${urlAPI}/user/create/?username=${params.user}`)
     const content = await response.json()
     userProfile = content[0]
 

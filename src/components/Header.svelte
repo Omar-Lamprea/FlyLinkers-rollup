@@ -5,10 +5,10 @@
   import HeaderNav from "./navbar/HeaderNav.svelte";
   import Loader from './Loader.svelte'
 
-  export let photo, id;
-  export let name = '', title = '', email = '', last_name = '', middle_name = '';
+  export let data;
   export let urlLogOut, urlAPI;
-  // export let getUserMainToFirestore;
+  let photo = data.photo, id = data.id
+
 
   let usersFound = false;
 
@@ -16,10 +16,12 @@
     const response = await fetch(`${urlAPI}/friend/search/?search=${value}`)
     const content = await response.json()
 
-    if (content.count > 0) {
-      usersFound = content.results
-    }else{
-      usersFound = [{ details: 'User not found'}]
+    if (response.ok ) {
+      if (content.count > 0) {
+        usersFound = content.results
+      }else{
+        usersFound = [{ details: 'User not found'}]
+      }
     }
   }
 
@@ -150,7 +152,7 @@
              {#each usersFound as user}
                 {#if user.name}
                   <li>
-                    <a href="/profile/{user.email}" use:link use:active on:click={visitProfile(user.email)} class="d-flex">
+                    <a href="/profile/{user.username}" use:link use:active on:click={visitProfile(user.username)} class="d-flex">
                       <span class="dropdown-item d-flex align-items-center">
                         <img src="{urlAPI}{user.photo}" alt="img">
                         <div class="userInfo">

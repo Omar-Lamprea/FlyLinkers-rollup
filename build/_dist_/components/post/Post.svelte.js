@@ -565,7 +565,7 @@ function create_if_block_2(ctx) {
 	let t2_value = /*share*/ ctx[14][0].name + "";
 	let t2;
 	let t3;
-	let t4_value = /*user*/ ctx[2].last_name + "";
+	let t4_value = /*share*/ ctx[14][0].last_name + "";
 	let t4;
 	let t5;
 	let span0;
@@ -681,7 +681,7 @@ function create_if_block_2(ctx) {
 			}
 
 			if (dirty[0] & /*share*/ 16384 && t2_value !== (t2_value = /*share*/ ctx[14][0].name + "")) set_data(t2, t2_value);
-			if (dirty[0] & /*user*/ 4 && t4_value !== (t4_value = /*user*/ ctx[2].last_name + "")) set_data(t4, t4_value);
+			if (dirty[0] & /*share*/ 16384 && t4_value !== (t4_value = /*share*/ ctx[14][0].last_name + "")) set_data(t4, t4_value);
 			if (dirty[0] & /*share*/ 16384 && t6_value !== (t6_value = /*share*/ ctx[14][0].title + "")) set_data(t6, t6_value);
 			if (dirty[0] & /*share*/ 16384 && t8_value !== (t8_value = startTime(/*share*/ ctx[14][1].create_time) + "")) set_data(t8, t8_value);
 

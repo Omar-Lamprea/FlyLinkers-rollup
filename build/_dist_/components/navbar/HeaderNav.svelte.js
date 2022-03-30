@@ -68,7 +68,7 @@ function get_each_context_1(ctx, list, i) {
 	return child_ctx;
 }
 
-// (370:6) {:else}
+// (386:6) {:else}
 function create_else_block_2(ctx) {
 	let li;
 
@@ -79,7 +79,7 @@ function create_else_block_2(ctx) {
 			li.innerHTML = `<span>You haven&#39;t started any chat</span> 
         `;
 
-			attr(li, "class", "dropdown-item chatList d-flex svelte-43rfm0");
+			attr(li, "class", "dropdown-item chatList d-flex svelte-z6xtox");
 		},
 		m(target, anchor) {
 			insert(target, li, anchor);
@@ -90,7 +90,7 @@ function create_else_block_2(ctx) {
 	};
 }
 
-// (368:6) {#each $usergroups as groups}
+// (384:6) {#each $usergroups as groups}
 function create_each_block_1(ctx) {
 	let chatlist;
 	let current;
@@ -133,7 +133,7 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (382:6) {#if countBubble > 0}
+// (398:6) {#if countBubble > 0}
 function create_if_block_2(ctx) {
 	let div;
 	let t;
@@ -142,7 +142,7 @@ function create_if_block_2(ctx) {
 		c() {
 			div = element("div");
 			t = text(/*countBubble*/ ctx[4]);
-			attr(div, "class", "notificacions-bubble svelte-43rfm0");
+			attr(div, "class", "notificacions-bubble svelte-z6xtox");
 		},
 		m(target, anchor) {
 			insert(target, div, anchor);
@@ -157,7 +157,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (401:10) {:else}
+// (417:10) {:else}
 function create_else_block_1(ctx) {
 	let li;
 	let a;
@@ -204,15 +204,15 @@ function create_else_block_1(ctx) {
 			t6 = space();
 			if (!src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[2] + "/" + /*notification*/ ctx[16].photo))) attr(img, "src", img_src_value);
 			attr(img, "alt", "userImage");
-			attr(img, "class", "svelte-43rfm0");
-			attr(p0, "class", "notification-user-name svelte-43rfm0");
-			attr(p1, "class", "notification-time svelte-43rfm0");
+			attr(img, "class", "svelte-z6xtox");
+			attr(p0, "class", "notification-user-name svelte-z6xtox");
+			attr(p1, "class", "notification-time svelte-z6xtox");
 			attr(div, "class", "data-user-time d-flex justify-content-between");
-			attr(p2, "class", "notification-desc svelte-43rfm0");
-			attr(span, "class", "svelte-43rfm0");
+			attr(p2, "class", "notification-desc svelte-z6xtox");
+			attr(span, "class", "svelte-z6xtox");
 			attr(a, "href", a_href_value = "/post/" + /*notification*/ ctx[16].id);
-			attr(a, "class", "d-flex svelte-43rfm0");
-			attr(li, "class", "d-flex notificationsList dropdown-item svelte-43rfm0");
+			attr(a, "class", "d-flex svelte-z6xtox");
+			attr(li, "class", "d-flex notificationsList dropdown-item svelte-z6xtox");
 			attr(li, "data-id", li_data_id_value = /*notification*/ ctx[16].id);
 		},
 		m(target, anchor) {
@@ -267,7 +267,7 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (388:10) {#if typeof(notification.id) === 'string'}
+// (404:10) {#if typeof(notification.id) === 'string'}
 function create_if_block_1(ctx) {
 	let li;
 	let a;
@@ -314,15 +314,15 @@ function create_if_block_1(ctx) {
 			t6 = space();
 			if (!src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[2] + "/" + /*notification*/ ctx[16].photo))) attr(img, "src", img_src_value);
 			attr(img, "alt", "userImage");
-			attr(img, "class", "svelte-43rfm0");
-			attr(p0, "class", "notification-user-name svelte-43rfm0");
-			attr(p1, "class", "notification-time svelte-43rfm0");
+			attr(img, "class", "svelte-z6xtox");
+			attr(p0, "class", "notification-user-name svelte-z6xtox");
+			attr(p1, "class", "notification-time svelte-z6xtox");
 			attr(div, "class", "data-user-time d-flex justify-content-between");
-			attr(p2, "class", "notification-desc svelte-43rfm0");
-			attr(span, "class", "svelte-43rfm0");
+			attr(p2, "class", "notification-desc svelte-z6xtox");
+			attr(span, "class", "svelte-z6xtox");
 			attr(a, "href", a_href_value = "/profile/" + /*notification*/ ctx[16].id);
-			attr(a, "class", "d-flex svelte-43rfm0");
-			attr(li, "class", "d-flex notificationsList dropdown-item svelte-43rfm0");
+			attr(a, "class", "d-flex svelte-z6xtox");
+			attr(li, "class", "d-flex notificationsList dropdown-item svelte-z6xtox");
 			attr(li, "data-email", li_data_email_value = /*notification*/ ctx[16].id);
 		},
 		m(target, anchor) {
@@ -381,7 +381,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (386:8) {#each notificationsList as notification}
+// (402:8) {#each notificationsList as notification}
 function create_each_block(ctx) {
 	let if_block_anchor;
 
@@ -422,7 +422,7 @@ function create_each_block(ctx) {
 	};
 }
 
-// (426:6) {:else}
+// (442:6) {:else}
 function create_else_block(ctx) {
 	let img;
 	let img_src_value;
@@ -433,7 +433,7 @@ function create_else_block(ctx) {
 			attr(img, "id", "headerUserImage");
 			if (!src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[2] + /*photo*/ ctx[0]))) attr(img, "src", img_src_value);
 			attr(img, "alt", "");
-			attr(img, "class", "svelte-43rfm0");
+			attr(img, "class", "svelte-z6xtox");
 		},
 		m(target, anchor) {
 			insert(target, img, anchor);
@@ -449,7 +449,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (424:6) {#if localStorage.getItem('profilePhoto')}
+// (440:6) {#if localStorage.getItem('profilePhoto')}
 function create_if_block(ctx) {
 	let img;
 	let img_src_value;
@@ -460,7 +460,7 @@ function create_if_block(ctx) {
 			attr(img, "id", "headerUserImage");
 			if (!src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[2] + localStorage.getItem('profilePhoto')))) attr(img, "src", img_src_value);
 			attr(img, "alt", "");
-			attr(img, "class", "svelte-43rfm0");
+			attr(img, "class", "svelte-z6xtox");
 		},
 		m(target, anchor) {
 			insert(target, img, anchor);
@@ -577,14 +577,14 @@ function create_fragment(ctx) {
 			nav = element("nav");
 			div0 = element("div");
 			a0 = element("a");
-			a0.innerHTML = `<i class="fas fa-home svelte-43rfm0"></i>`;
+			a0.innerHTML = `<i class="fas fa-home svelte-z6xtox"></i>`;
 			t0 = space();
 			div1 = element("div");
 			create_component(friendrequest.$$.fragment);
 			t1 = space();
 			div2 = element("div");
 			a1 = element("a");
-			a1.innerHTML = `<i class="fas fa-briefcase svelte-43rfm0"></i>`;
+			a1.innerHTML = `<i class="fas fa-briefcase svelte-z6xtox"></i>`;
 			t2 = space();
 			div4 = element("div");
 			div3 = element("div");
@@ -627,7 +627,7 @@ function create_fragment(ctx) {
 			ul2 = element("ul");
 			li0 = element("li");
 			a3 = element("a");
-			a3.innerHTML = `<span class="dropdown-item svelte-43rfm0">Settings</span>`;
+			a3.innerHTML = `<span class="dropdown-item svelte-z6xtox">Settings</span>`;
 			t13 = space();
 			li1 = element("li");
 			span1 = element("span");
@@ -635,46 +635,46 @@ function create_fragment(ctx) {
 			t15 = space();
 			div10 = element("div");
 			a4 = element("a");
-			a4.innerHTML = `<i class="fas fa-calendar-week svelte-43rfm0"></i>`;
+			a4.innerHTML = `<i class="fas fa-calendar-week svelte-z6xtox"></i>`;
 			attr(a0, "href", "/");
 			attr(div0, "id", "iconHome");
-			attr(div0, "class", "icon Header-nav-home mx-3 fs-3 svelte-43rfm0");
-			attr(div1, "class", "icon Header-nav-user-plus notification mx-3 fs-3 svelte-43rfm0");
+			attr(div0, "class", "icon Header-nav-home mx-3 fs-3 svelte-z6xtox");
+			attr(div1, "class", "icon Header-nav-user-plus notification mx-3 fs-3 svelte-z6xtox");
 			attr(a1, "href", "/");
-			attr(div2, "class", "icon Header-nav-briefcase hidden mx-3 fs-3 svelte-43rfm0");
+			attr(div2, "class", "icon Header-nav-briefcase hidden mx-3 fs-3 svelte-z6xtox");
 			attr(div3, "id", "notificacionsChatsBubble");
-			attr(div3, "class", "notificacions-bubble d-none svelte-43rfm0");
-			attr(i2, "class", "fas fa-comment dropdown-toggle svelte-43rfm0");
+			attr(div3, "class", "notificacions-bubble d-none svelte-z6xtox");
+			attr(i2, "class", "fas fa-comment dropdown-toggle svelte-z6xtox");
 			attr(i2, "id", "chats");
 			attr(i2, "data-bs-toggle", "dropdown");
 			attr(i2, "aria-expanded", "false");
-			attr(ul0, "class", "dropdown-menu svelte-43rfm0");
+			attr(ul0, "class", "dropdown-menu svelte-z6xtox");
 			attr(ul0, "aria-labelledby", "chats");
-			attr(div4, "class", "icon Header-nav-comment mx-3 fs-3 position-relative svelte-43rfm0");
-			attr(i3, "class", "fas fa-bell dropdown-toggle svelte-43rfm0");
+			attr(div4, "class", "icon Header-nav-comment mx-3 fs-3 position-relative svelte-z6xtox");
+			attr(i3, "class", "fas fa-bell dropdown-toggle svelte-z6xtox");
 			attr(i3, "id", "notifications");
 			attr(i3, "data-bs-toggle", "dropdown");
 			attr(i3, "aria-expanded", "false");
-			attr(ul1, "class", "dropdown-menu svelte-43rfm0");
+			attr(ul1, "class", "dropdown-menu svelte-z6xtox");
 			attr(ul1, "aria-labelledby", "notifications");
-			attr(div5, "class", "dropdown svelte-43rfm0");
-			attr(div6, "class", "icon Header-nav-bell mx-3 fs-3 notification svelte-43rfm0");
+			attr(div5, "class", "dropdown svelte-z6xtox");
+			attr(div6, "class", "icon Header-nav-bell mx-3 fs-3 notification svelte-z6xtox");
 			attr(div6, "id", "notification");
 			attr(a2, "href", "/profile");
-			attr(div7, "class", "icon Header-nav-user mx-3 fs-3 svelte-43rfm0");
-			attr(i4, "class", "fas fa-grip-vertical dropdown-toggle svelte-43rfm0");
+			attr(div7, "class", "icon Header-nav-user mx-3 fs-3 svelte-z6xtox");
+			attr(i4, "class", "fas fa-grip-vertical dropdown-toggle svelte-z6xtox");
 			attr(i4, "id", "settings");
 			attr(i4, "data-bs-toggle", "dropdown");
 			attr(i4, "aria-expanded", "false");
 			attr(a3, "href", "/settings");
-			attr(span1, "class", "dropdown-item svelte-43rfm0");
-			attr(ul2, "class", "dropdown-menu svelte-43rfm0");
+			attr(span1, "class", "dropdown-item svelte-z6xtox");
+			attr(ul2, "class", "dropdown-menu svelte-z6xtox");
 			attr(ul2, "aria-labelledby", "settings");
-			attr(div8, "class", "dropdown svelte-43rfm0");
-			attr(div9, "class", "icon Header-nav-grip-vertical mx-3 fs-3 svelte-43rfm0");
+			attr(div8, "class", "dropdown svelte-z6xtox");
+			attr(div9, "class", "icon Header-nav-grip-vertical mx-3 fs-3 svelte-z6xtox");
 			attr(a4, "href", "/");
-			attr(div10, "class", "icon Header-nav-calendar-week hidden mx-3 fs-3 svelte-43rfm0");
-			attr(nav, "class", "nav-container d-flex svelte-43rfm0");
+			attr(div10, "class", "icon Header-nav-calendar-week hidden mx-3 fs-3 svelte-z6xtox");
+			attr(nav, "class", "nav-container d-flex svelte-z6xtox");
 		},
 		m(target, anchor) {
 			insert(target, nav, anchor);
@@ -741,12 +741,12 @@ function create_fragment(ctx) {
 					action_destroyer(active_action = active.call(null, a0)),
 					action_destroyer(link_action_1 = link.call(null, a1)),
 					action_destroyer(active_action_1 = active.call(null, a1)),
-					listen(div6, "click", /*counterBubble*/ ctx[8]),
+					listen(div6, "click", /*counterBubble*/ ctx[7]),
 					action_destroyer(link_action_2 = link.call(null, a2)),
 					action_destroyer(active_action_2 = active.call(null, a2)),
 					action_destroyer(link_action_3 = link.call(null, a3)),
 					action_destroyer(active_action_3 = active.call(null, a3)),
-					listen(span1, "click", /*logOut*/ ctx[7]),
+					listen(span1, "click", /*logOut*/ ctx[8]),
 					action_destroyer(link_action_4 = link.call(null, a4)),
 					action_destroyer(active_action_4 = active.call(null, a4))
 				];
@@ -1023,11 +1023,6 @@ function instance($$self, $$props, $$invalidate) {
 	}; // console.log(notificationsList);
 	// console.log(countBubble);
 
-	const logOut = () => {
-		localStorage.clear();
-		window.location.href = urlLogOut;
-	};
-
 	async function counterBubble() {
 		if (notificationsList.length > 0) {
 			const userDoc = doc(db, 'user', idStr);
@@ -1113,6 +1108,20 @@ function instance($$self, $$props, $$invalidate) {
 		}
 	}
 
+	const logOut = async () => {
+		const logout = await fetch(`${urlAPI}/user/logout/?token=${localStorage.getItem('user')}`, {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' }
+		});
+
+		if (logout.ok) {
+			const content = await logout.json();
+			console.log(content);
+			localStorage.clear();
+			window.location.href = urlLogOut;
+		}
+	};
+
 	onMount(() => {
 		getUserNotifications();
 	});
@@ -1132,8 +1141,8 @@ function instance($$self, $$props, $$invalidate) {
 		countBubble,
 		$usergroups,
 		usergroups,
-		logOut,
 		counterBubble,
+		logOut,
 		urlLogOut
 	];
 }

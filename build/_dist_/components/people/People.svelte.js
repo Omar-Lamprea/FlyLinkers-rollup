@@ -175,15 +175,15 @@ function create_fragment(ctx) {
 		c() {
 			div3 = element("div");
 			div0 = element("div");
-			div0.innerHTML = `<h4 class="svelte-12bpm6z">People</h4>`;
+			div0.innerHTML = `<h4 class="svelte-1nd6ce4">People</h4>`;
 			t1 = space();
 			div2 = element("div");
 			div1 = element("div");
 			if (if_block) if_block.c();
-			attr(div0, "class", "People-Ttitle mb-3 text-center");
+			attr(div0, "class", "People-Ttitle mb-3 text-center svelte-1nd6ce4");
 			attr(div1, "class", "User");
 			attr(div2, "class", "People-column");
-			attr(div3, "class", "People Default-containers px-3 svelte-12bpm6z");
+			attr(div3, "class", "Default-containers px-3");
 		},
 		m(target, anchor) {
 			insert(target, div3, anchor);

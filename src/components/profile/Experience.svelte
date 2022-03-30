@@ -8,6 +8,7 @@
 
 
   export let urlAPI, id, experiences, userProfile
+  // console.log(experiences);
 
   // console.log(id, experiences, userProfile);
   let data = writable([])
@@ -18,7 +19,8 @@
   export async function getDataexperiences(updateExperiences){
     if (experiences || updateExperiences) {
       // console.log('run xps..');
-      const experiences = []
+      experiences = true
+      const dataExperiences = []
       const getXp = await getExperiences(urlAPI, userProfile)
 
       getXp.forEach(xp => {
@@ -32,10 +34,10 @@
           xp.end_date = dateEnd2
         }
         
-        experiences.push(xp)
+        dataExperiences.push(xp)
       });
       // console.log(experiences);
-      data.set(experiences)
+      data.set(dataExperiences)
     }
   }
 

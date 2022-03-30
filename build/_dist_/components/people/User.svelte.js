@@ -66,14 +66,14 @@ function create_fragment(ctx) {
 			t7 = text(/*email*/ ctx[4]);
 			if (!src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[5] + /*photo*/ ctx[3]))) attr(img, "src", img_src_value);
 			attr(img, "alt", "");
-			attr(img, "class", "svelte-2pwqh");
-			attr(div0, "class", "User-photo svelte-2pwqh");
-			attr(span0, "class", "svelte-2pwqh");
-			attr(span1, "class", "svelte-2pwqh");
-			attr(div1, "class", "User-detail d-flex flex-column svelte-2pwqh");
+			attr(img, "class", "svelte-sqwgji");
+			attr(div0, "class", "User-photo svelte-sqwgji");
+			attr(span0, "class", "svelte-sqwgji");
+			attr(span1, "class", "svelte-sqwgji");
+			attr(div1, "class", "User-detail d-flex flex-column svelte-sqwgji");
 			attr(a, "href", a_href_value = "/profile/" + /*email*/ ctx[4]);
 			attr(a, "class", "d-flex");
-			attr(div2, "class", "User my-3 pb-3 d-flex align-items-center svelte-2pwqh");
+			attr(div2, "class", "User my-3 pb-3 d-flex align-items-center svelte-sqwgji");
 		},
 		m(target, anchor) {
 			insert(target, div2, anchor);

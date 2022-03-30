@@ -121,7 +121,7 @@
   <ul class="dropdown-menu" aria-labelledby="notifications">
     {#each friendRequest as request}
        <li>
-        <a on:click={visitProfile(request.email)} href="/profile/{request.email}" use:link use:active class="d-flex">
+        <a on:click={visitProfile(request.username)} href="/profile/{request.username}" use:link use:active class="d-flex">
           <span class="dropdown-item">
             <div class="userData">
               <img src="{urlAPI}{request.photo}" alt="">

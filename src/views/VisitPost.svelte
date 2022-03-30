@@ -25,7 +25,7 @@
       data = result
 
       let content = data.results
-      console.log(content);
+      // console.log(content);
       name = content[0].name
       last_name = content[0].last_name
       title = content[0].title

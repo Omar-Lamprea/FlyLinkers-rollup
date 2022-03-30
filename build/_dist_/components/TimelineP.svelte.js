@@ -60,7 +60,7 @@ function get_each_context_2(ctx, list, i) {
 	return child_ctx;
 }
 
-// (158:6) {#if email === dataJson.email}
+// (146:6) {#if email === dataJson.email}
 function create_if_block_5(ctx) {
 	let div;
 	let p;
@@ -114,7 +114,7 @@ function create_if_block_5(ctx) {
 	};
 }
 
-// (164:6) {#if experiences !== undefined}
+// (152:6) {#if experiences !== undefined}
 function create_if_block_4(ctx) {
 	let experience;
 	let current;
@@ -159,7 +159,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (169:6) {#if post}
+// (157:6) {#if post}
 function create_if_block_2(ctx) {
 	let current_block_type_index;
 	let if_block;
@@ -229,7 +229,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (176:8) {:else}
+// (164:8) {:else}
 function create_else_block_1(ctx) {
 	let each_1_anchor;
 	let current;
@@ -313,7 +313,7 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (170:8) {#if userMain}
+// (158:8) {#if userMain}
 function create_if_block_3(ctx) {
 	let each_1_anchor;
 	let current;
@@ -397,7 +397,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (178:10) {#each post as dataPost}
+// (166:10) {#each post as dataPost}
 function create_each_block_3(ctx) {
 	let post_1;
 	let current;
@@ -452,7 +452,7 @@ function create_each_block_3(ctx) {
 	};
 }
 
-// (172:10) {#each post as dataPost}
+// (160:10) {#each post as dataPost}
 function create_each_block_2(ctx) {
 	let post_1;
 	let current;
@@ -507,7 +507,7 @@ function create_each_block_2(ctx) {
 	};
 }
 
-// (186:6) {#if $posts}
+// (174:6) {#if $posts}
 function create_if_block(ctx) {
 	let current_block_type_index;
 	let if_block;
@@ -577,7 +577,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (193:8) {:else}
+// (181:8) {:else}
 function create_else_block(ctx) {
 	let each_1_anchor;
 	let current;
@@ -661,7 +661,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (187:8) {#if userMain}
+// (175:8) {#if userMain}
 function create_if_block_1(ctx) {
 	let each_1_anchor;
 	let current;
@@ -745,7 +745,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (195:10) {#each $posts as dataPost}
+// (183:10) {#each $posts as dataPost}
 function create_each_block_1(ctx) {
 	let post_1;
 	let current;
@@ -800,7 +800,7 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (189:10) {#each $posts as dataPost}
+// (177:10) {#each $posts as dataPost}
 function create_each_block(ctx) {
 	let post_1;
 	let current;
@@ -1128,7 +1128,7 @@ function instance($$self, $$props, $$invalidate) {
 
 	let post;
 	let userPost;
-	let countPost = 0;
+	let countPost = null;
 
 	const getPost = async () => {
 		$$invalidate(12, post = '');
@@ -1141,7 +1141,7 @@ function instance($$self, $$props, $$invalidate) {
 			}
 		}).then(json => {
 			const content = json;
-			countPost = content.count;
+			countPost = content.next;
 
 			if (!content.Detail) {
 				if (content.results) {
@@ -1162,7 +1162,7 @@ function instance($$self, $$props, $$invalidate) {
 		page += 1;
 		const response = await fetch(`${urlAPI}/post/create/?page=${page}&user=${id}`);
 		const content = await response.json();
-		countPost = content.count;
+		countPost = content.next;
 
 		try {
 			if (content) {
@@ -1174,7 +1174,6 @@ function instance($$self, $$props, $$invalidate) {
 	}
 
 	const reloadPosts = () => {
-		// setTimeout(() => {
 		const reloadPosts = document.getElementById('reloadPostCheck');
 
 		const observer = new MutationObserver(() => {
@@ -1188,20 +1187,19 @@ function instance($$self, $$props, $$invalidate) {
 		if (!window.location.href.includes('settings')) {
 			observer.observe(reloadPosts, { attributes: true });
 		}
-	}; // }, 4000);
+	};
 
 	document.addEventListener('scroll', async e => {
-		if (window.innerHeight + window.scrollY >= main.offsetHeight - 1 && !window.location.href.includes('settings')) {
-			if (countPost > 3) {
+		if (window.innerHeight + window.scrollY >= main.offsetHeight - 1 && !window.location.href.includes('settings') && window.location.hash.length === 9) {
+			if (countPost !== null) {
 				getPosts();
-			}
-		}
-	});
-
-	document.addEventListener('scroll', async e => {
-		if (window.innerHeight + window.scrollY >= main.offsetHeight - 1 && !window.location.href.includes('settings')) {
-			if (countPost > 3) {
-				getPosts();
+			} else {
+				setTimeout(
+					() => {
+						endPosts.classList.remove('d-none');
+					},
+					1000
+				);
 			}
 		}
 	});
