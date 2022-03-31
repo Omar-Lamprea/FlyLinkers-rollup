@@ -657,7 +657,7 @@
                  <li class="dropdown-item" on:click={deletePost(id)}>Delete post</li>
                {/if}
             {:else}
-              {#if userMain.toString() === localStorage.getItem('userId')}
+              {#if user_id.toString() === localStorage.getItem('userId')}
                 <li class="dropdown-item" on:click={deletePost(id)}>Delete post</li>
               {/if}
             {/if}

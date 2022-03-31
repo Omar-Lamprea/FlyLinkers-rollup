@@ -100,7 +100,7 @@
       if (e.target.id === `chat-${e.target.dataset.chat}` || e.target.id === `btInitChat-${e.target.dataset.chat}`) {
         id = parseInt(e.target.dataset.chat)
         await openChat(id)
-        console.log(id);
+        // console.log(id);
         if (localStorage.getItem(`chat-${id}`)) {
           chatFlag = true
         }
