@@ -71,7 +71,7 @@ function create_fragment(ctx) {
 			attr(span0, "class", "svelte-sqwgji");
 			attr(span1, "class", "svelte-sqwgji");
 			attr(div1, "class", "User-detail d-flex flex-column svelte-sqwgji");
-			attr(a, "href", a_href_value = "/profile/" + /*email*/ ctx[4]);
+			attr(a, "href", a_href_value = "/profile/" + /*username*/ ctx[6]);
 			attr(a, "class", "d-flex");
 			attr(div2, "class", "User my-3 pb-3 d-flex align-items-center svelte-sqwgji");
 		},
@@ -97,7 +97,7 @@ function create_fragment(ctx) {
 				dispose = [
 					action_destroyer(link_action = link.call(null, a)),
 					action_destroyer(active_action = active.call(null, a)),
-					listen(div2, "click", /*visitProfile*/ ctx[6])
+					listen(div2, "click", /*visitProfile*/ ctx[7])
 				];
 
 				mounted = true;
@@ -113,7 +113,7 @@ function create_fragment(ctx) {
 			if (dirty & /*title*/ 4) set_data(t5, /*title*/ ctx[2]);
 			if (dirty & /*email*/ 16) set_data(t7, /*email*/ ctx[4]);
 
-			if (dirty & /*email*/ 16 && a_href_value !== (a_href_value = "/profile/" + /*email*/ ctx[4])) {
+			if (dirty & /*username*/ 64 && a_href_value !== (a_href_value = "/profile/" + /*username*/ ctx[6])) {
 				attr(a, "href", a_href_value);
 			}
 		},
@@ -128,29 +128,43 @@ function create_fragment(ctx) {
 }
 
 function instance($$self, $$props, $$invalidate) {
-	let { name, middle_name, last_name, title, photo, email, id, urlAPI } = $$props;
+	let { name, middle_name, last_name, title, photo, email, id, urlAPI, username, phone } = $$props;
 
 	const viewUserProfile = email => {
 		window.location.pathname = `profile/${email}`;
 	};
 
 	const visitProfile = () => {
-		localStorage.setItem('visitProfile', email);
+		localStorage.setItem('visitProfile', username);
 		window.location.reload();
 	};
 
 	$$self.$$set = $$props => {
 		if ('name' in $$props) $$invalidate(0, name = $$props.name);
-		if ('middle_name' in $$props) $$invalidate(7, middle_name = $$props.middle_name);
+		if ('middle_name' in $$props) $$invalidate(8, middle_name = $$props.middle_name);
 		if ('last_name' in $$props) $$invalidate(1, last_name = $$props.last_name);
 		if ('title' in $$props) $$invalidate(2, title = $$props.title);
 		if ('photo' in $$props) $$invalidate(3, photo = $$props.photo);
 		if ('email' in $$props) $$invalidate(4, email = $$props.email);
-		if ('id' in $$props) $$invalidate(8, id = $$props.id);
+		if ('id' in $$props) $$invalidate(9, id = $$props.id);
 		if ('urlAPI' in $$props) $$invalidate(5, urlAPI = $$props.urlAPI);
+		if ('username' in $$props) $$invalidate(6, username = $$props.username);
+		if ('phone' in $$props) $$invalidate(10, phone = $$props.phone);
 	};
 
-	return [name, last_name, title, photo, email, urlAPI, visitProfile, middle_name, id];
+	return [
+		name,
+		last_name,
+		title,
+		photo,
+		email,
+		urlAPI,
+		username,
+		visitProfile,
+		middle_name,
+		id,
+		phone
+	];
 }
 
 class User extends SvelteComponent {
@@ -159,13 +173,15 @@ class User extends SvelteComponent {
 
 		init(this, options, instance, create_fragment, safe_not_equal, {
 			name: 0,
-			middle_name: 7,
+			middle_name: 8,
 			last_name: 1,
 			title: 2,
 			photo: 3,
 			email: 4,
-			id: 8,
-			urlAPI: 5
+			id: 9,
+			urlAPI: 5,
+			username: 6,
+			phone: 10
 		});
 	}
 }

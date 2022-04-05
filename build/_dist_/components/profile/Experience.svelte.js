@@ -41,7 +41,7 @@ function get_each_context(ctx, list, i) {
 	return child_ctx;
 }
 
-// (212:2) {:else}
+// (214:2) {:else}
 function create_else_block_1(ctx) {
 	return {
 		c: noop,
@@ -53,7 +53,7 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (202:2) {#if id === parseInt(localStorage.getItem('userId'))}
+// (204:2) {#if id === parseInt(localStorage.getItem('userId'))}
 function create_if_block_4(ctx) {
 	let div2;
 	let div1;
@@ -68,7 +68,7 @@ function create_if_block_4(ctx) {
 	experiencesmodal = new ExperiencesModal({
 			props: {
 				userProfile: /*userProfile*/ ctx[3],
-				urlAPI: /*urlAPI*/ ctx[0]
+				urlAPI: /*urlAPI*/ ctx[1]
 			}
 		});
 
@@ -106,7 +106,7 @@ function create_if_block_4(ctx) {
 		p(ctx, dirty) {
 			const experiencesmodal_changes = {};
 			if (dirty & /*userProfile*/ 8) experiencesmodal_changes.userProfile = /*userProfile*/ ctx[3];
-			if (dirty & /*urlAPI*/ 1) experiencesmodal_changes.urlAPI = /*urlAPI*/ ctx[0];
+			if (dirty & /*urlAPI*/ 2) experiencesmodal_changes.urlAPI = /*urlAPI*/ ctx[1];
 			experiencesmodal.$set(experiencesmodal_changes);
 		},
 		i(local) {
@@ -125,14 +125,14 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (137:0) {#if experiences}
+// (139:0) {#if experiences}
 function create_if_block(ctx) {
 	let div2;
 	let div1;
 	let div0;
 	let t1;
 	let t2;
-	let show_if = /*id*/ ctx[1] === parseInt(localStorage.getItem('userId'));
+	let show_if = /*id*/ ctx[2] === parseInt(localStorage.getItem('userId'));
 	let current;
 	let each_value = /*$data*/ ctx[4];
 	let each_blocks = [];
@@ -180,7 +180,7 @@ function create_if_block(ctx) {
 			current = true;
 		},
 		p(ctx, dirty) {
-			if (dirty & /*userProfile, urlAPI, $data, removeExperience, sendDataExperience, id, parseInt, localStorage*/ 219) {
+			if (dirty & /*userProfile, urlAPI, $data, removeExperience, sendDataExperience, id, parseInt, localStorage*/ 222) {
 				each_value = /*$data*/ ctx[4];
 				let i;
 
@@ -207,13 +207,13 @@ function create_if_block(ctx) {
 				check_outros();
 			}
 
-			if (dirty & /*id*/ 2) show_if = /*id*/ ctx[1] === parseInt(localStorage.getItem('userId'));
+			if (dirty & /*id*/ 4) show_if = /*id*/ ctx[2] === parseInt(localStorage.getItem('userId'));
 
 			if (show_if) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 
-					if (dirty & /*id*/ 2) {
+					if (dirty & /*id*/ 4) {
 						transition_in(if_block, 1);
 					}
 				} else {
@@ -260,7 +260,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (149:12) {:else}
+// (151:12) {:else}
 function create_else_block(ctx) {
 	let p;
 	let t0;
@@ -295,7 +295,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (147:12) {#if !experience.working}
+// (149:12) {#if !experience.working}
 function create_if_block_3(ctx) {
 	let p;
 	let t0;
@@ -335,7 +335,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (158:12) {#if id === parseInt(localStorage.getItem('userId'))}
+// (160:12) {#if id === parseInt(localStorage.getItem('userId'))}
 function create_if_block_2(ctx) {
 	let div8;
 	let div0;
@@ -470,7 +470,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (143:7) {#each $data as experience}
+// (145:7) {#each $data as experience}
 function create_each_block(ctx) {
 	let div;
 	let p0;
@@ -502,7 +502,7 @@ function create_each_block(ctx) {
 	let t13_value = /*experience*/ ctx[11].description + "";
 	let t13;
 	let t14;
-	let show_if = /*id*/ ctx[1] === parseInt(localStorage.getItem('userId'));
+	let show_if = /*id*/ ctx[2] === parseInt(localStorage.getItem('userId'));
 	let t15;
 	let hr;
 	let div_id_value;
@@ -523,7 +523,7 @@ function create_each_block(ctx) {
 	updateexperiencesmodal = new UpdateExperiencesModal({
 			props: {
 				userProfile: /*userProfile*/ ctx[3],
-				urlAPI: /*urlAPI*/ ctx[0],
+				urlAPI: /*urlAPI*/ ctx[1],
 				experience: /*experience*/ ctx[11]
 			}
 		});
@@ -627,7 +627,7 @@ function create_each_block(ctx) {
 			if ((!current || dirty & /*$data*/ 16) && t8_value !== (t8_value = /*experience*/ ctx[11].title + "")) set_data(t8, t8_value);
 			if ((!current || dirty & /*$data*/ 16) && t11_value !== (t11_value = /*experience*/ ctx[11].employment_type + "")) set_data(t11, t11_value);
 			if ((!current || dirty & /*$data*/ 16) && t13_value !== (t13_value = /*experience*/ ctx[11].description + "")) set_data(t13, t13_value);
-			if (dirty & /*id*/ 2) show_if = /*id*/ ctx[1] === parseInt(localStorage.getItem('userId'));
+			if (dirty & /*id*/ 4) show_if = /*id*/ ctx[2] === parseInt(localStorage.getItem('userId'));
 
 			if (show_if) {
 				if (if_block1) {
@@ -652,7 +652,7 @@ function create_each_block(ctx) {
 
 			const updateexperiencesmodal_changes = {};
 			if (dirty & /*userProfile*/ 8) updateexperiencesmodal_changes.userProfile = /*userProfile*/ ctx[3];
-			if (dirty & /*urlAPI*/ 1) updateexperiencesmodal_changes.urlAPI = /*urlAPI*/ ctx[0];
+			if (dirty & /*urlAPI*/ 2) updateexperiencesmodal_changes.urlAPI = /*urlAPI*/ ctx[1];
 			if (dirty & /*$data*/ 16) updateexperiencesmodal_changes.experience = /*experience*/ ctx[11];
 			updateexperiencesmodal.$set(updateexperiencesmodal_changes);
 		},
@@ -675,7 +675,7 @@ function create_each_block(ctx) {
 	};
 }
 
-// (193:2) {#if id === parseInt(localStorage.getItem('userId'))}
+// (195:2) {#if id === parseInt(localStorage.getItem('userId'))}
 function create_if_block_1(ctx) {
 	let div;
 	let p;
@@ -688,7 +688,7 @@ function create_if_block_1(ctx) {
 	experiencesmodal = new ExperiencesModal({
 			props: {
 				userProfile: /*userProfile*/ ctx[3],
-				urlAPI: /*urlAPI*/ ctx[0]
+				urlAPI: /*urlAPI*/ ctx[1]
 			}
 		});
 
@@ -719,7 +719,7 @@ function create_if_block_1(ctx) {
 		p(ctx, dirty) {
 			const experiencesmodal_changes = {};
 			if (dirty & /*userProfile*/ 8) experiencesmodal_changes.userProfile = /*userProfile*/ ctx[3];
-			if (dirty & /*urlAPI*/ 1) experiencesmodal_changes.urlAPI = /*urlAPI*/ ctx[0];
+			if (dirty & /*urlAPI*/ 2) experiencesmodal_changes.urlAPI = /*urlAPI*/ ctx[1];
 			experiencesmodal.$set(experiencesmodal_changes);
 		},
 		i(local) {
@@ -748,9 +748,9 @@ function create_fragment(ctx) {
 	const if_blocks = [];
 
 	function select_block_type(ctx, dirty) {
-		if (dirty & /*id*/ 2) show_if = null;
-		if (/*experiences*/ ctx[2]) return 0;
-		if (show_if == null) show_if = !!(/*id*/ ctx[1] === parseInt(localStorage.getItem('userId')));
+		if (dirty & /*id*/ 4) show_if = null;
+		if (/*experiences*/ ctx[0]) return 0;
+		if (show_if == null) show_if = !!(/*id*/ ctx[2] === parseInt(localStorage.getItem('userId')));
 		if (show_if) return 1;
 		return 2;
 	}
@@ -815,6 +815,7 @@ function instance($$self, $$props, $$invalidate) {
 	let $data;
 	let { urlAPI, id, experiences, userProfile } = $$props;
 
+	// console.log(experiences);
 	// console.log(id, experiences, userProfile);
 	let data = writable([]);
 
@@ -824,8 +825,9 @@ function instance($$self, $$props, $$invalidate) {
 	async function getDataexperiences(updateExperiences) {
 		if (experiences || updateExperiences) {
 			// console.log('run xps..');
-			const experiences = [];
+			$$invalidate(0, experiences = true);
 
+			const dataExperiences = [];
 			const getXp = await getExperiences(urlAPI, userProfile);
 
 			getXp.forEach(xp => {
@@ -839,11 +841,11 @@ function instance($$self, $$props, $$invalidate) {
 					xp.end_date = dateEnd2;
 				}
 
-				experiences.push(xp);
+				dataExperiences.push(xp);
 			});
 
 			// console.log(experiences);
-			data.set(experiences);
+			data.set(dataExperiences);
 		}
 	}
 
@@ -897,16 +899,16 @@ function instance($$self, $$props, $$invalidate) {
 	});
 
 	$$self.$$set = $$props => {
-		if ('urlAPI' in $$props) $$invalidate(0, urlAPI = $$props.urlAPI);
-		if ('id' in $$props) $$invalidate(1, id = $$props.id);
-		if ('experiences' in $$props) $$invalidate(2, experiences = $$props.experiences);
+		if ('urlAPI' in $$props) $$invalidate(1, urlAPI = $$props.urlAPI);
+		if ('id' in $$props) $$invalidate(2, id = $$props.id);
+		if ('experiences' in $$props) $$invalidate(0, experiences = $$props.experiences);
 		if ('userProfile' in $$props) $$invalidate(3, userProfile = $$props.userProfile);
 	};
 
 	return [
+		experiences,
 		urlAPI,
 		id,
-		experiences,
 		userProfile,
 		$data,
 		data,
@@ -921,9 +923,9 @@ class Experience extends SvelteComponent {
 		super();
 
 		init(this, options, instance, create_fragment, safe_not_equal, {
-			urlAPI: 0,
-			id: 1,
-			experiences: 2,
+			urlAPI: 1,
+			id: 2,
+			experiences: 0,
 			userProfile: 3,
 			getDataexperiences: 8
 		});

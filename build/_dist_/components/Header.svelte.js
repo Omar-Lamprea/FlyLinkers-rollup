@@ -37,11 +37,11 @@ import Loader from './Loader.svelte.js';
 
 function get_each_context(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[15] = list[i];
+	child_ctx[11] = list[i];
 	return child_ctx;
 }
 
-// (172:12) {:else}
+// (174:12) {:else}
 function create_else_block_1(ctx) {
 	let loader;
 	let current;
@@ -71,10 +71,10 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (149:10) {#if usersFound}
+// (151:10) {#if usersFound}
 function create_if_block(ctx) {
 	let each_1_anchor;
-	let each_value = /*usersFound*/ ctx[4];
+	let each_value = /*usersFound*/ ctx[2];
 	let each_blocks = [];
 
 	for (let i = 0; i < each_value.length; i += 1) {
@@ -97,8 +97,8 @@ function create_if_block(ctx) {
 			insert(target, each_1_anchor, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*usersFound, visitProfile, urlAPI*/ 88) {
-				each_value = /*usersFound*/ ctx[4];
+			if (dirty & /*usersFound, visitProfile, urlAPI*/ 70) {
+				each_value = /*usersFound*/ ctx[2];
 				let i;
 
 				for (i = 0; i < each_value.length; i += 1) {
@@ -129,11 +129,11 @@ function create_if_block(ctx) {
 	};
 }
 
-// (164:16) {:else}
+// (166:16) {:else}
 function create_else_block(ctx) {
 	let li;
 	let span;
-	let t0_value = /*user*/ ctx[15].details + "";
+	let t0_value = /*user*/ ctx[11].details + "";
 	let t0;
 	let t1;
 
@@ -153,7 +153,7 @@ function create_else_block(ctx) {
 			append(li, t1);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*usersFound*/ 16 && t0_value !== (t0_value = /*user*/ ctx[15].details + "")) set_data(t0, t0_value);
+			if (dirty & /*usersFound*/ 4 && t0_value !== (t0_value = /*user*/ ctx[11].details + "")) set_data(t0, t0_value);
 		},
 		d(detaching) {
 			if (detaching) detach(li);
@@ -161,7 +161,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (151:16) {#if user.name}
+// (153:16) {#if user.name}
 function create_if_block_1(ctx) {
 	let li;
 	let a;
@@ -171,18 +171,18 @@ function create_if_block_1(ctx) {
 	let t0;
 	let div;
 	let h6;
-	let t1_value = /*user*/ ctx[15].name + "";
+	let t1_value = /*user*/ ctx[11].name + "";
 	let t1;
 	let t2;
-	let t3_value = /*user*/ ctx[15].last_name + "";
+	let t3_value = /*user*/ ctx[11].last_name + "";
 	let t3;
 	let t4;
 	let p0;
-	let t5_value = /*user*/ ctx[15].title + "";
+	let t5_value = /*user*/ ctx[11].title + "";
 	let t5;
 	let t6;
 	let p1;
-	let t7_value = /*user*/ ctx[15].email + "";
+	let t7_value = /*user*/ ctx[11].email + "";
 	let t7;
 	let a_href_value;
 	let link_action;
@@ -210,7 +210,7 @@ function create_if_block_1(ctx) {
 			p1 = element("p");
 			t7 = text(t7_value);
 			t8 = space();
-			if (!src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[3] + /*user*/ ctx[15].photo))) attr(img, "src", img_src_value);
+			if (!src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[1] + /*user*/ ctx[11].photo))) attr(img, "src", img_src_value);
 			attr(img, "alt", "img");
 			attr(img, "class", "svelte-17jelq4");
 			attr(h6, "class", "svelte-17jelq4");
@@ -218,7 +218,7 @@ function create_if_block_1(ctx) {
 			set_style(p1, "color", "grey");
 			attr(div, "class", "userInfo");
 			attr(span, "class", "dropdown-item d-flex align-items-center");
-			attr(a, "href", a_href_value = "/profile/" + /*user*/ ctx[15].email);
+			attr(a, "href", a_href_value = "/profile/" + /*user*/ ctx[11].username);
 			attr(a, "class", "d-flex");
 			attr(li, "class", "svelte-17jelq4");
 		},
@@ -246,7 +246,7 @@ function create_if_block_1(ctx) {
 					action_destroyer(link_action = link.call(null, a)),
 					action_destroyer(active_action = active.call(null, a)),
 					listen(a, "click", function () {
-						if (is_function(/*visitProfile*/ ctx[6](/*user*/ ctx[15].email))) /*visitProfile*/ ctx[6](/*user*/ ctx[15].email).apply(this, arguments);
+						if (is_function(/*visitProfile*/ ctx[6](/*user*/ ctx[11].username))) /*visitProfile*/ ctx[6](/*user*/ ctx[11].username).apply(this, arguments);
 					})
 				];
 
@@ -256,16 +256,16 @@ function create_if_block_1(ctx) {
 		p(new_ctx, dirty) {
 			ctx = new_ctx;
 
-			if (dirty & /*urlAPI, usersFound*/ 24 && !src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[3] + /*user*/ ctx[15].photo))) {
+			if (dirty & /*urlAPI, usersFound*/ 6 && !src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[1] + /*user*/ ctx[11].photo))) {
 				attr(img, "src", img_src_value);
 			}
 
-			if (dirty & /*usersFound*/ 16 && t1_value !== (t1_value = /*user*/ ctx[15].name + "")) set_data(t1, t1_value);
-			if (dirty & /*usersFound*/ 16 && t3_value !== (t3_value = /*user*/ ctx[15].last_name + "")) set_data(t3, t3_value);
-			if (dirty & /*usersFound*/ 16 && t5_value !== (t5_value = /*user*/ ctx[15].title + "")) set_data(t5, t5_value);
-			if (dirty & /*usersFound*/ 16 && t7_value !== (t7_value = /*user*/ ctx[15].email + "")) set_data(t7, t7_value);
+			if (dirty & /*usersFound*/ 4 && t1_value !== (t1_value = /*user*/ ctx[11].name + "")) set_data(t1, t1_value);
+			if (dirty & /*usersFound*/ 4 && t3_value !== (t3_value = /*user*/ ctx[11].last_name + "")) set_data(t3, t3_value);
+			if (dirty & /*usersFound*/ 4 && t5_value !== (t5_value = /*user*/ ctx[11].title + "")) set_data(t5, t5_value);
+			if (dirty & /*usersFound*/ 4 && t7_value !== (t7_value = /*user*/ ctx[11].email + "")) set_data(t7, t7_value);
 
-			if (dirty & /*usersFound*/ 16 && a_href_value !== (a_href_value = "/profile/" + /*user*/ ctx[15].email)) {
+			if (dirty & /*usersFound*/ 4 && a_href_value !== (a_href_value = "/profile/" + /*user*/ ctx[11].username)) {
 				attr(a, "href", a_href_value);
 			}
 		},
@@ -277,12 +277,12 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (150:13) {#each usersFound as user}
+// (152:13) {#each usersFound as user}
 function create_each_block(ctx) {
 	let if_block_anchor;
 
 	function select_block_type_1(ctx, dirty) {
-		if (/*user*/ ctx[15].name) return create_if_block_1;
+		if (/*user*/ ctx[11].name) return create_if_block_1;
 		return create_else_block;
 	}
 
@@ -343,7 +343,7 @@ function create_fragment(ctx) {
 	const if_blocks = [];
 
 	function select_block_type(ctx, dirty) {
-		if (/*usersFound*/ ctx[4]) return 0;
+		if (/*usersFound*/ ctx[2]) return 0;
 		return 1;
 	}
 
@@ -352,10 +352,10 @@ function create_fragment(ctx) {
 
 	headernav = new HeaderNav({
 			props: {
-				photo: /*photo*/ ctx[0],
-				id: /*id*/ ctx[1],
-				urlLogOut: /*urlLogOut*/ ctx[2],
-				urlAPI: /*urlAPI*/ ctx[3]
+				photo: /*photo*/ ctx[3],
+				id: /*id*/ ctx[4],
+				urlLogOut: /*urlLogOut*/ ctx[0],
+				urlAPI: /*urlAPI*/ ctx[1]
 			}
 		});
 
@@ -448,10 +448,8 @@ function create_fragment(ctx) {
 			}
 
 			const headernav_changes = {};
-			if (dirty & /*photo*/ 1) headernav_changes.photo = /*photo*/ ctx[0];
-			if (dirty & /*id*/ 2) headernav_changes.id = /*id*/ ctx[1];
-			if (dirty & /*urlLogOut*/ 4) headernav_changes.urlLogOut = /*urlLogOut*/ ctx[2];
-			if (dirty & /*urlAPI*/ 8) headernav_changes.urlAPI = /*urlAPI*/ ctx[3];
+			if (dirty & /*urlLogOut*/ 1) headernav_changes.urlLogOut = /*urlLogOut*/ ctx[0];
+			if (dirty & /*urlAPI*/ 2) headernav_changes.urlAPI = /*urlAPI*/ ctx[1];
 			headernav.$set(headernav_changes);
 		},
 		i(local) {
@@ -476,21 +474,21 @@ function create_fragment(ctx) {
 }
 
 function instance($$self, $$props, $$invalidate) {
-	let { photo, id } = $$props;
-	let { name = '', title = '', email = '', last_name = '', middle_name = '' } = $$props;
+	let { data } = $$props;
 	let { urlLogOut, urlAPI } = $$props;
-
-	// export let getUserMainToFirestore;
+	let photo = data.photo, id = data.id;
 	let usersFound = false;
 
 	const makeSearch = async value => {
 		const response = await fetch(`${urlAPI}/friend/search/?search=${value}`);
 		const content = await response.json();
 
-		if (content.count > 0) {
-			$$invalidate(4, usersFound = content.results);
-		} else {
-			$$invalidate(4, usersFound = [{ details: 'User not found' }]);
+		if (response.ok) {
+			if (content.count > 0) {
+				$$invalidate(2, usersFound = content.results);
+			} else {
+				$$invalidate(2, usersFound = [{ details: 'User not found' }]);
+			}
 		}
 	};
 
@@ -511,7 +509,7 @@ function instance($$self, $$props, $$invalidate) {
 				1000
 			);
 		} else {
-			$$invalidate(4, usersFound = false);
+			$$invalidate(2, usersFound = false);
 			searchList.classList.add("d-none");
 		}
 	}; // if (e.key === "Enter") {
@@ -530,53 +528,23 @@ function instance($$self, $$props, $$invalidate) {
 	document.addEventListener('click', e => {
 		if (e.target.id !== "searchList") {
 			searchList.classList.add('d-none');
-			$$invalidate(4, usersFound = false);
+			$$invalidate(2, usersFound = false);
 		}
 	});
 
 	$$self.$$set = $$props => {
-		if ('photo' in $$props) $$invalidate(0, photo = $$props.photo);
-		if ('id' in $$props) $$invalidate(1, id = $$props.id);
-		if ('name' in $$props) $$invalidate(7, name = $$props.name);
-		if ('title' in $$props) $$invalidate(8, title = $$props.title);
-		if ('email' in $$props) $$invalidate(9, email = $$props.email);
-		if ('last_name' in $$props) $$invalidate(10, last_name = $$props.last_name);
-		if ('middle_name' in $$props) $$invalidate(11, middle_name = $$props.middle_name);
-		if ('urlLogOut' in $$props) $$invalidate(2, urlLogOut = $$props.urlLogOut);
-		if ('urlAPI' in $$props) $$invalidate(3, urlAPI = $$props.urlAPI);
+		if ('data' in $$props) $$invalidate(7, data = $$props.data);
+		if ('urlLogOut' in $$props) $$invalidate(0, urlLogOut = $$props.urlLogOut);
+		if ('urlAPI' in $$props) $$invalidate(1, urlAPI = $$props.urlAPI);
 	};
 
-	return [
-		photo,
-		id,
-		urlLogOut,
-		urlAPI,
-		usersFound,
-		startSearch,
-		visitProfile,
-		name,
-		title,
-		email,
-		last_name,
-		middle_name
-	];
+	return [urlLogOut, urlAPI, usersFound, photo, id, startSearch, visitProfile, data];
 }
 
 class Header extends SvelteComponent {
 	constructor(options) {
 		super();
-
-		init(this, options, instance, create_fragment, safe_not_equal, {
-			photo: 0,
-			id: 1,
-			name: 7,
-			title: 8,
-			email: 9,
-			last_name: 10,
-			middle_name: 11,
-			urlLogOut: 2,
-			urlAPI: 3
-		});
+		init(this, options, instance, create_fragment, safe_not_equal, { data: 7, urlLogOut: 0, urlAPI: 1 });
 	}
 }
 

@@ -36,7 +36,7 @@ function get_each_context(ctx, list, i) {
 	return child_ctx;
 }
 
-// (84:4) {#if id}
+// (85:4) {#if id}
 function create_if_block(ctx) {
 	let addpost;
 	let current;
@@ -78,7 +78,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (87:4) {#each $posts as dataPost}
+// (88:4) {#each $posts as dataPost}
 function create_each_block(ctx) {
 	let post;
 	let current;
@@ -167,7 +167,7 @@ function create_fragment(ctx) {
 
 			t2 = space();
 			div0 = element("div");
-			div0.textContent = "Sorry! there aren't more posts.";
+			div0.textContent = "Sorry!, we can't find more post to show you.";
 			attr(input, "type", "checkbox");
 			attr(input, "id", "reloadPostCheck");
 			attr(input, "name", "reloadPost");
@@ -328,21 +328,6 @@ function instance($$self, $$props, $$invalidate) {
 		}
 	}; // }, 4000);
 
-	document.addEventListener('scroll', async e => {
-		if (window.innerHeight + window.scrollY >= main.offsetHeight - 1 && !window.location.href.includes('settings') && !window.location.href.includes('profile')) {
-			if (countPost !== null) {
-				getPosts();
-			} else {
-				setTimeout(
-					() => {
-						endPosts.classList.remove('d-none');
-					},
-					1000
-				);
-			}
-		}
-	});
-
 	iconHome.addEventListener('click', () => {
 		clearPost();
 		getPosts(1);
@@ -351,6 +336,21 @@ function instance($$self, $$props, $$invalidate) {
 	onMount(() => {
 		getPosts();
 		reloadPosts();
+
+		document.addEventListener('scroll', async e => {
+			if (window.innerHeight + window.scrollY >= main.offsetHeight - 1 && !window.location.href.includes('settings') && !window.location.href.includes('profile')) {
+				if (countPost !== null) {
+					getPosts();
+				} else {
+					setTimeout(
+						() => {
+							endPosts.classList.remove('d-none');
+						},
+						1000
+					);
+				}
+			}
+		});
 	});
 
 	$$self.$$set = $$props => {

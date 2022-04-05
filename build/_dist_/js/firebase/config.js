@@ -24,7 +24,7 @@ export async function getUserToFirestore(data) {
   const userRef = collection(db, 'user')
   const getDoc = await getDocs(userRef)
   const users = getDoc.docs.map(doc => doc.data());
-
+  // console.log(users);
   let flag = false
 
   users.forEach(el => {
@@ -35,9 +35,10 @@ export async function getUserToFirestore(data) {
   });
 
   if (flag === false) {
-    saveUserToFirestore(data)
+    return await saveUserToFirestore(data)
+  }else{
+    return user
   }
-  return user
 }
 
 export async function getUser(uid){
@@ -61,8 +62,21 @@ async function saveUserToFirestore(data) {
     uid: data.id,
     name: `${data.name} ${data.last_name}`,
     email: data.email,
-    groups: []
+    groups: [],
+    friends: [],
+    comments: [],
+    reactions: []
   });
+
+  return {
+    uid: data.id,
+    name: `${data.name} ${data.last_name}`,
+    email: data.email,
+    groups: [],
+    friends: [],
+    comments: [],
+    reactions: []
+  }
 }
 
 let flagGroups = false

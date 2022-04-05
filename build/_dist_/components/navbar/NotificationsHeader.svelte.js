@@ -129,7 +129,7 @@ function create_each_block(ctx) {
 			attr(button1, "class", "btn-request btn-decline svelte-vkg9ez");
 			attr(div1, "class", "btns-request svelte-vkg9ez");
 			attr(span1, "class", "dropdown-item svelte-vkg9ez");
-			attr(a, "href", a_href_value = "/profile/" + /*request*/ ctx[8].email);
+			attr(a, "href", a_href_value = "/profile/" + /*request*/ ctx[8].username);
 			attr(a, "class", "d-flex");
 		},
 		m(target, anchor) {
@@ -156,7 +156,7 @@ function create_each_block(ctx) {
 						if (is_function(/*acceptRequest*/ ctx[3](/*request*/ ctx[8].id))) /*acceptRequest*/ ctx[3](/*request*/ ctx[8].id).apply(this, arguments);
 					}),
 					listen(a, "click", function () {
-						if (is_function(/*visitProfile*/ ctx[4](/*request*/ ctx[8].email))) /*visitProfile*/ ctx[4](/*request*/ ctx[8].email).apply(this, arguments);
+						if (is_function(/*visitProfile*/ ctx[4](/*request*/ ctx[8].username))) /*visitProfile*/ ctx[4](/*request*/ ctx[8].username).apply(this, arguments);
 					}),
 					action_destroyer(link_action = link.call(null, a)),
 					action_destroyer(active_action = active.call(null, a))
@@ -175,7 +175,7 @@ function create_each_block(ctx) {
 			if (dirty & /*friendRequest*/ 4 && t1_value !== (t1_value = /*request*/ ctx[8].name + "")) set_data(t1, t1_value);
 			if (dirty & /*friendRequest*/ 4 && t3_value !== (t3_value = /*request*/ ctx[8].last_name + "")) set_data(t3, t3_value);
 
-			if (dirty & /*friendRequest*/ 4 && a_href_value !== (a_href_value = "/profile/" + /*request*/ ctx[8].email)) {
+			if (dirty & /*friendRequest*/ 4 && a_href_value !== (a_href_value = "/profile/" + /*request*/ ctx[8].username)) {
 				attr(a, "href", a_href_value);
 			}
 		},

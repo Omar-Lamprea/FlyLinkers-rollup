@@ -10,6 +10,7 @@
 
   let urlLink;
   let validUrl = '';
+  let YTlink;
 
   let characterCount = 0
   const validateInfoPost = async (e) =>{
@@ -74,7 +75,9 @@
         }
       }
       if (isValidHttpUrl(link) === true){
-        showMetaData(link)
+        link.includes('https://www.youtube.com/') 
+          ? showYouTubeData(link) 
+          : showMetaData(link)
       }
     }else{
       urlMeta.classList.add('d-none')
@@ -114,6 +117,12 @@
       }
     }
   }
+
+  const showYouTubeData = (link)=>{
+    YTvideoContainer.classList.remove('d-none')
+    YTlink = link.replace('watch?v=', 'embed/')
+  }
+
   function isValidHttpUrl(string) {
     let url;
     try {
@@ -138,6 +147,10 @@
       validUrl = ''
     }
     urlContent = undefined
+  }
+  const closeYTData = () =>{
+    YTlink = false
+    postDescription.value = ''
   }
 
   const sendPost = async()=>{
@@ -364,6 +377,21 @@
       {/if}
   </div>
 
+  <div id="YTvideoContainer" class="YTvideo d-flex flex-column d-none">
+    {#if YTlink}
+    <i class="fa-solid fa-xmark d-flex- align-self-end" on:click={closeYTData}></i>
+      <iframe
+        width="100%" 
+        height="350" 
+        src={YTlink} 
+        title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+      </iframe>
+    {/if}
+  </div>
+
   <NavPost/>
 
   <div id="loaderPost" class="loader-content d-none">
@@ -372,5 +400,4 @@
     </div>
   </div>
   <button id="btnSendPost" class="btn btn-outline-primary btn-flylinkers btn-post mt-3" disabled on:click={sendPost}>Post</button>
-
 </div>

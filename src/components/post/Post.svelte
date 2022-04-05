@@ -696,11 +696,23 @@
     </div>
 
     {#if video && share === ''}
-      <!-- <video   style="width: 100%;" controls autoplay muted autobuffer autobuffered> -->
+      {#if video.includes('https://www.youtube.com/')}
+        <iframe
+          width="100%" 
+          height="350" 
+          src={video} 
+          title="YouTube video player" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+        </iframe>
+      {:else}
+        <!-- <video   style="width: 100%;" controls autoplay muted autobuffer autobuffered> -->
         <video   style="width: 100%;" controls>
-        <source src="{urlAPI}{video}">
-        <track kind="captions">
-      </video>
+          <source src="{urlAPI}{video}">
+          <track kind="captions">
+        </video>
+      {/if}
     {/if}
 
     {#if share !== ''}
@@ -727,11 +739,23 @@
              <img src="{urlAPI}{share[1].img}" alt="" style="width: 100%;">
           {/if}
           {#if share[1].video}
-        <!-- <video   style="width: 100%;" controls autoplay muted autobuffer autobuffered> -->
-            <video  controls style="width: 100%;">
-              <source src="{urlAPI}{video}" autoplay autobuffer autobuffered>
-              <track kind="captions">
-            </video>
+            {#if share[1].video.includes('https://www.youtube.com/')}
+              <iframe
+                width="100%" 
+                height="350" 
+                src={share[1].video} 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+              </iframe>
+            {:else}
+              <!-- <video   style="width: 100%;" controls autoplay muted autobuffer autobuffered> -->
+              <video   style="width: 100%;" controls>
+                <source src="{urlAPI}{video}">
+                <track kind="captions">
+              </video>
+            {/if}
           {/if}
           {#if share[1].url_id !== 0}
             <div class="urlMeta d-flex flex-column mb-3">

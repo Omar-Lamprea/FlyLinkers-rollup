@@ -40,7 +40,7 @@ import { reactionsFirebase } from '../../js/firebase/reactionsFirebase.js';
 
 function get_each_context(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[40] = list[i];
+	child_ctx[42] = list[i];
 	return child_ctx;
 }
 
@@ -68,16 +68,16 @@ function create_else_block_1(ctx) {
 			img_1 = element("img");
 			t0 = space();
 			h2 = element("h2");
-			t1 = text(/*name*/ ctx[3]);
+			t1 = text(/*name*/ ctx[4]);
 			t2 = space();
-			t3 = text(/*last_name*/ ctx[4]);
+			t3 = text(/*last_name*/ ctx[5]);
 			t4 = space();
 			span0 = element("span");
-			t5 = text(/*title*/ ctx[5]);
+			t5 = text(/*title*/ ctx[6]);
 			t6 = space();
 			span1 = element("span");
 			t7 = text(t7_value);
-			if (!src_url_equal(img_1.src, img_1_src_value = "" + (/*urlAPI*/ ctx[13] + /*photo*/ ctx[6]))) attr(img_1, "src", img_1_src_value);
+			if (!src_url_equal(img_1.src, img_1_src_value = "" + (/*urlAPI*/ ctx[13] + /*photo*/ ctx[7]))) attr(img_1, "src", img_1_src_value);
 			attr(img_1, "alt", "");
 			attr(img_1, "class", "svelte-54r9g1");
 			attr(span0, "class", "svelte-54r9g1");
@@ -101,13 +101,13 @@ function create_else_block_1(ctx) {
 			append(span1, t7);
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*urlAPI, photo*/ 8256 && !src_url_equal(img_1.src, img_1_src_value = "" + (/*urlAPI*/ ctx[13] + /*photo*/ ctx[6]))) {
+			if (dirty[0] & /*urlAPI, photo*/ 8320 && !src_url_equal(img_1.src, img_1_src_value = "" + (/*urlAPI*/ ctx[13] + /*photo*/ ctx[7]))) {
 				attr(img_1, "src", img_1_src_value);
 			}
 
-			if (dirty[0] & /*name*/ 8) set_data(t1, /*name*/ ctx[3]);
-			if (dirty[0] & /*last_name*/ 16) set_data(t3, /*last_name*/ ctx[4]);
-			if (dirty[0] & /*title*/ 32) set_data(t5, /*title*/ ctx[5]);
+			if (dirty[0] & /*name*/ 16) set_data(t1, /*name*/ ctx[4]);
+			if (dirty[0] & /*last_name*/ 32) set_data(t3, /*last_name*/ ctx[5]);
+			if (dirty[0] & /*title*/ 64) set_data(t5, /*title*/ ctx[6]);
 			if (dirty[0] & /*create_time*/ 2048 && t7_value !== (t7_value = startTime(/*create_time*/ ctx[11]) + "")) set_data(t7, t7_value);
 		},
 		d(detaching) {
@@ -165,7 +165,7 @@ function create_if_block_18(ctx) {
 			attr(span0, "class", "svelte-54r9g1");
 			attr(span1, "class", "svelte-54r9g1");
 			attr(h2, "class", "svelte-54r9g1");
-			attr(a, "href", a_href_value = "/profile/" + /*user*/ ctx[2].email);
+			attr(a, "href", a_href_value = "/profile/" + /*user*/ ctx[2].username);
 			attr(a, "class", "d-flex");
 			attr(div, "class", "Card-user svelte-54r9g1");
 		},
@@ -205,7 +205,7 @@ function create_if_block_18(ctx) {
 			if (dirty[0] & /*user*/ 4 && t5_value !== (t5_value = /*user*/ ctx[2].title + "")) set_data(t5, t5_value);
 			if (dirty[0] & /*create_time*/ 2048 && t7_value !== (t7_value = startTime(/*create_time*/ ctx[11]) + "")) set_data(t7, t7_value);
 
-			if (dirty[0] & /*user*/ 4 && a_href_value !== (a_href_value = "/profile/" + /*user*/ ctx[2].email)) {
+			if (dirty[0] & /*user*/ 4 && a_href_value !== (a_href_value = "/profile/" + /*user*/ ctx[2].username)) {
 				attr(a, "href", a_href_value);
 			}
 		},
@@ -217,7 +217,7 @@ function create_if_block_18(ctx) {
 	};
 }
 
-// (660:14) {#if userMain.toString() === localStorage.getItem('userId')}
+// (660:14) {#if user_id.toString() === localStorage.getItem('userId')}
 function create_if_block_17(ctx) {
 	let li;
 	let mounted;
@@ -527,12 +527,9 @@ function create_if_block_9(ctx) {
 			source = element("source");
 			track = element("track");
 			if (!src_url_equal(source.src, source_src_value = "" + (/*urlAPI*/ ctx[13] + /*video*/ ctx[15]))) attr(source, "src", source_src_value);
-			attr(source, "autoplay", "");
-			attr(source, "autobuffer", "");
-			attr(source, "autobuffered", "");
 			attr(track, "kind", "captions");
-			video_1.controls = true;
 			set_style(video_1, "width", "100%");
+			video_1.controls = true;
 		},
 		m(target, anchor) {
 			insert(target, video_1, anchor);
@@ -550,7 +547,7 @@ function create_if_block_9(ctx) {
 	};
 }
 
-// (705:4) {#if share !== ''}
+// (706:4) {#if share !== ''}
 function create_if_block_2(ctx) {
 	let hr;
 	let t0;
@@ -628,7 +625,7 @@ function create_if_block_2(ctx) {
 			attr(span0, "class", "svelte-54r9g1");
 			attr(span1, "class", "svelte-54r9g1");
 			attr(h2, "class", "svelte-54r9g1");
-			attr(a, "href", a_href_value = "/profile/" + /*share*/ ctx[14][0].email);
+			attr(a, "href", a_href_value = "/profile/" + /*share*/ ctx[14][0].username);
 			attr(a, "class", "d-flex");
 			attr(div0, "class", "Card-user justify-content-start svelte-54r9g1");
 			attr(div1, "class", "user-shared");
@@ -685,7 +682,7 @@ function create_if_block_2(ctx) {
 			if (dirty[0] & /*share*/ 16384 && t6_value !== (t6_value = /*share*/ ctx[14][0].title + "")) set_data(t6, t6_value);
 			if (dirty[0] & /*share*/ 16384 && t8_value !== (t8_value = startTime(/*share*/ ctx[14][1].create_time) + "")) set_data(t8, t8_value);
 
-			if (dirty[0] & /*share*/ 16384 && a_href_value !== (a_href_value = "/profile/" + /*share*/ ctx[14][0].email)) {
+			if (dirty[0] & /*share*/ 16384 && a_href_value !== (a_href_value = "/profile/" + /*share*/ ctx[14][0].username)) {
 				attr(a, "href", a_href_value);
 			}
 
@@ -743,7 +740,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (725:10) {#if share[1].img !== ''}
+// (726:10) {#if share[1].img !== ''}
 function create_if_block_8(ctx) {
 	let img_1;
 	let img_1_src_value;
@@ -769,7 +766,7 @@ function create_if_block_8(ctx) {
 	};
 }
 
-// (728:10) {#if share[1].video}
+// (729:10) {#if share[1].video}
 function create_if_block_7(ctx) {
 	let video_1;
 	let source;
@@ -805,7 +802,7 @@ function create_if_block_7(ctx) {
 	};
 }
 
-// (734:10) {#if share[1].url_id !== 0}
+// (736:10) {#if share[1].url_id !== 0}
 function create_if_block_3(ctx) {
 	let div;
 	let a;
@@ -892,7 +889,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (737:16) {#if meta.title}
+// (739:16) {#if meta.title}
 function create_if_block_6(ctx) {
 	let h6;
 	let t_value = /*meta*/ ctx[8].title + "";
@@ -916,7 +913,7 @@ function create_if_block_6(ctx) {
 	};
 }
 
-// (740:16) {#if meta.description}
+// (742:16) {#if meta.description}
 function create_if_block_5(ctx) {
 	let p;
 	let t_value = /*meta*/ ctx[8].description + "";
@@ -940,7 +937,7 @@ function create_if_block_5(ctx) {
 	};
 }
 
-// (743:16) {#if meta.image}
+// (745:16) {#if meta.image}
 function create_if_block_4(ctx) {
 	let img_1;
 	let img_1_src_value;
@@ -966,7 +963,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (788:10) {:else}
+// (790:10) {:else}
 function create_else_block(ctx) {
 	let sharepost;
 	let current;
@@ -1007,7 +1004,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (786:10) {#if share !== ''}
+// (788:10) {#if share !== ''}
 function create_if_block_1(ctx) {
 	let sharepost;
 	let current;
@@ -1048,7 +1045,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (808:6) {#if dataComment}
+// (810:6) {#if dataComment}
 function create_if_block(ctx) {
 	let each_1_anchor;
 	let current;
@@ -1132,14 +1129,14 @@ function create_if_block(ctx) {
 	};
 }
 
-// (809:8) {#each dataComment as comment}
+// (811:8) {#each dataComment as comment}
 function create_each_block(ctx) {
 	let comment;
 	let current;
 
 	comment = new Comment({
 			props: {
-				comment: /*comment*/ ctx[40],
+				comment: /*comment*/ ctx[42],
 				urlAPI: /*urlAPI*/ ctx[13]
 			}
 		});
@@ -1154,7 +1151,7 @@ function create_each_block(ctx) {
 		},
 		p(ctx, dirty) {
 			const comment_changes = {};
-			if (dirty[0] & /*dataComment*/ 131072) comment_changes.comment = /*comment*/ ctx[40];
+			if (dirty[0] & /*dataComment*/ 131072) comment_changes.comment = /*comment*/ ctx[42];
 			if (dirty[0] & /*urlAPI*/ 8192) comment_changes.urlAPI = /*urlAPI*/ ctx[13];
 			comment.$set(comment_changes);
 		},
@@ -1276,9 +1273,9 @@ function create_fragment(ctx) {
 	let if_block0 = current_block_type(ctx);
 
 	function select_block_type_1(ctx, dirty) {
-		if (dirty[0] & /*userMain*/ 128) show_if = null;
+		if (dirty[0] & /*user_id*/ 8) show_if = null;
 		if (/*user*/ ctx[2]) return create_if_block_15;
-		if (show_if == null) show_if = !!(/*userMain*/ ctx[7].toString() === localStorage.getItem('userId'));
+		if (show_if == null) show_if = !!(/*user_id*/ ctx[3].toString() === localStorage.getItem('userId'));
 		if (show_if) return create_if_block_17;
 	}
 
@@ -1756,7 +1753,7 @@ function create_fragment(ctx) {
 function instance($$self, $$props, $$invalidate) {
 	let { userId } = $$props;
 	let { desc, reactions, img, comments, create_time, user, id, user_id, update_time } = $$props;
-	let { name, middle_name, last_name, title, photo, email } = $$props;
+	let { name, middle_name, last_name, title, photo, email, username = 0, phone = 0 } = $$props;
 	let { userMain, urlAPI, url_id, meta } = $$props;
 	let { share_id, share_count, share = '' } = $$props;
 	let { video } = $$props;
@@ -1798,7 +1795,7 @@ function instance($$self, $$props, $$invalidate) {
 	};
 
 	const visitProfile = () => {
-		localStorage.setItem('visitProfile', user.email);
+		localStorage.setItem('visitProfile', user.username);
 	};
 
 	const likeValue = `likeValue${id}`;
@@ -2182,20 +2179,22 @@ function instance($$self, $$props, $$invalidate) {
 		if ('create_time' in $$props) $$invalidate(11, create_time = $$props.create_time);
 		if ('user' in $$props) $$invalidate(2, user = $$props.user);
 		if ('id' in $$props) $$invalidate(12, id = $$props.id);
-		if ('user_id' in $$props) $$invalidate(27, user_id = $$props.user_id);
-		if ('update_time' in $$props) $$invalidate(28, update_time = $$props.update_time);
-		if ('name' in $$props) $$invalidate(3, name = $$props.name);
-		if ('middle_name' in $$props) $$invalidate(29, middle_name = $$props.middle_name);
-		if ('last_name' in $$props) $$invalidate(4, last_name = $$props.last_name);
-		if ('title' in $$props) $$invalidate(5, title = $$props.title);
-		if ('photo' in $$props) $$invalidate(6, photo = $$props.photo);
-		if ('email' in $$props) $$invalidate(30, email = $$props.email);
-		if ('userMain' in $$props) $$invalidate(7, userMain = $$props.userMain);
+		if ('user_id' in $$props) $$invalidate(3, user_id = $$props.user_id);
+		if ('update_time' in $$props) $$invalidate(27, update_time = $$props.update_time);
+		if ('name' in $$props) $$invalidate(4, name = $$props.name);
+		if ('middle_name' in $$props) $$invalidate(28, middle_name = $$props.middle_name);
+		if ('last_name' in $$props) $$invalidate(5, last_name = $$props.last_name);
+		if ('title' in $$props) $$invalidate(6, title = $$props.title);
+		if ('photo' in $$props) $$invalidate(7, photo = $$props.photo);
+		if ('email' in $$props) $$invalidate(29, email = $$props.email);
+		if ('username' in $$props) $$invalidate(31, username = $$props.username);
+		if ('phone' in $$props) $$invalidate(32, phone = $$props.phone);
+		if ('userMain' in $$props) $$invalidate(30, userMain = $$props.userMain);
 		if ('urlAPI' in $$props) $$invalidate(13, urlAPI = $$props.urlAPI);
-		if ('url_id' in $$props) $$invalidate(31, url_id = $$props.url_id);
+		if ('url_id' in $$props) $$invalidate(33, url_id = $$props.url_id);
 		if ('meta' in $$props) $$invalidate(8, meta = $$props.meta);
-		if ('share_id' in $$props) $$invalidate(32, share_id = $$props.share_id);
-		if ('share_count' in $$props) $$invalidate(33, share_count = $$props.share_count);
+		if ('share_id' in $$props) $$invalidate(34, share_id = $$props.share_id);
+		if ('share_count' in $$props) $$invalidate(35, share_count = $$props.share_count);
 		if ('share' in $$props) $$invalidate(14, share = $$props.share);
 		if ('video' in $$props) $$invalidate(15, video = $$props.video);
 	};
@@ -2204,11 +2203,11 @@ function instance($$self, $$props, $$invalidate) {
 		reactions,
 		comments,
 		user,
+		user_id,
 		name,
 		last_name,
 		title,
 		photo,
-		userMain,
 		meta,
 		desc,
 		img,
@@ -2228,10 +2227,12 @@ function instance($$self, $$props, $$invalidate) {
 		addComment,
 		deletePost,
 		userId,
-		user_id,
 		update_time,
 		middle_name,
 		email,
+		userMain,
+		username,
+		phone,
 		url_id,
 		share_id,
 		share_count
@@ -2257,20 +2258,22 @@ class Post extends SvelteComponent {
 				create_time: 11,
 				user: 2,
 				id: 12,
-				user_id: 27,
-				update_time: 28,
-				name: 3,
-				middle_name: 29,
-				last_name: 4,
-				title: 5,
-				photo: 6,
-				email: 30,
-				userMain: 7,
+				user_id: 3,
+				update_time: 27,
+				name: 4,
+				middle_name: 28,
+				last_name: 5,
+				title: 6,
+				photo: 7,
+				email: 29,
+				username: 31,
+				phone: 32,
+				userMain: 30,
 				urlAPI: 13,
-				url_id: 31,
+				url_id: 33,
 				meta: 8,
-				share_id: 32,
-				share_count: 33,
+				share_id: 34,
+				share_count: 35,
 				share: 14,
 				video: 15
 			},

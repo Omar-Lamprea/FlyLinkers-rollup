@@ -3,19 +3,18 @@ import './App.svelte.css.proxy.js';
 import {
 	SvelteComponent,
 	append,
-	assign,
 	attr,
 	check_outros,
 	create_component,
 	destroy_component,
 	detach,
 	element,
-	get_spread_object,
-	get_spread_update,
+	empty,
 	group_outros,
 	init,
 	insert,
 	mount_component,
+	noop,
 	safe_not_equal,
 	space,
 	transition_in,
@@ -35,54 +34,124 @@ import { onMount } from '../_snowpack/pkg/svelte.js';
 import { getUserToFirestore } from './js/firebase/config.js';
 import { openChat } from './js/openChat.js';
 
-function create_if_block_1(ctx) {
-	let header;
+function create_else_block(ctx) {
+	let loader;
 	let current;
-	const header_spread_levels = [/*data*/ ctx[0], { urlLogOut }, { urlAPI }];
-	let header_props = {};
-
-	for (let i = 0; i < header_spread_levels.length; i += 1) {
-		header_props = assign(header_props, header_spread_levels[i]);
-	}
-
-	header = new Header({ props: header_props });
+	loader = new Loader({});
 
 	return {
 		c() {
-			create_component(header.$$.fragment);
+			create_component(loader.$$.fragment);
 		},
 		m(target, anchor) {
-			mount_component(header, target, anchor);
+			mount_component(loader, target, anchor);
 			current = true;
 		},
-		p(ctx, dirty) {
-			const header_changes = (dirty & /*data, urlLogOut, urlAPI*/ 1)
-			? get_spread_update(header_spread_levels, [
-					dirty & /*data*/ 1 && get_spread_object(/*data*/ ctx[0]),
-					dirty & /*urlLogOut*/ 0 && { urlLogOut },
-					dirty & /*urlAPI*/ 0 && { urlAPI }
-				])
-			: {};
-
-			header.$set(header_changes);
-		},
+		p: noop,
 		i(local) {
 			if (current) return;
-			transition_in(header.$$.fragment, local);
+			transition_in(loader.$$.fragment, local);
 			current = true;
 		},
 		o(local) {
-			transition_out(header.$$.fragment, local);
+			transition_out(loader.$$.fragment, local);
 			current = false;
 		},
 		d(detaching) {
-			destroy_component(header, detaching);
+			destroy_component(loader, detaching);
 		}
 	};
 }
 
-// (199:4) {#if chatFlag && userMain && getUserMainToFirestore}
+// (197:0) {#if data && getUserMainToFirestore}
 function create_if_block(ctx) {
+	let header;
+	let t0;
+	let main;
+	let router;
+	let t1;
+	let current;
+
+	header = new Header({
+			props: { data: /*data*/ ctx[0], urlLogOut, urlAPI }
+		});
+
+	router = new Router({ props: { routes } });
+	let if_block = /*chatFlag*/ ctx[3] && /*userMain*/ ctx[1] && /*getUserMainToFirestore*/ ctx[2] && create_if_block_1(ctx);
+
+	return {
+		c() {
+			create_component(header.$$.fragment);
+			t0 = space();
+			main = element("main");
+			create_component(router.$$.fragment);
+			t1 = space();
+			if (if_block) if_block.c();
+			attr(main, "id", "main");
+			attr(main, "class", "container-fluid container-lg svelte-4xadag");
+		},
+		m(target, anchor) {
+			mount_component(header, target, anchor);
+			insert(target, t0, anchor);
+			insert(target, main, anchor);
+			mount_component(router, main, null);
+			append(main, t1);
+			if (if_block) if_block.m(main, null);
+			current = true;
+		},
+		p(ctx, dirty) {
+			const header_changes = {};
+			if (dirty & /*data*/ 1) header_changes.data = /*data*/ ctx[0];
+			header.$set(header_changes);
+
+			if (/*chatFlag*/ ctx[3] && /*userMain*/ ctx[1] && /*getUserMainToFirestore*/ ctx[2]) {
+				if (if_block) {
+					if_block.p(ctx, dirty);
+
+					if (dirty & /*chatFlag, userMain, getUserMainToFirestore*/ 14) {
+						transition_in(if_block, 1);
+					}
+				} else {
+					if_block = create_if_block_1(ctx);
+					if_block.c();
+					transition_in(if_block, 1);
+					if_block.m(main, null);
+				}
+			} else if (if_block) {
+				group_outros();
+
+				transition_out(if_block, 1, 1, () => {
+					if_block = null;
+				});
+
+				check_outros();
+			}
+		},
+		i(local) {
+			if (current) return;
+			transition_in(header.$$.fragment, local);
+			transition_in(router.$$.fragment, local);
+			transition_in(if_block);
+			current = true;
+		},
+		o(local) {
+			transition_out(header.$$.fragment, local);
+			transition_out(router.$$.fragment, local);
+			transition_out(if_block);
+			current = false;
+		},
+		d(detaching) {
+			destroy_component(header, detaching);
+			if (detaching) detach(t0);
+			if (detaching) detach(main);
+			destroy_component(router);
+			if (if_block) if_block.d();
+		}
+	};
+}
+
+// (203:5) {#if chatFlag && userMain && getUserMainToFirestore}
+function create_if_block_1(ctx) {
 	let chat;
 	let current;
 
@@ -123,101 +192,70 @@ function create_if_block(ctx) {
 }
 
 function create_fragment(ctx) {
-	let t0;
-	let main;
-	let router;
-	let t1;
+	let current_block_type_index;
+	let if_block;
+	let if_block_anchor;
 	let current;
-	let if_block0 = /*data*/ ctx[0] && create_if_block_1(ctx);
-	router = new Router({ props: { routes } });
-	let if_block1 = /*chatFlag*/ ctx[3] && /*userMain*/ ctx[1] && /*getUserMainToFirestore*/ ctx[2] && create_if_block(ctx);
+	const if_block_creators = [create_if_block, create_else_block];
+	const if_blocks = [];
+
+	function select_block_type(ctx, dirty) {
+		if (/*data*/ ctx[0] && /*getUserMainToFirestore*/ ctx[2]) return 0;
+		return 1;
+	}
+
+	current_block_type_index = select_block_type(ctx, -1);
+	if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
 
 	return {
 		c() {
-			if (if_block0) if_block0.c();
-			t0 = space();
-			main = element("main");
-			create_component(router.$$.fragment);
-			t1 = space();
-			if (if_block1) if_block1.c();
-			attr(main, "id", "main");
-			attr(main, "class", "container-fluid container-lg svelte-4xadag");
+			if_block.c();
+			if_block_anchor = empty();
 		},
 		m(target, anchor) {
-			if (if_block0) if_block0.m(target, anchor);
-			insert(target, t0, anchor);
-			insert(target, main, anchor);
-			mount_component(router, main, null);
-			append(main, t1);
-			if (if_block1) if_block1.m(main, null);
+			if_blocks[current_block_type_index].m(target, anchor);
+			insert(target, if_block_anchor, anchor);
 			current = true;
 		},
 		p(ctx, [dirty]) {
-			if (/*data*/ ctx[0]) {
-				if (if_block0) {
-					if_block0.p(ctx, dirty);
+			let previous_block_index = current_block_type_index;
+			current_block_type_index = select_block_type(ctx, dirty);
 
-					if (dirty & /*data*/ 1) {
-						transition_in(if_block0, 1);
-					}
-				} else {
-					if_block0 = create_if_block_1(ctx);
-					if_block0.c();
-					transition_in(if_block0, 1);
-					if_block0.m(t0.parentNode, t0);
-				}
-			} else if (if_block0) {
+			if (current_block_type_index === previous_block_index) {
+				if_blocks[current_block_type_index].p(ctx, dirty);
+			} else {
 				group_outros();
 
-				transition_out(if_block0, 1, 1, () => {
-					if_block0 = null;
+				transition_out(if_blocks[previous_block_index], 1, 1, () => {
+					if_blocks[previous_block_index] = null;
 				});
 
 				check_outros();
-			}
+				if_block = if_blocks[current_block_type_index];
 
-			if (/*chatFlag*/ ctx[3] && /*userMain*/ ctx[1] && /*getUserMainToFirestore*/ ctx[2]) {
-				if (if_block1) {
-					if_block1.p(ctx, dirty);
-
-					if (dirty & /*chatFlag, userMain, getUserMainToFirestore*/ 14) {
-						transition_in(if_block1, 1);
-					}
+				if (!if_block) {
+					if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
+					if_block.c();
 				} else {
-					if_block1 = create_if_block(ctx);
-					if_block1.c();
-					transition_in(if_block1, 1);
-					if_block1.m(main, null);
+					if_block.p(ctx, dirty);
 				}
-			} else if (if_block1) {
-				group_outros();
 
-				transition_out(if_block1, 1, 1, () => {
-					if_block1 = null;
-				});
-
-				check_outros();
+				transition_in(if_block, 1);
+				if_block.m(if_block_anchor.parentNode, if_block_anchor);
 			}
 		},
 		i(local) {
 			if (current) return;
-			transition_in(if_block0);
-			transition_in(router.$$.fragment, local);
-			transition_in(if_block1);
+			transition_in(if_block);
 			current = true;
 		},
 		o(local) {
-			transition_out(if_block0);
-			transition_out(router.$$.fragment, local);
-			transition_out(if_block1);
+			transition_out(if_block);
 			current = false;
 		},
 		d(detaching) {
-			if (if_block0) if_block0.d(detaching);
-			if (detaching) detach(t0);
-			if (detaching) detach(main);
-			destroy_component(router);
-			if (if_block1) if_block1.d();
+			if_blocks[current_block_type_index].d(detaching);
+			if (detaching) detach(if_block_anchor);
 		}
 	};
 }
@@ -270,10 +308,16 @@ function instance($$self, $$props, $$invalidate) {
 			// console.log(response);
 			if (response.ok) {
 				const content = await response.json();
+
+				// console.log(content);
 				$$invalidate(0, data = content.User);
-				await getUserToFirestore(data);
+
+				// await getUserToFirestore(data)
 				$$invalidate(2, getUserMainToFirestore = await getUserToFirestore(data));
 
+				// localStorage.setItem('userFirebase', JSON.stringify(getUserMainToFirestore))
+				// console.log(data);
+				// console.log(getUserMainToFirestore);
 				if (!localStorage.getItem('profilePhoto')) {
 					localStorage.setItem('profilePhoto', data.photo);
 				}
@@ -312,8 +356,8 @@ function instance($$self, $$props, $$invalidate) {
 			if (e.target.id === `chat-${e.target.dataset.chat}` || e.target.id === `btInitChat-${e.target.dataset.chat}`) {
 				$$invalidate(4, id = parseInt(e.target.dataset.chat));
 				await openChat(id);
-				console.log(id);
 
+				// console.log(id);
 				if (localStorage.getItem(`chat-${id}`)) {
 					$$invalidate(3, chatFlag = true);
 				}

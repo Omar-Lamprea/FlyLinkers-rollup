@@ -176,13 +176,17 @@
   }
   
   main{
-    padding-top: 14rem;
+    padding-top: 11rem;
     padding-bottom: 5rem;
   }
-
+  @media screen and (max-width: 1200px){
+    main{
+      padding-top: 13rem;
+    }
+  }
   @media screen and (max-width: 768px){
     main{
-      padding-top: 9rem;
+      padding-top: 10rem;
     }
     :global(.Default-containers){
       padding: 1rem 0;

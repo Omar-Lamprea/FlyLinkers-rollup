@@ -2,7 +2,7 @@
 <script>
   import {onMount} from 'svelte'
   import {db, validateGroup, getUser, getMessage, getGroupUser} from '../../../js/firebase/config.js'
-  import { collection, orderBy, getDoc, updateDoc, query, doc, onSnapshot, limit} from 'firebase/firestore';
+  import { collection, orderBy, getDoc, updateDoc, query, doc, onSnapshot, limit, where} from 'firebase/firestore';
   import startTime from '../../../js/startTime'
 
   export let urlAPI, id, groups
@@ -29,6 +29,7 @@
       const dataMain = JSON.parse(localStorage.getItem('data'))
       const userName = `${dataMain.name} ${dataMain.last_name}`
       const dataMessage = doc.data()
+      // console.log(dataMessage);
 
       messageId = doc.id
       seen = dataMessage.seen
@@ -36,36 +37,42 @@
       lastMessage = dataMessage.messageText
       time = dataMessage.sentAt.toDate()
 
-      if (!seen && template.sentBy !== userName) {
-        // countMessages = 0
+      // if (!seen && template.sentBy !== userName) {
+      if (!seen) {
+
+        // countMessages += 1
         // localStorage.setItem('countMessages', `${parseInt(localStorage.getItem('countMessages')) + 1}`)
         // countMessages = count
-        notificacionsChatsBubble.classList.remove('d-none')
+        // notificacionsChatsBubble.classList.remove('d-none')
         // notificacionsChatsBubble.textContent = localStorage.getItem('countMessages')
       }
+      // console.log(countMessages);
     });
   })
+
 
   const seenMessage = async() =>{
     // console.log('update seen =)', groups, messageId);
     if (!template.seen) {
       const dataMain = JSON.parse(localStorage.getItem('data'))
       const userName = `${dataMain.name} ${dataMain.last_name}`
-      if(template.sentBy !== userName){
-        console.log('actualizando visto');
-        const updateSeen = doc(db, `message/${groups}/messages/${messageId}`)
-        await updateDoc(updateSeen,{
-          seen : true
-        })
-        localStorage.setItem('countMessages', `${parseInt(localStorage.getItem('countMessages')) - 1}`)
-        // notificacionsChatsBubble.textContent -= 1
-        // notificacionsChatsBubble.textContent = localStorage.getItem('countMessages')
-        notificacionsChatsBubble.textContent = '!'
 
-        if (localStorage.getItem('countMessages') === '0') {
-          console.log('ocultar');
-          notificacionsChatsBubble.classList.add('d-none')
-        }
+      if(template.sentBy !== userName){
+
+        // const citiesRef = collection(db, "cities");
+        // const q = query(citiesRef, where("state", "==", "CA"));
+        const docRef = collection(db, `message/${groups}/messages`)
+        const q = query(docRef, where('seen', '==', false))
+        const snapDocs = onSnapshot(q, docs =>{
+          docs.forEach(el => {
+            const updateSeen = doc(db, `message/${groups}/messages/${el.id}`)
+            updateDoc(updateSeen,{
+              seen : true
+            })
+          });
+        })
+
+        notificacionsChatsBubble.classList.toggle('substractCounter')
       }
     }
   }
@@ -87,6 +94,10 @@
     const response = await fetch(`${urlAPI}/user/create/?id=${chatId}`)
     const content = await response.json()
     data = content[0]
+    const ulChatList = document.getElementById('ulChatList')
+    ulChatList.classList.toggle('li-active')
+
+
     name = `${data.name} ${data.last_name}`
   }
   

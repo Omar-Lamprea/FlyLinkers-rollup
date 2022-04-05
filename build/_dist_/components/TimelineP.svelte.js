@@ -60,7 +60,7 @@ function get_each_context_2(ctx, list, i) {
 	return child_ctx;
 }
 
-// (146:6) {#if email === dataJson.email}
+// (148:6) {#if email === dataJson.email}
 function create_if_block_5(ctx) {
 	let div;
 	let p;
@@ -114,7 +114,7 @@ function create_if_block_5(ctx) {
 	};
 }
 
-// (152:6) {#if experiences !== undefined}
+// (154:6) {#if experiences !== undefined}
 function create_if_block_4(ctx) {
 	let experience;
 	let current;
@@ -159,7 +159,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (157:6) {#if post}
+// (159:6) {#if post}
 function create_if_block_2(ctx) {
 	let current_block_type_index;
 	let if_block;
@@ -229,7 +229,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (164:8) {:else}
+// (166:8) {:else}
 function create_else_block_1(ctx) {
 	let each_1_anchor;
 	let current;
@@ -313,7 +313,7 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (158:8) {#if userMain}
+// (160:8) {#if userMain}
 function create_if_block_3(ctx) {
 	let each_1_anchor;
 	let current;
@@ -397,7 +397,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (166:10) {#each post as dataPost}
+// (168:10) {#each post as dataPost}
 function create_each_block_3(ctx) {
 	let post_1;
 	let current;
@@ -452,7 +452,7 @@ function create_each_block_3(ctx) {
 	};
 }
 
-// (160:10) {#each post as dataPost}
+// (162:10) {#each post as dataPost}
 function create_each_block_2(ctx) {
 	let post_1;
 	let current;
@@ -507,7 +507,7 @@ function create_each_block_2(ctx) {
 	};
 }
 
-// (174:6) {#if $posts}
+// (176:6) {#if $posts}
 function create_if_block(ctx) {
 	let current_block_type_index;
 	let if_block;
@@ -577,7 +577,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (181:8) {:else}
+// (183:8) {:else}
 function create_else_block(ctx) {
 	let each_1_anchor;
 	let current;
@@ -661,7 +661,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (175:8) {#if userMain}
+// (177:8) {#if userMain}
 function create_if_block_1(ctx) {
 	let each_1_anchor;
 	let current;
@@ -745,7 +745,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (183:10) {#each $posts as dataPost}
+// (185:10) {#each $posts as dataPost}
 function create_each_block_1(ctx) {
 	let post_1;
 	let current;
@@ -800,7 +800,7 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (177:10) {#each $posts as dataPost}
+// (179:10) {#each $posts as dataPost}
 function create_each_block(ctx) {
 	let post_1;
 	let current;
@@ -921,7 +921,7 @@ function create_fragment(ctx) {
 			if (if_block3) if_block3.c();
 			t7 = space();
 			div0 = element("div");
-			div0.textContent = "Sorry! there aren't more posts.";
+			div0.textContent = "Sorry!, we can't find more post to show you.";
 			attr(input, "type", "checkbox");
 			attr(input, "id", "reloadPostCheck");
 			attr(input, "name", "reloadPost");
@@ -1189,21 +1189,6 @@ function instance($$self, $$props, $$invalidate) {
 		}
 	};
 
-	document.addEventListener('scroll', async e => {
-		if (window.innerHeight + window.scrollY >= main.offsetHeight - 1 && !window.location.href.includes('settings') && window.location.hash.length === 9) {
-			if (countPost !== null) {
-				getPosts();
-			} else {
-				setTimeout(
-					() => {
-						endPosts.classList.remove('d-none');
-					},
-					1000
-				);
-			}
-		}
-	});
-
 	onMount(async () => {
 		await getProfile();
 
@@ -1212,6 +1197,21 @@ function instance($$self, $$props, $$invalidate) {
 		}
 
 		reloadPosts();
+
+		document.addEventListener('scroll', async e => {
+			if (window.innerHeight + window.scrollY >= main.offsetHeight - 1 && !window.location.href.includes('settings') && window.location.hash.length === 9) {
+				if (countPost !== null) {
+					getPosts();
+				} else {
+					setTimeout(
+						() => {
+							endPosts.classList.remove('d-none');
+						},
+						1000
+					);
+				}
+			}
+		});
 	});
 
 	$$self.$$set = $$props => {

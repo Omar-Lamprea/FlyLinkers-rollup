@@ -133,10 +133,22 @@
               {/if}
 
               {#if infoPost.video}
+                {#if infoPost.video.includes('https://www.youtube.com/')}
+                  <iframe
+                    width="100%" 
+                    height="350" 
+                    src={infoPost.video} 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                  </iframe>
+                {:else}
                 <video  controls style="width: 100%;">
                   <source src="{urlAPI}{infoPost.video}">
                   <track kind="captions">
                 </video>
+                {/if}
               {/if}
 
               {#if infoPost.url_id !== 0}

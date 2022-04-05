@@ -48,22 +48,26 @@
         usergroups.set(groups)
         
         groups.forEach(chat => {
-          const q = query(collection(db, `message/${chat}/messages`), orderBy('sentAt', 'desc'), limit(1))
+          const q = query(collection(db, `message/${chat}/messages`), orderBy('sentAt', 'desc'), limit(2))
           const snapChatId = onSnapshot(q, col =>{
-            col.forEach(doc => {
-              // countMessages = 0
-              if (!doc.data().seen) {
-                // console.log(doc.data());
+
+            // console.log('1', col.docs[0].data(), '2', col.docs[1].data());
+
+            if (col.docs.length === 2) {
+              if (col.docs[1].data().seen && !col.docs[0].data().seen ) {
+                console.log('entre al 2');
                 countMessages += 1
-                console.log(countMessages);
-                localStorage.setItem('countMessages', countMessages )
-                console.log(countMessages);
               }
-            });
+            }else{
+              if (!col.docs[0].data().seen) {
+                console.log('entre al 1');
+                countMessages += 1
+              }
+            }
           })
         });
 
-
+        
 
 
         // groups.forEach(chat => {
@@ -267,8 +271,17 @@
     }
   }
 
+
   onMount(()=>{
     getUserNotifications()
+
+
+    const observer = new MutationObserver(()=>{
+      console.log('reducir contador');
+      countMessages -= 1
+    })
+    observer.observe(notificacionsChatsBubble, {attributes:true})
+
   })
 
 </script>
@@ -378,9 +391,13 @@
     </a>
   </div>
   <div class="icon Header-nav-comment mx-3 fs-3 position-relative">
-    <div id="notificacionsChatsBubble" class="notificacions-bubble d-none">!</div>
+    {#if countMessages > 0}
+      <div id="notificacionsChatsBubble" class="notificacions-bubble">{countMessages}</div>
+    {:else}
+      <div id="notificacionsChatsBubble" class="notificacions-bubble d-none"></div>
+    {/if}
     <i class="fas fa-comment dropdown-toggle" id="chats" data-bs-toggle="dropdown" aria-expanded="false"></i>
-    <ul class="dropdown-menu" aria-labelledby="chats">
+    <ul class="dropdown-menu" aria-labelledby="chats" id="ulChatList">
       {#each $usergroups as groups}
          <ChatList {groups} {urlAPI} {id}/>
       {:else}

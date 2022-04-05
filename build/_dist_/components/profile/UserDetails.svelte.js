@@ -774,7 +774,7 @@ function instance($$self, $$props, $$invalidate) {
 				sender_id: parseInt(userMain),
 				name: `${contentUserDate[0].name} ${contentUserDate[0].last_name}`,
 				photo: contentUserDate[0].photo,
-				email: contentUserDate[0].email,
+				email: contentUserDate[0].username,
 				create_at: new Date(),
 				seen: false
 			};

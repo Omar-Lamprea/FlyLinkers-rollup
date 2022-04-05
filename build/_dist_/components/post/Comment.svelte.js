@@ -79,10 +79,10 @@ function create_fragment(ctx) {
 			if (!src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[1] + /*comment*/ ctx[0].user.photo))) attr(img, "src", img_src_value);
 			attr(img, "alt", "");
 			attr(img, "class", "svelte-1c8dgly");
-			attr(a0, "href", a0_href_value = "/profile/" + /*comment*/ ctx[0].user.email);
+			attr(a0, "href", a0_href_value = "/profile/" + /*comment*/ ctx[0].user.username);
 			attr(a0, "class", "d-flex");
 			attr(p0, "class", "User-comment svelte-1c8dgly");
-			attr(a1, "href", a1_href_value = "/profile/" + /*comment*/ ctx[0].user.email);
+			attr(a1, "href", a1_href_value = "/profile/" + /*comment*/ ctx[0].user.username);
 			attr(a1, "class", "d-flex");
 			attr(p1, "class", "startTime svelte-1c8dgly");
 			attr(div0, "class", "userInfo mb-1 d-flex justify-content-between svelte-1c8dgly");
@@ -127,14 +127,14 @@ function create_fragment(ctx) {
 				attr(img, "src", img_src_value);
 			}
 
-			if (dirty & /*comment*/ 1 && a0_href_value !== (a0_href_value = "/profile/" + /*comment*/ ctx[0].user.email)) {
+			if (dirty & /*comment*/ 1 && a0_href_value !== (a0_href_value = "/profile/" + /*comment*/ ctx[0].user.username)) {
 				attr(a0, "href", a0_href_value);
 			}
 
 			if (dirty & /*comment*/ 1 && t1_value !== (t1_value = /*comment*/ ctx[0].user.name + "")) set_data(t1, t1_value);
 			if (dirty & /*comment*/ 1 && t3_value !== (t3_value = /*comment*/ ctx[0].user.last_name + "")) set_data(t3, t3_value);
 
-			if (dirty & /*comment*/ 1 && a1_href_value !== (a1_href_value = "/profile/" + /*comment*/ ctx[0].user.email)) {
+			if (dirty & /*comment*/ 1 && a1_href_value !== (a1_href_value = "/profile/" + /*comment*/ ctx[0].user.username)) {
 				attr(a1, "href", a1_href_value);
 			}
 
@@ -153,6 +153,7 @@ function create_fragment(ctx) {
 
 function instance($$self, $$props, $$invalidate) {
 	let { comment, urlAPI } = $$props;
+	console.log(comment);
 
 	$$self.$$set = $$props => {
 		if ('comment' in $$props) $$invalidate(0, comment = $$props.comment);
