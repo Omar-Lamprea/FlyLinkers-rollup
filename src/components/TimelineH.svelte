@@ -4,6 +4,8 @@
   import Loader from './Loader.svelte'
   import {onMount} from 'svelte'
   import { writable } from 'svelte/store';
+  import { translate } from '../js/translate';
+
 
   export let id;
   export let urlAPI;
@@ -60,8 +62,8 @@
     getPosts(1)
   })
 
-  onMount(()=>{
-    getPosts()
+  onMount(async ()=>{
+    await getPosts()
     reloadPosts()
 
     document.addEventListener('scroll', async (e)=>{
@@ -75,6 +77,8 @@
         }
       }
     })
+
+    // translate()
 
   })
 </script>

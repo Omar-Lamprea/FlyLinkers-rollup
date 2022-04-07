@@ -90,7 +90,7 @@
 
 <div id="containerDescription" class="Default-containers container-active">
   <div class="header-description-userMenu d-flex justify-content-between align-items-center">
-    <p class="section-title">About me</p>
+    <p data-translate="title-about-me" class="section-title">About me</p>
     <i id="toggleDropDescriptionInfo" class="fa-solid fa-square-caret-down dropdown-active" on:click={dropdownUserInfo}></i>
   </div>
 
@@ -98,14 +98,14 @@
      <form action="" class="d-flex flex-column px-3 px-md-0">
        <div class="about mb-3 d-md-flex justify-content-between">
          <div class="aboutMe">
-           <label for="aboutMe">About Me*</label>
+           <label data-translate="about-me" for="aboutMe">About Me*</label>
            <textarea name="aboutMe" id="aboutMe" rows="3" value={dataProfile.about}></textarea>
          </div>
        </div>
        
        <i id="successProfile" class="fa-solid fa-check text-center icon-success d-none"></i>
        <i id="failProfile" class="fa-solid fa-bug text-center icon-success fail d-none"></i>
-       <button type="submit" class="btn btn-outline-primary btn-flylinkers btn-post mt-3" on:click|preventDefault={update}>Save</button>
+       <button data-translate="btn-save" type="submit" class="btn btn-outline-primary btn-flylinkers btn-post mt-3" on:click|preventDefault={update}>Save</button>
      </form>
   <!-- {:else}
     <Loader />

@@ -60,7 +60,7 @@
         <span>{title}</span>
       </div>
       <div class="Profile-card-text my-2">
-        <p>Who viewed your profile-card <span>3.8K</span></p> 
+        <p data-translate="who-viewed">Who viewed your profile-card <span>3.8K</span></p> 
         <p>Views of your post <span>3.8K</span></p> 
       </div>
     </div>

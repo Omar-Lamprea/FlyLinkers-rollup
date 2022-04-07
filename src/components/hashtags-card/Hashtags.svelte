@@ -55,7 +55,7 @@
 </style>
 
 <div class="Hashtags d-none d-lg-block Default-containers px-0 pb-0">
-  <h6>Followed Hashtags</h6>
+  <h6 data-translate="title-hashtags">Followed Hashtags</h6>
   {#each data as hashtag}
     <Hashtag {...hashtag}/>
   {:else}

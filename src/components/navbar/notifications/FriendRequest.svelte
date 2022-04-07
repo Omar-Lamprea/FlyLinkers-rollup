@@ -144,13 +144,13 @@
               </div>
             </a>
             <div class="btns-request">
-              <button class="btn-request btn-success" on:click={acceptRequest(request.id, request.username)}>Accept</button>
-              <button id="declineRequest" class="btn-request btn-decline" on:click={declineRequest(request.id, request.email)}>Decline</button>
+              <button data-translate="nav-acept-request" class="btn-request btn-success" on:click={acceptRequest(request.id, request.username)}>Accept</button>
+              <button  data-translate="nav-deline-request" id="declineRequest" class="btn-request btn-decline" on:click={declineRequest(request.id, request.email)}>Decline</button>
             </div>
           </span>
       </li>
     {:else}
-       <p class="text-center">You haven't news</p>
+       <p data-translate="nav-no-request" class="text-center">You haven't news</p>
     {/each}
   </ul>
 </div>

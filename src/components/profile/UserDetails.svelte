@@ -128,9 +128,9 @@
     font-size: 14px;
   }
   .Profile-card-info p span{
-    color: var(--main-color);
+    /* color: var(--main-color); */
     font-size: inherit;
-    font-weight: bold;
+    /* font-weight: bold; */
   }
   .Profile-card-user{
     color: var(--main-color);
@@ -147,7 +147,7 @@
     width: max-content;
   }
 
-  .Profile-card-text i, .Profile-card-text span{
+  .Profile-card-text i{
     color: var(--main-color);
     font-weight: bold;
   }
@@ -199,7 +199,7 @@
               {#if email === dataJson.email}
                 <p class="edit-description" on:click={editDescription}>
                   <i class="fas fa-pen"></i>
-                  About me...
+                  <span data-translate="profile-about-me">About me...</span> 
                 </p>
               {/if}
               <div class="Profile-description-text my-2">
@@ -208,11 +208,11 @@
                 {/if}
                 <div id="editAboutMe" class="d-none d-flex flex-column">
                   <textarea name="" id="textArea" on:keyup={valueTextArea} cols="30" rows="3" style="width: 100%;" value={aboutMe}></textarea>
-                  <button class="btn btn-outline-primary btn-flylinkers m-0 d-flex align-self-end" on:click={updateDescription}>Update</button>
+                  <button class="btn btn-outline-primary btn-flylinkers m-0 mt-1 d-flex align-self-end" on:click={updateDescription}>Update</button>
                 </div>
               </div>
               <div class="Profile-description-contact">
-                <p>Email</p>
+                <p data-translate="profile-email">Email</p>
                 <p style="color: var(--main-color); cursor:pointer">{email}</p>
               </div>
             </div>
@@ -224,7 +224,10 @@
       <div class="Profile-card-text text-end d-flex flex-column align-items-end mt-0 mt-md-3 px-3 px-md-0">
         {#if email === dataJson.email}
         <a href="/settings" use:link use:active>
-          <p type="button" class="mb-3" style="color:rgba(38, 38, 38, 07)"><i class="fas fa-pen"></i> Edit profile</p>
+          <p type="button" class="mb-3" style="color:rgba(38, 38, 38, 07)">
+            <i class="fas fa-pen"></i>
+            <span data-translate="edit-profile">Edit profile</span>
+          </p>
         </a>
           <CoverPhotoModal {id} {urlAPI}/>
           <ProfilePhotoModal {id} {urlAPI}/>
@@ -234,8 +237,11 @@
             <p>Views of your post <span>3.8K</span></p> 
           </div>
           <div class="Profile-card-buttons mt-5">
-            <button class="btn btn-outline-primary btn-flylinkers disabled" disabled><i class="fas fa-pen"></i> I have interest in...</button>
-            <button class="btn btn-outline-primary btn-flylinkers disabled" disabled>Add selection</button>
+            <button class="btn btn-outline-primary btn-flylinkers disabled" disabled>
+              <i class="fas fa-pen"></i>
+              <span data-translate="profile-btn-interests">I have interest in...</span> 
+            </button>
+            <button data-translate="profile-btn-selection" class="btn mt-0 mt-lg-1 mt-xl-0 btn-outline-primary btn-flylinkers disabled" disabled>Add section</button>
           </div>
         {:else}
           <div class="d-none" on:load={searchFriends()}></div>

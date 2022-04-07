@@ -12,10 +12,19 @@
   import Chat from './views/Chat.svelte'
   import {onMount} from 'svelte'
 
-
   import {getUserToFirestore} from './js/firebase/config.js'
   import {openChat} from './js/openChat.js'
+  // import {translate} from './js/translate'
 
+
+
+  if(!localStorage.getItem('lang')){
+    if (navigator.language.includes('en')) {
+      localStorage.setItem('lang', 'En')
+    } else {
+      localStorage.setItem('lang', 'Es')
+    }
+  }
 
   const urlUser = window.location.pathname
   const urluserProfile = urlUser.slice(9)
@@ -65,7 +74,6 @@
         // localStorage.setItem('userFirebase', JSON.stringify(getUserMainToFirestore))
         // console.log(data);
         // console.log(getUserMainToFirestore);
-
         if (!localStorage.getItem('profilePhoto')) {
           localStorage.setItem('profilePhoto', data.photo)
         }
@@ -116,8 +124,8 @@
     localStorage.removeItem('chat')
   }
   
-  onMount(()=>{
-    getData()
+  onMount(async()=>{
+    await getData()
     loadChatList()
   })
 
@@ -198,10 +206,10 @@
 </style>
 
 
+
 {#if data && getUserMainToFirestore}
    <Header {data} {urlLogOut} {urlAPI}/>
 
-   
    <main id="main" class="container-fluid container-lg">
      <Router {routes}/>
      {#if chatFlag && userMain && getUserMainToFirestore}

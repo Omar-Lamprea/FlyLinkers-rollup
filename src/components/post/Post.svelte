@@ -7,6 +7,8 @@
   import { onMount } from "svelte";
   import {commentsFirebase} from '../../js/firebase/commentsFirebase.js'
   import {reactionsFirebase} from '../../js/firebase/reactionsFirebase.js'
+  import { translate } from '../../js/translate';
+
 
 
   export let userId;
@@ -437,8 +439,9 @@
     }
   }
   
-  onMount(()=>{
-    reactionUser()
+  onMount(async ()=>{
+    await reactionUser()
+    translate()
   })
 </script>
 
@@ -788,8 +791,10 @@
         </div>
         <div class="Reaction Header-nav-comment mx-2">
           <i class="fas fa-comment"></i>
-          <span on:click={showComments}>
-            <span>{comments}</span> Comments</span>
+          <span data-translate="comments" on:click={showComments}>
+            <span>{comments}</span>
+            Comments
+          </span>
         </div>
       </div>
     </div>
@@ -806,7 +811,7 @@
         </button>
         <div class="Action Header-nav-comments" on:click={showComments}>
           <i class="fa-comments far"></i>
-          <span>Comment</span>
+          <span data-translate="comment">Comment</span>
         </div>
         <div class="Action Header-nav-share">
           {#if share !== ''}

@@ -402,7 +402,7 @@
          <ChatList {groups} {urlAPI} {id}/>
       {:else}
         <li class="dropdown-item chatList d-flex">
-          <span>You haven't started any chat</span>
+          <span data-translate="nav-no-chat">You haven't started any chat</span>
         </li>
       {/each}
     </ul>
@@ -416,37 +416,41 @@
          <div class="notificacions-bubble">{countBubble}</div>
       {/if}
       <ul class="dropdown-menu" aria-labelledby="notifications">
-        {#each notificationsList as notification}
-          <!-- friendRequest -->
-          {#if typeof(notification.id) === 'string'}
-             <li class="d-flex notificationsList dropdown-item" data-email={notification.id}>
-              <a on:click={visitProfile(notification.id)} href="/profile/{notification.id}" use:link use:active class="d-flex">
-                <img src="{urlAPI}/{notification.photo}" alt="userImage">
-                <span>
-                  <div class="data-user-time d-flex justify-content-between">
-                    <p class="notification-user-name">{notification.name}</p>
-                    <p class="notification-time">{startTime(notification.date.toISOString())}</p>
-                  </div>
-                  <p class="notification-desc">{notification.desc}</p>
-                </span>
-              </a>
-            </li>
-          {:else}
-            <!-- comment or reaction post -->
-             <li class="d-flex notificationsList dropdown-item" data-id={notification.id}>
-              <a href="/post/{notification.id}" use:link use:active class="d-flex" on:click={reload}>
-                <img src="{urlAPI}/{notification.photo}" alt="userImage">
-                <span>
-                  <div class="data-user-time d-flex justify-content-between">
-                    <p class="notification-user-name">{notification.name}</p>
-                    <p class="notification-time">{startTime(notification.date.toISOString())}</p>
-                  </div>
-                  <p class="notification-desc">{notification.desc}</p>
-                </span>
-              </a>
-            </li>
-            {/if}
-        {/each}
+        {#if notificationsList.length > 0}
+          {#each notificationsList as notification}
+            <!-- friendRequest -->
+            {#if typeof(notification.id) === 'string'}
+              <li class="d-flex notificationsList dropdown-item" data-email={notification.id}>
+                <a on:click={visitProfile(notification.id)} href="/profile/{notification.id}" use:link use:active class="d-flex">
+                  <img src="{urlAPI}/{notification.photo}" alt="userImage">
+                  <span>
+                    <div class="data-user-time d-flex justify-content-between">
+                      <p class="notification-user-name">{notification.name}</p>
+                      <p class="notification-time">{startTime(notification.date.toISOString())}</p>
+                    </div>
+                    <p class="notification-desc">{notification.desc}</p>
+                  </span>
+                </a>
+              </li>
+            {:else}
+              <!-- comment or reaction post -->
+              <li class="d-flex notificationsList dropdown-item" data-id={notification.id}>
+                <a href="/post/{notification.id}" use:link use:active class="d-flex" on:click={reload}>
+                  <img src="{urlAPI}/{notification.photo}" alt="userImage">
+                  <span>
+                    <div class="data-user-time d-flex justify-content-between">
+                      <p class="notification-user-name">{notification.name}</p>
+                      <p class="notification-time">{startTime(notification.date.toISOString())}</p>
+                    </div>
+                    <p class="notification-desc">{notification.desc}</p>
+                  </span>
+                </a>
+              </li>
+              {/if}
+          {/each}
+        {:else}
+          <p data-translate="nav-no-news">you haven't news</p>
+        {/if}
       </ul>
     </div>
   </div>
@@ -467,10 +471,10 @@
         <ul class="dropdown-menu" aria-labelledby="settings">
           <li>
             <a href="/settings" use:link use:active>
-              <span class="dropdown-item">Settings</span>
+              <span data-translate="nav-settings" class="dropdown-item">Settings</span>
             </a>
           </li>
-          <li><span class="dropdown-item" on:click={logOut}>Log Out</span></li>
+          <li><span data-translate="nav-log-out" class="dropdown-item" on:click={logOut}>Log Out</span></li>
         </ul>
       </div>
   </div>

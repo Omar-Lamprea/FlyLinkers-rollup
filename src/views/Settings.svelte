@@ -1,10 +1,14 @@
 <script>
+  import {onMount} from 'svelte'
   import SidebarRight from '../components/SidebarRight.svelte'
   import InfoUser from '../components/settings-user/InfoUser.svelte'
   import InfoProfile from '../components/settings-user/InfoProfile.svelte'
   import Experience from '../components/profile/Experience.svelte'
+  import Language from '../components/settings-user/Language.svelte'
   // import InfoExperiences from '../components/settings-user/InfoExperiences.svelte'
   import Loader from '../components/Loader.svelte'
+
+  import {translate} from '../js/translate'
 
   const urlAPI = 'https://api.flylinkers.com'
 
@@ -30,8 +34,11 @@
     }
   }
 
-  getUser()
-  getProfile()
+  onMount(async()=>{
+    await getUser()
+    await getProfile()
+    translate()
+  })
 </script>
 
 <div class="row">
@@ -39,6 +46,7 @@
     {#if dataProfile && getUser}
       <InfoUser {urlAPI} {dataUser}/>
       <InfoProfile {urlAPI} {dataProfile}/>
+      <Language/>
       <Experience {urlAPI} {id} {experiences} {userProfile}/>
     {:else}
       <Loader/>

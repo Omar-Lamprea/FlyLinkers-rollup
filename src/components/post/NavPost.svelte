@@ -70,7 +70,7 @@
   <div class="Header-nav Header-nav-image mx-3" id="loadPhotoPost" type="file">
     <label for="loadPhotoInput">
       <i class="fas fa-image"></i>
-      <span>Photo</span>
+      <span data-translate="icon-photo">Photo</span>
       <input type="file" name="loadPhotoInput" id="loadPhotoInput" class="d-none" accept=".png, .jpg, .jpeg, .gif"  on:change={showPostImg}>
     </label>
   </div>

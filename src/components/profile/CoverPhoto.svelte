@@ -33,6 +33,6 @@
 <div class="CoverPhoto dropdown">
   <img id="coverPhotoProfile" src={coverPhoto} alt="">
   {#if userId === parseInt(localStorage.getItem('userId'))}
-    <button class="editCoverPhoto" data-bs-toggle="modal" data-bs-target="#editProfile" aria-hidden="true">Edit cover photo</button>
+    <button data-translate="cover-photo" class="editCoverPhoto" data-bs-toggle="modal" data-bs-target="#editProfile" aria-hidden="true">Edit cover photo</button>
   {/if}
 </div>

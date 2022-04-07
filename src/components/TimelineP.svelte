@@ -8,6 +8,8 @@
   import Loader from './Loader.svelte'
   import { writable } from 'svelte/store';
   import {onMount} from 'svelte'
+  import { translate } from '../js/translate';
+
 
   export let name, last_name, title, email , photo , id, urlAPI;
   export let userMain;
@@ -116,6 +118,8 @@
         }
       }
     })
+
+    // translate()
 
   })
 

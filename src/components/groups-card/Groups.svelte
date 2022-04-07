@@ -32,7 +32,7 @@
 </style>
 
 <div class="Groups d-none d-lg-block Default-containers">
-  <h6>Groups</h6>
+  <h6 data-translate="title-groups">Groups</h6>
   {#each data as group}
     <Group {...group}/>
   {:else}

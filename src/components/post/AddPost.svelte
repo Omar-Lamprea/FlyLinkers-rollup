@@ -117,10 +117,10 @@
       }
     }
   }
-
   const showYouTubeData = (link)=>{
     YTvideoContainer.classList.remove('d-none')
     YTlink = link.replace('watch?v=', 'embed/')
+    btnSendPost.removeAttribute('disabled')
   }
 
   function isValidHttpUrl(string) {
@@ -151,6 +151,7 @@
   const closeYTData = () =>{
     YTlink = false
     postDescription.value = ''
+    btnSendPost.setAttribute('disabled', '')
   }
 
   const sendPost = async()=>{
@@ -201,12 +202,18 @@
         const joinPostDescriptionClean = postDescriptionClean.join(' ')
   
         let template;
-  
-        if (urlContent === undefined) {
+        if (urlContent === undefined && !YTlink) {
           template = {
             user: id,
             img: imagePost,
             desc: joinPostDescriptionClean,
+          }
+        }else if(urlContent === undefined && YTlink){
+          template = {
+            user: id,
+            img: imagePost,
+            desc: joinPostDescriptionClean,
+            video: YTlink
           }
         }else{
           if (urlContent.id) {
@@ -247,6 +254,7 @@
             postImg.classList.toggle('d-none')
           }
           closeMetaData()
+          closeYTData()
           loaderPost.classList.add('d-none')
           //recargar post
           const reloadPost = document.getElementById('reloadPostCheck')
@@ -354,7 +362,7 @@
 <div class="Add-post {colorbox} Default-containers px-lg-5 d-flex flex-column">
 
   <div class="Add-post-input mx-3 d-flex flex-column justify-content-center position-relative">
-    <textarea name="" cols="1" rows="1" id="postDescription" class="Default-containers" placeholder="Start a post..." on:keyup={validateUrl} on:keyup={validateInfoPost}></textarea>
+    <textarea data-translate="input-addPost" name="" cols="1" rows="1" id="postDescription" class="Default-containers" placeholder="Start a post..." on:keyup={validateUrl} on:keyup={validateInfoPost}></textarea>
     <div id="characterCountSpan" class="characterCount characterCount-active">
       {characterCount}/255
     </div>

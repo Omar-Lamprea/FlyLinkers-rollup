@@ -45,7 +45,7 @@
 
 <div class="Events Default-containers d-none d-lg-block px-2">
     <div class="Events-title mb-3 text-center">
-      <h4>Upcoming events</h4>
+      <h4 data-translate="title-upcoming-events">Upcoming events</h4>
     </div>
 
     <div class="Events-column">

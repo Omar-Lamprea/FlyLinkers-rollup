@@ -30,7 +30,7 @@
 
 <div class="Sponsors d-none d-lg-block Default-containers px-3">
   <div class="Events-title mb-3 text-center">
-    <h4>Sponsors</h4>
+    <h4 data-translate="title-sponsots">Sponsors</h4>
   </div>
   <div class="Sponsors-column">
     <div class="Sponsor">

@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
   import {link} from "svelte-spa-router";
   import active from 'svelte-spa-router/active'
 
@@ -138,4 +138,4 @@
        <p class="text-center">you haven't news</p>
     {/each}
   </ul>
-</div>
+</div> -->
