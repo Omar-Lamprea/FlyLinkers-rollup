@@ -37,6 +37,7 @@ import startTime from '../../js/startTime.js';
 import { onMount } from "../../../_snowpack/pkg/svelte.js";
 import { commentsFirebase } from '../../js/firebase/commentsFirebase.js';
 import { reactionsFirebase } from '../../js/firebase/reactionsFirebase.js';
+import { translate } from '../../js/translate.js';
 
 function get_each_context(ctx, list, i) {
 	const child_ctx = ctx.slice();
@@ -44,8 +45,8 @@ function get_each_context(ctx, list, i) {
 	return child_ctx;
 }
 
-// (639:8) {:else}
-function create_else_block_1(ctx) {
+// (642:8) {:else}
+function create_else_block_3(ctx) {
 	let div;
 	let img_1;
 	let img_1_src_value;
@@ -116,8 +117,8 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (628:8) {#if user}
-function create_if_block_18(ctx) {
+// (631:8) {#if user}
+function create_if_block_20(ctx) {
 	let div;
 	let a;
 	let img_1;
@@ -217,8 +218,8 @@ function create_if_block_18(ctx) {
 	};
 }
 
-// (660:14) {#if user_id.toString() === localStorage.getItem('userId')}
-function create_if_block_17(ctx) {
+// (663:14) {#if user_id.toString() === localStorage.getItem('userId')}
+function create_if_block_19(ctx) {
 	let li;
 	let mounted;
 	let dispose;
@@ -251,11 +252,11 @@ function create_if_block_17(ctx) {
 	};
 }
 
-// (655:12) {#if user}
-function create_if_block_15(ctx) {
+// (658:12) {#if user}
+function create_if_block_17(ctx) {
 	let show_if = /*user*/ ctx[2].id.toString() === localStorage.getItem('userId');
 	let if_block_anchor;
-	let if_block = show_if && create_if_block_16(ctx);
+	let if_block = show_if && create_if_block_18(ctx);
 
 	return {
 		c() {
@@ -273,7 +274,7 @@ function create_if_block_15(ctx) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 				} else {
-					if_block = create_if_block_16(ctx);
+					if_block = create_if_block_18(ctx);
 					if_block.c();
 					if_block.m(if_block_anchor.parentNode, if_block_anchor);
 				}
@@ -289,8 +290,8 @@ function create_if_block_15(ctx) {
 	};
 }
 
-// (656:15) {#if user.id.toString() === localStorage.getItem('userId')}
-function create_if_block_16(ctx) {
+// (659:15) {#if user.id.toString() === localStorage.getItem('userId')}
+function create_if_block_18(ctx) {
 	let li;
 	let mounted;
 	let dispose;
@@ -323,16 +324,16 @@ function create_if_block_16(ctx) {
 	};
 }
 
-// (675:6) {#if meta && share === ''}
-function create_if_block_11(ctx) {
+// (678:6) {#if meta && share === ''}
+function create_if_block_13(ctx) {
 	let div;
 	let a;
 	let t0;
 	let t1;
 	let a_href_value;
-	let if_block0 = /*meta*/ ctx[8].title && create_if_block_14(ctx);
-	let if_block1 = /*meta*/ ctx[8].description && create_if_block_13(ctx);
-	let if_block2 = /*meta*/ ctx[8].image && create_if_block_12(ctx);
+	let if_block0 = /*meta*/ ctx[8].title && create_if_block_16(ctx);
+	let if_block1 = /*meta*/ ctx[8].description && create_if_block_15(ctx);
+	let if_block2 = /*meta*/ ctx[8].image && create_if_block_14(ctx);
 
 	return {
 		c() {
@@ -362,7 +363,7 @@ function create_if_block_11(ctx) {
 				if (if_block0) {
 					if_block0.p(ctx, dirty);
 				} else {
-					if_block0 = create_if_block_14(ctx);
+					if_block0 = create_if_block_16(ctx);
 					if_block0.c();
 					if_block0.m(a, t0);
 				}
@@ -375,7 +376,7 @@ function create_if_block_11(ctx) {
 				if (if_block1) {
 					if_block1.p(ctx, dirty);
 				} else {
-					if_block1 = create_if_block_13(ctx);
+					if_block1 = create_if_block_15(ctx);
 					if_block1.c();
 					if_block1.m(a, t1);
 				}
@@ -388,7 +389,7 @@ function create_if_block_11(ctx) {
 				if (if_block2) {
 					if_block2.p(ctx, dirty);
 				} else {
-					if_block2 = create_if_block_12(ctx);
+					if_block2 = create_if_block_14(ctx);
 					if_block2.c();
 					if_block2.m(a, null);
 				}
@@ -410,8 +411,8 @@ function create_if_block_11(ctx) {
 	};
 }
 
-// (678:12) {#if meta.title}
-function create_if_block_14(ctx) {
+// (681:12) {#if meta.title}
+function create_if_block_16(ctx) {
 	let h6;
 	let t_value = /*meta*/ ctx[8].title + "";
 	let t;
@@ -434,8 +435,8 @@ function create_if_block_14(ctx) {
 	};
 }
 
-// (681:12) {#if meta.description}
-function create_if_block_13(ctx) {
+// (684:12) {#if meta.description}
+function create_if_block_15(ctx) {
 	let p;
 	let t_value = /*meta*/ ctx[8].description + "";
 	let t;
@@ -458,8 +459,8 @@ function create_if_block_13(ctx) {
 	};
 }
 
-// (684:12) {#if meta.image}
-function create_if_block_12(ctx) {
+// (687:12) {#if meta.image}
+function create_if_block_14(ctx) {
 	let img_1;
 	let img_1_src_value;
 
@@ -484,8 +485,8 @@ function create_if_block_12(ctx) {
 	};
 }
 
-// (691:6) {#if !!img}
-function create_if_block_10(ctx) {
+// (694:6) {#if !!img}
+function create_if_block_12(ctx) {
 	let figure;
 	let img_1;
 	let img_1_src_value;
@@ -514,8 +515,52 @@ function create_if_block_10(ctx) {
 	};
 }
 
-// (698:4) {#if video && share === ''}
-function create_if_block_9(ctx) {
+// (701:4) {#if video && share === ''}
+function create_if_block_10(ctx) {
+	let show_if;
+	let if_block_anchor;
+
+	function select_block_type_2(ctx, dirty) {
+		if (dirty[0] & /*video*/ 32768) show_if = null;
+		if (show_if == null) show_if = !!/*video*/ ctx[15].includes('https://www.youtube.com/');
+		if (show_if) return create_if_block_11;
+		return create_else_block_2;
+	}
+
+	let current_block_type = select_block_type_2(ctx, [-1, -1]);
+	let if_block = current_block_type(ctx);
+
+	return {
+		c() {
+			if_block.c();
+			if_block_anchor = empty();
+		},
+		m(target, anchor) {
+			if_block.m(target, anchor);
+			insert(target, if_block_anchor, anchor);
+		},
+		p(ctx, dirty) {
+			if (current_block_type === (current_block_type = select_block_type_2(ctx, dirty)) && if_block) {
+				if_block.p(ctx, dirty);
+			} else {
+				if_block.d(1);
+				if_block = current_block_type(ctx);
+
+				if (if_block) {
+					if_block.c();
+					if_block.m(if_block_anchor.parentNode, if_block_anchor);
+				}
+			}
+		},
+		d(detaching) {
+			if_block.d(detaching);
+			if (detaching) detach(if_block_anchor);
+		}
+	};
+}
+
+// (712:6) {:else}
+function create_else_block_2(ctx) {
 	let video_1;
 	let source;
 	let source_src_value;
@@ -547,7 +592,37 @@ function create_if_block_9(ctx) {
 	};
 }
 
-// (706:4) {#if share !== ''}
+// (702:6) {#if video.includes('https://www.youtube.com/')}
+function create_if_block_11(ctx) {
+	let iframe;
+	let iframe_src_value;
+
+	return {
+		c() {
+			iframe = element("iframe");
+			attr(iframe, "width", "100%");
+			attr(iframe, "height", "350");
+			if (!src_url_equal(iframe.src, iframe_src_value = /*video*/ ctx[15])) attr(iframe, "src", iframe_src_value);
+			attr(iframe, "title", "YouTube video player");
+			attr(iframe, "frameborder", "0");
+			attr(iframe, "allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
+			iframe.allowFullscreen = true;
+		},
+		m(target, anchor) {
+			insert(target, iframe, anchor);
+		},
+		p(ctx, dirty) {
+			if (dirty[0] & /*video*/ 32768 && !src_url_equal(iframe.src, iframe_src_value = /*video*/ ctx[15])) {
+				attr(iframe, "src", iframe_src_value);
+			}
+		},
+		d(detaching) {
+			if (detaching) detach(iframe);
+		}
+	};
+}
+
+// (721:4) {#if share !== ''}
 function create_if_block_2(ctx) {
 	let hr;
 	let t0;
@@ -585,7 +660,7 @@ function create_if_block_2(ctx) {
 	let t13;
 	let mounted;
 	let dispose;
-	let if_block0 = /*share*/ ctx[14][1].img !== '' && create_if_block_8(ctx);
+	let if_block0 = /*share*/ ctx[14][1].img !== '' && create_if_block_9(ctx);
 	let if_block1 = /*share*/ ctx[14][1].video && create_if_block_7(ctx);
 	let if_block2 = /*share*/ ctx[14][1].url_id !== 0 && create_if_block_3(ctx);
 
@@ -692,7 +767,7 @@ function create_if_block_2(ctx) {
 				if (if_block0) {
 					if_block0.p(ctx, dirty);
 				} else {
-					if_block0 = create_if_block_8(ctx);
+					if_block0 = create_if_block_9(ctx);
 					if_block0.c();
 					if_block0.m(div2, t12);
 				}
@@ -740,8 +815,8 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (726:10) {#if share[1].img !== ''}
-function create_if_block_8(ctx) {
+// (741:10) {#if share[1].img !== ''}
+function create_if_block_9(ctx) {
 	let img_1;
 	let img_1_src_value;
 
@@ -766,8 +841,52 @@ function create_if_block_8(ctx) {
 	};
 }
 
-// (729:10) {#if share[1].video}
+// (744:10) {#if share[1].video}
 function create_if_block_7(ctx) {
+	let show_if;
+	let if_block_anchor;
+
+	function select_block_type_3(ctx, dirty) {
+		if (dirty[0] & /*share*/ 16384) show_if = null;
+		if (show_if == null) show_if = !!/*share*/ ctx[14][1].video.includes('https://www.youtube.com/');
+		if (show_if) return create_if_block_8;
+		return create_else_block_1;
+	}
+
+	let current_block_type = select_block_type_3(ctx, [-1, -1]);
+	let if_block = current_block_type(ctx);
+
+	return {
+		c() {
+			if_block.c();
+			if_block_anchor = empty();
+		},
+		m(target, anchor) {
+			if_block.m(target, anchor);
+			insert(target, if_block_anchor, anchor);
+		},
+		p(ctx, dirty) {
+			if (current_block_type === (current_block_type = select_block_type_3(ctx, dirty)) && if_block) {
+				if_block.p(ctx, dirty);
+			} else {
+				if_block.d(1);
+				if_block = current_block_type(ctx);
+
+				if (if_block) {
+					if_block.c();
+					if_block.m(if_block_anchor.parentNode, if_block_anchor);
+				}
+			}
+		},
+		d(detaching) {
+			if_block.d(detaching);
+			if (detaching) detach(if_block_anchor);
+		}
+	};
+}
+
+// (755:12) {:else}
+function create_else_block_1(ctx) {
 	let video_1;
 	let source;
 	let source_src_value;
@@ -779,12 +898,9 @@ function create_if_block_7(ctx) {
 			source = element("source");
 			track = element("track");
 			if (!src_url_equal(source.src, source_src_value = "" + (/*urlAPI*/ ctx[13] + /*video*/ ctx[15]))) attr(source, "src", source_src_value);
-			attr(source, "autoplay", "");
-			attr(source, "autobuffer", "");
-			attr(source, "autobuffered", "");
 			attr(track, "kind", "captions");
-			video_1.controls = true;
 			set_style(video_1, "width", "100%");
+			video_1.controls = true;
 		},
 		m(target, anchor) {
 			insert(target, video_1, anchor);
@@ -802,7 +918,37 @@ function create_if_block_7(ctx) {
 	};
 }
 
-// (736:10) {#if share[1].url_id !== 0}
+// (745:12) {#if share[1].video.includes('https://www.youtube.com/')}
+function create_if_block_8(ctx) {
+	let iframe;
+	let iframe_src_value;
+
+	return {
+		c() {
+			iframe = element("iframe");
+			attr(iframe, "width", "100%");
+			attr(iframe, "height", "350");
+			if (!src_url_equal(iframe.src, iframe_src_value = /*share*/ ctx[14][1].video)) attr(iframe, "src", iframe_src_value);
+			attr(iframe, "title", "YouTube video player");
+			attr(iframe, "frameborder", "0");
+			attr(iframe, "allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
+			iframe.allowFullscreen = true;
+		},
+		m(target, anchor) {
+			insert(target, iframe, anchor);
+		},
+		p(ctx, dirty) {
+			if (dirty[0] & /*share*/ 16384 && !src_url_equal(iframe.src, iframe_src_value = /*share*/ ctx[14][1].video)) {
+				attr(iframe, "src", iframe_src_value);
+			}
+		},
+		d(detaching) {
+			if (detaching) detach(iframe);
+		}
+	};
+}
+
+// (763:10) {#if share[1].url_id !== 0}
 function create_if_block_3(ctx) {
 	let div;
 	let a;
@@ -889,7 +1035,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (739:16) {#if meta.title}
+// (766:16) {#if meta.title}
 function create_if_block_6(ctx) {
 	let h6;
 	let t_value = /*meta*/ ctx[8].title + "";
@@ -913,7 +1059,7 @@ function create_if_block_6(ctx) {
 	};
 }
 
-// (742:16) {#if meta.description}
+// (769:16) {#if meta.description}
 function create_if_block_5(ctx) {
 	let p;
 	let t_value = /*meta*/ ctx[8].description + "";
@@ -937,7 +1083,7 @@ function create_if_block_5(ctx) {
 	};
 }
 
-// (745:16) {#if meta.image}
+// (772:16) {#if meta.image}
 function create_if_block_4(ctx) {
 	let img_1;
 	let img_1_src_value;
@@ -963,7 +1109,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (790:10) {:else}
+// (819:10) {:else}
 function create_else_block(ctx) {
 	let sharepost;
 	let current;
@@ -1004,7 +1150,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (788:10) {#if share !== ''}
+// (817:10) {#if share !== ''}
 function create_if_block_1(ctx) {
 	let sharepost;
 	let current;
@@ -1045,7 +1191,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (810:6) {#if dataComment}
+// (839:6) {#if dataComment}
 function create_if_block(ctx) {
 	let each_1_anchor;
 	let current;
@@ -1129,7 +1275,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (811:8) {#each dataComment as comment}
+// (840:8) {#each dataComment as comment}
 function create_each_block(ctx) {
 	let comment;
 	let current;
@@ -1265,8 +1411,8 @@ function create_fragment(ctx) {
 	let dispose;
 
 	function select_block_type(ctx, dirty) {
-		if (/*user*/ ctx[2]) return create_if_block_18;
-		return create_else_block_1;
+		if (/*user*/ ctx[2]) return create_if_block_20;
+		return create_else_block_3;
 	}
 
 	let current_block_type = select_block_type(ctx, [-1, -1]);
@@ -1274,26 +1420,26 @@ function create_fragment(ctx) {
 
 	function select_block_type_1(ctx, dirty) {
 		if (dirty[0] & /*user_id*/ 8) show_if = null;
-		if (/*user*/ ctx[2]) return create_if_block_15;
+		if (/*user*/ ctx[2]) return create_if_block_17;
 		if (show_if == null) show_if = !!(/*user_id*/ ctx[3].toString() === localStorage.getItem('userId'));
-		if (show_if) return create_if_block_17;
+		if (show_if) return create_if_block_19;
 	}
 
 	let current_block_type_1 = select_block_type_1(ctx, [-1, -1]);
 	let if_block1 = current_block_type_1 && current_block_type_1(ctx);
-	let if_block2 = /*meta*/ ctx[8] && /*share*/ ctx[14] === '' && create_if_block_11(ctx);
-	let if_block3 = !!/*img*/ ctx[10] && create_if_block_10(ctx);
-	let if_block4 = /*video*/ ctx[15] && /*share*/ ctx[14] === '' && create_if_block_9(ctx);
+	let if_block2 = /*meta*/ ctx[8] && /*share*/ ctx[14] === '' && create_if_block_13(ctx);
+	let if_block3 = !!/*img*/ ctx[10] && create_if_block_12(ctx);
+	let if_block4 = /*video*/ ctx[15] && /*share*/ ctx[14] === '' && create_if_block_10(ctx);
 	let if_block5 = /*share*/ ctx[14] !== '' && create_if_block_2(ctx);
 	const if_block_creators = [create_if_block_1, create_else_block];
 	const if_blocks = [];
 
-	function select_block_type_2(ctx, dirty) {
+	function select_block_type_4(ctx, dirty) {
 		if (/*share*/ ctx[14] !== '') return 0;
 		return 1;
 	}
 
-	current_block_type_index = select_block_type_2(ctx, [-1, -1]);
+	current_block_type_index = select_block_type_4(ctx, [-1, -1]);
 	if_block6 = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
 	let if_block7 = /*dataComment*/ ctx[17] && create_if_block(ctx);
 
@@ -1348,7 +1494,7 @@ function create_fragment(ctx) {
 			span4 = element("span");
 			span3 = element("span");
 			t18 = text(/*comments*/ ctx[1]);
-			t19 = text(" Comments");
+			t19 = text("\n            Comments");
 			t20 = space();
 			div15 = element("div");
 			div14 = element("div");
@@ -1367,7 +1513,7 @@ function create_fragment(ctx) {
 			div11 = element("div");
 
 			div11.innerHTML = `<i class="fa-comments far"></i> 
-          <span class="svelte-54r9g1">Comment</span>`;
+          <span data-translate="comment" class="svelte-54r9g1">Comment</span>`;
 
 			t29 = space();
 			div12 = element("div");
@@ -1417,6 +1563,7 @@ function create_fragment(ctx) {
 			attr(div7, "class", "Reaction Header-nav-heart mx-2 svelte-54r9g1");
 			attr(i3, "class", "fas fa-comment");
 			attr(span3, "class", "svelte-54r9g1");
+			attr(span4, "data-translate", "comments");
 			attr(span4, "class", "svelte-54r9g1");
 			attr(div8, "class", "Reaction Header-nav-comment mx-2 svelte-54r9g1");
 			attr(div9, "class", "Card-board-icons-first d-flex px-3 px-md-0");
@@ -1586,7 +1733,7 @@ function create_fragment(ctx) {
 				if (if_block2) {
 					if_block2.p(ctx, dirty);
 				} else {
-					if_block2 = create_if_block_11(ctx);
+					if_block2 = create_if_block_13(ctx);
 					if_block2.c();
 					if_block2.m(div5, t7);
 				}
@@ -1599,7 +1746,7 @@ function create_fragment(ctx) {
 				if (if_block3) {
 					if_block3.p(ctx, dirty);
 				} else {
-					if_block3 = create_if_block_10(ctx);
+					if_block3 = create_if_block_12(ctx);
 					if_block3.c();
 					if_block3.m(div5, null);
 				}
@@ -1612,7 +1759,7 @@ function create_fragment(ctx) {
 				if (if_block4) {
 					if_block4.p(ctx, dirty);
 				} else {
-					if_block4 = create_if_block_9(ctx);
+					if_block4 = create_if_block_10(ctx);
 					if_block4.c();
 					if_block4.m(div18, t9);
 				}
@@ -1655,7 +1802,7 @@ function create_fragment(ctx) {
 			}
 
 			let previous_block_index = current_block_type_index;
-			current_block_type_index = select_block_type_2(ctx, dirty);
+			current_block_type_index = select_block_type_4(ctx, dirty);
 
 			if (current_block_type_index === previous_block_index) {
 				if_blocks[current_block_type_index].p(ctx, dirty);
@@ -2166,8 +2313,9 @@ function instance($$self, $$props, $$invalidate) {
 		}
 	};
 
-	onMount(() => {
-		reactionUser();
+	onMount(async () => {
+		await reactionUser();
+		translate();
 	});
 
 	$$self.$$set = $$props => {

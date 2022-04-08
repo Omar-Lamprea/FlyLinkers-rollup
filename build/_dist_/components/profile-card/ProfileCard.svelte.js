@@ -76,7 +76,7 @@ function create_fragment(ctx) {
 			t6 = space();
 			div1 = element("div");
 
-			div1.innerHTML = `<p class="svelte-svq0p9">Who viewed your profile-card <span class="svelte-svq0p9">3.8K</span></p>  
+			div1.innerHTML = `<p data-translate="who-viewed" class="svelte-svq0p9">Who viewed your profile-card <span class="svelte-svq0p9">3.8K</span></p>  
         <p class="svelte-svq0p9">Views of your post <span class="svelte-svq0p9">3.8K</span></p>`;
 
 			t12 = space();

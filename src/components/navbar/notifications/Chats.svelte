@@ -52,27 +52,28 @@
 
 
   const seenMessage = async() =>{
+    console.log('preparando para actualizar vistos en firestore');
     // console.log('update seen =)', groups, messageId);
     if (!template.seen) {
       const dataMain = JSON.parse(localStorage.getItem('data'))
       const userName = `${dataMain.name} ${dataMain.last_name}`
 
       if(template.sentBy !== userName){
-
-        // const citiesRef = collection(db, "cities");
-        // const q = query(citiesRef, where("state", "==", "CA"));
         const docRef = collection(db, `message/${groups}/messages`)
         const q = query(docRef, where('seen', '==', false))
         const snapDocs = onSnapshot(q, docs =>{
-          docs.forEach(el => {
-            const updateSeen = doc(db, `message/${groups}/messages/${el.id}`)
-            updateDoc(updateSeen,{
+          docs.forEach(async el => {
+            const updateSeen =  doc(db, `message/${groups}/messages/${el.id}`)
+            console.log('actualizando vistos');
+            await updateDoc(updateSeen,{
               seen : true
             })
+            console.log('stop listener');
+            snapDocs()
+            console.log('vistos actualizados, reduciendo contador...');
+            notificacionsChatsBubble.classList.toggle('substractCounter')
           });
         })
-
-        notificacionsChatsBubble.classList.toggle('substractCounter')
       }
     }
   }

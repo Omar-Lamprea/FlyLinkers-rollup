@@ -97,7 +97,7 @@ function create_fragment(ctx) {
 		c() {
 			div3 = element("div");
 			div0 = element("div");
-			div0.innerHTML = `<h4 class="svelte-1f1lox1">Upcoming events</h4>`;
+			div0.innerHTML = `<h4 data-translate="title-upcoming-events" class="svelte-1f1lox1">Upcoming events</h4>`;
 			t1 = space();
 			div2 = element("div");
 			div1 = element("div");

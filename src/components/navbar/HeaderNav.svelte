@@ -46,55 +46,37 @@
       //read Chats
       if (groups !== undefined) {
         usergroups.set(groups)
-        
+
         groups.forEach(chat => {
           const q = query(collection(db, `message/${chat}/messages`), orderBy('sentAt', 'desc'), limit(2))
+          // console.log(q);
           const snapChatId = onSnapshot(q, col =>{
-
             // console.log('1', col.docs[0].data(), '2', col.docs[1].data());
-
-            if (col.docs.length === 2) {
-              if (col.docs[1].data().seen && !col.docs[0].data().seen ) {
-                console.log('entre al 2');
-                countMessages += 1
-              }
-            }else{
-              if (!col.docs[0].data().seen) {
-                console.log('entre al 1');
-                countMessages += 1
+            const dataMain = JSON.parse(localStorage.getItem('data'))
+            const userName = `${dataMain.name} ${dataMain.last_name}`
+            console.log(col, col.docs);
+            if (col.docs[0]) {
+              if (col.docs[0].data().sentBy !== userName) {
+                if (col.docs.length === 2) {
+                  if (col.docs[1].data().seen && !col.docs[0].data().seen ) {
+                    console.log('entre al 2a');
+                    countMessages += 1
+                  } else if (!col.docs[1].data().seen && !col.docs[0].data().seen ) {
+                    console.log('entre al 2b');
+                    countMessages += 1
+                  }
+                 
+                }else{
+                  if (!col.docs[0].data().seen) {
+                    console.log('entre al 1');
+                    countMessages += 1
+                  }
+                }
               }
             }
+            // snapChatId()
           })
         });
-
-        
-
-
-        // groups.forEach(chat => {
-        //   const q = query(collection(db, `message/${chat}/messages`), orderBy('sentAt', 'desc'), limit(1))
-        //   const snapChatId = onSnapshot(q, col =>{
-        //     col.forEach(doc => {
-        //       // console.log(doc.data().sentAt);
-        //       const dataMessage = doc.data()
-        //       const liChatMessage = document.getElementsByClassName('unreadMessage')
-        //       console.log(liChatMessage);
-        //       countMessages = liChatMessage.length
-        //       if (!dataMessage.seen) {
-        //         console.log('nueva notificacion');
-        //         const dataMain = JSON.parse(localStorage.getItem('data'))
-        //         const name = `${dataMain.name} ${dataMain.last_name}`
-        //         if (name !== dataMessage.sentBy) {
-        //           notificacionsChatsBubble.classList.remove('d-none')
-        //           countMessages += 1
-        //         }
-        //       }
-        //       if (countMessages === 0) {
-        //         notificacionsChatsBubble.classList.add('d-none')
-        //       }
-        //       // console.log(countMessages);
-        //     });
-        //   })
-        // });
       }
 
       //read Comments
@@ -277,8 +259,10 @@
 
 
     const observer = new MutationObserver(()=>{
-      console.log('reducir contador');
-      countMessages -= 1
+      if (countMessages > 0) countMessages -= 1
+      // usergroups.set([])
+      // getUserNotifications()
+      console.log('contador reducido en 1');
     })
     observer.observe(notificacionsChatsBubble, {attributes:true})
 
@@ -392,7 +376,7 @@
   </div>
   <div class="icon Header-nav-comment mx-3 fs-3 position-relative">
     {#if countMessages > 0}
-      <div id="notificacionsChatsBubble" class="notificacions-bubble">{countMessages}</div>
+      <div id="notificacionsChatsBubble" class="notificacions-bubble">!</div>
     {:else}
       <div id="notificacionsChatsBubble" class="notificacions-bubble d-none"></div>
     {/if}

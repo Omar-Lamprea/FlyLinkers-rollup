@@ -63,7 +63,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (197:0) {#if data && getUserMainToFirestore}
+// (210:0) {#if data && getUserMainToFirestore}
 function create_if_block(ctx) {
 	let header;
 	let t0;
@@ -88,7 +88,7 @@ function create_if_block(ctx) {
 			t1 = space();
 			if (if_block) if_block.c();
 			attr(main, "id", "main");
-			attr(main, "class", "container-fluid container-lg svelte-4xadag");
+			attr(main, "class", "container-fluid container-lg svelte-1ycacfu");
 		},
 		m(target, anchor) {
 			mount_component(header, target, anchor);
@@ -150,7 +150,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (203:5) {#if chatFlag && userMain && getUserMainToFirestore}
+// (215:5) {#if chatFlag && userMain && getUserMainToFirestore}
 function create_if_block_1(ctx) {
 	let chat;
 	let current;
@@ -267,6 +267,14 @@ const urlLogOut = 'https://flylinkers.com';
 const urlAPI = 'https://api.flylinkers.com';
 
 function instance($$self, $$props, $$invalidate) {
+	if (!localStorage.getItem('lang')) {
+		if (navigator.language.includes('en')) {
+			localStorage.setItem('lang', 'En');
+		} else {
+			localStorage.setItem('lang', 'Es');
+		}
+	}
+
 	const urlUser = window.location.pathname;
 	const urluserProfile = urlUser.slice(9);
 
@@ -374,8 +382,8 @@ function instance($$self, $$props, $$invalidate) {
 		localStorage.removeItem('chat');
 	}
 
-	onMount(() => {
-		getData();
+	onMount(async () => {
+		await getData();
 		loadChatList();
 	});
 

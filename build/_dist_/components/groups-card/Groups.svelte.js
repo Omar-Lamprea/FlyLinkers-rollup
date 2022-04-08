@@ -129,6 +129,7 @@ function create_fragment(ctx) {
 				each_1_else.c();
 			}
 
+			attr(h6, "data-translate", "title-groups");
 			attr(h6, "class", "svelte-jg8a8m");
 			attr(div, "class", "Groups d-none d-lg-block Default-containers svelte-jg8a8m");
 		},

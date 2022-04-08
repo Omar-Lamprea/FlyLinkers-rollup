@@ -54,7 +54,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (54:4) {#if id && getUserMainToFirestore}
+// (56:4) {#if id && getUserMainToFirestore}
 function create_if_block(ctx) {
 	let sidebarleft;
 	let t0;
@@ -235,9 +235,9 @@ function instance($$self, $$props, $$invalidate) {
 		}
 	};
 
-	onMount(() => {
-		getData();
-	});
+	onMount(async () => {
+		await getData();
+	}); // translate()
 
 	return [name, last_name, title, photo, id, getUserMainToFirestore];
 }

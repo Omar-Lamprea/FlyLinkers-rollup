@@ -72,6 +72,7 @@ function create_fragment(ctx) {
       <span class="svelte-1x5l75b">Write article</span>`;
 
 			attr(i0, "class", "fas fa-image svelte-1x5l75b");
+			attr(span0, "data-translate", "icon-photo");
 			attr(span0, "class", "svelte-1x5l75b");
 			attr(input0, "type", "file");
 			attr(input0, "name", "loadPhotoInput");

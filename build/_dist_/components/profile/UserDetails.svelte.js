@@ -44,10 +44,10 @@ function create_if_block_4(ctx) {
 		c() {
 			p = element("p");
 
-			p.innerHTML = `<i class="fas fa-pen svelte-1s725ch"></i>
-                  About me...`;
+			p.innerHTML = `<i class="fas fa-pen svelte-1px6h87"></i> 
+                  <span data-translate="profile-about-me" class="svelte-1px6h87">About me...</span>`;
 
-			attr(p, "class", "edit-description svelte-1s725ch");
+			attr(p, "class", "edit-description svelte-1px6h87");
 		},
 		m(target, anchor) {
 			insert(target, p, anchor);
@@ -76,7 +76,7 @@ function create_if_block_3(ctx) {
 			p = element("p");
 			t = text(/*aboutMe*/ ctx[6]);
 			attr(p, "id", "userDescription");
-			attr(p, "class", "svelte-1s725ch");
+			attr(p, "class", "svelte-1px6h87");
 		},
 		m(target, anchor) {
 			insert(target, p, anchor);
@@ -91,7 +91,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (240:8) {:else}
+// (246:8) {:else}
 function create_else_block(ctx) {
 	let div;
 	let t0;
@@ -121,7 +121,7 @@ function create_else_block(ctx) {
 			attr(div, "class", "d-none");
 			attr(button, "id", button_id_value = "btInitChat-" + /*id*/ ctx[5]);
 			attr(button, "data-chat", /*id*/ ctx[5]);
-			attr(button, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 svelte-1s725ch");
+			attr(button, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 svelte-1px6h87");
 		},
 		m(target, anchor) {
 			insert(target, div, anchor);
@@ -176,13 +176,13 @@ function create_if_block(ctx) {
 	let a;
 	let link_action;
 	let active_action;
-	let t1;
-	let coverphotomodal;
 	let t2;
-	let profilephotomodal;
+	let coverphotomodal;
 	let t3;
+	let profilephotomodal;
+	let t4;
 	let div0;
-	let t9;
+	let t10;
 	let div1;
 	let current;
 	let mounted;
@@ -205,22 +205,26 @@ function create_if_block(ctx) {
 	return {
 		c() {
 			a = element("a");
-			a.innerHTML = `<p type="button" class="mb-3" style="color:rgba(38, 38, 38, 07)"><i class="fas fa-pen svelte-1s725ch"></i> Edit profile</p>`;
-			t1 = space();
-			create_component(coverphotomodal.$$.fragment);
+
+			a.innerHTML = `<p type="button" class="mb-3 svelte-1px6h87" style="color:rgba(38, 38, 38, 07)"><i class="fas fa-pen svelte-1px6h87"></i> 
+            <span data-translate="edit-profile" class="svelte-1px6h87">Edit profile</span></p>`;
+
 			t2 = space();
-			create_component(profilephotomodal.$$.fragment);
+			create_component(coverphotomodal.$$.fragment);
 			t3 = space();
+			create_component(profilephotomodal.$$.fragment);
+			t4 = space();
 			div0 = element("div");
 
-			div0.innerHTML = `<p class="svelte-1s725ch">Who viewed your profile-card <span class="svelte-1s725ch">3.8K</span></p>  
-            <p class="svelte-1s725ch">Views of your post <span class="svelte-1s725ch">3.8K</span></p>`;
+			div0.innerHTML = `<p class="svelte-1px6h87">Who viewed your profile-card <span class="svelte-1px6h87">3.8K</span></p>  
+            <p class="svelte-1px6h87">Views of your post <span class="svelte-1px6h87">3.8K</span></p>`;
 
-			t9 = space();
+			t10 = space();
 			div1 = element("div");
 
-			div1.innerHTML = `<button class="btn btn-outline-primary btn-flylinkers disabled svelte-1s725ch" disabled=""><i class="fas fa-pen svelte-1s725ch"></i> I have interest in...</button> 
-            <button class="btn btn-outline-primary btn-flylinkers disabled svelte-1s725ch" disabled="">Add selection</button>`;
+			div1.innerHTML = `<button class="btn btn-outline-primary btn-flylinkers disabled svelte-1px6h87" disabled=""><i class="fas fa-pen svelte-1px6h87"></i> 
+              <span data-translate="profile-btn-interests">I have interest in...</span></button> 
+            <button data-translate="profile-btn-selection" class="btn mt-0 mt-lg-1 mt-xl-0 btn-outline-primary btn-flylinkers disabled svelte-1px6h87" disabled="">Add section</button>`;
 
 			attr(a, "href", "/settings");
 			attr(div0, "class", "Profile-card-statistics");
@@ -228,13 +232,13 @@ function create_if_block(ctx) {
 		},
 		m(target, anchor) {
 			insert(target, a, anchor);
-			insert(target, t1, anchor);
-			mount_component(coverphotomodal, target, anchor);
 			insert(target, t2, anchor);
-			mount_component(profilephotomodal, target, anchor);
+			mount_component(coverphotomodal, target, anchor);
 			insert(target, t3, anchor);
+			mount_component(profilephotomodal, target, anchor);
+			insert(target, t4, anchor);
 			insert(target, div0, anchor);
-			insert(target, t9, anchor);
+			insert(target, t10, anchor);
 			insert(target, div1, anchor);
 			current = true;
 
@@ -270,13 +274,13 @@ function create_if_block(ctx) {
 		},
 		d(detaching) {
 			if (detaching) detach(a);
-			if (detaching) detach(t1);
-			destroy_component(coverphotomodal, detaching);
 			if (detaching) detach(t2);
-			destroy_component(profilephotomodal, detaching);
+			destroy_component(coverphotomodal, detaching);
 			if (detaching) detach(t3);
+			destroy_component(profilephotomodal, detaching);
+			if (detaching) detach(t4);
 			if (detaching) detach(div0);
-			if (detaching) detach(t9);
+			if (detaching) detach(t10);
 			if (detaching) detach(div1);
 			mounted = false;
 			run_all(dispose);
@@ -284,7 +288,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (251:10) {:else}
+// (257:10) {:else}
 function create_else_block_2(ctx) {
 	let button;
 
@@ -292,7 +296,7 @@ function create_else_block_2(ctx) {
 		c() {
 			button = element("button");
 			button.textContent = "Friends";
-			attr(button, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 svelte-1s725ch");
+			attr(button, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 svelte-1px6h87");
 		},
 		m(target, anchor) {
 			insert(target, button, anchor);
@@ -304,7 +308,7 @@ function create_else_block_2(ctx) {
 	};
 }
 
-// (242:10) {#if !friend}
+// (248:10) {#if !friend}
 function create_if_block_1(ctx) {
 	let if_block_anchor;
 
@@ -345,7 +349,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (248:14) {:else}
+// (254:14) {:else}
 function create_else_block_1(ctx) {
 	let button;
 	let mounted;
@@ -356,7 +360,7 @@ function create_else_block_1(ctx) {
 			button = element("button");
 			button.textContent = "Send friend request";
 			attr(button, "id", "btnSendFriendRequest");
-			attr(button, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 svelte-1s725ch");
+			attr(button, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 svelte-1px6h87");
 		},
 		m(target, anchor) {
 			insert(target, button, anchor);
@@ -375,7 +379,7 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (243:12) {#if friendRequest}
+// (249:12) {#if friendRequest}
 function create_if_block_2(ctx) {
 	let div;
 	let button0;
@@ -393,9 +397,9 @@ function create_if_block_2(ctx) {
 			button1 = element("button");
 			button1.textContent = "Decline friend request";
 			attr(button0, "id", "btnSendFriendRequest");
-			attr(button0, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 accept-friend svelte-1s725ch");
+			attr(button0, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 accept-friend svelte-1px6h87");
 			attr(button1, "id", "btnSendFriendRequest");
-			attr(button1, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 decline-friend svelte-1s725ch");
+			attr(button1, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 decline-friend svelte-1px6h87");
 			attr(div, "class", "btn-friend-request mb-3");
 		},
 		m(target, anchor) {
@@ -525,30 +529,31 @@ function create_fragment(ctx) {
 			div10 = element("div");
 			div9 = element("div");
 			if_block2.c();
-			attr(h2, "class", "svelte-1s725ch");
-			attr(span, "class", "svelte-1s725ch");
-			attr(div0, "class", "Profile-card-user p-3 p-md-0 svelte-1s725ch");
+			attr(h2, "class", "svelte-1px6h87");
+			attr(span, "class", "svelte-1px6h87");
+			attr(div0, "class", "Profile-card-user p-3 p-md-0 svelte-1px6h87");
 			attr(textarea, "name", "");
 			attr(textarea, "id", "textArea");
 			attr(textarea, "cols", "30");
 			attr(textarea, "rows", "3");
 			set_style(textarea, "width", "100%");
 			textarea.value = /*aboutMe*/ ctx[6];
-			attr(button, "class", "btn btn-outline-primary btn-flylinkers m-0 d-flex align-self-end svelte-1s725ch");
+			attr(button, "class", "btn btn-outline-primary btn-flylinkers m-0 mt-1 d-flex align-self-end svelte-1px6h87");
 			attr(div1, "id", "editAboutMe");
 			attr(div1, "class", "d-none d-flex flex-column");
 			attr(div2, "class", "Profile-description-text my-2");
-			attr(p0, "class", "svelte-1s725ch");
+			attr(p0, "data-translate", "profile-email");
+			attr(p0, "class", "svelte-1px6h87");
 			set_style(p1, "color", "var(--main-color)");
 			set_style(p1, "cursor", "pointer");
-			attr(p1, "class", "svelte-1s725ch");
+			attr(p1, "class", "svelte-1px6h87");
 			attr(div3, "class", "Profile-description-contact");
-			attr(div4, "class", "Profile-description px-3 px-md-0 my-3 svelte-1s725ch");
-			attr(div5, "class", "Profile-card-info mt-2 svelte-1s725ch");
+			attr(div4, "class", "Profile-description px-3 px-md-0 my-3 svelte-1px6h87");
+			attr(div5, "class", "Profile-card-info mt-2 svelte-1px6h87");
 			attr(div6, "class", "Profile-card-content d-flex flex-column");
-			attr(div7, "class", "Profile-card svelte-1s725ch");
+			attr(div7, "class", "Profile-card svelte-1px6h87");
 			attr(div8, "class", "col-12 col-lg-6");
-			attr(div9, "class", "Profile-card-text text-end d-flex flex-column align-items-end mt-0 mt-md-3 px-3 px-md-0 svelte-1s725ch");
+			attr(div9, "class", "Profile-card-text text-end d-flex flex-column align-items-end mt-0 mt-md-3 px-3 px-md-0 svelte-1px6h87");
 			attr(div10, "class", "col-12 col-lg-6");
 			attr(div11, "class", "row");
 			attr(div12, "class", "UserDetails Default-containers mt-3");

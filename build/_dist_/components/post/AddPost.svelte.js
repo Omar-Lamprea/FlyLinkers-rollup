@@ -57,16 +57,16 @@ function create_else_block(ctx) {
 	};
 }
 
-// (357:6) {#if urlContent && urlLink.includes('https://')}
-function create_if_block(ctx) {
+// (378:6) {#if urlContent && urlLink.includes('https://')}
+function create_if_block_1(ctx) {
 	let i;
 	let t0;
 	let h6;
-	let t1_value = /*urlContent*/ ctx[3].title + "";
+	let t1_value = /*urlContent*/ ctx[4].title + "";
 	let t1;
 	let t2;
 	let p;
-	let t3_value = /*urlContent*/ ctx[3].description + "";
+	let t3_value = /*urlContent*/ ctx[4].description + "";
 	let t3;
 	let t4;
 	let img;
@@ -89,7 +89,7 @@ function create_if_block(ctx) {
 			attr(h6, "id", "metaTitle");
 			attr(p, "id", "metaDescription");
 			attr(img, "id", "metaImage");
-			if (!src_url_equal(img.src, img_src_value = /*urlContent*/ ctx[3].image)) attr(img, "src", img_src_value);
+			if (!src_url_equal(img.src, img_src_value = /*urlContent*/ ctx[4].image)) attr(img, "src", img_src_value);
 			attr(img, "alt", "");
 			attr(img, "class", "svelte-1ud6jqj");
 		},
@@ -105,15 +105,15 @@ function create_if_block(ctx) {
 			insert(target, img, anchor);
 
 			if (!mounted) {
-				dispose = listen(i, "click", /*closeMetaData*/ ctx[6]);
+				dispose = listen(i, "click", /*closeMetaData*/ ctx[7]);
 				mounted = true;
 			}
 		},
 		p(ctx, dirty) {
-			if (dirty & /*urlContent*/ 8 && t1_value !== (t1_value = /*urlContent*/ ctx[3].title + "")) set_data(t1, t1_value);
-			if (dirty & /*urlContent*/ 8 && t3_value !== (t3_value = /*urlContent*/ ctx[3].description + "")) set_data(t3, t3_value);
+			if (dirty & /*urlContent*/ 16 && t1_value !== (t1_value = /*urlContent*/ ctx[4].title + "")) set_data(t1, t1_value);
+			if (dirty & /*urlContent*/ 16 && t3_value !== (t3_value = /*urlContent*/ ctx[4].description + "")) set_data(t3, t3_value);
 
-			if (dirty & /*urlContent*/ 8 && !src_url_equal(img.src, img_src_value = /*urlContent*/ ctx[3].image)) {
+			if (dirty & /*urlContent*/ 16 && !src_url_equal(img.src, img_src_value = /*urlContent*/ ctx[4].image)) {
 				attr(img, "src", img_src_value);
 			}
 		},
@@ -133,8 +133,56 @@ function create_if_block(ctx) {
 	};
 }
 
+// (389:4) {#if YTlink}
+function create_if_block(ctx) {
+	let i;
+	let t;
+	let iframe;
+	let iframe_src_value;
+	let mounted;
+	let dispose;
+
+	return {
+		c() {
+			i = element("i");
+			t = space();
+			iframe = element("iframe");
+			attr(i, "class", "fa-solid fa-xmark d-flex- align-self-end svelte-1ud6jqj");
+			attr(iframe, "width", "100%");
+			attr(iframe, "height", "350");
+			if (!src_url_equal(iframe.src, iframe_src_value = /*YTlink*/ ctx[2])) attr(iframe, "src", iframe_src_value);
+			attr(iframe, "title", "YouTube video player");
+			attr(iframe, "frameborder", "0");
+			attr(iframe, "allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
+			iframe.allowFullscreen = true;
+		},
+		m(target, anchor) {
+			insert(target, i, anchor);
+			insert(target, t, anchor);
+			insert(target, iframe, anchor);
+
+			if (!mounted) {
+				dispose = listen(i, "click", /*closeYTData*/ ctx[8]);
+				mounted = true;
+			}
+		},
+		p(ctx, dirty) {
+			if (dirty & /*YTlink*/ 4 && !src_url_equal(iframe.src, iframe_src_value = /*YTlink*/ ctx[2])) {
+				attr(iframe, "src", iframe_src_value);
+			}
+		},
+		d(detaching) {
+			if (detaching) detach(i);
+			if (detaching) detach(t);
+			if (detaching) detach(iframe);
+			mounted = false;
+			dispose();
+		}
+	};
+}
+
 function create_fragment(ctx) {
-	let div6;
+	let div7;
 	let div1;
 	let textarea;
 	let t0;
@@ -149,39 +197,42 @@ function create_fragment(ctx) {
 	let div2;
 	let show_if;
 	let current_block_type_index;
-	let if_block;
+	let if_block0;
 	let t6;
-	let navpost;
+	let div3;
 	let t7;
-	let div5;
+	let navpost;
 	let t8;
+	let div6;
+	let t9;
 	let button;
-	let div6_class_value;
+	let div7_class_value;
 	let current;
 	let mounted;
 	let dispose;
-	const if_block_creators = [create_if_block, create_else_block];
+	const if_block_creators = [create_if_block_1, create_else_block];
 	const if_blocks = [];
 
 	function select_block_type(ctx, dirty) {
-		if (dirty & /*urlContent, urlLink*/ 10) show_if = null;
-		if (show_if == null) show_if = !!(/*urlContent*/ ctx[3] && /*urlLink*/ ctx[1].includes('https://'));
+		if (dirty & /*urlContent, urlLink*/ 18) show_if = null;
+		if (show_if == null) show_if = !!(/*urlContent*/ ctx[4] && /*urlLink*/ ctx[1].includes('https://'));
 		if (show_if) return 0;
 		return 1;
 	}
 
 	current_block_type_index = select_block_type(ctx, -1);
-	if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
+	if_block0 = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
+	let if_block1 = /*YTlink*/ ctx[2] && create_if_block(ctx);
 	navpost = new NavPost({});
 
 	return {
 		c() {
-			div6 = element("div");
+			div7 = element("div");
 			div1 = element("div");
 			textarea = element("textarea");
 			t0 = space();
 			div0 = element("div");
-			t1 = text(/*characterCount*/ ctx[2]);
+			t1 = text(/*characterCount*/ ctx[3]);
 			t2 = text("/255");
 			t3 = space();
 			img = element("img");
@@ -190,15 +241,19 @@ function create_fragment(ctx) {
 			video.innerHTML = `<track kind="captions"/>`;
 			t5 = space();
 			div2 = element("div");
-			if_block.c();
+			if_block0.c();
 			t6 = space();
-			create_component(navpost.$$.fragment);
+			div3 = element("div");
+			if (if_block1) if_block1.c();
 			t7 = space();
-			div5 = element("div");
-			div5.innerHTML = `<div class="loader"><div></div></div>`;
+			create_component(navpost.$$.fragment);
 			t8 = space();
+			div6 = element("div");
+			div6.innerHTML = `<div class="loader"><div></div></div>`;
+			t9 = space();
 			button = element("button");
 			button.textContent = "Post";
+			attr(textarea, "data-translate", "input-addPost");
 			attr(textarea, "name", "");
 			attr(textarea, "cols", "1");
 			attr(textarea, "rows", "1");
@@ -216,16 +271,18 @@ function create_fragment(ctx) {
 			attr(div1, "class", "Add-post-input mx-3 d-flex flex-column justify-content-center position-relative");
 			attr(div2, "id", "urlMeta");
 			attr(div2, "class", "urlMeta d-flex flex-column d-none svelte-1ud6jqj");
-			attr(div5, "id", "loaderPost");
-			attr(div5, "class", "loader-content d-none");
+			attr(div3, "id", "YTvideoContainer");
+			attr(div3, "class", "YTvideo d-flex flex-column d-none");
+			attr(div6, "id", "loaderPost");
+			attr(div6, "class", "loader-content d-none");
 			attr(button, "id", "btnSendPost");
 			attr(button, "class", "btn btn-outline-primary btn-flylinkers btn-post mt-3 svelte-1ud6jqj");
 			button.disabled = true;
-			attr(div6, "class", div6_class_value = "Add-post " + /*colorbox*/ ctx[0] + " Default-containers px-lg-5 d-flex flex-column" + " svelte-1ud6jqj");
+			attr(div7, "class", div7_class_value = "Add-post " + /*colorbox*/ ctx[0] + " Default-containers px-lg-5 d-flex flex-column" + " svelte-1ud6jqj");
 		},
 		m(target, anchor) {
-			insert(target, div6, anchor);
-			append(div6, div1);
+			insert(target, div7, anchor);
+			append(div7, div1);
 			append(div1, textarea);
 			append(div1, t0);
 			append(div1, div0);
@@ -235,29 +292,32 @@ function create_fragment(ctx) {
 			append(div1, img);
 			append(div1, t4);
 			append(div1, video);
-			append(div6, t5);
-			append(div6, div2);
+			append(div7, t5);
+			append(div7, div2);
 			if_blocks[current_block_type_index].m(div2, null);
-			append(div6, t6);
-			mount_component(navpost, div6, null);
-			append(div6, t7);
-			append(div6, div5);
-			append(div6, t8);
-			append(div6, button);
+			append(div7, t6);
+			append(div7, div3);
+			if (if_block1) if_block1.m(div3, null);
+			append(div7, t7);
+			mount_component(navpost, div7, null);
+			append(div7, t8);
+			append(div7, div6);
+			append(div7, t9);
+			append(div7, button);
 			current = true;
 
 			if (!mounted) {
 				dispose = [
-					listen(textarea, "keyup", /*validateUrl*/ ctx[5]),
-					listen(textarea, "keyup", /*validateInfoPost*/ ctx[4]),
-					listen(button, "click", /*sendPost*/ ctx[7])
+					listen(textarea, "keyup", /*validateUrl*/ ctx[6]),
+					listen(textarea, "keyup", /*validateInfoPost*/ ctx[5]),
+					listen(button, "click", /*sendPost*/ ctx[9])
 				];
 
 				mounted = true;
 			}
 		},
 		p(ctx, [dirty]) {
-			if (!current || dirty & /*characterCount*/ 4) set_data(t1, /*characterCount*/ ctx[2]);
+			if (!current || dirty & /*characterCount*/ 8) set_data(t1, /*characterCount*/ ctx[3]);
 			let previous_block_index = current_block_type_index;
 			current_block_type_index = select_block_type(ctx, dirty);
 
@@ -271,37 +331,51 @@ function create_fragment(ctx) {
 				});
 
 				check_outros();
-				if_block = if_blocks[current_block_type_index];
+				if_block0 = if_blocks[current_block_type_index];
 
-				if (!if_block) {
-					if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
-					if_block.c();
+				if (!if_block0) {
+					if_block0 = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
+					if_block0.c();
 				} else {
-					if_block.p(ctx, dirty);
+					if_block0.p(ctx, dirty);
 				}
 
-				transition_in(if_block, 1);
-				if_block.m(div2, null);
+				transition_in(if_block0, 1);
+				if_block0.m(div2, null);
 			}
 
-			if (!current || dirty & /*colorbox*/ 1 && div6_class_value !== (div6_class_value = "Add-post " + /*colorbox*/ ctx[0] + " Default-containers px-lg-5 d-flex flex-column" + " svelte-1ud6jqj")) {
-				attr(div6, "class", div6_class_value);
+			if (/*YTlink*/ ctx[2]) {
+				if (if_block1) {
+					if_block1.p(ctx, dirty);
+				} else {
+					if_block1 = create_if_block(ctx);
+					if_block1.c();
+					if_block1.m(div3, null);
+				}
+			} else if (if_block1) {
+				if_block1.d(1);
+				if_block1 = null;
+			}
+
+			if (!current || dirty & /*colorbox*/ 1 && div7_class_value !== (div7_class_value = "Add-post " + /*colorbox*/ ctx[0] + " Default-containers px-lg-5 d-flex flex-column" + " svelte-1ud6jqj")) {
+				attr(div7, "class", div7_class_value);
 			}
 		},
 		i(local) {
 			if (current) return;
-			transition_in(if_block);
+			transition_in(if_block0);
 			transition_in(navpost.$$.fragment, local);
 			current = true;
 		},
 		o(local) {
-			transition_out(if_block);
+			transition_out(if_block0);
 			transition_out(navpost.$$.fragment, local);
 			current = false;
 		},
 		d(detaching) {
-			if (detaching) detach(div6);
+			if (detaching) detach(div7);
 			if_blocks[current_block_type_index].d();
+			if (if_block1) if_block1.d();
 			destroy_component(navpost);
 			mounted = false;
 			run_all(dispose);
@@ -330,6 +404,7 @@ function instance($$self, $$props, $$invalidate) {
 
 	let urlLink;
 	let validUrl = '';
+	let YTlink;
 	let characterCount = 0;
 
 	const validateInfoPost = async e => {
@@ -339,7 +414,7 @@ function instance($$self, $$props, $$invalidate) {
 		: "41px";
 
 		// console.log(e.target.value.length);
-		$$invalidate(2, characterCount = e.target.value.length);
+		$$invalidate(3, characterCount = e.target.value.length);
 
 		if (e.target.value.length <= 255) {
 			characterCountSpan.classList.add('characterCount-active');
@@ -370,7 +445,7 @@ function instance($$self, $$props, $$invalidate) {
 			metaTitle.value = '';
 			metaDescription.value = '';
 			metaImage.src = '';
-			$$invalidate(3, urlContent = '');
+			$$invalidate(4, urlContent = '');
 			searchMeta = '';
 			$$invalidate(1, urlLink = '');
 		}
@@ -403,7 +478,9 @@ function instance($$self, $$props, $$invalidate) {
 			}
 
 			if (isValidHttpUrl(link) === true) {
-				showMetaData(link);
+				link.includes('https://www.youtube.com/')
+				? showYouTubeData(link)
+				: showMetaData(link);
 			}
 		} else {
 			urlMeta.classList.add('d-none');
@@ -436,11 +513,17 @@ function instance($$self, $$props, $$invalidate) {
 
 			if (content) {
 				// console.log(url);
-				$$invalidate(3, urlContent = content);
+				$$invalidate(4, urlContent = content);
 
 				validUrl = url;
 			}
 		}
+	};
+
+	const showYouTubeData = link => {
+		YTvideoContainer.classList.remove('d-none');
+		$$invalidate(2, YTlink = link.replace('watch?v=', 'embed/'));
+		btnSendPost.removeAttribute('disabled');
 	};
 
 	const closeMetaData = () => {
@@ -452,13 +535,19 @@ function instance($$self, $$props, $$invalidate) {
 			metaTitle.value = '';
 			metaDescription.value = '';
 			metaImage.src = '';
-			$$invalidate(3, urlContent = '');
+			$$invalidate(4, urlContent = '');
 			searchMeta = '';
 			$$invalidate(1, urlLink = '');
 			validUrl = '';
 		}
 
-		$$invalidate(3, urlContent = undefined);
+		$$invalidate(4, urlContent = undefined);
+	};
+
+	const closeYTData = () => {
+		$$invalidate(2, YTlink = false);
+		postDescription.value = '';
+		btnSendPost.setAttribute('disabled', '');
 	};
 
 	const sendPost = async () => {
@@ -504,11 +593,18 @@ function instance($$self, $$props, $$invalidate) {
 				const joinPostDescriptionClean = postDescriptionClean.join(' ');
 				let template;
 
-				if (urlContent === undefined) {
+				if (urlContent === undefined && !YTlink) {
 					template = {
 						user: id,
 						img: imagePost,
 						desc: joinPostDescriptionClean
+					};
+				} else if (urlContent === undefined && YTlink) {
+					template = {
+						user: id,
+						img: imagePost,
+						desc: joinPostDescriptionClean,
+						video: YTlink
 					};
 				} else {
 					if (urlContent.id) {
@@ -550,6 +646,7 @@ function instance($$self, $$props, $$invalidate) {
 					}
 
 					closeMetaData();
+					closeYTData();
 					loaderPost.classList.add('d-none');
 
 					//recargar post
@@ -597,19 +694,21 @@ function instance($$self, $$props, $$invalidate) {
 	};
 
 	$$self.$$set = $$props => {
-		if ('id' in $$props) $$invalidate(8, id = $$props.id);
-		if ('urlAPI' in $$props) $$invalidate(9, urlAPI = $$props.urlAPI);
+		if ('id' in $$props) $$invalidate(10, id = $$props.id);
+		if ('urlAPI' in $$props) $$invalidate(11, urlAPI = $$props.urlAPI);
 		if ('colorbox' in $$props) $$invalidate(0, colorbox = $$props.colorbox);
 	};
 
 	return [
 		colorbox,
 		urlLink,
+		YTlink,
 		characterCount,
 		urlContent,
 		validateInfoPost,
 		validateUrl,
 		closeMetaData,
+		closeYTData,
 		sendPost,
 		id,
 		urlAPI
@@ -619,7 +718,7 @@ function instance($$self, $$props, $$invalidate) {
 class AddPost extends SvelteComponent {
 	constructor(options) {
 		super();
-		init(this, options, instance, create_fragment, safe_not_equal, { id: 8, urlAPI: 9, colorbox: 0 });
+		init(this, options, instance, create_fragment, safe_not_equal, { id: 10, urlAPI: 11, colorbox: 0 });
 	}
 }
 

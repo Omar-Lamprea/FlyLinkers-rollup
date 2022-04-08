@@ -19,6 +19,7 @@ import {
 	is_function,
 	listen,
 	mount_component,
+	noop,
 	run_all,
 	safe_not_equal,
 	set_data,
@@ -68,15 +69,60 @@ function get_each_context_1(ctx, list, i) {
 	return child_ctx;
 }
 
-// (386:6) {:else}
-function create_else_block_2(ctx) {
+// (396:4) {:else}
+function create_else_block_4(ctx) {
+	let div;
+
+	return {
+		c() {
+			div = element("div");
+			attr(div, "id", "notificacionsChatsBubble");
+			attr(div, "class", "notificacions-bubble d-none svelte-z6xtox");
+		},
+		m(target, anchor) {
+			insert(target, div, anchor);
+		},
+		p: noop,
+		d(detaching) {
+			if (detaching) detach(div);
+		}
+	};
+}
+
+// (394:4) {#if countMessages > 0}
+function create_if_block_4(ctx) {
+	let div;
+	let t;
+
+	return {
+		c() {
+			div = element("div");
+			t = text(/*countMessages*/ ctx[5]);
+			attr(div, "id", "notificacionsChatsBubble");
+			attr(div, "class", "notificacions-bubble svelte-z6xtox");
+		},
+		m(target, anchor) {
+			insert(target, div, anchor);
+			append(div, t);
+		},
+		p(ctx, dirty) {
+			if (dirty & /*countMessages*/ 32) set_data(t, /*countMessages*/ ctx[5]);
+		},
+		d(detaching) {
+			if (detaching) detach(div);
+		}
+	};
+}
+
+// (403:6) {:else}
+function create_else_block_3(ctx) {
 	let li;
 
 	return {
 		c() {
 			li = element("li");
 
-			li.innerHTML = `<span>You haven&#39;t started any chat</span> 
+			li.innerHTML = `<span data-translate="nav-no-chat">You haven&#39;t started any chat</span> 
         `;
 
 			attr(li, "class", "dropdown-item chatList d-flex svelte-z6xtox");
@@ -90,7 +136,7 @@ function create_else_block_2(ctx) {
 	};
 }
 
-// (384:6) {#each $usergroups as groups}
+// (401:6) {#each $usergroups as groups}
 function create_each_block_1(ctx) {
 	let chatlist;
 	let current;
@@ -113,7 +159,7 @@ function create_each_block_1(ctx) {
 		},
 		p(ctx, dirty) {
 			const chatlist_changes = {};
-			if (dirty & /*$usergroups*/ 32) chatlist_changes.groups = /*groups*/ ctx[19];
+			if (dirty & /*$usergroups*/ 64) chatlist_changes.groups = /*groups*/ ctx[19];
 			if (dirty & /*urlAPI*/ 4) chatlist_changes.urlAPI = /*urlAPI*/ ctx[2];
 			if (dirty & /*id*/ 2) chatlist_changes.id = /*id*/ ctx[1];
 			chatlist.$set(chatlist_changes);
@@ -133,8 +179,8 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (398:6) {#if countBubble > 0}
-function create_if_block_2(ctx) {
+// (415:6) {#if countBubble > 0}
+function create_if_block_3(ctx) {
 	let div;
 	let t;
 
@@ -157,7 +203,83 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (417:10) {:else}
+// (451:8) {:else}
+function create_else_block_2(ctx) {
+	let p;
+
+	return {
+		c() {
+			p = element("p");
+			p.textContent = "you haven't news";
+			attr(p, "data-translate", "nav-no-news");
+		},
+		m(target, anchor) {
+			insert(target, p, anchor);
+		},
+		p: noop,
+		d(detaching) {
+			if (detaching) detach(p);
+		}
+	};
+}
+
+// (419:8) {#if notificationsList.length > 0}
+function create_if_block_1(ctx) {
+	let each_1_anchor;
+	let each_value = /*notificationsList*/ ctx[3];
+	let each_blocks = [];
+
+	for (let i = 0; i < each_value.length; i += 1) {
+		each_blocks[i] = create_each_block(get_each_context(ctx, each_value, i));
+	}
+
+	return {
+		c() {
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].c();
+			}
+
+			each_1_anchor = empty();
+		},
+		m(target, anchor) {
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].m(target, anchor);
+			}
+
+			insert(target, each_1_anchor, anchor);
+		},
+		p(ctx, dirty) {
+			if (dirty & /*notificationsList, visitProfile, startTime, urlAPI, reload*/ 12) {
+				each_value = /*notificationsList*/ ctx[3];
+				let i;
+
+				for (i = 0; i < each_value.length; i += 1) {
+					const child_ctx = get_each_context(ctx, each_value, i);
+
+					if (each_blocks[i]) {
+						each_blocks[i].p(child_ctx, dirty);
+					} else {
+						each_blocks[i] = create_each_block(child_ctx);
+						each_blocks[i].c();
+						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
+					}
+				}
+
+				for (; i < each_blocks.length; i += 1) {
+					each_blocks[i].d(1);
+				}
+
+				each_blocks.length = each_value.length;
+			}
+		},
+		d(detaching) {
+			destroy_each(each_blocks, detaching);
+			if (detaching) detach(each_1_anchor);
+		}
+	};
+}
+
+// (435:12) {:else}
 function create_else_block_1(ctx) {
 	let li;
 	let a;
@@ -267,8 +389,8 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (404:10) {#if typeof(notification.id) === 'string'}
-function create_if_block_1(ctx) {
+// (422:12) {#if typeof(notification.id) === 'string'}
+function create_if_block_2(ctx) {
 	let li;
 	let a;
 	let img;
@@ -381,16 +503,16 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (402:8) {#each notificationsList as notification}
+// (420:10) {#each notificationsList as notification}
 function create_each_block(ctx) {
 	let if_block_anchor;
 
-	function select_block_type(ctx, dirty) {
-		if (typeof /*notification*/ ctx[16].id === 'string') return create_if_block_1;
+	function select_block_type_2(ctx, dirty) {
+		if (typeof /*notification*/ ctx[16].id === 'string') return create_if_block_2;
 		return create_else_block_1;
 	}
 
-	let current_block_type = select_block_type(ctx, -1);
+	let current_block_type = select_block_type_2(ctx, -1);
 	let if_block = current_block_type(ctx);
 
 	return {
@@ -403,7 +525,7 @@ function create_each_block(ctx) {
 			insert(target, if_block_anchor, anchor);
 		},
 		p(ctx, dirty) {
-			if (current_block_type === (current_block_type = select_block_type(ctx, dirty)) && if_block) {
+			if (current_block_type === (current_block_type = select_block_type_2(ctx, dirty)) && if_block) {
 				if_block.p(ctx, dirty);
 			} else {
 				if_block.d(1);
@@ -422,7 +544,7 @@ function create_each_block(ctx) {
 	};
 }
 
-// (442:6) {:else}
+// (463:6) {:else}
 function create_else_block(ctx) {
 	let img;
 	let img_src_value;
@@ -449,7 +571,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (440:6) {#if localStorage.getItem('profilePhoto')}
+// (461:6) {#if localStorage.getItem('profilePhoto')}
 function create_if_block(ctx) {
 	let img;
 	let img_src_value;
@@ -491,40 +613,39 @@ function create_fragment(ctx) {
 	let link_action_1;
 	let active_action_1;
 	let t2;
-	let div4;
 	let div3;
-	let t4;
+	let t3;
 	let i2;
-	let t5;
+	let t4;
 	let ul0;
-	let t6;
-	let div6;
+	let t5;
 	let div5;
+	let div4;
 	let i3;
+	let t6;
 	let t7;
-	let t8;
 	let ul1;
-	let t9;
-	let div7;
+	let t8;
+	let div6;
 	let a2;
 	let show_if;
 	let link_action_2;
 	let active_action_2;
-	let t10;
-	let div9;
+	let t9;
 	let div8;
+	let div7;
 	let i4;
-	let t11;
+	let t10;
 	let ul2;
 	let li0;
 	let a3;
 	let link_action_3;
 	let active_action_3;
-	let t13;
+	let t12;
 	let li1;
 	let span1;
-	let t15;
-	let div10;
+	let t14;
+	let div9;
 	let a4;
 	let link_action_4;
 	let active_action_4;
@@ -539,38 +660,47 @@ function create_fragment(ctx) {
 			}
 		});
 
-	let each_value_1 = /*$usergroups*/ ctx[5];
-	let each_blocks_1 = [];
-
-	for (let i = 0; i < each_value_1.length; i += 1) {
-		each_blocks_1[i] = create_each_block_1(get_each_context_1(ctx, each_value_1, i));
+	function select_block_type(ctx, dirty) {
+		if (/*countMessages*/ ctx[5] > 0) return create_if_block_4;
+		return create_else_block_4;
 	}
 
-	const out = i => transition_out(each_blocks_1[i], 1, 1, () => {
-		each_blocks_1[i] = null;
-	});
-
-	let each0_else = null;
-
-	if (!each_value_1.length) {
-		each0_else = create_else_block_2(ctx);
-	}
-
-	let if_block0 = /*countBubble*/ ctx[4] > 0 && create_if_block_2(ctx);
-	let each_value = /*notificationsList*/ ctx[3];
+	let current_block_type = select_block_type(ctx, -1);
+	let if_block0 = current_block_type(ctx);
+	let each_value_1 = /*$usergroups*/ ctx[6];
 	let each_blocks = [];
 
-	for (let i = 0; i < each_value.length; i += 1) {
-		each_blocks[i] = create_each_block(get_each_context(ctx, each_value, i));
+	for (let i = 0; i < each_value_1.length; i += 1) {
+		each_blocks[i] = create_each_block_1(get_each_context_1(ctx, each_value_1, i));
 	}
 
+	const out = i => transition_out(each_blocks[i], 1, 1, () => {
+		each_blocks[i] = null;
+	});
+
+	let each_1_else = null;
+
+	if (!each_value_1.length) {
+		each_1_else = create_else_block_3(ctx);
+	}
+
+	let if_block1 = /*countBubble*/ ctx[4] > 0 && create_if_block_3(ctx);
+
 	function select_block_type_1(ctx, dirty) {
+		if (/*notificationsList*/ ctx[3].length > 0) return create_if_block_1;
+		return create_else_block_2;
+	}
+
+	let current_block_type_1 = select_block_type_1(ctx, -1);
+	let if_block2 = current_block_type_1(ctx);
+
+	function select_block_type_3(ctx, dirty) {
 		if (localStorage.getItem('profilePhoto')) return create_if_block;
 		return create_else_block;
 	}
 
-	let current_block_type = select_block_type_1(ctx, -1);
-	let if_block1 = current_block_type(ctx);
+	let current_block_type_2 = select_block_type_3(ctx, -1);
+	let if_block3 = current_block_type_2(ctx);
 
 	return {
 		c() {
@@ -586,54 +716,49 @@ function create_fragment(ctx) {
 			a1 = element("a");
 			a1.innerHTML = `<i class="fas fa-briefcase svelte-z6xtox"></i>`;
 			t2 = space();
-			div4 = element("div");
 			div3 = element("div");
-			div3.textContent = "!";
-			t4 = space();
+			if_block0.c();
+			t3 = space();
 			i2 = element("i");
-			t5 = space();
+			t4 = space();
 			ul0 = element("ul");
-
-			for (let i = 0; i < each_blocks_1.length; i += 1) {
-				each_blocks_1[i].c();
-			}
-
-			if (each0_else) {
-				each0_else.c();
-			}
-
-			t6 = space();
-			div6 = element("div");
-			div5 = element("div");
-			i3 = element("i");
-			t7 = space();
-			if (if_block0) if_block0.c();
-			t8 = space();
-			ul1 = element("ul");
 
 			for (let i = 0; i < each_blocks.length; i += 1) {
 				each_blocks[i].c();
 			}
 
-			t9 = space();
-			div7 = element("div");
+			if (each_1_else) {
+				each_1_else.c();
+			}
+
+			t5 = space();
+			div5 = element("div");
+			div4 = element("div");
+			i3 = element("i");
+			t6 = space();
+			if (if_block1) if_block1.c();
+			t7 = space();
+			ul1 = element("ul");
+			if_block2.c();
+			t8 = space();
+			div6 = element("div");
 			a2 = element("a");
-			if_block1.c();
-			t10 = space();
-			div9 = element("div");
+			if_block3.c();
+			t9 = space();
 			div8 = element("div");
+			div7 = element("div");
 			i4 = element("i");
-			t11 = space();
+			t10 = space();
 			ul2 = element("ul");
 			li0 = element("li");
 			a3 = element("a");
-			a3.innerHTML = `<span class="dropdown-item svelte-z6xtox">Settings</span>`;
-			t13 = space();
+			a3.innerHTML = `<span data-translate="nav-settings" class="dropdown-item svelte-z6xtox">Settings</span>`;
+			t12 = space();
 			li1 = element("li");
 			span1 = element("span");
 			span1.textContent = "Log Out";
-			t15 = space();
-			div10 = element("div");
+			t14 = space();
+			div9 = element("div");
 			a4 = element("a");
 			a4.innerHTML = `<i class="fas fa-calendar-week svelte-z6xtox"></i>`;
 			attr(a0, "href", "/");
@@ -642,38 +767,38 @@ function create_fragment(ctx) {
 			attr(div1, "class", "icon Header-nav-user-plus notification mx-3 fs-3 svelte-z6xtox");
 			attr(a1, "href", "/");
 			attr(div2, "class", "icon Header-nav-briefcase hidden mx-3 fs-3 svelte-z6xtox");
-			attr(div3, "id", "notificacionsChatsBubble");
-			attr(div3, "class", "notificacions-bubble d-none svelte-z6xtox");
 			attr(i2, "class", "fas fa-comment dropdown-toggle svelte-z6xtox");
 			attr(i2, "id", "chats");
 			attr(i2, "data-bs-toggle", "dropdown");
 			attr(i2, "aria-expanded", "false");
 			attr(ul0, "class", "dropdown-menu svelte-z6xtox");
 			attr(ul0, "aria-labelledby", "chats");
-			attr(div4, "class", "icon Header-nav-comment mx-3 fs-3 position-relative svelte-z6xtox");
+			attr(ul0, "id", "ulChatList");
+			attr(div3, "class", "icon Header-nav-comment mx-3 fs-3 position-relative svelte-z6xtox");
 			attr(i3, "class", "fas fa-bell dropdown-toggle svelte-z6xtox");
 			attr(i3, "id", "notifications");
 			attr(i3, "data-bs-toggle", "dropdown");
 			attr(i3, "aria-expanded", "false");
 			attr(ul1, "class", "dropdown-menu svelte-z6xtox");
 			attr(ul1, "aria-labelledby", "notifications");
-			attr(div5, "class", "dropdown svelte-z6xtox");
-			attr(div6, "class", "icon Header-nav-bell mx-3 fs-3 notification svelte-z6xtox");
-			attr(div6, "id", "notification");
+			attr(div4, "class", "dropdown svelte-z6xtox");
+			attr(div5, "class", "icon Header-nav-bell mx-3 fs-3 notification svelte-z6xtox");
+			attr(div5, "id", "notification");
 			attr(a2, "href", "/profile");
-			attr(div7, "class", "icon Header-nav-user mx-3 fs-3 svelte-z6xtox");
+			attr(div6, "class", "icon Header-nav-user mx-3 fs-3 svelte-z6xtox");
 			attr(i4, "class", "fas fa-grip-vertical dropdown-toggle svelte-z6xtox");
 			attr(i4, "id", "settings");
 			attr(i4, "data-bs-toggle", "dropdown");
 			attr(i4, "aria-expanded", "false");
 			attr(a3, "href", "/settings");
+			attr(span1, "data-translate", "nav-log-out");
 			attr(span1, "class", "dropdown-item svelte-z6xtox");
 			attr(ul2, "class", "dropdown-menu svelte-z6xtox");
 			attr(ul2, "aria-labelledby", "settings");
-			attr(div8, "class", "dropdown svelte-z6xtox");
-			attr(div9, "class", "icon Header-nav-grip-vertical mx-3 fs-3 svelte-z6xtox");
+			attr(div7, "class", "dropdown svelte-z6xtox");
+			attr(div8, "class", "icon Header-nav-grip-vertical mx-3 fs-3 svelte-z6xtox");
 			attr(a4, "href", "/");
-			attr(div10, "class", "icon Header-nav-calendar-week hidden mx-3 fs-3 svelte-z6xtox");
+			attr(div9, "class", "icon Header-nav-calendar-week hidden mx-3 fs-3 svelte-z6xtox");
 			attr(nav, "class", "nav-container d-flex svelte-z6xtox");
 		},
 		m(target, anchor) {
@@ -687,52 +812,48 @@ function create_fragment(ctx) {
 			append(nav, div2);
 			append(div2, a1);
 			append(nav, t2);
-			append(nav, div4);
-			append(div4, div3);
-			append(div4, t4);
-			append(div4, i2);
-			append(div4, t5);
-			append(div4, ul0);
-
-			for (let i = 0; i < each_blocks_1.length; i += 1) {
-				each_blocks_1[i].m(ul0, null);
-			}
-
-			if (each0_else) {
-				each0_else.m(ul0, null);
-			}
-
-			append(nav, t6);
-			append(nav, div6);
-			append(div6, div5);
-			append(div5, i3);
-			append(div5, t7);
-			if (if_block0) if_block0.m(div5, null);
-			append(div5, t8);
-			append(div5, ul1);
+			append(nav, div3);
+			if_block0.m(div3, null);
+			append(div3, t3);
+			append(div3, i2);
+			append(div3, t4);
+			append(div3, ul0);
 
 			for (let i = 0; i < each_blocks.length; i += 1) {
-				each_blocks[i].m(ul1, null);
+				each_blocks[i].m(ul0, null);
 			}
 
+			if (each_1_else) {
+				each_1_else.m(ul0, null);
+			}
+
+			append(nav, t5);
+			append(nav, div5);
+			append(div5, div4);
+			append(div4, i3);
+			append(div4, t6);
+			if (if_block1) if_block1.m(div4, null);
+			append(div4, t7);
+			append(div4, ul1);
+			if_block2.m(ul1, null);
+			append(nav, t8);
+			append(nav, div6);
+			append(div6, a2);
+			if_block3.m(a2, null);
 			append(nav, t9);
-			append(nav, div7);
-			append(div7, a2);
-			if_block1.m(a2, null);
-			append(nav, t10);
-			append(nav, div9);
-			append(div9, div8);
-			append(div8, i4);
-			append(div8, t11);
-			append(div8, ul2);
+			append(nav, div8);
+			append(div8, div7);
+			append(div7, i4);
+			append(div7, t10);
+			append(div7, ul2);
 			append(ul2, li0);
 			append(li0, a3);
-			append(ul2, t13);
+			append(ul2, t12);
 			append(ul2, li1);
 			append(li1, span1);
-			append(nav, t15);
-			append(nav, div10);
-			append(div10, a4);
+			append(nav, t14);
+			append(nav, div9);
+			append(div9, a4);
 			current = true;
 
 			if (!mounted) {
@@ -741,12 +862,12 @@ function create_fragment(ctx) {
 					action_destroyer(active_action = active.call(null, a0)),
 					action_destroyer(link_action_1 = link.call(null, a1)),
 					action_destroyer(active_action_1 = active.call(null, a1)),
-					listen(div6, "click", /*counterBubble*/ ctx[7]),
+					listen(div5, "click", /*counterBubble*/ ctx[8]),
 					action_destroyer(link_action_2 = link.call(null, a2)),
 					action_destroyer(active_action_2 = active.call(null, a2)),
 					action_destroyer(link_action_3 = link.call(null, a3)),
 					action_destroyer(active_action_3 = active.call(null, a3)),
-					listen(span1, "click", /*logOut*/ ctx[8]),
+					listen(span1, "click", /*logOut*/ ctx[9]),
 					action_destroyer(link_action_4 = link.call(null, a4)),
 					action_destroyer(active_action_4 = active.call(null, a4))
 				];
@@ -760,98 +881,99 @@ function create_fragment(ctx) {
 			if (dirty & /*urlAPI*/ 4) friendrequest_changes.urlAPI = /*urlAPI*/ ctx[2];
 			friendrequest.$set(friendrequest_changes);
 
-			if (dirty & /*$usergroups, urlAPI, id*/ 38) {
-				each_value_1 = /*$usergroups*/ ctx[5];
+			if (current_block_type === (current_block_type = select_block_type(ctx, dirty)) && if_block0) {
+				if_block0.p(ctx, dirty);
+			} else {
+				if_block0.d(1);
+				if_block0 = current_block_type(ctx);
+
+				if (if_block0) {
+					if_block0.c();
+					if_block0.m(div3, t3);
+				}
+			}
+
+			if (dirty & /*$usergroups, urlAPI, id*/ 70) {
+				each_value_1 = /*$usergroups*/ ctx[6];
 				let i;
 
 				for (i = 0; i < each_value_1.length; i += 1) {
 					const child_ctx = get_each_context_1(ctx, each_value_1, i);
 
-					if (each_blocks_1[i]) {
-						each_blocks_1[i].p(child_ctx, dirty);
-						transition_in(each_blocks_1[i], 1);
+					if (each_blocks[i]) {
+						each_blocks[i].p(child_ctx, dirty);
+						transition_in(each_blocks[i], 1);
 					} else {
-						each_blocks_1[i] = create_each_block_1(child_ctx);
-						each_blocks_1[i].c();
-						transition_in(each_blocks_1[i], 1);
-						each_blocks_1[i].m(ul0, null);
+						each_blocks[i] = create_each_block_1(child_ctx);
+						each_blocks[i].c();
+						transition_in(each_blocks[i], 1);
+						each_blocks[i].m(ul0, null);
 					}
 				}
 
 				group_outros();
 
-				for (i = each_value_1.length; i < each_blocks_1.length; i += 1) {
+				for (i = each_value_1.length; i < each_blocks.length; i += 1) {
 					out(i);
 				}
 
 				check_outros();
 
 				if (each_value_1.length) {
-					if (each0_else) {
-						each0_else.d(1);
-						each0_else = null;
+					if (each_1_else) {
+						each_1_else.d(1);
+						each_1_else = null;
 					}
-				} else if (!each0_else) {
-					each0_else = create_else_block_2(ctx);
-					each0_else.c();
-					each0_else.m(ul0, null);
+				} else if (!each_1_else) {
+					each_1_else = create_else_block_3(ctx);
+					each_1_else.c();
+					each_1_else.m(ul0, null);
 				}
 			}
 
 			if (/*countBubble*/ ctx[4] > 0) {
-				if (if_block0) {
-					if_block0.p(ctx, dirty);
+				if (if_block1) {
+					if_block1.p(ctx, dirty);
 				} else {
-					if_block0 = create_if_block_2(ctx);
-					if_block0.c();
-					if_block0.m(div5, t8);
+					if_block1 = create_if_block_3(ctx);
+					if_block1.c();
+					if_block1.m(div4, t7);
 				}
-			} else if (if_block0) {
-				if_block0.d(1);
-				if_block0 = null;
+			} else if (if_block1) {
+				if_block1.d(1);
+				if_block1 = null;
 			}
 
-			if (dirty & /*notificationsList, visitProfile, startTime, urlAPI, reload*/ 12) {
-				each_value = /*notificationsList*/ ctx[3];
-				let i;
+			if (current_block_type_1 === (current_block_type_1 = select_block_type_1(ctx, dirty)) && if_block2) {
+				if_block2.p(ctx, dirty);
+			} else {
+				if_block2.d(1);
+				if_block2 = current_block_type_1(ctx);
 
-				for (i = 0; i < each_value.length; i += 1) {
-					const child_ctx = get_each_context(ctx, each_value, i);
-
-					if (each_blocks[i]) {
-						each_blocks[i].p(child_ctx, dirty);
-					} else {
-						each_blocks[i] = create_each_block(child_ctx);
-						each_blocks[i].c();
-						each_blocks[i].m(ul1, null);
-					}
+				if (if_block2) {
+					if_block2.c();
+					if_block2.m(ul1, null);
 				}
-
-				for (; i < each_blocks.length; i += 1) {
-					each_blocks[i].d(1);
-				}
-
-				each_blocks.length = each_value.length;
 			}
 
-			if_block1.p(ctx, dirty);
+			if_block3.p(ctx, dirty);
 		},
 		i(local) {
 			if (current) return;
 			transition_in(friendrequest.$$.fragment, local);
 
 			for (let i = 0; i < each_value_1.length; i += 1) {
-				transition_in(each_blocks_1[i]);
+				transition_in(each_blocks[i]);
 			}
 
 			current = true;
 		},
 		o(local) {
 			transition_out(friendrequest.$$.fragment, local);
-			each_blocks_1 = each_blocks_1.filter(Boolean);
+			each_blocks = each_blocks.filter(Boolean);
 
-			for (let i = 0; i < each_blocks_1.length; i += 1) {
-				transition_out(each_blocks_1[i]);
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				transition_out(each_blocks[i]);
 			}
 
 			current = false;
@@ -859,11 +981,12 @@ function create_fragment(ctx) {
 		d(detaching) {
 			if (detaching) detach(nav);
 			destroy_component(friendrequest);
-			destroy_each(each_blocks_1, detaching);
-			if (each0_else) each0_else.d();
-			if (if_block0) if_block0.d();
+			if_block0.d();
 			destroy_each(each_blocks, detaching);
-			if_block1.d();
+			if (each_1_else) each_1_else.d();
+			if (if_block1) if_block1.d();
+			if_block2.d();
+			if_block3.d();
 			mounted = false;
 			run_all(dispose);
 		}
@@ -884,7 +1007,7 @@ function instance($$self, $$props, $$invalidate) {
 	let { urlLogOut, urlAPI } = $$props;
 	let idStr = id.toString();
 	let usergroups = writable([]);
-	component_subscribe($$self, usergroups, value => $$invalidate(5, $usergroups = value));
+	component_subscribe($$self, usergroups, value => $$invalidate(6, $usergroups = value));
 	let newChat;
 	let notificationsList = [];
 	let notificationsChats = [];
@@ -896,7 +1019,7 @@ function instance($$self, $$props, $$invalidate) {
 			$$invalidate(3, notificationsList = []);
 			notificationsChats = [];
 			$$invalidate(4, countBubble = 0);
-			countMessages = 0;
+			$$invalidate(5, countMessages = 0);
 			const data = notification.data();
 			const groups = data.groups;
 			const friendsRequests = data.friends;
@@ -908,20 +1031,21 @@ function instance($$self, $$props, $$invalidate) {
 				usergroups.set(groups);
 
 				groups.forEach(chat => {
-					const q = query(collection(db, `message/${chat}/messages`), orderBy('sentAt', 'desc'), limit(1));
+					const q = query(collection(db, `message/${chat}/messages`), orderBy('sentAt', 'desc'), limit(2));
 
 					const snapChatId = onSnapshot(q, col => {
-						col.forEach(doc => {
-							// countMessages = 0
-							if (!doc.data().seen) {
-								// console.log(doc.data());
-								countMessages += 1;
-
-								console.log(countMessages);
-								localStorage.setItem('countMessages', countMessages);
-								console.log(countMessages);
+						// console.log('1', col.docs[0].data(), '2', col.docs[1].data());
+						if (col.docs.length === 2) {
+							if (col.docs[1].data().seen && !col.docs[0].data().seen) {
+								console.log('entre al 2');
+								$$invalidate(5, countMessages += 1);
 							}
-						});
+						} else {
+							if (!col.docs[0].data().seen) {
+								console.log('entre al 1');
+								$$invalidate(5, countMessages += 1);
+							}
+						}
 					});
 				});
 			} // groups.forEach(chat => {
@@ -1124,12 +1248,19 @@ function instance($$self, $$props, $$invalidate) {
 
 	onMount(() => {
 		getUserNotifications();
+
+		const observer = new MutationObserver(() => {
+				console.log('reducir contador');
+				$$invalidate(5, countMessages -= 1);
+			});
+
+		observer.observe(notificacionsChatsBubble, { attributes: true });
 	});
 
 	$$self.$$set = $$props => {
 		if ('photo' in $$props) $$invalidate(0, photo = $$props.photo);
 		if ('id' in $$props) $$invalidate(1, id = $$props.id);
-		if ('urlLogOut' in $$props) $$invalidate(9, urlLogOut = $$props.urlLogOut);
+		if ('urlLogOut' in $$props) $$invalidate(10, urlLogOut = $$props.urlLogOut);
 		if ('urlAPI' in $$props) $$invalidate(2, urlAPI = $$props.urlAPI);
 	};
 
@@ -1139,6 +1270,7 @@ function instance($$self, $$props, $$invalidate) {
 		urlAPI,
 		notificationsList,
 		countBubble,
+		countMessages,
 		$usergroups,
 		usergroups,
 		counterBubble,
@@ -1150,7 +1282,13 @@ function instance($$self, $$props, $$invalidate) {
 class HeaderNav extends SvelteComponent {
 	constructor(options) {
 		super();
-		init(this, options, instance, create_fragment, safe_not_equal, { photo: 0, id: 1, urlLogOut: 9, urlAPI: 2 });
+
+		init(this, options, instance, create_fragment, safe_not_equal, {
+			photo: 0,
+			id: 1,
+			urlLogOut: 10,
+			urlAPI: 2
+		});
 	}
 }
 

@@ -21,6 +21,7 @@ function create_if_block(ctx) {
 		c() {
 			button = element("button");
 			button.textContent = "Edit cover photo";
+			attr(button, "data-translate", "cover-photo");
 			attr(button, "class", "editCoverPhoto svelte-8ip6o5");
 			attr(button, "data-bs-toggle", "modal");
 			attr(button, "data-bs-target", "#editProfile");

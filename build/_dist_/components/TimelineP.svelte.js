@@ -35,6 +35,7 @@ import Post from './post/Post.svelte.js';
 import Loader from './Loader.svelte.js';
 import { writable } from '../../_snowpack/pkg/svelte/store.js';
 import { onMount } from '../../_snowpack/pkg/svelte.js';
+import { translate } from '../js/translate.js';
 
 function get_each_context_1(ctx, list, i) {
 	const child_ctx = ctx.slice();
@@ -60,7 +61,7 @@ function get_each_context_2(ctx, list, i) {
 	return child_ctx;
 }
 
-// (148:6) {#if email === dataJson.email}
+// (152:6) {#if email === dataJson.email}
 function create_if_block_5(ctx) {
 	let div;
 	let p;
@@ -114,7 +115,7 @@ function create_if_block_5(ctx) {
 	};
 }
 
-// (154:6) {#if experiences !== undefined}
+// (158:6) {#if experiences !== undefined}
 function create_if_block_4(ctx) {
 	let experience;
 	let current;
@@ -159,7 +160,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (159:6) {#if post}
+// (163:6) {#if post}
 function create_if_block_2(ctx) {
 	let current_block_type_index;
 	let if_block;
@@ -229,7 +230,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (166:8) {:else}
+// (170:8) {:else}
 function create_else_block_1(ctx) {
 	let each_1_anchor;
 	let current;
@@ -313,7 +314,7 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (160:8) {#if userMain}
+// (164:8) {#if userMain}
 function create_if_block_3(ctx) {
 	let each_1_anchor;
 	let current;
@@ -397,7 +398,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (168:10) {#each post as dataPost}
+// (172:10) {#each post as dataPost}
 function create_each_block_3(ctx) {
 	let post_1;
 	let current;
@@ -452,7 +453,7 @@ function create_each_block_3(ctx) {
 	};
 }
 
-// (162:10) {#each post as dataPost}
+// (166:10) {#each post as dataPost}
 function create_each_block_2(ctx) {
 	let post_1;
 	let current;
@@ -507,7 +508,7 @@ function create_each_block_2(ctx) {
 	};
 }
 
-// (176:6) {#if $posts}
+// (180:6) {#if $posts}
 function create_if_block(ctx) {
 	let current_block_type_index;
 	let if_block;
@@ -577,7 +578,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (183:8) {:else}
+// (187:8) {:else}
 function create_else_block(ctx) {
 	let each_1_anchor;
 	let current;
@@ -661,7 +662,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (177:8) {#if userMain}
+// (181:8) {#if userMain}
 function create_if_block_1(ctx) {
 	let each_1_anchor;
 	let current;
@@ -745,7 +746,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (185:10) {#each $posts as dataPost}
+// (189:10) {#each $posts as dataPost}
 function create_each_block_1(ctx) {
 	let post_1;
 	let current;
@@ -800,7 +801,7 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (179:10) {#each $posts as dataPost}
+// (183:10) {#each $posts as dataPost}
 function create_each_block(ctx) {
 	let post_1;
 	let current;
@@ -1212,7 +1213,7 @@ function instance($$self, $$props, $$invalidate) {
 				}
 			}
 		});
-	});
+	}); // translate()
 
 	$$self.$$set = $$props => {
 		if ('name' in $$props) $$invalidate(1, name = $$props.name);

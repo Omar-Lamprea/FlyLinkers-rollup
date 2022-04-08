@@ -142,6 +142,12 @@ export async function newGroup(user1, user2, messageText){
 const updateUser = async(groupId, user)=>{
   // console.log(user);
   const collectionId = user.uid.toString()
+  // if (!user.groups) {
+  //   const userDoc = doc(db, 'user', collectionId)
+  //   await updateDoc(userDoc, {
+  //     groups: []
+  //   })
+  // }
 
   let aux = user.groups
   aux.push(groupId)

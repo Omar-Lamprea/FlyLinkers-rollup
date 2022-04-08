@@ -29,6 +29,7 @@ import Post from './post/Post.svelte.js';
 import Loader from './Loader.svelte.js';
 import { onMount } from '../../_snowpack/pkg/svelte.js';
 import { writable } from '../../_snowpack/pkg/svelte/store.js';
+import { translate } from '../js/translate.js';
 
 function get_each_context(ctx, list, i) {
 	const child_ctx = ctx.slice();
@@ -36,7 +37,7 @@ function get_each_context(ctx, list, i) {
 	return child_ctx;
 }
 
-// (85:4) {#if id}
+// (89:4) {#if id}
 function create_if_block(ctx) {
 	let addpost;
 	let current;
@@ -78,7 +79,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (88:4) {#each $posts as dataPost}
+// (92:4) {#each $posts as dataPost}
 function create_each_block(ctx) {
 	let post;
 	let current;
@@ -333,8 +334,8 @@ function instance($$self, $$props, $$invalidate) {
 		getPosts(1);
 	});
 
-	onMount(() => {
-		getPosts();
+	onMount(async () => {
+		await getPosts();
 		reloadPosts();
 
 		document.addEventListener('scroll', async e => {
@@ -351,7 +352,7 @@ function instance($$self, $$props, $$invalidate) {
 				}
 			}
 		});
-	});
+	}); // translate()
 
 	$$self.$$set = $$props => {
 		if ('id' in $$props) $$invalidate(0, id = $$props.id);
