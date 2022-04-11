@@ -19,7 +19,7 @@
 
 <div class=" Default-containers px-3">
   <div class="People-Ttitle mb-3 text-center">
-    <h4>People</h4>
+    <h4 data-translate="title-people">People</h4>
   </div>
   <div class="People-column">
     <div class="User">

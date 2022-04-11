@@ -654,14 +654,14 @@
         <div class="dropdown">
           <i class="fas fa-ellipsis-h dropdown-toggle" type="button" id="settings-post" data-bs-toggle="dropdown" aria-expanded="false"></i> 
           <ul class="dropdown-menu" aria-labelledby="settings-post">
-            <li><a class="dropdown-item" href="/post/{id}" use:link use:active>View post</a></li>
+            <li><a class="dropdown-item" href="/post/{id}" use:link use:active data-translate="see-post">See post</a></li>
             {#if user}
                {#if user.id.toString() === localStorage.getItem('userId')}
-                 <li class="dropdown-item" on:click={deletePost(id)}>Delete post</li>
+                 <li class="dropdown-item" on:click={deletePost(id)} data-translate="delete-post">Delete post</li>
                {/if}
             {:else}
               {#if user_id.toString() === localStorage.getItem('userId')}
-                <li class="dropdown-item" on:click={deletePost(id)}>Delete post</li>
+                <li class="dropdown-item" on:click={deletePost(id)} data-translate="delete-post">Delete post</li>
               {/if}
             {/if}
           </ul>
@@ -803,11 +803,11 @@
       <div class="Card-board-actions d-flex justify-content-center justify-content-md-start">
         <button id="btnReactionLike{id}" class="Action Header-nav-thumbs-up" on:click={changeReaction}>
           <i id="btnLike{id}" class="fa-thumbs-up far"></i>
-          <span>Like</span>
+          <span data-translate="like">Like</span>
         </button>
         <button id="btnReactionLove{id}" class="Action Header-nav-heart" on:click={changeReaction}>
           <i id="btnLove{id}"class="fa-heart far"></i>
-          <span>love</span>
+          <span data-translate="love">love</span>
         </button>
         <div class="Action Header-nav-comments" on:click={showComments}>
           <i class="fa-comments far"></i>
@@ -822,7 +822,7 @@
         </div>
         <div class="Action Header-nav-paper-plane hidden disabled">
           <i class="fas fa-paper-plane"></i>
-          <span>Send</span>
+          <span data-translate="send">Send</span>
         </div>
       </div>
     </div>

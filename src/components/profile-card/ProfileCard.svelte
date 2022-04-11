@@ -22,7 +22,7 @@
   .Profile-card-info p{
     font-size: 14px;
   }
-  .Profile-card-info p span{
+  .Profile-card-info p span:last-child{
     color: var(--main-color);
     font-size: inherit;
     font-weight: bold;
@@ -60,8 +60,14 @@
         <span>{title}</span>
       </div>
       <div class="Profile-card-text my-2">
-        <p data-translate="who-viewed">Who viewed your profile-card <span>3.8K</span></p> 
-        <p>Views of your post <span>3.8K</span></p> 
+        <p>
+          <span data-translate="who-viewed">Who viewed your profile-card</span>
+          <span>3.8K</span>
+        </p> 
+        <p>
+          <span data-translate="views-post">Views of your post</span>
+          <span>3.8K</span>
+        </p> 
       </div>
     </div>
     <div class="Profile-card-edit">
@@ -69,7 +75,7 @@
         <a href="/profile" use:link use:active class="d-flex align-items-center">
           <div class="Profile-edit-profile">
             <i class="fas fa-bookmark"></i>
-            Edit profile
+            <span data-translate="profile-mini">Edit profile</span> 
           </div>
         </a>
       </p>

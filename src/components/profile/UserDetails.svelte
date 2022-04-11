@@ -233,8 +233,12 @@
           <ProfilePhotoModal {id} {urlAPI}/>
 
           <div class="Profile-card-statistics">
-            <p>Who viewed your profile-card <span>3.8K</span></p> 
-            <p>Views of your post <span>3.8K</span></p> 
+            <p>
+              <span data-translate="who-viewed">Who viewed your profile-card</span>
+              <span>3.8K</span></p> 
+            <p>
+              <span data-translate="views-post">Views of your post</span>
+              <span>3.8K</span></p> 
           </div>
           <div class="Profile-card-buttons mt-5">
             <button class="btn btn-outline-primary btn-flylinkers disabled" disabled>

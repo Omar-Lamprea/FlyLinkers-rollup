@@ -151,7 +151,7 @@
 
       {#if email === dataJson.email}
         <div class="Background-post-profile">
-          <p class="my-2">Post</p>
+          <p data-translate="title-post" class="my-2">Post</p>
           <AddPost {id} {urlAPI}/>
         </div>
       {/if}

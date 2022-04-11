@@ -62,6 +62,6 @@
     <p>Loading...</p>
   {/each}
   <div class="Hashtags-discover text-center py-3">
-    <p>Discover More</p>
+    <p data-translate="discover-hash">Discover More</p>
   </div>
 </div>

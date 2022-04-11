@@ -54,21 +54,21 @@
             // console.log('1', col.docs[0].data(), '2', col.docs[1].data());
             const dataMain = JSON.parse(localStorage.getItem('data'))
             const userName = `${dataMain.name} ${dataMain.last_name}`
-            console.log(col, col.docs);
+            // console.log(col, col.docs);
             if (col.docs[0]) {
               if (col.docs[0].data().sentBy !== userName) {
                 if (col.docs.length === 2) {
                   if (col.docs[1].data().seen && !col.docs[0].data().seen ) {
-                    console.log('entre al 2a');
+                    // console.log('entre al 2a');
                     countMessages += 1
                   } else if (!col.docs[1].data().seen && !col.docs[0].data().seen ) {
-                    console.log('entre al 2b');
+                    // console.log('entre al 2b');
                     countMessages += 1
                   }
                  
                 }else{
                   if (!col.docs[0].data().seen) {
-                    console.log('entre al 1');
+                    // console.log('entre al 1');
                     countMessages += 1
                   }
                 }
@@ -247,7 +247,7 @@
     })
     if (logout.ok) {
       const content = await logout.json()
-      console.log(content);
+      // console.log(content);
       localStorage.clear();
       window.location.href = urlLogOut;
     }
@@ -262,7 +262,7 @@
       if (countMessages > 0) countMessages -= 1
       // usergroups.set([])
       // getUserNotifications()
-      console.log('contador reducido en 1');
+      // console.log('contador reducido en 1');
     })
     observer.observe(notificacionsChatsBubble, {attributes:true})
 

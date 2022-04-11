@@ -407,5 +407,5 @@
       <div></div>
     </div>
   </div>
-  <button id="btnSendPost" class="btn btn-outline-primary btn-flylinkers btn-post mt-3" disabled on:click={sendPost}>Post</button>
+  <button data-translate="post" id="btnSendPost" class="btn btn-outline-primary btn-flylinkers btn-post mt-3" disabled on:click={sendPost}>Post</button>
 </div>

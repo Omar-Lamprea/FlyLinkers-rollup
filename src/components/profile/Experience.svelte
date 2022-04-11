@@ -5,6 +5,7 @@
   import { writable } from 'svelte/store';
   import {onMount} from 'svelte'
   import {closeModal} from '../../js/closeModals'
+  import {translate} from '../../js/translate'
 
 
   export let urlAPI, id, experiences, userProfile
@@ -84,9 +85,10 @@
     }
   }
 
-  onMount(()=>{
-    getDataexperiences()
+  onMount(async()=>{
+    await getDataexperiences()
     reloadExperiences()
+    translate()
   })
 </script>
 
@@ -97,7 +99,7 @@
   .Experience-content p{
     margin: 1rem 0;
   }
-  .Experience-content span, .Experience-title{
+  .Experience-content span:last-child, .Experience-title{
     color: var(--main-color);
   }
   .Experience-title{
@@ -140,21 +142,38 @@
   <div class="Default-containers Experience">
     <div class="Experience-content mx-3 mx-md-0">
       <div class="Experience-title">
-        <p>Experience</p>
+        <p data-translate="title-experiences" >Experience</p>
       </div>
        {#each $data as experience}
           <div id="experience{experience.id}" data-experienceId={experience.id} class="experience position-relative">
             
-            <p>Company Name: <span>{experience.company_name}</span></p>
+            <p>
+              <span data-translate="company-name">Company Name:</span>
+              <span>{experience.company_name}</span>
+            <p/>
             {#if !experience.working}
-               <p>Dates of employments: <span>{experience.start_date} / {experience.end_date}</span></p>
+               <p>
+                 <span data-translate="date-employment">Dates of employments:</span>
+                 <span>{experience.start_date} / {experience.end_date}</span>
+                </p>
             {:else}
-               <p>Dates of employments: <span>{experience.start_date} / currently</span></p>
+               <p>
+                <span data-translate="date-employment">Dates of employments: </span> 
+                <span>{experience.start_date} / <span data-translate="currently">currently</span></span></p>
             {/if}
-            <p>Ubication: <span>{experience.location}</span></p>
+            <p>
+              <span data-translate="locacy">Ubication:</span>
+              <span>{experience.location}</span>
+            </p>
   
-            <p>Title: <span>{experience.title}</span></p>
-            <p>job type: <span>{experience.employment_type}</span></p>
+            <p>
+              <span data-translate="title-exp">Title:</span>
+              <span>{experience.title}</span>
+            </p>
+            <p>
+              <span data-translate="job-type">job type:</span>
+              <span>{experience.employment_type}</span>
+            </p>
             <p>{experience.description}</p>
 
             {#if id === parseInt(localStorage.getItem('userId'))}
@@ -194,7 +213,7 @@
     </div>
   {#if id === parseInt(localStorage.getItem('userId'))}
     <div class="addExperiences text-center">
-      <p>Add position</p>
+      <p data-translate="add-position">Add position</p>
       <i class="fas fa-plus-circle" data-bs-toggle="modal" data-bs-target="#modalExperience"></i>
       <ExperiencesModal {userProfile} {urlAPI}/>
     </div>
@@ -211,8 +230,6 @@
         </div>
       </div>
     </div>
-  {:else}
-      <!-- else content here -->
   {/if}
 {/if}
 

@@ -52,7 +52,7 @@
 
 
   const seenMessage = async() =>{
-    console.log('preparando para actualizar vistos en firestore');
+    // console.log('preparando para actualizar vistos en firestore');
     // console.log('update seen =)', groups, messageId);
     if (!template.seen) {
       const dataMain = JSON.parse(localStorage.getItem('data'))
@@ -64,13 +64,13 @@
         const snapDocs = onSnapshot(q, docs =>{
           docs.forEach(async el => {
             const updateSeen =  doc(db, `message/${groups}/messages/${el.id}`)
-            console.log('actualizando vistos');
+            // console.log('actualizando vistos');
             await updateDoc(updateSeen,{
               seen : true
             })
-            console.log('stop listener');
+            // console.log('stop listener');
             snapDocs()
-            console.log('vistos actualizados, reduciendo contador...');
+            // console.log('vistos actualizados, reduciendo contador...');
             notificacionsChatsBubble.classList.toggle('substractCounter')
           });
         })

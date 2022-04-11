@@ -69,7 +69,7 @@ function get_each_context_1(ctx, list, i) {
 	return child_ctx;
 }
 
-// (396:4) {:else}
+// (380:4) {:else}
 function create_else_block_4(ctx) {
 	let div;
 
@@ -82,31 +82,25 @@ function create_else_block_4(ctx) {
 		m(target, anchor) {
 			insert(target, div, anchor);
 		},
-		p: noop,
 		d(detaching) {
 			if (detaching) detach(div);
 		}
 	};
 }
 
-// (394:4) {#if countMessages > 0}
+// (378:4) {#if countMessages > 0}
 function create_if_block_4(ctx) {
 	let div;
-	let t;
 
 	return {
 		c() {
 			div = element("div");
-			t = text(/*countMessages*/ ctx[5]);
+			div.textContent = "!";
 			attr(div, "id", "notificacionsChatsBubble");
 			attr(div, "class", "notificacions-bubble svelte-z6xtox");
 		},
 		m(target, anchor) {
 			insert(target, div, anchor);
-			append(div, t);
-		},
-		p(ctx, dirty) {
-			if (dirty & /*countMessages*/ 32) set_data(t, /*countMessages*/ ctx[5]);
 		},
 		d(detaching) {
 			if (detaching) detach(div);
@@ -114,7 +108,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (403:6) {:else}
+// (387:6) {:else}
 function create_else_block_3(ctx) {
 	let li;
 
@@ -136,7 +130,7 @@ function create_else_block_3(ctx) {
 	};
 }
 
-// (401:6) {#each $usergroups as groups}
+// (385:6) {#each $usergroups as groups}
 function create_each_block_1(ctx) {
 	let chatlist;
 	let current;
@@ -179,7 +173,7 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (415:6) {#if countBubble > 0}
+// (399:6) {#if countBubble > 0}
 function create_if_block_3(ctx) {
 	let div;
 	let t;
@@ -203,7 +197,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (451:8) {:else}
+// (435:8) {:else}
 function create_else_block_2(ctx) {
 	let p;
 
@@ -223,7 +217,7 @@ function create_else_block_2(ctx) {
 	};
 }
 
-// (419:8) {#if notificationsList.length > 0}
+// (403:8) {#if notificationsList.length > 0}
 function create_if_block_1(ctx) {
 	let each_1_anchor;
 	let each_value = /*notificationsList*/ ctx[3];
@@ -279,7 +273,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (435:12) {:else}
+// (419:12) {:else}
 function create_else_block_1(ctx) {
 	let li;
 	let a;
@@ -389,7 +383,7 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (422:12) {#if typeof(notification.id) === 'string'}
+// (406:12) {#if typeof(notification.id) === 'string'}
 function create_if_block_2(ctx) {
 	let li;
 	let a;
@@ -503,7 +497,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (420:10) {#each notificationsList as notification}
+// (404:10) {#each notificationsList as notification}
 function create_each_block(ctx) {
 	let if_block_anchor;
 
@@ -544,7 +538,7 @@ function create_each_block(ctx) {
 	};
 }
 
-// (463:6) {:else}
+// (447:6) {:else}
 function create_else_block(ctx) {
 	let img;
 	let img_src_value;
@@ -571,7 +565,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (461:6) {#if localStorage.getItem('profilePhoto')}
+// (445:6) {#if localStorage.getItem('profilePhoto')}
 function create_if_block(ctx) {
 	let img;
 	let img_src_value;
@@ -881,9 +875,7 @@ function create_fragment(ctx) {
 			if (dirty & /*urlAPI*/ 4) friendrequest_changes.urlAPI = /*urlAPI*/ ctx[2];
 			friendrequest.$set(friendrequest_changes);
 
-			if (current_block_type === (current_block_type = select_block_type(ctx, dirty)) && if_block0) {
-				if_block0.p(ctx, dirty);
-			} else {
+			if (current_block_type !== (current_block_type = select_block_type(ctx, dirty))) {
 				if_block0.d(1);
 				if_block0 = current_block_type(ctx);
 
@@ -1033,47 +1025,36 @@ function instance($$self, $$props, $$invalidate) {
 				groups.forEach(chat => {
 					const q = query(collection(db, `message/${chat}/messages`), orderBy('sentAt', 'desc'), limit(2));
 
+					// console.log(q);
 					const snapChatId = onSnapshot(q, col => {
 						// console.log('1', col.docs[0].data(), '2', col.docs[1].data());
-						if (col.docs.length === 2) {
-							if (col.docs[1].data().seen && !col.docs[0].data().seen) {
-								console.log('entre al 2');
-								$$invalidate(5, countMessages += 1);
-							}
-						} else {
-							if (!col.docs[0].data().seen) {
-								console.log('entre al 1');
-								$$invalidate(5, countMessages += 1);
+						const dataMain = JSON.parse(localStorage.getItem('data'));
+
+						const userName = `${dataMain.name} ${dataMain.last_name}`;
+						console.log(col, col.docs);
+
+						if (col.docs[0]) {
+							if (col.docs[0].data().sentBy !== userName) {
+								if (col.docs.length === 2) {
+									if (col.docs[1].data().seen && !col.docs[0].data().seen) {
+										console.log('entre al 2a');
+										$$invalidate(5, countMessages += 1);
+									} else if (!col.docs[1].data().seen && !col.docs[0].data().seen) {
+										console.log('entre al 2b');
+										$$invalidate(5, countMessages += 1);
+									}
+								} else {
+									if (!col.docs[0].data().seen) {
+										console.log('entre al 1');
+										$$invalidate(5, countMessages += 1);
+									}
+								}
 							}
 						}
-					});
+					}); // snapChatId()
 				});
-			} // groups.forEach(chat => {
-			//   const q = query(collection(db, `message/${chat}/messages`), orderBy('sentAt', 'desc'), limit(1))
+			}
 
-			//   const snapChatId = onSnapshot(q, col =>{
-			//     col.forEach(doc => {
-			//       // console.log(doc.data().sentAt);
-			//       const dataMessage = doc.data()
-			//       const liChatMessage = document.getElementsByClassName('unreadMessage')
-			//       console.log(liChatMessage);
-			//       countMessages = liChatMessage.length
-			//       if (!dataMessage.seen) {
-			//         console.log('nueva notificacion');
-			//         const dataMain = JSON.parse(localStorage.getItem('data'))
-			//         const name = `${dataMain.name} ${dataMain.last_name}`
-			//         if (name !== dataMessage.sentBy) {
-			//           notificacionsChatsBubble.classList.remove('d-none')
-			//           countMessages += 1
-			//         }
-			//       }
-			//       if (countMessages === 0) {
-			//         notificacionsChatsBubble.classList.add('d-none')
-			//       }
-			//       // console.log(countMessages);
-			//     });
-			//   })
-			// });
 			//read Comments
 			if (comments !== undefined) {
 				comments.forEach(comment => {
@@ -1250,8 +1231,11 @@ function instance($$self, $$props, $$invalidate) {
 		getUserNotifications();
 
 		const observer = new MutationObserver(() => {
-				console.log('reducir contador');
-				$$invalidate(5, countMessages -= 1);
+				if (countMessages > 0) $$invalidate(5, countMessages -= 1);
+
+				// usergroups.set([])
+				// getUserNotifications()
+				console.log('contador reducido en 1');
 			});
 
 		observer.observe(notificacionsChatsBubble, { attributes: true });

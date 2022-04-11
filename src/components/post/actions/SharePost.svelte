@@ -30,6 +30,6 @@
 <div class="share" data-bs-toggle="modal" data-bs-target="#shareModal-{id}" on:click={getPostShare}>
 <!-- <div class="share" data-bs-toggle="modal" data-bs-target="#shareModal-{id}"> -->
   <i class="fas fa-share"></i>
-  <span>Share</span>
+  <span data-translate="share">Share</span>
 </div>
 <ShareModal {urlAPI} {id} {userPost} {infoPost}/>

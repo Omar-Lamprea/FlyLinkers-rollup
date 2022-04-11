@@ -77,20 +77,20 @@
   <div class="Header-nav Header-nav-film mx-3">
     <label for="uploadVideo">
       <i class="fas fa-film"></i>
-      <span>Video</span>
+      <span data-translate="icon-video">Video</span>
       <input type="file" name="uploadVideo" id="uploadVideo" class="d-none" accept="video/mp4,video/x-m4v,video/*"  on:change={uploadVideoPost}>
     </label>
   </div>
   <div class="Header-nav Header-nav-calendar mx-3 disabled">
     <!-- <a href="/"> -->
       <i class="fas fa-calendar"></i>
-      <span>Event</span>
+      <span data-translate="icon-event">Event</span>
     <!-- </a> -->
   </div>
   <div class="Header-nav Header-nav-file-alt mx-3 hidden disabled">
     <!-- <a href="/"> -->
       <i class="fas fa-file-alt"></i>
-      <span>Write article</span>
+      <span data-translate="icon-article">Write article</span>
     <!-- </a> -->
   </div>
 </div>
