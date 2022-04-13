@@ -256,12 +256,12 @@
               <button id="btnSendFriendRequest" class="btn btn-outline-primary btn-flylinkers align-self-end mt-1 decline-friend" on:click={declineRequest}>Decline friend request</button>
             </div>
               {:else}
-                <button id="btnSendFriendRequest" class="btn btn-outline-primary btn-flylinkers align-self-end mt-1" on:click={sendFriendRequest}>Send friend request</button>
+                <button data-translate="send-friend-request" id="btnSendFriendRequest" class="btn btn-outline-primary btn-flylinkers align-self-end mt-1" on:click={sendFriendRequest}>Send friend request</button>
             {/if}
           {:else}
-            <button class="btn btn-outline-primary btn-flylinkers align-self-end mt-1">Friends</button>
+            <button data-translate="is-friend" class="btn btn-outline-primary btn-flylinkers align-self-end mt-1">Friends</button>
           {/if}
-          <button id="btInitChat-{id}" data-chat={id} class="btn btn-outline-primary btn-flylinkers align-self-end mt-1">Send a message</button>
+          <button data-translate="send-message" id="btInitChat-{id}" data-chat={id} class="btn btn-outline-primary btn-flylinkers align-self-end mt-1">Send a message</button>
         {/if}
       </div>
     </div>

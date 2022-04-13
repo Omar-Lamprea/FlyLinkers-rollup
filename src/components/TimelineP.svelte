@@ -159,7 +159,10 @@
          <Experience {urlAPI} {id} {experiences} {userProfile}/>
       {/if}
 
-      <Panel/>
+      {#if email === dataJson.email}
+        <Panel/>
+      {/if}
+
       {#if post}
         {#if userMain}
 

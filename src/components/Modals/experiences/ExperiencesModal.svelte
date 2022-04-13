@@ -17,13 +17,36 @@
     {value: '9', month : 'September'},
     {value: '10', month : 'October'},
     {value: '11', month : 'November'},
-    {value: '12', month : 'December'}    
+    {value: '12', month : 'December'}
   ]
+  const monthsEs = [
+    {value: '0', month : 'Selecciona una opción'},
+    {value: '1', month : 'Enero'},
+    {value: '2', month : 'Febrero'},
+    {value: '3', month : 'Marzo'},
+    {value: '4', month : 'Abril'},
+    {value: '5', month : 'Mayo'},
+    {value: '6', month : 'Junio'},
+    {value: '7', month : 'Julio'},
+    {value: '8', month : 'Augosto'},
+    {value: '9', month : 'Septiembre'},
+    {value: '10', month : 'Octubre'},
+    {value: '11', month : 'Noviembre'},
+    {value: '12', month : 'Diciembre'}
+  ]
+
   const employmentTypeList = [
     'Full-time', 'Part-time', 
     'Self-employed', 'Freelance', 
     'Contract', 'InternShip', 
     'Apprenticeship', 
+    'Seasonal'
+  ]
+  const employmentTypeListEs = [
+    'Jornada completa', 'Jornada parcial', 
+    'Autónomo', 'Profesional independiente', 
+    'Contrato temporal', 'Contrato de prácticas', 
+    'Contrato de formación', 
     'Seasonal'
   ]
 
@@ -176,34 +199,40 @@
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalExperienceLabel">Add Experience</h5>
+        <h5 data-translate="title-post-xp" class="modal-title" id="modalExperienceLabel">Add Experience</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body text-start">
 
         <div class="headModal">
-          <h5>Where do you currently work?</h5>
-          <p class="my-3">* Indicates required</p>
+          <h5 data-translate="title-worked">Where have you worked?</h5>
+          <p data-translate="require-xp" class="my-3">* Indicates required</p>
         </div>
 
         <div class="formExperience">
           <form id="formAddNewExperience" action="">
             <div class="companyName">
-              <label for="postCompanyName">Company Name*</label>
+              <label data-translate="modal-company-name" for="postCompanyName">Company Name*</label>
                 <input type="text" name="postCompanyName" id="postCompanyName" placeholder="Ex: FlyLinkers">
             </div>
 
             <div class="dates">
               <div class="start me-md-1">
-                <label for="postStartDate">Start date*</label>
+                <label data-translate="modal-start-date" for="postStartDate">Start date*</label>
                 <div class="workStartDate d-md-flex justify-content-between">
                   <select name="postStartDate" id="postStartDate" class="me-md-1 mb-3">
-                    {#each months as month}
-                       <option value={month.value}>{month.month}</option>
-                    {/each}
+                    {#if localStorage.getItem('lang') === 'En'}
+                      {#each months as month}
+                        <option value={month.value}>{month.month}</option>
+                      {/each}
+                    {:else}
+                      {#each monthsEs as month}
+                        <option value={month.value}>{month.month}</option>
+                      {/each}
+                    {/if}
                   </select>
                   <select name="postStartYear" id="postStartYear" class="mb-3">
-                    <option value=0>Year</option>
+                    <option data-translate="modal-xp-year" value=0>Year</option>
                     {#each yearList as year}
                       <option value={year}>{year}</option>
                     {/each}
@@ -212,15 +241,22 @@
               </div>
 
               <div class="end">
-                <label for="postEndDate">end date*</label>
+                <label data-translate="modal-end-date" for="postEndDate">end date*</label>
                 <div class="workEndDate d-md-flex justify-content-between">
                   <select name="postEndDate" id="postEndDate" class="me-md-1 mb-3">
-                    {#each months as month}
-                       <option value={month.value}>{month.month}</option>
-                    {/each}
+                    {#if localStorage.getItem('lang') === 'En'}
+                      {#each months as month}
+                        <option value={month.value}>{month.month}</option>
+                      {/each}
+                    {:else}
+                      {#each monthsEs as month}
+                        <option value={month.value}>{month.month}</option>
+                      {/each}
+                    {/if}
+                    
                   </select>
                   <select name="postEndYear" id="postEndYear" class="mb-3">
-                    <option value=0>Year</option>
+                    <option data-translate="modal-xp-year" value=0>Year</option>
                     {#each yearList as year}
                       <option value={year}>{year}</option>
                     {/each}
@@ -231,34 +267,40 @@
 
             <div class="working d-flex align-items-center">
               <input type="checkbox" name="postWorking" id="postWorking" on:click={toggleEndDate}>
-              <label for="postWorking">
+              <label data-translate="modal-currently" for="postWorking">
                 I am currently working in this role
               </label>
             </div>
 
-            <label for="postCountry">Location*</label>
+            <label data-translate="modal-locacy" for="postCountry">Location*</label>
             <input type="text" name="postCountry" id="postCountry" placeholder="Ex: Colombia">
 
-            <label for="postTitle">Title*</label>
+            <label data-translate="modal-title-exp" for="postTitle">Title*</label>
             <input type="text" name="postTitle" id="postTitle" placeholder="Ex: Manager">
 
-            <label for="postEmploymentType">Employment type*</label>
+            <label data-translate="modal-job-type" for="postEmploymentType">Employment type*</label>
             <select name="postEmploymentType" id="postEmploymentType">
-              <option value="pleaseSelect">Please select</option>
-              {#each employmentTypeList as employment}
-                <option value={employment}>{employment}</option>
-              {/each}
+              <option data-translate="modal-xp-select-job-type" value="pleaseSelect">Please select</option>
+              {#if localStorage.getItem('lang') === 'En'}
+                {#each employmentTypeList as employment}
+                  <option value={employment}>{employment}</option>
+                {/each}
+              {:else}
+                {#each employmentTypeListEs as employment}
+                  <option value={employment}>{employment}</option>
+                {/each}
+              {/if}
             </select>
 
-            <label for="postDescriptionExperience">Description*</label>
+            <label data-translate="moda-xp-description" for="postDescriptionExperience">Description*</label>
             <textarea name="postDescriptionExperience" id="postDescriptionExperience" cols="30" rows="5"></textarea>
           </form>
         </div>
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button id="btnAddExperience" type="button" class="btn btn-outline-primary btn-flylinkers btn-save-experience" on:click={addExpreience}>Save</button>
+        <button data-translate="modal-xp-btn-close" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button data-translate="modal-xp-btn-save" id="btnAddExperience" type="button" class="btn btn-outline-primary btn-flylinkers btn-save-experience" on:click={addExpreience}>Save</button>
       </div>
     </div>
   </div>

@@ -1031,21 +1031,21 @@ function instance($$self, $$props, $$invalidate) {
 						const dataMain = JSON.parse(localStorage.getItem('data'));
 
 						const userName = `${dataMain.name} ${dataMain.last_name}`;
-						console.log(col, col.docs);
 
+						// console.log(col, col.docs);
 						if (col.docs[0]) {
 							if (col.docs[0].data().sentBy !== userName) {
 								if (col.docs.length === 2) {
 									if (col.docs[1].data().seen && !col.docs[0].data().seen) {
-										console.log('entre al 2a');
+										// console.log('entre al 2a');
 										$$invalidate(5, countMessages += 1);
 									} else if (!col.docs[1].data().seen && !col.docs[0].data().seen) {
-										console.log('entre al 2b');
+										// console.log('entre al 2b');
 										$$invalidate(5, countMessages += 1);
 									}
 								} else {
 									if (!col.docs[0].data().seen) {
-										console.log('entre al 1');
+										// console.log('entre al 1');
 										$$invalidate(5, countMessages += 1);
 									}
 								}
@@ -1221,8 +1221,10 @@ function instance($$self, $$props, $$invalidate) {
 
 		if (logout.ok) {
 			const content = await logout.json();
-			console.log(content);
+
+			// console.log(content);
 			localStorage.clear();
+
 			window.location.href = urlLogOut;
 		}
 	};
@@ -1232,11 +1234,9 @@ function instance($$self, $$props, $$invalidate) {
 
 		const observer = new MutationObserver(() => {
 				if (countMessages > 0) $$invalidate(5, countMessages -= 1);
-
-				// usergroups.set([])
-				// getUserNotifications()
-				console.log('contador reducido en 1');
-			});
+			}); // usergroups.set([])
+		// getUserNotifications()
+		// console.log('contador reducido en 1');
 
 		observer.observe(notificacionsChatsBubble, { attributes: true });
 	});

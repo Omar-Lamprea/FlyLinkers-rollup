@@ -83,6 +83,7 @@ function create_if_block_5(ctx) {
 			p.textContent = "Post";
 			t1 = space();
 			create_component(addpost.$$.fragment);
+			attr(p, "data-translate", "title-post");
 			attr(p, "class", "my-2 svelte-9igu1v");
 			attr(div, "class", "Background-post-profile svelte-9igu1v");
 		},

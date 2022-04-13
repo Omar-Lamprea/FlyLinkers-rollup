@@ -91,7 +91,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (246:8) {:else}
+// (250:8) {:else}
 function create_else_block(ctx) {
 	let div;
 	let t0;
@@ -182,7 +182,7 @@ function create_if_block(ctx) {
 	let profilephotomodal;
 	let t4;
 	let div0;
-	let t10;
+	let t12;
 	let div1;
 	let current;
 	let mounted;
@@ -216,10 +216,12 @@ function create_if_block(ctx) {
 			t4 = space();
 			div0 = element("div");
 
-			div0.innerHTML = `<p class="svelte-1px6h87">Who viewed your profile-card <span class="svelte-1px6h87">3.8K</span></p>  
-            <p class="svelte-1px6h87">Views of your post <span class="svelte-1px6h87">3.8K</span></p>`;
+			div0.innerHTML = `<p class="svelte-1px6h87"><span data-translate="who-viewed" class="svelte-1px6h87">Who viewed your profile-card</span> 
+              <span class="svelte-1px6h87">3.8K</span></p>  
+            <p class="svelte-1px6h87"><span data-translate="views-post" class="svelte-1px6h87">Views of your post</span> 
+              <span class="svelte-1px6h87">3.8K</span></p>`;
 
-			t10 = space();
+			t12 = space();
 			div1 = element("div");
 
 			div1.innerHTML = `<button class="btn btn-outline-primary btn-flylinkers disabled svelte-1px6h87" disabled=""><i class="fas fa-pen svelte-1px6h87"></i> 
@@ -238,7 +240,7 @@ function create_if_block(ctx) {
 			mount_component(profilephotomodal, target, anchor);
 			insert(target, t4, anchor);
 			insert(target, div0, anchor);
-			insert(target, t10, anchor);
+			insert(target, t12, anchor);
 			insert(target, div1, anchor);
 			current = true;
 
@@ -280,7 +282,7 @@ function create_if_block(ctx) {
 			destroy_component(profilephotomodal, detaching);
 			if (detaching) detach(t4);
 			if (detaching) detach(div0);
-			if (detaching) detach(t10);
+			if (detaching) detach(t12);
 			if (detaching) detach(div1);
 			mounted = false;
 			run_all(dispose);
@@ -288,7 +290,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (257:10) {:else}
+// (261:10) {:else}
 function create_else_block_2(ctx) {
 	let button;
 
@@ -308,7 +310,7 @@ function create_else_block_2(ctx) {
 	};
 }
 
-// (248:10) {#if !friend}
+// (252:10) {#if !friend}
 function create_if_block_1(ctx) {
 	let if_block_anchor;
 
@@ -349,7 +351,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (254:14) {:else}
+// (258:14) {:else}
 function create_else_block_1(ctx) {
 	let button;
 	let mounted;
@@ -379,7 +381,7 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (249:12) {#if friendRequest}
+// (253:12) {#if friendRequest}
 function create_if_block_2(ctx) {
 	let div;
 	let button0;

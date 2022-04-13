@@ -134,7 +134,7 @@ function create_fragment(ctx) {
 
 			t2 = space();
 			div0 = element("div");
-			div0.innerHTML = `<p class="svelte-1714uyw">Discover More</p>`;
+			div0.innerHTML = `<p data-translate="discover-hash" class="svelte-1714uyw">Discover More</p>`;
 			attr(h6, "data-translate", "title-hashtags");
 			attr(h6, "class", "svelte-1714uyw");
 			attr(div0, "class", "Hashtags-discover text-center py-3 svelte-1714uyw");

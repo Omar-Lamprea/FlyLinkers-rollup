@@ -15,7 +15,7 @@ export default{
       //profile card mini
       "who-viewed": "Visitas a tu perfil",
       //********************
-      "views-post": "Visitas a tus post",
+      "views-post": "Visitas a tus publicaciones",
       "profile-mini": "Editar Perfil",
 
       //groups panel
@@ -58,6 +58,12 @@ export default{
       "see-post": "Ver publicación",
       "delete-post": "Eliminar publicación",
 
+      //share post
+      "title-share-post": "Compartir publicación",
+      // "input-addPost"
+      "share-post-btn-close": "Cerrar",
+      "share-post-btn-save": "Compartir publicación",
+
       //Profile
       "cover-photo": "Editar portada",
       "edit-profile": "Editar pefil",
@@ -67,6 +73,10 @@ export default{
       "profile-btn-selection": "Añadir sección",
       //********************
       // "who-viewed": "Quién ha visito tu perfil",
+      "send-friend-request": 'Enviar solicitud de amistad',
+      "send-message": "Enviar mensaje",
+      "is-friend": "Amigo",
+      "update-profile-photo": "Actualizar foto de perfil",
 
 
 
@@ -82,7 +92,7 @@ export default{
       "add-position": "Agregar empleo",
 
       //panel statistics user profile
-      "title-panel": "Tu panel",
+      "title-panel": "Panel",
       // "who-viewed": "Quién ha visito tu perfil",
       // "post-views": "Publicaciones vistas",
       "my-network": "Mi red de trabajo",
@@ -116,5 +126,38 @@ export default{
       "select-lg-2" : 'Inglés',
       "select-lg-3" : 'Español',
       //********************
+
+    //Modals
+      //update exp
+      "title-update-xp": "Actualizar experiencia",
+
+      //post exp
+      "title-post-xp": "Agregar experiencia",
+      "title-worked" : "¿Dónde has trabajado?",
+      "require-xp": "* indica que es requerido",
+      "modal-company-name": "Nombre de la empresa*",
+      "modal-start-date": "Fechas de inicio*",
+      "modal-end-date": "Fecha de terminación*:",
+      "modal-currently": "Actualmente trabajo en este cargo",
+      "modal-locacy": "Ubicación*",
+      "modal-title-exp": "Título*",
+      "modal-job-type": "Tipo de empleo*",
+      "moda-xp-description": "Descripción",
+      "modal-xp-btn-close" : "Cerrar",
+      "modal-xp-btn-save" : "Guardar",
+      "modal-xp-select-job-type": "Selecciona una opción",
+      "modal-xp-year": "Año",
+
+      //update cover photo
+      "title-cover": "Editar foto de portada",
+      "p-cover": "Agregar foto de portada",
+      "modal-cover-btn-close": "Cerrar",
+      "modal-cover-btn-save": "Guardar foto",
+
+      //update profile photo
+      "title-profile-photo": "Editar foto de perfil",
+      "p-profile": "Agregar foto de perfil",
+      "modal-profile-btn-close": "Cerrar",
+      "modal-profile-btn-save": "Guardar foto",
   }
 }

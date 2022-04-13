@@ -41,7 +41,7 @@ function create_fragment(ctx) {
 	let t5;
 	let t6;
 	let div1;
-	let t12;
+	let t14;
 	let div4;
 	let p2;
 	let a;
@@ -76,27 +76,30 @@ function create_fragment(ctx) {
 			t6 = space();
 			div1 = element("div");
 
-			div1.innerHTML = `<p data-translate="who-viewed" class="svelte-svq0p9">Who viewed your profile-card <span class="svelte-svq0p9">3.8K</span></p>  
-        <p class="svelte-svq0p9">Views of your post <span class="svelte-svq0p9">3.8K</span></p>`;
+			div1.innerHTML = `<p class="svelte-1bzipfw"><span data-translate="who-viewed" class="svelte-1bzipfw">Who viewed your profile-card</span> 
+          <span class="svelte-1bzipfw">3.8K</span></p>  
+        <p class="svelte-1bzipfw"><span data-translate="views-post" class="svelte-1bzipfw">Views of your post</span> 
+          <span class="svelte-1bzipfw">3.8K</span></p>`;
 
-			t12 = space();
+			t14 = space();
 			div4 = element("div");
 			p2 = element("p");
 			a = element("a");
 
-			a.innerHTML = `<div class="Profile-edit-profile svelte-svq0p9"><i class="fas fa-bookmark svelte-svq0p9"></i>
-            Edit profile</div>`;
+			a.innerHTML = `<div class="Profile-edit-profile svelte-1bzipfw"><i class="fas fa-bookmark svelte-1bzipfw"></i> 
+            <span data-translate="profile-mini" class="svelte-1bzipfw">Edit profile</span></div>`;
 
-			attr(h2, "class", "pt-2 pt-lg-0 svelte-svq0p9");
-			attr(span0, "class", "svelte-svq0p9");
-			attr(div0, "class", "Profile-card-user mt-4 mt-lg-0 svelte-svq0p9");
+			attr(h2, "class", "pt-2 pt-lg-0 svelte-1bzipfw");
+			attr(span0, "class", "svelte-1bzipfw");
+			attr(div0, "class", "Profile-card-user mt-4 mt-lg-0 svelte-1bzipfw");
 			attr(div1, "class", "Profile-card-text my-2");
-			attr(div2, "class", "Profile-card-info text-center mt-2 svelte-svq0p9");
+			attr(div2, "class", "Profile-card-info text-center mt-2 svelte-1bzipfw");
 			attr(a, "href", "/profile");
 			attr(a, "class", "d-flex align-items-center");
-			attr(div4, "class", "Profile-card-edit svelte-svq0p9");
+			attr(p2, "class", "svelte-1bzipfw");
+			attr(div4, "class", "Profile-card-edit svelte-1bzipfw");
 			attr(div5, "class", "Profile-card-content d-flex flex-column justify-content-center align-items-center");
-			attr(div6, "class", "Profile-card Default-containers px-0 svelte-svq0p9");
+			attr(div6, "class", "Profile-card Default-containers px-0 svelte-1bzipfw");
 		},
 		m(target, anchor) {
 			insert(target, div6, anchor);
@@ -114,7 +117,7 @@ function create_fragment(ctx) {
 			append(span0, t5);
 			append(div2, t6);
 			append(div2, div1);
-			append(div5, t12);
+			append(div5, t14);
 			append(div5, div4);
 			append(div4, p2);
 			append(p2, a);

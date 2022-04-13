@@ -80,21 +80,21 @@
     <div class="modal-content">
 
       <div class="modal-header">
-        <h5 class="modal-title" id="ModalProfileModalLabel">Edit profile photo</h5>
+        <h5 data-translate="title-profile-photo" class="modal-title" id="ModalProfileModalLabel">Edit profile photo</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
       <div class="modal-body text-start">
         <div class="photo">
-          <label for="profilePhoto">Profile photo</label>
+          <label data-translate="p-profile" for="profilePhoto">Add profile photo</label>
           <input type="file" name="profilePhoto" id="profilePhoto" accept=".png, .jpg, .jpeg" on:change={showProfileImg}>
           <img src="" alt="" id="showProfileImage" class="photoLoaded">
         </div>
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button id="btnProfilePhoto" type="button" class="btn btn-outline-primary btn-flylinkers" on:click={updateProfile(id)}>{saveProfilePhoto}</button>
+        <button data-translate="modal-profile-btn-close" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button data-translate="modal-profile-btn-save" id="btnProfilePhoto" type="button" class="btn btn-outline-primary btn-flylinkers" on:click={updateProfile(id)}>{saveProfilePhoto}</button>
       </div>
 
     </div>

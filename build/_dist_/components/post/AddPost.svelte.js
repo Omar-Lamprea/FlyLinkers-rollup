@@ -275,6 +275,7 @@ function create_fragment(ctx) {
 			attr(div3, "class", "YTvideo d-flex flex-column d-none");
 			attr(div6, "id", "loaderPost");
 			attr(div6, "class", "loader-content d-none");
+			attr(button, "data-translate", "post");
 			attr(button, "id", "btnSendPost");
 			attr(button, "class", "btn btn-outline-primary btn-flylinkers btn-post mt-3 svelte-1ud6jqj");
 			button.disabled = true;

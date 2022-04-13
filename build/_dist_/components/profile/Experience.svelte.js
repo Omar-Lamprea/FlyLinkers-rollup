@@ -18,7 +18,6 @@ import {
 	is_function,
 	listen,
 	mount_component,
-	noop,
 	run_all,
 	safe_not_equal,
 	set_data,
@@ -34,6 +33,7 @@ import { getExperiences } from '../../js/getExperiences.js';
 import { writable } from '../../../_snowpack/pkg/svelte/store.js';
 import { onMount } from '../../../_snowpack/pkg/svelte.js';
 import { closeModal } from '../../js/closeModals.js';
+import { translate } from '../../js/translate.js';
 
 function get_each_context(ctx, list, i) {
 	const child_ctx = ctx.slice();
@@ -41,19 +41,7 @@ function get_each_context(ctx, list, i) {
 	return child_ctx;
 }
 
-// (214:2) {:else}
-function create_else_block_1(ctx) {
-	return {
-		c: noop,
-		m: noop,
-		p: noop,
-		i: noop,
-		o: noop,
-		d: noop
-	};
-}
-
-// (204:2) {#if id === parseInt(localStorage.getItem('userId'))}
+// (223:2) {#if id === parseInt(localStorage.getItem('userId'))}
 function create_if_block_4(ctx) {
 	let div2;
 	let div1;
@@ -83,14 +71,14 @@ function create_if_block_4(ctx) {
 			i = element("i");
 			t2 = space();
 			create_component(experiencesmodal.$$.fragment);
-			attr(p, "class", "svelte-1gfb5zc");
+			attr(p, "class", "svelte-ejk3cr");
 			attr(i, "id", "");
-			attr(i, "class", "fas fa-plus-circle svelte-1gfb5zc");
+			attr(i, "class", "fas fa-plus-circle svelte-ejk3cr");
 			attr(i, "data-bs-toggle", "modal");
 			attr(i, "data-bs-target", "#modalExperience");
-			attr(div0, "class", "addExperiences text-center svelte-1gfb5zc");
-			attr(div1, "class", "Experience-content mx-3 mx-md-0 svelte-1gfb5zc");
-			attr(div2, "class", "Default-containers Experience svelte-1gfb5zc");
+			attr(div0, "class", "addExperiences text-center svelte-ejk3cr");
+			attr(div1, "class", "Experience-content mx-3 mx-md-0 svelte-ejk3cr");
+			attr(div2, "class", "Default-containers Experience svelte-ejk3cr");
 		},
 		m(target, anchor) {
 			insert(target, div2, anchor);
@@ -125,7 +113,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (139:0) {#if experiences}
+// (141:0) {#if experiences}
 function create_if_block(ctx) {
 	let div2;
 	let div1;
@@ -152,7 +140,7 @@ function create_if_block(ctx) {
 			div2 = element("div");
 			div1 = element("div");
 			div0 = element("div");
-			div0.innerHTML = `<p class="svelte-1gfb5zc">Experience</p>`;
+			div0.innerHTML = `<p data-translate="title-experiences" class="svelte-ejk3cr">Experience</p>`;
 			t1 = space();
 
 			for (let i = 0; i < each_blocks.length; i += 1) {
@@ -161,9 +149,9 @@ function create_if_block(ctx) {
 
 			t2 = space();
 			if (if_block) if_block.c();
-			attr(div0, "class", "Experience-title svelte-1gfb5zc");
-			attr(div1, "class", "Experience-content mx-3 mx-md-0 svelte-1gfb5zc");
-			attr(div2, "class", "Default-containers Experience svelte-1gfb5zc");
+			attr(div0, "class", "Experience-title svelte-ejk3cr");
+			attr(div1, "class", "Experience-content mx-3 mx-md-0 svelte-ejk3cr");
+			attr(div2, "class", "Default-containers Experience svelte-ejk3cr");
 		},
 		m(target, anchor) {
 			insert(target, div2, anchor);
@@ -260,34 +248,46 @@ function create_if_block(ctx) {
 	};
 }
 
-// (151:12) {:else}
+// (159:12) {:else}
 function create_else_block(ctx) {
 	let p;
-	let t0;
-	let span;
-	let t1_value = /*experience*/ ctx[11].start_date + "";
+	let span0;
 	let t1;
+	let span2;
+	let t2_value = /*experience*/ ctx[11].start_date + "";
 	let t2;
+	let t3;
+	let span1;
 
 	return {
 		c() {
 			p = element("p");
-			t0 = text("Dates of employments: ");
-			span = element("span");
-			t1 = text(t1_value);
-			t2 = text(" / currently");
-			attr(span, "class", "svelte-1gfb5zc");
-			attr(p, "class", "svelte-1gfb5zc");
+			span0 = element("span");
+			span0.textContent = "Dates of employments:";
+			t1 = space();
+			span2 = element("span");
+			t2 = text(t2_value);
+			t3 = text(" / ");
+			span1 = element("span");
+			span1.textContent = "currently";
+			attr(span0, "data-translate", "date-employment");
+			attr(span0, "class", "svelte-ejk3cr");
+			attr(span1, "data-translate", "currently");
+			attr(span1, "class", "svelte-ejk3cr");
+			attr(span2, "class", "svelte-ejk3cr");
+			attr(p, "class", "svelte-ejk3cr");
 		},
 		m(target, anchor) {
 			insert(target, p, anchor);
-			append(p, t0);
-			append(p, span);
-			append(span, t1);
-			append(span, t2);
+			append(p, span0);
+			append(p, t1);
+			append(p, span2);
+			append(span2, t2);
+			append(span2, t3);
+			append(span2, span1);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*$data*/ 16 && t1_value !== (t1_value = /*experience*/ ctx[11].start_date + "")) set_data(t1, t1_value);
+			if (dirty & /*$data*/ 16 && t2_value !== (t2_value = /*experience*/ ctx[11].start_date + "")) set_data(t2, t2_value);
 		},
 		d(detaching) {
 			if (detaching) detach(p);
@@ -295,39 +295,45 @@ function create_else_block(ctx) {
 	};
 }
 
-// (149:12) {#if !experience.working}
+// (154:12) {#if !experience.working}
 function create_if_block_3(ctx) {
 	let p;
-	let t0;
-	let span;
-	let t1_value = /*experience*/ ctx[11].start_date + "";
+	let span0;
 	let t1;
+	let span1;
+	let t2_value = /*experience*/ ctx[11].start_date + "";
 	let t2;
-	let t3_value = /*experience*/ ctx[11].end_date + "";
 	let t3;
+	let t4_value = /*experience*/ ctx[11].end_date + "";
+	let t4;
 
 	return {
 		c() {
 			p = element("p");
-			t0 = text("Dates of employments: ");
-			span = element("span");
-			t1 = text(t1_value);
-			t2 = text(" / ");
-			t3 = text(t3_value);
-			attr(span, "class", "svelte-1gfb5zc");
-			attr(p, "class", "svelte-1gfb5zc");
+			span0 = element("span");
+			span0.textContent = "Dates of employments:";
+			t1 = space();
+			span1 = element("span");
+			t2 = text(t2_value);
+			t3 = text(" / ");
+			t4 = text(t4_value);
+			attr(span0, "data-translate", "date-employment");
+			attr(span0, "class", "svelte-ejk3cr");
+			attr(span1, "class", "svelte-ejk3cr");
+			attr(p, "class", "svelte-ejk3cr");
 		},
 		m(target, anchor) {
 			insert(target, p, anchor);
-			append(p, t0);
-			append(p, span);
-			append(span, t1);
-			append(span, t2);
-			append(span, t3);
+			append(p, span0);
+			append(p, t1);
+			append(p, span1);
+			append(span1, t2);
+			append(span1, t3);
+			append(span1, t4);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*$data*/ 16 && t1_value !== (t1_value = /*experience*/ ctx[11].start_date + "")) set_data(t1, t1_value);
-			if (dirty & /*$data*/ 16 && t3_value !== (t3_value = /*experience*/ ctx[11].end_date + "")) set_data(t3, t3_value);
+			if (dirty & /*$data*/ 16 && t2_value !== (t2_value = /*experience*/ ctx[11].start_date + "")) set_data(t2, t2_value);
+			if (dirty & /*$data*/ 16 && t4_value !== (t4_value = /*experience*/ ctx[11].end_date + "")) set_data(t4, t4_value);
 		},
 		d(detaching) {
 			if (detaching) detach(p);
@@ -335,7 +341,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (160:12) {#if id === parseInt(localStorage.getItem('userId'))}
+// (179:12) {#if id === parseInt(localStorage.getItem('userId'))}
 function create_if_block_2(ctx) {
 	let div8;
 	let div0;
@@ -388,11 +394,11 @@ function create_if_block_2(ctx) {
 			t8 = space();
 			button2 = element("button");
 			button2.textContent = "Delete";
-			attr(i0, "class", "fas fa-pen svelte-1gfb5zc");
-			attr(div0, "class", "updateExperience mx-3 svelte-1gfb5zc");
+			attr(i0, "class", "fas fa-pen svelte-ejk3cr");
+			attr(div0, "class", "updateExperience mx-3 svelte-ejk3cr");
 			attr(div0, "data-bs-toggle", "modal");
 			attr(div0, "data-bs-target", div0_data_bs_target_value = "#modalUpdateExperience" + /*experience*/ ctx[11].id);
-			attr(i1, "class", "fa-solid fa-trash svelte-1gfb5zc");
+			attr(i1, "class", "fa-solid fa-trash svelte-ejk3cr");
 			attr(i1, "data-bs-toggle", "modal");
 			attr(i1, "data-bs-target", i1_data_bs_target_value = "#removeExperience" + /*experience*/ ctx[11].id);
 			attr(div1, "class", "modal-header");
@@ -411,7 +417,7 @@ function create_if_block_2(ctx) {
 			attr(div6, "tabindex", "-1");
 			attr(div6, "aria-labelledby", "removeExperienceLabel");
 			attr(div6, "aria-hidden", "true");
-			attr(div7, "class", "deleteExperience mx-3 svelte-1gfb5zc");
+			attr(div7, "class", "deleteExperience mx-3 svelte-ejk3cr");
 			attr(div8, "class", "settings-exps d-flex justify-content-center");
 		},
 		m(target, anchor) {
@@ -470,44 +476,50 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (145:7) {#each $data as experience}
+// (147:7) {#each $data as experience}
 function create_each_block(ctx) {
 	let div;
 	let p0;
-	let t0;
 	let span0;
-	let t1_value = /*experience*/ ctx[11].company_name + "";
 	let t1;
+	let span1;
+	let t2_value = /*experience*/ ctx[11].company_name + "";
 	let t2;
 	let t3;
 	let p1;
 	let t4;
-	let span1;
-	let t5_value = /*experience*/ ctx[11].location + "";
 	let t5;
-	let t6;
 	let p2;
-	let t7;
 	let span2;
-	let t8_value = /*experience*/ ctx[11].title + "";
+	let t7;
+	let span3;
+	let t8_value = /*experience*/ ctx[11].location + "";
 	let t8;
 	let t9;
 	let p3;
-	let t10;
-	let span3;
-	let t11_value = /*experience*/ ctx[11].employment_type + "";
+	let span4;
 	let t11;
+	let span5;
+	let t12_value = /*experience*/ ctx[11].title + "";
 	let t12;
-	let p4;
-	let t13_value = /*experience*/ ctx[11].description + "";
 	let t13;
-	let t14;
-	let show_if = /*id*/ ctx[2] === parseInt(localStorage.getItem('userId'));
+	let p4;
+	let span6;
 	let t15;
+	let span7;
+	let t16_value = /*experience*/ ctx[11].employment_type + "";
+	let t16;
+	let t17;
+	let p5;
+	let t18_value = /*experience*/ ctx[11].description + "";
+	let t18;
+	let t19;
+	let show_if = /*id*/ ctx[2] === parseInt(localStorage.getItem('userId'));
+	let t20;
 	let hr;
 	let div_id_value;
 	let div_data_experienceid_value;
-	let t16;
+	let t21;
 	let updateexperiencesmodal;
 	let current;
 
@@ -532,44 +544,63 @@ function create_each_block(ctx) {
 		c() {
 			div = element("div");
 			p0 = element("p");
-			t0 = text("Company Name: ");
 			span0 = element("span");
-			t1 = text(t1_value);
-			t2 = space();
-			if_block0.c();
+			span0.textContent = "Company Name:";
+			t1 = space();
+			span1 = element("span");
+			t2 = text(t2_value);
 			t3 = space();
 			p1 = element("p");
-			t4 = text("Ubication: ");
-			span1 = element("span");
-			t5 = text(t5_value);
-			t6 = space();
+			t4 = space();
+			if_block0.c();
+			t5 = space();
 			p2 = element("p");
-			t7 = text("Title: ");
 			span2 = element("span");
+			span2.textContent = "Ubication:";
+			t7 = space();
+			span3 = element("span");
 			t8 = text(t8_value);
 			t9 = space();
 			p3 = element("p");
-			t10 = text("job type: ");
-			span3 = element("span");
-			t11 = text(t11_value);
-			t12 = space();
+			span4 = element("span");
+			span4.textContent = "Title:";
+			t11 = space();
+			span5 = element("span");
+			t12 = text(t12_value);
+			t13 = space();
 			p4 = element("p");
-			t13 = text(t13_value);
-			t14 = space();
-			if (if_block1) if_block1.c();
+			span6 = element("span");
+			span6.textContent = "job type:";
 			t15 = space();
+			span7 = element("span");
+			t16 = text(t16_value);
+			t17 = space();
+			p5 = element("p");
+			t18 = text(t18_value);
+			t19 = space();
+			if (if_block1) if_block1.c();
+			t20 = space();
 			hr = element("hr");
-			t16 = space();
+			t21 = space();
 			create_component(updateexperiencesmodal.$$.fragment);
-			attr(span0, "class", "svelte-1gfb5zc");
-			attr(p0, "class", "svelte-1gfb5zc");
-			attr(span1, "class", "svelte-1gfb5zc");
-			attr(p1, "class", "svelte-1gfb5zc");
-			attr(span2, "class", "svelte-1gfb5zc");
-			attr(p2, "class", "svelte-1gfb5zc");
-			attr(span3, "class", "svelte-1gfb5zc");
-			attr(p3, "class", "svelte-1gfb5zc");
-			attr(p4, "class", "svelte-1gfb5zc");
+			attr(span0, "data-translate", "company-name");
+			attr(span0, "class", "svelte-ejk3cr");
+			attr(span1, "class", "svelte-ejk3cr");
+			attr(p0, "class", "svelte-ejk3cr");
+			attr(p1, "class", "svelte-ejk3cr");
+			attr(span2, "data-translate", "locacy");
+			attr(span2, "class", "svelte-ejk3cr");
+			attr(span3, "class", "svelte-ejk3cr");
+			attr(p2, "class", "svelte-ejk3cr");
+			attr(span4, "data-translate", "title-exp");
+			attr(span4, "class", "svelte-ejk3cr");
+			attr(span5, "class", "svelte-ejk3cr");
+			attr(p3, "class", "svelte-ejk3cr");
+			attr(span6, "data-translate", "job-type");
+			attr(span6, "class", "svelte-ejk3cr");
+			attr(span7, "class", "svelte-ejk3cr");
+			attr(p4, "class", "svelte-ejk3cr");
+			attr(p5, "class", "svelte-ejk3cr");
 			attr(div, "id", div_id_value = "experience" + /*experience*/ ctx[11].id);
 			attr(div, "data-experienceid", div_data_experienceid_value = /*experience*/ ctx[11].id);
 			attr(div, "class", "experience position-relative");
@@ -577,39 +608,45 @@ function create_each_block(ctx) {
 		m(target, anchor) {
 			insert(target, div, anchor);
 			append(div, p0);
-			append(p0, t0);
 			append(p0, span0);
-			append(span0, t1);
-			append(div, t2);
-			if_block0.m(div, null);
-			append(div, t3);
+			append(p0, t1);
+			append(p0, span1);
+			append(span1, t2);
+			append(p0, t3);
 			append(div, p1);
-			append(p1, t4);
-			append(p1, span1);
-			append(span1, t5);
-			append(div, t6);
+			append(div, t4);
+			if_block0.m(div, null);
+			append(div, t5);
 			append(div, p2);
-			append(p2, t7);
 			append(p2, span2);
-			append(span2, t8);
+			append(p2, t7);
+			append(p2, span3);
+			append(span3, t8);
 			append(div, t9);
 			append(div, p3);
-			append(p3, t10);
-			append(p3, span3);
-			append(span3, t11);
-			append(div, t12);
+			append(p3, span4);
+			append(p3, t11);
+			append(p3, span5);
+			append(span5, t12);
+			append(div, t13);
 			append(div, p4);
-			append(p4, t13);
-			append(div, t14);
+			append(p4, span6);
+			append(p4, t15);
+			append(p4, span7);
+			append(span7, t16);
+			append(div, t17);
+			append(div, p5);
+			append(p5, t18);
+			append(div, t19);
 			if (if_block1) if_block1.m(div, null);
-			append(div, t15);
+			append(div, t20);
 			append(div, hr);
-			insert(target, t16, anchor);
+			insert(target, t21, anchor);
 			mount_component(updateexperiencesmodal, target, anchor);
 			current = true;
 		},
 		p(ctx, dirty) {
-			if ((!current || dirty & /*$data*/ 16) && t1_value !== (t1_value = /*experience*/ ctx[11].company_name + "")) set_data(t1, t1_value);
+			if ((!current || dirty & /*$data*/ 16) && t2_value !== (t2_value = /*experience*/ ctx[11].company_name + "")) set_data(t2, t2_value);
 
 			if (current_block_type === (current_block_type = select_block_type_1(ctx, dirty)) && if_block0) {
 				if_block0.p(ctx, dirty);
@@ -619,14 +656,14 @@ function create_each_block(ctx) {
 
 				if (if_block0) {
 					if_block0.c();
-					if_block0.m(div, t3);
+					if_block0.m(div, t5);
 				}
 			}
 
-			if ((!current || dirty & /*$data*/ 16) && t5_value !== (t5_value = /*experience*/ ctx[11].location + "")) set_data(t5, t5_value);
-			if ((!current || dirty & /*$data*/ 16) && t8_value !== (t8_value = /*experience*/ ctx[11].title + "")) set_data(t8, t8_value);
-			if ((!current || dirty & /*$data*/ 16) && t11_value !== (t11_value = /*experience*/ ctx[11].employment_type + "")) set_data(t11, t11_value);
-			if ((!current || dirty & /*$data*/ 16) && t13_value !== (t13_value = /*experience*/ ctx[11].description + "")) set_data(t13, t13_value);
+			if ((!current || dirty & /*$data*/ 16) && t8_value !== (t8_value = /*experience*/ ctx[11].location + "")) set_data(t8, t8_value);
+			if ((!current || dirty & /*$data*/ 16) && t12_value !== (t12_value = /*experience*/ ctx[11].title + "")) set_data(t12, t12_value);
+			if ((!current || dirty & /*$data*/ 16) && t16_value !== (t16_value = /*experience*/ ctx[11].employment_type + "")) set_data(t16, t16_value);
+			if ((!current || dirty & /*$data*/ 16) && t18_value !== (t18_value = /*experience*/ ctx[11].description + "")) set_data(t18, t18_value);
 			if (dirty & /*id*/ 4) show_if = /*id*/ ctx[2] === parseInt(localStorage.getItem('userId'));
 
 			if (show_if) {
@@ -635,7 +672,7 @@ function create_each_block(ctx) {
 				} else {
 					if_block1 = create_if_block_2(ctx);
 					if_block1.c();
-					if_block1.m(div, t15);
+					if_block1.m(div, t20);
 				}
 			} else if (if_block1) {
 				if_block1.d(1);
@@ -669,13 +706,13 @@ function create_each_block(ctx) {
 			if (detaching) detach(div);
 			if_block0.d();
 			if (if_block1) if_block1.d();
-			if (detaching) detach(t16);
+			if (detaching) detach(t21);
 			destroy_component(updateexperiencesmodal, detaching);
 		}
 	};
 }
 
-// (195:2) {#if id === parseInt(localStorage.getItem('userId'))}
+// (214:2) {#if id === parseInt(localStorage.getItem('userId'))}
 function create_if_block_1(ctx) {
 	let div;
 	let p;
@@ -701,11 +738,12 @@ function create_if_block_1(ctx) {
 			i = element("i");
 			t2 = space();
 			create_component(experiencesmodal.$$.fragment);
-			attr(p, "class", "svelte-1gfb5zc");
-			attr(i, "class", "fas fa-plus-circle svelte-1gfb5zc");
+			attr(p, "data-translate", "add-position");
+			attr(p, "class", "svelte-ejk3cr");
+			attr(i, "class", "fas fa-plus-circle svelte-ejk3cr");
 			attr(i, "data-bs-toggle", "modal");
 			attr(i, "data-bs-target", "#modalExperience");
-			attr(div, "class", "addExperiences text-center svelte-1gfb5zc");
+			attr(div, "class", "addExperiences text-center svelte-ejk3cr");
 		},
 		m(target, anchor) {
 			insert(target, div, anchor);
@@ -744,7 +782,7 @@ function create_fragment(ctx) {
 	let if_block;
 	let if_block_anchor;
 	let current;
-	const if_block_creators = [create_if_block, create_if_block_4, create_else_block_1];
+	const if_block_creators = [create_if_block, create_if_block_4];
 	const if_blocks = [];
 
 	function select_block_type(ctx, dirty) {
@@ -752,19 +790,23 @@ function create_fragment(ctx) {
 		if (/*experiences*/ ctx[0]) return 0;
 		if (show_if == null) show_if = !!(/*id*/ ctx[2] === parseInt(localStorage.getItem('userId')));
 		if (show_if) return 1;
-		return 2;
+		return -1;
 	}
 
-	current_block_type_index = select_block_type(ctx, -1);
-	if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
+	if (~(current_block_type_index = select_block_type(ctx, -1))) {
+		if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
+	}
 
 	return {
 		c() {
-			if_block.c();
+			if (if_block) if_block.c();
 			if_block_anchor = empty();
 		},
 		m(target, anchor) {
-			if_blocks[current_block_type_index].m(target, anchor);
+			if (~current_block_type_index) {
+				if_blocks[current_block_type_index].m(target, anchor);
+			}
+
 			insert(target, if_block_anchor, anchor);
 			current = true;
 		},
@@ -773,26 +815,35 @@ function create_fragment(ctx) {
 			current_block_type_index = select_block_type(ctx, dirty);
 
 			if (current_block_type_index === previous_block_index) {
-				if_blocks[current_block_type_index].p(ctx, dirty);
+				if (~current_block_type_index) {
+					if_blocks[current_block_type_index].p(ctx, dirty);
+				}
 			} else {
-				group_outros();
+				if (if_block) {
+					group_outros();
 
-				transition_out(if_blocks[previous_block_index], 1, 1, () => {
-					if_blocks[previous_block_index] = null;
-				});
+					transition_out(if_blocks[previous_block_index], 1, 1, () => {
+						if_blocks[previous_block_index] = null;
+					});
 
-				check_outros();
-				if_block = if_blocks[current_block_type_index];
-
-				if (!if_block) {
-					if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
-					if_block.c();
-				} else {
-					if_block.p(ctx, dirty);
+					check_outros();
 				}
 
-				transition_in(if_block, 1);
-				if_block.m(if_block_anchor.parentNode, if_block_anchor);
+				if (~current_block_type_index) {
+					if_block = if_blocks[current_block_type_index];
+
+					if (!if_block) {
+						if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
+						if_block.c();
+					} else {
+						if_block.p(ctx, dirty);
+					}
+
+					transition_in(if_block, 1);
+					if_block.m(if_block_anchor.parentNode, if_block_anchor);
+				} else {
+					if_block = null;
+				}
 			}
 		},
 		i(local) {
@@ -805,7 +856,10 @@ function create_fragment(ctx) {
 			current = false;
 		},
 		d(detaching) {
-			if_blocks[current_block_type_index].d(detaching);
+			if (~current_block_type_index) {
+				if_blocks[current_block_type_index].d(detaching);
+			}
+
 			if (detaching) detach(if_block_anchor);
 		}
 	};
@@ -893,9 +947,10 @@ function instance($$self, $$props, $$invalidate) {
 		} // }, 4000);
 	};
 
-	onMount(() => {
-		getDataexperiences();
+	onMount(async () => {
+		await getDataexperiences();
 		reloadExperiences();
+		translate();
 	});
 
 	$$self.$$set = $$props => {

@@ -229,6 +229,7 @@ function create_if_block_19(ctx) {
 			li = element("li");
 			li.textContent = "Delete post";
 			attr(li, "class", "dropdown-item svelte-54r9g1");
+			attr(li, "data-translate", "delete-post");
 		},
 		m(target, anchor) {
 			insert(target, li, anchor);
@@ -301,6 +302,7 @@ function create_if_block_18(ctx) {
 			li = element("li");
 			li.textContent = "Delete post";
 			attr(li, "class", "dropdown-item svelte-54r9g1");
+			attr(li, "data-translate", "delete-post");
 		},
 		m(target, anchor) {
 			insert(target, li, anchor);
@@ -1457,7 +1459,7 @@ function create_fragment(ctx) {
 			ul = element("ul");
 			li = element("li");
 			a = element("a");
-			t2 = text("View post");
+			t2 = text("See post");
 			t3 = space();
 			if (if_block1) if_block1.c();
 			t4 = space();
@@ -1522,7 +1524,7 @@ function create_fragment(ctx) {
 			div13 = element("div");
 
 			div13.innerHTML = `<i class="fas fa-paper-plane"></i> 
-          <span class="svelte-54r9g1">Send</span>`;
+          <span data-translate="send" class="svelte-54r9g1">Send</span>`;
 
 			t33 = space();
 			div17 = element("div");
@@ -1543,6 +1545,7 @@ function create_fragment(ctx) {
 			attr(i0, "aria-expanded", "false");
 			attr(a, "class", "dropdown-item svelte-54r9g1");
 			attr(a, "href", a_href_value = "/post/" + /*id*/ ctx[12]);
+			attr(a, "data-translate", "see-post");
 			attr(li, "class", "svelte-54r9g1");
 			attr(ul, "class", "dropdown-menu");
 			attr(ul, "aria-labelledby", "settings-post");
@@ -1570,11 +1573,13 @@ function create_fragment(ctx) {
 			attr(div10, "class", "Card-board-icons svelte-54r9g1");
 			attr(i4, "id", i4_id_value = "btnLike" + /*id*/ ctx[12]);
 			attr(i4, "class", "fa-thumbs-up far");
+			attr(span5, "data-translate", "like");
 			attr(span5, "class", "svelte-54r9g1");
 			attr(button0, "id", button0_id_value = "btnReactionLike" + /*id*/ ctx[12]);
 			attr(button0, "class", "Action Header-nav-thumbs-up svelte-54r9g1");
 			attr(i5, "id", i5_id_value = "btnLove" + /*id*/ ctx[12]);
 			attr(i5, "class", "fa-heart far");
+			attr(span6, "data-translate", "love");
 			attr(span6, "class", "svelte-54r9g1");
 			attr(button1, "id", button1_id_value = "btnReactionLove" + /*id*/ ctx[12]);
 			attr(button1, "class", "Action Header-nav-heart svelte-54r9g1");

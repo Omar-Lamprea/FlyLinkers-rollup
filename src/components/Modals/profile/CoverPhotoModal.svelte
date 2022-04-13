@@ -88,21 +88,21 @@
     <div class="modal-content">
 
       <div class="modal-header">
-        <h5 class="modal-title" id="editProfileLabel">Edit cover photo</h5>
+        <h5 data-translate="title-cover" class="modal-title" id="editProfileLabel">Edit cover photo</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
       <div class="modal-body text-start">
         <div class="cover-photo">
-          <label for="coverPhoto">Cover photo</label>
+          <label data-translate="p-cover" for="coverPhoto">Add cover photo</label>
           <input type="file" name="coverPhoto" id="coverPhoto" accept=".png, .jpg, .jpeg" on:change={showCoverImg}>
           <img src="" alt="" id="showImage" class="coverPhotoLoaded">
         </div>
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button id="btnUpdateCoverPhoto" type="button" class="btn btn-outline-primary btn-flylinkers" on:click={getProfile(id)}>{btnSaveCoverPhoto}</button>
+        <button data-translate="modal-cover-btn-close" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button data-translate="modal-cover-btn-save" id="btnUpdateCoverPhoto" type="button" class="btn btn-outline-primary btn-flylinkers" on:click={getProfile(id)}>{btnSaveCoverPhoto}</button>
       </div>
 
     </div>

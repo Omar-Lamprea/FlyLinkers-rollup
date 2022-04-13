@@ -61,6 +61,10 @@
       if(template.sentBy !== userName){
         const docRef = collection(db, `message/${groups}/messages`)
         const q = query(docRef, where('seen', '==', false))
+        
+        let a = 1
+        console.log('help');
+        
         const snapDocs = onSnapshot(q, docs =>{
           docs.forEach(async el => {
             const updateSeen =  doc(db, `message/${groups}/messages/${el.id}`)
@@ -71,7 +75,12 @@
             // console.log('stop listener');
             snapDocs()
             // console.log('vistos actualizados, reduciendo contador...');
-            notificacionsChatsBubble.classList.toggle('substractCounter')
+            if (a === 1) {
+              console.log('reduciendo');
+              notificacionsChatsBubble.classList.toggle('substractCounter')
+              a = 0
+            }
+            
           });
         })
       }

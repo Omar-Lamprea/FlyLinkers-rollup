@@ -40,11 +40,33 @@
     {value: '11', month : 'November'},
     {value: '12', month : 'December'}    
   ]
+  const monthsEs = [
+    {value: '0', month : 'Selecciona una opción'},
+    {value: '1', month : 'Enero'},
+    {value: '2', month : 'Febrero'},
+    {value: '3', month : 'Marzo'},
+    {value: '4', month : 'Abril'},
+    {value: '5', month : 'Mayo'},
+    {value: '6', month : 'Junio'},
+    {value: '7', month : 'Julio'},
+    {value: '8', month : 'Augosto'},
+    {value: '9', month : 'Septiembre'},
+    {value: '10', month : 'Octubre'},
+    {value: '11', month : 'Noviembre'},
+    {value: '12', month : 'Diciembre'}
+  ]
   const employmentTypeList = [
     'Full-time', 'Part-time', 
     'Self-employed', 'Freelance', 
     'Contract', 'InternShip', 
     'Apprenticeship', 
+    'Seasonal'
+  ]
+  const employmentTypeListEs = [
+    'Jornada completa', 'Jornada parcial', 
+    'Autónomo', 'Profesional independiente', 
+    'Contrato temporal', 'Contrato de prácticas', 
+    'Contrato de formación', 
     'Seasonal'
   ]
 
@@ -211,37 +233,46 @@
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalUpdateExperience{experience.id}Label">Update Experience</h5>
+        <h5 data-translate="title-update-xp" class="modal-title" id="modalUpdateExperience{experience.id}Label">Update Experience</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body text-start">
 
         <div class="headModal">
-          <h5>Where do you currently work?</h5>
-          <p class="my-3">* Indicates required</p>
+          <h5 data-translate="title-worked">Where have you worked?</h5>
+          <p data-translate="require-xp" class="my-3">* Indicates required</p>
         </div>
 
         <div class="formExperience">
           <form action="">
             <div class="companyName">
-              <label for="companyNameUpdate{experience.id}">Company Name*</label>
+              <label data-translate="modal-company-name" for="companyNameUpdate{experience.id}">Company Name*</label>
                 <input type="text" name="companyNameUpdate{experience.id}" id="companyNameUpdate{experience.id}" placeholder="Ex: FlyLinkers" value={experience.company_name}>
             </div>
 
             <div class="dates">
               <div class="start me-md-1">
-                <label for="startDate{experience.id}">Start date*</label>
+                <label data-translate="modal-start-date" for="startDate{experience.id}">Start date*</label>
                 <div class="workStartDate d-md-flex justify-content-between">
                   <select name="startDate{experience.id}" id="startDate{experience.id}" class="me-md-1 mb-3">
-                    {#each months as month}
-                      {#if joinStartMonth === month.value}
-                        <option value={month.value} selected>{month.month}</option>
-                      {/if}
-                       <option value={month.value}>{month.month}</option>
-                    {/each}
+                    {#if localStorage.getItem('lang') === 'En'}
+                      {#each months as month}
+                        {#if joinStartMonth === month.value}
+                          <option value={month.value} selected>{month.month}</option>
+                        {/if}
+                        <option value={month.value}>{month.month}</option>
+                      {/each}
+                    {:else}
+                      {#each monthsEs as month}
+                        {#if joinStartMonth === month.value}
+                          <option value={month.value} selected>{month.month}</option>
+                        {/if}
+                        <option value={month.value}>{month.month}</option>
+                      {/each}
+                    {/if}
                   </select>
                   <select name="startYear{experience.id}" id="startYear{experience.id}" class="mb-3">
-                    <option value=0>Year</option>
+                    <option data-translate="modal-xp-year" value=0>Year</option>
                     {#each yearList as year}
                       {#if parseInt(dataStartYear) === year}
                         <option value={year} selected>{year}</option>
@@ -253,19 +284,29 @@
               </div>
 
               <div class="end">
-                <label for="endDate{experience.id}">end date*</label>
+                <label data-translate="modal-end-date" for="endDate{experience.id}">end date*</label>
                 <div class="workEndDate d-md-flex justify-content-between">
                   {#if !experience.working}
                      <select name="endDate{experience.id}" id="endDate{experience.id}" class="me-md-1 mb-3">
-                       {#each months as month}
-                         {#if joinEndMonth === month.value}
-                           <option value={month.value} selected>{month.month}</option>
-                         {/if}
+                      {#if localStorage.getItem('lang') === 'En'}
+                        {#each months as month}
+                          {#if joinEndMonth === month.value}
+                            <option value={month.value} selected>{month.month}</option>
+                          {/if}
                           <option value={month.value}>{month.month}</option>
-                       {/each}
+                        {/each}
+                      {:else}
+                        {#each monthsEs as month}
+                          {#if joinEndMonth === month.value}
+                            <option value={month.value} selected>{month.month}</option>
+                          {/if}
+                          <option value={month.value}>{month.month}</option>
+                        {/each}
+                      {/if}
+                       
                      </select>
                      <select name="endYear{experience.id}" id="endYear{experience.id}" class="mb-3">
-                       <option value=0>Year</option>
+                       <option data-translate="modal-xp-year" value=0>Year</option>
                        {#each yearList as year}
                          {#if parseInt(dataEndYear) === year}
                            <option value={year} selected>{year}</option>
@@ -275,15 +316,25 @@
                      </select>
                   {:else}
                     <select name="endDate{experience.id}" id="endDate{experience.id}" disabled class="me-md-1 mb-3">
-                      {#each months as month}
-                        {#if joinEndMonth === month.value}
-                          <option value={month.value} selected>{month.month}</option>
-                        {/if}
-                        <option value={month.value}>{month.month}</option>
-                      {/each}
+                      {#if localStorage.getItem('lang') === 'En'}
+                        {#each months as month}
+                          {#if joinEndMonth === month.value}
+                            <option value={month.value} selected>{month.month}</option>
+                          {/if}
+                          <option value={month.value}>{month.month}</option>
+                        {/each}
+                      {:else}
+                        {#each monthsEs as month}
+                          {#if joinEndMonth === month.value}
+                            <option value={month.value} selected>{month.month}</option>
+                          {/if}
+                          <option value={month.value}>{month.month}</option>
+                        {/each}
+                      {/if}
+                      
                     </select>
                     <select name="endYear{experience.id}" id="endYear{experience.id}" disabled class="mb-3">
-                      <option value=0>Year</option>
+                      <option data-translate="modal-xp-year" value=0>Year</option>
                       {#each yearList as year}
                         {#if parseInt(dataEndYear) === year}
                           <option value={year} selected>{year}</option>
@@ -298,20 +349,20 @@
 
             <div class="working d-flex align-items-center">
               <input type="checkbox" name="working{experience.id}" id="working{experience.id}" checked={experience.working} on:click={toggleEndDate}>
-              <label for="working{experience.id}">
+              <label data-translate="modal-currently" for="working{experience.id}">
                 I am currently working in this role
               </label>
             </div>
 
-            <label for="country{experience.id}">Location*</label>
+            <label data-translate="modal-locacy" for="country{experience.id}">Location*</label>
             <input type="text" name="country{experience.id}" id="country{experience.id}" placeholder="Ex: Colombia" value={experience.location}>
 
-            <label for="title{experience.id}">Title*</label>
+            <label data-translate="modal-title-exp" for="title{experience.id}">Title*</label>
             <input type="text" name="title{experience.id}" id="title{experience.id}" placeholder="Ex: Manager" value={experience.title}>
 
-            <label for="employmentType{experience.id}">Employment type*</label>
+            <label data-translate="modal-job-type" for="employmentType{experience.id}">Employment type*</label>
             <select name="employmentType{experience.id}" id="employmentType{experience.id}">
-              <option value="pleaseSelect">Please select</option>
+              <option data-translate="modal-xp-select-job-type" value="pleaseSelect">Please select</option>
               {#each employmentTypeList as employment}
                 {#if experience.employment_type === employment}
                   <option value={employment} selected>{employment}</option>
@@ -320,15 +371,15 @@
               {/each}
             </select>
 
-            <label for="description{experience.id}">Description*</label>
+            <label data-translate="moda-xp-description" for="description{experience.id}">Description*</label>
             <textarea name="description{experience.id}" id="description{experience.id}" cols="30" rows="5" value={experience.description}></textarea>
           </form>
         </div>
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button id="btnUpdateExperience{experience.id}" type="button" class="btn btn-outline-primary btn-flylinkers btn-save-experience" on:click={addExpreience}>Save</button>
+        <button data-translate="modal-xp-btn-close" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button data-translate="modal-xp-btn-save" id="btnUpdateExperience{experience.id}" type="button" class="btn btn-outline-primary btn-flylinkers btn-save-experience" on:click={addExpreience}>Save</button>
       </div>
     </div>
   </div>

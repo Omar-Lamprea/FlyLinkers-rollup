@@ -18,14 +18,15 @@ function create_fragment(ctx) {
 		c() {
 			div5 = element("div");
 
-			div5.innerHTML = `<div class="Panel-title svelte-1awuuu9"><p class="mx-3 mx-md-0">Your panel</p></div> 
+			div5.innerHTML = `<div class="Panel-title svelte-1awuuu9"><p data-translate="title-panel" class="mx-3 mx-md-0">Your panel</p></div> 
   <div class="d-flex flex-wrap justify-content-center justify-content-xl-between my-2"><div class="Default-containers Panel-content text-center svelte-1awuuu9"><h3 class="svelte-1awuuu9">1</h3> 
-      <p>Who&#39;s viewed your profile</p></div> 
+      <p data-translate="who-viewed">Who&#39;s viewed your profile</p></div> 
     <div class="Default-containers Panel-content text-center svelte-1awuuu9"><h3 class="svelte-1awuuu9">50</h3> 
-      <p>Post views</p></div> 
+      <p data-translate="views-post">Post views</p></div> 
     <div class="Default-containers Panel-content text-center svelte-1awuuu9"><h3 class="svelte-1awuuu9">50</h3> 
-      <p>My network</p></div></div> 
-  <p class="mx-3 mx-md-0"><i class="fas fa-bookmark svelte-1awuuu9"></i> Mark pages</p>`;
+      <p data-translate="my-network">My network</p></div></div> 
+  <p class="mx-3 mx-md-0"><i class="fas fa-bookmark svelte-1awuuu9"></i> 
+    <span data-translate="mark-pages">Mark pages</span></p>`;
 
 			attr(div5, "class", "Default-containers-grey Panel svelte-1awuuu9");
 		},

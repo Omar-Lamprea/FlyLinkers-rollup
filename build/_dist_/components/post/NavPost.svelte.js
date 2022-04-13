@@ -63,13 +63,13 @@ function create_fragment(ctx) {
 			div2 = element("div");
 
 			div2.innerHTML = `<i class="fas fa-calendar svelte-1x5l75b"></i> 
-      <span class="svelte-1x5l75b">Event</span>`;
+      <span data-translate="icon-event" class="svelte-1x5l75b">Event</span>`;
 
 			t10 = space();
 			div3 = element("div");
 
 			div3.innerHTML = `<i class="fas fa-file-alt svelte-1x5l75b"></i> 
-      <span class="svelte-1x5l75b">Write article</span>`;
+      <span data-translate="icon-article" class="svelte-1x5l75b">Write article</span>`;
 
 			attr(i0, "class", "fas fa-image svelte-1x5l75b");
 			attr(span0, "data-translate", "icon-photo");
@@ -85,6 +85,7 @@ function create_fragment(ctx) {
 			attr(div0, "id", "loadPhotoPost");
 			attr(div0, "type", "file");
 			attr(i1, "class", "fas fa-film svelte-1x5l75b");
+			attr(span1, "data-translate", "icon-video");
 			attr(span1, "class", "svelte-1x5l75b");
 			attr(input1, "type", "file");
 			attr(input1, "name", "uploadVideo");

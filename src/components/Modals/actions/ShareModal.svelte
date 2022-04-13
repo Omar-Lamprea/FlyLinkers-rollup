@@ -109,12 +109,12 @@
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="shareModal-{id}Label">Share post</h5>
+        <h5 data-translate="title-share-post" class="modal-title" id="shareModal-{id}Label">Share post</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form action="">
-          <textarea name="descPost" id="descPost-{id}" class="Default-containers" cols="30" rows="1" placeholder="Start a post..." on:keyup={incrementTextArea}></textarea>
+          <textarea data-translate="input-addPost" name="descPost" id="descPost-{id}" class="Default-containers" cols="30" rows="1" placeholder="Start a post..." on:keyup={incrementTextArea}></textarea>
         </form>
         {#if userPost && infoPost}
           <div class="post-shared Default-containers">
@@ -163,8 +163,8 @@
         {/if}
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button id="btnSharePost-{id}" type="button" class="btn btn-flylinkers" on:click={sharePost(userPost, infoPost)}>Share post</button>
+        <button data-translate="share-post-btn-close" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button data-translate="share-post-btn-save" id="btnSharePost-{id}" type="button" class="btn btn-flylinkers" on:click={sharePost(userPost, infoPost)}>Share post</button>
       </div>
     </div>
   </div>
