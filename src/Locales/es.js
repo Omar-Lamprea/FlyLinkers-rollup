@@ -11,6 +11,11 @@ export default{
     "nav-deline-request" : "Rechazar",
     //********************
 
+    //notifications
+    "notification-reaction": "ha reaccionado a tu publicación",
+    "notification-Frequest": "te envió una solicitud de amistad",
+    "notification-comment": "ha comentado tu publicación",
+
     //sidebarLeft
       //profile card mini
       "who-viewed": "Visitas a tu perfil",
@@ -49,6 +54,8 @@ export default{
       //post
       "comments": "Comentarios",
       "comment": "Comentar",
+      "input-make-comment" : 'Escribe un comentario...',
+      "btn-make-comment" : 'Publicar',
       //********************
       "title-post": "Publicar",
       "like": "Me gusta",
@@ -77,8 +84,8 @@ export default{
       "send-message": "Enviar mensaje",
       "is-friend": "Amigo",
       "update-profile-photo": "Actualizar foto de perfil",
-
-
+      "btn-accept-request": "Aceptar solicitud de amistad",
+      "btn-deny-request": "Rechazar solicitud de amistad",
 
       //Experiences
       "title-experiences" : "Experiencia",
@@ -100,6 +107,7 @@ export default{
 
     //settings user
       "btn-save": "Guardar",
+      "finish-settings": "Terminar",
       //********************
 
       //user info

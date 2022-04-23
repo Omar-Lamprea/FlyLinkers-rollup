@@ -5,20 +5,25 @@
 
   const showPostImg = ()=>{
 
-    if(loadPhotoInput.files[0].size > 3_145_728){
-      alert("File is too big! \nTry again with a file smaller than 3MB");
-      loadPhotoInput.value = "";
-    }
-
+    
     if (loadPhotoInput.value !== "") {
+      if(loadPhotoInput.files[0].size > 3_145_728){
+        alert("File is too big! \nTry again with a file smaller than 3MB");
+        loadPhotoInput.value = "";
+      }
       const render = new FileReader();
       render.readAsDataURL(loadPhotoInput.files[0])
       render.onloadend = ()=>{
         postImg.classList.remove('d-none')
         postImg.src = render.result
         ableBtn()
+        uploadVideo.setAttribute('disabled', '')
       }
     }
+    // else{
+    //   uploadVideo.removeAttribute('disabled')
+    // }
+    
   }
 
   const uploadVideoPost = (e) =>{
@@ -35,6 +40,7 @@
         // console.log(render.result);
         postVideo.src = render.result
         ableBtn()
+        loadPhotoInput.setAttribute('disabled', '')
       }
     }
   }
@@ -81,16 +87,20 @@
       <input type="file" name="uploadVideo" id="uploadVideo" class="d-none" accept="video/mp4,video/x-m4v,video/*"  on:change={uploadVideoPost}>
     </label>
   </div>
-  <div class="Header-nav Header-nav-calendar mx-3 disabled">
-    <!-- <a href="/"> -->
+
+
+
+  <!-- other buttons -->
+  <!-- <div class="Header-nav Header-nav-calendar mx-3 disabled">
+    <a href="/">
       <i class="fas fa-calendar"></i>
       <span data-translate="icon-event">Event</span>
-    <!-- </a> -->
+    </a>
   </div>
   <div class="Header-nav Header-nav-file-alt mx-3 hidden disabled">
-    <!-- <a href="/"> -->
+    <a href="/">
       <i class="fas fa-file-alt"></i>
       <span data-translate="icon-article">Write article</span>
-    <!-- </a> -->
-  </div>
+    </a>
+  </div> -->
 </div>

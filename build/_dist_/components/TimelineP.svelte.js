@@ -62,7 +62,7 @@ function get_each_context_2(ctx, list, i) {
 }
 
 // (152:6) {#if email === dataJson.email}
-function create_if_block_5(ctx) {
+function create_if_block_6(ctx) {
 	let div;
 	let p;
 	let t1;
@@ -117,7 +117,7 @@ function create_if_block_5(ctx) {
 }
 
 // (158:6) {#if experiences !== undefined}
-function create_if_block_4(ctx) {
+function create_if_block_5(ctx) {
 	let experience;
 	let current;
 
@@ -161,7 +161,36 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (163:6) {#if post}
+// (162:6) {#if email === dataJson.email}
+function create_if_block_4(ctx) {
+	let panel;
+	let current;
+	panel = new Panel({});
+
+	return {
+		c() {
+			create_component(panel.$$.fragment);
+		},
+		m(target, anchor) {
+			mount_component(panel, target, anchor);
+			current = true;
+		},
+		i(local) {
+			if (current) return;
+			transition_in(panel.$$.fragment, local);
+			current = true;
+		},
+		o(local) {
+			transition_out(panel.$$.fragment, local);
+			current = false;
+		},
+		d(detaching) {
+			destroy_component(panel, detaching);
+		}
+	};
+}
+
+// (166:6) {#if post}
 function create_if_block_2(ctx) {
 	let current_block_type_index;
 	let if_block;
@@ -231,7 +260,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (170:8) {:else}
+// (173:8) {:else}
 function create_else_block_1(ctx) {
 	let each_1_anchor;
 	let current;
@@ -315,7 +344,7 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (164:8) {#if userMain}
+// (167:8) {#if userMain}
 function create_if_block_3(ctx) {
 	let each_1_anchor;
 	let current;
@@ -399,7 +428,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (172:10) {#each post as dataPost}
+// (175:10) {#each post as dataPost}
 function create_each_block_3(ctx) {
 	let post_1;
 	let current;
@@ -454,7 +483,7 @@ function create_each_block_3(ctx) {
 	};
 }
 
-// (166:10) {#each post as dataPost}
+// (169:10) {#each post as dataPost}
 function create_each_block_2(ctx) {
 	let post_1;
 	let current;
@@ -509,7 +538,7 @@ function create_each_block_2(ctx) {
 	};
 }
 
-// (180:6) {#if $posts}
+// (183:6) {#if $posts}
 function create_if_block(ctx) {
 	let current_block_type_index;
 	let if_block;
@@ -579,7 +608,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (187:8) {:else}
+// (190:8) {:else}
 function create_else_block(ctx) {
 	let each_1_anchor;
 	let current;
@@ -663,7 +692,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (181:8) {#if userMain}
+// (184:8) {#if userMain}
 function create_if_block_1(ctx) {
 	let each_1_anchor;
 	let current;
@@ -747,7 +776,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (189:10) {#each $posts as dataPost}
+// (192:10) {#each $posts as dataPost}
 function create_each_block_1(ctx) {
 	let post_1;
 	let current;
@@ -802,7 +831,7 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (183:10) {#each $posts as dataPost}
+// (186:10) {#each $posts as dataPost}
 function create_each_block(ctx) {
 	let post_1;
 	let current;
@@ -868,7 +897,6 @@ function create_fragment(ctx) {
 	let t2;
 	let t3;
 	let t4;
-	let panel;
 	let t5;
 	let t6;
 	let t7;
@@ -896,11 +924,11 @@ function create_fragment(ctx) {
 			}
 		});
 
-	let if_block0 = /*email*/ ctx[4] === /*dataJson*/ ctx[15].email && create_if_block_5(ctx);
-	let if_block1 = /*experiences*/ ctx[10] !== undefined && create_if_block_4(ctx);
-	panel = new Panel({});
-	let if_block2 = /*post*/ ctx[12] && create_if_block_2(ctx);
-	let if_block3 = /*$posts*/ ctx[14] && create_if_block(ctx);
+	let if_block0 = /*email*/ ctx[4] === /*dataJson*/ ctx[15].email && create_if_block_6(ctx);
+	let if_block1 = /*experiences*/ ctx[10] !== undefined && create_if_block_5(ctx);
+	let if_block2 = /*email*/ ctx[4] === /*dataJson*/ ctx[15].email && create_if_block_4(ctx);
+	let if_block3 = /*post*/ ctx[12] && create_if_block_2(ctx);
+	let if_block4 = /*$posts*/ ctx[14] && create_if_block(ctx);
 
 	return {
 		c() {
@@ -916,11 +944,11 @@ function create_fragment(ctx) {
 			t3 = space();
 			if (if_block1) if_block1.c();
 			t4 = space();
-			create_component(panel.$$.fragment);
-			t5 = space();
 			if (if_block2) if_block2.c();
-			t6 = space();
+			t5 = space();
 			if (if_block3) if_block3.c();
+			t6 = space();
+			if (if_block4) if_block4.c();
 			t7 = space();
 			div0 = element("div");
 			div0.textContent = "Sorry!, we can't find more post to show you.";
@@ -947,11 +975,11 @@ function create_fragment(ctx) {
 			append(div1, t3);
 			if (if_block1) if_block1.m(div1, null);
 			append(div1, t4);
-			mount_component(panel, div1, null);
-			append(div1, t5);
 			if (if_block2) if_block2.m(div1, null);
-			append(div1, t6);
+			append(div1, t5);
 			if (if_block3) if_block3.m(div1, null);
+			append(div1, t6);
+			if (if_block4) if_block4.m(div1, null);
 			append(div1, t7);
 			append(div1, div0);
 			current = true;
@@ -980,7 +1008,7 @@ function create_fragment(ctx) {
 						transition_in(if_block0, 1);
 					}
 				} else {
-					if_block0 = create_if_block_5(ctx);
+					if_block0 = create_if_block_6(ctx);
 					if_block0.c();
 					transition_in(if_block0, 1);
 					if_block0.m(div1, t3);
@@ -1003,7 +1031,7 @@ function create_fragment(ctx) {
 						transition_in(if_block1, 1);
 					}
 				} else {
-					if_block1 = create_if_block_4(ctx);
+					if_block1 = create_if_block_5(ctx);
 					if_block1.c();
 					transition_in(if_block1, 1);
 					if_block1.m(div1, t4);
@@ -1018,18 +1046,16 @@ function create_fragment(ctx) {
 				check_outros();
 			}
 
-			if (/*post*/ ctx[12]) {
+			if (/*email*/ ctx[4] === /*dataJson*/ ctx[15].email) {
 				if (if_block2) {
-					if_block2.p(ctx, dirty);
-
-					if (dirty[0] & /*post*/ 4096) {
+					if (dirty[0] & /*email*/ 16) {
 						transition_in(if_block2, 1);
 					}
 				} else {
-					if_block2 = create_if_block_2(ctx);
+					if_block2 = create_if_block_4(ctx);
 					if_block2.c();
 					transition_in(if_block2, 1);
-					if_block2.m(div1, t6);
+					if_block2.m(div1, t5);
 				}
 			} else if (if_block2) {
 				group_outros();
@@ -1041,24 +1067,47 @@ function create_fragment(ctx) {
 				check_outros();
 			}
 
-			if (/*$posts*/ ctx[14]) {
+			if (/*post*/ ctx[12]) {
 				if (if_block3) {
 					if_block3.p(ctx, dirty);
 
-					if (dirty[0] & /*$posts*/ 16384) {
+					if (dirty[0] & /*post*/ 4096) {
 						transition_in(if_block3, 1);
 					}
 				} else {
-					if_block3 = create_if_block(ctx);
+					if_block3 = create_if_block_2(ctx);
 					if_block3.c();
 					transition_in(if_block3, 1);
-					if_block3.m(div1, t7);
+					if_block3.m(div1, t6);
 				}
 			} else if (if_block3) {
 				group_outros();
 
 				transition_out(if_block3, 1, 1, () => {
 					if_block3 = null;
+				});
+
+				check_outros();
+			}
+
+			if (/*$posts*/ ctx[14]) {
+				if (if_block4) {
+					if_block4.p(ctx, dirty);
+
+					if (dirty[0] & /*$posts*/ 16384) {
+						transition_in(if_block4, 1);
+					}
+				} else {
+					if_block4 = create_if_block(ctx);
+					if_block4.c();
+					transition_in(if_block4, 1);
+					if_block4.m(div1, t7);
+				}
+			} else if (if_block4) {
+				group_outros();
+
+				transition_out(if_block4, 1, 1, () => {
+					if_block4 = null;
 				});
 
 				check_outros();
@@ -1070,9 +1119,9 @@ function create_fragment(ctx) {
 			transition_in(userdetails.$$.fragment, local);
 			transition_in(if_block0);
 			transition_in(if_block1);
-			transition_in(panel.$$.fragment, local);
 			transition_in(if_block2);
 			transition_in(if_block3);
+			transition_in(if_block4);
 			current = true;
 		},
 		o(local) {
@@ -1080,9 +1129,9 @@ function create_fragment(ctx) {
 			transition_out(userdetails.$$.fragment, local);
 			transition_out(if_block0);
 			transition_out(if_block1);
-			transition_out(panel.$$.fragment, local);
 			transition_out(if_block2);
 			transition_out(if_block3);
+			transition_out(if_block4);
 			current = false;
 		},
 		d(detaching) {
@@ -1091,9 +1140,9 @@ function create_fragment(ctx) {
 			destroy_component(userdetails);
 			if (if_block0) if_block0.d();
 			if (if_block1) if_block1.d();
-			destroy_component(panel);
 			if (if_block2) if_block2.d();
 			if (if_block3) if_block3.d();
+			if (if_block4) if_block4.d();
 		}
 	};
 }

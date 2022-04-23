@@ -66,7 +66,7 @@
     background-color: #199aaf;
     color: #fefefe;
   }
-  form input, form textarea{
+  form textarea{
     border-radius: 5px;
     border: 1px solid var(--main-color);
     width: 100%;

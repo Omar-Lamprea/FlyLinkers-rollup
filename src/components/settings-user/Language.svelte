@@ -1,18 +1,20 @@
 <script>
+  import {translate} from '../../js/translate'
   const dropdownUserInfo = ()=>{
     toggleLanguage.classList.toggle('dropdown-active')
     containerLanguage.classList.toggle('container-active')
   }
 
   const setLanguage = (e)=>{
-    console.log(e.target.value);
+    // console.log(e.target.value);
     localStorage.setItem('lang', e.target.value)
-    window.location.reload()
+    translate()
+    // window.location.reload()
   }
 </script>
 
 <style>
-    .Default-containers{
+  .Default-containers{
     overflow: hidden;
     height: 4rem;
     transition: all ease-in .5s;
@@ -35,6 +37,12 @@
     color: var(--main-color);
     font-weight: 700;
   }
+  .description-lang{
+    color: #6b6b6b;
+  }
+  .select-language{
+    width: 16rem;
+  }
 
 </style>
 
@@ -43,9 +51,11 @@
     <p data-translate="title-lang" class="section-title">Language</p>
     <i id="toggleLanguage" class="fa-solid fa-square-caret-down dropdown-active" on:click={dropdownUserInfo}></i>
   </div>
-  <p data-translate="p1">Select the language you use on Flylinkers</p>
-  <p data-translate="p2">You can change it back at any time.</p>
-  <select name="selectLanguege" id="selectLanguege" on:change={setLanguage}>
+  <div class="description-lang">
+    <p data-translate="p1" class="mb-2">Select the language you use on Flylinkers.</p>
+    <p data-translate="p2" class="mb-2">You can change it back at any time.</p>
+  </div>
+  <select class="select-language" name="selectLanguege" id="selectLanguege" on:change={setLanguage}>
     <option data-translate="select-lg-1" value="">Select language</option>
     <option data-translate="select-lg-2" value="En">English</option>
     <option data-translate="select-lg-3" value="Es">Spanish</option>

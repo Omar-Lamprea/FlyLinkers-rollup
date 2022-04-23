@@ -53,12 +53,12 @@
   userMain = parseInt(userMain)
 
 
-  const viewUserProfile = () => {
-    if (user) {
-      const userEmail = user.email;
-      window.location.pathname = `profile/${userEmail}`
-    }
-  }
+  // const viewUserProfile = () => {
+  //   if (user) {
+  //     const userEmail = user.email;
+  //     window.location.pathname = `profile/${userEmail}`
+  //   }
+  // }
   const visitProfile = () =>{
     localStorage.setItem('visitProfile', user.username)
   }
@@ -441,6 +441,9 @@
   
   onMount(async ()=>{
     await reactionUser()
+    if (window.location.href.includes('/post/')) {
+      showComments()
+    }
     translate()
   })
 </script>
@@ -489,7 +492,8 @@
   }
   .Card-photo img {
     width: 100%;
-    height: auto;
+    max-height: 400px;
+    object-fit: contain;
   }
   .Card-photo figure {
     margin: 0;
@@ -711,7 +715,7 @@
         </iframe>
       {:else}
         <!-- <video   style="width: 100%;" controls autoplay muted autobuffer autobuffered> -->
-        <video   style="width: 100%;" controls>
+        <video style="width: 100%; max-height: 400px;" controls>
           <source src="{urlAPI}{video}">
           <track kind="captions">
         </video>
@@ -754,7 +758,7 @@
               </iframe>
             {:else}
               <!-- <video   style="width: 100%;" controls autoplay muted autobuffer autobuffered> -->
-              <video   style="width: 100%;" controls>
+              <video style="width: 100%; max-height: 400px;" controls>
                 <source src="{urlAPI}{video}">
                 <track kind="captions">
               </video>
@@ -791,9 +795,9 @@
         </div>
         <div class="Reaction Header-nav-comment mx-2">
           <i class="fas fa-comment"></i>
-          <span data-translate="comments" on:click={showComments}>
+          <span on:click={showComments}>
             <span>{comments}</span>
-            Comments
+            <span data-translate="comments">Comments</span>
           </span>
         </div>
       </div>
@@ -820,10 +824,10 @@
             <SharePost {id} {urlAPI}/>
           {/if}
         </div>
-        <div class="Action Header-nav-paper-plane hidden disabled">
+        <!-- <div class="Action Header-nav-paper-plane hidden disabled">
           <i class="fas fa-paper-plane"></i>
           <span data-translate="send">Send</span>
-        </div>
+        </div> -->
       </div>
     </div>
 
@@ -831,8 +835,8 @@
       <div class="Comments-add d-flex justify-content-between">
         <img src="{urlAPI}{localStorage.getItem('profilePhoto')}" alt="img">
         <form>
-          <input id="inputAddComment{id}" type="text" class="Comments-input" placeholder="Write a comment..." on:keyup={commentAbled}>
-          <button id="btn-sendComment{id}" class="btn-sendComment" disabled on:click={addComment}>Post</button>
+          <input data-translate="input-make-comment" id="inputAddComment{id}" type="text" class="Comments-input" placeholder="Write a comment..." on:keyup={commentAbled}>
+          <button data-translate="btn-make-comment" id="btn-sendComment{id}" class="btn-sendComment" disabled on:click={addComment}>Post</button>
         </form>
       </div>
 

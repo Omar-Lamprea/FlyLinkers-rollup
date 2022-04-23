@@ -144,7 +144,7 @@
       
       <i id="success" class="fa-solid fa-check text-center icon-success d-none"></i>
       <i id="fail" class="fa-solid fa-bug text-center icon-success fail d-none"></i>
-      <button data-translate="btn-save" type="submit" class="btn btn-outline-primary btn-flylinkers btn-post mt-3" on:click={update}>Save</button>
+      <button data-translate="btn-save" type="submit" class="btn btn-outline-primary btn-flylinkers btn-post mt-3" on:click|preventDefault={update}>Save</button>
     </form>
   {:else}
     <Loader />

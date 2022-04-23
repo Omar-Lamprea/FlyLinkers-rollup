@@ -136,7 +136,8 @@
   @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
   :root{
-    --main-color: #199AAF
+    --main-color: #199AAF;
+    --hover-main-color: #158496
   }
   :global(body){
     background-color: #fafafa;

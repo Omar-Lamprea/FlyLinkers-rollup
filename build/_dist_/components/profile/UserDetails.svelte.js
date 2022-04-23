@@ -119,6 +119,7 @@ function create_else_block(ctx) {
 			button = element("button");
 			t2 = text("Send a message");
 			attr(div, "class", "d-none");
+			attr(button, "data-translate", "send-message");
 			attr(button, "id", button_id_value = "btInitChat-" + /*id*/ ctx[5]);
 			attr(button, "data-chat", /*id*/ ctx[5]);
 			attr(button, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 svelte-1px6h87");
@@ -298,6 +299,7 @@ function create_else_block_2(ctx) {
 		c() {
 			button = element("button");
 			button.textContent = "Friends";
+			attr(button, "data-translate", "is-friend");
 			attr(button, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 svelte-1px6h87");
 		},
 		m(target, anchor) {
@@ -361,6 +363,7 @@ function create_else_block_1(ctx) {
 		c() {
 			button = element("button");
 			button.textContent = "Send friend request";
+			attr(button, "data-translate", "send-friend-request");
 			attr(button, "id", "btnSendFriendRequest");
 			attr(button, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 svelte-1px6h87");
 		},

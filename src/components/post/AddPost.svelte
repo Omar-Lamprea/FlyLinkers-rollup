@@ -28,8 +28,10 @@
         btnSendPost.removeAttribute('disabled')
       }else{
         btnSendPost.setAttribute('disabled', '')
+        // localStorage.removeItem('urlPost')
         if (postImg.src) {
           btnSendPost.removeAttribute('disabled')
+          uploadVideo.setAttribute('disabled', '')
         }
       }
     }else{
@@ -39,16 +41,17 @@
   }
 
   const validateUrl = (e)=>{
-    urlLink = ''
-    if (urlContent) {
-      metaTitle.value = ''
-      metaDescription.value = ''
-      metaImage.src = ''
-      urlContent = ''
-      searchMeta = ''
-      urlLink = ''
-    }
+    // urlLink = ''
+    // if (urlContent) {
+    //   metaTitle.value = ''
+    //   metaDescription.value = ''
+    //   metaImage.src = ''
+    //   urlContent = ''
+    //   searchMeta = ''
+    //   urlLink = ''
+    // }
     if(e.target.value.includes('https') || e.target.value.includes('http')){
+      loadPhotoInput.setAttribute('disabled', '')
       let searchUrl = e.target.value.split(' ')
 
       searchUrl.forEach(url => {
@@ -70,16 +73,22 @@
         if (searchUrl[i].includes('https://') || searchUrl[i].includes('http://')) {
           link = searchUrl[i]
           urlLink = searchUrl[i]
-        }else{
-
         }
       }
       if (isValidHttpUrl(link) === true){
-        link.includes('https://www.youtube.com/') 
-          ? showYouTubeData(link) 
-          : showMetaData(link)
+        if (!localStorage.getItem('urlPost')) {
+          localStorage.setItem('urlPost', link)
+          showDataPost(link)
+        }else{
+          if (link !== localStorage.getItem('urlPost')) {
+            localStorage.setItem('urlPost', link)
+            showDataPost(link)
+          }
+        }
+
       }
     }else{
+      loadPhotoInput.removeAttribute('disabled')
       urlMeta.classList.add('d-none')
     }
 
@@ -92,10 +101,18 @@
     }
   }
 
+  const showDataPost = (link)=>{
+    console.log('call data');
+    link.includes('https://www.youtube.com/') 
+      ? showYouTubeData(link) 
+      : showMetaData(link)
+  }
+
   let searchMeta = false;
   let urlContent;
-
+  
   const showMetaData = async (url) =>{
+    console.log(url);
     if (!searchMeta || url !== searchMeta) {
       searchMeta = url
       const urlMeta = document.getElementById('urlMeta')
@@ -134,6 +151,7 @@
   }
 
   const closeMetaData = ()=>{
+    localStorage.removeItem('urlPost')
     postDescription.value = ''
     btnSendPost.setAttribute('disabled', '')
     if(urlContent){
@@ -149,6 +167,7 @@
     urlContent = undefined
   }
   const closeYTData = () =>{
+    localStorage.removeItem('urlPost')
     YTlink = false
     postDescription.value = ''
     btnSendPost.setAttribute('disabled', '')
@@ -366,9 +385,9 @@
     <div id="characterCountSpan" class="characterCount characterCount-active">
       {characterCount}/255
     </div>
-    <img alt="postImg" id="postImg" class="d-none my-3">
+    <img alt="postImg" id="postImg" class="d-none my-3" style="width:100%; max-height: 400px; object-fit: contain;">
 
-    <video controls id="postVideo" class="d-none my-3">
+    <video controls id="postVideo" class="d-none my-3" style="max-height: 400px;">
       <track kind="captions">
     </video>
 
@@ -376,6 +395,7 @@
 
   <div id="urlMeta" class="urlMeta d-flex flex-column d-none">
       {#if urlContent && urlLink.includes('https://')}
+      <!-- {#if urlContent} -->
         <i class="fa-solid fa-xmark d-flex- align-self-end" on:click={closeMetaData}></i>
         <h6 id="metaTitle">{urlContent.title}</h6>
         <p id="metaDescription">{urlContent.description}</p>

@@ -123,7 +123,7 @@ function create_if_block_1(ctx) {
 			img = element("img");
 			t0 = space();
 			ul = element("ul");
-			ul.innerHTML = `<li><a class="dropdown-item" href="/" data-bs-toggle="modal" data-bs-target="#ModalProfile">Update profile photo</a></li>`;
+			ul.innerHTML = `<li><a data-translate="update-profile-photo" class="dropdown-item" href="/" data-bs-toggle="modal" data-bs-target="#ModalProfile">Update profile photo</a></li>`;
 			if (!src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[2] + /*photo*/ ctx[1]))) attr(img, "src", img_src_value);
 			attr(img, "alt", "profilePhoto");
 			attr(img, "class", "dropdown-toggle svelte-1tdigc9");

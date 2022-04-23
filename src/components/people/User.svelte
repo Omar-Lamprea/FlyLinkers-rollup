@@ -34,6 +34,7 @@
   }
   .User-photo{
     width: 60px;
+    min-width: 60px;
     height: 60px;
   }
   .User-photo img{

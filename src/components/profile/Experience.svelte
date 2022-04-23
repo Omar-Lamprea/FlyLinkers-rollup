@@ -18,12 +18,13 @@
   
   // console.log(experiences);
   export async function getDataexperiences(updateExperiences){
-    if (experiences || updateExperiences) {
-      // console.log('run xps..');
+    // if (experiences || updateExperiences) {
+      console.log('run xps..');
       experiences = true
       const dataExperiences = []
       const getXp = await getExperiences(urlAPI, userProfile)
 
+      // console.log(getXp);
       getXp.forEach(xp => {
         const dateStart1 = xp.start_date
         const dateStart2 = dateStart1.slice(0, -3)
@@ -39,7 +40,7 @@
       });
       // console.log(experiences);
       data.set(dataExperiences)
-    }
+    // }
   }
 
   const sendDataExperience = (id)=>{
@@ -68,18 +69,22 @@
     }
   }
 
+
   const reloadExperiences = () =>{
     if (localStorage.getItem('userId') === id.toString()) {
       // setTimeout(() => {
-        const reloadExperiences = document.getElementById('btnAddExperience')
+        const btnreloadExperiences = document.getElementById('btnAddExperience')
+  
         const observer = new MutationObserver(async ()=>{
           // console.log('reloading exps...');
-          // reloadExperiences.removeAttribute('reload-expereriences')
+          btnreloadExperiences.removeAttribute('reload-expereriences')
           let updateExperiences = true
-          await getDataexperiences(updateExperiences)
+          experiences = true
+          await getDataexperiences(experiences)
+          // console.log('get');
         })
         if (window.location.href.includes('settings') || window.location.href.includes('profile')){
-          observer.observe(reloadExperiences, {attributes:true})
+          observer.observe(btnreloadExperiences, {attributes:true})
         }
       // }, 4000);
     }

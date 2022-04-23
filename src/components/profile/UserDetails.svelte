@@ -6,6 +6,7 @@
   import ProfilePhotoModal from '../Modals/profile/ProfilePhotoModal.svelte'
   import {friendsRequestFirebase} from '../../js/firebase/friendsRequestFirebase'
   import {addFriend, declineFriend} from '../../js/friendRequests'
+  import {onMount} from 'svelte'
 
   export let name, last_name, title, email , photo, id, aboutMe, urlAPI;
   export let userMain;
@@ -42,7 +43,10 @@
 
   let friend = false;
   let friendRequest = false
+
   const searchFriends = async ()=>{
+    console.log(id, dataJson.id);
+
     const response = await fetch(`${urlAPI}/friend/user/?user=${userMain}`)
     const content = await response.json()
     content.forEach(el => {
@@ -54,11 +58,16 @@
     const getfriendRequest = await fetch(`${urlAPI}/friend/request/?user_id=${id}`)
     const requests = await getfriendRequest.json()
     requests.forEach(el =>{
-      if (el.id === parseInt(userMain)) {
-        friendRequest = true
+      // console.log(el.id, parseInt(userMain));
+      if (el.id === dataJson.id) {
+        btnSendFriendRequest.setAttribute('disabled', '')
       }
+      // if (el.id === id) {
+      //   friendRequest = true
+      // }
     })
 
+    console.log(userMain);
     const getMyFriendsRequest = await fetch(`${urlAPI}/friend/request/?user_id=${userMain}`)
     const requestsFriend = await getMyFriendsRequest.json()
     requestsFriend.forEach(el =>{
@@ -83,7 +92,11 @@
     const content = await response.json()
     console.log(content);
     if (content.Detail === 'OK') {
-      btnSendFriendRequest.textContent = "request sent"
+      if (localStorage.getItem('lang') === 'en') {
+        btnSendFriendRequest.textContent = "request sent"
+      }else{
+        btnSendFriendRequest.textContent = "solicitud enviada"
+      }
       btnSendFriendRequest.setAttribute('disabled','')
 
       const getUserData = await fetch(`${urlAPI}/user/create/?id=${userMain}`)
@@ -102,15 +115,22 @@
   }
 
   const acceptRequest = () =>{
-    addFriend(urlAPI, id.toString(), userMain, email)
+    addFriend(urlAPI, id.toString(), userMain, localStorage.getItem('visitProfile'))
   }
 
   const declineRequest = async () =>{
-    let response = await declineFriend(urlAPI, id.toString(), userMain, email)
+    let response = await declineFriend(urlAPI, id.toString(), userMain, localStorage.getItem('visitProfile'))
     if (response) {
       friendRequest = false
     }
   }
+
+  onMount(()=>{
+    if (id !== dataJson.id) {
+      searchFriends()
+    }
+
+  })
 </script>
 
 <style>
@@ -222,13 +242,13 @@
     </div>
     <div class="col-12 col-lg-6">
       <div class="Profile-card-text text-end d-flex flex-column align-items-end mt-0 mt-md-3 px-3 px-md-0">
-        {#if email === dataJson.email}
-        <a href="/settings" use:link use:active>
-          <p type="button" class="mb-3" style="color:rgba(38, 38, 38, 07)">
-            <i class="fas fa-pen"></i>
-            <span data-translate="edit-profile">Edit profile</span>
-          </p>
-        </a>
+        {#if id === dataJson.id}
+          <a href="/settings" use:link use:active>
+            <p type="button" class="mb-3" style="color:rgba(38, 38, 38, 07)">
+              <i class="fas fa-pen"></i>
+              <span data-translate="edit-profile">Edit profile</span>
+            </p>
+          </a>
           <CoverPhotoModal {id} {urlAPI}/>
           <ProfilePhotoModal {id} {urlAPI}/>
 
@@ -248,12 +268,11 @@
             <button data-translate="profile-btn-selection" class="btn mt-0 mt-lg-1 mt-xl-0 btn-outline-primary btn-flylinkers disabled" disabled>Add section</button>
           </div>
         {:else}
-          <div class="d-none" on:load={searchFriends()}></div>
           {#if !friend}
             {#if friendRequest}
             <div class="btn-friend-request mb-3">
-              <button id="btnSendFriendRequest" class="btn btn-outline-primary btn-flylinkers align-self-end mt-1 accept-friend" on:click={acceptRequest}>Accept friends request</button>
-              <button id="btnSendFriendRequest" class="btn btn-outline-primary btn-flylinkers align-self-end mt-1 decline-friend" on:click={declineRequest}>Decline friend request</button>
+              <button data-translate="btn-accept-request" id="btnSendFriendRequest" class="btn btn-outline-primary btn-flylinkers align-self-end mt-1 accept-friend" on:click={acceptRequest}>Accept friends request</button>
+              <button data-translate="btn-deny-request" id="btnSendFriendRequest" class="btn btn-outline-primary btn-flylinkers align-self-end mt-1 decline-friend" on:click={declineRequest}>Decline friend request</button>
             </div>
               {:else}
                 <button data-translate="send-friend-request" id="btnSendFriendRequest" class="btn btn-outline-primary btn-flylinkers align-self-end mt-1" on:click={sendFriendRequest}>Send friend request</button>

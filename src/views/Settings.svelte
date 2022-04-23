@@ -1,4 +1,6 @@
 <script>
+  import {link} from 'svelte-spa-router';
+  import active from 'svelte-spa-router/active'
   import {onMount} from 'svelte'
   import SidebarRight from '../components/SidebarRight.svelte'
   import InfoUser from '../components/settings-user/InfoUser.svelte'
@@ -41,13 +43,30 @@
   })
 </script>
 
+<style>
+  .btn-home{
+    background-color: var(--main-color);
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+    padding: .5rem;
+    width: 20rem;
+  }
+  .btn-home:hover{
+    background-color: var(--hover-main-color);
+  }
+</style>
+
 <div class="row">
-  <div class="col-12 col-lg-9 mt-3 mt-md-0">
+  <div class="col-12 col-lg-9 mt-3 mt-md-0 d-flex flex-column">
     {#if dataProfile && getUser}
       <InfoUser {urlAPI} {dataUser}/>
       <InfoProfile {urlAPI} {dataProfile}/>
       <Language/>
       <Experience {urlAPI} {id} {experiences} {userProfile}/>
+      <a class="d-flex align-self-center" href="/" use:link use:active>
+        <button data-translate="finish-settings" class="btn-home">Finish</button>
+      </a>
     {:else}
       <Loader/>
     {/if}

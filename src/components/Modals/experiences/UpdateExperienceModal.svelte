@@ -1,7 +1,7 @@
 <script>
   import {closeModal} from '../../../js/closeModals'
   export let userProfile, urlAPI, experience;
-  // console.log(experience.id);
+  console.log(experience);
 
   const dataStartYear = experience.start_date.split('-')[0]
   const dataStartMonth = experience.start_date.split('-')[1]

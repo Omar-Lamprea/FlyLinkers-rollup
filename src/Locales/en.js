@@ -2,13 +2,18 @@ export default{
   "translation":{
 
     //header
-    "nav-settings": "Setting",
+    "nav-settings": "Settings",
     "nav-log-out": "Logout",
     "nav-no-chat": "You don't have chats",
     "nav-no-news": "You don't have news",
     "nav-no-request": "You don't have friend request",
     "nav-acept-request" : "Accept",
     "nav-deline-request" : "Deny",
+
+    //notifications
+    "notification-reaction": "has reacted to your post",
+    "notification-Frequest": "has sent you a friend request",
+    "notification-comment": "has commented your post",
 
     //sidebarLeft
       //profile card mini
@@ -44,6 +49,8 @@ export default{
       //post
       "comments": "Comments",
       "comment": "Comment",
+      "input-make-comment" : 'Escribe un comentario...',
+      "btn-make-comment" : 'Publicar',
       "title-post": "Post",
       "like": "Like",
       "love": "Love",
@@ -59,7 +66,7 @@ export default{
       "share-post-btn-save": "Share post",
 
       //Profile
-      "cover-photo": "Edit cover",
+      "cover-photo": "Edit cover photo",
       "edit-profile": "Edit profile",
       "profile-about-me": "About me ...",
       "profile-email": "Email",
@@ -70,6 +77,8 @@ export default{
       "send-message": "Send Message",
       "is-friend": "Friend",
       "update-profile-photo": "Update profile photo",
+      "btn-accept-request": "Accept friends request",
+      "btn-deny-request": "Decline friend request",
 
       //Experiences
       "title-experiences" : "Experiences",
@@ -91,10 +100,11 @@ export default{
 
     //settings user
       "btn-save": "Save",
+      "finish-settings": "Finish",
       //user info
       "title-user-info": "Information of user",
       "first-name": "Frist name*",
-      "middle-name": "Second name",
+      "middle-name": "Middle name",
       "last-name": "Last name*",
       "title" : 'Title*',
       "mobile" : 'Mobile',

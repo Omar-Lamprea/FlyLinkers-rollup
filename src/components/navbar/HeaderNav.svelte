@@ -164,6 +164,11 @@
           }
           notificationsList.push(obj)
         });
+        if (countBubble === 0) {
+          notificacionsBubbleCount.classList.add('d-none')
+        }else{
+          notificacionsBubbleCount.classList.remove('d-none')
+        }
       }
 
       updateNotifications()
@@ -314,10 +319,10 @@
     text-decoration: none;
     color: #fff;
   }
-  .dropdown-toggle:empty::after{
+  .dropdown-toggle:empty::after, .notificacions-bubble::after{
     content: initial
   }
-  .dropdown-item{
+  .dropdown-item, .icon img{
     cursor: pointer;
   }
   .dropdown-item:active{
@@ -355,9 +360,9 @@
   .notification-time{
     color: grey
   }
-  .notification-desc{
-    width: 210.19px;
-  }
+  /* .notification-desc{
+    max-width: 220.19px;
+  } */
 
   .notificationsList, .Header-nav-comment, .Header-nav-bell{
     cursor: pointer;
@@ -368,6 +373,7 @@
     object-fit: cover;
     border-radius: 30px;
     margin-right: 1rem;
+    min-width: 50px;
   }
   .notificationsList .notification-user-name{
     color: var(--main-color);
@@ -393,6 +399,7 @@
     .icon{
       font-size: 1.7rem !important;
       margin: 0 0.8rem !important;
+      cursor: pointer;
     }
   }
 
@@ -415,30 +422,33 @@
     </a>
   </div>
   <div class="icon Header-nav-comment mx-3 fs-3 position-relative">
-    {#if countMessages > 0}
-      <div id="notificacionsChatsBubble" class="notificacions-bubble">{countMessages}</div>
-    {:else}
-      <div id="notificacionsChatsBubble" class="notificacions-bubble d-none"></div>
-    {/if}
-    <i class="fas fa-comment dropdown-toggle" id="chats" data-bs-toggle="dropdown" aria-expanded="false"></i>
-    <ul class="dropdown-menu" aria-labelledby="chats" id="ulChatList">
-      {#each $usergroups as groups}
-         <ChatList {groups} {urlAPI} {id}/>
+    <div class="dropdown">
+      {#if countMessages > 0}
+        <div id="notificacionsChatsBubble" class="notificacions-bubble dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">{countMessages}</div>
       {:else}
-        <li class="dropdown-item chatList d-flex">
-          <span data-translate="nav-no-chat">You haven't started any chat</span>
-        </li>
-      {/each}
-    </ul>
+        <div id="notificacionsChatsBubble" class="notificacions-bubble d-none"></div>
+      {/if}
+      <i class="fas fa-comment dropdown-toggle" id="chats" data-bs-toggle="dropdown" aria-expanded="false"></i>
+      <!-- <i class="fas fa-comment"></i> -->
+      <ul class="dropdown-menu" aria-labelledby="chats" id="ulChatList">
+        {#each $usergroups as groups}
+           <ChatList {groups} {urlAPI} {id}/>
+        {:else}
+          <li class="dropdown-item chatList d-flex">
+            <span data-translate="nav-no-chat">You haven't started any chat</span>
+          </li>
+        {/each}
+      </ul>
+    </div>
   </div>
 
   <!-- notifications icon -->
   <div class="icon Header-nav-bell mx-3 fs-3 notification" id="notification" on:click={counterBubble}>
     <div class="dropdown">
       <i class="fas fa-bell dropdown-toggle" id="notifications" data-bs-toggle="dropdown" aria-expanded="false"></i>
-      {#if countBubble > 0}
-         <div class="notificacions-bubble">{countBubble}</div>
-      {/if}
+      <!-- {#if countBubble > 0}
+      {/if} -->
+      <div id="notificacionsBubbleCount" class="notificacions-bubble d-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">{countBubble}</div>
       <ul class="dropdown-menu" aria-labelledby="notifications">
         {#if notificationsList.length > 0}
           {#each notificationsList as notification}
@@ -452,7 +462,7 @@
                       <p class="notification-user-name">{notification.name}</p>
                       <p class="notification-time">{startTime(notification.date.toISOString())}</p>
                     </div>
-                    <p class="notification-desc">{notification.desc}</p>
+                    <p data-translate="notification-Frequest" class="notification-desc">{notification.desc}</p>
                   </span>
                 </a>
               </li>
@@ -466,7 +476,11 @@
                       <p class="notification-user-name">{notification.name}</p>
                       <p class="notification-time">{startTime(notification.date.toISOString())}</p>
                     </div>
-                    <p class="notification-desc">{notification.desc}</p>
+                    {#if notification.desc.includes('reacted')}
+                      <p data-translate="notification-reaction" class="notification-desc">{notification.desc}</p>
+                    {:else}
+                      <p data-translate="notification-comment" class="notification-desc">{notification.desc}</p>
+                    {/if}
                   </span>
                 </a>
               </li>
@@ -491,7 +505,7 @@
   </div>
   <div class="icon Header-nav-grip-vertical mx-3 fs-3">
       <div class="dropdown">
-        <i class="fas fa-grip-vertical dropdown-toggle" id="settings" data-bs-toggle="dropdown" aria-expanded="false" ></i>
+        <img  src="../img/grid-icon.png" alt="" width="27" class="fas fa-grip-vertical dropdown-toggle" id="settings" data-bs-toggle="dropdown" aria-expanded="false">
         <ul class="dropdown-menu" aria-labelledby="settings">
           <li>
             <a href="/settings" use:link use:active>
