@@ -19,8 +19,13 @@ export default function startTime (create_time){
 
   if (substractDate < hour) {
     timePost = (1 * substractDate)/ minute 
-    datePost = Math.floor(timePost) + 'Min'
-    return datePost
+    datePost = Math.floor(timePost)
+    if (datePost < 0) {
+      return 0 + 'min'
+    }else{
+      return datePost + 'min'
+    }
+    // return datePost + 'min'
   }
   if (daysCount < 1 && substractDate > hour){
     timePost = (1 * substractDate)/ hour 

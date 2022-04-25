@@ -6,9 +6,10 @@
   }
 
   const setLanguage = (e)=>{
-    // console.log(e.target.value);
-    localStorage.setItem('lang', e.target.value)
-    translate()
+    if (e.target.value !== '') {
+      localStorage.setItem('lang', e.target.value)
+      translate()
+    }
     // window.location.reload()
   }
 </script>

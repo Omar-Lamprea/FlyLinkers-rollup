@@ -41,7 +41,7 @@ function get_each_context(ctx, list, i) {
 	return child_ctx;
 }
 
-// (223:2) {#if id === parseInt(localStorage.getItem('userId'))}
+// (228:2) {#if id === parseInt(localStorage.getItem('userId'))}
 function create_if_block_4(ctx) {
 	let div2;
 	let div1;
@@ -113,7 +113,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (141:0) {#if experiences}
+// (146:0) {#if experiences}
 function create_if_block(ctx) {
 	let div2;
 	let div1;
@@ -248,7 +248,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (159:12) {:else}
+// (164:12) {:else}
 function create_else_block(ctx) {
 	let p;
 	let span0;
@@ -295,7 +295,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (154:12) {#if !experience.working}
+// (159:12) {#if !experience.working}
 function create_if_block_3(ctx) {
 	let p;
 	let span0;
@@ -341,7 +341,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (179:12) {#if id === parseInt(localStorage.getItem('userId'))}
+// (184:12) {#if id === parseInt(localStorage.getItem('userId'))}
 function create_if_block_2(ctx) {
 	let div8;
 	let div0;
@@ -476,7 +476,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (147:7) {#each $data as experience}
+// (152:7) {#each $data as experience}
 function create_each_block(ctx) {
 	let div;
 	let p0;
@@ -712,7 +712,7 @@ function create_each_block(ctx) {
 	};
 }
 
-// (214:2) {#if id === parseInt(localStorage.getItem('userId'))}
+// (219:2) {#if id === parseInt(localStorage.getItem('userId'))}
 function create_if_block_1(ctx) {
 	let div;
 	let p;
@@ -877,31 +877,31 @@ function instance($$self, $$props, $$invalidate) {
 	let experienceId;
 
 	async function getDataexperiences(updateExperiences) {
-		if (experiences || updateExperiences) {
-			// console.log('run xps..');
-			$$invalidate(0, experiences = true);
+		// if (experiences || updateExperiences) {
+		console.log('run xps..');
 
-			const dataExperiences = [];
-			const getXp = await getExperiences(urlAPI, userProfile);
+		$$invalidate(0, experiences = true);
+		const dataExperiences = [];
+		const getXp = await getExperiences(urlAPI, userProfile);
 
-			getXp.forEach(xp => {
-				const dateStart1 = xp.start_date;
-				const dateStart2 = dateStart1.slice(0, -3);
-				xp.start_date = dateStart2;
+		// console.log(getXp);
+		getXp.forEach(xp => {
+			const dateStart1 = xp.start_date;
+			const dateStart2 = dateStart1.slice(0, -3);
+			xp.start_date = dateStart2;
 
-				if (xp.end_date !== null) {
-					const dateEnd1 = xp.end_date;
-					const dateEnd2 = dateEnd1.slice(0, -3);
-					xp.end_date = dateEnd2;
-				}
+			if (xp.end_date !== null) {
+				const dateEnd1 = xp.end_date;
+				const dateEnd2 = dateEnd1.slice(0, -3);
+				xp.end_date = dateEnd2;
+			}
 
-				dataExperiences.push(xp);
-			});
+			dataExperiences.push(xp);
+		});
 
-			// console.log(experiences);
-			data.set(dataExperiences);
-		}
-	}
+		// console.log(experiences);
+		data.set(dataExperiences);
+	} // }
 
 	const sendDataExperience = id => {
 		// console.log(id);
@@ -931,18 +931,19 @@ function instance($$self, $$props, $$invalidate) {
 	const reloadExperiences = () => {
 		if (localStorage.getItem('userId') === id.toString()) {
 			// setTimeout(() => {
-			const reloadExperiences = document.getElementById('btnAddExperience');
+			const btnreloadExperiences = document.getElementById('btnAddExperience');
 
 			const observer = new MutationObserver(async () => {
 					// console.log('reloading exps...');
-					// reloadExperiences.removeAttribute('reload-expereriences')
-					let updateExperiences = true;
+					btnreloadExperiences.removeAttribute('reload-expereriences');
 
-					await getDataexperiences(updateExperiences);
-				});
+					let updateExperiences = true;
+					$$invalidate(0, experiences = true);
+					await getDataexperiences(experiences);
+				}); // console.log('get');
 
 			if (window.location.href.includes('settings') || window.location.href.includes('profile')) {
-				observer.observe(reloadExperiences, { attributes: true });
+				observer.observe(btnreloadExperiences, { attributes: true });
 			}
 		} // }, 4000);
 	};

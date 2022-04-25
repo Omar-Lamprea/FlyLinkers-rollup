@@ -69,15 +69,15 @@ function get_each_context_1(ctx, list, i) {
 	return child_ctx;
 }
 
-// (420:4) {:else}
-function create_else_block_4(ctx) {
+// (428:6) {:else}
+function create_else_block_5(ctx) {
 	let div;
 
 	return {
 		c() {
 			div = element("div");
 			attr(div, "id", "notificacionsChatsBubble");
-			attr(div, "class", "notificacions-bubble d-none svelte-zafo5t");
+			attr(div, "class", "notificacions-bubble d-none svelte-1dexmrm");
 		},
 		m(target, anchor) {
 			insert(target, div, anchor);
@@ -89,7 +89,7 @@ function create_else_block_4(ctx) {
 	};
 }
 
-// (418:4) {#if countMessages > 0}
+// (426:6) {#if countMessages > 0}
 function create_if_block_4(ctx) {
 	let div;
 	let t;
@@ -99,7 +99,9 @@ function create_if_block_4(ctx) {
 			div = element("div");
 			t = text(/*countMessages*/ ctx[5]);
 			attr(div, "id", "notificacionsChatsBubble");
-			attr(div, "class", "notificacions-bubble svelte-zafo5t");
+			attr(div, "class", "notificacions-bubble dropdown-toggle svelte-1dexmrm");
+			attr(div, "data-bs-toggle", "dropdown");
+			attr(div, "aria-expanded", "false");
 		},
 		m(target, anchor) {
 			insert(target, div, anchor);
@@ -114,8 +116,8 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (427:6) {:else}
-function create_else_block_3(ctx) {
+// (436:8) {:else}
+function create_else_block_4(ctx) {
 	let li;
 
 	return {
@@ -123,9 +125,9 @@ function create_else_block_3(ctx) {
 			li = element("li");
 
 			li.innerHTML = `<span data-translate="nav-no-chat">You haven&#39;t started any chat</span> 
-        `;
+          `;
 
-			attr(li, "class", "dropdown-item chatList d-flex svelte-zafo5t");
+			attr(li, "class", "dropdown-item chatList d-flex svelte-1dexmrm");
 		},
 		m(target, anchor) {
 			insert(target, li, anchor);
@@ -136,7 +138,7 @@ function create_else_block_3(ctx) {
 	};
 }
 
-// (425:6) {#each $usergroups as groups}
+// (434:8) {#each $usergroups as groups}
 function create_each_block_1(ctx) {
 	let chatlist;
 	let current;
@@ -179,32 +181,8 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (439:6) {#if countBubble > 0}
-function create_if_block_3(ctx) {
-	let div;
-	let t;
-
-	return {
-		c() {
-			div = element("div");
-			t = text(/*countBubble*/ ctx[4]);
-			attr(div, "class", "notificacions-bubble svelte-zafo5t");
-		},
-		m(target, anchor) {
-			insert(target, div, anchor);
-			append(div, t);
-		},
-		p(ctx, dirty) {
-			if (dirty & /*countBubble*/ 16) set_data(t, /*countBubble*/ ctx[4]);
-		},
-		d(detaching) {
-			if (detaching) detach(div);
-		}
-	};
-}
-
-// (475:8) {:else}
-function create_else_block_2(ctx) {
+// (489:8) {:else}
+function create_else_block_3(ctx) {
 	let p;
 
 	return {
@@ -223,7 +201,7 @@ function create_else_block_2(ctx) {
 	};
 }
 
-// (443:8) {#if notificationsList.length > 0}
+// (453:8) {#if notificationsList.length > 0}
 function create_if_block_1(ctx) {
 	let each_1_anchor;
 	let each_value = /*notificationsList*/ ctx[3];
@@ -279,7 +257,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (459:12) {:else}
+// (469:12) {:else}
 function create_else_block_1(ctx) {
 	let li;
 	let a;
@@ -296,16 +274,24 @@ function create_else_block_1(ctx) {
 	let t3_value = startTime(/*notification*/ ctx[16].date.toISOString()) + "";
 	let t3;
 	let t4;
-	let p2;
-	let t5_value = /*notification*/ ctx[16].desc + "";
-	let t5;
+	let show_if;
 	let a_href_value;
 	let link_action;
 	let active_action;
-	let t6;
+	let t5;
 	let li_data_id_value;
 	let mounted;
 	let dispose;
+
+	function select_block_type_3(ctx, dirty) {
+		if (dirty & /*notificationsList*/ 8) show_if = null;
+		if (show_if == null) show_if = !!/*notification*/ ctx[16].desc.includes('reacted');
+		if (show_if) return create_if_block_3;
+		return create_else_block_2;
+	}
+
+	let current_block_type = select_block_type_3(ctx, -1);
+	let if_block = current_block_type(ctx);
 
 	return {
 		c() {
@@ -321,20 +307,18 @@ function create_else_block_1(ctx) {
 			p1 = element("p");
 			t3 = text(t3_value);
 			t4 = space();
-			p2 = element("p");
-			t5 = text(t5_value);
-			t6 = space();
+			if_block.c();
+			t5 = space();
 			if (!src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[2] + "/" + /*notification*/ ctx[16].photo))) attr(img, "src", img_src_value);
 			attr(img, "alt", "userImage");
-			attr(img, "class", "svelte-zafo5t");
-			attr(p0, "class", "notification-user-name svelte-zafo5t");
-			attr(p1, "class", "notification-time svelte-zafo5t");
+			attr(img, "class", "svelte-1dexmrm");
+			attr(p0, "class", "notification-user-name svelte-1dexmrm");
+			attr(p1, "class", "notification-time svelte-1dexmrm");
 			attr(div, "class", "data-user-time d-flex justify-content-between");
-			attr(p2, "class", "notification-desc svelte-zafo5t");
-			attr(span, "class", "svelte-zafo5t");
+			attr(span, "class", "svelte-1dexmrm");
 			attr(a, "href", a_href_value = "/post/" + /*notification*/ ctx[16].id);
-			attr(a, "class", "d-flex svelte-zafo5t");
-			attr(li, "class", "d-flex notificationsList dropdown-item svelte-zafo5t");
+			attr(a, "class", "d-flex svelte-1dexmrm");
+			attr(li, "class", "d-flex notificationsList dropdown-item svelte-1dexmrm");
 			attr(li, "data-id", li_data_id_value = /*notification*/ ctx[16].id);
 		},
 		m(target, anchor) {
@@ -350,9 +334,8 @@ function create_else_block_1(ctx) {
 			append(div, p1);
 			append(p1, t3);
 			append(span, t4);
-			append(span, p2);
-			append(p2, t5);
-			append(li, t6);
+			if_block.m(span, null);
+			append(li, t5);
 
 			if (!mounted) {
 				dispose = [
@@ -371,7 +354,18 @@ function create_else_block_1(ctx) {
 
 			if (dirty & /*notificationsList*/ 8 && t1_value !== (t1_value = /*notification*/ ctx[16].name + "")) set_data(t1, t1_value);
 			if (dirty & /*notificationsList*/ 8 && t3_value !== (t3_value = startTime(/*notification*/ ctx[16].date.toISOString()) + "")) set_data(t3, t3_value);
-			if (dirty & /*notificationsList*/ 8 && t5_value !== (t5_value = /*notification*/ ctx[16].desc + "")) set_data(t5, t5_value);
+
+			if (current_block_type === (current_block_type = select_block_type_3(ctx, dirty)) && if_block) {
+				if_block.p(ctx, dirty);
+			} else {
+				if_block.d(1);
+				if_block = current_block_type(ctx);
+
+				if (if_block) {
+					if_block.c();
+					if_block.m(span, null);
+				}
+			}
 
 			if (dirty & /*notificationsList*/ 8 && a_href_value !== (a_href_value = "/post/" + /*notification*/ ctx[16].id)) {
 				attr(a, "href", a_href_value);
@@ -383,13 +377,14 @@ function create_else_block_1(ctx) {
 		},
 		d(detaching) {
 			if (detaching) detach(li);
+			if_block.d();
 			mounted = false;
 			run_all(dispose);
 		}
 	};
 }
 
-// (446:12) {#if typeof(notification.id) === 'string'}
+// (456:12) {#if typeof(notification.id) === 'string'}
 function create_if_block_2(ctx) {
 	let li;
 	let a;
@@ -436,15 +431,16 @@ function create_if_block_2(ctx) {
 			t6 = space();
 			if (!src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[2] + "/" + /*notification*/ ctx[16].photo))) attr(img, "src", img_src_value);
 			attr(img, "alt", "userImage");
-			attr(img, "class", "svelte-zafo5t");
-			attr(p0, "class", "notification-user-name svelte-zafo5t");
-			attr(p1, "class", "notification-time svelte-zafo5t");
+			attr(img, "class", "svelte-1dexmrm");
+			attr(p0, "class", "notification-user-name svelte-1dexmrm");
+			attr(p1, "class", "notification-time svelte-1dexmrm");
 			attr(div, "class", "data-user-time d-flex justify-content-between");
-			attr(p2, "class", "notification-desc svelte-zafo5t");
-			attr(span, "class", "svelte-zafo5t");
+			attr(p2, "data-translate", "notification-Frequest");
+			attr(p2, "class", "notification-desc");
+			attr(span, "class", "svelte-1dexmrm");
 			attr(a, "href", a_href_value = "/profile/" + /*notification*/ ctx[16].id);
-			attr(a, "class", "d-flex svelte-zafo5t");
-			attr(li, "class", "d-flex notificationsList dropdown-item svelte-zafo5t");
+			attr(a, "class", "d-flex svelte-1dexmrm");
+			attr(li, "class", "d-flex notificationsList dropdown-item svelte-1dexmrm");
 			attr(li, "data-email", li_data_email_value = /*notification*/ ctx[16].id);
 		},
 		m(target, anchor) {
@@ -503,7 +499,59 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (444:10) {#each notificationsList as notification}
+// (481:20) {:else}
+function create_else_block_2(ctx) {
+	let p;
+	let t_value = /*notification*/ ctx[16].desc + "";
+	let t;
+
+	return {
+		c() {
+			p = element("p");
+			t = text(t_value);
+			attr(p, "data-translate", "notification-comment");
+			attr(p, "class", "notification-desc");
+		},
+		m(target, anchor) {
+			insert(target, p, anchor);
+			append(p, t);
+		},
+		p(ctx, dirty) {
+			if (dirty & /*notificationsList*/ 8 && t_value !== (t_value = /*notification*/ ctx[16].desc + "")) set_data(t, t_value);
+		},
+		d(detaching) {
+			if (detaching) detach(p);
+		}
+	};
+}
+
+// (479:20) {#if notification.desc.includes('reacted')}
+function create_if_block_3(ctx) {
+	let p;
+	let t_value = /*notification*/ ctx[16].desc + "";
+	let t;
+
+	return {
+		c() {
+			p = element("p");
+			t = text(t_value);
+			attr(p, "data-translate", "notification-reaction");
+			attr(p, "class", "notification-desc");
+		},
+		m(target, anchor) {
+			insert(target, p, anchor);
+			append(p, t);
+		},
+		p(ctx, dirty) {
+			if (dirty & /*notificationsList*/ 8 && t_value !== (t_value = /*notification*/ ctx[16].desc + "")) set_data(t, t_value);
+		},
+		d(detaching) {
+			if (detaching) detach(p);
+		}
+	};
+}
+
+// (454:10) {#each notificationsList as notification}
 function create_each_block(ctx) {
 	let if_block_anchor;
 
@@ -544,7 +592,7 @@ function create_each_block(ctx) {
 	};
 }
 
-// (487:6) {:else}
+// (501:6) {:else}
 function create_else_block(ctx) {
 	let img;
 	let img_src_value;
@@ -555,7 +603,7 @@ function create_else_block(ctx) {
 			attr(img, "id", "headerUserImage");
 			if (!src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[2] + /*photo*/ ctx[0]))) attr(img, "src", img_src_value);
 			attr(img, "alt", "");
-			attr(img, "class", "svelte-zafo5t");
+			attr(img, "class", "svelte-1dexmrm");
 		},
 		m(target, anchor) {
 			insert(target, img, anchor);
@@ -571,7 +619,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (485:6) {#if localStorage.getItem('profilePhoto')}
+// (499:6) {#if localStorage.getItem('profilePhoto')}
 function create_if_block(ctx) {
 	let img;
 	let img_src_value;
@@ -582,7 +630,7 @@ function create_if_block(ctx) {
 			attr(img, "id", "headerUserImage");
 			if (!src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[2] + localStorage.getItem('profilePhoto')))) attr(img, "src", img_src_value);
 			attr(img, "alt", "");
-			attr(img, "class", "svelte-zafo5t");
+			attr(img, "class", "svelte-1dexmrm");
 		},
 		m(target, anchor) {
 			insert(target, img, anchor);
@@ -613,39 +661,43 @@ function create_fragment(ctx) {
 	let link_action_1;
 	let active_action_1;
 	let t2;
+	let div4;
 	let div3;
 	let t3;
 	let i2;
 	let t4;
 	let ul0;
 	let t5;
-	let div5;
-	let div4;
+	let div7;
+	let div6;
 	let i3;
 	let t6;
+	let div5;
 	let t7;
-	let ul1;
 	let t8;
-	let div6;
+	let ul1;
+	let t9;
+	let div8;
 	let a2;
 	let show_if;
 	let link_action_2;
 	let active_action_2;
-	let t9;
-	let div8;
-	let div7;
-	let i4;
 	let t10;
+	let div10;
+	let div9;
+	let img;
+	let img_src_value;
+	let t11;
 	let ul2;
 	let li0;
 	let a3;
 	let link_action_3;
 	let active_action_3;
-	let t12;
+	let t13;
 	let li1;
 	let span1;
-	let t14;
-	let div9;
+	let t15;
+	let div11;
 	let a4;
 	let link_action_4;
 	let active_action_4;
@@ -662,7 +714,7 @@ function create_fragment(ctx) {
 
 	function select_block_type(ctx, dirty) {
 		if (/*countMessages*/ ctx[5] > 0) return create_if_block_4;
-		return create_else_block_4;
+		return create_else_block_5;
 	}
 
 	let current_block_type = select_block_type(ctx, -1);
@@ -681,41 +733,40 @@ function create_fragment(ctx) {
 	let each_1_else = null;
 
 	if (!each_value_1.length) {
-		each_1_else = create_else_block_3(ctx);
+		each_1_else = create_else_block_4(ctx);
 	}
-
-	let if_block1 = /*countBubble*/ ctx[4] > 0 && create_if_block_3(ctx);
 
 	function select_block_type_1(ctx, dirty) {
 		if (/*notificationsList*/ ctx[3].length > 0) return create_if_block_1;
-		return create_else_block_2;
+		return create_else_block_3;
 	}
 
 	let current_block_type_1 = select_block_type_1(ctx, -1);
-	let if_block2 = current_block_type_1(ctx);
+	let if_block1 = current_block_type_1(ctx);
 
-	function select_block_type_3(ctx, dirty) {
+	function select_block_type_4(ctx, dirty) {
 		if (localStorage.getItem('profilePhoto')) return create_if_block;
 		return create_else_block;
 	}
 
-	let current_block_type_2 = select_block_type_3(ctx, -1);
-	let if_block3 = current_block_type_2(ctx);
+	let current_block_type_2 = select_block_type_4(ctx, -1);
+	let if_block2 = current_block_type_2(ctx);
 
 	return {
 		c() {
 			nav = element("nav");
 			div0 = element("div");
 			a0 = element("a");
-			a0.innerHTML = `<i class="fas fa-home svelte-zafo5t"></i>`;
+			a0.innerHTML = `<i class="fas fa-home svelte-1dexmrm"></i>`;
 			t0 = space();
 			div1 = element("div");
 			create_component(friendrequest.$$.fragment);
 			t1 = space();
 			div2 = element("div");
 			a1 = element("a");
-			a1.innerHTML = `<i class="fas fa-briefcase svelte-zafo5t"></i>`;
+			a1.innerHTML = `<i class="fas fa-briefcase svelte-1dexmrm"></i>`;
 			t2 = space();
+			div4 = element("div");
 			div3 = element("div");
 			if_block0.c();
 			t3 = space();
@@ -732,74 +783,83 @@ function create_fragment(ctx) {
 			}
 
 			t5 = space();
-			div5 = element("div");
-			div4 = element("div");
+			div7 = element("div");
+			div6 = element("div");
 			i3 = element("i");
 			t6 = space();
-			if (if_block1) if_block1.c();
-			t7 = space();
-			ul1 = element("ul");
-			if_block2.c();
+			div5 = element("div");
+			t7 = text(/*countBubble*/ ctx[4]);
 			t8 = space();
-			div6 = element("div");
-			a2 = element("a");
-			if_block3.c();
+			ul1 = element("ul");
+			if_block1.c();
 			t9 = space();
 			div8 = element("div");
-			div7 = element("div");
-			i4 = element("i");
+			a2 = element("a");
+			if_block2.c();
 			t10 = space();
+			div10 = element("div");
+			div9 = element("div");
+			img = element("img");
+			t11 = space();
 			ul2 = element("ul");
 			li0 = element("li");
 			a3 = element("a");
-			a3.innerHTML = `<span data-translate="nav-settings" class="dropdown-item svelte-zafo5t">Settings</span>`;
-			t12 = space();
+			a3.innerHTML = `<span data-translate="nav-settings" class="dropdown-item svelte-1dexmrm">Settings</span>`;
+			t13 = space();
 			li1 = element("li");
 			span1 = element("span");
 			span1.textContent = "Log Out";
-			t14 = space();
-			div9 = element("div");
+			t15 = space();
+			div11 = element("div");
 			a4 = element("a");
-			a4.innerHTML = `<i class="fas fa-calendar-week svelte-zafo5t"></i>`;
+			a4.innerHTML = `<i class="fas fa-calendar-week svelte-1dexmrm"></i>`;
 			attr(a0, "href", "/");
 			attr(div0, "id", "iconHome");
-			attr(div0, "class", "icon Header-nav-home mx-3 fs-3 svelte-zafo5t");
-			attr(div1, "class", "icon Header-nav-user-plus notification mx-3 fs-3 svelte-zafo5t");
+			attr(div0, "class", "icon Header-nav-home mx-3 fs-3 svelte-1dexmrm");
+			attr(div1, "class", "icon Header-nav-user-plus notification mx-3 fs-3 svelte-1dexmrm");
 			attr(a1, "href", "/");
-			attr(div2, "class", "icon Header-nav-briefcase hidden mx-3 fs-3 svelte-zafo5t");
-			attr(i2, "class", "fas fa-comment dropdown-toggle svelte-zafo5t");
+			attr(div2, "class", "icon Header-nav-briefcase hidden mx-3 fs-3 svelte-1dexmrm");
+			attr(i2, "class", "fas fa-comment dropdown-toggle svelte-1dexmrm");
 			attr(i2, "id", "chats");
 			attr(i2, "data-bs-toggle", "dropdown");
 			attr(i2, "aria-expanded", "false");
-			attr(ul0, "class", "dropdown-menu svelte-zafo5t");
+			attr(ul0, "class", "dropdown-menu svelte-1dexmrm");
 			attr(ul0, "aria-labelledby", "chats");
 			attr(ul0, "id", "ulChatList");
-			attr(div3, "class", "icon Header-nav-comment mx-3 fs-3 position-relative svelte-zafo5t");
-			attr(i3, "class", "fas fa-bell dropdown-toggle svelte-zafo5t");
+			attr(div3, "class", "dropdown svelte-1dexmrm");
+			attr(div4, "class", "icon Header-nav-comment mx-3 fs-3 position-relative svelte-1dexmrm");
+			attr(i3, "class", "fas fa-bell dropdown-toggle svelte-1dexmrm");
 			attr(i3, "id", "notifications");
 			attr(i3, "data-bs-toggle", "dropdown");
 			attr(i3, "aria-expanded", "false");
-			attr(ul1, "class", "dropdown-menu svelte-zafo5t");
+			attr(div5, "id", "notificacionsBubbleCount");
+			attr(div5, "class", "notificacions-bubble d-none dropdown-toggle svelte-1dexmrm");
+			attr(div5, "data-bs-toggle", "dropdown");
+			attr(div5, "aria-expanded", "false");
+			attr(ul1, "class", "dropdown-menu svelte-1dexmrm");
 			attr(ul1, "aria-labelledby", "notifications");
-			attr(div4, "class", "dropdown svelte-zafo5t");
-			attr(div5, "class", "icon Header-nav-bell mx-3 fs-3 notification svelte-zafo5t");
-			attr(div5, "id", "notification");
+			attr(div6, "class", "dropdown svelte-1dexmrm");
+			attr(div7, "class", "icon Header-nav-bell mx-3 fs-3 notification svelte-1dexmrm");
+			attr(div7, "id", "notification");
 			attr(a2, "href", "/profile");
-			attr(div6, "class", "icon Header-nav-user mx-3 fs-3 svelte-zafo5t");
-			attr(i4, "class", "fas fa-grip-vertical dropdown-toggle svelte-zafo5t");
-			attr(i4, "id", "settings");
-			attr(i4, "data-bs-toggle", "dropdown");
-			attr(i4, "aria-expanded", "false");
+			attr(div8, "class", "icon Header-nav-user mx-3 fs-3 svelte-1dexmrm");
+			if (!src_url_equal(img.src, img_src_value = "../img/grid-icon.png")) attr(img, "src", img_src_value);
+			attr(img, "alt", "");
+			attr(img, "width", "27");
+			attr(img, "class", "fas fa-grip-vertical dropdown-toggle svelte-1dexmrm");
+			attr(img, "id", "settings");
+			attr(img, "data-bs-toggle", "dropdown");
+			attr(img, "aria-expanded", "false");
 			attr(a3, "href", "/settings");
 			attr(span1, "data-translate", "nav-log-out");
-			attr(span1, "class", "dropdown-item svelte-zafo5t");
-			attr(ul2, "class", "dropdown-menu svelte-zafo5t");
+			attr(span1, "class", "dropdown-item svelte-1dexmrm");
+			attr(ul2, "class", "dropdown-menu svelte-1dexmrm");
 			attr(ul2, "aria-labelledby", "settings");
-			attr(div7, "class", "dropdown svelte-zafo5t");
-			attr(div8, "class", "icon Header-nav-grip-vertical mx-3 fs-3 svelte-zafo5t");
+			attr(div9, "class", "dropdown");
+			attr(div10, "class", "icon Header-nav-grip-vertical mx-3 fs-3 svelte-1dexmrm");
 			attr(a4, "href", "/");
-			attr(div9, "class", "icon Header-nav-calendar-week hidden mx-3 fs-3 svelte-zafo5t");
-			attr(nav, "class", "nav-container d-flex svelte-zafo5t");
+			attr(div11, "class", "icon Header-nav-calendar-week hidden mx-3 fs-3 svelte-1dexmrm");
+			attr(nav, "class", "nav-container d-flex svelte-1dexmrm");
 		},
 		m(target, anchor) {
 			insert(target, nav, anchor);
@@ -812,7 +872,8 @@ function create_fragment(ctx) {
 			append(nav, div2);
 			append(div2, a1);
 			append(nav, t2);
-			append(nav, div3);
+			append(nav, div4);
+			append(div4, div3);
 			if_block0.m(div3, null);
 			append(div3, t3);
 			append(div3, i2);
@@ -828,32 +889,33 @@ function create_fragment(ctx) {
 			}
 
 			append(nav, t5);
-			append(nav, div5);
-			append(div5, div4);
-			append(div4, i3);
-			append(div4, t6);
-			if (if_block1) if_block1.m(div4, null);
-			append(div4, t7);
-			append(div4, ul1);
-			if_block2.m(ul1, null);
-			append(nav, t8);
-			append(nav, div6);
-			append(div6, a2);
-			if_block3.m(a2, null);
+			append(nav, div7);
+			append(div7, div6);
+			append(div6, i3);
+			append(div6, t6);
+			append(div6, div5);
+			append(div5, t7);
+			append(div6, t8);
+			append(div6, ul1);
+			if_block1.m(ul1, null);
 			append(nav, t9);
 			append(nav, div8);
-			append(div8, div7);
-			append(div7, i4);
-			append(div7, t10);
-			append(div7, ul2);
+			append(div8, a2);
+			if_block2.m(a2, null);
+			append(nav, t10);
+			append(nav, div10);
+			append(div10, div9);
+			append(div9, img);
+			append(div9, t11);
+			append(div9, ul2);
 			append(ul2, li0);
 			append(li0, a3);
-			append(ul2, t12);
+			append(ul2, t13);
 			append(ul2, li1);
 			append(li1, span1);
-			append(nav, t14);
-			append(nav, div9);
-			append(div9, a4);
+			append(nav, t15);
+			append(nav, div11);
+			append(div11, a4);
 			current = true;
 
 			if (!mounted) {
@@ -862,7 +924,7 @@ function create_fragment(ctx) {
 					action_destroyer(active_action = active.call(null, a0)),
 					action_destroyer(link_action_1 = link.call(null, a1)),
 					action_destroyer(active_action_1 = active.call(null, a1)),
-					listen(div5, "click", /*counterBubble*/ ctx[8]),
+					listen(div7, "click", /*counterBubble*/ ctx[8]),
 					action_destroyer(link_action_2 = link.call(null, a2)),
 					action_destroyer(active_action_2 = active.call(null, a2)),
 					action_destroyer(link_action_3 = link.call(null, a3)),
@@ -925,38 +987,27 @@ function create_fragment(ctx) {
 						each_1_else = null;
 					}
 				} else if (!each_1_else) {
-					each_1_else = create_else_block_3(ctx);
+					each_1_else = create_else_block_4(ctx);
 					each_1_else.c();
 					each_1_else.m(ul0, null);
 				}
 			}
 
-			if (/*countBubble*/ ctx[4] > 0) {
-				if (if_block1) {
-					if_block1.p(ctx, dirty);
-				} else {
-					if_block1 = create_if_block_3(ctx);
-					if_block1.c();
-					if_block1.m(div4, t7);
-				}
-			} else if (if_block1) {
-				if_block1.d(1);
-				if_block1 = null;
-			}
+			if (!current || dirty & /*countBubble*/ 16) set_data(t7, /*countBubble*/ ctx[4]);
 
-			if (current_block_type_1 === (current_block_type_1 = select_block_type_1(ctx, dirty)) && if_block2) {
-				if_block2.p(ctx, dirty);
+			if (current_block_type_1 === (current_block_type_1 = select_block_type_1(ctx, dirty)) && if_block1) {
+				if_block1.p(ctx, dirty);
 			} else {
-				if_block2.d(1);
-				if_block2 = current_block_type_1(ctx);
+				if_block1.d(1);
+				if_block1 = current_block_type_1(ctx);
 
-				if (if_block2) {
-					if_block2.c();
-					if_block2.m(ul1, null);
+				if (if_block1) {
+					if_block1.c();
+					if_block1.m(ul1, null);
 				}
 			}
 
-			if_block3.p(ctx, dirty);
+			if_block2.p(ctx, dirty);
 		},
 		i(local) {
 			if (current) return;
@@ -984,9 +1035,8 @@ function create_fragment(ctx) {
 			if_block0.d();
 			destroy_each(each_blocks, detaching);
 			if (each_1_else) each_1_else.d();
-			if (if_block1) if_block1.d();
+			if_block1.d();
 			if_block2.d();
-			if_block3.d();
 			mounted = false;
 			run_all(dispose);
 		}
@@ -1150,6 +1200,12 @@ function instance($$self, $$props, $$invalidate) {
 
 					notificationsList.push(obj);
 				});
+
+				if (countBubble === 0) {
+					notificacionsBubbleCount.classList.add('d-none');
+				} else {
+					notificacionsBubbleCount.classList.remove('d-none');
+				}
 			}
 
 			updateNotifications();

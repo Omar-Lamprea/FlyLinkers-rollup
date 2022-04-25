@@ -63,7 +63,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (210:0) {#if data && getUserMainToFirestore}
+// (211:0) {#if data && getUserMainToFirestore}
 function create_if_block(ctx) {
 	let header;
 	let t0;
@@ -88,7 +88,7 @@ function create_if_block(ctx) {
 			t1 = space();
 			if (if_block) if_block.c();
 			attr(main, "id", "main");
-			attr(main, "class", "container-fluid container-lg svelte-1ycacfu");
+			attr(main, "class", "container-fluid container-lg svelte-u8f4vv");
 		},
 		m(target, anchor) {
 			mount_component(header, target, anchor);
@@ -150,7 +150,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (215:5) {#if chatFlag && userMain && getUserMainToFirestore}
+// (216:5) {#if chatFlag && userMain && getUserMainToFirestore}
 function create_if_block_1(ctx) {
 	let chat;
 	let current;

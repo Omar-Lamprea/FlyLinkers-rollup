@@ -122,6 +122,7 @@
   
   if (window.location.reload) {
     localStorage.removeItem('chat')
+    localStorage.removeItem('urlPost')
   }
   
   onMount(async()=>{

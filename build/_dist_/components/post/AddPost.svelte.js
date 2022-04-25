@@ -18,6 +18,7 @@ import {
 	run_all,
 	safe_not_equal,
 	set_data,
+	set_style,
 	space,
 	src_url_equal,
 	text,
@@ -57,7 +58,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (378:6) {#if urlContent && urlLink.includes('https://')}
+// (397:6) {#if urlContent && urlLink.includes('https://')}
 function create_if_block_1(ctx) {
 	let i;
 	let t0;
@@ -133,7 +134,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (389:4) {#if YTlink}
+// (409:4) {#if YTlink}
 function create_if_block(ctx) {
 	let i;
 	let t;
@@ -265,9 +266,13 @@ function create_fragment(ctx) {
 			attr(img, "alt", "postImg");
 			attr(img, "id", "postImg");
 			attr(img, "class", "d-none my-3 svelte-1ud6jqj");
+			set_style(img, "width", "100%");
+			set_style(img, "max-height", "400px");
+			set_style(img, "object-fit", "contain");
 			video.controls = true;
 			attr(video, "id", "postVideo");
 			attr(video, "class", "d-none my-3");
+			set_style(video, "max-height", "400px");
 			attr(div1, "class", "Add-post-input mx-3 d-flex flex-column justify-content-center position-relative");
 			attr(div2, "id", "urlMeta");
 			attr(div2, "class", "urlMeta d-flex flex-column d-none svelte-1ud6jqj");
@@ -429,8 +434,10 @@ function instance($$self, $$props, $$invalidate) {
 			} else {
 				btnSendPost.setAttribute('disabled', '');
 
+				// localStorage.removeItem('urlPost')
 				if (postImg.src) {
 					btnSendPost.removeAttribute('disabled');
+					uploadVideo.setAttribute('disabled', '');
 				}
 			}
 		} else {
@@ -440,18 +447,17 @@ function instance($$self, $$props, $$invalidate) {
 	};
 
 	const validateUrl = e => {
-		$$invalidate(1, urlLink = '');
-
-		if (urlContent) {
-			metaTitle.value = '';
-			metaDescription.value = '';
-			metaImage.src = '';
-			$$invalidate(4, urlContent = '');
-			searchMeta = '';
-			$$invalidate(1, urlLink = '');
-		}
-
+		// urlLink = ''
+		// if (urlContent) {
+		//   metaTitle.value = ''
+		//   metaDescription.value = ''
+		//   metaImage.src = ''
+		//   urlContent = ''
+		//   searchMeta = ''
+		//   urlLink = ''
+		// }
 		if (e.target.value.includes('https') || e.target.value.includes('http')) {
+			loadPhotoInput.setAttribute('disabled', '');
 			let searchUrl = e.target.value.split(' ');
 
 			searchUrl.forEach(url => {
@@ -473,17 +479,22 @@ function instance($$self, $$props, $$invalidate) {
 				if (searchUrl[i].includes('https://') || searchUrl[i].includes('http://')) {
 					link = searchUrl[i];
 					$$invalidate(1, urlLink = searchUrl[i]);
-				} else {
-					
 				}
 			}
 
 			if (isValidHttpUrl(link) === true) {
-				link.includes('https://www.youtube.com/')
-				? showYouTubeData(link)
-				: showMetaData(link);
+				if (!localStorage.getItem('urlPost')) {
+					localStorage.setItem('urlPost', link);
+					showDataPost(link);
+				} else {
+					if (link !== localStorage.getItem('urlPost')) {
+						localStorage.setItem('urlPost', link);
+						showDataPost(link);
+					}
+				}
 			}
 		} else {
+			loadPhotoInput.removeAttribute('disabled');
 			urlMeta.classList.add('d-none');
 		}
 
@@ -495,10 +506,20 @@ function instance($$self, $$props, $$invalidate) {
 		}
 	};
 
+	const showDataPost = link => {
+		console.log('call data');
+
+		link.includes('https://www.youtube.com/')
+		? showYouTubeData(link)
+		: showMetaData(link);
+	};
+
 	let searchMeta = false;
 	let urlContent;
 
 	const showMetaData = async url => {
+		console.log(url);
+
 		if (!searchMeta || url !== searchMeta) {
 			searchMeta = url;
 			const urlMeta = document.getElementById('urlMeta');
@@ -528,6 +549,7 @@ function instance($$self, $$props, $$invalidate) {
 	};
 
 	const closeMetaData = () => {
+		localStorage.removeItem('urlPost');
 		postDescription.value = '';
 		btnSendPost.setAttribute('disabled', '');
 
@@ -546,6 +568,7 @@ function instance($$self, $$props, $$invalidate) {
 	};
 
 	const closeYTData = () => {
+		localStorage.removeItem('urlPost');
 		$$invalidate(2, YTlink = false);
 		postDescription.value = '';
 		btnSendPost.setAttribute('disabled', '');

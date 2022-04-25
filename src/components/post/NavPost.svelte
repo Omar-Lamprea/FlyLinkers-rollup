@@ -4,8 +4,6 @@
 
 
   const showPostImg = ()=>{
-
-    
     if (loadPhotoInput.value !== "") {
       if(loadPhotoInput.files[0].size > 3_145_728){
         alert("File is too big! \nTry again with a file smaller than 3MB");
@@ -14,6 +12,7 @@
       const render = new FileReader();
       render.readAsDataURL(loadPhotoInput.files[0])
       render.onloadend = ()=>{
+        closeImg.classList.remove('d-none')
         postImg.classList.remove('d-none')
         postImg.src = render.result
         ableBtn()
@@ -29,18 +28,21 @@
   const uploadVideoPost = (e) =>{
     console.log(uploadVideo.files);
     // postVideo.srx = uploadVideo.files[0]
-    if (uploadVideo.files[0].size > 52_428_800) {
-      alert("File is too big! \nTry again with a file smaller than 50MB");
-      loadPhotoInput.value = "";
-    }else{
-      const render = new FileReader();
-      render.readAsDataURL(uploadVideo.files[0])
-      render.onloadend = ()=>{
-        postVideo.classList.remove('d-none')
-        // console.log(render.result);
-        postVideo.src = render.result
-        ableBtn()
-        loadPhotoInput.setAttribute('disabled', '')
+    if (uploadVideo.files[0]) {
+      if (uploadVideo.files[0].size > 52_428_800) {
+        alert("File is too big! \nTry again with a file smaller than 50MB");
+        loadPhotoInput.value = "";
+      }else{
+        const render = new FileReader();
+        render.readAsDataURL(uploadVideo.files[0])
+        render.onloadend = ()=>{
+          closeVd.classList.remove('d-none')
+          postVideo.classList.remove('d-none')
+          // console.log(render.result);
+          postVideo.src = render.result
+          ableBtn()
+          loadPhotoInput.setAttribute('disabled', '')
+        }
       }
     }
   }

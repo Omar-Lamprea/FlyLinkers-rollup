@@ -27,7 +27,8 @@
       if (e.target.value.length >= 3) {
         btnSendPost.removeAttribute('disabled')
       }else{
-        btnSendPost.setAttribute('disabled', '')
+        closeMeta()
+        // btnSendPost.setAttribute('disabled', '')
         // localStorage.removeItem('urlPost')
         if (postImg.src) {
           btnSendPost.removeAttribute('disabled')
@@ -52,6 +53,7 @@
     // }
     if(e.target.value.includes('https') || e.target.value.includes('http')){
       loadPhotoInput.setAttribute('disabled', '')
+      uploadVideo.setAttribute('disabled', '')
       let searchUrl = e.target.value.split(' ')
 
       searchUrl.forEach(url => {
@@ -89,6 +91,7 @@
       }
     }else{
       loadPhotoInput.removeAttribute('disabled')
+      uploadVideo.removeAttribute('disabled', '')
       urlMeta.classList.add('d-none')
     }
 
@@ -150,7 +153,26 @@
     return(url.protocol === "http:" || url.protocol === "https:");
   }
 
+  const closeMeta = ()=>{
+    localStorage.removeItem('urlPost')
+    btnSendPost.setAttribute('disabled', '')
+    loadPhotoInput.removeAttribute('disabled')
+    uploadVideo.removeAttribute('disabled', '')
+    if(urlContent){
+      urlMeta.classList.add('d-none')
+      metaTitle.value = ''
+      metaDescription.value = ''
+      metaImage.src = ''
+      urlContent = ''
+      searchMeta = ''
+      urlLink = ''
+      validUrl = ''
+    }
+    urlContent = undefined
+  }
   const closeMetaData = ()=>{
+    loadPhotoInput.removeAttribute('disabled')
+    uploadVideo.removeAttribute('disabled', '')
     localStorage.removeItem('urlPost')
     postDescription.value = ''
     btnSendPost.setAttribute('disabled', '')
@@ -167,10 +189,29 @@
     urlContent = undefined
   }
   const closeYTData = () =>{
+    loadPhotoInput.removeAttribute('disabled')
+    uploadVideo.removeAttribute('disabled', '')
     localStorage.removeItem('urlPost')
     YTlink = false
     postDescription.value = ''
     btnSendPost.setAttribute('disabled', '')
+  }
+
+  const closeImage =() =>{
+    postImg.removeAttribute('src')
+    postImg.classList.toggle('d-none')
+    closeImg.classList.add('d-none')
+    uploadVideo.removeAttribute('disabled')
+    if (postDescription.value === '') btnSendPost.setAttribute('disabled', '')
+  }
+
+  const closeVideo = () =>{
+    closeVd.classList.add('d-none')
+    postVideo.classList.add('d-none')
+    postVideo.removeAttribute('src')
+    loadPhotoInput.removeAttribute('disabled')
+    uploadVideo.value = ''
+    if (postDescription.value === '') btnSendPost.setAttribute('disabled', '')
   }
 
   const sendPost = async()=>{
@@ -271,6 +312,7 @@
           if (postImg.src) {
             postImg.setAttribute('src', '')
             postImg.classList.toggle('d-none')
+            
           }
           closeMetaData()
           closeYTData()
@@ -374,6 +416,14 @@
   .boxHome{
     background-color: #EFEFEF;
   }
+  .btn-closeImgVideo{
+    width: fit-content;
+    display: flex;
+    align-self: end;
+    color: red;
+    /* font-size: 1rem; */
+    cursor: pointer;
+  }
 
 </style>
 
@@ -385,8 +435,10 @@
     <div id="characterCountSpan" class="characterCount characterCount-active">
       {characterCount}/255
     </div>
+    <i id="closeImg" class="fa-solid fa-xmark btn-closeImgVideo d-none" on:click={closeImage}></i>
     <img alt="postImg" id="postImg" class="d-none my-3" style="width:100%; max-height: 400px; object-fit: contain;">
 
+    <i id="closeVd" class="fa-solid fa-xmark btn-closeImgVideo d-none" on:click={closeVideo}></i>
     <video controls id="postVideo" class="d-none my-3" style="max-height: 400px;">
       <track kind="captions">
     </video>

@@ -37,7 +37,7 @@ function get_each_context(ctx, list, i) {
 	return child_ctx;
 }
 
-// (89:4) {#if id}
+// (123:4) {#if id}
 function create_if_block(ctx) {
 	let addpost;
 	let current;
@@ -79,7 +79,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (92:4) {#each $posts as dataPost}
+// (126:4) {#each $posts as dataPost}
 function create_each_block(ctx) {
 	let post;
 	let current;
@@ -295,10 +295,37 @@ function instance($$self, $$props, $$invalidate) {
 
 		try {
 			const response = await fetch(`${urlAPI}/post/home/?page=${page}&user_id=${id}`);
-			const content = await response.json();
+			let content = await response.json();
 			countPost = content.next;
 
 			if (response.ok) {
+				const dateNow = new Date();
+				const dateNowOfMlSeconds = dateNow.getTime();
+
+				// const datelimit = new Date(dateNowOfMlSeconds - addMlSeconds)
+				// console.log(datelimit.toISOString());
+				// console.log(new Date(Date.parse(content.results[2].create_time)));
+				// console.log(new Date(Date.parse(content.results[2].create_time) + 10000));
+				if (content.results.length === 3) {
+					for (let i = 0; i < content.results.length; i++) {
+						if (content.results[i].user.id === parseInt(localStorage.getItem('userId')) && new Date(Date.parse(content.results[i].create_time) + 10000) >= dateNowOfMlSeconds) {
+							let aux = content.results[0];
+							let aux2 = content.results[1];
+							content.results[0] = content.results[i];
+							content.results[1] = aux;
+							content.results[2] = aux2;
+						}
+					}
+				} else if (content.results.length === 2) {
+					for (let i = 0; i < content.results.length; i++) {
+						if (content.results[i].user.id === parseInt(localStorage.getItem('userId')) && new Date(Date.parse(content.results[i].create_time) + 10000) >= dateNowOfMlSeconds) {
+							let aux = content.results[0];
+							content.results[0] = content.results[i];
+							content.results[1] = aux;
+						}
+					}
+				}
+
 				posts.set([...$posts, ...content.results]);
 			} else {
 				endPosts.classList.remove('d-none');
@@ -352,7 +379,16 @@ function instance($$self, $$props, $$invalidate) {
 				}
 			}
 		});
-	}); // translate()
+
+		// translate()
+		setInterval(
+			() => {
+				clearPost();
+				getPosts(1);
+			},
+			120_000
+		);
+	});
 
 	$$self.$$set = $$props => {
 		if ('id' in $$props) $$invalidate(0, id = $$props.id);

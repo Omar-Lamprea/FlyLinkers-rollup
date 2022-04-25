@@ -1,6 +1,8 @@
 <script>
   import {onMount} from 'svelte'
   import Loader from '../Loader.svelte'
+  import {db} from '../../js/firebase/config'
+  import { doc, updateDoc } from "firebase/firestore";
   export let urlAPI;
 
   export let dataUser;
@@ -8,6 +10,7 @@
   // translate()
 
   const update = async()=>{
+    btnSave.setAttribute('disabled', '')
     if (firstName.value !== '' && lastName.value !== '' && email.value) {
       const response = await fetch(`${urlAPI}/user/create/?id=${localStorage.getItem('userId')}`,{
         method: 'PUT',
@@ -24,6 +27,12 @@
         })
       })
       if (response.ok) {
+        const userDoc = doc(db, 'user',localStorage.getItem('userId'))
+        await updateDoc(userDoc, {
+          name: `${firstName.value} ${lastName.value}`
+        });
+        
+        btnSave.removeAttribute('disabled')
         success.classList.remove('d-none')
         setTimeout(() => {
           dropdownUserInfo()
@@ -144,7 +153,7 @@
       
       <i id="success" class="fa-solid fa-check text-center icon-success d-none"></i>
       <i id="fail" class="fa-solid fa-bug text-center icon-success fail d-none"></i>
-      <button data-translate="btn-save" type="submit" class="btn btn-outline-primary btn-flylinkers btn-post mt-3" on:click|preventDefault={update}>Save</button>
+      <button id="btnSave" data-translate="btn-save" type="submit" class="btn btn-outline-primary btn-flylinkers btn-post mt-3" on:click|preventDefault={update}>Save</button>
     </form>
   {:else}
     <Loader />

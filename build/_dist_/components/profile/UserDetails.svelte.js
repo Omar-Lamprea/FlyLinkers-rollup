@@ -34,6 +34,7 @@ import CoverPhotoModal from '../Modals/profile/CoverPhotoModal.svelte.js';
 import ProfilePhotoModal from '../Modals/profile/ProfilePhotoModal.svelte.js';
 import { friendsRequestFirebase } from '../../js/firebase/friendsRequestFirebase.js';
 import { addFriend, declineFriend } from '../../js/friendRequests.js';
+import { onMount } from '../../../_snowpack/pkg/svelte.js';
 
 function create_if_block_4(ctx) {
 	let p;
@@ -66,7 +67,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (206:16) {#if aboutMe}
+// (226:16) {#if aboutMe}
 function create_if_block_3(ctx) {
 	let p;
 	let t;
@@ -91,16 +92,12 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (250:8) {:else}
+// (270:8) {:else}
 function create_else_block(ctx) {
-	let div;
 	let t0;
-	let t1;
 	let button;
-	let t2;
+	let t1;
 	let button_id_value;
-	let mounted;
-	let dispose;
 
 	function select_block_type_1(ctx, dirty) {
 		if (!/*friend*/ ctx[8]) return create_if_block_1;
@@ -112,30 +109,20 @@ function create_else_block(ctx) {
 
 	return {
 		c() {
-			div = element("div");
-			t0 = space();
 			if_block.c();
-			t1 = space();
+			t0 = space();
 			button = element("button");
-			t2 = text("Send a message");
-			attr(div, "class", "d-none");
+			t1 = text("Send a message");
 			attr(button, "data-translate", "send-message");
 			attr(button, "id", button_id_value = "btInitChat-" + /*id*/ ctx[5]);
 			attr(button, "data-chat", /*id*/ ctx[5]);
 			attr(button, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 svelte-1px6h87");
 		},
 		m(target, anchor) {
-			insert(target, div, anchor);
-			insert(target, t0, anchor);
 			if_block.m(target, anchor);
-			insert(target, t1, anchor);
+			insert(target, t0, anchor);
 			insert(target, button, anchor);
-			append(button, t2);
-
-			if (!mounted) {
-				dispose = listen(div, "load", /*searchFriends*/ ctx[14]());
-				mounted = true;
-			}
+			append(button, t1);
 		},
 		p(ctx, dirty) {
 			if (current_block_type === (current_block_type = select_block_type_1(ctx, dirty)) && if_block) {
@@ -146,7 +133,7 @@ function create_else_block(ctx) {
 
 				if (if_block) {
 					if_block.c();
-					if_block.m(t1.parentNode, t1);
+					if_block.m(t0.parentNode, t0);
 				}
 			}
 
@@ -161,18 +148,14 @@ function create_else_block(ctx) {
 		i: noop,
 		o: noop,
 		d(detaching) {
-			if (detaching) detach(div);
-			if (detaching) detach(t0);
 			if_block.d(detaching);
-			if (detaching) detach(t1);
+			if (detaching) detach(t0);
 			if (detaching) detach(button);
-			mounted = false;
-			dispose();
 		}
 	};
 }
 
-// (225:8) {#if email === dataJson.email}
+// (245:8) {#if id === dataJson.id}
 function create_if_block(ctx) {
 	let a;
 	let link_action;
@@ -208,7 +191,7 @@ function create_if_block(ctx) {
 			a = element("a");
 
 			a.innerHTML = `<p type="button" class="mb-3 svelte-1px6h87" style="color:rgba(38, 38, 38, 07)"><i class="fas fa-pen svelte-1px6h87"></i> 
-            <span data-translate="edit-profile" class="svelte-1px6h87">Edit profile</span></p>`;
+              <span data-translate="edit-profile" class="svelte-1px6h87">Edit profile</span></p>`;
 
 			t2 = space();
 			create_component(coverphotomodal.$$.fragment);
@@ -291,7 +274,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (261:10) {:else}
+// (280:10) {:else}
 function create_else_block_2(ctx) {
 	let button;
 
@@ -312,7 +295,7 @@ function create_else_block_2(ctx) {
 	};
 }
 
-// (252:10) {#if !friend}
+// (271:10) {#if !friend}
 function create_if_block_1(ctx) {
 	let if_block_anchor;
 
@@ -353,7 +336,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (258:14) {:else}
+// (277:14) {:else}
 function create_else_block_1(ctx) {
 	let button;
 	let mounted;
@@ -371,7 +354,7 @@ function create_else_block_1(ctx) {
 			insert(target, button, anchor);
 
 			if (!mounted) {
-				dispose = listen(button, "click", /*sendFriendRequest*/ ctx[15]);
+				dispose = listen(button, "click", /*sendFriendRequest*/ ctx[14]);
 				mounted = true;
 			}
 		},
@@ -384,7 +367,7 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (253:12) {#if friendRequest}
+// (272:12) {#if friendRequest}
 function create_if_block_2(ctx) {
 	let div;
 	let button0;
@@ -401,8 +384,10 @@ function create_if_block_2(ctx) {
 			t1 = space();
 			button1 = element("button");
 			button1.textContent = "Decline friend request";
+			attr(button0, "data-translate", "btn-accept-request");
 			attr(button0, "id", "btnSendFriendRequest");
 			attr(button0, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 accept-friend svelte-1px6h87");
+			attr(button1, "data-translate", "btn-deny-request");
 			attr(button1, "id", "btnSendFriendRequest");
 			attr(button1, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 decline-friend svelte-1px6h87");
 			attr(div, "class", "btn-friend-request mb-3");
@@ -415,8 +400,8 @@ function create_if_block_2(ctx) {
 
 			if (!mounted) {
 				dispose = [
-					listen(button0, "click", /*acceptRequest*/ ctx[16]),
-					listen(button1, "click", /*declineRequest*/ ctx[17])
+					listen(button0, "click", /*acceptRequest*/ ctx[15]),
+					listen(button1, "click", /*declineRequest*/ ctx[16])
 				];
 
 				mounted = true;
@@ -486,7 +471,7 @@ function create_fragment(ctx) {
 	const if_blocks = [];
 
 	function select_block_type(ctx, dirty) {
-		if (/*email*/ ctx[3] === /*dataJson*/ ctx[10].email) return 0;
+		if (/*id*/ ctx[5] === /*dataJson*/ ctx[10].id) return 0;
 		return 1;
 	}
 
@@ -736,6 +721,7 @@ function instance($$self, $$props, $$invalidate) {
 	let friendRequest = false;
 
 	const searchFriends = async () => {
+		console.log(id, dataJson.id);
 		const response = await fetch(`${urlAPI}/friend/user/?user=${userMain}`);
 		const content = await response.json();
 
@@ -749,11 +735,15 @@ function instance($$self, $$props, $$invalidate) {
 		const requests = await getfriendRequest.json();
 
 		requests.forEach(el => {
-			if (el.id === parseInt(userMain)) {
-				$$invalidate(9, friendRequest = true);
+			// console.log(el.id, parseInt(userMain));
+			if (el.id === dataJson.id) {
+				btnSendFriendRequest.setAttribute('disabled', '');
 			}
-		});
+		}); // if (el.id === id) {
+		//   friendRequest = true
+		// }
 
+		console.log(userMain);
 		const getMyFriendsRequest = await fetch(`${urlAPI}/friend/request/?user_id=${userMain}`);
 		const requestsFriend = await getMyFriendsRequest.json();
 
@@ -775,7 +765,12 @@ function instance($$self, $$props, $$invalidate) {
 		console.log(content);
 
 		if (content.Detail === 'OK') {
-			btnSendFriendRequest.textContent = "request sent";
+			if (localStorage.getItem('lang') === 'en') {
+				btnSendFriendRequest.textContent = "request sent";
+			} else {
+				btnSendFriendRequest.textContent = "solicitud enviada";
+			}
+
 			btnSendFriendRequest.setAttribute('disabled', '');
 			const getUserData = await fetch(`${urlAPI}/user/create/?id=${userMain}`);
 			const contentUserDate = await getUserData.json();
@@ -794,16 +789,22 @@ function instance($$self, $$props, $$invalidate) {
 	};
 
 	const acceptRequest = () => {
-		addFriend(urlAPI, id.toString(), userMain, email);
+		addFriend(urlAPI, id.toString(), userMain, localStorage.getItem('visitProfile'));
 	};
 
 	const declineRequest = async () => {
-		let response = await declineFriend(urlAPI, id.toString(), userMain, email);
+		let response = await declineFriend(urlAPI, id.toString(), userMain, localStorage.getItem('visitProfile'));
 
 		if (response) {
 			$$invalidate(9, friendRequest = false);
 		}
 	};
+
+	onMount(() => {
+		if (id !== dataJson.id) {
+			searchFriends();
+		}
+	});
 
 	$$self.$$set = $$props => {
 		if ('name' in $$props) $$invalidate(0, name = $$props.name);
@@ -814,7 +815,7 @@ function instance($$self, $$props, $$invalidate) {
 		if ('id' in $$props) $$invalidate(5, id = $$props.id);
 		if ('aboutMe' in $$props) $$invalidate(6, aboutMe = $$props.aboutMe);
 		if ('urlAPI' in $$props) $$invalidate(7, urlAPI = $$props.urlAPI);
-		if ('userMain' in $$props) $$invalidate(18, userMain = $$props.userMain);
+		if ('userMain' in $$props) $$invalidate(17, userMain = $$props.userMain);
 	};
 
 	return [
@@ -832,7 +833,6 @@ function instance($$self, $$props, $$invalidate) {
 		editDescription,
 		valueTextArea,
 		updateDescription,
-		searchFriends,
 		sendFriendRequest,
 		acceptRequest,
 		declineRequest,
@@ -853,7 +853,7 @@ class UserDetails extends SvelteComponent {
 			id: 5,
 			aboutMe: 6,
 			urlAPI: 7,
-			userMain: 18
+			userMain: 17
 		});
 	}
 }

@@ -16,7 +16,7 @@ import {
 } from "../../../_snowpack/pkg/svelte/internal.js";
 
 function create_fragment(ctx) {
-	let div4;
+	let div2;
 	let div0;
 	let label0;
 	let i0;
@@ -32,16 +32,12 @@ function create_fragment(ctx) {
 	let span1;
 	let t6;
 	let input1;
-	let t7;
-	let div2;
-	let t10;
-	let div3;
 	let mounted;
 	let dispose;
 
 	return {
 		c() {
-			div4 = element("div");
+			div2 = element("div");
 			div0 = element("div");
 			label0 = element("label");
 			i0 = element("i");
@@ -59,18 +55,6 @@ function create_fragment(ctx) {
 			span1.textContent = "Video";
 			t6 = space();
 			input1 = element("input");
-			t7 = space();
-			div2 = element("div");
-
-			div2.innerHTML = `<i class="fas fa-calendar svelte-1x5l75b"></i> 
-      <span data-translate="icon-event" class="svelte-1x5l75b">Event</span>`;
-
-			t10 = space();
-			div3 = element("div");
-
-			div3.innerHTML = `<i class="fas fa-file-alt svelte-1x5l75b"></i> 
-      <span data-translate="icon-article" class="svelte-1x5l75b">Write article</span>`;
-
 			attr(i0, "class", "fas fa-image svelte-1x5l75b");
 			attr(span0, "data-translate", "icon-photo");
 			attr(span0, "class", "svelte-1x5l75b");
@@ -95,31 +79,25 @@ function create_fragment(ctx) {
 			attr(label1, "for", "uploadVideo");
 			attr(label1, "class", "svelte-1x5l75b");
 			attr(div1, "class", "Header-nav Header-nav-film mx-3 svelte-1x5l75b");
-			attr(div2, "class", "Header-nav Header-nav-calendar mx-3 disabled svelte-1x5l75b");
-			attr(div3, "class", "Header-nav Header-nav-file-alt mx-3 hidden disabled svelte-1x5l75b");
-			attr(div4, "class", "Nav-add-post d-flex justify-content-center mt-2 text-center");
+			attr(div2, "class", "Nav-add-post d-flex justify-content-center mt-2 text-center");
 		},
 		m(target, anchor) {
-			insert(target, div4, anchor);
-			append(div4, div0);
+			insert(target, div2, anchor);
+			append(div2, div0);
 			append(div0, label0);
 			append(label0, i0);
 			append(label0, t0);
 			append(label0, span0);
 			append(label0, t2);
 			append(label0, input0);
-			append(div4, t3);
-			append(div4, div1);
+			append(div2, t3);
+			append(div2, div1);
 			append(div1, label1);
 			append(label1, i1);
 			append(label1, t4);
 			append(label1, span1);
 			append(label1, t6);
 			append(label1, input1);
-			append(div4, t7);
-			append(div4, div2);
-			append(div4, t10);
-			append(div4, div3);
 
 			if (!mounted) {
 				dispose = [
@@ -134,7 +112,7 @@ function create_fragment(ctx) {
 		i: noop,
 		o: noop,
 		d(detaching) {
-			if (detaching) detach(div4);
+			if (detaching) detach(div2);
 			mounted = false;
 			run_all(dispose);
 		}
@@ -143,12 +121,12 @@ function create_fragment(ctx) {
 
 function instance($$self) {
 	const showPostImg = () => {
-		if (loadPhotoInput.files[0].size > 3_145_728) {
-			alert("File is too big! \nTry again with a file smaller than 3MB");
-			loadPhotoInput.value = "";
-		}
-
 		if (loadPhotoInput.value !== "") {
+			if (loadPhotoInput.files[0].size > 3_145_728) {
+				alert("File is too big! \nTry again with a file smaller than 3MB");
+				loadPhotoInput.value = "";
+			}
+
 			const render = new FileReader();
 			render.readAsDataURL(loadPhotoInput.files[0]);
 
@@ -156,9 +134,12 @@ function instance($$self) {
 				postImg.classList.remove('d-none');
 				postImg.src = render.result;
 				ableBtn();
+				uploadVideo.setAttribute('disabled', '');
 			};
 		}
-	};
+	}; // else{
+	//   uploadVideo.removeAttribute('disabled')
+	// }
 
 	const uploadVideoPost = e => {
 		console.log(uploadVideo.files);
@@ -178,6 +159,7 @@ function instance($$self) {
 				postVideo.src = render.result;
 
 				ableBtn();
+				loadPhotoInput.setAttribute('disabled', '');
 			};
 		}
 	};
