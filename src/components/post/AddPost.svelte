@@ -4,9 +4,7 @@
 
   export let id, urlAPI, colorbox;
 
-  if (!colorbox) {
-    colorbox = ''
-  }
+  if (!colorbox) colorbox = ''
 
   let urlLink;
   let validUrl = '';
@@ -28,8 +26,6 @@
         btnSendPost.removeAttribute('disabled')
       }else{
         closeMeta()
-        // btnSendPost.setAttribute('disabled', '')
-        // localStorage.removeItem('urlPost')
         if (postImg.src) {
           btnSendPost.removeAttribute('disabled')
           uploadVideo.setAttribute('disabled', '')
@@ -42,15 +38,6 @@
   }
 
   const validateUrl = (e)=>{
-    // urlLink = ''
-    // if (urlContent) {
-    //   metaTitle.value = ''
-    //   metaDescription.value = ''
-    //   metaImage.src = ''
-    //   urlContent = ''
-    //   searchMeta = ''
-    //   urlLink = ''
-    // }
     if(e.target.value.includes('https') || e.target.value.includes('http')){
       loadPhotoInput.setAttribute('disabled', '')
       uploadVideo.setAttribute('disabled', '')
@@ -66,7 +53,6 @@
               searchUrl = [el]
             }
           });
-
         }
       });
       let link;
@@ -87,14 +73,13 @@
             showDataPost(link)
           }
         }
-
       }
+
     }else{
       loadPhotoInput.removeAttribute('disabled')
       uploadVideo.removeAttribute('disabled', '')
       urlMeta.classList.add('d-none')
     }
-
 
     if (e.target.value.length >= 3) {
       btnSendPost.removeAttribute('disabled')
@@ -199,16 +184,17 @@
 
   const closeImage =() =>{
     postImg.removeAttribute('src')
-    postImg.classList.toggle('d-none')
+    postImg.classList.add('d-none')
     closeImg.classList.add('d-none')
     uploadVideo.removeAttribute('disabled')
     if (postDescription.value === '') btnSendPost.setAttribute('disabled', '')
   }
 
   const closeVideo = () =>{
-    closeVd.classList.add('d-none')
-    postVideo.classList.add('d-none')
+    //const btnCloseVd = document.getElementById('closeVd')
     postVideo.removeAttribute('src')
+    postVideo.classList.add('d-none')
+    closeVd.classList.add('d-none')
     loadPhotoInput.removeAttribute('disabled')
     uploadVideo.value = ''
     if (postDescription.value === '') btnSendPost.setAttribute('disabled', '')
@@ -306,16 +292,19 @@
           },
           body: JSON.stringify(template)
         })
-  
+
         if (post.ok) {
           postDescription.value = ''
           if (postImg.src) {
             postImg.setAttribute('src', '')
-            postImg.classList.toggle('d-none')
-            
+            postImg.classList.add('d-none')
           }
+
           closeMetaData()
           closeYTData()
+          closeVideo()
+          closeImage()
+
           loaderPost.classList.add('d-none')
           //recargar post
           const reloadPost = document.getElementById('reloadPostCheck')
@@ -350,6 +339,7 @@
         })
   
         if (responsePostVideo.ok) {
+          
           postDescription.value = ''
           if (postVideo.src) {
             postVideo.setAttribute('src', '')
@@ -359,6 +349,7 @@
             const reloadPost = document.getElementById('reloadPostCheck')
             reloadPost.classList.toggle('data-reloading')
           }
+          closeVideo()
         }
       }
     }

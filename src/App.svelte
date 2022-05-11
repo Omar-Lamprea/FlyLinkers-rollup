@@ -220,5 +220,7 @@
      {/if}
    </main>
 {:else}
-  <Loader/>
+  <div class="loaderContainer d-flex" style="height: 100%;">
+    <Loader/>
+  </div>
 {/if}

@@ -58,6 +58,8 @@
       <TimelineH {id} {urlAPI}/>
       <SidebarRight {urlAPI}/>
     {:else}
-      <Loader/>
+      <div class="loaderContainer d-flex" style="height: calc(100vh - 15rem);">
+        <Loader/>
+      </div>
     {/if}
 </div>

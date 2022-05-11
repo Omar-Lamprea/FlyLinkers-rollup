@@ -58,7 +58,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (397:6) {#if urlContent && urlLink.includes('https://')}
+// (449:6) {#if urlContent && urlLink.includes('https://')}
 function create_if_block_1(ctx) {
 	let i;
 	let t0;
@@ -86,13 +86,13 @@ function create_if_block_1(ctx) {
 			t3 = text(t3_value);
 			t4 = space();
 			img = element("img");
-			attr(i, "class", "fa-solid fa-xmark d-flex- align-self-end svelte-1ud6jqj");
+			attr(i, "class", "fa-solid fa-xmark d-flex- align-self-end svelte-18ol0e");
 			attr(h6, "id", "metaTitle");
 			attr(p, "id", "metaDescription");
 			attr(img, "id", "metaImage");
 			if (!src_url_equal(img.src, img_src_value = /*urlContent*/ ctx[4].image)) attr(img, "src", img_src_value);
 			attr(img, "alt", "");
-			attr(img, "class", "svelte-1ud6jqj");
+			attr(img, "class", "svelte-18ol0e");
 		},
 		m(target, anchor) {
 			insert(target, i, anchor);
@@ -134,7 +134,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (409:4) {#if YTlink}
+// (461:4) {#if YTlink}
 function create_if_block(ctx) {
 	let i;
 	let t;
@@ -148,7 +148,7 @@ function create_if_block(ctx) {
 			i = element("i");
 			t = space();
 			iframe = element("iframe");
-			attr(i, "class", "fa-solid fa-xmark d-flex- align-self-end svelte-1ud6jqj");
+			attr(i, "class", "fa-solid fa-xmark d-flex- align-self-end svelte-18ol0e");
 			attr(iframe, "width", "100%");
 			attr(iframe, "height", "350");
 			if (!src_url_equal(iframe.src, iframe_src_value = /*YTlink*/ ctx[2])) attr(iframe, "src", iframe_src_value);
@@ -191,21 +191,25 @@ function create_fragment(ctx) {
 	let t1;
 	let t2;
 	let t3;
-	let img;
+	let i0;
 	let t4;
-	let video;
+	let img;
 	let t5;
+	let i1;
+	let t6;
+	let video;
+	let t7;
 	let div2;
 	let show_if;
 	let current_block_type_index;
 	let if_block0;
-	let t6;
-	let div3;
-	let t7;
-	let navpost;
 	let t8;
-	let div6;
+	let div3;
 	let t9;
+	let navpost;
+	let t10;
+	let div6;
+	let t11;
 	let button;
 	let div7_class_value;
 	let current;
@@ -236,22 +240,26 @@ function create_fragment(ctx) {
 			t1 = text(/*characterCount*/ ctx[3]);
 			t2 = text("/255");
 			t3 = space();
-			img = element("img");
+			i0 = element("i");
 			t4 = space();
+			img = element("img");
+			t5 = space();
+			i1 = element("i");
+			t6 = space();
 			video = element("video");
 			video.innerHTML = `<track kind="captions"/>`;
-			t5 = space();
+			t7 = space();
 			div2 = element("div");
 			if_block0.c();
-			t6 = space();
+			t8 = space();
 			div3 = element("div");
 			if (if_block1) if_block1.c();
-			t7 = space();
+			t9 = space();
 			create_component(navpost.$$.fragment);
-			t8 = space();
+			t10 = space();
 			div6 = element("div");
 			div6.innerHTML = `<div class="loader"><div></div></div>`;
-			t9 = space();
+			t11 = space();
 			button = element("button");
 			button.textContent = "Post";
 			attr(textarea, "data-translate", "input-addPost");
@@ -259,32 +267,36 @@ function create_fragment(ctx) {
 			attr(textarea, "cols", "1");
 			attr(textarea, "rows", "1");
 			attr(textarea, "id", "postDescription");
-			attr(textarea, "class", "Default-containers svelte-1ud6jqj");
+			attr(textarea, "class", "Default-containers svelte-18ol0e");
 			attr(textarea, "placeholder", "Start a post...");
 			attr(div0, "id", "characterCountSpan");
-			attr(div0, "class", "characterCount characterCount-active svelte-1ud6jqj");
+			attr(div0, "class", "characterCount characterCount-active svelte-18ol0e");
+			attr(i0, "id", "closeImg");
+			attr(i0, "class", "fa-solid fa-xmark btn-closeImgVideo d-none svelte-18ol0e");
 			attr(img, "alt", "postImg");
 			attr(img, "id", "postImg");
-			attr(img, "class", "d-none my-3 svelte-1ud6jqj");
+			attr(img, "class", "d-none my-3 svelte-18ol0e");
 			set_style(img, "width", "100%");
 			set_style(img, "max-height", "400px");
 			set_style(img, "object-fit", "contain");
+			attr(i1, "id", "closeVd");
+			attr(i1, "class", "fa-solid fa-xmark btn-closeImgVideo d-none svelte-18ol0e");
 			video.controls = true;
 			attr(video, "id", "postVideo");
 			attr(video, "class", "d-none my-3");
 			set_style(video, "max-height", "400px");
 			attr(div1, "class", "Add-post-input mx-3 d-flex flex-column justify-content-center position-relative");
 			attr(div2, "id", "urlMeta");
-			attr(div2, "class", "urlMeta d-flex flex-column d-none svelte-1ud6jqj");
+			attr(div2, "class", "urlMeta d-flex flex-column d-none svelte-18ol0e");
 			attr(div3, "id", "YTvideoContainer");
 			attr(div3, "class", "YTvideo d-flex flex-column d-none");
 			attr(div6, "id", "loaderPost");
 			attr(div6, "class", "loader-content d-none");
 			attr(button, "data-translate", "post");
 			attr(button, "id", "btnSendPost");
-			attr(button, "class", "btn btn-outline-primary btn-flylinkers btn-post mt-3 svelte-1ud6jqj");
+			attr(button, "class", "btn btn-outline-primary btn-flylinkers btn-post mt-3 svelte-18ol0e");
 			button.disabled = true;
-			attr(div7, "class", div7_class_value = "Add-post " + /*colorbox*/ ctx[0] + " Default-containers px-lg-5 d-flex flex-column" + " svelte-1ud6jqj");
+			attr(div7, "class", div7_class_value = "Add-post " + /*colorbox*/ ctx[0] + " Default-containers px-lg-5 d-flex flex-column" + " svelte-18ol0e");
 		},
 		m(target, anchor) {
 			insert(target, div7, anchor);
@@ -295,20 +307,24 @@ function create_fragment(ctx) {
 			append(div0, t1);
 			append(div0, t2);
 			append(div1, t3);
-			append(div1, img);
+			append(div1, i0);
 			append(div1, t4);
+			append(div1, img);
+			append(div1, t5);
+			append(div1, i1);
+			append(div1, t6);
 			append(div1, video);
-			append(div7, t5);
+			append(div7, t7);
 			append(div7, div2);
 			if_blocks[current_block_type_index].m(div2, null);
-			append(div7, t6);
+			append(div7, t8);
 			append(div7, div3);
 			if (if_block1) if_block1.m(div3, null);
-			append(div7, t7);
-			mount_component(navpost, div7, null);
-			append(div7, t8);
-			append(div7, div6);
 			append(div7, t9);
+			mount_component(navpost, div7, null);
+			append(div7, t10);
+			append(div7, div6);
+			append(div7, t11);
 			append(div7, button);
 			current = true;
 
@@ -316,7 +332,9 @@ function create_fragment(ctx) {
 				dispose = [
 					listen(textarea, "keyup", /*validateUrl*/ ctx[6]),
 					listen(textarea, "keyup", /*validateInfoPost*/ ctx[5]),
-					listen(button, "click", /*sendPost*/ ctx[9])
+					listen(i0, "click", /*closeImage*/ ctx[9]),
+					listen(i1, "click", /*closeVideo*/ ctx[10]),
+					listen(button, "click", /*sendPost*/ ctx[11])
 				];
 
 				mounted = true;
@@ -363,7 +381,7 @@ function create_fragment(ctx) {
 				if_block1 = null;
 			}
 
-			if (!current || dirty & /*colorbox*/ 1 && div7_class_value !== (div7_class_value = "Add-post " + /*colorbox*/ ctx[0] + " Default-containers px-lg-5 d-flex flex-column" + " svelte-1ud6jqj")) {
+			if (!current || dirty & /*colorbox*/ 1 && div7_class_value !== (div7_class_value = "Add-post " + /*colorbox*/ ctx[0] + " Default-containers px-lg-5 d-flex flex-column" + " svelte-18ol0e")) {
 				attr(div7, "class", div7_class_value);
 			}
 		},
@@ -432,8 +450,9 @@ function instance($$self, $$props, $$invalidate) {
 			if (e.target.value.length >= 3) {
 				btnSendPost.removeAttribute('disabled');
 			} else {
-				btnSendPost.setAttribute('disabled', '');
+				closeMeta();
 
+				// btnSendPost.setAttribute('disabled', '')
 				// localStorage.removeItem('urlPost')
 				if (postImg.src) {
 					btnSendPost.removeAttribute('disabled');
@@ -458,6 +477,7 @@ function instance($$self, $$props, $$invalidate) {
 		// }
 		if (e.target.value.includes('https') || e.target.value.includes('http')) {
 			loadPhotoInput.setAttribute('disabled', '');
+			uploadVideo.setAttribute('disabled', '');
 			let searchUrl = e.target.value.split(' ');
 
 			searchUrl.forEach(url => {
@@ -495,6 +515,7 @@ function instance($$self, $$props, $$invalidate) {
 			}
 		} else {
 			loadPhotoInput.removeAttribute('disabled');
+			uploadVideo.removeAttribute('disabled', '');
 			urlMeta.classList.add('d-none');
 		}
 
@@ -548,7 +569,29 @@ function instance($$self, $$props, $$invalidate) {
 		btnSendPost.removeAttribute('disabled');
 	};
 
+	const closeMeta = () => {
+		localStorage.removeItem('urlPost');
+		btnSendPost.setAttribute('disabled', '');
+		loadPhotoInput.removeAttribute('disabled');
+		uploadVideo.removeAttribute('disabled', '');
+
+		if (urlContent) {
+			urlMeta.classList.add('d-none');
+			metaTitle.value = '';
+			metaDescription.value = '';
+			metaImage.src = '';
+			$$invalidate(4, urlContent = '');
+			searchMeta = '';
+			$$invalidate(1, urlLink = '');
+			validUrl = '';
+		}
+
+		$$invalidate(4, urlContent = undefined);
+	};
+
 	const closeMetaData = () => {
+		loadPhotoInput.removeAttribute('disabled');
+		uploadVideo.removeAttribute('disabled', '');
 		localStorage.removeItem('urlPost');
 		postDescription.value = '';
 		btnSendPost.setAttribute('disabled', '');
@@ -568,10 +611,29 @@ function instance($$self, $$props, $$invalidate) {
 	};
 
 	const closeYTData = () => {
+		loadPhotoInput.removeAttribute('disabled');
+		uploadVideo.removeAttribute('disabled', '');
 		localStorage.removeItem('urlPost');
 		$$invalidate(2, YTlink = false);
 		postDescription.value = '';
 		btnSendPost.setAttribute('disabled', '');
+	};
+
+	const closeImage = () => {
+		postImg.removeAttribute('src');
+		postImg.classList.toggle('d-none');
+		closeImg.classList.add('d-none');
+		uploadVideo.removeAttribute('disabled');
+		if (postDescription.value === '') btnSendPost.setAttribute('disabled', '');
+	};
+
+	const closeVideo = () => {
+		closeVd.classList.add('d-none');
+		postVideo.classList.add('d-none');
+		postVideo.removeAttribute('src');
+		loadPhotoInput.removeAttribute('disabled');
+		uploadVideo.value = '';
+		if (postDescription.value === '') btnSendPost.setAttribute('disabled', '');
 	};
 
 	const sendPost = async () => {
@@ -718,8 +780,8 @@ function instance($$self, $$props, $$invalidate) {
 	};
 
 	$$self.$$set = $$props => {
-		if ('id' in $$props) $$invalidate(10, id = $$props.id);
-		if ('urlAPI' in $$props) $$invalidate(11, urlAPI = $$props.urlAPI);
+		if ('id' in $$props) $$invalidate(12, id = $$props.id);
+		if ('urlAPI' in $$props) $$invalidate(13, urlAPI = $$props.urlAPI);
 		if ('colorbox' in $$props) $$invalidate(0, colorbox = $$props.colorbox);
 	};
 
@@ -733,6 +795,8 @@ function instance($$self, $$props, $$invalidate) {
 		validateUrl,
 		closeMetaData,
 		closeYTData,
+		closeImage,
+		closeVideo,
 		sendPost,
 		id,
 		urlAPI
@@ -742,7 +806,7 @@ function instance($$self, $$props, $$invalidate) {
 class AddPost extends SvelteComponent {
 	constructor(options) {
 		super();
-		init(this, options, instance, create_fragment, safe_not_equal, { id: 10, urlAPI: 11, colorbox: 0 });
+		init(this, options, instance, create_fragment, safe_not_equal, { id: 12, urlAPI: 13, colorbox: 0 });
 	}
 }
 

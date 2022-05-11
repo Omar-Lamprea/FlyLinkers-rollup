@@ -63,7 +63,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (211:0) {#if data && getUserMainToFirestore}
+// (212:0) {#if data && getUserMainToFirestore}
 function create_if_block(ctx) {
 	let header;
 	let t0;
@@ -150,7 +150,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (216:5) {#if chatFlag && userMain && getUserMainToFirestore}
+// (217:5) {#if chatFlag && userMain && getUserMainToFirestore}
 function create_if_block_1(ctx) {
 	let chat;
 	let current;
@@ -380,6 +380,7 @@ function instance($$self, $$props, $$invalidate) {
 
 	if (window.location.reload) {
 		localStorage.removeItem('chat');
+		localStorage.removeItem('urlPost');
 	}
 
 	onMount(async () => {

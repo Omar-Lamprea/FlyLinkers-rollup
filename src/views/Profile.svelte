@@ -42,6 +42,8 @@
     <TimelineP {name} {last_name} {title} {email} {photo} {id} {urlAPI}/>
     <SidebarRight {id} {urlAPI}/>
   {:else}
-     <Loader/>
+    <div class="loaderContainer d-flex" style="height: calc(100vh - 15rem);">
+      <Loader/>
+    </div>
   {/if}
 </div>
