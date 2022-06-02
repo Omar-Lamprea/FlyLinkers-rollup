@@ -40,7 +40,7 @@
 
   .Default-containers{
     overflow: hidden;
-    height: 4rem;
+    height: 3.5rem;
     transition: all ease-in .5s;
   }
   .container-active{
@@ -89,7 +89,7 @@
 </style>
 
 <div id="containerDescription" class="Default-containers container-active">
-  <div class="header-description-userMenu d-flex justify-content-between align-items-center">
+  <div class="header-description-userMenu d-flex mx-3 mx-md-0 justify-content-between align-items-center">
     <p data-translate="title-about-me" class="section-title">About me</p>
     <i id="toggleDropDescriptionInfo" class="fa-solid fa-square-caret-down dropdown-active" on:click={dropdownUserInfo}></i>
   </div>

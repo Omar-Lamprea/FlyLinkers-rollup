@@ -19,7 +19,7 @@
   // console.log(experiences);
   export async function getDataexperiences(updateExperiences){
     // if (experiences || updateExperiences) {
-      console.log('run xps..');
+      // console.log('run xps..');
       experiences = true
       const dataExperiences = []
       const getXp = await getExperiences(urlAPI, userProfile)

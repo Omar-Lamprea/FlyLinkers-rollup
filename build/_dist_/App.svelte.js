@@ -16,6 +16,7 @@ import {
 	mount_component,
 	noop,
 	safe_not_equal,
+	set_style,
 	space,
 	transition_in,
 	transition_out
@@ -35,16 +36,21 @@ import { getUserToFirestore } from './js/firebase/config.js';
 import { openChat } from './js/openChat.js';
 
 function create_else_block(ctx) {
+	let div;
 	let loader;
 	let current;
 	loader = new Loader({});
 
 	return {
 		c() {
+			div = element("div");
 			create_component(loader.$$.fragment);
+			attr(div, "class", "loaderContainer d-flex");
+			set_style(div, "height", "100%");
 		},
 		m(target, anchor) {
-			mount_component(loader, target, anchor);
+			insert(target, div, anchor);
+			mount_component(loader, div, null);
 			current = true;
 		},
 		p: noop,
@@ -58,7 +64,8 @@ function create_else_block(ctx) {
 			current = false;
 		},
 		d(detaching) {
-			destroy_component(loader, detaching);
+			if (detaching) detach(div);
+			destroy_component(loader);
 		}
 	};
 }

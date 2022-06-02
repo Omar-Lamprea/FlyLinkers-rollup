@@ -17,7 +17,7 @@
 <style>
   .Default-containers{
     overflow: hidden;
-    height: 4rem;
+    height: 3.5rem;
     transition: all ease-in .5s;
   }
   .container-active{
@@ -48,7 +48,7 @@
 </style>
 
 <div id="containerLanguage" class="Default-containers container-active">
-  <div class="header-description-userMenu d-flex justify-content-between align-items-center">
+  <div class="header-description-userMenu mx-3 mx-md-0 d-flex justify-content-between align-items-center">
     <p data-translate="title-lang" class="section-title">Language</p>
     <i id="toggleLanguage" class="fa-solid fa-square-caret-down dropdown-active" on:click={dropdownUserInfo}></i>
   </div>

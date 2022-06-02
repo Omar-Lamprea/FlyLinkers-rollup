@@ -5,7 +5,7 @@
   import Loader from '../components/Loader.svelte'
   import {onMount} from 'svelte'
   import {getUserToFirestore} from '../js/firebase/config.js'
-  // import { translate } from '../js/translate';
+  import { translate } from '../js/translate';
 
 
   const urlAPI = 'https://api.flylinkers.com'
@@ -47,7 +47,7 @@
 
   onMount(async()=>{
     await getData()
-    // translate()
+    translate()
   })
 
 </script>

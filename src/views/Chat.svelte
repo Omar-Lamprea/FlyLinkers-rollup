@@ -43,6 +43,9 @@
   }
 
   const sendMessage = async (e) => {
+    let targetInput = inputMessage.value.length
+    targetInput >= 1 ? btnSentMessage.removeAttribute('disabled') : btnSentMessage.setAttribute('disabled', '')
+
     if (e.key === 'Enter' || e.type === 'click') {
       if (inputMessage.value !== '') {
         // console.log(groupId);
@@ -50,15 +53,17 @@
           newMessage(groupId, user1.name, inputMessage.value)
         }else{
           inputMessage.setAttribute('disabled', '')
+          btnSentMessage.setAttribute('disabled', '')
           await newGroup(user1, user2, inputMessage.value)
           await getUserChat()
           inputMessage.removeAttribute('disabled')
+          btnSentMessage.removeAttribute('disabled')
         }
         inputMessage.value = ''
 
         setTimeout(() => {
           scrollChat()
-        }, 1000);
+        }, 100);
       }
     }
   }
@@ -69,27 +74,16 @@
     const messageRef =collection(db, `message/${groupId}/messages`)
     const q =  query(messageRef, orderBy('sentAt'))
     chats = collectionData(q, 'id').pipe(startWith([]))
-    setTimeout(() => {
-      // console.log($chats)
-      scrollChat()
-    }, 1000);
-    // const snapChats = onSnapshot(q, (doc) =>{
-    //   doc.forEach(msg => {
-    //     arrChats.push(msg.data());
-    //   });
-    // })
-    // setTimeout(() => {
-    //   console.log(arrChats);
-    // }, 2000);
   }
 
   onMount( async () =>{
     await getUserChat()
-    getContainerMessages()
+    await getContainerMessages()
     setTimeout(() => {
       scrollChat()
-    }, 1000);
+    }, 300);
   })
+
 </script>
 
 <style>
@@ -100,11 +94,14 @@
     transition: all ease-in .5s;
   }
   .minimize-chat{
-    bottom: 0rem;
+    bottom: 0rem !important;
     transition: all ease-in .5s;
   }
 
   .chat{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     border: 1px solid var(--main-color);
     border-radius: 5px 5px 0 0;
     width: 300px;
@@ -135,7 +132,7 @@
 
 
   .messages{
-    height: 80%;
+    height: 100%;
     overflow-y: auto;
     scroll-behavior: smooth
   }
@@ -171,28 +168,45 @@
 
   .messageText{
     border-top: 1px solid var(--main-color);
-    height: 10%;
+    height: 40px;
   }
   .messageText textarea{
     resize: none;
     width: 100%;
     border: none;
+    background-color: #f3f3f3;
   }
   .messageText textarea:focus-visible{
     outline:none
   }
 
   .btn-sendMessage{
-    background-color: white;
+    color: white;
     border: none;
-    background-color: #f3f3f3;
+    background-color: var(--main-color);
   }
-  .btn-sendMessage i:hover{
-    color: var(--main-color);
+  .btn-sendMessage:hover{
+    background-color: var(--hover-main-color);
   }
   .chat-controller .arrow{
     font-size: 1.2rem;
   }
+
+  @media screen and (max-width: 620px){
+    .chat-container{
+      z-index: 10000;
+    }
+    .chat{
+      height: 100vh;
+      width: 100vw;
+    }
+    .chat-container{
+      bottom: -95%;
+      /* top: 100%; */
+    }
+
+  }
+
 </style>
 
 <div id="chatContainer-{id}" class=" row chat-container minimize-chat">
@@ -208,7 +222,7 @@
       </div>
     </div>
 
-    <div id="messagesContainer" class="messages p-3  d-flex flex-column">
+    <div id="messagesContainer" class="messages p-3 p-4 p-md-3 d-flex flex-column">
       {#if groupId}
         {#each $chats as message}
           {#if message.sentBy !== user1.name}
@@ -230,7 +244,7 @@
 
     <div class="messageText d-flex">
       <textarea id="inputMessage" type="text" placeholder="write a message" autocomplete="off" on:keyup={sendMessage}></textarea>
-      <button id="btnSentMessage" class="btn-sendMessage" on:click={sendMessage}>
+      <button id="btnSentMessage" class="btn-sendMessage" disabled on:click={sendMessage}>
         <i class="fas fa-paper-plane"></i>
       </button>
     </div>

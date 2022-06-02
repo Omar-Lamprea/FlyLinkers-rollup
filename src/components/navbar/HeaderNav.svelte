@@ -41,9 +41,9 @@
       const comments = data.comments
       const reactions = data.reactions
 
-      console.log('soy la flag dentro del primer snap');
-      console.log('soy el contador dentro del primer snap', countMessages);
-      console.log(groups);
+      // console.log('soy la flag dentro del primer snap');
+      // console.log('soy el contador dentro del primer snap', countMessages);
+      // console.log(groups);
       //read Chats
       if (groups !== undefined) {
         usergroups.set(groups)
@@ -51,7 +51,7 @@
         groups.forEach(chat => {
           let flag = 0
           countMessages = 0
-          console.log('reiniciando contador a 0');
+          // console.log('reiniciando contador a 0');
           const q = query(collection(db, `message/${chat}/messages`), orderBy('sentAt', 'desc'), limit(2))
           // console.log(q);
 
@@ -61,20 +61,20 @@
             const dataMain = JSON.parse(localStorage.getItem('data'))
             const userName = `${dataMain.name} ${dataMain.last_name}`
             // console.log(col, col.docs);
-            console.log('soy la flag dentro del segundo snap', flag);
-            console.log('soy el contador dentro del segundo snap', countMessages);
+            // console.log('soy la flag dentro del segundo snap', flag);
+            // console.log('soy el contador dentro del segundo snap', countMessages);
             
             if (col.docs[0]) {
               
               if (col.docChanges()[0]) {
-                console.log('soy el cambio',col.docChanges()[0]);
+                // console.log('soy el cambio',col.docChanges()[0]);
                 if (col.docChanges()[0].type === "added" || col.docChanges()[0].type === "removed") {
-                  console.log('soy el cambio',col.docChanges()[0].type);
+                  // console.log('soy el cambio',col.docChanges()[0].type);
                   if (col.docs[0].data().sentBy !== userName) {
                     if (col.docs.length === 1) {
                      
                       if (!col.docs[0].data().seen) {
-                        console.log('entré al 1');
+                        // console.log('entré al 1');
                         countMessages += 1
                         flag = 1
                       }
@@ -83,7 +83,7 @@
     
                       if (col.docs[1].data().seen) {
                         if (!col.docs[0].data().seen) {
-                          console.log('entre al 2a');
+                          // console.log('entre al 2a');
                           countMessages += 1
                           flag = 1
                         }else{
@@ -91,7 +91,7 @@
                         }
                       }else{
                         if (flag === 0) {
-                          console.log('entre al 2b');
+                          // console.log('entre al 2b');
                           countMessages += 1
                         }else{
                           // flag = 0
@@ -301,8 +301,8 @@
         //   countMessages -= 2
         // }
         countMessages -= 1
-        console.log('soy conuntmessages',countMessages);
-        console.log('entré a reducir');
+        // console.log('soy conuntmessages',countMessages);
+        // console.log('entré a reducir');
       } 
       // usergroups.set([])
       // getUserNotifications()

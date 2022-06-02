@@ -58,7 +58,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (449:6) {#if urlContent && urlLink.includes('https://')}
+// (440:6) {#if urlContent && urlLink.includes('https://')}
 function create_if_block_1(ctx) {
 	let i;
 	let t0;
@@ -134,7 +134,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (461:4) {#if YTlink}
+// (452:4) {#if YTlink}
 function create_if_block(ctx) {
 	let i;
 	let t;
@@ -421,11 +421,7 @@ function isValidHttpUrl(string) {
 
 function instance($$self, $$props, $$invalidate) {
 	let { id, urlAPI, colorbox } = $$props;
-
-	if (!colorbox) {
-		colorbox = '';
-	}
-
+	if (!colorbox) colorbox = '';
 	let urlLink;
 	let validUrl = '';
 	let YTlink;
@@ -452,8 +448,6 @@ function instance($$self, $$props, $$invalidate) {
 			} else {
 				closeMeta();
 
-				// btnSendPost.setAttribute('disabled', '')
-				// localStorage.removeItem('urlPost')
 				if (postImg.src) {
 					btnSendPost.removeAttribute('disabled');
 					uploadVideo.setAttribute('disabled', '');
@@ -466,15 +460,6 @@ function instance($$self, $$props, $$invalidate) {
 	};
 
 	const validateUrl = e => {
-		// urlLink = ''
-		// if (urlContent) {
-		//   metaTitle.value = ''
-		//   metaDescription.value = ''
-		//   metaImage.src = ''
-		//   urlContent = ''
-		//   searchMeta = ''
-		//   urlLink = ''
-		// }
 		if (e.target.value.includes('https') || e.target.value.includes('http')) {
 			loadPhotoInput.setAttribute('disabled', '');
 			uploadVideo.setAttribute('disabled', '');
@@ -621,16 +606,18 @@ function instance($$self, $$props, $$invalidate) {
 
 	const closeImage = () => {
 		postImg.removeAttribute('src');
-		postImg.classList.toggle('d-none');
+		postImg.classList.add('d-none');
 		closeImg.classList.add('d-none');
 		uploadVideo.removeAttribute('disabled');
 		if (postDescription.value === '') btnSendPost.setAttribute('disabled', '');
 	};
 
 	const closeVideo = () => {
-		closeVd.classList.add('d-none');
-		postVideo.classList.add('d-none');
+		//const btnCloseVd = document.getElementById('closeVd')
 		postVideo.removeAttribute('src');
+
+		postVideo.classList.add('d-none');
+		closeVd.classList.add('d-none');
 		loadPhotoInput.removeAttribute('disabled');
 		uploadVideo.value = '';
 		if (postDescription.value === '') btnSendPost.setAttribute('disabled', '');
@@ -728,11 +715,13 @@ function instance($$self, $$props, $$invalidate) {
 
 					if (postImg.src) {
 						postImg.setAttribute('src', '');
-						postImg.classList.toggle('d-none');
+						postImg.classList.add('d-none');
 					}
 
 					closeMetaData();
 					closeYTData();
+					closeVideo();
+					closeImage();
 					loaderPost.classList.add('d-none');
 
 					//recargar post
@@ -774,6 +763,8 @@ function instance($$self, $$props, $$invalidate) {
 						const reloadPost = document.getElementById('reloadPostCheck');
 						reloadPost.classList.toggle('data-reloading');
 					}
+
+					closeVideo();
 				}
 			}
 		}

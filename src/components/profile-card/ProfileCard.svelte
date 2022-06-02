@@ -59,7 +59,7 @@
         <h2 class="pt-2 pt-lg-0">{name} {last_name}</h2>
         <span>{title}</span>
       </div>
-      <div class="Profile-card-text my-2">
+      <!-- <div class="Profile-card-text my-2">
         <p>
           <span data-translate="who-viewed">Who viewed your profile-card</span>
           <span>3.8K</span>
@@ -68,14 +68,14 @@
           <span data-translate="views-post">Views of your post</span>
           <span>3.8K</span>
         </p> 
-      </div>
+      </div> -->
     </div>
     <div class="Profile-card-edit">
       <p>
         <a href="/profile" use:link use:active class="d-flex align-items-center">
           <div class="Profile-edit-profile">
             <i class="fas fa-bookmark"></i>
-            <span data-translate="profile-mini">Edit profile</span> 
+            <span data-translate="profile-mini">Profile</span> 
           </div>
         </a>
       </p>

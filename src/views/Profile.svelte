@@ -3,6 +3,8 @@
   import SidebarRight from '../components/SidebarRight.svelte'
   import {getUserToFirestore} from '../js/firebase/config.js'
   import Loader from '../components/Loader.svelte'
+  import { translate } from '../js/translate';
+  import {onMount} from 'svelte';
 
 
   const urlAPI = 'https://api.flylinkers.com'
@@ -32,7 +34,10 @@
     }
   }
 
-  getData()
+  onMount(async()=>{
+    await getData()
+    translate()
+  })
 
 
 </script>

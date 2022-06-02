@@ -2,8 +2,15 @@
   import Events from './events-card/Events.svelte'
   import Sponsors from './sponsors-card/Sponsors.svelte'
   import People from './people/People.svelte'
+  import {onMount} from 'svelte'
+  import { translate } from '../js/translate';
+  
 
   export let id = '', urlAPI;
+
+  onMount(async()=>{
+    await translate()
+  })
 
 </script>
 
