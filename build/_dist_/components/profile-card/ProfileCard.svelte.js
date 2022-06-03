@@ -26,11 +26,11 @@ import { link } from '../../../_snowpack/pkg/svelte-spa-router.js';
 import active from '../../../_snowpack/pkg/svelte-spa-router/active.js';
 
 function create_fragment(ctx) {
-	let div6;
 	let div5;
+	let div4;
 	let userpotho;
 	let t0;
-	let div2;
+	let div1;
 	let div0;
 	let h2;
 	let t1;
@@ -40,10 +40,8 @@ function create_fragment(ctx) {
 	let span0;
 	let t5;
 	let t6;
-	let div1;
-	let t14;
-	let div4;
-	let p2;
+	let div3;
+	let p;
 	let a;
 	let link_action;
 	let active_action;
@@ -60,11 +58,11 @@ function create_fragment(ctx) {
 
 	return {
 		c() {
-			div6 = element("div");
 			div5 = element("div");
+			div4 = element("div");
 			create_component(userpotho.$$.fragment);
 			t0 = space();
-			div2 = element("div");
+			div1 = element("div");
 			div0 = element("div");
 			h2 = element("h2");
 			t1 = text(/*name*/ ctx[0]);
@@ -74,40 +72,31 @@ function create_fragment(ctx) {
 			span0 = element("span");
 			t5 = text(/*title*/ ctx[1]);
 			t6 = space();
-			div1 = element("div");
-
-			div1.innerHTML = `<p class="svelte-1bzipfw"><span data-translate="who-viewed" class="svelte-1bzipfw">Who viewed your profile-card</span> 
-          <span class="svelte-1bzipfw">3.8K</span></p>  
-        <p class="svelte-1bzipfw"><span data-translate="views-post" class="svelte-1bzipfw">Views of your post</span> 
-          <span class="svelte-1bzipfw">3.8K</span></p>`;
-
-			t14 = space();
-			div4 = element("div");
-			p2 = element("p");
+			div3 = element("div");
+			p = element("p");
 			a = element("a");
 
 			a.innerHTML = `<div class="Profile-edit-profile svelte-1bzipfw"><i class="fas fa-bookmark svelte-1bzipfw"></i> 
-            <span data-translate="profile-mini" class="svelte-1bzipfw">Edit profile</span></div>`;
+            <span data-translate="profile-mini" class="svelte-1bzipfw">Profile</span></div>`;
 
 			attr(h2, "class", "pt-2 pt-lg-0 svelte-1bzipfw");
 			attr(span0, "class", "svelte-1bzipfw");
 			attr(div0, "class", "Profile-card-user mt-4 mt-lg-0 svelte-1bzipfw");
-			attr(div1, "class", "Profile-card-text my-2");
-			attr(div2, "class", "Profile-card-info text-center mt-2 svelte-1bzipfw");
+			attr(div1, "class", "Profile-card-info text-center mt-2 svelte-1bzipfw");
 			attr(a, "href", "/profile");
 			attr(a, "class", "d-flex align-items-center");
-			attr(p2, "class", "svelte-1bzipfw");
-			attr(div4, "class", "Profile-card-edit svelte-1bzipfw");
-			attr(div5, "class", "Profile-card-content d-flex flex-column justify-content-center align-items-center");
-			attr(div6, "class", "Profile-card Default-containers px-0 svelte-1bzipfw");
+			attr(p, "class", "svelte-1bzipfw");
+			attr(div3, "class", "Profile-card-edit svelte-1bzipfw");
+			attr(div4, "class", "Profile-card-content d-flex flex-column justify-content-center align-items-center");
+			attr(div5, "class", "Profile-card Default-containers px-0 svelte-1bzipfw");
 		},
 		m(target, anchor) {
-			insert(target, div6, anchor);
-			append(div6, div5);
-			mount_component(userpotho, div5, null);
-			append(div5, t0);
-			append(div5, div2);
-			append(div2, div0);
+			insert(target, div5, anchor);
+			append(div5, div4);
+			mount_component(userpotho, div4, null);
+			append(div4, t0);
+			append(div4, div1);
+			append(div1, div0);
 			append(div0, h2);
 			append(h2, t1);
 			append(h2, t2);
@@ -115,12 +104,10 @@ function create_fragment(ctx) {
 			append(div0, t4);
 			append(div0, span0);
 			append(span0, t5);
-			append(div2, t6);
-			append(div2, div1);
-			append(div5, t14);
-			append(div5, div4);
-			append(div4, p2);
-			append(p2, a);
+			append(div4, t6);
+			append(div4, div3);
+			append(div3, p);
+			append(p, a);
 			current = true;
 
 			if (!mounted) {
@@ -151,7 +138,7 @@ function create_fragment(ctx) {
 			current = false;
 		},
 		d(detaching) {
-			if (detaching) detach(div6);
+			if (detaching) detach(div5);
 			destroy_component(userpotho);
 			mounted = false;
 			run_all(dispose);

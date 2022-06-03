@@ -25,6 +25,7 @@ import SidebarRight from '../components/SidebarRight.svelte.js';
 import Loader from '../components/Loader.svelte.js';
 import { onMount } from '../../_snowpack/pkg/svelte.js';
 import { getUserToFirestore } from '../js/firebase/config.js';
+import { translate } from '../js/translate.js';
 
 function create_else_block(ctx) {
 	let div;
@@ -244,7 +245,8 @@ function instance($$self, $$props, $$invalidate) {
 
 	onMount(async () => {
 		await getData();
-	}); // translate()
+		translate();
+	});
 
 	return [name, last_name, title, photo, id, getUserMainToFirestore];
 }

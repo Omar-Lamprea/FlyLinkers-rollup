@@ -8,6 +8,7 @@
   import {commentsFirebase} from '../../js/firebase/commentsFirebase.js'
   import {reactionsFirebase} from '../../js/firebase/reactionsFirebase.js'
   import { translate } from '../../js/translate';
+  import Loader from '../Loader.svelte'
 
 
 
@@ -438,6 +439,26 @@
       reloadPost.classList.toggle('data-reloading')
     }
   }
+
+  let showLoader = 0
+  const googleTranslate = async (text) =>{
+    showLoader = 1
+
+    const API_KEY = 'AIzaSyBLxDf_fbc_6Yvst0Z0nLSPIW52J2dFbuc'
+
+    let res = await axios.post(`https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`,{ 
+      q: text,
+      target: localStorage.getItem('lang')
+    });
+
+    if (res.status === 200) {
+      console.log(res.data.data.translations[0]);
+      let translation = res.data.data.translations[0].translatedText;
+      showLoader = 0
+      const textTranslated = document.getElementById(`textTranslated-${id}`)
+      textTranslated.innerHTML = translation
+    }
+  }
   
   onMount(async ()=>{
     await reactionUser()
@@ -540,6 +561,13 @@
     margin: 0 1rem;
   }
 
+  .Card-description .btn-translatePost{
+    color: var(--main-color);
+    font-weight: 700;
+    font-size: 12px;
+    cursor: pointer;
+  }
+
   .Action{
     cursor: pointer;
     margin-right: 1rem;
@@ -610,6 +638,8 @@
     color: inherit;
   }
 
+  
+
 
   @media screen and (max-width: 768px){
     .hidden{
@@ -673,8 +703,17 @@
       </div>
     </div>
 
-    <div class="Card-description mx-3 mx-md-0">
+    <div class="Card-description d-flex flex-column mx-3 mx-md-0">
       <span class="mx-0">{desc}</span>
+      {#if desc}
+        <span id="btn-translatePost" class="mx-0 btn-translatePost" on:click={googleTranslate(desc)}>See translation</span>
+        <div class="desc-translated">
+          {#if showLoader}
+            <Loader size={"small"}/>
+          {/if}
+          <span class="mx-0" id="textTranslated-{id}"></span>
+        </div>
+      {/if}
     </div>
   </div>
 

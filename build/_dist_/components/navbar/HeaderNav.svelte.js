@@ -1074,10 +1074,10 @@ function instance($$self, $$props, $$invalidate) {
 			const friendsRequests = data.friends;
 			const comments = data.comments;
 			const reactions = data.reactions;
-			console.log('soy la flag dentro del primer snap');
-			console.log('soy el contador dentro del primer snap', countMessages);
-			console.log(groups);
 
+			// console.log('soy la flag dentro del primer snap');
+			// console.log('soy el contador dentro del primer snap', countMessages);
+			// console.log(groups);
 			//read Chats
 			if (groups !== undefined) {
 				usergroups.set(groups);
@@ -1085,7 +1085,8 @@ function instance($$self, $$props, $$invalidate) {
 				groups.forEach(chat => {
 					let flag = 0;
 					$$invalidate(5, countMessages = 0);
-					console.log('reiniciando contador a 0');
+
+					// console.log('reiniciando contador a 0');
 					const q = query(collection(db, `message/${chat}/messages`), orderBy('sentAt', 'desc'), limit(2));
 
 					// console.log(q);
@@ -1096,36 +1097,34 @@ function instance($$self, $$props, $$invalidate) {
 						const userName = `${dataMain.name} ${dataMain.last_name}`;
 
 						// console.log(col, col.docs);
-						console.log('soy la flag dentro del segundo snap', flag);
-
-						console.log('soy el contador dentro del segundo snap', countMessages);
-
+						// console.log('soy la flag dentro del segundo snap', flag);
+						// console.log('soy el contador dentro del segundo snap', countMessages);
 						if (col.docs[0]) {
 							if (col.docChanges()[0]) {
-								console.log('soy el cambio', col.docChanges()[0]);
-
+								// console.log('soy el cambio',col.docChanges()[0]);
 								if (col.docChanges()[0].type === "added" || col.docChanges()[0].type === "removed") {
-									console.log('soy el cambio', col.docChanges()[0].type);
-
+									// console.log('soy el cambio',col.docChanges()[0].type);
 									if (col.docs[0].data().sentBy !== userName) {
 										if (col.docs.length === 1) {
 											if (!col.docs[0].data().seen) {
-												console.log('entré al 1');
+												// console.log('entré al 1');
 												$$invalidate(5, countMessages += 1);
+
 												flag = 1;
 											}
 										} else if (col.docs.length === 2) {
 											if (col.docs[1].data().seen) {
 												if (!col.docs[0].data().seen) {
-													console.log('entre al 2a');
+													// console.log('entre al 2a');
 													$$invalidate(5, countMessages += 1);
+
 													flag = 1;
 												} else {
 													flag = 1;
 												}
 											} else {
 												if (flag === 0) {
-													console.log('entre al 2b');
+													// console.log('entre al 2b');
 													$$invalidate(5, countMessages += 1);
 												} else {
 													
@@ -1331,10 +1330,8 @@ function instance($$self, $$props, $$invalidate) {
 					//   countMessages -= 2
 					// }
 					$$invalidate(5, countMessages -= 1);
-
-					console.log('soy conuntmessages', countMessages);
-					console.log('entré a reducir');
-				}
+				} // console.log('soy conuntmessages',countMessages);
+				// console.log('entré a reducir');
 			}); // usergroups.set([])
 		// getUserNotifications()
 		// console.log('contador reducido en 1');

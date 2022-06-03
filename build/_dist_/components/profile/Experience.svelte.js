@@ -878,9 +878,9 @@ function instance($$self, $$props, $$invalidate) {
 
 	async function getDataexperiences(updateExperiences) {
 		// if (experiences || updateExperiences) {
-		console.log('run xps..');
-
+		// console.log('run xps..');
 		$$invalidate(0, experiences = true);
+
 		const dataExperiences = [];
 		const getXp = await getExperiences(urlAPI, userProfile);
 

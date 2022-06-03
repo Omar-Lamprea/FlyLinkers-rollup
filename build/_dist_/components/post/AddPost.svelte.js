@@ -513,8 +513,7 @@ function instance($$self, $$props, $$invalidate) {
 	};
 
 	const showDataPost = link => {
-		console.log('call data');
-
+		// console.log('call data');
 		link.includes('https://www.youtube.com/')
 		? showYouTubeData(link)
 		: showMetaData(link);
@@ -524,8 +523,7 @@ function instance($$self, $$props, $$invalidate) {
 	let urlContent;
 
 	const showMetaData = async url => {
-		console.log(url);
-
+		// console.log(url);
 		if (!searchMeta || url !== searchMeta) {
 			searchMeta = url;
 			const urlMeta = document.getElementById('urlMeta');
@@ -702,8 +700,7 @@ function instance($$self, $$props, $$invalidate) {
 					}
 				}
 
-				console.log(template);
-
+				// console.log(template);
 				const post = await fetch(`${urlAPI}/post/create/`, {
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json' },
@@ -737,8 +734,8 @@ function instance($$self, $$props, $$invalidate) {
 
 			if (responseVideo.ok) {
 				const content = await responseVideo.json();
-				console.log(content);
 
+				// console.log(content);
 				const templateVideo = {
 					user: id,
 					img: "",

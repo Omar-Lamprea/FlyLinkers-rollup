@@ -19,6 +19,8 @@ import {
 import Events from './events-card/Events.svelte.js';
 import Sponsors from './sponsors-card/Sponsors.svelte.js';
 import People from './people/People.svelte.js';
+import { onMount } from '../../_snowpack/pkg/svelte.js';
+import { translate } from '../js/translate.js';
 
 function create_if_block(ctx) {
 	let people;
@@ -122,6 +124,10 @@ function create_fragment(ctx) {
 
 function instance($$self, $$props, $$invalidate) {
 	let { id = '', urlAPI } = $$props;
+
+	onMount(async () => {
+		await translate();
+	});
 
 	$$self.$$set = $$props => {
 		if ('id' in $$props) $$invalidate(0, id = $$props.id);

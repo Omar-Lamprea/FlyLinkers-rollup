@@ -44,7 +44,7 @@ function get_each_context(ctx, list, i) {
 	return child_ctx;
 }
 
-// (202:6) {#if user2}
+// (216:6) {#if user2}
 function create_if_block_4(ctx) {
 	let h6;
 	let t_value = /*user2*/ ctx[2].name + "";
@@ -55,7 +55,7 @@ function create_if_block_4(ctx) {
 			h6 = element("h6");
 			t = text(t_value);
 			set_style(h6, "color", "#fff");
-			attr(h6, "class", "svelte-cf48ha");
+			attr(h6, "class", "svelte-66reda");
 		},
 		m(target, anchor) {
 			insert(target, h6, anchor);
@@ -70,7 +70,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (212:6) {#if groupId}
+// (226:6) {#if groupId}
 function create_if_block(ctx) {
 	let each_1_anchor;
 	let each_value = /*$chats*/ ctx[5];
@@ -126,7 +126,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (223:12) {:else}
+// (237:12) {:else}
 function create_else_block_1(ctx) {
 	let a;
 	let t_value = /*message*/ ctx[13].messageText + "";
@@ -139,7 +139,7 @@ function create_else_block_1(ctx) {
 			t = text(t_value);
 			attr(a, "href", a_href_value = /*message*/ ctx[13].messageText);
 			attr(a, "target", "_blank");
-			attr(a, "class", "me svelte-cf48ha");
+			attr(a, "class", "me svelte-66reda");
 		},
 		m(target, anchor) {
 			insert(target, a, anchor);
@@ -158,7 +158,7 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (221:12) {#if !message.messageText.includes('https://')}
+// (235:12) {#if !message.messageText.includes('https://')}
 function create_if_block_3(ctx) {
 	let p;
 	let t_value = /*message*/ ctx[13].messageText + "";
@@ -168,7 +168,7 @@ function create_if_block_3(ctx) {
 		c() {
 			p = element("p");
 			t = text(t_value);
-			attr(p, "class", "me svelte-cf48ha");
+			attr(p, "class", "me svelte-66reda");
 		},
 		m(target, anchor) {
 			insert(target, p, anchor);
@@ -183,7 +183,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (214:10) {#if message.sentBy !== user1.name}
+// (228:10) {#if message.sentBy !== user1.name}
 function create_if_block_1(ctx) {
 	let show_if;
 	let if_block_anchor;
@@ -227,7 +227,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (217:12) {:else}
+// (231:12) {:else}
 function create_else_block(ctx) {
 	let a;
 	let t_value = /*message*/ ctx[13].messageText + "";
@@ -240,7 +240,7 @@ function create_else_block(ctx) {
 			t = text(t_value);
 			attr(a, "href", a_href_value = /*message*/ ctx[13].messageText);
 			attr(a, "target", "_blank");
-			attr(a, "class", "friend aLink svelte-cf48ha");
+			attr(a, "class", "friend aLink svelte-66reda");
 		},
 		m(target, anchor) {
 			insert(target, a, anchor);
@@ -259,7 +259,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (215:12) {#if !message.messageText.includes('https://')}
+// (229:12) {#if !message.messageText.includes('https://')}
 function create_if_block_2(ctx) {
 	let p;
 	let t_value = /*message*/ ctx[13].messageText + "";
@@ -269,7 +269,7 @@ function create_if_block_2(ctx) {
 		c() {
 			p = element("p");
 			t = text(t_value);
-			attr(p, "class", "friend svelte-cf48ha");
+			attr(p, "class", "friend svelte-66reda");
 		},
 		m(target, anchor) {
 			insert(target, p, anchor);
@@ -284,7 +284,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (213:8) {#each $chats as message}
+// (227:8) {#each $chats as message}
 function create_each_block(ctx) {
 	let show_if;
 	let if_block_anchor;
@@ -371,27 +371,28 @@ function create_fragment(ctx) {
 			textarea = element("textarea");
 			t4 = space();
 			button = element("button");
-			button.innerHTML = `<i class="fas fa-paper-plane svelte-cf48ha"></i>`;
+			button.innerHTML = `<i class="fas fa-paper-plane"></i>`;
 			attr(i0, "id", "arrow");
-			attr(i0, "class", "fas fa-arrow-up px-1 rotate  svelte-cf48ha");
+			attr(i0, "class", "fas fa-arrow-up px-1 rotate  svelte-66reda");
 			attr(i1, "id", i1_id_value = "closeChat-" + /*id*/ ctx[0]);
 			attr(i1, "data-chat", /*id*/ ctx[0]);
-			attr(i1, "class", "arrow fas fa-times mx-2 svelte-cf48ha");
-			attr(div0, "class", "chat-controller svelte-cf48ha");
-			attr(div1, "class", "header-chat d-flex justify-content-between align-items-center svelte-cf48ha");
+			attr(i1, "class", "arrow fas fa-times mx-2 svelte-66reda");
+			attr(div0, "class", "chat-controller svelte-66reda");
+			attr(div1, "class", "header-chat d-flex justify-content-between align-items-center svelte-66reda");
 			attr(div2, "id", "messagesContainer");
-			attr(div2, "class", "messages p-3 d-flex flex-column svelte-cf48ha");
+			attr(div2, "class", "messages p-3 p-4 p-md-3 d-flex flex-column svelte-66reda");
 			attr(textarea, "id", "inputMessage");
 			attr(textarea, "type", "text");
 			attr(textarea, "placeholder", "write a message");
 			attr(textarea, "autocomplete", "off");
-			attr(textarea, "class", "svelte-cf48ha");
+			attr(textarea, "class", "svelte-66reda");
 			attr(button, "id", "btnSentMessage");
-			attr(button, "class", "btn-sendMessage svelte-cf48ha");
-			attr(div3, "class", "messageText d-flex svelte-cf48ha");
-			attr(div4, "class", "chat col-3 svelte-cf48ha");
+			attr(button, "class", "btn-sendMessage svelte-66reda");
+			button.disabled = true;
+			attr(div3, "class", "messageText d-flex svelte-66reda");
+			attr(div4, "class", "chat col-3 svelte-66reda");
 			attr(div5, "id", div5_id_value = "chatContainer-" + /*id*/ ctx[0]);
-			attr(div5, "class", "row chat-container minimize-chat svelte-cf48ha");
+			attr(div5, "class", "row chat-container minimize-chat svelte-66reda");
 		},
 		m(target, anchor) {
 			insert(target, div5, anchor);
@@ -516,6 +517,12 @@ function instance($$self, $$props, $$invalidate) {
 	};
 
 	const sendMessage = async e => {
+		let targetInput = inputMessage.value.length;
+
+		targetInput >= 1
+		? btnSentMessage.removeAttribute('disabled')
+		: btnSentMessage.setAttribute('disabled', '');
+
 		if (e.key === 'Enter' || e.type === 'click') {
 			if (inputMessage.value !== '') {
 				// console.log(groupId);
@@ -523,9 +530,11 @@ function instance($$self, $$props, $$invalidate) {
 					newMessage(groupId, user1.name, inputMessage.value);
 				} else {
 					inputMessage.setAttribute('disabled', '');
+					btnSentMessage.setAttribute('disabled', '');
 					await newGroup(user1, user2, inputMessage.value);
 					await getUserChat();
 					inputMessage.removeAttribute('disabled');
+					btnSentMessage.removeAttribute('disabled');
 				}
 
 				inputMessage.value = '';
@@ -534,7 +543,7 @@ function instance($$self, $$props, $$invalidate) {
 					() => {
 						scrollChat();
 					},
-					1000
+					100
 				);
 			}
 		}
@@ -548,32 +557,17 @@ function instance($$self, $$props, $$invalidate) {
 		const messageRef = collection(db, `message/${groupId}/messages`);
 		const q = query(messageRef, orderBy('sentAt'));
 		$$subscribe_chats($$invalidate(4, chats = collectionData(q, 'id').pipe(startWith([]))));
+	};
 
-		setTimeout(
-			() => {
-				// console.log($chats)
-				scrollChat();
-			},
-			1000
-		);
-	}; // const snapChats = onSnapshot(q, (doc) =>{
-	//   doc.forEach(msg => {
-	//     arrChats.push(msg.data());
-	//   });
-
-	// })
-	// setTimeout(() => {
-	//   console.log(arrChats);
-	// }, 2000);
 	onMount(async () => {
 		await getUserChat();
-		getContainerMessages();
+		await getContainerMessages();
 
 		setTimeout(
 			() => {
 				scrollChat();
 			},
-			1000
+			300
 		);
 	});
 

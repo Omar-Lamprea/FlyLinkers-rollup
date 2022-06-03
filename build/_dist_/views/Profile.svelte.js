@@ -23,6 +23,8 @@ import TimelineP from '../components/TimelineP.svelte.js';
 import SidebarRight from '../components/SidebarRight.svelte.js';
 import { getUserToFirestore } from '../js/firebase/config.js';
 import Loader from '../components/Loader.svelte.js';
+import { translate } from '../js/translate.js';
+import { onMount } from '../../_snowpack/pkg/svelte.js';
 
 function create_else_block(ctx) {
 	let div;
@@ -59,7 +61,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (41:2) {#if id && getUserMainToFirestore}
+// (46:2) {#if id && getUserMainToFirestore}
 function create_if_block(ctx) {
 	let timelinep;
 	let t;
@@ -223,7 +225,11 @@ function instance($$self, $$props, $$invalidate) {
 		}
 	};
 
-	getData();
+	onMount(async () => {
+		await getData();
+		translate();
+	});
+
 	return [name, title, email, photo, id, last_name, getUserMainToFirestore];
 }
 
