@@ -152,9 +152,9 @@
      <li id='chat-{chatId}' data-chat={chatId} class="dropdown-item chatList d-flex" on:click={seenMessage}>
       <img id='chat-{chatId}' data-chat={chatId} src="{urlAPI}{data.photo}" alt="img">
       <span id='chat-{chatId}' data-chat={chatId}>
-        <div class="data-user-time d-flex justify-content-between">
+        <div id='chat-{chatId}' data-chat={chatId} class="data-user-time d-flex justify-content-between">
           <p class="chat-name" id='chat-{chatId}' data-chat={chatId}>{name}</p>
-          <p class="chat-time">{startTime(time.toISOString())}</p>
+          <p id='chat-{chatId}' data-chat={chatId} class="chat-time">{startTime(time.toISOString())}</p>
         </div>
         <p id='chat-{chatId}' data-chat={chatId} class="messageText">{lastMessage}</p>
       </span>
@@ -163,7 +163,7 @@
      <li id='chat-{chatId}' data-chat={chatId} class="dropdown-item chatList d-flex" style="background-color: #e9ecef;" on:click={seenMessage}>
       <img id='chat-{chatId}' data-chat={chatId} src="{urlAPI}{data.photo}" alt="img">
       <span id='chat-{chatId}' data-chat={chatId}>
-        <div class="data-user-time d-flex justify-content-between">
+        <div id='chat-{chatId}' data-chat={chatId} class="data-user-time d-flex justify-content-between">
           <p class="chat-name" id='chat-{chatId}' data-chat={chatId}>{name}</p>
           <p class="chat-time">{startTime(time.toISOString())}</p>
         </div>

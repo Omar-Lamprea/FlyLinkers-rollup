@@ -109,12 +109,12 @@
     })
 
     // translate()
-    setInterval(() => {
-      clearPost()
-      getPosts(1)
-    }, 120_000);
-
+    // setInterval(() => {
+    //   clearPost()
+    //   getPosts(1)
+    // }, 120_000);
   })
+
 </script>
 
 <div class="Timeline col-12 col-lg-6">
@@ -127,6 +127,6 @@
       <Post {...dataPost} {userId} {urlAPI}/>
     {/each}
 
-    <div id="endPosts" class="d-none text-center fw-bold" style="color: var(--main-color);">Sorry!, we can't find more post to show you.</div>
+    <div data-translate="noPost" id="endPosts" class="d-none text-center fw-bold" style="color: var(--main-color);">Sorry!, we can't find more post to show you.</div>
   </div>
 </div>

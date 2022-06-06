@@ -844,15 +844,15 @@
 
     <div class="Card-board-actions">
       <div class="Card-board-actions d-flex justify-content-center justify-content-md-start">
-        <button id="btnReactionLike{id}" class="Action Header-nav-thumbs-up" on:click={changeReaction}>
+        <button id="btnReactionLike{id}" class="Action Header-nav-thumbs-up d-flex d-xl-block flex-column align-items-center" on:click={changeReaction}>
           <i id="btnLike{id}" class="fa-thumbs-up far"></i>
           <span data-translate="like">Like</span>
         </button>
-        <button id="btnReactionLove{id}" class="Action Header-nav-heart" on:click={changeReaction}>
+        <button id="btnReactionLove{id}" class="Action Header-nav-heart d-flex d-xl-block flex-column align-items-center" on:click={changeReaction}>
           <i id="btnLove{id}"class="fa-heart far"></i>
           <span data-translate="love">love</span>
         </button>
-        <div class="Action Header-nav-comments" on:click={showComments}>
+        <div class="Action Header-nav-comments d-flex d-xl-block flex-column align-items-center" on:click={showComments}>
           <i class="fa-comments far"></i>
           <span data-translate="comment">Comment</span>
         </div>

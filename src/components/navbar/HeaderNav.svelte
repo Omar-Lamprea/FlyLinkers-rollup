@@ -416,11 +416,11 @@
   <div class="icon Header-nav-user-plus notification mx-3 fs-3">
     <FriendRequest {id} {urlAPI}/>
   </div>
-  <div class="icon Header-nav-briefcase hidden mx-3 fs-3">
+  <!-- <div class="icon Header-nav-briefcase hidden mx-3 fs-3">
     <a href="/" use:link use:active>
       <i class="fas fa-briefcase"></i>
     </a>
-  </div>
+  </div> -->
   <div class="icon Header-nav-comment mx-3 fs-3 position-relative">
     <div class="dropdown">
       {#if countMessages > 0}
@@ -429,10 +429,10 @@
         <div id="notificacionsChatsBubble" class="notificacions-bubble d-none"></div>
       {/if}
       <i class="fas fa-comment dropdown-toggle" id="chats" data-bs-toggle="dropdown" aria-expanded="false"></i>
-      <!-- <i class="fas fa-comment"></i> -->
+      
       <ul class="dropdown-menu" aria-labelledby="chats" id="ulChatList">
         {#each $usergroups as groups}
-           <ChatList {groups} {urlAPI} {id}/>
+          <ChatList {groups} {urlAPI} {id}/>
         {:else}
           <li class="dropdown-item chatList d-flex">
             <span data-translate="nav-no-chat">You haven't started any chat</span>
@@ -516,10 +516,10 @@
         </ul>
       </div>
   </div>
-  <div class="icon Header-nav-calendar-week hidden mx-3 fs-3">
+  <!-- <div class="icon Header-nav-calendar-week hidden mx-3 fs-3">
     <a href="/" use:link use:active>
       <i class="fas fa-calendar-week"></i>
     </a>
-  </div>
+  </div> -->
 </nav>
 

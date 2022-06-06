@@ -27,7 +27,7 @@
   }
 </style>
 
-<div class="share" data-bs-toggle="modal" data-bs-target="#shareModal-{id}" on:click={getPostShare}>
+<div class="share d-flex d-xl-block flex-column align-items-center" data-bs-toggle="modal" data-bs-target="#shareModal-{id}" on:click={getPostShare}>
 <!-- <div class="share" data-bs-toggle="modal" data-bs-target="#shareModal-{id}"> -->
   <i class="fas fa-share"></i>
   <span data-translate="share">Share</span>

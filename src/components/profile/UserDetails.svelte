@@ -93,9 +93,9 @@
     console.log(content);
     if (content.Detail === 'OK') {
       if (localStorage.getItem('lang') === 'en') {
-        btnSendFriendRequest.textContent = "request sent"
+        btnSendFriendRequest.textContent = "Request sent"
       }else{
-        btnSendFriendRequest.textContent = "solicitud enviada"
+        btnSendFriendRequest.textContent = "Solicitud enviada"
       }
       btnSendFriendRequest.setAttribute('disabled','')
 

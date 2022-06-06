@@ -22,7 +22,7 @@
   <div class="Panel-title">
     <p data-translate="title-panel" class="mx-3 mx-md-0">Your panel</p>
   </div>
-  <div class="d-flex flex-wrap justify-content-center justify-content-xl-between my-2">
+  <div class="d-flex flex-wrap justify-content-center my-2">
     <!-- <div class="Default-containers Panel-content text-center">
       <h3>1</h3>
       <p data-translate="who-viewed">Who's viewed your profile</p>

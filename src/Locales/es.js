@@ -64,6 +64,8 @@ export default{
       "send": "Enviar",
       "see-post": "Ver publicación",
       "delete-post": "Eliminar publicación",
+      "noPost": "Lo sentimos!, no hay más publicaciones que mostrarte.",
+
 
       //share post
       "title-share-post": "Compartir publicación",
@@ -115,7 +117,7 @@ export default{
       "first-name": "Primer nombre*",
       "middle-name": "Segundo nombre",
       "last-name": "Apellido(s)*",
-      "title" : 'Título*',
+      "title" : 'Título',
       "mobile" : 'Teléfono',
       "username" : 'Nombre de usuario',
       "email" : 'Correo electrónico*',

@@ -58,6 +58,7 @@ export default{
       "send": "Send",
       "see-post": "See post",
       "delete-post": "Delete post",
+      "noPost": "Sorry!, we can't find more post to show you.",
 
       //share post
       "title-share-post": "Share post",
@@ -106,7 +107,7 @@ export default{
       "first-name": "Frist name*",
       "middle-name": "Middle name",
       "last-name": "Last name*",
-      "title" : 'Title*',
+      "title" : 'Title',
       "mobile" : 'Mobile',
       "username" : 'Username*',
       "email" : 'Email*',

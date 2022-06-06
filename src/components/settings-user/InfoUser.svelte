@@ -135,7 +135,11 @@
   
         <div class="mobile ms-md-2"style="width:100%">
           <label data-translate="mobile" for="mobile">Mobile</label>
-          <input data-translate="mobile" id="mobile" type="tel" placeholder="Mobile...." value={dataUser.phone}>
+          {#if dataUser.phone === "0"}
+            <input data-translate="mobile" id="mobile" type="tel" placeholder="Mobile....">
+             {:else}
+            <input data-translate="mobile" id="mobile" type="tel" placeholder="Mobile...." value={dataUser.phone}>
+          {/if}
         </div>
       </div>
 

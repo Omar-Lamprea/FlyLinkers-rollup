@@ -4,7 +4,7 @@
   import {startWith} from 'rxjs/operators'
   import { collection,onSnapshot,orderBy, query} from 'firebase/firestore';
   import { writable } from 'svelte/store';
-  import {onMount} from 'svelte'
+  import {onMount, onDestroy} from 'svelte'
   import Loader from '../components/Loader.svelte'
 
   export let id, userMain;
@@ -84,6 +84,10 @@
     }, 300);
   })
 
+  onDestroy( () => {
+      console.log("Component removed")
+  });
+
 </script>
 
 <style>
@@ -142,7 +146,7 @@
     width: fit-content;
     max-width: 15rem;
     padding: .5rem;
-    word-break: break-all;
+    word-break: break-word;
   }
 
   .messages a{
