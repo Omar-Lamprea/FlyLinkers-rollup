@@ -4,6 +4,9 @@
   import {db, validateGroup, getUser, getMessage, getGroupUser} from '../../../js/firebase/config.js'
   import { collection, orderBy, getDoc, updateDoc, query, doc, onSnapshot, limit, where} from 'firebase/firestore';
   import startTime from '../../../js/startTime'
+  
+  import {link} from 'svelte-spa-router';
+  import active from 'svelte-spa-router/active'
 
   export let urlAPI, id, groups
 
@@ -147,7 +150,7 @@
   }
 </style>
 
-{#if data}
+{#if data && window.innerWidth >= 620}
   {#if seen}
      <li id='chat-{chatId}' data-chat={chatId} class="dropdown-item chatList d-flex" on:click={seenMessage}>
       <img id='chat-{chatId}' data-chat={chatId} src="{urlAPI}{data.photo}" alt="img">
@@ -160,15 +163,44 @@
       </span>
     </li>
   {:else}
-     <li id='chat-{chatId}' data-chat={chatId} class="dropdown-item chatList d-flex" style="background-color: #e9ecef;" on:click={seenMessage}>
+    <li id='chat-{chatId}' data-chat={chatId} class="dropdown-item chatList d-flex" style="background-color: #e9ecef;" on:click={seenMessage}>
       <img id='chat-{chatId}' data-chat={chatId} src="{urlAPI}{data.photo}" alt="img">
       <span id='chat-{chatId}' data-chat={chatId}>
         <div id='chat-{chatId}' data-chat={chatId} class="data-user-time d-flex justify-content-between">
           <p class="chat-name" id='chat-{chatId}' data-chat={chatId}>{name}</p>
-          <p class="chat-time">{startTime(time.toISOString())}</p>
+          <p id='chat-{chatId}' data-chat={chatId} class="chat-time">{startTime(time.toISOString())}</p>
         </div>
         <p id='chat-{chatId}' data-chat={chatId} class="messageText">{lastMessage}</p>
       </span>
     </li>
+  {/if}
+
+{:else}
+{#if data && seen}
+<a href="/chat/{chatId}/{localStorage.getItem('userId')}" use:link use:active class="d-flex align-items-center">
+      <li class="dropdown-item chatList d-flex" on:click={seenMessage}>
+        <img src="{urlAPI}{data.photo}" alt="img">
+        <span>
+          <div class="data-user-time d-flex justify-content-between">
+            <p class="chat-name">{name}</p>
+            <p class="chat-time">{startTime(time.toISOString())}</p>
+          </div>
+          <p class="messageText">{lastMessage}</p>
+        </span>
+      </li>
+    </a>
+    {:else if data && !seen}
+    <a href="/chat/{chatId}/{localStorage.getItem('userId')}" use:link use:active class="d-flex align-items-center">
+      <li class="dropdown-item chatList d-flex" style="background-color: #e9ecef;" on:click={seenMessage}>
+        <img src="{urlAPI}{data.photo}" alt="img">
+        <span>
+          <div class="data-user-time d-flex justify-content-between">
+            <p class="chat-name">{name}</p>
+            <p class="chat-time">{startTime(time.toISOString())}</p>
+          </div>
+          <p class="messageText">{lastMessage}</p>
+        </span>
+      </li>
+    </a>
   {/if}
 {/if}

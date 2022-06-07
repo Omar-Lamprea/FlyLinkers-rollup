@@ -1701,14 +1701,14 @@ function create_fragment(ctx) {
 			attr(span6, "data-translate", "like");
 			attr(span6, "class", "svelte-q53ztj");
 			attr(button0, "id", button0_id_value = "btnReactionLike" + /*id*/ ctx[12]);
-			attr(button0, "class", "Action Header-nav-thumbs-up svelte-q53ztj");
+			attr(button0, "class", "Action Header-nav-thumbs-up d-flex d-xl-block flex-column align-items-center svelte-q53ztj");
 			attr(i5, "id", i5_id_value = "btnLove" + /*id*/ ctx[12]);
 			attr(i5, "class", "fa-heart far");
 			attr(span7, "data-translate", "love");
 			attr(span7, "class", "svelte-q53ztj");
 			attr(button1, "id", button1_id_value = "btnReactionLove" + /*id*/ ctx[12]);
-			attr(button1, "class", "Action Header-nav-heart svelte-q53ztj");
-			attr(div11, "class", "Action Header-nav-comments svelte-q53ztj");
+			attr(button1, "class", "Action Header-nav-heart d-flex d-xl-block flex-column align-items-center svelte-q53ztj");
+			attr(div11, "class", "Action Header-nav-comments d-flex d-xl-block flex-column align-items-center svelte-q53ztj");
 			attr(div12, "class", "Action Header-nav-share svelte-q53ztj");
 			attr(div13, "class", "Card-board-actions d-flex justify-content-center justify-content-md-start svelte-q53ztj");
 			attr(div14, "class", "Card-board-actions svelte-q53ztj");

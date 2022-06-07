@@ -8,6 +8,7 @@
   import {commentsFirebase} from '../../js/firebase/commentsFirebase.js'
   import {reactionsFirebase} from '../../js/firebase/reactionsFirebase.js'
   import { translate } from '../../js/translate';
+  import {googleTranslateJs} from '../..//js/googleTranslate'
   import Loader from '../Loader.svelte'
 
 
@@ -17,7 +18,14 @@
   export let name, middle_name, last_name, title, photo, email, username = 0, phone = 0;
   export let userMain, urlAPI, url_id, meta;
   export let share_id, share_count, share = '';
-  export let video;
+  export let video, code;
+
+  
+  code = code.charAt(0).toUpperCase() + code.slice(1)
+  // console.log(navigator.language);
+  
+  // console.log(code, localStorage.getItem('lang'));
+  // console.log(code === localStorage.getItem('lang'));
 
   const userStorage = JSON.parse(localStorage.getItem('data'))
 
@@ -444,16 +452,10 @@
   const googleTranslate = async (text) =>{
     showLoader = 1
 
-    const API_KEY = 'AIzaSyBLxDf_fbc_6Yvst0Z0nLSPIW52J2dFbuc'
+    const translated = await googleTranslateJs(text)
 
-    let res = await axios.post(`https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`,{ 
-      q: text,
-      target: localStorage.getItem('lang')
-    });
-
-    if (res.status === 200) {
-      console.log(res.data.data.translations[0]);
-      let translation = res.data.data.translations[0].translatedText;
+    if (translated) {
+      let translation = translated.translatedText
       showLoader = 0
       const textTranslated = document.getElementById(`textTranslated-${id}`)
       textTranslated.innerHTML = translation
@@ -705,7 +707,7 @@
 
     <div class="Card-description d-flex flex-column mx-3 mx-md-0">
       <span class="mx-0">{desc}</span>
-      {#if desc}
+      {#if desc && code !== localStorage.getItem('lang') }
         <span id="btn-translatePost" class="mx-0 btn-translatePost" on:click={googleTranslate(desc)}>See translation</span>
         <div class="desc-translated">
           {#if showLoader}

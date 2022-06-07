@@ -9,6 +9,7 @@ export default{
     "nav-no-request": "You don't have friend request",
     "nav-acept-request" : "Accept",
     "nav-deline-request" : "Deny",
+    "input-search" : "Search",
 
     //notifications
     "notification-reaction": "has reacted to your post",

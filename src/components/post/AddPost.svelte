@@ -1,6 +1,7 @@
 <script>
   import NavPost from './NavPost.svelte'
   import Loader from '../Loader.svelte'
+  import {googleTranslateJs} from '../../js/googleTranslate'
 
   export let id, urlAPI, colorbox;
 
@@ -247,19 +248,30 @@
         }
         const joinPostDescriptionClean = postDescriptionClean.join(' ')
   
+
+
+
+
+        const translated = await googleTranslateJs(joinPostDescriptionClean)
+        let code = translated.detectedSourceLanguage
         let template;
+
+
         if (urlContent === undefined && !YTlink) {
           template = {
             user: id,
             img: imagePost,
             desc: joinPostDescriptionClean,
+            code: code
           }
         }else if(urlContent === undefined && YTlink){
           template = {
             user: id,
             img: imagePost,
             desc: joinPostDescriptionClean,
-            video: YTlink
+            video: YTlink,
+            code: code
+
           }
         }else{
           if (urlContent.id) {
@@ -267,13 +279,15 @@
               user: id,
               img: imagePost,
               desc: joinPostDescriptionClean,
-              url_id: urlContent.id
+              url_id: urlContent.id,
+              code: code
             }
           }else{
             template = {
               user: id,
               img: imagePost,
               desc: joinPostDescriptionClean,
+              code: code,
               meta: {
                 title: urlContent.title,
                 description: urlContent.description,
@@ -284,7 +298,7 @@
           }
         }
   
-        // console.log(template);
+        console.log(template);
         const post = await fetch(`${urlAPI}/post/create/`,{
           method : 'POST',
           headers : {
@@ -315,6 +329,8 @@
     }else{
       const data = new FormData()
       data.append('video', uploadVideo.files[0])
+      const translated = await googleTranslateJs(postDescription.value)
+      let code = translated.detectedSourceLanguage
   
       const responseVideo = await fetch(`${urlAPI}/resources/video/`, {
         method: 'POST',
@@ -327,9 +343,10 @@
           user: id,
           img: "",
           desc: postDescription.value,
+          code: code,
           video: content.video
         }
-  
+        // console.log(templateVideo);
         const responsePostVideo = await fetch(`${urlAPI}/post/create/`,{
           method : 'POST',
           headers : {

@@ -146,7 +146,7 @@
       </div>
 
       <div class="Header-input">
-        <input type="text" placeholder="Search" on:keyup={startSearch}>
+        <input data-translate="input-search" type="text" placeholder="Search" on:keyup={startSearch}>
         <ul class="dropdown-search d-none" id="searchList">
           {#if usersFound}
              {#each usersFound as user}

@@ -14,7 +14,7 @@
 
   import {getUserToFirestore} from './js/firebase/config.js'
   import {openChat} from './js/openChat.js'
-  // import {translate} from './js/translate'
+  import {translate} from './js/translate'
 
 
 
@@ -142,18 +142,6 @@
       window.innerDocClick = false;
   }
 
-
-  
-  // window.onchange = function(){
-  //   console.log('eeee');
-  //     if (!window.innerDocClick) {
-  //       if (window.location.href.includes('localhost:8080/')) {
-  //         console.log('se mantiene');
-  //       }else{
-  //         window.location.href = 'http://localhost:8080/'
-  //       }
-  //     }
-  // }
   window.onhashchange = function() {
     if (!window.innerDocClick) {
       
@@ -164,11 +152,11 @@
     }
   }
 
-  
 
   onMount(async()=>{
     await getData()
     loadChatList()
+    translate()
   })
 
 </script>

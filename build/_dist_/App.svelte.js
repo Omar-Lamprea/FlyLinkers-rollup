@@ -70,7 +70,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (212:0) {#if data && getUserMainToFirestore}
+// (253:0) {#if data && getUserMainToFirestore}
 function create_if_block(ctx) {
 	let header;
 	let t0;
@@ -157,7 +157,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (217:5) {#if chatFlag && userMain && getUserMainToFirestore}
+// (258:5) {#if chatFlag && userMain && getUserMainToFirestore}
 function create_if_block_1(ctx) {
 	let chat;
 	let current;
@@ -285,7 +285,7 @@ function instance($$self, $$props, $$invalidate) {
 	const urlUser = window.location.pathname;
 	const urluserProfile = urlUser.slice(9);
 
-	if (!localStorage.getItem('user') || localStorage.getItem('user') === 'null') {
+	if (!localStorage.getItem('user') || localStorage.getItem('user') === 'null' || window.location.href.includes('user=')) {
 		const param = window.location.search;
 		const urlParams = new URLSearchParams(param);
 		const user = urlParams.get('user');
@@ -309,7 +309,7 @@ function instance($$self, $$props, $$invalidate) {
 	);
 
 	if (localStorage.getItem('user') && window.location.search.includes('?user=')) {
-		window.location.search = '';
+		window.location.href = window.location.href.slice(0, window.location.href.indexOf('?'));
 	}
 
 	let data;
@@ -368,12 +368,14 @@ function instance($$self, $$props, $$invalidate) {
 		$$invalidate(3, chatFlag = false);
 
 		document.addEventListener('click', async e => {
+			// console.log(e);
 			if (e.target.id === `chat-${e.target.dataset.chat}` || e.target.id === `btInitChat-${e.target.dataset.chat}`) {
 				$$invalidate(4, id = parseInt(e.target.dataset.chat));
 				await openChat(id);
 
 				// console.log(id);
 				if (localStorage.getItem(`chat-${id}`)) {
+					// window.location.href = "/#/chat"
 					$$invalidate(3, chatFlag = true);
 				}
 			}
@@ -389,6 +391,35 @@ function instance($$self, $$props, $$invalidate) {
 		localStorage.removeItem('chat');
 		localStorage.removeItem('urlPost');
 	}
+
+	document.onmouseover = function () {
+		//User's mouse is inside the page.
+		window.innerDocClick = true;
+	};
+
+	document.onmouseleave = function () {
+		//User's mouse has left the page.
+		window.innerDocClick = false;
+	};
+
+	// window.onchange = function(){
+	//   console.log('eeee');
+	//     if (!window.innerDocClick) {
+	//       if (window.location.href.includes('localhost:8080/')) {
+	//         console.log('se mantiene');
+	//       }else{
+	//         window.location.href = 'http://localhost:8080/'
+	//       }
+	//     }
+	// }
+	window.onhashchange = function () {
+		if (!window.innerDocClick) {
+			if (chatFlag) {
+				$$invalidate(3, chatFlag = false);
+				history.forward();
+			}
+		}
+	};
 
 	onMount(async () => {
 		await getData();

@@ -9,6 +9,7 @@ export default{
     "nav-no-request": "No tienes solicitudes pendientes",
     "nav-acept-request" : "Aceptar",
     "nav-deline-request" : "Rechazar",
+    "input-search" : "Buscar",
     //********************
 
     //notifications

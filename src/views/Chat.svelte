@@ -5,10 +5,12 @@
   import { collection,onSnapshot,orderBy, query} from 'firebase/firestore';
   import { writable } from 'svelte/store';
   import {onMount, onDestroy} from 'svelte'
-  import Loader from '../components/Loader.svelte'
+  // import Loader from '../components/Loader.svelte'
 
-  export let id, userMain;
+  export let params = ''
+  export let id = parseInt(params.id), userMain = parseInt(params.userMain);
 
+  // console.log(id, userMain, params);
 
   const pickUpTab = ()=>{
     const chatContainer = document.getElementById(`chatContainer-${id}`)
@@ -74,6 +76,10 @@
     const messageRef =collection(db, `message/${groupId}/messages`)
     const q =  query(messageRef, orderBy('sentAt'))
     chats = collectionData(q, 'id').pipe(startWith([]))
+  }
+
+  const closeChat = ()=>{
+    history.back()
   }
 
   onMount( async () =>{
@@ -221,8 +227,14 @@
         <h6 style="color: #fff;">{user2.name}</h6>
       {/if}
       <div class="chat-controller">
-        <i id="arrow" class="fas fa-arrow-up px-1 rotate " on:click={pickUpTab}></i>
-        <i id="closeChat-{id}" data-chat={id} class="arrow fas fa-times mx-2"></i>
+        {#if window.innerWidth >= 620}
+          <i id="arrow" class="fas fa-arrow-up px-1 rotate " on:click={pickUpTab}></i>
+          <i id="closeChat-{id}" data-chat={id} class="arrow fas fa-times mx-2"></i>
+        {:else}
+          <i class="arrow fas fa-times mx-2" on:click={closeChat}></i>
+        {/if}
+        
+        
       </div>
     </div>
 

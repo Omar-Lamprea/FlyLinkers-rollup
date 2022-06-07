@@ -35,7 +35,7 @@ import { collectionData } from '../../_snowpack/pkg/rxfire/firestore.js';
 import { startWith } from '../../_snowpack/pkg/rxjs/operators.js';
 import { collection, onSnapshot, orderBy, query } from '../../_snowpack/pkg/firebase/firestore.js';
 import { writable } from '../../_snowpack/pkg/svelte/store.js';
-import { onMount } from '../../_snowpack/pkg/svelte.js';
+import { onMount, onDestroy } from '../../_snowpack/pkg/svelte.js';
 import Loader from '../components/Loader.svelte.js';
 
 function get_each_context(ctx, list, i) {
@@ -44,7 +44,7 @@ function get_each_context(ctx, list, i) {
 	return child_ctx;
 }
 
-// (216:6) {#if user2}
+// (220:6) {#if user2}
 function create_if_block_4(ctx) {
 	let h6;
 	let t_value = /*user2*/ ctx[2].name + "";
@@ -55,7 +55,7 @@ function create_if_block_4(ctx) {
 			h6 = element("h6");
 			t = text(t_value);
 			set_style(h6, "color", "#fff");
-			attr(h6, "class", "svelte-66reda");
+			attr(h6, "class", "svelte-17o8cqd");
 		},
 		m(target, anchor) {
 			insert(target, h6, anchor);
@@ -70,7 +70,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (226:6) {#if groupId}
+// (230:6) {#if groupId}
 function create_if_block(ctx) {
 	let each_1_anchor;
 	let each_value = /*$chats*/ ctx[5];
@@ -126,7 +126,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (237:12) {:else}
+// (241:12) {:else}
 function create_else_block_1(ctx) {
 	let a;
 	let t_value = /*message*/ ctx[13].messageText + "";
@@ -139,7 +139,7 @@ function create_else_block_1(ctx) {
 			t = text(t_value);
 			attr(a, "href", a_href_value = /*message*/ ctx[13].messageText);
 			attr(a, "target", "_blank");
-			attr(a, "class", "me svelte-66reda");
+			attr(a, "class", "me svelte-17o8cqd");
 		},
 		m(target, anchor) {
 			insert(target, a, anchor);
@@ -158,7 +158,7 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (235:12) {#if !message.messageText.includes('https://')}
+// (239:12) {#if !message.messageText.includes('https://')}
 function create_if_block_3(ctx) {
 	let p;
 	let t_value = /*message*/ ctx[13].messageText + "";
@@ -168,7 +168,7 @@ function create_if_block_3(ctx) {
 		c() {
 			p = element("p");
 			t = text(t_value);
-			attr(p, "class", "me svelte-66reda");
+			attr(p, "class", "me svelte-17o8cqd");
 		},
 		m(target, anchor) {
 			insert(target, p, anchor);
@@ -183,7 +183,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (228:10) {#if message.sentBy !== user1.name}
+// (232:10) {#if message.sentBy !== user1.name}
 function create_if_block_1(ctx) {
 	let show_if;
 	let if_block_anchor;
@@ -227,7 +227,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (231:12) {:else}
+// (235:12) {:else}
 function create_else_block(ctx) {
 	let a;
 	let t_value = /*message*/ ctx[13].messageText + "";
@@ -240,7 +240,7 @@ function create_else_block(ctx) {
 			t = text(t_value);
 			attr(a, "href", a_href_value = /*message*/ ctx[13].messageText);
 			attr(a, "target", "_blank");
-			attr(a, "class", "friend aLink svelte-66reda");
+			attr(a, "class", "friend aLink svelte-17o8cqd");
 		},
 		m(target, anchor) {
 			insert(target, a, anchor);
@@ -259,7 +259,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (229:12) {#if !message.messageText.includes('https://')}
+// (233:12) {#if !message.messageText.includes('https://')}
 function create_if_block_2(ctx) {
 	let p;
 	let t_value = /*message*/ ctx[13].messageText + "";
@@ -269,7 +269,7 @@ function create_if_block_2(ctx) {
 		c() {
 			p = element("p");
 			t = text(t_value);
-			attr(p, "class", "friend svelte-66reda");
+			attr(p, "class", "friend svelte-17o8cqd");
 		},
 		m(target, anchor) {
 			insert(target, p, anchor);
@@ -284,7 +284,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (227:8) {#each $chats as message}
+// (231:8) {#each $chats as message}
 function create_each_block(ctx) {
 	let show_if;
 	let if_block_anchor;
@@ -373,26 +373,26 @@ function create_fragment(ctx) {
 			button = element("button");
 			button.innerHTML = `<i class="fas fa-paper-plane"></i>`;
 			attr(i0, "id", "arrow");
-			attr(i0, "class", "fas fa-arrow-up px-1 rotate  svelte-66reda");
+			attr(i0, "class", "fas fa-arrow-up px-1 rotate  svelte-17o8cqd");
 			attr(i1, "id", i1_id_value = "closeChat-" + /*id*/ ctx[0]);
 			attr(i1, "data-chat", /*id*/ ctx[0]);
-			attr(i1, "class", "arrow fas fa-times mx-2 svelte-66reda");
-			attr(div0, "class", "chat-controller svelte-66reda");
-			attr(div1, "class", "header-chat d-flex justify-content-between align-items-center svelte-66reda");
+			attr(i1, "class", "arrow fas fa-times mx-2 svelte-17o8cqd");
+			attr(div0, "class", "chat-controller svelte-17o8cqd");
+			attr(div1, "class", "header-chat d-flex justify-content-between align-items-center svelte-17o8cqd");
 			attr(div2, "id", "messagesContainer");
-			attr(div2, "class", "messages p-3 p-4 p-md-3 d-flex flex-column svelte-66reda");
+			attr(div2, "class", "messages p-3 p-4 p-md-3 d-flex flex-column svelte-17o8cqd");
 			attr(textarea, "id", "inputMessage");
 			attr(textarea, "type", "text");
 			attr(textarea, "placeholder", "write a message");
 			attr(textarea, "autocomplete", "off");
-			attr(textarea, "class", "svelte-66reda");
+			attr(textarea, "class", "svelte-17o8cqd");
 			attr(button, "id", "btnSentMessage");
-			attr(button, "class", "btn-sendMessage svelte-66reda");
+			attr(button, "class", "btn-sendMessage svelte-17o8cqd");
 			button.disabled = true;
-			attr(div3, "class", "messageText d-flex svelte-66reda");
-			attr(div4, "class", "chat col-3 svelte-66reda");
+			attr(div3, "class", "messageText d-flex svelte-17o8cqd");
+			attr(div4, "class", "chat col-3 svelte-17o8cqd");
 			attr(div5, "id", div5_id_value = "chatContainer-" + /*id*/ ctx[0]);
-			attr(div5, "class", "row chat-container minimize-chat svelte-66reda");
+			attr(div5, "class", "row chat-container minimize-chat svelte-17o8cqd");
 		},
 		m(target, anchor) {
 			insert(target, div5, anchor);
@@ -569,6 +569,10 @@ function instance($$self, $$props, $$invalidate) {
 			},
 			300
 		);
+	});
+
+	onDestroy(() => {
+		console.log("Component removed");
 	});
 
 	$$self.$$set = $$props => {

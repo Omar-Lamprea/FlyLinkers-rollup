@@ -19,7 +19,7 @@ function create_fragment(ctx) {
 			div3 = element("div");
 
 			div3.innerHTML = `<div class="Panel-title svelte-1awuuu9"><p data-translate="title-panel" class="mx-3 mx-md-0">Your panel</p></div> 
-  <div class="d-flex flex-wrap justify-content-center justify-content-xl-between my-2"><div class="Default-containers Panel-content text-center svelte-1awuuu9"><h3 class="svelte-1awuuu9">50</h3> 
+  <div class="d-flex flex-wrap justify-content-center my-2"><div class="Default-containers Panel-content text-center svelte-1awuuu9"><h3 class="svelte-1awuuu9">50</h3> 
       <p data-translate="my-network">My network</p></div></div> 
   <p class="mx-3 mx-md-0"><i class="fas fa-bookmark svelte-1awuuu9"></i> 
     <span data-translate="mark-pages">Mark pages</span></p>`;

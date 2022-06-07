@@ -656,51 +656,41 @@ function create_fragment(ctx) {
 	let div1;
 	let friendrequest;
 	let t1;
+	let div3;
 	let div2;
+	let t2;
+	let i1;
+	let t3;
+	let ul0;
+	let t4;
+	let div6;
+	let div5;
+	let i2;
+	let t5;
+	let div4;
+	let t6;
+	let t7;
+	let ul1;
+	let t8;
+	let div7;
 	let a1;
+	let show_if;
 	let link_action_1;
 	let active_action_1;
-	let t2;
-	let div4;
-	let div3;
-	let t3;
-	let i2;
-	let t4;
-	let ul0;
-	let t5;
-	let div7;
-	let div6;
-	let i3;
-	let t6;
-	let div5;
-	let t7;
-	let t8;
-	let ul1;
 	let t9;
-	let div8;
-	let a2;
-	let show_if;
-	let link_action_2;
-	let active_action_2;
-	let t10;
-	let div10;
 	let div9;
+	let div8;
 	let img;
 	let img_src_value;
-	let t11;
+	let t10;
 	let ul2;
 	let li0;
-	let a3;
-	let link_action_3;
-	let active_action_3;
-	let t13;
+	let a2;
+	let link_action_2;
+	let active_action_2;
+	let t12;
 	let li1;
 	let span1;
-	let t15;
-	let div11;
-	let a4;
-	let link_action_4;
-	let active_action_4;
 	let current;
 	let mounted;
 	let dispose;
@@ -762,16 +752,12 @@ function create_fragment(ctx) {
 			div1 = element("div");
 			create_component(friendrequest.$$.fragment);
 			t1 = space();
-			div2 = element("div");
-			a1 = element("a");
-			a1.innerHTML = `<i class="fas fa-briefcase svelte-1dexmrm"></i>`;
-			t2 = space();
-			div4 = element("div");
 			div3 = element("div");
+			div2 = element("div");
 			if_block0.c();
+			t2 = space();
+			i1 = element("i");
 			t3 = space();
-			i2 = element("i");
-			t4 = space();
 			ul0 = element("ul");
 
 			for (let i = 0; i < each_blocks.length; i += 1) {
@@ -782,67 +768,61 @@ function create_fragment(ctx) {
 				each_1_else.c();
 			}
 
-			t5 = space();
-			div7 = element("div");
+			t4 = space();
 			div6 = element("div");
-			i3 = element("i");
-			t6 = space();
 			div5 = element("div");
-			t7 = text(/*countBubble*/ ctx[4]);
-			t8 = space();
+			i2 = element("i");
+			t5 = space();
+			div4 = element("div");
+			t6 = text(/*countBubble*/ ctx[4]);
+			t7 = space();
 			ul1 = element("ul");
 			if_block1.c();
-			t9 = space();
-			div8 = element("div");
-			a2 = element("a");
+			t8 = space();
+			div7 = element("div");
+			a1 = element("a");
 			if_block2.c();
-			t10 = space();
-			div10 = element("div");
+			t9 = space();
 			div9 = element("div");
+			div8 = element("div");
 			img = element("img");
-			t11 = space();
+			t10 = space();
 			ul2 = element("ul");
 			li0 = element("li");
-			a3 = element("a");
-			a3.innerHTML = `<span data-translate="nav-settings" class="dropdown-item svelte-1dexmrm">Settings</span>`;
-			t13 = space();
+			a2 = element("a");
+			a2.innerHTML = `<span data-translate="nav-settings" class="dropdown-item svelte-1dexmrm">Settings</span>`;
+			t12 = space();
 			li1 = element("li");
 			span1 = element("span");
 			span1.textContent = "Log Out";
-			t15 = space();
-			div11 = element("div");
-			a4 = element("a");
-			a4.innerHTML = `<i class="fas fa-calendar-week svelte-1dexmrm"></i>`;
 			attr(a0, "href", "/");
 			attr(div0, "id", "iconHome");
 			attr(div0, "class", "icon Header-nav-home mx-3 fs-3 svelte-1dexmrm");
 			attr(div1, "class", "icon Header-nav-user-plus notification mx-3 fs-3 svelte-1dexmrm");
-			attr(a1, "href", "/");
-			attr(div2, "class", "icon Header-nav-briefcase hidden mx-3 fs-3 svelte-1dexmrm");
-			attr(i2, "class", "fas fa-comment dropdown-toggle svelte-1dexmrm");
-			attr(i2, "id", "chats");
-			attr(i2, "data-bs-toggle", "dropdown");
-			attr(i2, "aria-expanded", "false");
+			attr(i1, "class", "fas fa-comment dropdown-toggle svelte-1dexmrm");
+			attr(i1, "id", "chats");
+			attr(i1, "data-bs-toggle", "dropdown");
+			attr(i1, "aria-expanded", "false");
 			attr(ul0, "class", "dropdown-menu svelte-1dexmrm");
 			attr(ul0, "aria-labelledby", "chats");
 			attr(ul0, "id", "ulChatList");
-			attr(div3, "class", "dropdown svelte-1dexmrm");
-			attr(div4, "class", "icon Header-nav-comment mx-3 fs-3 position-relative svelte-1dexmrm");
-			attr(i3, "class", "fas fa-bell dropdown-toggle svelte-1dexmrm");
-			attr(i3, "id", "notifications");
-			attr(i3, "data-bs-toggle", "dropdown");
-			attr(i3, "aria-expanded", "false");
-			attr(div5, "id", "notificacionsBubbleCount");
-			attr(div5, "class", "notificacions-bubble d-none dropdown-toggle svelte-1dexmrm");
-			attr(div5, "data-bs-toggle", "dropdown");
-			attr(div5, "aria-expanded", "false");
+			attr(div2, "class", "dropdown svelte-1dexmrm");
+			attr(div3, "class", "icon Header-nav-comment mx-3 fs-3 position-relative svelte-1dexmrm");
+			attr(i2, "class", "fas fa-bell dropdown-toggle svelte-1dexmrm");
+			attr(i2, "id", "notifications");
+			attr(i2, "data-bs-toggle", "dropdown");
+			attr(i2, "aria-expanded", "false");
+			attr(div4, "id", "notificacionsBubbleCount");
+			attr(div4, "class", "notificacions-bubble d-none dropdown-toggle svelte-1dexmrm");
+			attr(div4, "data-bs-toggle", "dropdown");
+			attr(div4, "aria-expanded", "false");
 			attr(ul1, "class", "dropdown-menu svelte-1dexmrm");
 			attr(ul1, "aria-labelledby", "notifications");
-			attr(div6, "class", "dropdown svelte-1dexmrm");
-			attr(div7, "class", "icon Header-nav-bell mx-3 fs-3 notification svelte-1dexmrm");
-			attr(div7, "id", "notification");
-			attr(a2, "href", "/profile");
-			attr(div8, "class", "icon Header-nav-user mx-3 fs-3 svelte-1dexmrm");
+			attr(div5, "class", "dropdown svelte-1dexmrm");
+			attr(div6, "class", "icon Header-nav-bell mx-3 fs-3 notification svelte-1dexmrm");
+			attr(div6, "id", "notification");
+			attr(a1, "href", "/profile");
+			attr(div7, "class", "icon Header-nav-user mx-3 fs-3 svelte-1dexmrm");
 			if (!src_url_equal(img.src, img_src_value = "../img/grid-icon.png")) attr(img, "src", img_src_value);
 			attr(img, "alt", "");
 			attr(img, "width", "27");
@@ -850,15 +830,13 @@ function create_fragment(ctx) {
 			attr(img, "id", "settings");
 			attr(img, "data-bs-toggle", "dropdown");
 			attr(img, "aria-expanded", "false");
-			attr(a3, "href", "/settings");
+			attr(a2, "href", "/settings");
 			attr(span1, "data-translate", "nav-log-out");
 			attr(span1, "class", "dropdown-item svelte-1dexmrm");
 			attr(ul2, "class", "dropdown-menu svelte-1dexmrm");
 			attr(ul2, "aria-labelledby", "settings");
-			attr(div9, "class", "dropdown");
-			attr(div10, "class", "icon Header-nav-grip-vertical mx-3 fs-3 svelte-1dexmrm");
-			attr(a4, "href", "/");
-			attr(div11, "class", "icon Header-nav-calendar-week hidden mx-3 fs-3 svelte-1dexmrm");
+			attr(div8, "class", "dropdown");
+			attr(div9, "class", "icon Header-nav-grip-vertical mx-3 fs-3 svelte-1dexmrm");
 			attr(nav, "class", "nav-container d-flex svelte-1dexmrm");
 		},
 		m(target, anchor) {
@@ -869,16 +847,13 @@ function create_fragment(ctx) {
 			append(nav, div1);
 			mount_component(friendrequest, div1, null);
 			append(nav, t1);
-			append(nav, div2);
-			append(div2, a1);
-			append(nav, t2);
-			append(nav, div4);
-			append(div4, div3);
-			if_block0.m(div3, null);
-			append(div3, t3);
-			append(div3, i2);
-			append(div3, t4);
-			append(div3, ul0);
+			append(nav, div3);
+			append(div3, div2);
+			if_block0.m(div2, null);
+			append(div2, t2);
+			append(div2, i1);
+			append(div2, t3);
+			append(div2, ul0);
 
 			for (let i = 0; i < each_blocks.length; i += 1) {
 				each_blocks[i].m(ul0, null);
@@ -888,50 +863,43 @@ function create_fragment(ctx) {
 				each_1_else.m(ul0, null);
 			}
 
-			append(nav, t5);
-			append(nav, div7);
-			append(div7, div6);
-			append(div6, i3);
-			append(div6, t6);
+			append(nav, t4);
+			append(nav, div6);
 			append(div6, div5);
+			append(div5, i2);
+			append(div5, t5);
+			append(div5, div4);
+			append(div4, t6);
 			append(div5, t7);
-			append(div6, t8);
-			append(div6, ul1);
+			append(div5, ul1);
 			if_block1.m(ul1, null);
+			append(nav, t8);
+			append(nav, div7);
+			append(div7, a1);
+			if_block2.m(a1, null);
 			append(nav, t9);
-			append(nav, div8);
-			append(div8, a2);
-			if_block2.m(a2, null);
-			append(nav, t10);
-			append(nav, div10);
-			append(div10, div9);
-			append(div9, img);
-			append(div9, t11);
-			append(div9, ul2);
+			append(nav, div9);
+			append(div9, div8);
+			append(div8, img);
+			append(div8, t10);
+			append(div8, ul2);
 			append(ul2, li0);
-			append(li0, a3);
-			append(ul2, t13);
+			append(li0, a2);
+			append(ul2, t12);
 			append(ul2, li1);
 			append(li1, span1);
-			append(nav, t15);
-			append(nav, div11);
-			append(div11, a4);
 			current = true;
 
 			if (!mounted) {
 				dispose = [
 					action_destroyer(link_action = link.call(null, a0)),
 					action_destroyer(active_action = active.call(null, a0)),
+					listen(div6, "click", /*counterBubble*/ ctx[8]),
 					action_destroyer(link_action_1 = link.call(null, a1)),
 					action_destroyer(active_action_1 = active.call(null, a1)),
-					listen(div7, "click", /*counterBubble*/ ctx[8]),
 					action_destroyer(link_action_2 = link.call(null, a2)),
 					action_destroyer(active_action_2 = active.call(null, a2)),
-					action_destroyer(link_action_3 = link.call(null, a3)),
-					action_destroyer(active_action_3 = active.call(null, a3)),
-					listen(span1, "click", /*logOut*/ ctx[9]),
-					action_destroyer(link_action_4 = link.call(null, a4)),
-					action_destroyer(active_action_4 = active.call(null, a4))
+					listen(span1, "click", /*logOut*/ ctx[9])
 				];
 
 				mounted = true;
@@ -951,7 +919,7 @@ function create_fragment(ctx) {
 
 				if (if_block0) {
 					if_block0.c();
-					if_block0.m(div3, t3);
+					if_block0.m(div2, t2);
 				}
 			}
 
@@ -993,7 +961,7 @@ function create_fragment(ctx) {
 				}
 			}
 
-			if (!current || dirty & /*countBubble*/ 16) set_data(t7, /*countBubble*/ ctx[4]);
+			if (!current || dirty & /*countBubble*/ 16) set_data(t6, /*countBubble*/ ctx[4]);
 
 			if (current_block_type_1 === (current_block_type_1 = select_block_type_1(ctx, dirty)) && if_block1) {
 				if_block1.p(ctx, dirty);

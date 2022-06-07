@@ -173,6 +173,7 @@ function create_fragment(ctx) {
 			attr(input, "id", "reloadPostCheck");
 			attr(input, "name", "reloadPost");
 			attr(input, "class", "d-none");
+			attr(div0, "data-translate", "noPost");
 			attr(div0, "id", "endPosts");
 			attr(div0, "class", "d-none text-center fw-bold");
 			set_style(div0, "color", "var(--main-color)");
@@ -379,16 +380,10 @@ function instance($$self, $$props, $$invalidate) {
 				}
 			}
 		});
-
-		// translate()
-		setInterval(
-			() => {
-				clearPost();
-				getPosts(1);
-			},
-			120_000
-		);
-	});
+	}); // translate()
+	// setInterval(() => {
+	//   clearPost()
+	//   getPosts(1)
 
 	$$self.$$set = $$props => {
 		if ('id' in $$props) $$invalidate(0, id = $$props.id);
