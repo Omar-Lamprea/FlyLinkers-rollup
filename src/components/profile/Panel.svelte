@@ -1,3 +1,6 @@
+<script>
+  export let countFriends;
+</script>
 <style>
   .Panel{
     color: #6b6b6b;
@@ -32,7 +35,7 @@
       <p data-translate="views-post">Post views</p>
     </div> -->
     <div class="Default-containers Panel-content text-center">
-      <h3>50</h3>
+      <h3>{countFriends}</h3>
       <p data-translate="my-network">My network</p>
     </div>
   </div>

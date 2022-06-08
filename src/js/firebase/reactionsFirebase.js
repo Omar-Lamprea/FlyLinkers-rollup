@@ -8,9 +8,9 @@ export const reactionsFirebase = async (template, author)=>{
   const docSnap = await getDoc(userDoc)
 
   if (docSnap.exists()) {
-    console.log(docSnap.data());
+    // console.log(docSnap.data());
 
-    console.log(docSnap.data().reactions);
+    // console.log(docSnap.data().reactions);
     if (docSnap.data().reactions === undefined) {
       updateDoc(userDoc,{
         reactions: [template]

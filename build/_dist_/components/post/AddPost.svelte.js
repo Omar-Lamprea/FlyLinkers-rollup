@@ -28,6 +28,7 @@ import {
 
 import NavPost from './NavPost.svelte.js';
 import Loader from '../Loader.svelte.js';
+import { googleTranslateJs } from '../../js/googleTranslate.js';
 
 function create_else_block(ctx) {
 	let loader;
@@ -58,7 +59,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (440:6) {#if urlContent && urlLink.includes('https://')}
+// (457:6) {#if urlContent && urlLink.includes('https://')}
 function create_if_block_1(ctx) {
 	let i;
 	let t0;
@@ -134,7 +135,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (452:4) {#if YTlink}
+// (469:4) {#if YTlink}
 function create_if_block(ctx) {
 	let i;
 	let t;
@@ -662,20 +663,24 @@ function instance($$self, $$props, $$invalidate) {
 				}
 
 				const joinPostDescriptionClean = postDescriptionClean.join(' ');
+				const translated = await googleTranslateJs(joinPostDescriptionClean);
+				let code = translated.detectedSourceLanguage;
 				let template;
 
 				if (urlContent === undefined && !YTlink) {
 					template = {
 						user: id,
 						img: imagePost,
-						desc: joinPostDescriptionClean
+						desc: joinPostDescriptionClean,
+						code
 					};
 				} else if (urlContent === undefined && YTlink) {
 					template = {
 						user: id,
 						img: imagePost,
 						desc: joinPostDescriptionClean,
-						video: YTlink
+						video: YTlink,
+						code
 					};
 				} else {
 					if (urlContent.id) {
@@ -683,13 +688,15 @@ function instance($$self, $$props, $$invalidate) {
 							user: id,
 							img: imagePost,
 							desc: joinPostDescriptionClean,
-							url_id: urlContent.id
+							url_id: urlContent.id,
+							code
 						};
 					} else {
 						template = {
 							user: id,
 							img: imagePost,
 							desc: joinPostDescriptionClean,
+							code,
 							meta: {
 								title: urlContent.title,
 								description: urlContent.description,
@@ -700,7 +707,8 @@ function instance($$self, $$props, $$invalidate) {
 					}
 				}
 
-				// console.log(template);
+				console.log(template);
+
 				const post = await fetch(`${urlAPI}/post/create/`, {
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json' },
@@ -730,6 +738,8 @@ function instance($$self, $$props, $$invalidate) {
 		} else {
 			const data = new FormData();
 			data.append('video', uploadVideo.files[0]);
+			const translated = await googleTranslateJs(postDescription.value);
+			let code = translated.detectedSourceLanguage;
 			const responseVideo = await fetch(`${urlAPI}/resources/video/`, { method: 'POST', body: data });
 
 			if (responseVideo.ok) {
@@ -740,9 +750,11 @@ function instance($$self, $$props, $$invalidate) {
 					user: id,
 					img: "",
 					desc: postDescription.value,
+					code,
 					video: content.video
 				};
 
+				// console.log(templateVideo);
 				const responsePostVideo = await fetch(`${urlAPI}/post/create/`, {
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json' },

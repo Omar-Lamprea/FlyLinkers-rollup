@@ -3,6 +3,7 @@ import Es from '../Locales/es'
 import En from '../Locales/en'
 
 export async function translate(){  
+
   //init i18next library
   await i18next.init({
     lng: localStorage.getItem('lang'),

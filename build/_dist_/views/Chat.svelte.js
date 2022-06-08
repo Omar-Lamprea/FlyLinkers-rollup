@@ -36,16 +36,15 @@ import { startWith } from '../../_snowpack/pkg/rxjs/operators.js';
 import { collection, onSnapshot, orderBy, query } from '../../_snowpack/pkg/firebase/firestore.js';
 import { writable } from '../../_snowpack/pkg/svelte/store.js';
 import { onMount, onDestroy } from '../../_snowpack/pkg/svelte.js';
-import Loader from '../components/Loader.svelte.js';
 
 function get_each_context(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[13] = list[i];
+	child_ctx[15] = list[i];
 	return child_ctx;
 }
 
-// (220:6) {#if user2}
-function create_if_block_4(ctx) {
+// (226:6) {#if user2}
+function create_if_block_5(ctx) {
 	let h6;
 	let t_value = /*user2*/ ctx[2].name + "";
 	let t;
@@ -70,7 +69,84 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (230:6) {#if groupId}
+// (233:8) {:else}
+function create_else_block_2(ctx) {
+	let i;
+	let mounted;
+	let dispose;
+
+	return {
+		c() {
+			i = element("i");
+			attr(i, "class", "arrow fas fa-times mx-2 svelte-17o8cqd");
+		},
+		m(target, anchor) {
+			insert(target, i, anchor);
+
+			if (!mounted) {
+				dispose = listen(i, "click", /*closeChat*/ ctx[8]);
+				mounted = true;
+			}
+		},
+		p: noop,
+		d(detaching) {
+			if (detaching) detach(i);
+			mounted = false;
+			dispose();
+		}
+	};
+}
+
+// (230:8) {#if window.innerWidth >= 620}
+function create_if_block_4(ctx) {
+	let i0;
+	let t;
+	let i1;
+	let i1_id_value;
+	let mounted;
+	let dispose;
+
+	return {
+		c() {
+			i0 = element("i");
+			t = space();
+			i1 = element("i");
+			attr(i0, "id", "arrow");
+			attr(i0, "class", "fas fa-arrow-up px-1 rotate  svelte-17o8cqd");
+			attr(i1, "id", i1_id_value = "closeChat-" + /*id*/ ctx[0]);
+			attr(i1, "data-chat", /*id*/ ctx[0]);
+			attr(i1, "class", "arrow fas fa-times mx-2 svelte-17o8cqd");
+		},
+		m(target, anchor) {
+			insert(target, i0, anchor);
+			insert(target, t, anchor);
+			insert(target, i1, anchor);
+
+			if (!mounted) {
+				dispose = listen(i0, "click", /*pickUpTab*/ ctx[6]);
+				mounted = true;
+			}
+		},
+		p(ctx, dirty) {
+			if (dirty & /*id*/ 1 && i1_id_value !== (i1_id_value = "closeChat-" + /*id*/ ctx[0])) {
+				attr(i1, "id", i1_id_value);
+			}
+
+			if (dirty & /*id*/ 1) {
+				attr(i1, "data-chat", /*id*/ ctx[0]);
+			}
+		},
+		d(detaching) {
+			if (detaching) detach(i0);
+			if (detaching) detach(t);
+			if (detaching) detach(i1);
+			mounted = false;
+			dispose();
+		}
+	};
+}
+
+// (242:6) {#if groupId}
 function create_if_block(ctx) {
 	let each_1_anchor;
 	let each_value = /*$chats*/ ctx[5];
@@ -126,10 +202,10 @@ function create_if_block(ctx) {
 	};
 }
 
-// (241:12) {:else}
+// (253:12) {:else}
 function create_else_block_1(ctx) {
 	let a;
-	let t_value = /*message*/ ctx[13].messageText + "";
+	let t_value = /*message*/ ctx[15].messageText + "";
 	let t;
 	let a_href_value;
 
@@ -137,7 +213,7 @@ function create_else_block_1(ctx) {
 		c() {
 			a = element("a");
 			t = text(t_value);
-			attr(a, "href", a_href_value = /*message*/ ctx[13].messageText);
+			attr(a, "href", a_href_value = /*message*/ ctx[15].messageText);
 			attr(a, "target", "_blank");
 			attr(a, "class", "me svelte-17o8cqd");
 		},
@@ -146,9 +222,9 @@ function create_else_block_1(ctx) {
 			append(a, t);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*$chats*/ 32 && t_value !== (t_value = /*message*/ ctx[13].messageText + "")) set_data(t, t_value);
+			if (dirty & /*$chats*/ 32 && t_value !== (t_value = /*message*/ ctx[15].messageText + "")) set_data(t, t_value);
 
-			if (dirty & /*$chats*/ 32 && a_href_value !== (a_href_value = /*message*/ ctx[13].messageText)) {
+			if (dirty & /*$chats*/ 32 && a_href_value !== (a_href_value = /*message*/ ctx[15].messageText)) {
 				attr(a, "href", a_href_value);
 			}
 		},
@@ -158,10 +234,10 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (239:12) {#if !message.messageText.includes('https://')}
+// (251:12) {#if !message.messageText.includes('https://')}
 function create_if_block_3(ctx) {
 	let p;
-	let t_value = /*message*/ ctx[13].messageText + "";
+	let t_value = /*message*/ ctx[15].messageText + "";
 	let t;
 
 	return {
@@ -175,7 +251,7 @@ function create_if_block_3(ctx) {
 			append(p, t);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*$chats*/ 32 && t_value !== (t_value = /*message*/ ctx[13].messageText + "")) set_data(t, t_value);
+			if (dirty & /*$chats*/ 32 && t_value !== (t_value = /*message*/ ctx[15].messageText + "")) set_data(t, t_value);
 		},
 		d(detaching) {
 			if (detaching) detach(p);
@@ -183,16 +259,118 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (232:10) {#if message.sentBy !== user1.name}
+// (244:10) {#if message.sentBy !== user1.name}
 function create_if_block_1(ctx) {
+	let show_if;
+	let if_block_anchor;
+
+	function select_block_type_2(ctx, dirty) {
+		if (dirty & /*$chats*/ 32) show_if = null;
+		if (show_if == null) show_if = !!!/*message*/ ctx[15].messageText.includes('https://');
+		if (show_if) return create_if_block_2;
+		return create_else_block;
+	}
+
+	let current_block_type = select_block_type_2(ctx, -1);
+	let if_block = current_block_type(ctx);
+
+	return {
+		c() {
+			if_block.c();
+			if_block_anchor = empty();
+		},
+		m(target, anchor) {
+			if_block.m(target, anchor);
+			insert(target, if_block_anchor, anchor);
+		},
+		p(ctx, dirty) {
+			if (current_block_type === (current_block_type = select_block_type_2(ctx, dirty)) && if_block) {
+				if_block.p(ctx, dirty);
+			} else {
+				if_block.d(1);
+				if_block = current_block_type(ctx);
+
+				if (if_block) {
+					if_block.c();
+					if_block.m(if_block_anchor.parentNode, if_block_anchor);
+				}
+			}
+		},
+		d(detaching) {
+			if_block.d(detaching);
+			if (detaching) detach(if_block_anchor);
+		}
+	};
+}
+
+// (247:12) {:else}
+function create_else_block(ctx) {
+	let a;
+	let t_value = /*message*/ ctx[15].messageText + "";
+	let t;
+	let a_href_value;
+
+	return {
+		c() {
+			a = element("a");
+			t = text(t_value);
+			attr(a, "href", a_href_value = /*message*/ ctx[15].messageText);
+			attr(a, "target", "_blank");
+			attr(a, "class", "friend aLink svelte-17o8cqd");
+		},
+		m(target, anchor) {
+			insert(target, a, anchor);
+			append(a, t);
+		},
+		p(ctx, dirty) {
+			if (dirty & /*$chats*/ 32 && t_value !== (t_value = /*message*/ ctx[15].messageText + "")) set_data(t, t_value);
+
+			if (dirty & /*$chats*/ 32 && a_href_value !== (a_href_value = /*message*/ ctx[15].messageText)) {
+				attr(a, "href", a_href_value);
+			}
+		},
+		d(detaching) {
+			if (detaching) detach(a);
+		}
+	};
+}
+
+// (245:12) {#if !message.messageText.includes('https://')}
+function create_if_block_2(ctx) {
+	let p;
+	let t_value = /*message*/ ctx[15].messageText + "";
+	let t;
+
+	return {
+		c() {
+			p = element("p");
+			t = text(t_value);
+			attr(p, "class", "friend svelte-17o8cqd");
+		},
+		m(target, anchor) {
+			insert(target, p, anchor);
+			append(p, t);
+		},
+		p(ctx, dirty) {
+			if (dirty & /*$chats*/ 32 && t_value !== (t_value = /*message*/ ctx[15].messageText + "")) set_data(t, t_value);
+		},
+		d(detaching) {
+			if (detaching) detach(p);
+		}
+	};
+}
+
+// (243:8) {#each $chats as message}
+function create_each_block(ctx) {
 	let show_if;
 	let if_block_anchor;
 
 	function select_block_type_1(ctx, dirty) {
 		if (dirty & /*$chats*/ 32) show_if = null;
-		if (show_if == null) show_if = !!!/*message*/ ctx[13].messageText.includes('https://');
-		if (show_if) return create_if_block_2;
-		return create_else_block;
+		if (/*message*/ ctx[15].sentBy !== /*user1*/ ctx[1].name) return create_if_block_1;
+		if (show_if == null) show_if = !!!/*message*/ ctx[15].messageText.includes('https://');
+		if (show_if) return create_if_block_3;
+		return create_else_block_1;
 	}
 
 	let current_block_type = select_block_type_1(ctx, -1);
@@ -227,130 +405,32 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (235:12) {:else}
-function create_else_block(ctx) {
-	let a;
-	let t_value = /*message*/ ctx[13].messageText + "";
-	let t;
-	let a_href_value;
-
-	return {
-		c() {
-			a = element("a");
-			t = text(t_value);
-			attr(a, "href", a_href_value = /*message*/ ctx[13].messageText);
-			attr(a, "target", "_blank");
-			attr(a, "class", "friend aLink svelte-17o8cqd");
-		},
-		m(target, anchor) {
-			insert(target, a, anchor);
-			append(a, t);
-		},
-		p(ctx, dirty) {
-			if (dirty & /*$chats*/ 32 && t_value !== (t_value = /*message*/ ctx[13].messageText + "")) set_data(t, t_value);
-
-			if (dirty & /*$chats*/ 32 && a_href_value !== (a_href_value = /*message*/ ctx[13].messageText)) {
-				attr(a, "href", a_href_value);
-			}
-		},
-		d(detaching) {
-			if (detaching) detach(a);
-		}
-	};
-}
-
-// (233:12) {#if !message.messageText.includes('https://')}
-function create_if_block_2(ctx) {
-	let p;
-	let t_value = /*message*/ ctx[13].messageText + "";
-	let t;
-
-	return {
-		c() {
-			p = element("p");
-			t = text(t_value);
-			attr(p, "class", "friend svelte-17o8cqd");
-		},
-		m(target, anchor) {
-			insert(target, p, anchor);
-			append(p, t);
-		},
-		p(ctx, dirty) {
-			if (dirty & /*$chats*/ 32 && t_value !== (t_value = /*message*/ ctx[13].messageText + "")) set_data(t, t_value);
-		},
-		d(detaching) {
-			if (detaching) detach(p);
-		}
-	};
-}
-
-// (231:8) {#each $chats as message}
-function create_each_block(ctx) {
-	let show_if;
-	let if_block_anchor;
-
-	function select_block_type(ctx, dirty) {
-		if (dirty & /*$chats*/ 32) show_if = null;
-		if (/*message*/ ctx[13].sentBy !== /*user1*/ ctx[1].name) return create_if_block_1;
-		if (show_if == null) show_if = !!!/*message*/ ctx[13].messageText.includes('https://');
-		if (show_if) return create_if_block_3;
-		return create_else_block_1;
-	}
-
-	let current_block_type = select_block_type(ctx, -1);
-	let if_block = current_block_type(ctx);
-
-	return {
-		c() {
-			if_block.c();
-			if_block_anchor = empty();
-		},
-		m(target, anchor) {
-			if_block.m(target, anchor);
-			insert(target, if_block_anchor, anchor);
-		},
-		p(ctx, dirty) {
-			if (current_block_type === (current_block_type = select_block_type(ctx, dirty)) && if_block) {
-				if_block.p(ctx, dirty);
-			} else {
-				if_block.d(1);
-				if_block = current_block_type(ctx);
-
-				if (if_block) {
-					if_block.c();
-					if_block.m(if_block_anchor.parentNode, if_block_anchor);
-				}
-			}
-		},
-		d(detaching) {
-			if_block.d(detaching);
-			if (detaching) detach(if_block_anchor);
-		}
-	};
-}
-
 function create_fragment(ctx) {
 	let div5;
 	let div4;
 	let div1;
 	let t0;
 	let div0;
-	let i0;
 	let t1;
-	let i1;
-	let i1_id_value;
-	let t2;
 	let div2;
-	let t3;
+	let t2;
 	let div3;
 	let textarea;
-	let t4;
+	let t3;
 	let button;
 	let div5_id_value;
 	let mounted;
 	let dispose;
-	let if_block0 = /*user2*/ ctx[2] && create_if_block_4(ctx);
-	let if_block1 = /*groupId*/ ctx[3] && create_if_block(ctx);
+	let if_block0 = /*user2*/ ctx[2] && create_if_block_5(ctx);
+
+	function select_block_type(ctx, dirty) {
+		if (window.innerWidth >= 620) return create_if_block_4;
+		return create_else_block_2;
+	}
+
+	let current_block_type = select_block_type(ctx, -1);
+	let if_block1 = current_block_type(ctx);
+	let if_block2 = /*groupId*/ ctx[3] && create_if_block(ctx);
 
 	return {
 		c() {
@@ -360,23 +440,16 @@ function create_fragment(ctx) {
 			if (if_block0) if_block0.c();
 			t0 = space();
 			div0 = element("div");
-			i0 = element("i");
+			if_block1.c();
 			t1 = space();
-			i1 = element("i");
-			t2 = space();
 			div2 = element("div");
-			if (if_block1) if_block1.c();
-			t3 = space();
+			if (if_block2) if_block2.c();
+			t2 = space();
 			div3 = element("div");
 			textarea = element("textarea");
-			t4 = space();
+			t3 = space();
 			button = element("button");
 			button.innerHTML = `<i class="fas fa-paper-plane"></i>`;
-			attr(i0, "id", "arrow");
-			attr(i0, "class", "fas fa-arrow-up px-1 rotate  svelte-17o8cqd");
-			attr(i1, "id", i1_id_value = "closeChat-" + /*id*/ ctx[0]);
-			attr(i1, "data-chat", /*id*/ ctx[0]);
-			attr(i1, "class", "arrow fas fa-times mx-2 svelte-17o8cqd");
 			attr(div0, "class", "chat-controller svelte-17o8cqd");
 			attr(div1, "class", "header-chat d-flex justify-content-between align-items-center svelte-17o8cqd");
 			attr(div2, "id", "messagesContainer");
@@ -401,21 +474,18 @@ function create_fragment(ctx) {
 			if (if_block0) if_block0.m(div1, null);
 			append(div1, t0);
 			append(div1, div0);
-			append(div0, i0);
-			append(div0, t1);
-			append(div0, i1);
-			append(div4, t2);
+			if_block1.m(div0, null);
+			append(div4, t1);
 			append(div4, div2);
-			if (if_block1) if_block1.m(div2, null);
-			append(div4, t3);
+			if (if_block2) if_block2.m(div2, null);
+			append(div4, t2);
 			append(div4, div3);
 			append(div3, textarea);
-			append(div3, t4);
+			append(div3, t3);
 			append(div3, button);
 
 			if (!mounted) {
 				dispose = [
-					listen(i0, "click", /*pickUpTab*/ ctx[6]),
 					listen(textarea, "keyup", /*sendMessage*/ ctx[7]),
 					listen(button, "click", /*sendMessage*/ ctx[7])
 				];
@@ -428,7 +498,7 @@ function create_fragment(ctx) {
 				if (if_block0) {
 					if_block0.p(ctx, dirty);
 				} else {
-					if_block0 = create_if_block_4(ctx);
+					if_block0 = create_if_block_5(ctx);
 					if_block0.c();
 					if_block0.m(div1, t0);
 				}
@@ -437,25 +507,19 @@ function create_fragment(ctx) {
 				if_block0 = null;
 			}
 
-			if (dirty & /*id*/ 1 && i1_id_value !== (i1_id_value = "closeChat-" + /*id*/ ctx[0])) {
-				attr(i1, "id", i1_id_value);
-			}
-
-			if (dirty & /*id*/ 1) {
-				attr(i1, "data-chat", /*id*/ ctx[0]);
-			}
+			if_block1.p(ctx, dirty);
 
 			if (/*groupId*/ ctx[3]) {
-				if (if_block1) {
-					if_block1.p(ctx, dirty);
+				if (if_block2) {
+					if_block2.p(ctx, dirty);
 				} else {
-					if_block1 = create_if_block(ctx);
-					if_block1.c();
-					if_block1.m(div2, null);
+					if_block2 = create_if_block(ctx);
+					if_block2.c();
+					if_block2.m(div2, null);
 				}
-			} else if (if_block1) {
-				if_block1.d(1);
-				if_block1 = null;
+			} else if (if_block2) {
+				if_block2.d(1);
+				if_block2 = null;
 			}
 
 			if (dirty & /*id*/ 1 && div5_id_value !== (div5_id_value = "chatContainer-" + /*id*/ ctx[0])) {
@@ -467,7 +531,8 @@ function create_fragment(ctx) {
 		d(detaching) {
 			if (detaching) detach(div5);
 			if (if_block0) if_block0.d();
-			if (if_block1) if_block1.d();
+			if_block1.d();
+			if (if_block2) if_block2.d();
 			mounted = false;
 			run_all(dispose);
 		}
@@ -480,8 +545,10 @@ function instance($$self, $$props, $$invalidate) {
 		$$subscribe_chats = () => ($$unsubscribe_chats(), $$unsubscribe_chats = subscribe(chats, $$value => $$invalidate(5, $chats = $$value)), chats);
 
 	$$self.$$.on_destroy.push(() => $$unsubscribe_chats());
-	let { id, userMain } = $$props;
+	let { params = '' } = $$props;
+	let { id = parseInt(params.id), userMain = parseInt(params.userMain) } = $$props;
 
+	// console.log(id, userMain, params);
 	const pickUpTab = () => {
 		const chatContainer = document.getElementById(`chatContainer-${id}`);
 		chatContainer.classList.toggle('minimize-chat');
@@ -559,6 +626,10 @@ function instance($$self, $$props, $$invalidate) {
 		$$subscribe_chats($$invalidate(4, chats = collectionData(q, 'id').pipe(startWith([]))));
 	};
 
+	const closeChat = () => {
+		history.back();
+	};
+
 	onMount(async () => {
 		await getUserChat();
 		await getContainerMessages();
@@ -576,17 +647,30 @@ function instance($$self, $$props, $$invalidate) {
 	});
 
 	$$self.$$set = $$props => {
+		if ('params' in $$props) $$invalidate(9, params = $$props.params);
 		if ('id' in $$props) $$invalidate(0, id = $$props.id);
-		if ('userMain' in $$props) $$invalidate(8, userMain = $$props.userMain);
+		if ('userMain' in $$props) $$invalidate(10, userMain = $$props.userMain);
 	};
 
-	return [id, user1, user2, groupId, chats, $chats, pickUpTab, sendMessage, userMain];
+	return [
+		id,
+		user1,
+		user2,
+		groupId,
+		chats,
+		$chats,
+		pickUpTab,
+		sendMessage,
+		closeChat,
+		params,
+		userMain
+	];
 }
 
 class Chat extends SvelteComponent {
 	constructor(options) {
 		super();
-		init(this, options, instance, create_fragment, safe_not_equal, { id: 0, userMain: 8 });
+		init(this, options, instance, create_fragment, safe_not_equal, { params: 9, id: 0, userMain: 10 });
 	}
 }
 

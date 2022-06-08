@@ -15,7 +15,7 @@
   let userProfile;
   let dataProfile;
   let id, name, last_name, title, email , photo;
-  
+
   const getUser = async()=>{
     const response = await fetch(`${urlAPI}/user/create/?username=${params.user}`)
     const content = await response.json()
@@ -29,6 +29,7 @@
     email = userProfile.email
     photo = userProfile.photo
 
+    // console.log(id);
     getUserProfile(userProfile.id)
   }
 
@@ -38,8 +39,20 @@
     dataProfile = content[0]
   }
 
-  onMount(() =>{
-    getUser()
+  let dataFriends;
+  let countFriends;
+  const getFriends = async()=>{
+    const response = await fetch(`${urlAPI}/friend/user/?user=${id}`)
+    if (response.ok) {
+      const content = await response.json()
+      dataFriends = content
+      countFriends = content.length;
+    }
+  }
+
+  onMount(async() =>{
+    await getUser()
+    getFriends()
   })
 
 </script>
@@ -47,7 +60,7 @@
 <div class="row">
   {#if dataProfile}
     <TimelineP {name} {last_name} {title} {email} {photo} {id} {userMain} {urlAPI}/>
-    <SidebarRight {id} {urlAPI}/>
+    <SidebarRight {id} {urlAPI} {dataFriends}/>
   {:else}
      <Loader/>
   {/if}

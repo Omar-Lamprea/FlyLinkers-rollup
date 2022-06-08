@@ -45,7 +45,7 @@
   let friendRequest = false
 
   const searchFriends = async ()=>{
-    console.log(id, dataJson.id);
+    // console.log(id, dataJson.id);
 
     const response = await fetch(`${urlAPI}/friend/user/?user=${userMain}`)
     const content = await response.json()
@@ -67,7 +67,7 @@
       // }
     })
 
-    console.log(userMain);
+    // console.log(userMain);
     const getMyFriendsRequest = await fetch(`${urlAPI}/friend/request/?user_id=${userMain}`)
     const requestsFriend = await getMyFriendsRequest.json()
     requestsFriend.forEach(el =>{
@@ -201,6 +201,14 @@
     background-color: #d70000;
   }
 
+  .edit-profile-content{
+    height: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    margin: 1rem 0;
+  }
+
 </style>
 <div class="UserDetails Default-containers mt-3">
   <div class="row">
@@ -210,12 +218,12 @@
         <div class="Profile-card-content d-flex flex-column">
           <UserPotho {photo} {urlAPI} {id}/>
           <div class="Profile-card-info mt-2">
-            <div class="Profile-card-user p-3 p-md-0">
+            <div class="Profile-card-user p-3 p-md-0 mt-4 mt-md-0">
               <h2>{name} {last_name}</h2>
               <span>{title}</span>
-              <!-- <p>Colombia</p> -->
+              <!-- <p>Colombia</p> -->  
             </div>
-            <div class="Profile-description px-3 px-md-0 my-3">
+            <div class="Profile-description m-3 mx-md-0">
               {#if email === dataJson.email}
                 <p class="edit-description" on:click={editDescription}>
                   <i class="fas fa-pen"></i>
@@ -233,7 +241,9 @@
               </div>
               <div class="Profile-description-contact">
                 <p data-translate="profile-email">Email</p>
-                <p style="color: var(--main-color); cursor:pointer">{email}</p>
+                <a href="mailto:{email}">
+                  <p style="color: var(--main-color); cursor:pointer">{email}</p>
+                </a>
               </div>
             </div>
           </div>
@@ -241,8 +251,9 @@
       </div>
     </div>
     <div class="col-12 col-lg-6">
-      <div class="Profile-card-text text-end d-flex flex-column align-items-end mt-0 mt-md-3 px-3 px-md-0">
+      <div class="Profile-card-text text-end d-flex flex-column align-items-end mt-0 mt-md-3 px-3 px-md-0" style="height:100%">
         {#if id === dataJson.id}
+        <div class="edit-profile-content">
           <a href="/settings" use:link use:active>
             <p type="button" class="mb-3" style="color:rgba(38, 38, 38, 07)">
               <i class="fas fa-pen"></i>
@@ -251,22 +262,23 @@
           </a>
           <CoverPhotoModal {id} {urlAPI}/>
           <ProfilePhotoModal {id} {urlAPI}/>
+        </div>
 
-          <div class="Profile-card-statistics">
+          <!-- <div class="Profile-card-statistics">
             <p>
               <span data-translate="who-viewed">Who viewed your profile-card</span>
               <span>3.8K</span></p> 
             <p>
               <span data-translate="views-post">Views of your post</span>
               <span>3.8K</span></p> 
-          </div>
-          <div class="Profile-card-buttons mt-5">
+          </div> -->
+          <!-- <div class="Profile-card-buttons mt-5">
             <button class="btn btn-outline-primary btn-flylinkers disabled" disabled>
               <i class="fas fa-pen"></i>
               <span data-translate="profile-btn-interests">I have interest in...</span> 
             </button>
             <button data-translate="profile-btn-selection" class="btn mt-0 mt-lg-1 mt-xl-0 btn-outline-primary btn-flylinkers disabled" disabled>Add section</button>
-          </div>
+          </div> -->
         {:else}
           {#if !friend}
             {#if friendRequest}

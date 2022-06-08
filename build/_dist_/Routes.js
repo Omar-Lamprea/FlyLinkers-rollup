@@ -15,7 +15,7 @@ const routes = {
   '/profile/:user': UserProfile,
   '/post/:id': VisitPost,
   '/settings' : Settings,
-  '/chat': Chat
+  '/chat/:id/:userMain': Chat
 }
 
 export default routes

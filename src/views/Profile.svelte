@@ -34,8 +34,20 @@
     }
   }
 
+  let dataFriends;
+  let countFriends;
+  const getFriends = async()=>{
+    const response = await fetch(`${urlAPI}/friend/user/?user=${id}`)
+    if (response.ok) {
+      const content = await response.json()
+      dataFriends = content
+      countFriends = content.length;
+    }
+  }
+
   onMount(async()=>{
     await getData()
+    await getFriends()
     translate()
   })
 
@@ -44,8 +56,8 @@
 
 <div class="row">
   {#if id && getUserMainToFirestore}
-    <TimelineP {name} {last_name} {title} {email} {photo} {id} {urlAPI}/>
-    <SidebarRight {id} {urlAPI}/>
+    <TimelineP {name} {last_name} {title} {email} {photo} {id} {urlAPI} {countFriends}/>
+    <SidebarRight {id} {urlAPI} {dataFriends}/>
   {:else}
     <div class="loaderContainer d-flex" style="height: calc(100vh - 15rem);">
       <Loader/>

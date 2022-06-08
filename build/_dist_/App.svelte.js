@@ -34,6 +34,7 @@ import Chat from './views/Chat.svelte.js';
 import { onMount } from '../_snowpack/pkg/svelte.js';
 import { getUserToFirestore } from './js/firebase/config.js';
 import { openChat } from './js/openChat.js';
+import { translate } from './js/translate.js';
 
 function create_else_block(ctx) {
 	let div;
@@ -70,7 +71,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (253:0) {#if data && getUserMainToFirestore}
+// (241:0) {#if data && getUserMainToFirestore}
 function create_if_block(ctx) {
 	let header;
 	let t0;
@@ -157,7 +158,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (258:5) {#if chatFlag && userMain && getUserMainToFirestore}
+// (246:5) {#if chatFlag && userMain && getUserMainToFirestore}
 function create_if_block_1(ctx) {
 	let chat;
 	let current;
@@ -402,16 +403,6 @@ function instance($$self, $$props, $$invalidate) {
 		window.innerDocClick = false;
 	};
 
-	// window.onchange = function(){
-	//   console.log('eeee');
-	//     if (!window.innerDocClick) {
-	//       if (window.location.href.includes('localhost:8080/')) {
-	//         console.log('se mantiene');
-	//       }else{
-	//         window.location.href = 'http://localhost:8080/'
-	//       }
-	//     }
-	// }
 	window.onhashchange = function () {
 		if (!window.innerDocClick) {
 			if (chatFlag) {
@@ -424,6 +415,7 @@ function instance($$self, $$props, $$invalidate) {
 	onMount(async () => {
 		await getData();
 		loadChatList();
+		translate();
 	});
 
 	return [data, userMain, getUserMainToFirestore, chatFlag, id];

@@ -13,6 +13,7 @@
 
   export let name, last_name, title, email , photo , id, urlAPI;
   export let userMain;
+  export let countFriends = 0;
 
   if (userMain === undefined) {
     userMain = ""
@@ -160,7 +161,7 @@
       {/if}
 
       {#if email === dataJson.email}
-        <Panel/>
+        <Panel {countFriends}/>
       {/if}
 
       {#if post}

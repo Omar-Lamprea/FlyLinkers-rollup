@@ -1,14 +1,8 @@
 <script>
-  import User from './User.svelte'
 
-  export let id, urlAPI;
-  let data;
-  const getFriends = async()=>{
-    const response = await fetch(`${urlAPI}/friend/user/?user=${id}`)
-    const content = await response.json()
-    data = content
-  }
-  getFriends()
+  import User from './User.svelte'
+  export let id, urlAPI, dataFriends;
+
 </script>
 
 <style>
@@ -23,8 +17,8 @@
   </div>
   <div class="People-column">
     <div class="User">
-      {#if data}
-         {#each data as UserDetails}
+      {#if dataFriends}
+         {#each dataFriends as UserDetails}
            <User {...UserDetails} {urlAPI}/>
          {/each}
       {/if}

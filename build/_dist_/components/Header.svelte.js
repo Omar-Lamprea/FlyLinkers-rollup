@@ -382,6 +382,7 @@ function create_fragment(ctx) {
 			attr(a, "href", "/");
 			attr(a, "class", "d-flex align-items-center");
 			attr(div0, "class", "Header-logo d-flex align-items-center px-3 svelte-17jelq4");
+			attr(input, "data-translate", "input-search");
 			attr(input, "type", "text");
 			attr(input, "placeholder", "Search");
 			attr(input, "class", "svelte-17jelq4");

@@ -20,12 +20,10 @@
   export let share_id, share_count, share = '';
   export let video, code;
 
-  
   code = code.charAt(0).toUpperCase() + code.slice(1)
+
+
   // console.log(navigator.language);
-  
-  // console.log(code, localStorage.getItem('lang'));
-  // console.log(code === localStorage.getItem('lang'));
 
   const userStorage = JSON.parse(localStorage.getItem('data'))
 
@@ -76,15 +74,29 @@
   
   let reactionsPost = '';
   const reactionUser = async()=>{
+    const getIdReaction = await fetch(`${urlAPI}/post/like/?post_id=${id}`)
+    const response = await getIdReaction.json()
+    reactionsPost = response
+
+    const ulLikeList = document.getElementById(`ulLikeListReactions${id}`)
+    const ulLoveList = document.getElementById(`ulLoveReactionsList${id}`)
+
+    reactionsPost.forEach(userReaction => {
+      if (userReaction.like) {
+        let row = `<li style="list-style: none;">${userReaction.name}</li>`
+        ulLikeList.innerHTML += row
+      } else if (userReaction.love) {
+        let row = `<li style="list-style: none;">${userReaction.name}</li>`
+        ulLoveList.innerHTML += row
+      }
+    });
+
     const spanLikeValue = document.getElementById(`likeValue${id}`)
     const spanLoveValue = document.getElementById(`loveValue${id}`)
     const btnLike = document.getElementById(`btnLike${id}`)
     const btnLove = document.getElementById(`btnLove${id}`)
     
     if (spanLikeValue.textContent !== '0' || spanLoveValue.textContent !== '0') {
-      const getIdReaction = await fetch(`${urlAPI}/post/like/?post_id=${id}`)
-      const response = await getIdReaction.json()
-      reactionsPost = response
       response.forEach(reaction => {
         if (reaction.id === userId && reaction.like) {
           btnLike.classList.remove('far')
@@ -97,6 +109,7 @@
       });
     }
   }
+
   const changeReaction = async(e)=>{
     const btnReactionLike = document.getElementById(`btnReactionLike${id}`)
     const btnReactionLove = document.getElementById(`btnReactionLove${id}`)
@@ -461,6 +474,8 @@
       textTranslated.innerHTML = translation
     }
   }
+
+  
   
   onMount(async ()=>{
     await reactionUser()
@@ -640,7 +655,40 @@
     color: inherit;
   }
 
-  
+  .tooltipp {
+  position: relative;
+  display: inline-block;
+  /* border-bottom: 1px dotted black; */
+}
+
+.tooltipp .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: rgba(0, 0, 0, 0.761);
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltipp .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+.tooltipp:hover .tooltiptext {
+  visibility: visible;
+}
 
 
   @media screen and (max-width: 768px){
@@ -826,14 +874,26 @@
 
     <div class="Card-board-icons">
       <div class="Card-board-icons-first d-flex px-3 px-md-0">
-        <div class="Reaction Header-nav-like mx-2">
+        <div class="Reaction Header-nav-like mx-2 tooltipp">
             <i class="fas fa-thumbs-up"></i>
             <span id={likeValue}>{reactions.like}</span>
+            <span class="tooltiptext">
+              <ul class="p-0 m-0" id="ulLikeListReactions{id}">
+                <!-- liListReactions.... -->
+              </ul>
+            </span>
         </div>
-        <div class="Reaction Header-nav-heart mx-2">
+
+        <div class="Reaction Header-nav-heart mx-2 tooltipp">
           <i class="fas fa-heart"></i>
           <span id={loveValue}>{reactions.love}</span>
+          <span class="tooltiptext">
+            <ul class="p-0 m-0" id="ulLoveReactionsList{id}">
+              <!-- liListReactions.... -->
+            </ul>
+          </span>
         </div>
+
         <div class="Reaction Header-nav-comment mx-2">
           <i class="fas fa-comment"></i>
           <span on:click={showComments}>
