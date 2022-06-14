@@ -29,7 +29,8 @@ function create_if_block(ctx) {
 	people = new People({
 			props: {
 				id: /*id*/ ctx[0],
-				urlAPI: /*urlAPI*/ ctx[1]
+				urlAPI: /*urlAPI*/ ctx[1],
+				dataFriends: /*dataFriends*/ ctx[2]
 			}
 		});
 
@@ -45,6 +46,7 @@ function create_if_block(ctx) {
 			const people_changes = {};
 			if (dirty & /*id*/ 1) people_changes.id = /*id*/ ctx[0];
 			if (dirty & /*urlAPI*/ 2) people_changes.urlAPI = /*urlAPI*/ ctx[1];
+			if (dirty & /*dataFriends*/ 4) people_changes.dataFriends = /*dataFriends*/ ctx[2];
 			people.$set(people_changes);
 		},
 		i(local) {
@@ -123,7 +125,7 @@ function create_fragment(ctx) {
 }
 
 function instance($$self, $$props, $$invalidate) {
-	let { id = '', urlAPI } = $$props;
+	let { id = '', urlAPI, dataFriends = '' } = $$props;
 
 	onMount(async () => {
 		await translate();
@@ -132,15 +134,16 @@ function instance($$self, $$props, $$invalidate) {
 	$$self.$$set = $$props => {
 		if ('id' in $$props) $$invalidate(0, id = $$props.id);
 		if ('urlAPI' in $$props) $$invalidate(1, urlAPI = $$props.urlAPI);
+		if ('dataFriends' in $$props) $$invalidate(2, dataFriends = $$props.dataFriends);
 	};
 
-	return [id, urlAPI];
+	return [id, urlAPI, dataFriends];
 }
 
 class SidebarRight extends SvelteComponent {
 	constructor(options) {
 		super();
-		init(this, options, instance, create_fragment, safe_not_equal, { id: 0, urlAPI: 1 });
+		init(this, options, instance, create_fragment, safe_not_equal, { id: 0, urlAPI: 1, dataFriends: 2 });
 	}
 }
 

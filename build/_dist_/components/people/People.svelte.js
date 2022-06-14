@@ -28,15 +28,15 @@ import User from './User.svelte.js';
 
 function get_each_context(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[4] = list[i];
+	child_ctx[3] = list[i];
 	return child_ctx;
 }
 
-// (26:6) {#if data}
+// (20:6) {#if dataFriends}
 function create_if_block(ctx) {
 	let each_1_anchor;
 	let current;
-	let each_value = /*data*/ ctx[1];
+	let each_value = /*dataFriends*/ ctx[1];
 	let each_blocks = [];
 
 	for (let i = 0; i < each_value.length; i += 1) {
@@ -64,8 +64,8 @@ function create_if_block(ctx) {
 			current = true;
 		},
 		p(ctx, dirty) {
-			if (dirty & /*data, urlAPI*/ 3) {
-				each_value = /*data*/ ctx[1];
+			if (dirty & /*dataFriends, urlAPI*/ 3) {
+				each_value = /*dataFriends*/ ctx[1];
 				let i;
 
 				for (i = 0; i < each_value.length; i += 1) {
@@ -116,11 +116,11 @@ function create_if_block(ctx) {
 	};
 }
 
-// (27:9) {#each data as UserDetails}
+// (21:9) {#each dataFriends as UserDetails}
 function create_each_block(ctx) {
 	let user;
 	let current;
-	const user_spread_levels = [/*UserDetails*/ ctx[4], { urlAPI: /*urlAPI*/ ctx[0] }];
+	const user_spread_levels = [/*UserDetails*/ ctx[3], { urlAPI: /*urlAPI*/ ctx[0] }];
 	let user_props = {};
 
 	for (let i = 0; i < user_spread_levels.length; i += 1) {
@@ -138,9 +138,9 @@ function create_each_block(ctx) {
 			current = true;
 		},
 		p(ctx, dirty) {
-			const user_changes = (dirty & /*data, urlAPI*/ 3)
+			const user_changes = (dirty & /*dataFriends, urlAPI*/ 3)
 			? get_spread_update(user_spread_levels, [
-					dirty & /*data*/ 2 && get_spread_object(/*UserDetails*/ ctx[4]),
+					dirty & /*dataFriends*/ 2 && get_spread_object(/*UserDetails*/ ctx[3]),
 					dirty & /*urlAPI*/ 1 && { urlAPI: /*urlAPI*/ ctx[0] }
 				])
 			: {};
@@ -169,7 +169,7 @@ function create_fragment(ctx) {
 	let div2;
 	let div1;
 	let current;
-	let if_block = /*data*/ ctx[1] && create_if_block(ctx);
+	let if_block = /*dataFriends*/ ctx[1] && create_if_block(ctx);
 
 	return {
 		c() {
@@ -195,11 +195,11 @@ function create_fragment(ctx) {
 			current = true;
 		},
 		p(ctx, [dirty]) {
-			if (/*data*/ ctx[1]) {
+			if (/*dataFriends*/ ctx[1]) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 
-					if (dirty & /*data*/ 2) {
+					if (dirty & /*dataFriends*/ 2) {
 						transition_in(if_block, 1);
 					}
 				} else {
@@ -235,29 +235,21 @@ function create_fragment(ctx) {
 }
 
 function instance($$self, $$props, $$invalidate) {
-	let { id, urlAPI } = $$props;
-	let data;
-
-	const getFriends = async () => {
-		const response = await fetch(`${urlAPI}/friend/user/?user=${id}`);
-		const content = await response.json();
-		$$invalidate(1, data = content);
-	};
-
-	getFriends();
+	let { id, urlAPI, dataFriends } = $$props;
 
 	$$self.$$set = $$props => {
 		if ('id' in $$props) $$invalidate(2, id = $$props.id);
 		if ('urlAPI' in $$props) $$invalidate(0, urlAPI = $$props.urlAPI);
+		if ('dataFriends' in $$props) $$invalidate(1, dataFriends = $$props.dataFriends);
 	};
 
-	return [urlAPI, data, id];
+	return [urlAPI, dataFriends, id];
 }
 
 class People extends SvelteComponent {
 	constructor(options) {
 		super();
-		init(this, options, instance, create_fragment, safe_not_equal, { id: 2, urlAPI: 0 });
+		init(this, options, instance, create_fragment, safe_not_equal, { id: 2, urlAPI: 0, dataFriends: 1 });
 	}
 }
 

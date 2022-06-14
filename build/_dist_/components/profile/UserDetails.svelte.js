@@ -45,10 +45,10 @@ function create_if_block_4(ctx) {
 		c() {
 			p = element("p");
 
-			p.innerHTML = `<i class="fas fa-pen svelte-1px6h87"></i> 
-                  <span data-translate="profile-about-me" class="svelte-1px6h87">About me...</span>`;
+			p.innerHTML = `<i class="fas fa-pen svelte-k3krtt"></i> 
+                  <span data-translate="profile-about-me" class="svelte-k3krtt">About me...</span>`;
 
-			attr(p, "class", "edit-description svelte-1px6h87");
+			attr(p, "class", "edit-description svelte-k3krtt");
 		},
 		m(target, anchor) {
 			insert(target, p, anchor);
@@ -67,7 +67,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (226:16) {#if aboutMe}
+// (234:16) {#if aboutMe}
 function create_if_block_3(ctx) {
 	let p;
 	let t;
@@ -77,7 +77,7 @@ function create_if_block_3(ctx) {
 			p = element("p");
 			t = text(/*aboutMe*/ ctx[6]);
 			attr(p, "id", "userDescription");
-			attr(p, "class", "svelte-1px6h87");
+			attr(p, "class", "svelte-k3krtt");
 		},
 		m(target, anchor) {
 			insert(target, p, anchor);
@@ -92,7 +92,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (270:8) {:else}
+// (282:8) {:else}
 function create_else_block(ctx) {
 	let t0;
 	let button;
@@ -116,7 +116,7 @@ function create_else_block(ctx) {
 			attr(button, "data-translate", "send-message");
 			attr(button, "id", button_id_value = "btInitChat-" + /*id*/ ctx[5]);
 			attr(button, "data-chat", /*id*/ ctx[5]);
-			attr(button, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 svelte-1px6h87");
+			attr(button, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 svelte-k3krtt");
 		},
 		m(target, anchor) {
 			if_block.m(target, anchor);
@@ -155,8 +155,9 @@ function create_else_block(ctx) {
 	};
 }
 
-// (245:8) {#if id === dataJson.id}
+// (255:8) {#if id === dataJson.id}
 function create_if_block(ctx) {
+	let div;
 	let a;
 	let link_action;
 	let active_action;
@@ -164,10 +165,6 @@ function create_if_block(ctx) {
 	let coverphotomodal;
 	let t3;
 	let profilephotomodal;
-	let t4;
-	let div0;
-	let t12;
-	let div1;
 	let current;
 	let mounted;
 	let dispose;
@@ -188,44 +185,26 @@ function create_if_block(ctx) {
 
 	return {
 		c() {
+			div = element("div");
 			a = element("a");
 
-			a.innerHTML = `<p type="button" class="mb-3 svelte-1px6h87" style="color:rgba(38, 38, 38, 07)"><i class="fas fa-pen svelte-1px6h87"></i> 
-              <span data-translate="edit-profile" class="svelte-1px6h87">Edit profile</span></p>`;
+			a.innerHTML = `<p type="button" class="mb-3 svelte-k3krtt" style="color:rgba(38, 38, 38, 07)"><i class="fas fa-pen svelte-k3krtt"></i> 
+              <span data-translate="edit-profile" class="svelte-k3krtt">Edit profile</span></p>`;
 
 			t2 = space();
 			create_component(coverphotomodal.$$.fragment);
 			t3 = space();
 			create_component(profilephotomodal.$$.fragment);
-			t4 = space();
-			div0 = element("div");
-
-			div0.innerHTML = `<p class="svelte-1px6h87"><span data-translate="who-viewed" class="svelte-1px6h87">Who viewed your profile-card</span> 
-              <span class="svelte-1px6h87">3.8K</span></p>  
-            <p class="svelte-1px6h87"><span data-translate="views-post" class="svelte-1px6h87">Views of your post</span> 
-              <span class="svelte-1px6h87">3.8K</span></p>`;
-
-			t12 = space();
-			div1 = element("div");
-
-			div1.innerHTML = `<button class="btn btn-outline-primary btn-flylinkers disabled svelte-1px6h87" disabled=""><i class="fas fa-pen svelte-1px6h87"></i> 
-              <span data-translate="profile-btn-interests">I have interest in...</span></button> 
-            <button data-translate="profile-btn-selection" class="btn mt-0 mt-lg-1 mt-xl-0 btn-outline-primary btn-flylinkers disabled svelte-1px6h87" disabled="">Add section</button>`;
-
 			attr(a, "href", "/settings");
-			attr(div0, "class", "Profile-card-statistics");
-			attr(div1, "class", "Profile-card-buttons mt-5");
+			attr(div, "class", "edit-profile-content svelte-k3krtt");
 		},
 		m(target, anchor) {
-			insert(target, a, anchor);
-			insert(target, t2, anchor);
-			mount_component(coverphotomodal, target, anchor);
-			insert(target, t3, anchor);
-			mount_component(profilephotomodal, target, anchor);
-			insert(target, t4, anchor);
-			insert(target, div0, anchor);
-			insert(target, t12, anchor);
-			insert(target, div1, anchor);
+			insert(target, div, anchor);
+			append(div, a);
+			append(div, t2);
+			mount_component(coverphotomodal, div, null);
+			append(div, t3);
+			mount_component(profilephotomodal, div, null);
 			current = true;
 
 			if (!mounted) {
@@ -259,22 +238,16 @@ function create_if_block(ctx) {
 			current = false;
 		},
 		d(detaching) {
-			if (detaching) detach(a);
-			if (detaching) detach(t2);
-			destroy_component(coverphotomodal, detaching);
-			if (detaching) detach(t3);
-			destroy_component(profilephotomodal, detaching);
-			if (detaching) detach(t4);
-			if (detaching) detach(div0);
-			if (detaching) detach(t12);
-			if (detaching) detach(div1);
+			if (detaching) detach(div);
+			destroy_component(coverphotomodal);
+			destroy_component(profilephotomodal);
 			mounted = false;
 			run_all(dispose);
 		}
 	};
 }
 
-// (280:10) {:else}
+// (292:10) {:else}
 function create_else_block_2(ctx) {
 	let button;
 
@@ -283,7 +256,7 @@ function create_else_block_2(ctx) {
 			button = element("button");
 			button.textContent = "Friends";
 			attr(button, "data-translate", "is-friend");
-			attr(button, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 svelte-1px6h87");
+			attr(button, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 svelte-k3krtt");
 		},
 		m(target, anchor) {
 			insert(target, button, anchor);
@@ -295,7 +268,7 @@ function create_else_block_2(ctx) {
 	};
 }
 
-// (271:10) {#if !friend}
+// (283:10) {#if !friend}
 function create_if_block_1(ctx) {
 	let if_block_anchor;
 
@@ -336,7 +309,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (277:14) {:else}
+// (289:14) {:else}
 function create_else_block_1(ctx) {
 	let button;
 	let mounted;
@@ -348,7 +321,7 @@ function create_else_block_1(ctx) {
 			button.textContent = "Send friend request";
 			attr(button, "data-translate", "send-friend-request");
 			attr(button, "id", "btnSendFriendRequest");
-			attr(button, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 svelte-1px6h87");
+			attr(button, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 svelte-k3krtt");
 		},
 		m(target, anchor) {
 			insert(target, button, anchor);
@@ -367,7 +340,7 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (272:12) {#if friendRequest}
+// (284:12) {#if friendRequest}
 function create_if_block_2(ctx) {
 	let div;
 	let button0;
@@ -386,10 +359,10 @@ function create_if_block_2(ctx) {
 			button1.textContent = "Decline friend request";
 			attr(button0, "data-translate", "btn-accept-request");
 			attr(button0, "id", "btnSendFriendRequest");
-			attr(button0, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 accept-friend svelte-1px6h87");
+			attr(button0, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 accept-friend svelte-k3krtt");
 			attr(button1, "data-translate", "btn-deny-request");
 			attr(button1, "id", "btnSendFriendRequest");
-			attr(button1, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 decline-friend svelte-1px6h87");
+			attr(button1, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 decline-friend svelte-k3krtt");
 			attr(div, "class", "btn-friend-request mb-3");
 		},
 		m(target, anchor) {
@@ -446,8 +419,10 @@ function create_fragment(ctx) {
 	let div3;
 	let p0;
 	let t13;
+	let a;
 	let p1;
 	let t14;
+	let a_href_value;
 	let t15;
 	let div10;
 	let div9;
@@ -513,37 +488,40 @@ function create_fragment(ctx) {
 			p0 = element("p");
 			p0.textContent = "Email";
 			t13 = space();
+			a = element("a");
 			p1 = element("p");
 			t14 = text(/*email*/ ctx[3]);
 			t15 = space();
 			div10 = element("div");
 			div9 = element("div");
 			if_block2.c();
-			attr(h2, "class", "svelte-1px6h87");
-			attr(span, "class", "svelte-1px6h87");
-			attr(div0, "class", "Profile-card-user p-3 p-md-0 svelte-1px6h87");
+			attr(h2, "class", "svelte-k3krtt");
+			attr(span, "class", "svelte-k3krtt");
+			attr(div0, "class", "Profile-card-user p-3 p-md-0 mt-4 mt-md-0 svelte-k3krtt");
 			attr(textarea, "name", "");
 			attr(textarea, "id", "textArea");
 			attr(textarea, "cols", "30");
 			attr(textarea, "rows", "3");
 			set_style(textarea, "width", "100%");
 			textarea.value = /*aboutMe*/ ctx[6];
-			attr(button, "class", "btn btn-outline-primary btn-flylinkers m-0 mt-1 d-flex align-self-end svelte-1px6h87");
+			attr(button, "class", "btn btn-outline-primary btn-flylinkers m-0 mt-1 d-flex align-self-end svelte-k3krtt");
 			attr(div1, "id", "editAboutMe");
 			attr(div1, "class", "d-none d-flex flex-column");
 			attr(div2, "class", "Profile-description-text my-2");
 			attr(p0, "data-translate", "profile-email");
-			attr(p0, "class", "svelte-1px6h87");
+			attr(p0, "class", "svelte-k3krtt");
 			set_style(p1, "color", "var(--main-color)");
 			set_style(p1, "cursor", "pointer");
-			attr(p1, "class", "svelte-1px6h87");
+			attr(p1, "class", "svelte-k3krtt");
+			attr(a, "href", a_href_value = "mailto:" + /*email*/ ctx[3]);
 			attr(div3, "class", "Profile-description-contact");
-			attr(div4, "class", "Profile-description px-3 px-md-0 my-3 svelte-1px6h87");
-			attr(div5, "class", "Profile-card-info mt-2 svelte-1px6h87");
+			attr(div4, "class", "Profile-description m-3 mx-md-0 svelte-k3krtt");
+			attr(div5, "class", "Profile-card-info mt-2 svelte-k3krtt");
 			attr(div6, "class", "Profile-card-content d-flex flex-column");
-			attr(div7, "class", "Profile-card svelte-1px6h87");
+			attr(div7, "class", "Profile-card svelte-k3krtt");
 			attr(div8, "class", "col-12 col-lg-6");
-			attr(div9, "class", "Profile-card-text text-end d-flex flex-column align-items-end mt-0 mt-md-3 px-3 px-md-0 svelte-1px6h87");
+			attr(div9, "class", "Profile-card-text text-end d-flex flex-column align-items-end mt-0 mt-md-3 px-3 px-md-0 svelte-k3krtt");
+			set_style(div9, "height", "100%");
 			attr(div10, "class", "col-12 col-lg-6");
 			attr(div11, "class", "row");
 			attr(div12, "class", "UserDetails Default-containers mt-3");
@@ -580,7 +558,8 @@ function create_fragment(ctx) {
 			append(div4, div3);
 			append(div3, p0);
 			append(div3, t13);
-			append(div3, p1);
+			append(div3, a);
+			append(a, p1);
 			append(p1, t14);
 			append(div11, t15);
 			append(div11, div10);
@@ -638,6 +617,11 @@ function create_fragment(ctx) {
 			}
 
 			if (!current || dirty & /*email*/ 8) set_data(t14, /*email*/ ctx[3]);
+
+			if (!current || dirty & /*email*/ 8 && a_href_value !== (a_href_value = "mailto:" + /*email*/ ctx[3])) {
+				attr(a, "href", a_href_value);
+			}
+
 			let previous_block_index = current_block_type_index;
 			current_block_type_index = select_block_type(ctx, dirty);
 
@@ -721,8 +705,9 @@ function instance($$self, $$props, $$invalidate) {
 	let friendRequest = false;
 
 	const searchFriends = async () => {
-		console.log(id, dataJson.id);
+		// console.log(id, dataJson.id);
 		const response = await fetch(`${urlAPI}/friend/user/?user=${userMain}`);
+
 		const content = await response.json();
 
 		content.forEach(el => {
@@ -743,8 +728,9 @@ function instance($$self, $$props, $$invalidate) {
 		//   friendRequest = true
 		// }
 
-		console.log(userMain);
+		// console.log(userMain);
 		const getMyFriendsRequest = await fetch(`${urlAPI}/friend/request/?user_id=${userMain}`);
+
 		const requestsFriend = await getMyFriendsRequest.json();
 
 		requestsFriend.forEach(el => {

@@ -61,7 +61,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (46:2) {#if id && getUserMainToFirestore}
+// (58:2) {#if id && getUserMainToFirestore}
 function create_if_block(ctx) {
 	let timelinep;
 	let t;
@@ -76,11 +76,18 @@ function create_if_block(ctx) {
 				email: /*email*/ ctx[2],
 				photo: /*photo*/ ctx[3],
 				id: /*id*/ ctx[4],
-				urlAPI
+				urlAPI,
+				countFriends: /*countFriends*/ ctx[8]
 			}
 		});
 
-	sidebarright = new SidebarRight({ props: { id: /*id*/ ctx[4], urlAPI } });
+	sidebarright = new SidebarRight({
+			props: {
+				id: /*id*/ ctx[4],
+				urlAPI,
+				dataFriends: /*dataFriends*/ ctx[7]
+			}
+		});
 
 	return {
 		c() {
@@ -102,9 +109,11 @@ function create_if_block(ctx) {
 			if (dirty & /*email*/ 4) timelinep_changes.email = /*email*/ ctx[2];
 			if (dirty & /*photo*/ 8) timelinep_changes.photo = /*photo*/ ctx[3];
 			if (dirty & /*id*/ 16) timelinep_changes.id = /*id*/ ctx[4];
+			if (dirty & /*countFriends*/ 256) timelinep_changes.countFriends = /*countFriends*/ ctx[8];
 			timelinep.$set(timelinep_changes);
 			const sidebarright_changes = {};
 			if (dirty & /*id*/ 16) sidebarright_changes.id = /*id*/ ctx[4];
+			if (dirty & /*dataFriends*/ 128) sidebarright_changes.dataFriends = /*dataFriends*/ ctx[7];
 			sidebarright.$set(sidebarright_changes);
 		},
 		i(local) {
@@ -225,12 +234,36 @@ function instance($$self, $$props, $$invalidate) {
 		}
 	};
 
+	let dataFriends;
+	let countFriends;
+
+	const getFriends = async () => {
+		const response = await fetch(`${urlAPI}/friend/user/?user=${id}`);
+
+		if (response.ok) {
+			const content = await response.json();
+			$$invalidate(7, dataFriends = content);
+			$$invalidate(8, countFriends = content.length);
+		}
+	};
+
 	onMount(async () => {
 		await getData();
+		await getFriends();
 		translate();
 	});
 
-	return [name, title, email, photo, id, last_name, getUserMainToFirestore];
+	return [
+		name,
+		title,
+		email,
+		photo,
+		id,
+		last_name,
+		getUserMainToFirestore,
+		dataFriends,
+		countFriends
+	];
 }
 
 class Profile extends SvelteComponent {

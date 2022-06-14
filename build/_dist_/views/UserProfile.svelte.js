@@ -52,7 +52,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (48:2) {#if dataProfile}
+// (61:2) {#if dataProfile}
 function create_if_block(ctx) {
 	let timelinep;
 	let t;
@@ -67,12 +67,18 @@ function create_if_block(ctx) {
 				email: /*email*/ ctx[5],
 				photo: /*photo*/ ctx[6],
 				id: /*id*/ ctx[1],
-				userMain: /*userMain*/ ctx[7],
+				userMain: /*userMain*/ ctx[8],
 				urlAPI
 			}
 		});
 
-	sidebarright = new SidebarRight({ props: { id: /*id*/ ctx[1], urlAPI } });
+	sidebarright = new SidebarRight({
+			props: {
+				id: /*id*/ ctx[1],
+				urlAPI,
+				dataFriends: /*dataFriends*/ ctx[7]
+			}
+		});
 
 	return {
 		c() {
@@ -97,6 +103,7 @@ function create_if_block(ctx) {
 			timelinep.$set(timelinep_changes);
 			const sidebarright_changes = {};
 			if (dirty & /*id*/ 2) sidebarright_changes.id = /*id*/ ctx[1];
+			if (dirty & /*dataFriends*/ 128) sidebarright_changes.dataFriends = /*dataFriends*/ ctx[7];
 			sidebarright.$set(sidebarright_changes);
 		},
 		i(local) {
@@ -212,6 +219,8 @@ function instance($$self, $$props, $$invalidate) {
 		$$invalidate(4, title = userProfile.title);
 		$$invalidate(5, email = userProfile.email);
 		$$invalidate(6, photo = userProfile.photo);
+
+		// console.log(id);
 		getUserProfile(userProfile.id);
 	};
 
@@ -221,21 +230,46 @@ function instance($$self, $$props, $$invalidate) {
 		$$invalidate(0, dataProfile = content[0]);
 	};
 
-	onMount(() => {
-		getUser();
+	let dataFriends;
+	let countFriends;
+
+	const getFriends = async () => {
+		const response = await fetch(`${urlAPI}/friend/user/?user=${id}`);
+
+		if (response.ok) {
+			const content = await response.json();
+			$$invalidate(7, dataFriends = content);
+			countFriends = content.length;
+		}
+	};
+
+	onMount(async () => {
+		await getUser();
+		getFriends();
 	});
 
 	$$self.$$set = $$props => {
-		if ('params' in $$props) $$invalidate(8, params = $$props.params);
+		if ('params' in $$props) $$invalidate(9, params = $$props.params);
 	};
 
-	return [dataProfile, id, name, last_name, title, email, photo, userMain, params];
+	return [
+		dataProfile,
+		id,
+		name,
+		last_name,
+		title,
+		email,
+		photo,
+		dataFriends,
+		userMain,
+		params
+	];
 }
 
 class UserProfile extends SvelteComponent {
 	constructor(options) {
 		super();
-		init(this, options, instance, create_fragment, safe_not_equal, { params: 8 });
+		init(this, options, instance, create_fragment, safe_not_equal, { params: 9 });
 	}
 }
 

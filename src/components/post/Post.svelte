@@ -20,9 +20,10 @@
   export let share_id, share_count, share = '';
   export let video, code;
 
-  code = code.charAt(0).toUpperCase() + code.slice(1)
+  code ? code = code.charAt(0).toUpperCase() + code.slice(1) : code = false
 
-
+  let reactionsLikeList;
+  let reactionsLoveList;
   // console.log(navigator.language);
 
   const userStorage = JSON.parse(localStorage.getItem('data'))
@@ -76,20 +77,15 @@
   const reactionUser = async()=>{
     const getIdReaction = await fetch(`${urlAPI}/post/like/?post_id=${id}`)
     const response = await getIdReaction.json()
-    reactionsPost = response
 
-    const ulLikeList = document.getElementById(`ulLikeListReactions${id}`)
-    const ulLoveList = document.getElementById(`ulLoveReactionsList${id}`)
+    reactionsPost = response
+    reactionsLikeList = []
+    reactionsLoveList = []
 
     reactionsPost.forEach(userReaction => {
-      if (userReaction.like) {
-        let row = `<li style="list-style: none;">${userReaction.name}</li>`
-        ulLikeList.innerHTML += row
-      } else if (userReaction.love) {
-        let row = `<li style="list-style: none;">${userReaction.name}</li>`
-        ulLoveList.innerHTML += row
-      }
-    });
+      if (userReaction.like) reactionsLikeList.push(userReaction.name + ' ' + userReaction.last_name)
+      else if (userReaction.love) reactionsLoveList.push(userReaction.name + ' ' + userReaction.last_name)
+    })
 
     const spanLikeValue = document.getElementById(`likeValue${id}`)
     const spanLoveValue = document.getElementById(`loveValue${id}`)
@@ -879,7 +875,11 @@
             <span id={likeValue}>{reactions.like}</span>
             <span class="tooltiptext">
               <ul class="p-0 m-0" id="ulLikeListReactions{id}">
-                <!-- liListReactions.... -->
+                {#if reactionsLikeList}
+                   {#each reactionsLikeList as userLike}
+                     <li style="list-style: none;">{userLike}</li>
+                   {/each}
+                {/if}
               </ul>
             </span>
         </div>
@@ -889,7 +889,11 @@
           <span id={loveValue}>{reactions.love}</span>
           <span class="tooltiptext">
             <ul class="p-0 m-0" id="ulLoveReactionsList{id}">
-              <!-- liListReactions.... -->
+              {#if reactionsLoveList}
+                   {#each reactionsLoveList as userLove}
+                     <li style="list-style: none;">{userLove}</li>
+                   {/each}
+                {/if}
             </ul>
           </span>
         </div>
