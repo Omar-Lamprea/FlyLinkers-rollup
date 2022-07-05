@@ -6,8 +6,8 @@
   import { translate } from '../js/translate';
   
 
-  export let id = '', urlAPI, dataFriends = '';
-
+  export let id = '', urlAPI, urlImages = '', dataFriends = '';
+  
   onMount(async()=>{
     await translate()
   })
@@ -26,7 +26,7 @@
     <Events/>
     <Sponsors/>
     {#if window.location.href.includes('profile')}
-       <People {id} {urlAPI} {dataFriends}/>
+       <People {id} {urlAPI} {urlImages} {dataFriends}/>
     {/if}
   </div>
 </div>

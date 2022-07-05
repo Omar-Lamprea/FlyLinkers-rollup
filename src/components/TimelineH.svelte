@@ -8,7 +8,7 @@
 
 
   export let id;
-  export let urlAPI;
+  export let urlAPI, urlImages;
 
   const userId = id;
   const posts = writable([])
@@ -121,10 +121,10 @@
   <div class="Timeline-container">
     <input type="checkbox" id="reloadPostCheck" name="reloadPost" class="d-none">
     {#if id}
-       <AddPost {id} {urlAPI} {colorbox}/>
+       <AddPost {id} {urlAPI} {colorbox} {urlImages}/>
     {/if}
     {#each $posts as dataPost}
-      <Post {...dataPost} {userId} {urlAPI}/>
+      <Post {...dataPost} {userId} {urlAPI} {urlImages}/>
     {/each}
 
     <div data-translate="noPost" id="endPosts" class="d-none text-center fw-bold" style="color: var(--main-color);">Sorry!, we can't find more post to show you.</div>

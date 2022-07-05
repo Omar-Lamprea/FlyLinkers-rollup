@@ -8,6 +8,8 @@
 
 
   const urlAPI = 'https://api.flylinkers.com'
+  const urlImages= 'http://3.130.198.152:8000'
+
   let name, title, email, photo, id, last_name, middle_name;
   let data;
   let getUserMainToFirestore
@@ -56,8 +58,8 @@
 
 <div class="row">
   {#if id && getUserMainToFirestore}
-    <TimelineP {name} {last_name} {title} {email} {photo} {id} {urlAPI} {countFriends}/>
-    <SidebarRight {id} {urlAPI} {dataFriends}/>
+    <TimelineP {name} {last_name} {title} {email} {photo} {id} {urlAPI} {urlImages} {countFriends}/>
+    <SidebarRight {id} {urlAPI} {dataFriends} {urlImages}/>
   {:else}
     <div class="loaderContainer d-flex" style="height: calc(100vh - 15rem);">
       <Loader/>

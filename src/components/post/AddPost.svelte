@@ -3,7 +3,7 @@
   import Loader from '../Loader.svelte'
   import {googleTranslateJs} from '../../js/googleTranslate'
 
-  export let id, urlAPI, colorbox;
+  export let id, urlAPI, colorbox, urlImages;
 
   if (!colorbox) colorbox = ''
 
@@ -206,7 +206,7 @@
     let imagePost = '';
     if (!!postImg.src) {
       // console.log('envia solo foto')
-      const convertImageB64 = await fetch(`${urlAPI}/resources/img/`, {
+      const convertImageB64 = await fetch(`${urlImages}/resources/img/`, {
         method : 'POST',
         headers : {
           'Content-Type' : 'application/json'

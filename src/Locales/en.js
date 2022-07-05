@@ -49,9 +49,11 @@ export default{
 
       //post
       "comments": "Comments",
+      "reply": "reply",
       "comment": "Comment",
-      "input-make-comment" : 'Escribe un comentario...',
-      "btn-make-comment" : 'Publicar',
+      "input-make-comment" : 'Add a comment...',
+      "input-make-reply" : 'Add a reply...',
+      "btn-make-comment" : 'Post',
       "title-post": "Post",
       "like": "Like",
       "love": "Love",

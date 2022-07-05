@@ -8,7 +8,7 @@
   import {addFriend, declineFriend} from '../../js/friendRequests'
   import {onMount} from 'svelte'
 
-  export let name, last_name, title, email , photo, id, aboutMe, urlAPI;
+  export let name, last_name, title, email , photo, id, aboutMe, urlAPI, urlImages;
   export let userMain;
 
   const dataJson = JSON.parse(localStorage.getItem('data'))
@@ -216,7 +216,7 @@
 
       <div class="Profile-card">
         <div class="Profile-card-content d-flex flex-column">
-          <UserPotho {photo} {urlAPI} {id}/>
+          <UserPotho {photo} {urlAPI} {urlImages} {id}/>
           <div class="Profile-card-info mt-2">
             <div class="Profile-card-user p-3 p-md-0 mt-4 mt-md-0">
               <h2>{name} {last_name}</h2>
@@ -260,8 +260,8 @@
               <span data-translate="edit-profile">Edit profile</span>
             </p>
           </a>
-          <CoverPhotoModal {id} {urlAPI}/>
-          <ProfilePhotoModal {id} {urlAPI}/>
+          <CoverPhotoModal {id} {urlAPI} {urlImages}/>
+          <ProfilePhotoModal {id} {urlAPI} {urlImages}/>
         </div>
 
           <!-- <div class="Profile-card-statistics">

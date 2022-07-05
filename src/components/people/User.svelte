@@ -2,10 +2,9 @@
   import {link} from "svelte-spa-router";
   import active from 'svelte-spa-router/active'
 
-  export let name, middle_name, last_name, title, photo, email, id, urlAPI, username, phone;
+  export let name, middle_name, last_name, title, photo, email, id, urlAPI, urlImages, username, phone;
 
-
-
+  
   const viewUserProfile = (email) => {
     window.location.pathname = `profile/${email}`
   }
@@ -62,7 +61,7 @@
 <div class="User my-3 pb-3 d-flex align-items-center" on:click={visitProfile}>
   <a href="/profile/{username}" class="d-flex" use:link use:active>
     <div class="User-photo">
-      <img src="{urlAPI}{photo}" alt="">
+      <img src="{urlImages}{photo}" alt="">
     </div>
     <div class="User-detail d-flex flex-column">
       <p>{name} {last_name}</p>

@@ -4,8 +4,8 @@
   let coverPhotoB64;
   let urlCoverPhoto;
   let idCoverPhoto;
+  export let id, urlAPI, urlImages;
 
-  export let id, urlAPI;
 
   let btnSaveCoverPhoto = 'Save cover photo'
 
@@ -20,7 +20,7 @@
   }
 
   const convertCoverB64 = async ()=> {
-    const response = await fetch(`${urlAPI}/resources/img/`,{
+    const response = await fetch(`${urlImages}/resources/img/`,{
       method : 'POST',
       headers : {
         'Content-Type': 'application/json'

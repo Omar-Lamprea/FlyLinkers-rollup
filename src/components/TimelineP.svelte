@@ -11,7 +11,7 @@
   import { translate } from '../js/translate';
 
 
-  export let name, last_name, title, email , photo , id, urlAPI;
+  export let name, last_name, title, email , photo , id, urlAPI, urlImages;
   export let userMain;
   export let countFriends = 0;
 
@@ -35,7 +35,7 @@
       data = content[0]
       userProfile = data.id
       experiences = data.experiences
-      coverPhoto = `${urlAPI}${data.cover_img}`
+      coverPhoto = `${urlImages}${data.cover_img}`
       aboutMe = data.about
     }
   }
@@ -148,7 +148,7 @@
     <input type="checkbox" id="reloadPostCheck" name="reloadPost" class="d-none">
     <div class="Profile-container">
       <CoverPhoto {coverPhoto} {userId}/>
-      <UserDetails {name} {last_name} {title} {email} {photo} {id} {aboutMe} {userMain} {urlAPI}/>
+      <UserDetails {name} {last_name} {title} {email} {photo} {id} {aboutMe} {userMain} {urlAPI} {urlImages}/>
 
       {#if email === dataJson.email}
         <div class="Background-post-profile">
@@ -168,13 +168,13 @@
         {#if userMain}
 
           {#each post as dataPost}
-            <Post {...userPost} {...dataPost} {userMain} {urlAPI}/>
+            <Post {...userPost} {...dataPost} {userMain} {urlAPI} {urlImages}/>
           {/each}
 
         {:else}
 
           {#each post as dataPost}
-            <Post {...userPost} {...dataPost} {userId} {urlAPI}/>
+            <Post {...userPost} {...dataPost} {userId} {urlAPI} {urlImages}/>
           {/each}
 
         {/if}
@@ -185,13 +185,13 @@
         {#if userMain}
 
           {#each $posts as dataPost}
-            <Post {...userPost} {...dataPost} {userMain} {urlAPI}/>
+            <Post {...userPost} {...dataPost} {userMain} {urlAPI} {urlImages}/>
           {/each}
 
         {:else}
 
           {#each $posts as dataPost}
-            <Post {...userPost} {...dataPost} {userId} {urlAPI}/>
+            <Post {...userPost} {...dataPost} {userId} {urlAPI} {urlImages}/>
           {/each}
 
         {/if}

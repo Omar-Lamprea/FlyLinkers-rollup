@@ -3,7 +3,7 @@
   import {link} from 'svelte-spa-router';
   import active from 'svelte-spa-router/active'
 
-  export let name, title, photo, last_name, urlAPI;
+  export let name, title, photo, last_name, urlAPI, urlImages;
 
 </script>
 
@@ -53,7 +53,7 @@
 
 <div class="Profile-card Default-containers px-0">
   <div class="Profile-card-content d-flex flex-column justify-content-center align-items-center">
-    <UserPotho {photo} {urlAPI}/>
+    <UserPotho {photo} {urlAPI} {urlImages}/>
     <div class="Profile-card-info text-center mt-2">
       <div class="Profile-card-user mt-4 mt-lg-0">
         <h2 class="pt-2 pt-lg-0">{name} {last_name}</h2>

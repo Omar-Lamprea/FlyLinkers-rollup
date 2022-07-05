@@ -4,10 +4,9 @@
   let profilePhotoB64;
   let urlProfilePhoto;
   let idProfilePhoto
+  export let id, urlAPI, urlImages;
 
-  export let id, urlAPI;
   let saveProfilePhoto = 'Save profile photo'
-
 
   const showProfileImg = () =>{
     const render = new FileReader();
@@ -20,7 +19,7 @@
   }
 
   const convertProfileB64 = async ()=> {
-    const response = await fetch(`${urlAPI}/resources/img/`,{
+    const response = await fetch(`${urlImages}/resources/img/`,{
       method : 'POST',
       headers : {
         'Content-Type': 'application/json'

@@ -1,7 +1,9 @@
 <script>
 
   import User from './User.svelte'
-  export let id, urlAPI, dataFriends;
+  export let id, urlAPI, urlImages, dataFriends;
+
+  
 
 </script>
 
@@ -19,7 +21,7 @@
     <div class="User">
       {#if dataFriends}
          {#each dataFriends as UserDetails}
-           <User {...UserDetails} {urlAPI}/>
+           <User {...UserDetails} {urlAPI} {urlImages}/>
          {/each}
       {/if}
     </div>

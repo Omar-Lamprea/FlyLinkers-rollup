@@ -6,7 +6,7 @@
   import Loader from './Loader.svelte'
 
   export let data;
-  export let urlLogOut, urlAPI;
+  export let urlLogOut, urlAPI, urlImages;
   let photo = data.photo, id = data.id
 
 
@@ -154,7 +154,7 @@
                   <li>
                     <a href="/profile/{user.username}" use:link use:active on:click={visitProfile(user.username)} class="d-flex">
                       <span class="dropdown-item d-flex align-items-center">
-                        <img src="{urlAPI}{user.photo}" alt="img">
+                        <img src="{urlImages}{user.photo}" alt="img">
                         <div class="userInfo">
                           <h6>{user.name} {user.last_name}</h6>
                           <p style="color: grey;">{user.title} </p>
@@ -178,7 +178,7 @@
       </div>
 
       <div class="Header-nav d-flex m-auto">
-        <HeaderNav {photo} {id} {urlLogOut} {urlAPI}/>
+        <HeaderNav {photo} {id} {urlLogOut} {urlAPI} {urlImages}/>
       </div>
     </div>
   </div>

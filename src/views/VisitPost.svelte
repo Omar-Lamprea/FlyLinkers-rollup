@@ -7,6 +7,8 @@
 
   export let params
   const urlAPI = 'https://api.flylinkers.com'
+  const urlImages= 'http://3.130.198.152:8000'
+
   let data;
   let template;
   let error = undefined;
@@ -61,11 +63,11 @@
 
 <div class="row">
   {#if template}
-    <SidebarLeft {name} {last_name} {title} {photo} {urlAPI}/>
+    <SidebarLeft {name} {last_name} {title} {photo} {urlAPI} {urlImages}/>
     <div class="col-12 col-lg-6">
-      <Post {urlAPI} {...template} {userId}/>
+      <Post {urlAPI} {...template} {userId} {urlImages}/>
     </div>
-    <SidebarRight {urlAPI}/>
+    <SidebarRight {urlAPI} {urlImages}/>
   {:else}
     <Loader/>
   {/if}

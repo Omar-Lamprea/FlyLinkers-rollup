@@ -35,6 +35,10 @@
 
   // const urlAPI = 'http://18.118.50.78:8000'
   const urlAPI = 'https://api.flylinkers.com'
+  const urlImages= 'http://3.130.198.152:8000'
+
+
+  console.log("falta extender la urlImages a los modals que hacen el put");
 
   if(!localStorage.getItem('user') || localStorage.getItem('user') === 'null' || window.location.href.includes('user=')){
     const param = window.location.search
@@ -239,7 +243,7 @@
 
 
 {#if data && getUserMainToFirestore}
-   <Header {data} {urlLogOut} {urlAPI}/>
+   <Header {data} {urlLogOut} {urlAPI} {urlImages}/> 
 
    <main id="main" class="container-fluid container-lg">
      <Router {routes}/>

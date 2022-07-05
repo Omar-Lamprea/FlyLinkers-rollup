@@ -16,11 +16,16 @@
   export let userId;
   export let desc, reactions, img, comments, create_time, user, id, user_id, update_time;
   export let name, middle_name, last_name, title, photo, email, username = 0, phone = 0;
-  export let userMain, urlAPI, url_id, meta;
+  export let userMain, urlAPI, urlImages, url_id, meta;
   export let share_id, share_count, share = '';
   export let video, code;
 
-  code ? code = code.charAt(0).toUpperCase() + code.slice(1) : code = false
+  if(code !== false) code = code.charAt(0).toUpperCase() + code.slice(1)
+  console.log(code);
+
+  // code
+  //   ? code = code.charAt(0).toUpperCase() + code.slice(1) 
+  //   : code = false
 
   let reactionsLikeList;
   let reactionsLoveList;
@@ -378,6 +383,7 @@
       const response = await fetch(`${urlAPI}/post/comment/?post_id=${id}`)
       const content = await response.json()
       dataComment = content
+      translate()
     }
   }
 
@@ -711,7 +717,7 @@
         {#if user}
           <div class="Card-user" on:click={visitProfile}>
             <a href="/profile/{user.username}" class="d-flex" use:link use:active>
-              <img src="{urlAPI}{user.photo}" alt="">
+              <img src="{urlImages}{user.photo}" alt="">
               <h2>
                 {user.name} {user.last_name}
                 <span>{user.title}</span>
@@ -721,7 +727,7 @@
           </div>
         {:else}
           <div class="Card-user">
-            <img src="{urlAPI}{photo}" alt="">
+            <img src="{urlImages}{photo}" alt="">
             <h2>
               {name} {last_name}
               <span>{title}</span>
@@ -751,7 +757,7 @@
 
     <div class="Card-description d-flex flex-column mx-3 mx-md-0">
       <span class="mx-0">{desc}</span>
-      {#if desc && code !== localStorage.getItem('lang') }
+      {#if desc && code && code !== localStorage.getItem('lang') }
         <span id="btn-translatePost" class="mx-0 btn-translatePost" on:click={googleTranslate(desc)}>See translation</span>
         <div class="desc-translated">
           {#if showLoader}
@@ -782,7 +788,7 @@
 
       {#if !!img}
         <figure>
-          <img src="{urlAPI}{img}" alt="img post">
+          <img src="{urlImages}{img}" alt="img post">
         </figure>
       {/if}
     </div>
@@ -792,7 +798,7 @@
         <iframe
           width="100%" 
           height="350" 
-          src={video} 
+          src={video}
           title="YouTube video player" 
           frameborder="0" 
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -815,7 +821,7 @@
 
           <div class="Card-user justify-content-start" on:click={visitProfile}>
             <a href="/profile/{share[0].username}" class="d-flex" use:link use:active>
-              <img src="{urlAPI}{share[0].photo}" alt="">
+              <img src="{urlImages}{share[0].photo}" alt="">
               <h2>
                 {share[0].name} {share[0].last_name}
                 <span>{share[0].title}</span>
@@ -828,7 +834,7 @@
         <div class="info-shared">
           <span>{share[1].desc}</span>
           {#if share[1].img !== ''}
-             <img src="{urlAPI}{share[1].img}" alt="" style="width: 100%;">
+             <img src="{urlImages}{share[1].img}" alt="" style="width: 100%;">
           {/if}
           {#if share[1].video}
             {#if share[1].video.includes('https://www.youtube.com/')}
@@ -938,7 +944,7 @@
 
     <div id="comment{id}" class="comments mt-3 d-none">
       <div class="Comments-add d-flex justify-content-between">
-        <img src="{urlAPI}{localStorage.getItem('profilePhoto')}" alt="img">
+        <img src="{urlImages}{localStorage.getItem('profilePhoto')}" alt="img">
         <form>
           <input data-translate="input-make-comment" id="inputAddComment{id}" type="text" class="Comments-input" placeholder="Write a comment..." on:keyup={commentAbled}>
           <button data-translate="btn-make-comment" id="btn-sendComment{id}" class="btn-sendComment" disabled on:click={addComment}>Post</button>
@@ -947,7 +953,7 @@
 
       {#if dataComment}
         {#each dataComment as comment}
-          <Comment {comment} {urlAPI}/>
+          <Comment {comment} {urlAPI} {urlImages}/>
         {/each}
       {/if}
     </div>

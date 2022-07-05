@@ -17,7 +17,7 @@
   
 
   export let photo, id;
-  export let urlLogOut, urlAPI;
+  export let urlLogOut, urlAPI, urlImages;
 
   let idStr = id.toString()
   
@@ -497,9 +497,9 @@
   <div class="icon Header-nav-user mx-3 fs-3">
     <a href="/profile" use:link use:active>
       {#if localStorage.getItem('profilePhoto')}
-        <img id="headerUserImage" src="{urlAPI}{localStorage.getItem('profilePhoto')}" alt="">
+        <img id="headerUserImage" src="{urlImages}{localStorage.getItem('profilePhoto')}" alt="">
       {:else}
-        <img id="headerUserImage" src="{urlAPI}{photo}" alt="">
+        <img id="headerUserImage" src="{urlImages}{photo}" alt="">
       {/if}
     </a>
   </div>

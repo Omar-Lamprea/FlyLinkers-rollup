@@ -54,8 +54,10 @@ export default{
 
       //post
       "comments": "Comentarios",
+      "reply": "Respuestas",
       "comment": "Comentar",
       "input-make-comment" : 'Escribe un comentario...',
+      "input-make-reply" : 'Escribe una respuesta...',
       "btn-make-comment" : 'Publicar',
       //********************
       "title-post": "Publicar",
