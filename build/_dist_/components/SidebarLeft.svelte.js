@@ -36,7 +36,8 @@ function create_fragment(ctx) {
 				last_name: /*last_name*/ ctx[3],
 				title: /*title*/ ctx[1],
 				photo: /*photo*/ ctx[2],
-				urlAPI: /*urlAPI*/ ctx[4]
+				urlAPI: /*urlAPI*/ ctx[4],
+				urlImages: /*urlImages*/ ctx[5]
 			}
 		});
 
@@ -72,6 +73,7 @@ function create_fragment(ctx) {
 			if (dirty & /*title*/ 2) profilecard_changes.title = /*title*/ ctx[1];
 			if (dirty & /*photo*/ 4) profilecard_changes.photo = /*photo*/ ctx[2];
 			if (dirty & /*urlAPI*/ 16) profilecard_changes.urlAPI = /*urlAPI*/ ctx[4];
+			if (dirty & /*urlImages*/ 32) profilecard_changes.urlImages = /*urlImages*/ ctx[5];
 			profilecard.$set(profilecard_changes);
 		},
 		i(local) {
@@ -97,7 +99,7 @@ function create_fragment(ctx) {
 }
 
 function instance($$self, $$props, $$invalidate) {
-	let { name, title, photo, last_name, urlAPI } = $$props;
+	let { name, title, photo, last_name, urlAPI, urlImages } = $$props;
 
 	$$self.$$set = $$props => {
 		if ('name' in $$props) $$invalidate(0, name = $$props.name);
@@ -105,9 +107,10 @@ function instance($$self, $$props, $$invalidate) {
 		if ('photo' in $$props) $$invalidate(2, photo = $$props.photo);
 		if ('last_name' in $$props) $$invalidate(3, last_name = $$props.last_name);
 		if ('urlAPI' in $$props) $$invalidate(4, urlAPI = $$props.urlAPI);
+		if ('urlImages' in $$props) $$invalidate(5, urlImages = $$props.urlImages);
 	};
 
-	return [name, title, photo, last_name, urlAPI];
+	return [name, title, photo, last_name, urlAPI, urlImages];
 }
 
 class SidebarLeft extends SvelteComponent {
@@ -119,7 +122,8 @@ class SidebarLeft extends SvelteComponent {
 			title: 1,
 			photo: 2,
 			last_name: 3,
-			urlAPI: 4
+			urlAPI: 4,
+			urlImages: 5
 		});
 	}
 }

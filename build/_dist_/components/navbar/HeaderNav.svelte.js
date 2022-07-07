@@ -59,13 +59,13 @@ import startTime from '../../js/startTime.js';
 
 function get_each_context(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[16] = list[i];
+	child_ctx[17] = list[i];
 	return child_ctx;
 }
 
 function get_each_context_1(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[19] = list[i];
+	child_ctx[20] = list[i];
 	return child_ctx;
 }
 
@@ -97,7 +97,7 @@ function create_if_block_4(ctx) {
 	return {
 		c() {
 			div = element("div");
-			t = text(/*countMessages*/ ctx[5]);
+			t = text(/*countMessages*/ ctx[6]);
 			attr(div, "id", "notificacionsChatsBubble");
 			attr(div, "class", "notificacions-bubble dropdown-toggle svelte-1dexmrm");
 			attr(div, "data-bs-toggle", "dropdown");
@@ -108,7 +108,7 @@ function create_if_block_4(ctx) {
 			append(div, t);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*countMessages*/ 32) set_data(t, /*countMessages*/ ctx[5]);
+			if (dirty & /*countMessages*/ 64) set_data(t, /*countMessages*/ ctx[6]);
 		},
 		d(detaching) {
 			if (detaching) detach(div);
@@ -145,7 +145,7 @@ function create_each_block_1(ctx) {
 
 	chatlist = new ChatList({
 			props: {
-				groups: /*groups*/ ctx[19],
+				groups: /*groups*/ ctx[20],
 				urlAPI: /*urlAPI*/ ctx[2],
 				id: /*id*/ ctx[1]
 			}
@@ -161,7 +161,7 @@ function create_each_block_1(ctx) {
 		},
 		p(ctx, dirty) {
 			const chatlist_changes = {};
-			if (dirty & /*$usergroups*/ 64) chatlist_changes.groups = /*groups*/ ctx[19];
+			if (dirty & /*$usergroups*/ 128) chatlist_changes.groups = /*groups*/ ctx[20];
 			if (dirty & /*urlAPI*/ 4) chatlist_changes.urlAPI = /*urlAPI*/ ctx[2];
 			if (dirty & /*id*/ 2) chatlist_changes.id = /*id*/ ctx[1];
 			chatlist.$set(chatlist_changes);
@@ -204,7 +204,7 @@ function create_else_block_3(ctx) {
 // (453:8) {#if notificationsList.length > 0}
 function create_if_block_1(ctx) {
 	let each_1_anchor;
-	let each_value = /*notificationsList*/ ctx[3];
+	let each_value = /*notificationsList*/ ctx[4];
 	let each_blocks = [];
 
 	for (let i = 0; i < each_value.length; i += 1) {
@@ -227,8 +227,8 @@ function create_if_block_1(ctx) {
 			insert(target, each_1_anchor, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*notificationsList, visitProfile, startTime, urlAPI, reload*/ 12) {
-				each_value = /*notificationsList*/ ctx[3];
+			if (dirty & /*notificationsList, visitProfile, startTime, urlImages, reload*/ 24) {
+				each_value = /*notificationsList*/ ctx[4];
 				let i;
 
 				for (i = 0; i < each_value.length; i += 1) {
@@ -267,11 +267,11 @@ function create_else_block_1(ctx) {
 	let span;
 	let div;
 	let p0;
-	let t1_value = /*notification*/ ctx[16].name + "";
+	let t1_value = /*notification*/ ctx[17].name + "";
 	let t1;
 	let t2;
 	let p1;
-	let t3_value = startTime(/*notification*/ ctx[16].date.toISOString()) + "";
+	let t3_value = startTime(/*notification*/ ctx[17].date.toISOString()) + "";
 	let t3;
 	let t4;
 	let show_if;
@@ -284,8 +284,8 @@ function create_else_block_1(ctx) {
 	let dispose;
 
 	function select_block_type_3(ctx, dirty) {
-		if (dirty & /*notificationsList*/ 8) show_if = null;
-		if (show_if == null) show_if = !!/*notification*/ ctx[16].desc.includes('reacted');
+		if (dirty & /*notificationsList*/ 16) show_if = null;
+		if (show_if == null) show_if = !!/*notification*/ ctx[17].desc.includes('reacted');
 		if (show_if) return create_if_block_3;
 		return create_else_block_2;
 	}
@@ -309,17 +309,17 @@ function create_else_block_1(ctx) {
 			t4 = space();
 			if_block.c();
 			t5 = space();
-			if (!src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[2] + "/" + /*notification*/ ctx[16].photo))) attr(img, "src", img_src_value);
+			if (!src_url_equal(img.src, img_src_value = "" + (/*urlImages*/ ctx[3] + /*notification*/ ctx[17].photo))) attr(img, "src", img_src_value);
 			attr(img, "alt", "userImage");
 			attr(img, "class", "svelte-1dexmrm");
 			attr(p0, "class", "notification-user-name svelte-1dexmrm");
 			attr(p1, "class", "notification-time svelte-1dexmrm");
 			attr(div, "class", "data-user-time d-flex justify-content-between");
 			attr(span, "class", "svelte-1dexmrm");
-			attr(a, "href", a_href_value = "/post/" + /*notification*/ ctx[16].id);
+			attr(a, "href", a_href_value = "/post/" + /*notification*/ ctx[17].id);
 			attr(a, "class", "d-flex svelte-1dexmrm");
 			attr(li, "class", "d-flex notificationsList dropdown-item svelte-1dexmrm");
-			attr(li, "data-id", li_data_id_value = /*notification*/ ctx[16].id);
+			attr(li, "data-id", li_data_id_value = /*notification*/ ctx[17].id);
 		},
 		m(target, anchor) {
 			insert(target, li, anchor);
@@ -348,12 +348,12 @@ function create_else_block_1(ctx) {
 			}
 		},
 		p(ctx, dirty) {
-			if (dirty & /*urlAPI, notificationsList*/ 12 && !src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[2] + "/" + /*notification*/ ctx[16].photo))) {
+			if (dirty & /*urlImages, notificationsList*/ 24 && !src_url_equal(img.src, img_src_value = "" + (/*urlImages*/ ctx[3] + /*notification*/ ctx[17].photo))) {
 				attr(img, "src", img_src_value);
 			}
 
-			if (dirty & /*notificationsList*/ 8 && t1_value !== (t1_value = /*notification*/ ctx[16].name + "")) set_data(t1, t1_value);
-			if (dirty & /*notificationsList*/ 8 && t3_value !== (t3_value = startTime(/*notification*/ ctx[16].date.toISOString()) + "")) set_data(t3, t3_value);
+			if (dirty & /*notificationsList*/ 16 && t1_value !== (t1_value = /*notification*/ ctx[17].name + "")) set_data(t1, t1_value);
+			if (dirty & /*notificationsList*/ 16 && t3_value !== (t3_value = startTime(/*notification*/ ctx[17].date.toISOString()) + "")) set_data(t3, t3_value);
 
 			if (current_block_type === (current_block_type = select_block_type_3(ctx, dirty)) && if_block) {
 				if_block.p(ctx, dirty);
@@ -367,11 +367,11 @@ function create_else_block_1(ctx) {
 				}
 			}
 
-			if (dirty & /*notificationsList*/ 8 && a_href_value !== (a_href_value = "/post/" + /*notification*/ ctx[16].id)) {
+			if (dirty & /*notificationsList*/ 16 && a_href_value !== (a_href_value = "/post/" + /*notification*/ ctx[17].id)) {
 				attr(a, "href", a_href_value);
 			}
 
-			if (dirty & /*notificationsList*/ 8 && li_data_id_value !== (li_data_id_value = /*notification*/ ctx[16].id)) {
+			if (dirty & /*notificationsList*/ 16 && li_data_id_value !== (li_data_id_value = /*notification*/ ctx[17].id)) {
 				attr(li, "data-id", li_data_id_value);
 			}
 		},
@@ -394,15 +394,15 @@ function create_if_block_2(ctx) {
 	let span;
 	let div;
 	let p0;
-	let t1_value = /*notification*/ ctx[16].name + "";
+	let t1_value = /*notification*/ ctx[17].name + "";
 	let t1;
 	let t2;
 	let p1;
-	let t3_value = startTime(/*notification*/ ctx[16].date.toISOString()) + "";
+	let t3_value = startTime(/*notification*/ ctx[17].date.toISOString()) + "";
 	let t3;
 	let t4;
 	let p2;
-	let t5_value = /*notification*/ ctx[16].desc + "";
+	let t5_value = /*notification*/ ctx[17].desc + "";
 	let t5;
 	let a_href_value;
 	let link_action;
@@ -429,7 +429,7 @@ function create_if_block_2(ctx) {
 			p2 = element("p");
 			t5 = text(t5_value);
 			t6 = space();
-			if (!src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[2] + "/" + /*notification*/ ctx[16].photo))) attr(img, "src", img_src_value);
+			if (!src_url_equal(img.src, img_src_value = "" + (/*urlImages*/ ctx[3] + /*notification*/ ctx[17].photo))) attr(img, "src", img_src_value);
 			attr(img, "alt", "userImage");
 			attr(img, "class", "svelte-1dexmrm");
 			attr(p0, "class", "notification-user-name svelte-1dexmrm");
@@ -438,10 +438,10 @@ function create_if_block_2(ctx) {
 			attr(p2, "data-translate", "notification-Frequest");
 			attr(p2, "class", "notification-desc");
 			attr(span, "class", "svelte-1dexmrm");
-			attr(a, "href", a_href_value = "/profile/" + /*notification*/ ctx[16].id);
+			attr(a, "href", a_href_value = "/profile/" + /*notification*/ ctx[17].id);
 			attr(a, "class", "d-flex svelte-1dexmrm");
 			attr(li, "class", "d-flex notificationsList dropdown-item svelte-1dexmrm");
-			attr(li, "data-email", li_data_email_value = /*notification*/ ctx[16].id);
+			attr(li, "data-email", li_data_email_value = /*notification*/ ctx[17].id);
 		},
 		m(target, anchor) {
 			insert(target, li, anchor);
@@ -463,7 +463,7 @@ function create_if_block_2(ctx) {
 			if (!mounted) {
 				dispose = [
 					listen(a, "click", function () {
-						if (is_function(visitProfile(/*notification*/ ctx[16].id))) visitProfile(/*notification*/ ctx[16].id).apply(this, arguments);
+						if (is_function(visitProfile(/*notification*/ ctx[17].id))) visitProfile(/*notification*/ ctx[17].id).apply(this, arguments);
 					}),
 					action_destroyer(link_action = link.call(null, a)),
 					action_destroyer(active_action = active.call(null, a))
@@ -475,19 +475,19 @@ function create_if_block_2(ctx) {
 		p(new_ctx, dirty) {
 			ctx = new_ctx;
 
-			if (dirty & /*urlAPI, notificationsList*/ 12 && !src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[2] + "/" + /*notification*/ ctx[16].photo))) {
+			if (dirty & /*urlImages, notificationsList*/ 24 && !src_url_equal(img.src, img_src_value = "" + (/*urlImages*/ ctx[3] + /*notification*/ ctx[17].photo))) {
 				attr(img, "src", img_src_value);
 			}
 
-			if (dirty & /*notificationsList*/ 8 && t1_value !== (t1_value = /*notification*/ ctx[16].name + "")) set_data(t1, t1_value);
-			if (dirty & /*notificationsList*/ 8 && t3_value !== (t3_value = startTime(/*notification*/ ctx[16].date.toISOString()) + "")) set_data(t3, t3_value);
-			if (dirty & /*notificationsList*/ 8 && t5_value !== (t5_value = /*notification*/ ctx[16].desc + "")) set_data(t5, t5_value);
+			if (dirty & /*notificationsList*/ 16 && t1_value !== (t1_value = /*notification*/ ctx[17].name + "")) set_data(t1, t1_value);
+			if (dirty & /*notificationsList*/ 16 && t3_value !== (t3_value = startTime(/*notification*/ ctx[17].date.toISOString()) + "")) set_data(t3, t3_value);
+			if (dirty & /*notificationsList*/ 16 && t5_value !== (t5_value = /*notification*/ ctx[17].desc + "")) set_data(t5, t5_value);
 
-			if (dirty & /*notificationsList*/ 8 && a_href_value !== (a_href_value = "/profile/" + /*notification*/ ctx[16].id)) {
+			if (dirty & /*notificationsList*/ 16 && a_href_value !== (a_href_value = "/profile/" + /*notification*/ ctx[17].id)) {
 				attr(a, "href", a_href_value);
 			}
 
-			if (dirty & /*notificationsList*/ 8 && li_data_email_value !== (li_data_email_value = /*notification*/ ctx[16].id)) {
+			if (dirty & /*notificationsList*/ 16 && li_data_email_value !== (li_data_email_value = /*notification*/ ctx[17].id)) {
 				attr(li, "data-email", li_data_email_value);
 			}
 		},
@@ -502,7 +502,7 @@ function create_if_block_2(ctx) {
 // (481:20) {:else}
 function create_else_block_2(ctx) {
 	let p;
-	let t_value = /*notification*/ ctx[16].desc + "";
+	let t_value = /*notification*/ ctx[17].desc + "";
 	let t;
 
 	return {
@@ -517,7 +517,7 @@ function create_else_block_2(ctx) {
 			append(p, t);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*notificationsList*/ 8 && t_value !== (t_value = /*notification*/ ctx[16].desc + "")) set_data(t, t_value);
+			if (dirty & /*notificationsList*/ 16 && t_value !== (t_value = /*notification*/ ctx[17].desc + "")) set_data(t, t_value);
 		},
 		d(detaching) {
 			if (detaching) detach(p);
@@ -528,7 +528,7 @@ function create_else_block_2(ctx) {
 // (479:20) {#if notification.desc.includes('reacted')}
 function create_if_block_3(ctx) {
 	let p;
-	let t_value = /*notification*/ ctx[16].desc + "";
+	let t_value = /*notification*/ ctx[17].desc + "";
 	let t;
 
 	return {
@@ -543,7 +543,7 @@ function create_if_block_3(ctx) {
 			append(p, t);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*notificationsList*/ 8 && t_value !== (t_value = /*notification*/ ctx[16].desc + "")) set_data(t, t_value);
+			if (dirty & /*notificationsList*/ 16 && t_value !== (t_value = /*notification*/ ctx[17].desc + "")) set_data(t, t_value);
 		},
 		d(detaching) {
 			if (detaching) detach(p);
@@ -556,7 +556,7 @@ function create_each_block(ctx) {
 	let if_block_anchor;
 
 	function select_block_type_2(ctx, dirty) {
-		if (typeof /*notification*/ ctx[16].id === 'string') return create_if_block_2;
+		if (typeof /*notification*/ ctx[17].id === 'string') return create_if_block_2;
 		return create_else_block_1;
 	}
 
@@ -601,7 +601,7 @@ function create_else_block(ctx) {
 		c() {
 			img = element("img");
 			attr(img, "id", "headerUserImage");
-			if (!src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[2] + /*photo*/ ctx[0]))) attr(img, "src", img_src_value);
+			if (!src_url_equal(img.src, img_src_value = "" + (/*urlImages*/ ctx[3] + /*photo*/ ctx[0]))) attr(img, "src", img_src_value);
 			attr(img, "alt", "");
 			attr(img, "class", "svelte-1dexmrm");
 		},
@@ -609,7 +609,7 @@ function create_else_block(ctx) {
 			insert(target, img, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*urlAPI, photo*/ 5 && !src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[2] + /*photo*/ ctx[0]))) {
+			if (dirty & /*urlImages, photo*/ 9 && !src_url_equal(img.src, img_src_value = "" + (/*urlImages*/ ctx[3] + /*photo*/ ctx[0]))) {
 				attr(img, "src", img_src_value);
 			}
 		},
@@ -628,7 +628,7 @@ function create_if_block(ctx) {
 		c() {
 			img = element("img");
 			attr(img, "id", "headerUserImage");
-			if (!src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[2] + localStorage.getItem('profilePhoto')))) attr(img, "src", img_src_value);
+			if (!src_url_equal(img.src, img_src_value = "" + (/*urlImages*/ ctx[3] + localStorage.getItem('profilePhoto')))) attr(img, "src", img_src_value);
 			attr(img, "alt", "");
 			attr(img, "class", "svelte-1dexmrm");
 		},
@@ -636,7 +636,7 @@ function create_if_block(ctx) {
 			insert(target, img, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*urlAPI*/ 4 && !src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[2] + localStorage.getItem('profilePhoto')))) {
+			if (dirty & /*urlImages*/ 8 && !src_url_equal(img.src, img_src_value = "" + (/*urlImages*/ ctx[3] + localStorage.getItem('profilePhoto')))) {
 				attr(img, "src", img_src_value);
 			}
 		},
@@ -703,13 +703,13 @@ function create_fragment(ctx) {
 		});
 
 	function select_block_type(ctx, dirty) {
-		if (/*countMessages*/ ctx[5] > 0) return create_if_block_4;
+		if (/*countMessages*/ ctx[6] > 0) return create_if_block_4;
 		return create_else_block_5;
 	}
 
 	let current_block_type = select_block_type(ctx, -1);
 	let if_block0 = current_block_type(ctx);
-	let each_value_1 = /*$usergroups*/ ctx[6];
+	let each_value_1 = /*$usergroups*/ ctx[7];
 	let each_blocks = [];
 
 	for (let i = 0; i < each_value_1.length; i += 1) {
@@ -727,7 +727,7 @@ function create_fragment(ctx) {
 	}
 
 	function select_block_type_1(ctx, dirty) {
-		if (/*notificationsList*/ ctx[3].length > 0) return create_if_block_1;
+		if (/*notificationsList*/ ctx[4].length > 0) return create_if_block_1;
 		return create_else_block_3;
 	}
 
@@ -774,7 +774,7 @@ function create_fragment(ctx) {
 			i2 = element("i");
 			t5 = space();
 			div4 = element("div");
-			t6 = text(/*countBubble*/ ctx[4]);
+			t6 = text(/*countBubble*/ ctx[5]);
 			t7 = space();
 			ul1 = element("ul");
 			if_block1.c();
@@ -894,12 +894,12 @@ function create_fragment(ctx) {
 				dispose = [
 					action_destroyer(link_action = link.call(null, a0)),
 					action_destroyer(active_action = active.call(null, a0)),
-					listen(div6, "click", /*counterBubble*/ ctx[8]),
+					listen(div6, "click", /*counterBubble*/ ctx[9]),
 					action_destroyer(link_action_1 = link.call(null, a1)),
 					action_destroyer(active_action_1 = active.call(null, a1)),
 					action_destroyer(link_action_2 = link.call(null, a2)),
 					action_destroyer(active_action_2 = active.call(null, a2)),
-					listen(span1, "click", /*logOut*/ ctx[9])
+					listen(span1, "click", /*logOut*/ ctx[10])
 				];
 
 				mounted = true;
@@ -923,8 +923,8 @@ function create_fragment(ctx) {
 				}
 			}
 
-			if (dirty & /*$usergroups, urlAPI, id*/ 70) {
-				each_value_1 = /*$usergroups*/ ctx[6];
+			if (dirty & /*$usergroups, urlAPI, id*/ 134) {
+				each_value_1 = /*$usergroups*/ ctx[7];
 				let i;
 
 				for (i = 0; i < each_value_1.length; i += 1) {
@@ -961,7 +961,7 @@ function create_fragment(ctx) {
 				}
 			}
 
-			if (!current || dirty & /*countBubble*/ 16) set_data(t6, /*countBubble*/ ctx[4]);
+			if (!current || dirty & /*countBubble*/ 32) set_data(t6, /*countBubble*/ ctx[5]);
 
 			if (current_block_type_1 === (current_block_type_1 = select_block_type_1(ctx, dirty)) && if_block1) {
 				if_block1.p(ctx, dirty);
@@ -1022,10 +1022,10 @@ async function reload() {
 function instance($$self, $$props, $$invalidate) {
 	let $usergroups;
 	let { photo, id } = $$props;
-	let { urlLogOut, urlAPI } = $$props;
+	let { urlLogOut, urlAPI, urlImages } = $$props;
 	let idStr = id.toString();
 	let usergroups = writable([]);
-	component_subscribe($$self, usergroups, value => $$invalidate(6, $usergroups = value));
+	component_subscribe($$self, usergroups, value => $$invalidate(7, $usergroups = value));
 	let newChat;
 	let notificationsList = [];
 	let notificationsChats = [];
@@ -1034,9 +1034,9 @@ function instance($$self, $$props, $$invalidate) {
 
 	function getUserNotifications() {
 		const notifications = onSnapshot(doc(db, 'user', idStr), notification => {
-			$$invalidate(3, notificationsList = []);
+			$$invalidate(4, notificationsList = []);
 			notificationsChats = [];
-			$$invalidate(4, countBubble = 0);
+			$$invalidate(5, countBubble = 0);
 			const data = notification.data();
 			const groups = data.groups;
 			const friendsRequests = data.friends;
@@ -1052,7 +1052,7 @@ function instance($$self, $$props, $$invalidate) {
 
 				groups.forEach(chat => {
 					let flag = 0;
-					$$invalidate(5, countMessages = 0);
+					$$invalidate(6, countMessages = 0);
 
 					// console.log('reiniciando contador a 0');
 					const q = query(collection(db, `message/${chat}/messages`), orderBy('sentAt', 'desc'), limit(2));
@@ -1076,7 +1076,7 @@ function instance($$self, $$props, $$invalidate) {
 										if (col.docs.length === 1) {
 											if (!col.docs[0].data().seen) {
 												// console.log('entré al 1');
-												$$invalidate(5, countMessages += 1);
+												$$invalidate(6, countMessages += 1);
 
 												flag = 1;
 											}
@@ -1084,7 +1084,7 @@ function instance($$self, $$props, $$invalidate) {
 											if (col.docs[1].data().seen) {
 												if (!col.docs[0].data().seen) {
 													// console.log('entre al 2a');
-													$$invalidate(5, countMessages += 1);
+													$$invalidate(6, countMessages += 1);
 
 													flag = 1;
 												} else {
@@ -1093,7 +1093,7 @@ function instance($$self, $$props, $$invalidate) {
 											} else {
 												if (flag === 0) {
 													// console.log('entre al 2b');
-													$$invalidate(5, countMessages += 1);
+													$$invalidate(6, countMessages += 1);
 												} else {
 													
 												} // flag = 0
@@ -1121,7 +1121,7 @@ function instance($$self, $$props, $$invalidate) {
 					};
 
 					if (!obj.seen) {
-						$$invalidate(4, countBubble += 1);
+						$$invalidate(5, countBubble += 1);
 					}
 
 					notificationsList.push(obj);
@@ -1142,7 +1142,7 @@ function instance($$self, $$props, $$invalidate) {
 
 					//recargar solicitudes
 					if (!obj.seen) {
-						$$invalidate(4, countBubble += 1);
+						$$invalidate(5, countBubble += 1);
 					}
 
 					notificationsList.push(obj);
@@ -1162,7 +1162,7 @@ function instance($$self, $$props, $$invalidate) {
 					};
 
 					if (!obj.seen) {
-						$$invalidate(4, countBubble += 1);
+						$$invalidate(5, countBubble += 1);
 					}
 
 					notificationsList.push(obj);
@@ -1297,7 +1297,7 @@ function instance($$self, $$props, $$invalidate) {
 					// }else{
 					//   countMessages -= 2
 					// }
-					$$invalidate(5, countMessages -= 1);
+					$$invalidate(6, countMessages -= 1);
 				} // console.log('soy conuntmessages',countMessages);
 				// console.log('entré a reducir');
 			}); // usergroups.set([])
@@ -1310,14 +1310,16 @@ function instance($$self, $$props, $$invalidate) {
 	$$self.$$set = $$props => {
 		if ('photo' in $$props) $$invalidate(0, photo = $$props.photo);
 		if ('id' in $$props) $$invalidate(1, id = $$props.id);
-		if ('urlLogOut' in $$props) $$invalidate(10, urlLogOut = $$props.urlLogOut);
+		if ('urlLogOut' in $$props) $$invalidate(11, urlLogOut = $$props.urlLogOut);
 		if ('urlAPI' in $$props) $$invalidate(2, urlAPI = $$props.urlAPI);
+		if ('urlImages' in $$props) $$invalidate(3, urlImages = $$props.urlImages);
 	};
 
 	return [
 		photo,
 		id,
 		urlAPI,
+		urlImages,
 		notificationsList,
 		countBubble,
 		countMessages,
@@ -1336,8 +1338,9 @@ class HeaderNav extends SvelteComponent {
 		init(this, options, instance, create_fragment, safe_not_equal, {
 			photo: 0,
 			id: 1,
-			urlLogOut: 10,
-			urlAPI: 2
+			urlLogOut: 11,
+			urlAPI: 2,
+			urlImages: 3
 		});
 	}
 }

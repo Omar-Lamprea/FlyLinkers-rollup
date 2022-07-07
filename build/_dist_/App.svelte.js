@@ -71,7 +71,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (241:0) {#if data && getUserMainToFirestore}
+// (242:0) {#if data && getUserMainToFirestore}
 function create_if_block(ctx) {
 	let header;
 	let t0;
@@ -81,7 +81,12 @@ function create_if_block(ctx) {
 	let current;
 
 	header = new Header({
-			props: { data: /*data*/ ctx[0], urlLogOut, urlAPI }
+			props: {
+				data: /*data*/ ctx[0],
+				urlLogOut,
+				urlAPI,
+				urlImages
+			}
 		});
 
 	router = new Router({ props: { routes } });
@@ -158,7 +163,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (246:5) {#if chatFlag && userMain && getUserMainToFirestore}
+// (247:5) {#if chatFlag && userMain && getUserMainToFirestore}
 function create_if_block_1(ctx) {
 	let chat;
 	let current;
@@ -273,6 +278,8 @@ const urlLogOut = 'https://flylinkers.com';
 // const urlLogOut = 'https://omar-lamprea.github.io/FlyLinkers-Login/'
 // const urlAPI = 'http://18.118.50.78:8000'
 const urlAPI = 'https://api.flylinkers.com';
+
+const urlImages = 'http://3.130.198.152:8000';
 
 function instance($$self, $$props, $$invalidate) {
 	if (!localStorage.getItem('lang')) {

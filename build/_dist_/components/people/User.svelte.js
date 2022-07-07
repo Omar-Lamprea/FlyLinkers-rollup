@@ -64,7 +64,7 @@ function create_fragment(ctx) {
 			t6 = space();
 			span1 = element("span");
 			t7 = text(/*email*/ ctx[4]);
-			if (!src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[5] + /*photo*/ ctx[3]))) attr(img, "src", img_src_value);
+			if (!src_url_equal(img.src, img_src_value = "" + (/*urlImages*/ ctx[5] + /*photo*/ ctx[3]))) attr(img, "src", img_src_value);
 			attr(img, "alt", "");
 			attr(img, "class", "svelte-n637bs");
 			attr(div0, "class", "User-photo svelte-n637bs");
@@ -104,7 +104,7 @@ function create_fragment(ctx) {
 			}
 		},
 		p(ctx, [dirty]) {
-			if (dirty & /*urlAPI, photo*/ 40 && !src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[5] + /*photo*/ ctx[3]))) {
+			if (dirty & /*urlImages, photo*/ 40 && !src_url_equal(img.src, img_src_value = "" + (/*urlImages*/ ctx[5] + /*photo*/ ctx[3]))) {
 				attr(img, "src", img_src_value);
 			}
 
@@ -128,7 +128,7 @@ function create_fragment(ctx) {
 }
 
 function instance($$self, $$props, $$invalidate) {
-	let { name, middle_name, last_name, title, photo, email, id, urlAPI, username, phone } = $$props;
+	let { name, middle_name, last_name, title, photo, email, id, urlAPI, urlImages, username, phone } = $$props;
 
 	const viewUserProfile = email => {
 		window.location.pathname = `profile/${email}`;
@@ -147,9 +147,10 @@ function instance($$self, $$props, $$invalidate) {
 		if ('photo' in $$props) $$invalidate(3, photo = $$props.photo);
 		if ('email' in $$props) $$invalidate(4, email = $$props.email);
 		if ('id' in $$props) $$invalidate(9, id = $$props.id);
-		if ('urlAPI' in $$props) $$invalidate(5, urlAPI = $$props.urlAPI);
+		if ('urlAPI' in $$props) $$invalidate(10, urlAPI = $$props.urlAPI);
+		if ('urlImages' in $$props) $$invalidate(5, urlImages = $$props.urlImages);
 		if ('username' in $$props) $$invalidate(6, username = $$props.username);
-		if ('phone' in $$props) $$invalidate(10, phone = $$props.phone);
+		if ('phone' in $$props) $$invalidate(11, phone = $$props.phone);
 	};
 
 	return [
@@ -158,11 +159,12 @@ function instance($$self, $$props, $$invalidate) {
 		title,
 		photo,
 		email,
-		urlAPI,
+		urlImages,
 		username,
 		visitProfile,
 		middle_name,
 		id,
+		urlAPI,
 		phone
 	];
 }
@@ -179,9 +181,10 @@ class User extends SvelteComponent {
 			photo: 3,
 			email: 4,
 			id: 9,
-			urlAPI: 5,
+			urlAPI: 10,
+			urlImages: 5,
 			username: 6,
-			phone: 10
+			phone: 11
 		});
 	}
 }

@@ -70,7 +70,7 @@ const postReaction =  async (commentId, userId, type) =>{
   }
 }
 
-export async function sendLike(icon, count, commentId){
+export async function sendLike(icon, count, commentId, userId){
   let result = false
   const user = await getReactionUser(commentId, userId)
 
@@ -92,7 +92,7 @@ export async function sendLike(icon, count, commentId){
   return result;
 }
 
-export async function sendLove(icon, count, commentId){
+export async function sendLove(icon, count, commentId, userId){
   const user = await getReactionUser(commentId, userId)
   let result = false
   if(user){

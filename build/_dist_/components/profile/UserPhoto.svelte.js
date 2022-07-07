@@ -23,7 +23,7 @@ function create_else_block_1(ctx) {
 	return {
 		c() {
 			img = element("img");
-			if (!src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[2] + /*photo*/ ctx[1]))) attr(img, "src", img_src_value);
+			if (!src_url_equal(img.src, img_src_value = "" + (/*urlImages*/ ctx[2] + /*photo*/ ctx[1]))) attr(img, "src", img_src_value);
 			attr(img, "alt", "profilePhoto");
 			attr(img, "class", "svelte-1tdigc9");
 		},
@@ -31,7 +31,7 @@ function create_else_block_1(ctx) {
 			insert(target, img, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*urlAPI, photo*/ 6 && !src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[2] + /*photo*/ ctx[1]))) {
+			if (dirty & /*urlImages, photo*/ 6 && !src_url_equal(img.src, img_src_value = "" + (/*urlImages*/ ctx[2] + /*photo*/ ctx[1]))) {
 				attr(img, "src", img_src_value);
 			}
 		},
@@ -41,7 +41,7 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (31:2) {#if id}
+// (33:2) {#if id}
 function create_if_block(ctx) {
 	let show_if;
 	let if_block_anchor;
@@ -85,7 +85,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (37:4) {:else}
+// (39:4) {:else}
 function create_else_block(ctx) {
 	let img;
 	let img_src_value;
@@ -93,7 +93,7 @@ function create_else_block(ctx) {
 	return {
 		c() {
 			img = element("img");
-			if (!src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[2] + /*photo*/ ctx[1]))) attr(img, "src", img_src_value);
+			if (!src_url_equal(img.src, img_src_value = "" + (/*urlImages*/ ctx[2] + /*photo*/ ctx[1]))) attr(img, "src", img_src_value);
 			attr(img, "alt", "profilePhoto");
 			attr(img, "class", "svelte-1tdigc9");
 		},
@@ -101,7 +101,7 @@ function create_else_block(ctx) {
 			insert(target, img, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*urlAPI, photo*/ 6 && !src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[2] + /*photo*/ ctx[1]))) {
+			if (dirty & /*urlImages, photo*/ 6 && !src_url_equal(img.src, img_src_value = "" + (/*urlImages*/ ctx[2] + /*photo*/ ctx[1]))) {
 				attr(img, "src", img_src_value);
 			}
 		},
@@ -111,7 +111,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (32:4) {#if id.toString() === localStorage.getItem('userId')}
+// (34:4) {#if id.toString() === localStorage.getItem('userId')}
 function create_if_block_1(ctx) {
 	let img;
 	let img_src_value;
@@ -124,7 +124,7 @@ function create_if_block_1(ctx) {
 			t0 = space();
 			ul = element("ul");
 			ul.innerHTML = `<li><a data-translate="update-profile-photo" class="dropdown-item" href="/" data-bs-toggle="modal" data-bs-target="#ModalProfile">Update profile photo</a></li>`;
-			if (!src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[2] + /*photo*/ ctx[1]))) attr(img, "src", img_src_value);
+			if (!src_url_equal(img.src, img_src_value = "" + (/*urlImages*/ ctx[2] + /*photo*/ ctx[1]))) attr(img, "src", img_src_value);
 			attr(img, "alt", "profilePhoto");
 			attr(img, "class", "dropdown-toggle svelte-1tdigc9");
 			attr(img, "type", "button");
@@ -140,7 +140,7 @@ function create_if_block_1(ctx) {
 			insert(target, ul, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*urlAPI, photo*/ 6 && !src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[2] + /*photo*/ ctx[1]))) {
+			if (dirty & /*urlImages, photo*/ 6 && !src_url_equal(img.src, img_src_value = "" + (/*urlImages*/ ctx[2] + /*photo*/ ctx[1]))) {
 				attr(img, "src", img_src_value);
 			}
 		},
@@ -196,7 +196,7 @@ function create_fragment(ctx) {
 }
 
 function instance($$self, $$props, $$invalidate) {
-	let { photo, urlAPI, id } = $$props;
+	let { photo, urlAPI, id, urlImages } = $$props;
 
 	if (id === undefined) {
 		id = '';
@@ -204,17 +204,18 @@ function instance($$self, $$props, $$invalidate) {
 
 	$$self.$$set = $$props => {
 		if ('photo' in $$props) $$invalidate(1, photo = $$props.photo);
-		if ('urlAPI' in $$props) $$invalidate(2, urlAPI = $$props.urlAPI);
+		if ('urlAPI' in $$props) $$invalidate(3, urlAPI = $$props.urlAPI);
 		if ('id' in $$props) $$invalidate(0, id = $$props.id);
+		if ('urlImages' in $$props) $$invalidate(2, urlImages = $$props.urlImages);
 	};
 
-	return [id, photo, urlAPI];
+	return [id, photo, urlImages, urlAPI];
 }
 
 class UserPhoto extends SvelteComponent {
 	constructor(options) {
 		super();
-		init(this, options, instance, create_fragment, safe_not_equal, { photo: 1, urlAPI: 2, id: 0 });
+		init(this, options, instance, create_fragment, safe_not_equal, { photo: 1, urlAPI: 3, id: 0, urlImages: 2 });
 	}
 }
 

@@ -37,7 +37,7 @@ import Loader from './Loader.svelte.js';
 
 function get_each_context(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[11] = list[i];
+	child_ctx[12] = list[i];
 	return child_ctx;
 }
 
@@ -74,7 +74,7 @@ function create_else_block_1(ctx) {
 // (151:10) {#if usersFound}
 function create_if_block(ctx) {
 	let each_1_anchor;
-	let each_value = /*usersFound*/ ctx[2];
+	let each_value = /*usersFound*/ ctx[3];
 	let each_blocks = [];
 
 	for (let i = 0; i < each_value.length; i += 1) {
@@ -97,8 +97,8 @@ function create_if_block(ctx) {
 			insert(target, each_1_anchor, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*usersFound, visitProfile, urlAPI*/ 70) {
-				each_value = /*usersFound*/ ctx[2];
+			if (dirty & /*usersFound, visitProfile, urlImages*/ 140) {
+				each_value = /*usersFound*/ ctx[3];
 				let i;
 
 				for (i = 0; i < each_value.length; i += 1) {
@@ -133,7 +133,7 @@ function create_if_block(ctx) {
 function create_else_block(ctx) {
 	let li;
 	let span;
-	let t0_value = /*user*/ ctx[11].details + "";
+	let t0_value = /*user*/ ctx[12].details + "";
 	let t0;
 	let t1;
 
@@ -153,7 +153,7 @@ function create_else_block(ctx) {
 			append(li, t1);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*usersFound*/ 4 && t0_value !== (t0_value = /*user*/ ctx[11].details + "")) set_data(t0, t0_value);
+			if (dirty & /*usersFound*/ 8 && t0_value !== (t0_value = /*user*/ ctx[12].details + "")) set_data(t0, t0_value);
 		},
 		d(detaching) {
 			if (detaching) detach(li);
@@ -171,18 +171,18 @@ function create_if_block_1(ctx) {
 	let t0;
 	let div;
 	let h6;
-	let t1_value = /*user*/ ctx[11].name + "";
+	let t1_value = /*user*/ ctx[12].name + "";
 	let t1;
 	let t2;
-	let t3_value = /*user*/ ctx[11].last_name + "";
+	let t3_value = /*user*/ ctx[12].last_name + "";
 	let t3;
 	let t4;
 	let p0;
-	let t5_value = /*user*/ ctx[11].title + "";
+	let t5_value = /*user*/ ctx[12].title + "";
 	let t5;
 	let t6;
 	let p1;
-	let t7_value = /*user*/ ctx[11].email + "";
+	let t7_value = /*user*/ ctx[12].email + "";
 	let t7;
 	let a_href_value;
 	let link_action;
@@ -210,7 +210,7 @@ function create_if_block_1(ctx) {
 			p1 = element("p");
 			t7 = text(t7_value);
 			t8 = space();
-			if (!src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[1] + /*user*/ ctx[11].photo))) attr(img, "src", img_src_value);
+			if (!src_url_equal(img.src, img_src_value = "" + (/*urlImages*/ ctx[2] + /*user*/ ctx[12].photo))) attr(img, "src", img_src_value);
 			attr(img, "alt", "img");
 			attr(img, "class", "svelte-17jelq4");
 			attr(h6, "class", "svelte-17jelq4");
@@ -218,7 +218,7 @@ function create_if_block_1(ctx) {
 			set_style(p1, "color", "grey");
 			attr(div, "class", "userInfo");
 			attr(span, "class", "dropdown-item d-flex align-items-center");
-			attr(a, "href", a_href_value = "/profile/" + /*user*/ ctx[11].username);
+			attr(a, "href", a_href_value = "/profile/" + /*user*/ ctx[12].username);
 			attr(a, "class", "d-flex");
 			attr(li, "class", "svelte-17jelq4");
 		},
@@ -246,7 +246,7 @@ function create_if_block_1(ctx) {
 					action_destroyer(link_action = link.call(null, a)),
 					action_destroyer(active_action = active.call(null, a)),
 					listen(a, "click", function () {
-						if (is_function(/*visitProfile*/ ctx[6](/*user*/ ctx[11].username))) /*visitProfile*/ ctx[6](/*user*/ ctx[11].username).apply(this, arguments);
+						if (is_function(/*visitProfile*/ ctx[7](/*user*/ ctx[12].username))) /*visitProfile*/ ctx[7](/*user*/ ctx[12].username).apply(this, arguments);
 					})
 				];
 
@@ -256,16 +256,16 @@ function create_if_block_1(ctx) {
 		p(new_ctx, dirty) {
 			ctx = new_ctx;
 
-			if (dirty & /*urlAPI, usersFound*/ 6 && !src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[1] + /*user*/ ctx[11].photo))) {
+			if (dirty & /*urlImages, usersFound*/ 12 && !src_url_equal(img.src, img_src_value = "" + (/*urlImages*/ ctx[2] + /*user*/ ctx[12].photo))) {
 				attr(img, "src", img_src_value);
 			}
 
-			if (dirty & /*usersFound*/ 4 && t1_value !== (t1_value = /*user*/ ctx[11].name + "")) set_data(t1, t1_value);
-			if (dirty & /*usersFound*/ 4 && t3_value !== (t3_value = /*user*/ ctx[11].last_name + "")) set_data(t3, t3_value);
-			if (dirty & /*usersFound*/ 4 && t5_value !== (t5_value = /*user*/ ctx[11].title + "")) set_data(t5, t5_value);
-			if (dirty & /*usersFound*/ 4 && t7_value !== (t7_value = /*user*/ ctx[11].email + "")) set_data(t7, t7_value);
+			if (dirty & /*usersFound*/ 8 && t1_value !== (t1_value = /*user*/ ctx[12].name + "")) set_data(t1, t1_value);
+			if (dirty & /*usersFound*/ 8 && t3_value !== (t3_value = /*user*/ ctx[12].last_name + "")) set_data(t3, t3_value);
+			if (dirty & /*usersFound*/ 8 && t5_value !== (t5_value = /*user*/ ctx[12].title + "")) set_data(t5, t5_value);
+			if (dirty & /*usersFound*/ 8 && t7_value !== (t7_value = /*user*/ ctx[12].email + "")) set_data(t7, t7_value);
 
-			if (dirty & /*usersFound*/ 4 && a_href_value !== (a_href_value = "/profile/" + /*user*/ ctx[11].username)) {
+			if (dirty & /*usersFound*/ 8 && a_href_value !== (a_href_value = "/profile/" + /*user*/ ctx[12].username)) {
 				attr(a, "href", a_href_value);
 			}
 		},
@@ -282,7 +282,7 @@ function create_each_block(ctx) {
 	let if_block_anchor;
 
 	function select_block_type_1(ctx, dirty) {
-		if (/*user*/ ctx[11].name) return create_if_block_1;
+		if (/*user*/ ctx[12].name) return create_if_block_1;
 		return create_else_block;
 	}
 
@@ -343,7 +343,7 @@ function create_fragment(ctx) {
 	const if_blocks = [];
 
 	function select_block_type(ctx, dirty) {
-		if (/*usersFound*/ ctx[2]) return 0;
+		if (/*usersFound*/ ctx[3]) return 0;
 		return 1;
 	}
 
@@ -352,10 +352,11 @@ function create_fragment(ctx) {
 
 	headernav = new HeaderNav({
 			props: {
-				photo: /*photo*/ ctx[3],
-				id: /*id*/ ctx[4],
+				photo: /*photo*/ ctx[4],
+				id: /*id*/ ctx[5],
 				urlLogOut: /*urlLogOut*/ ctx[0],
-				urlAPI: /*urlAPI*/ ctx[1]
+				urlAPI: /*urlAPI*/ ctx[1],
+				urlImages: /*urlImages*/ ctx[2]
 			}
 		});
 
@@ -415,7 +416,7 @@ function create_fragment(ctx) {
 				dispose = [
 					action_destroyer(link_action = link.call(null, a)),
 					action_destroyer(active_action = active.call(null, a)),
-					listen(input, "keyup", /*startSearch*/ ctx[5])
+					listen(input, "keyup", /*startSearch*/ ctx[6])
 				];
 
 				mounted = true;
@@ -451,6 +452,7 @@ function create_fragment(ctx) {
 			const headernav_changes = {};
 			if (dirty & /*urlLogOut*/ 1) headernav_changes.urlLogOut = /*urlLogOut*/ ctx[0];
 			if (dirty & /*urlAPI*/ 2) headernav_changes.urlAPI = /*urlAPI*/ ctx[1];
+			if (dirty & /*urlImages*/ 4) headernav_changes.urlImages = /*urlImages*/ ctx[2];
 			headernav.$set(headernav_changes);
 		},
 		i(local) {
@@ -476,7 +478,7 @@ function create_fragment(ctx) {
 
 function instance($$self, $$props, $$invalidate) {
 	let { data } = $$props;
-	let { urlLogOut, urlAPI } = $$props;
+	let { urlLogOut, urlAPI, urlImages } = $$props;
 	let photo = data.photo, id = data.id;
 	let usersFound = false;
 
@@ -486,9 +488,9 @@ function instance($$self, $$props, $$invalidate) {
 
 		if (response.ok) {
 			if (content.count > 0) {
-				$$invalidate(2, usersFound = content.results);
+				$$invalidate(3, usersFound = content.results);
 			} else {
-				$$invalidate(2, usersFound = [{ details: 'User not found' }]);
+				$$invalidate(3, usersFound = [{ details: 'User not found' }]);
 			}
 		}
 	};
@@ -510,7 +512,7 @@ function instance($$self, $$props, $$invalidate) {
 				1000
 			);
 		} else {
-			$$invalidate(2, usersFound = false);
+			$$invalidate(3, usersFound = false);
 			searchList.classList.add("d-none");
 		}
 	}; // if (e.key === "Enter") {
@@ -529,23 +531,40 @@ function instance($$self, $$props, $$invalidate) {
 	document.addEventListener('click', e => {
 		if (e.target.id !== "searchList") {
 			searchList.classList.add('d-none');
-			$$invalidate(2, usersFound = false);
+			$$invalidate(3, usersFound = false);
 		}
 	});
 
 	$$self.$$set = $$props => {
-		if ('data' in $$props) $$invalidate(7, data = $$props.data);
+		if ('data' in $$props) $$invalidate(8, data = $$props.data);
 		if ('urlLogOut' in $$props) $$invalidate(0, urlLogOut = $$props.urlLogOut);
 		if ('urlAPI' in $$props) $$invalidate(1, urlAPI = $$props.urlAPI);
+		if ('urlImages' in $$props) $$invalidate(2, urlImages = $$props.urlImages);
 	};
 
-	return [urlLogOut, urlAPI, usersFound, photo, id, startSearch, visitProfile, data];
+	return [
+		urlLogOut,
+		urlAPI,
+		urlImages,
+		usersFound,
+		photo,
+		id,
+		startSearch,
+		visitProfile,
+		data
+	];
 }
 
 class Header extends SvelteComponent {
 	constructor(options) {
 		super();
-		init(this, options, instance, create_fragment, safe_not_equal, { data: 7, urlLogOut: 0, urlAPI: 1 });
+
+		init(this, options, instance, create_fragment, safe_not_equal, {
+			data: 8,
+			urlLogOut: 0,
+			urlAPI: 1,
+			urlImages: 2
+		});
 	}
 }
 

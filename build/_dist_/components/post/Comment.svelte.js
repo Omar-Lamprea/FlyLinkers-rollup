@@ -5,28 +5,246 @@ import {
 	action_destroyer,
 	append,
 	attr,
+	check_outros,
+	create_component,
+	destroy_component,
+	destroy_each,
 	detach,
 	element,
+	group_outros,
 	init,
 	insert,
-	noop,
+	is_function,
+	listen,
+	mount_component,
 	run_all,
 	safe_not_equal,
 	set_data,
 	space,
 	src_url_equal,
-	text
+	text,
+	transition_in,
+	transition_out
 } from "../../../_snowpack/pkg/svelte/internal.js";
 
 import { link } from "../../../_snowpack/pkg/svelte-spa-router.js";
 import active from '../../../_snowpack/pkg/svelte-spa-router/active.js';
 import UserPhoto from '../profile/UserPhoto.svelte.js';
 import startTime from '../../js/startTime.js';
+import Reply from './Reply.svelte.js';
+import { translate } from '../../js/translate.js';
+import { sendLike, sendLove, getReactionUser } from '../../js/reactionsPost.js';
+import { onMount } from "../../../_snowpack/pkg/svelte.js";
+
+function get_each_context(ctx, list, i) {
+	const child_ctx = ctx.slice();
+	child_ctx[4] = list[i];
+	return child_ctx;
+}
+
+// (255:8) {#if reply}
+function create_if_block(ctx) {
+	let div0;
+	let img;
+	let img_src_value;
+	let t0;
+	let form;
+	let input;
+	let input_id_value;
+	let t1;
+	let button;
+	let t2;
+	let button_id_value;
+	let t3;
+	let div1;
+	let current;
+	let mounted;
+	let dispose;
+	let each_value = /*reply*/ ctx[4];
+	let each_blocks = [];
+
+	for (let i = 0; i < each_value.length; i += 1) {
+		each_blocks[i] = create_each_block(get_each_context(ctx, each_value, i));
+	}
+
+	const out = i => transition_out(each_blocks[i], 1, 1, () => {
+		each_blocks[i] = null;
+	});
+
+	return {
+		c() {
+			div0 = element("div");
+			img = element("img");
+			t0 = space();
+			form = element("form");
+			input = element("input");
+			t1 = space();
+			button = element("button");
+			t2 = text("Post");
+			t3 = space();
+			div1 = element("div");
+
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].c();
+			}
+
+			if (!src_url_equal(img.src, img_src_value = "" + (/*urlImages*/ ctx[1] + localStorage.getItem('profilePhoto')))) attr(img, "src", img_src_value);
+			attr(img, "alt", "img");
+			attr(img, "class", "svelte-19ifcbj");
+			attr(input, "data-translate", "input-make-reply");
+			attr(input, "id", input_id_value = "input-addReply-" + /*comment*/ ctx[0].id);
+			attr(input, "type", "text");
+			attr(input, "class", "Comments-input svelte-19ifcbj");
+			attr(input, "placeholder", "Write a reply...");
+			attr(button, "data-translate", "btn-make-comment");
+			attr(button, "id", button_id_value = "btn-addReply-" + /*comment*/ ctx[0].id);
+			attr(button, "class", "btn-sendComment svelte-19ifcbj");
+			button.disabled = true;
+			attr(form, "class", "d-flex w-100");
+			attr(div0, "class", "add-reply mt-2 d-flex svelte-19ifcbj");
+			attr(div1, "class", "container-replys");
+		},
+		m(target, anchor) {
+			insert(target, div0, anchor);
+			append(div0, img);
+			append(div0, t0);
+			append(div0, form);
+			append(form, input);
+			append(form, t1);
+			append(form, button);
+			append(button, t2);
+			insert(target, t3, anchor);
+			insert(target, div1, anchor);
+
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].m(div1, null);
+			}
+
+			current = true;
+
+			if (!mounted) {
+				dispose = [
+					listen(input, "keyup", /*commentAbled*/ ctx[6]),
+					listen(button, "click", /*addReply*/ ctx[7])
+				];
+
+				mounted = true;
+			}
+		},
+		p(ctx, dirty) {
+			if (!current || dirty & /*urlImages*/ 2 && !src_url_equal(img.src, img_src_value = "" + (/*urlImages*/ ctx[1] + localStorage.getItem('profilePhoto')))) {
+				attr(img, "src", img_src_value);
+			}
+
+			if (!current || dirty & /*comment*/ 1 && input_id_value !== (input_id_value = "input-addReply-" + /*comment*/ ctx[0].id)) {
+				attr(input, "id", input_id_value);
+			}
+
+			if (!current || dirty & /*comment*/ 1 && button_id_value !== (button_id_value = "btn-addReply-" + /*comment*/ ctx[0].id)) {
+				attr(button, "id", button_id_value);
+			}
+
+			if (dirty & /*reply, urlImages*/ 18) {
+				each_value = /*reply*/ ctx[4];
+				let i;
+
+				for (i = 0; i < each_value.length; i += 1) {
+					const child_ctx = get_each_context(ctx, each_value, i);
+
+					if (each_blocks[i]) {
+						each_blocks[i].p(child_ctx, dirty);
+						transition_in(each_blocks[i], 1);
+					} else {
+						each_blocks[i] = create_each_block(child_ctx);
+						each_blocks[i].c();
+						transition_in(each_blocks[i], 1);
+						each_blocks[i].m(div1, null);
+					}
+				}
+
+				group_outros();
+
+				for (i = each_value.length; i < each_blocks.length; i += 1) {
+					out(i);
+				}
+
+				check_outros();
+			}
+		},
+		i(local) {
+			if (current) return;
+
+			for (let i = 0; i < each_value.length; i += 1) {
+				transition_in(each_blocks[i]);
+			}
+
+			current = true;
+		},
+		o(local) {
+			each_blocks = each_blocks.filter(Boolean);
+
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				transition_out(each_blocks[i]);
+			}
+
+			current = false;
+		},
+		d(detaching) {
+			if (detaching) detach(div0);
+			if (detaching) detach(t3);
+			if (detaching) detach(div1);
+			destroy_each(each_blocks, detaching);
+			mounted = false;
+			run_all(dispose);
+		}
+	};
+}
+
+// (265:13) {#each reply as reply}
+function create_each_block(ctx) {
+	let reply_1;
+	let current;
+
+	reply_1 = new Reply({
+			props: {
+				reply: /*reply*/ ctx[4],
+				urlImages: /*urlImages*/ ctx[1]
+			}
+		});
+
+	return {
+		c() {
+			create_component(reply_1.$$.fragment);
+		},
+		m(target, anchor) {
+			mount_component(reply_1, target, anchor);
+			current = true;
+		},
+		p(ctx, dirty) {
+			const reply_1_changes = {};
+			if (dirty & /*reply*/ 16) reply_1_changes.reply = /*reply*/ ctx[4];
+			if (dirty & /*urlImages*/ 2) reply_1_changes.urlImages = /*urlImages*/ ctx[1];
+			reply_1.$set(reply_1_changes);
+		},
+		i(local) {
+			if (current) return;
+			transition_in(reply_1.$$.fragment, local);
+			current = true;
+		},
+		o(local) {
+			transition_out(reply_1.$$.fragment, local);
+			current = false;
+		},
+		d(detaching) {
+			destroy_component(reply_1, detaching);
+		}
+	};
+}
 
 function create_fragment(ctx) {
+	let div5;
+	let div4;
 	let div3;
-	let div2;
-	let div1;
 	let a0;
 	let img;
 	let img_src_value;
@@ -34,7 +252,7 @@ function create_fragment(ctx) {
 	let link_action;
 	let active_action;
 	let t0;
-	let span;
+	let span4;
 	let div0;
 	let a1;
 	let p0;
@@ -51,20 +269,56 @@ function create_fragment(ctx) {
 	let t5_value = startTime(/*comment*/ ctx[0].create_time) + "";
 	let t5;
 	let t6;
+	let div1;
 	let t7_value = /*comment*/ ctx[0].comment + "";
 	let t7;
+	let t8;
+	let div2;
+	let p2;
+	let i0;
+	let i0_id_value;
+	let i0_class_value;
+	let t9;
+	let span0;
+	let t10_value = /*comment*/ ctx[0].reactions.like + "";
+	let t10;
+	let span0_id_value;
+	let p2_id_value;
+	let t11;
+	let p3;
+	let i1;
+	let i1_id_value;
+	let i1_class_value;
+	let t12;
+	let span1;
+	let t13_value = /*comment*/ ctx[0].reactions.love + "";
+	let t13;
+	let span1_id_value;
+	let p3_id_value;
+	let t14;
+	let p4;
+	let i2;
+	let t15;
+	let span3;
+	let t16_value = /*comment*/ ctx[0].answers + "";
+	let t16;
+	let t17;
+	let span2;
+	let t19;
+	let current;
 	let mounted;
 	let dispose;
+	let if_block = /*reply*/ ctx[4] && create_if_block(ctx);
 
 	return {
 		c() {
+			div5 = element("div");
+			div4 = element("div");
 			div3 = element("div");
-			div2 = element("div");
-			div1 = element("div");
 			a0 = element("a");
 			img = element("img");
 			t0 = space();
-			span = element("span");
+			span4 = element("span");
 			div0 = element("div");
 			a1 = element("a");
 			p0 = element("p");
@@ -75,31 +329,78 @@ function create_fragment(ctx) {
 			p1 = element("p");
 			t5 = text(t5_value);
 			t6 = space();
+			div1 = element("div");
 			t7 = text(t7_value);
-			if (!src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[1] + /*comment*/ ctx[0].user.photo))) attr(img, "src", img_src_value);
+			t8 = space();
+			div2 = element("div");
+			p2 = element("p");
+			i0 = element("i");
+			t9 = space();
+			span0 = element("span");
+			t10 = text(t10_value);
+			t11 = space();
+			p3 = element("p");
+			i1 = element("i");
+			t12 = space();
+			span1 = element("span");
+			t13 = text(t13_value);
+			t14 = space();
+			p4 = element("p");
+			i2 = element("i");
+			t15 = space();
+			span3 = element("span");
+			t16 = text(t16_value);
+			t17 = space();
+			span2 = element("span");
+			span2.textContent = "Reply";
+			t19 = space();
+			if (if_block) if_block.c();
+			if (!src_url_equal(img.src, img_src_value = "" + (/*urlImages*/ ctx[1] + /*comment*/ ctx[0].user.photo))) attr(img, "src", img_src_value);
 			attr(img, "alt", "");
-			attr(img, "class", "svelte-1c8dgly");
+			attr(img, "class", "svelte-19ifcbj");
 			attr(a0, "href", a0_href_value = "/profile/" + /*comment*/ ctx[0].user.username);
 			attr(a0, "class", "d-flex");
-			attr(p0, "class", "User-comment svelte-1c8dgly");
+			attr(p0, "class", "User-comment svelte-19ifcbj");
 			attr(a1, "href", a1_href_value = "/profile/" + /*comment*/ ctx[0].user.username);
 			attr(a1, "class", "d-flex");
-			attr(p1, "class", "startTime svelte-1c8dgly");
-			attr(div0, "class", "userInfo mb-1 d-flex justify-content-between svelte-1c8dgly");
-			attr(span, "class", "svelte-1c8dgly");
-			attr(div1, "class", "Comments-users svelte-1c8dgly");
-			attr(div2, "class", "Comments-content");
-			attr(div3, "class", "Comments svelte-1c8dgly");
+			attr(p1, "class", "startTime svelte-19ifcbj");
+			attr(div0, "class", "userInfo mb-1 d-flex justify-content-between svelte-19ifcbj");
+			attr(div1, "class", "mb-2");
+			attr(i0, "id", i0_id_value = "icon-like-" + /*comment*/ ctx[0].id);
+			attr(i0, "class", i0_class_value = "" + (/*iconLike*/ ctx[2] + " fa-thumbs-up" + " svelte-19ifcbj"));
+			attr(i0, "aria-hidden", "true");
+			attr(span0, "id", span0_id_value = "count-like-" + /*comment*/ ctx[0].id);
+			attr(span0, "class", "span-reply svelte-19ifcbj");
+			attr(p2, "id", p2_id_value = "container-reaction-like-" + /*comment*/ ctx[0].id);
+			attr(p2, "class", "mx-2 svelte-19ifcbj");
+			attr(i1, "id", i1_id_value = "icon-love-" + /*comment*/ ctx[0].id);
+			attr(i1, "class", i1_class_value = "" + (/*iconLove*/ ctx[3] + " fa-heart" + " svelte-19ifcbj"));
+			attr(i1, "aria-hidden", "true");
+			attr(span1, "id", span1_id_value = "count-love-" + /*comment*/ ctx[0].id);
+			attr(span1, "class", "span-reply svelte-19ifcbj");
+			attr(p3, "id", p3_id_value = "container-reaction-love-" + /*comment*/ ctx[0].id);
+			attr(p3, "class", "mx-2 svelte-19ifcbj");
+			attr(i2, "class", "fas fa-comment");
+			attr(i2, "aria-hidden", "true");
+			attr(span2, "class", "span-reply svelte-19ifcbj");
+			attr(span2, "data-translate", "reply");
+			attr(span3, "class", "span-reply svelte-19ifcbj");
+			attr(p4, "class", "mx-2 svelte-19ifcbj");
+			attr(div2, "class", "reactions-comment d-flex svelte-19ifcbj");
+			attr(span4, "class", "svelte-19ifcbj");
+			attr(div3, "class", "Comments-users svelte-19ifcbj");
+			attr(div4, "class", "Comments-content");
+			attr(div5, "class", "Comments svelte-19ifcbj");
 		},
 		m(target, anchor) {
-			insert(target, div3, anchor);
-			append(div3, div2);
-			append(div2, div1);
-			append(div1, a0);
+			insert(target, div5, anchor);
+			append(div5, div4);
+			append(div4, div3);
+			append(div3, a0);
 			append(a0, img);
-			append(div1, t0);
-			append(div1, span);
-			append(span, div0);
+			append(div3, t0);
+			append(div3, span4);
+			append(span4, div0);
 			append(div0, a1);
 			append(a1, p0);
 			append(p0, t1);
@@ -108,43 +409,146 @@ function create_fragment(ctx) {
 			append(div0, t4);
 			append(div0, p1);
 			append(p1, t5);
-			append(span, t6);
-			append(span, t7);
+			append(span4, t6);
+			append(span4, div1);
+			append(div1, t7);
+			append(span4, t8);
+			append(span4, div2);
+			append(div2, p2);
+			append(p2, i0);
+			append(p2, t9);
+			append(p2, span0);
+			append(span0, t10);
+			append(div2, t11);
+			append(div2, p3);
+			append(p3, i1);
+			append(p3, t12);
+			append(p3, span1);
+			append(span1, t13);
+			append(div2, t14);
+			append(div2, p4);
+			append(p4, i2);
+			append(p4, t15);
+			append(p4, span3);
+			append(span3, t16);
+			append(span3, t17);
+			append(span3, span2);
+			append(span4, t19);
+			if (if_block) if_block.m(span4, null);
+			current = true;
 
 			if (!mounted) {
 				dispose = [
 					action_destroyer(link_action = link.call(null, a0)),
 					action_destroyer(active_action = active.call(null, a0)),
 					action_destroyer(link_action_1 = link.call(null, a1)),
-					action_destroyer(active_action_1 = active.call(null, a1))
+					action_destroyer(active_action_1 = active.call(null, a1)),
+					listen(p2, "click", function () {
+						if (is_function(/*makeLike*/ ctx[8](`icon-like-${/*comment*/ ctx[0].id}`, `count-like-${/*comment*/ ctx[0].id}`, `${/*comment*/ ctx[0].id}`))) /*makeLike*/ ctx[8](`icon-like-${/*comment*/ ctx[0].id}`, `count-like-${/*comment*/ ctx[0].id}`, `${/*comment*/ ctx[0].id}`).apply(this, arguments);
+					}),
+					listen(p3, "click", function () {
+						if (is_function(/*makeLove*/ ctx[9](`icon-love-${/*comment*/ ctx[0].id}`, `count-love-${/*comment*/ ctx[0].id}`, `${/*comment*/ ctx[0].id}`))) /*makeLove*/ ctx[9](`icon-love-${/*comment*/ ctx[0].id}`, `count-love-${/*comment*/ ctx[0].id}`, `${/*comment*/ ctx[0].id}`).apply(this, arguments);
+					}),
+					listen(p4, "click", /*showReply*/ ctx[5])
 				];
 
 				mounted = true;
 			}
 		},
-		p(ctx, [dirty]) {
-			if (dirty & /*urlAPI, comment*/ 3 && !src_url_equal(img.src, img_src_value = "" + (/*urlAPI*/ ctx[1] + /*comment*/ ctx[0].user.photo))) {
+		p(new_ctx, [dirty]) {
+			ctx = new_ctx;
+
+			if (!current || dirty & /*urlImages, comment*/ 3 && !src_url_equal(img.src, img_src_value = "" + (/*urlImages*/ ctx[1] + /*comment*/ ctx[0].user.photo))) {
 				attr(img, "src", img_src_value);
 			}
 
-			if (dirty & /*comment*/ 1 && a0_href_value !== (a0_href_value = "/profile/" + /*comment*/ ctx[0].user.username)) {
+			if (!current || dirty & /*comment*/ 1 && a0_href_value !== (a0_href_value = "/profile/" + /*comment*/ ctx[0].user.username)) {
 				attr(a0, "href", a0_href_value);
 			}
 
-			if (dirty & /*comment*/ 1 && t1_value !== (t1_value = /*comment*/ ctx[0].user.name + "")) set_data(t1, t1_value);
-			if (dirty & /*comment*/ 1 && t3_value !== (t3_value = /*comment*/ ctx[0].user.last_name + "")) set_data(t3, t3_value);
+			if ((!current || dirty & /*comment*/ 1) && t1_value !== (t1_value = /*comment*/ ctx[0].user.name + "")) set_data(t1, t1_value);
+			if ((!current || dirty & /*comment*/ 1) && t3_value !== (t3_value = /*comment*/ ctx[0].user.last_name + "")) set_data(t3, t3_value);
 
-			if (dirty & /*comment*/ 1 && a1_href_value !== (a1_href_value = "/profile/" + /*comment*/ ctx[0].user.username)) {
+			if (!current || dirty & /*comment*/ 1 && a1_href_value !== (a1_href_value = "/profile/" + /*comment*/ ctx[0].user.username)) {
 				attr(a1, "href", a1_href_value);
 			}
 
-			if (dirty & /*comment*/ 1 && t5_value !== (t5_value = startTime(/*comment*/ ctx[0].create_time) + "")) set_data(t5, t5_value);
-			if (dirty & /*comment*/ 1 && t7_value !== (t7_value = /*comment*/ ctx[0].comment + "")) set_data(t7, t7_value);
+			if ((!current || dirty & /*comment*/ 1) && t5_value !== (t5_value = startTime(/*comment*/ ctx[0].create_time) + "")) set_data(t5, t5_value);
+			if ((!current || dirty & /*comment*/ 1) && t7_value !== (t7_value = /*comment*/ ctx[0].comment + "")) set_data(t7, t7_value);
+
+			if (!current || dirty & /*comment*/ 1 && i0_id_value !== (i0_id_value = "icon-like-" + /*comment*/ ctx[0].id)) {
+				attr(i0, "id", i0_id_value);
+			}
+
+			if (!current || dirty & /*iconLike*/ 4 && i0_class_value !== (i0_class_value = "" + (/*iconLike*/ ctx[2] + " fa-thumbs-up" + " svelte-19ifcbj"))) {
+				attr(i0, "class", i0_class_value);
+			}
+
+			if ((!current || dirty & /*comment*/ 1) && t10_value !== (t10_value = /*comment*/ ctx[0].reactions.like + "")) set_data(t10, t10_value);
+
+			if (!current || dirty & /*comment*/ 1 && span0_id_value !== (span0_id_value = "count-like-" + /*comment*/ ctx[0].id)) {
+				attr(span0, "id", span0_id_value);
+			}
+
+			if (!current || dirty & /*comment*/ 1 && p2_id_value !== (p2_id_value = "container-reaction-like-" + /*comment*/ ctx[0].id)) {
+				attr(p2, "id", p2_id_value);
+			}
+
+			if (!current || dirty & /*comment*/ 1 && i1_id_value !== (i1_id_value = "icon-love-" + /*comment*/ ctx[0].id)) {
+				attr(i1, "id", i1_id_value);
+			}
+
+			if (!current || dirty & /*iconLove*/ 8 && i1_class_value !== (i1_class_value = "" + (/*iconLove*/ ctx[3] + " fa-heart" + " svelte-19ifcbj"))) {
+				attr(i1, "class", i1_class_value);
+			}
+
+			if ((!current || dirty & /*comment*/ 1) && t13_value !== (t13_value = /*comment*/ ctx[0].reactions.love + "")) set_data(t13, t13_value);
+
+			if (!current || dirty & /*comment*/ 1 && span1_id_value !== (span1_id_value = "count-love-" + /*comment*/ ctx[0].id)) {
+				attr(span1, "id", span1_id_value);
+			}
+
+			if (!current || dirty & /*comment*/ 1 && p3_id_value !== (p3_id_value = "container-reaction-love-" + /*comment*/ ctx[0].id)) {
+				attr(p3, "id", p3_id_value);
+			}
+
+			if ((!current || dirty & /*comment*/ 1) && t16_value !== (t16_value = /*comment*/ ctx[0].answers + "")) set_data(t16, t16_value);
+
+			if (/*reply*/ ctx[4]) {
+				if (if_block) {
+					if_block.p(ctx, dirty);
+
+					if (dirty & /*reply*/ 16) {
+						transition_in(if_block, 1);
+					}
+				} else {
+					if_block = create_if_block(ctx);
+					if_block.c();
+					transition_in(if_block, 1);
+					if_block.m(span4, null);
+				}
+			} else if (if_block) {
+				group_outros();
+
+				transition_out(if_block, 1, 1, () => {
+					if_block = null;
+				});
+
+				check_outros();
+			}
 		},
-		i: noop,
-		o: noop,
+		i(local) {
+			if (current) return;
+			transition_in(if_block);
+			current = true;
+		},
+		o(local) {
+			transition_out(if_block);
+			current = false;
+		},
 		d(detaching) {
-			if (detaching) detach(div3);
+			if (detaching) detach(div5);
+			if (if_block) if_block.d();
 			mounted = false;
 			run_all(dispose);
 		}
@@ -152,21 +556,174 @@ function create_fragment(ctx) {
 }
 
 function instance($$self, $$props, $$invalidate) {
-	let { comment, urlAPI } = $$props;
-	console.log(comment);
+	let { comment, urlAPI, urlImages } = $$props;
+	let reply;
+	let iconLike = "far";
+	let iconLove = "far";
+
+	const getReaction = async () => {
+		const reaction = await getReactionUser(comment.id, localStorage.getItem('userId'));
+
+		if (reaction) {
+			reaction.like
+			? $$invalidate(2, iconLike = 'fas')
+			: false;
+
+			reaction.love
+			? $$invalidate(3, iconLove = 'fas')
+			: false;
+		}
+	};
+
+	const showReply = async () => {
+		try {
+			const response = await fetch(`${urlAPI}/post/answer/?comment_id=${comment.id}`);
+
+			if (response.ok) {
+				const content = await response.json();
+				$$invalidate(4, reply = content);
+				translate();
+			} else {
+				console.log(response);
+			}
+		} catch(error) {
+			console.log('asdf');
+			console.log(error);
+		}
+	};
+
+	const commentAbled = e => {
+		const btnSendComment = document.getElementById(`btn-addReply-${comment.id}`);
+
+		e.target.value !== ''
+		? btnSendComment.removeAttribute('disabled')
+		: btnSendComment.setAttribute('disabled', '');
+	};
+
+	const addReply = async e => {
+		e.preventDefault();
+		const inputAddReply = document.getElementById(`input-addReply-${comment.id}`);
+
+		const obj = {
+			answer: inputAddReply.value,
+			user_id: localStorage.getItem('userId'),
+			comment_id: comment.id
+		};
+
+		const response = await fetch(`${urlAPI}/post/answer/`, {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(obj)
+		});
+
+		if (response.ok) {
+			inputAddReply.value = '';
+			$$invalidate(0, comment.answers += 1, comment);
+			await showReply();
+		}
+	}; //firebase:
+	// const content = await response.json()
+	// if (content) {
+	// inputAddReply.value = ''
+
+	// comments += 1
+	// await getCommets()
+	// let aux;
+	// if (user.length === 0) {
+	//   aux = user_id
+	// }else{
+	//   aux = user.id
+	// }
+	// if (aux !== userId ) {
+	//   let userDataComment = 0
+	//   if (dataComment.length > 0) {
+	//     userDataComment = dataComment[dataComment.length - 1]
+	//   }else{
+	//     userDataComment = dataComment[0]
+	//   }
+	//   const commentUserFirebase = {
+	//     user_id: userId,
+	//     comment: userDataComment.comment,
+	//     name: userStorage.name + ' ' + userStorage.last_name,
+	//     photo: userStorage.photo,
+	//     post_id: id,
+	//     seen: false,
+	//     create_at: new Date()
+	//   }
+	//   commentsFirebase(commentUserFirebase, aux)
+	// }
+	// }
+	const makeLike = async (icon, count, idComment) => {
+		const countLike = document.getElementById(`container-reaction-like-${comment.id}`);
+		countLike.setAttribute('disabled', '');
+		const result = await sendLike(icon, count, idComment);
+
+		if (result === "update like to dislike") {
+			$$invalidate(0, comment.reactions.like -= 1, comment);
+			$$invalidate(2, iconLike = "far");
+		} else if (result === "update like and dislove") {
+			$$invalidate(0, comment.reactions.like += 1, comment);
+			$$invalidate(0, comment.reactions.love -= 1, comment);
+			$$invalidate(2, iconLike = "fas");
+			$$invalidate(3, iconLove = "far");
+		} else if (result === "update to like" || result === "new like reaction") {
+			$$invalidate(0, comment.reactions.like += 1, comment);
+			$$invalidate(2, iconLike = "fas");
+		}
+
+		countLike.removeAttribute('disabled');
+	};
+
+	const makeLove = async (icon, count, idComment) => {
+		const countLove = document.getElementById(`container-reaction-love-${comment.id}`);
+		countLove.setAttribute('disabled', '');
+		const result = await sendLove(icon, count, idComment);
+
+		if (result === "update love to dislove") {
+			$$invalidate(0, comment.reactions.love -= 1, comment);
+			$$invalidate(3, iconLove = "far");
+		} else if (result === "update love and dislike") {
+			$$invalidate(0, comment.reactions.love += 1, comment);
+			$$invalidate(0, comment.reactions.like -= 1, comment);
+			$$invalidate(3, iconLove = "fas");
+			$$invalidate(2, iconLike = "far");
+		} else if (result === "update to love" || result === "new love reaction") {
+			$$invalidate(0, comment.reactions.love += 1, comment);
+			$$invalidate(3, iconLove = "fas");
+		}
+
+		countLove.removeAttribute('disabled');
+	};
+
+	onMount(async () => {
+		await getReaction();
+	});
 
 	$$self.$$set = $$props => {
 		if ('comment' in $$props) $$invalidate(0, comment = $$props.comment);
-		if ('urlAPI' in $$props) $$invalidate(1, urlAPI = $$props.urlAPI);
+		if ('urlAPI' in $$props) $$invalidate(10, urlAPI = $$props.urlAPI);
+		if ('urlImages' in $$props) $$invalidate(1, urlImages = $$props.urlImages);
 	};
 
-	return [comment, urlAPI];
+	return [
+		comment,
+		urlImages,
+		iconLike,
+		iconLove,
+		reply,
+		showReply,
+		commentAbled,
+		addReply,
+		makeLike,
+		makeLove,
+		urlAPI
+	];
 }
 
 class Comment extends SvelteComponent {
 	constructor(options) {
 		super();
-		init(this, options, instance, create_fragment, safe_not_equal, { comment: 0, urlAPI: 1 });
+		init(this, options, instance, create_fragment, safe_not_equal, { comment: 0, urlAPI: 10, urlImages: 1 });
 	}
 }
 

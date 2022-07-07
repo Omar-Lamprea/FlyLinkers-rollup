@@ -62,7 +62,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (56:4) {#if id && getUserMainToFirestore}
+// (58:4) {#if id && getUserMainToFirestore}
 function create_if_block(ctx) {
 	let sidebarleft;
 	let t0;
@@ -77,12 +77,16 @@ function create_if_block(ctx) {
 				last_name: /*last_name*/ ctx[1],
 				title: /*title*/ ctx[2],
 				photo: /*photo*/ ctx[3],
-				urlAPI
+				urlAPI,
+				urlImages
 			}
 		});
 
-	timelineh = new TimelineH({ props: { id: /*id*/ ctx[4], urlAPI } });
-	sidebarright = new SidebarRight({ props: { urlAPI } });
+	timelineh = new TimelineH({
+			props: { id: /*id*/ ctx[4], urlAPI, urlImages }
+		});
+
+	sidebarright = new SidebarRight({ props: { urlAPI, urlImages } });
 
 	return {
 		c() {
@@ -205,6 +209,7 @@ function create_fragment(ctx) {
 }
 
 const urlAPI = 'https://api.flylinkers.com';
+const urlImages = 'http://3.130.198.152:8000';
 
 function instance($$self, $$props, $$invalidate) {
 	let name, middle_name, last_name, email, title, photo, id;

@@ -52,7 +52,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (61:2) {#if dataProfile}
+// (62:2) {#if dataProfile}
 function create_if_block(ctx) {
 	let timelinep;
 	let t;
@@ -68,7 +68,8 @@ function create_if_block(ctx) {
 				photo: /*photo*/ ctx[6],
 				id: /*id*/ ctx[1],
 				userMain: /*userMain*/ ctx[8],
-				urlAPI
+				urlAPI,
+				urlImages
 			}
 		});
 
@@ -76,7 +77,8 @@ function create_if_block(ctx) {
 			props: {
 				id: /*id*/ ctx[1],
 				urlAPI,
-				dataFriends: /*dataFriends*/ ctx[7]
+				dataFriends: /*dataFriends*/ ctx[7],
+				urlImages
 			}
 		});
 
@@ -196,6 +198,7 @@ function create_fragment(ctx) {
 }
 
 const urlAPI = 'https://api.flylinkers.com';
+const urlImages = 'http://3.130.198.152:8000';
 
 function instance($$self, $$props, $$invalidate) {
 	let userMain = localStorage.getItem('userId');
@@ -234,7 +237,7 @@ function instance($$self, $$props, $$invalidate) {
 	let countFriends;
 
 	const getFriends = async () => {
-		const response = await fetch(`${urlAPI}/friend/user/?user=${id}`);
+		const response = await fetch(`${urlAPI}/friend/user/?user=${id}&limit=3`);
 
 		if (response.ok) {
 			const content = await response.json();

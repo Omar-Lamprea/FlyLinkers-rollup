@@ -59,7 +59,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (457:6) {#if urlContent && urlLink.includes('https://')}
+// (460:6) {#if urlContent && urlLink.includes('https://')}
 function create_if_block_1(ctx) {
 	let i;
 	let t0;
@@ -135,7 +135,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (469:4) {#if YTlink}
+// (472:4) {#if YTlink}
 function create_if_block(ctx) {
 	let i;
 	let t;
@@ -421,7 +421,7 @@ function isValidHttpUrl(string) {
 }
 
 function instance($$self, $$props, $$invalidate) {
-	let { id, urlAPI, colorbox } = $$props;
+	let { id, urlAPI, colorbox, urlImages } = $$props;
 	if (!colorbox) colorbox = '';
 	let urlLink;
 	let validUrl = '';
@@ -628,7 +628,7 @@ function instance($$self, $$props, $$invalidate) {
 
 		if (!!postImg.src) {
 			// console.log('envia solo foto')
-			const convertImageB64 = await fetch(`${urlAPI}/resources/img/`, {
+			const convertImageB64 = await fetch(`${urlImages}/resources/img/`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ img: postImg.src })
@@ -716,6 +716,8 @@ function instance($$self, $$props, $$invalidate) {
 				});
 
 				if (post.ok) {
+					let content = await post.json();
+					console.log("contenido:", content.id);
 					postDescription.value = '';
 
 					if (postImg.src) {
@@ -733,6 +735,7 @@ function instance($$self, $$props, $$invalidate) {
 					const reloadPost = document.getElementById('reloadPostCheck');
 
 					reloadPost.classList.toggle('data-reloading');
+					reloadPost.setAttribute('data-post', content.id);
 				}
 			}
 		} else {
@@ -783,6 +786,7 @@ function instance($$self, $$props, $$invalidate) {
 		if ('id' in $$props) $$invalidate(12, id = $$props.id);
 		if ('urlAPI' in $$props) $$invalidate(13, urlAPI = $$props.urlAPI);
 		if ('colorbox' in $$props) $$invalidate(0, colorbox = $$props.colorbox);
+		if ('urlImages' in $$props) $$invalidate(14, urlImages = $$props.urlImages);
 	};
 
 	return [
@@ -799,14 +803,21 @@ function instance($$self, $$props, $$invalidate) {
 		closeVideo,
 		sendPost,
 		id,
-		urlAPI
+		urlAPI,
+		urlImages
 	];
 }
 
 class AddPost extends SvelteComponent {
 	constructor(options) {
 		super();
-		init(this, options, instance, create_fragment, safe_not_equal, { id: 12, urlAPI: 13, colorbox: 0 });
+
+		init(this, options, instance, create_fragment, safe_not_equal, {
+			id: 12,
+			urlAPI: 13,
+			colorbox: 0,
+			urlImages: 14
+		});
 	}
 }
 

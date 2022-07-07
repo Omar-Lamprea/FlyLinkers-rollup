@@ -43,23 +43,23 @@ import Loader from '../Loader.svelte.js';
 
 function get_each_context(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[46] = list[i];
+	child_ctx[47] = list[i];
 	return child_ctx;
 }
 
 function get_each_context_1(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[49] = list[i];
+	child_ctx[50] = list[i];
 	return child_ctx;
 }
 
 function get_each_context_2(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[52] = list[i];
+	child_ctx[53] = list[i];
 	return child_ctx;
 }
 
-// (722:8) {:else}
+// (728:8) {:else}
 function create_else_block_3(ctx) {
 	let div;
 	let img_1;
@@ -92,7 +92,7 @@ function create_else_block_3(ctx) {
 			t6 = space();
 			span1 = element("span");
 			t7 = text(t7_value);
-			if (!src_url_equal(img_1.src, img_1_src_value = "" + (/*urlAPI*/ ctx[14] + /*photo*/ ctx[7]))) attr(img_1, "src", img_1_src_value);
+			if (!src_url_equal(img_1.src, img_1_src_value = "" + (/*urlImages*/ ctx[15] + /*photo*/ ctx[7]))) attr(img_1, "src", img_1_src_value);
 			attr(img_1, "alt", "");
 			attr(img_1, "class", "svelte-1ib3qll");
 			attr(span0, "class", "svelte-1ib3qll");
@@ -116,7 +116,7 @@ function create_else_block_3(ctx) {
 			append(span1, t7);
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*urlAPI, photo*/ 16512 && !src_url_equal(img_1.src, img_1_src_value = "" + (/*urlAPI*/ ctx[14] + /*photo*/ ctx[7]))) {
+			if (dirty[0] & /*urlImages, photo*/ 32896 && !src_url_equal(img_1.src, img_1_src_value = "" + (/*urlImages*/ ctx[15] + /*photo*/ ctx[7]))) {
 				attr(img_1, "src", img_1_src_value);
 			}
 
@@ -131,7 +131,7 @@ function create_else_block_3(ctx) {
 	};
 }
 
-// (711:8) {#if user}
+// (717:8) {#if user}
 function create_if_block_24(ctx) {
 	let div;
 	let a;
@@ -174,7 +174,7 @@ function create_if_block_24(ctx) {
 			t6 = space();
 			span1 = element("span");
 			t7 = text(t7_value);
-			if (!src_url_equal(img_1.src, img_1_src_value = "" + (/*urlAPI*/ ctx[14] + /*user*/ ctx[2].photo))) attr(img_1, "src", img_1_src_value);
+			if (!src_url_equal(img_1.src, img_1_src_value = "" + (/*urlImages*/ ctx[15] + /*user*/ ctx[2].photo))) attr(img_1, "src", img_1_src_value);
 			attr(img_1, "alt", "");
 			attr(img_1, "class", "svelte-1ib3qll");
 			attr(span0, "class", "svelte-1ib3qll");
@@ -204,14 +204,14 @@ function create_if_block_24(ctx) {
 				dispose = [
 					action_destroyer(link_action = link.call(null, a)),
 					action_destroyer(active_action = active.call(null, a)),
-					listen(div, "click", /*visitProfile*/ ctx[22])
+					listen(div, "click", /*visitProfile*/ ctx[23])
 				];
 
 				mounted = true;
 			}
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*urlAPI, user*/ 16388 && !src_url_equal(img_1.src, img_1_src_value = "" + (/*urlAPI*/ ctx[14] + /*user*/ ctx[2].photo))) {
+			if (dirty[0] & /*urlImages, user*/ 32772 && !src_url_equal(img_1.src, img_1_src_value = "" + (/*urlImages*/ ctx[15] + /*user*/ ctx[2].photo))) {
 				attr(img_1, "src", img_1_src_value);
 			}
 
@@ -232,7 +232,7 @@ function create_if_block_24(ctx) {
 	};
 }
 
-// (743:14) {#if user_id.toString() === localStorage.getItem('userId')}
+// (749:14) {#if user_id.toString() === localStorage.getItem('userId')}
 function create_if_block_23(ctx) {
 	let li;
 	let mounted;
@@ -250,7 +250,7 @@ function create_if_block_23(ctx) {
 
 			if (!mounted) {
 				dispose = listen(li, "click", function () {
-					if (is_function(/*deletePost*/ ctx[29](/*id*/ ctx[13]))) /*deletePost*/ ctx[29](/*id*/ ctx[13]).apply(this, arguments);
+					if (is_function(/*deletePost*/ ctx[30](/*id*/ ctx[13]))) /*deletePost*/ ctx[30](/*id*/ ctx[13]).apply(this, arguments);
 				});
 
 				mounted = true;
@@ -267,7 +267,7 @@ function create_if_block_23(ctx) {
 	};
 }
 
-// (738:12) {#if user}
+// (744:12) {#if user}
 function create_if_block_21(ctx) {
 	let show_if = /*user*/ ctx[2].id.toString() === localStorage.getItem('userId');
 	let if_block_anchor;
@@ -305,7 +305,7 @@ function create_if_block_21(ctx) {
 	};
 }
 
-// (739:15) {#if user.id.toString() === localStorage.getItem('userId')}
+// (745:15) {#if user.id.toString() === localStorage.getItem('userId')}
 function create_if_block_22(ctx) {
 	let li;
 	let mounted;
@@ -323,7 +323,7 @@ function create_if_block_22(ctx) {
 
 			if (!mounted) {
 				dispose = listen(li, "click", function () {
-					if (is_function(/*deletePost*/ ctx[29](/*id*/ ctx[13]))) /*deletePost*/ ctx[29](/*id*/ ctx[13]).apply(this, arguments);
+					if (is_function(/*deletePost*/ ctx[30](/*id*/ ctx[13]))) /*deletePost*/ ctx[30](/*id*/ ctx[13]).apply(this, arguments);
 				});
 
 				mounted = true;
@@ -340,7 +340,7 @@ function create_if_block_22(ctx) {
 	};
 }
 
-// (754:6) {#if desc && code !== localStorage.getItem('lang') }
+// (760:6) {#if desc && code && code !== localStorage.getItem('lang') }
 function create_if_block_19(ctx) {
 	let span0;
 	let t1;
@@ -351,7 +351,7 @@ function create_if_block_19(ctx) {
 	let current;
 	let mounted;
 	let dispose;
-	let if_block = /*showLoader*/ ctx[21] && create_if_block_20(ctx);
+	let if_block = /*showLoader*/ ctx[22] && create_if_block_20(ctx);
 
 	return {
 		c() {
@@ -379,7 +379,7 @@ function create_if_block_19(ctx) {
 
 			if (!mounted) {
 				dispose = listen(span0, "click", function () {
-					if (is_function(/*googleTranslate*/ ctx[30](/*desc*/ ctx[10]))) /*googleTranslate*/ ctx[30](/*desc*/ ctx[10]).apply(this, arguments);
+					if (is_function(/*googleTranslate*/ ctx[31](/*desc*/ ctx[10]))) /*googleTranslate*/ ctx[31](/*desc*/ ctx[10]).apply(this, arguments);
 				});
 
 				mounted = true;
@@ -388,9 +388,9 @@ function create_if_block_19(ctx) {
 		p(new_ctx, dirty) {
 			ctx = new_ctx;
 
-			if (/*showLoader*/ ctx[21]) {
+			if (/*showLoader*/ ctx[22]) {
 				if (if_block) {
-					if (dirty[0] & /*showLoader*/ 2097152) {
+					if (dirty[0] & /*showLoader*/ 4194304) {
 						transition_in(if_block, 1);
 					}
 				} else {
@@ -433,7 +433,7 @@ function create_if_block_19(ctx) {
 	};
 }
 
-// (757:10) {#if showLoader}
+// (763:10) {#if showLoader}
 function create_if_block_20(ctx) {
 	let loader;
 	let current;
@@ -462,7 +462,7 @@ function create_if_block_20(ctx) {
 	};
 }
 
-// (767:6) {#if meta && share === ''}
+// (773:6) {#if meta && share === ''}
 function create_if_block_15(ctx) {
 	let div;
 	let a;
@@ -549,7 +549,7 @@ function create_if_block_15(ctx) {
 	};
 }
 
-// (770:12) {#if meta.title}
+// (776:12) {#if meta.title}
 function create_if_block_18(ctx) {
 	let h6;
 	let t_value = /*meta*/ ctx[8].title + "";
@@ -573,7 +573,7 @@ function create_if_block_18(ctx) {
 	};
 }
 
-// (773:12) {#if meta.description}
+// (779:12) {#if meta.description}
 function create_if_block_17(ctx) {
 	let p;
 	let t_value = /*meta*/ ctx[8].description + "";
@@ -597,7 +597,7 @@ function create_if_block_17(ctx) {
 	};
 }
 
-// (776:12) {#if meta.image}
+// (782:12) {#if meta.image}
 function create_if_block_16(ctx) {
 	let img_1;
 	let img_1_src_value;
@@ -623,7 +623,7 @@ function create_if_block_16(ctx) {
 	};
 }
 
-// (783:6) {#if !!img}
+// (789:6) {#if !!img}
 function create_if_block_14(ctx) {
 	let figure;
 	let img_1;
@@ -633,7 +633,7 @@ function create_if_block_14(ctx) {
 		c() {
 			figure = element("figure");
 			img_1 = element("img");
-			if (!src_url_equal(img_1.src, img_1_src_value = "" + (/*urlAPI*/ ctx[14] + /*img*/ ctx[11]))) attr(img_1, "src", img_1_src_value);
+			if (!src_url_equal(img_1.src, img_1_src_value = "" + (/*urlImages*/ ctx[15] + /*img*/ ctx[11]))) attr(img_1, "src", img_1_src_value);
 			attr(img_1, "alt", "img post");
 			attr(img_1, "class", "svelte-1ib3qll");
 			attr(figure, "class", "svelte-1ib3qll");
@@ -643,7 +643,7 @@ function create_if_block_14(ctx) {
 			append(figure, img_1);
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*urlAPI, img*/ 18432 && !src_url_equal(img_1.src, img_1_src_value = "" + (/*urlAPI*/ ctx[14] + /*img*/ ctx[11]))) {
+			if (dirty[0] & /*urlImages, img*/ 34816 && !src_url_equal(img_1.src, img_1_src_value = "" + (/*urlImages*/ ctx[15] + /*img*/ ctx[11]))) {
 				attr(img_1, "src", img_1_src_value);
 			}
 		},
@@ -653,14 +653,14 @@ function create_if_block_14(ctx) {
 	};
 }
 
-// (790:4) {#if video && share === ''}
+// (796:4) {#if video && share === ''}
 function create_if_block_12(ctx) {
 	let show_if;
 	let if_block_anchor;
 
 	function select_block_type_2(ctx, dirty) {
-		if (dirty[0] & /*video*/ 65536) show_if = null;
-		if (show_if == null) show_if = !!/*video*/ ctx[16].includes('https://www.youtube.com/');
+		if (dirty[0] & /*video*/ 131072) show_if = null;
+		if (show_if == null) show_if = !!/*video*/ ctx[17].includes('https://www.youtube.com/');
 		if (show_if) return create_if_block_13;
 		return create_else_block_2;
 	}
@@ -697,7 +697,7 @@ function create_if_block_12(ctx) {
 	};
 }
 
-// (801:6) {:else}
+// (807:6) {:else}
 function create_else_block_2(ctx) {
 	let video_1;
 	let source;
@@ -709,7 +709,7 @@ function create_else_block_2(ctx) {
 			video_1 = element("video");
 			source = element("source");
 			track = element("track");
-			if (!src_url_equal(source.src, source_src_value = "" + (/*urlAPI*/ ctx[14] + /*video*/ ctx[16]))) attr(source, "src", source_src_value);
+			if (!src_url_equal(source.src, source_src_value = "" + (/*urlAPI*/ ctx[14] + /*video*/ ctx[17]))) attr(source, "src", source_src_value);
 			attr(track, "kind", "captions");
 			set_style(video_1, "width", "100%");
 			set_style(video_1, "max-height", "400px");
@@ -721,7 +721,7 @@ function create_else_block_2(ctx) {
 			append(video_1, track);
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*urlAPI, video*/ 81920 && !src_url_equal(source.src, source_src_value = "" + (/*urlAPI*/ ctx[14] + /*video*/ ctx[16]))) {
+			if (dirty[0] & /*urlAPI, video*/ 147456 && !src_url_equal(source.src, source_src_value = "" + (/*urlAPI*/ ctx[14] + /*video*/ ctx[17]))) {
 				attr(source, "src", source_src_value);
 			}
 		},
@@ -731,7 +731,7 @@ function create_else_block_2(ctx) {
 	};
 }
 
-// (791:6) {#if video.includes('https://www.youtube.com/')}
+// (797:6) {#if video.includes('https://www.youtube.com/')}
 function create_if_block_13(ctx) {
 	let iframe;
 	let iframe_src_value;
@@ -741,7 +741,7 @@ function create_if_block_13(ctx) {
 			iframe = element("iframe");
 			attr(iframe, "width", "100%");
 			attr(iframe, "height", "350");
-			if (!src_url_equal(iframe.src, iframe_src_value = /*video*/ ctx[16])) attr(iframe, "src", iframe_src_value);
+			if (!src_url_equal(iframe.src, iframe_src_value = /*video*/ ctx[17])) attr(iframe, "src", iframe_src_value);
 			attr(iframe, "title", "YouTube video player");
 			attr(iframe, "frameborder", "0");
 			attr(iframe, "allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
@@ -751,7 +751,7 @@ function create_if_block_13(ctx) {
 			insert(target, iframe, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*video*/ 65536 && !src_url_equal(iframe.src, iframe_src_value = /*video*/ ctx[16])) {
+			if (dirty[0] & /*video*/ 131072 && !src_url_equal(iframe.src, iframe_src_value = /*video*/ ctx[17])) {
 				attr(iframe, "src", iframe_src_value);
 			}
 		},
@@ -761,7 +761,7 @@ function create_if_block_13(ctx) {
 	};
 }
 
-// (810:4) {#if share !== ''}
+// (816:4) {#if share !== ''}
 function create_if_block_4(ctx) {
 	let hr;
 	let t0;
@@ -773,18 +773,18 @@ function create_if_block_4(ctx) {
 	let img_1_src_value;
 	let t1;
 	let h2;
-	let t2_value = /*share*/ ctx[15][0].name + "";
+	let t2_value = /*share*/ ctx[16][0].name + "";
 	let t2;
 	let t3;
-	let t4_value = /*share*/ ctx[15][0].last_name + "";
+	let t4_value = /*share*/ ctx[16][0].last_name + "";
 	let t4;
 	let t5;
 	let span0;
-	let t6_value = /*share*/ ctx[15][0].title + "";
+	let t6_value = /*share*/ ctx[16][0].title + "";
 	let t6;
 	let t7;
 	let span1;
-	let t8_value = startTime(/*share*/ ctx[15][1].create_time) + "";
+	let t8_value = startTime(/*share*/ ctx[16][1].create_time) + "";
 	let t8;
 	let a_href_value;
 	let link_action;
@@ -792,16 +792,16 @@ function create_if_block_4(ctx) {
 	let t9;
 	let div2;
 	let span2;
-	let t10_value = /*share*/ ctx[15][1].desc + "";
+	let t10_value = /*share*/ ctx[16][1].desc + "";
 	let t10;
 	let t11;
 	let t12;
 	let t13;
 	let mounted;
 	let dispose;
-	let if_block0 = /*share*/ ctx[15][1].img !== '' && create_if_block_11(ctx);
-	let if_block1 = /*share*/ ctx[15][1].video && create_if_block_9(ctx);
-	let if_block2 = /*share*/ ctx[15][1].url_id !== 0 && create_if_block_5(ctx);
+	let if_block0 = /*share*/ ctx[16][1].img !== '' && create_if_block_11(ctx);
+	let if_block1 = /*share*/ ctx[16][1].video && create_if_block_9(ctx);
+	let if_block2 = /*share*/ ctx[16][1].url_id !== 0 && create_if_block_5(ctx);
 
 	return {
 		c() {
@@ -833,13 +833,13 @@ function create_if_block_4(ctx) {
 			if (if_block1) if_block1.c();
 			t13 = space();
 			if (if_block2) if_block2.c();
-			if (!src_url_equal(img_1.src, img_1_src_value = "" + (/*urlAPI*/ ctx[14] + /*share*/ ctx[15][0].photo))) attr(img_1, "src", img_1_src_value);
+			if (!src_url_equal(img_1.src, img_1_src_value = "" + (/*urlImages*/ ctx[15] + /*share*/ ctx[16][0].photo))) attr(img_1, "src", img_1_src_value);
 			attr(img_1, "alt", "");
 			attr(img_1, "class", "svelte-1ib3qll");
 			attr(span0, "class", "svelte-1ib3qll");
 			attr(span1, "class", "svelte-1ib3qll");
 			attr(h2, "class", "svelte-1ib3qll");
-			attr(a, "href", a_href_value = "/profile/" + /*share*/ ctx[15][0].username);
+			attr(a, "href", a_href_value = "/profile/" + /*share*/ ctx[16][0].username);
 			attr(a, "class", "d-flex");
 			attr(div0, "class", "Card-user justify-content-start svelte-1ib3qll");
 			attr(div1, "class", "user-shared");
@@ -880,29 +880,29 @@ function create_if_block_4(ctx) {
 				dispose = [
 					action_destroyer(link_action = link.call(null, a)),
 					action_destroyer(active_action = active.call(null, a)),
-					listen(div0, "click", /*visitProfile*/ ctx[22])
+					listen(div0, "click", /*visitProfile*/ ctx[23])
 				];
 
 				mounted = true;
 			}
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*urlAPI, share*/ 49152 && !src_url_equal(img_1.src, img_1_src_value = "" + (/*urlAPI*/ ctx[14] + /*share*/ ctx[15][0].photo))) {
+			if (dirty[0] & /*urlImages, share*/ 98304 && !src_url_equal(img_1.src, img_1_src_value = "" + (/*urlImages*/ ctx[15] + /*share*/ ctx[16][0].photo))) {
 				attr(img_1, "src", img_1_src_value);
 			}
 
-			if (dirty[0] & /*share*/ 32768 && t2_value !== (t2_value = /*share*/ ctx[15][0].name + "")) set_data(t2, t2_value);
-			if (dirty[0] & /*share*/ 32768 && t4_value !== (t4_value = /*share*/ ctx[15][0].last_name + "")) set_data(t4, t4_value);
-			if (dirty[0] & /*share*/ 32768 && t6_value !== (t6_value = /*share*/ ctx[15][0].title + "")) set_data(t6, t6_value);
-			if (dirty[0] & /*share*/ 32768 && t8_value !== (t8_value = startTime(/*share*/ ctx[15][1].create_time) + "")) set_data(t8, t8_value);
+			if (dirty[0] & /*share*/ 65536 && t2_value !== (t2_value = /*share*/ ctx[16][0].name + "")) set_data(t2, t2_value);
+			if (dirty[0] & /*share*/ 65536 && t4_value !== (t4_value = /*share*/ ctx[16][0].last_name + "")) set_data(t4, t4_value);
+			if (dirty[0] & /*share*/ 65536 && t6_value !== (t6_value = /*share*/ ctx[16][0].title + "")) set_data(t6, t6_value);
+			if (dirty[0] & /*share*/ 65536 && t8_value !== (t8_value = startTime(/*share*/ ctx[16][1].create_time) + "")) set_data(t8, t8_value);
 
-			if (dirty[0] & /*share*/ 32768 && a_href_value !== (a_href_value = "/profile/" + /*share*/ ctx[15][0].username)) {
+			if (dirty[0] & /*share*/ 65536 && a_href_value !== (a_href_value = "/profile/" + /*share*/ ctx[16][0].username)) {
 				attr(a, "href", a_href_value);
 			}
 
-			if (dirty[0] & /*share*/ 32768 && t10_value !== (t10_value = /*share*/ ctx[15][1].desc + "")) set_data(t10, t10_value);
+			if (dirty[0] & /*share*/ 65536 && t10_value !== (t10_value = /*share*/ ctx[16][1].desc + "")) set_data(t10, t10_value);
 
-			if (/*share*/ ctx[15][1].img !== '') {
+			if (/*share*/ ctx[16][1].img !== '') {
 				if (if_block0) {
 					if_block0.p(ctx, dirty);
 				} else {
@@ -915,7 +915,7 @@ function create_if_block_4(ctx) {
 				if_block0 = null;
 			}
 
-			if (/*share*/ ctx[15][1].video) {
+			if (/*share*/ ctx[16][1].video) {
 				if (if_block1) {
 					if_block1.p(ctx, dirty);
 				} else {
@@ -928,7 +928,7 @@ function create_if_block_4(ctx) {
 				if_block1 = null;
 			}
 
-			if (/*share*/ ctx[15][1].url_id !== 0) {
+			if (/*share*/ ctx[16][1].url_id !== 0) {
 				if (if_block2) {
 					if_block2.p(ctx, dirty);
 				} else {
@@ -954,7 +954,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (830:10) {#if share[1].img !== ''}
+// (836:10) {#if share[1].img !== ''}
 function create_if_block_11(ctx) {
 	let img_1;
 	let img_1_src_value;
@@ -962,7 +962,7 @@ function create_if_block_11(ctx) {
 	return {
 		c() {
 			img_1 = element("img");
-			if (!src_url_equal(img_1.src, img_1_src_value = "" + (/*urlAPI*/ ctx[14] + /*share*/ ctx[15][1].img))) attr(img_1, "src", img_1_src_value);
+			if (!src_url_equal(img_1.src, img_1_src_value = "" + (/*urlImages*/ ctx[15] + /*share*/ ctx[16][1].img))) attr(img_1, "src", img_1_src_value);
 			attr(img_1, "alt", "");
 			set_style(img_1, "width", "100%");
 		},
@@ -970,7 +970,7 @@ function create_if_block_11(ctx) {
 			insert(target, img_1, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*urlAPI, share*/ 49152 && !src_url_equal(img_1.src, img_1_src_value = "" + (/*urlAPI*/ ctx[14] + /*share*/ ctx[15][1].img))) {
+			if (dirty[0] & /*urlImages, share*/ 98304 && !src_url_equal(img_1.src, img_1_src_value = "" + (/*urlImages*/ ctx[15] + /*share*/ ctx[16][1].img))) {
 				attr(img_1, "src", img_1_src_value);
 			}
 		},
@@ -980,14 +980,14 @@ function create_if_block_11(ctx) {
 	};
 }
 
-// (833:10) {#if share[1].video}
+// (839:10) {#if share[1].video}
 function create_if_block_9(ctx) {
 	let show_if;
 	let if_block_anchor;
 
 	function select_block_type_3(ctx, dirty) {
-		if (dirty[0] & /*share*/ 32768) show_if = null;
-		if (show_if == null) show_if = !!/*share*/ ctx[15][1].video.includes('https://www.youtube.com/');
+		if (dirty[0] & /*share*/ 65536) show_if = null;
+		if (show_if == null) show_if = !!/*share*/ ctx[16][1].video.includes('https://www.youtube.com/');
 		if (show_if) return create_if_block_10;
 		return create_else_block_1;
 	}
@@ -1024,7 +1024,7 @@ function create_if_block_9(ctx) {
 	};
 }
 
-// (844:12) {:else}
+// (850:12) {:else}
 function create_else_block_1(ctx) {
 	let video_1;
 	let source;
@@ -1036,7 +1036,7 @@ function create_else_block_1(ctx) {
 			video_1 = element("video");
 			source = element("source");
 			track = element("track");
-			if (!src_url_equal(source.src, source_src_value = "" + (/*urlAPI*/ ctx[14] + /*video*/ ctx[16]))) attr(source, "src", source_src_value);
+			if (!src_url_equal(source.src, source_src_value = "" + (/*urlAPI*/ ctx[14] + /*video*/ ctx[17]))) attr(source, "src", source_src_value);
 			attr(track, "kind", "captions");
 			set_style(video_1, "width", "100%");
 			set_style(video_1, "max-height", "400px");
@@ -1048,7 +1048,7 @@ function create_else_block_1(ctx) {
 			append(video_1, track);
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*urlAPI, video*/ 81920 && !src_url_equal(source.src, source_src_value = "" + (/*urlAPI*/ ctx[14] + /*video*/ ctx[16]))) {
+			if (dirty[0] & /*urlAPI, video*/ 147456 && !src_url_equal(source.src, source_src_value = "" + (/*urlAPI*/ ctx[14] + /*video*/ ctx[17]))) {
 				attr(source, "src", source_src_value);
 			}
 		},
@@ -1058,7 +1058,7 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (834:12) {#if share[1].video.includes('https://www.youtube.com/')}
+// (840:12) {#if share[1].video.includes('https://www.youtube.com/')}
 function create_if_block_10(ctx) {
 	let iframe;
 	let iframe_src_value;
@@ -1068,7 +1068,7 @@ function create_if_block_10(ctx) {
 			iframe = element("iframe");
 			attr(iframe, "width", "100%");
 			attr(iframe, "height", "350");
-			if (!src_url_equal(iframe.src, iframe_src_value = /*share*/ ctx[15][1].video)) attr(iframe, "src", iframe_src_value);
+			if (!src_url_equal(iframe.src, iframe_src_value = /*share*/ ctx[16][1].video)) attr(iframe, "src", iframe_src_value);
 			attr(iframe, "title", "YouTube video player");
 			attr(iframe, "frameborder", "0");
 			attr(iframe, "allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
@@ -1078,7 +1078,7 @@ function create_if_block_10(ctx) {
 			insert(target, iframe, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*share*/ 32768 && !src_url_equal(iframe.src, iframe_src_value = /*share*/ ctx[15][1].video)) {
+			if (dirty[0] & /*share*/ 65536 && !src_url_equal(iframe.src, iframe_src_value = /*share*/ ctx[16][1].video)) {
 				attr(iframe, "src", iframe_src_value);
 			}
 		},
@@ -1088,7 +1088,7 @@ function create_if_block_10(ctx) {
 	};
 }
 
-// (852:10) {#if share[1].url_id !== 0}
+// (858:10) {#if share[1].url_id !== 0}
 function create_if_block_5(ctx) {
 	let div;
 	let a;
@@ -1175,7 +1175,7 @@ function create_if_block_5(ctx) {
 	};
 }
 
-// (855:16) {#if meta.title}
+// (861:16) {#if meta.title}
 function create_if_block_8(ctx) {
 	let h6;
 	let t_value = /*meta*/ ctx[8].title + "";
@@ -1199,7 +1199,7 @@ function create_if_block_8(ctx) {
 	};
 }
 
-// (858:16) {#if meta.description}
+// (864:16) {#if meta.description}
 function create_if_block_7(ctx) {
 	let p;
 	let t_value = /*meta*/ ctx[8].description + "";
@@ -1223,7 +1223,7 @@ function create_if_block_7(ctx) {
 	};
 }
 
-// (861:16) {#if meta.image}
+// (867:16) {#if meta.image}
 function create_if_block_6(ctx) {
 	let img_1;
 	let img_1_src_value;
@@ -1249,10 +1249,10 @@ function create_if_block_6(ctx) {
 	};
 }
 
-// (878:16) {#if reactionsLikeList}
+// (884:16) {#if reactionsLikeList}
 function create_if_block_3(ctx) {
 	let each_1_anchor;
-	let each_value_2 = /*reactionsLikeList*/ ctx[17];
+	let each_value_2 = /*reactionsLikeList*/ ctx[18];
 	let each_blocks = [];
 
 	for (let i = 0; i < each_value_2.length; i += 1) {
@@ -1275,8 +1275,8 @@ function create_if_block_3(ctx) {
 			insert(target, each_1_anchor, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*reactionsLikeList*/ 131072) {
-				each_value_2 = /*reactionsLikeList*/ ctx[17];
+			if (dirty[0] & /*reactionsLikeList*/ 262144) {
+				each_value_2 = /*reactionsLikeList*/ ctx[18];
 				let i;
 
 				for (i = 0; i < each_value_2.length; i += 1) {
@@ -1305,10 +1305,10 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (879:19) {#each reactionsLikeList as userLike}
+// (885:19) {#each reactionsLikeList as userLike}
 function create_each_block_2(ctx) {
 	let li;
-	let t_value = /*userLike*/ ctx[52] + "";
+	let t_value = /*userLike*/ ctx[53] + "";
 	let t;
 
 	return {
@@ -1322,7 +1322,7 @@ function create_each_block_2(ctx) {
 			append(li, t);
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*reactionsLikeList*/ 131072 && t_value !== (t_value = /*userLike*/ ctx[52] + "")) set_data(t, t_value);
+			if (dirty[0] & /*reactionsLikeList*/ 262144 && t_value !== (t_value = /*userLike*/ ctx[53] + "")) set_data(t, t_value);
 		},
 		d(detaching) {
 			if (detaching) detach(li);
@@ -1330,10 +1330,10 @@ function create_each_block_2(ctx) {
 	};
 }
 
-// (892:14) {#if reactionsLoveList}
+// (898:14) {#if reactionsLoveList}
 function create_if_block_2(ctx) {
 	let each_1_anchor;
-	let each_value_1 = /*reactionsLoveList*/ ctx[18];
+	let each_value_1 = /*reactionsLoveList*/ ctx[19];
 	let each_blocks = [];
 
 	for (let i = 0; i < each_value_1.length; i += 1) {
@@ -1356,8 +1356,8 @@ function create_if_block_2(ctx) {
 			insert(target, each_1_anchor, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*reactionsLoveList*/ 262144) {
-				each_value_1 = /*reactionsLoveList*/ ctx[18];
+			if (dirty[0] & /*reactionsLoveList*/ 524288) {
+				each_value_1 = /*reactionsLoveList*/ ctx[19];
 				let i;
 
 				for (i = 0; i < each_value_1.length; i += 1) {
@@ -1386,10 +1386,10 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (893:19) {#each reactionsLoveList as userLove}
+// (899:19) {#each reactionsLoveList as userLove}
 function create_each_block_1(ctx) {
 	let li;
-	let t_value = /*userLove*/ ctx[49] + "";
+	let t_value = /*userLove*/ ctx[50] + "";
 	let t;
 
 	return {
@@ -1403,7 +1403,7 @@ function create_each_block_1(ctx) {
 			append(li, t);
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*reactionsLoveList*/ 262144 && t_value !== (t_value = /*userLove*/ ctx[49] + "")) set_data(t, t_value);
+			if (dirty[0] & /*reactionsLoveList*/ 524288 && t_value !== (t_value = /*userLove*/ ctx[50] + "")) set_data(t, t_value);
 		},
 		d(detaching) {
 			if (detaching) detach(li);
@@ -1411,7 +1411,7 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (928:10) {:else}
+// (934:10) {:else}
 function create_else_block(ctx) {
 	let sharepost;
 	let current;
@@ -1419,7 +1419,8 @@ function create_else_block(ctx) {
 	sharepost = new SharePost({
 			props: {
 				id: /*id*/ ctx[13],
-				urlAPI: /*urlAPI*/ ctx[14]
+				urlAPI: /*urlAPI*/ ctx[14],
+				urlImages: /*urlImages*/ ctx[15]
 			}
 		});
 
@@ -1435,6 +1436,7 @@ function create_else_block(ctx) {
 			const sharepost_changes = {};
 			if (dirty[0] & /*id*/ 8192) sharepost_changes.id = /*id*/ ctx[13];
 			if (dirty[0] & /*urlAPI*/ 16384) sharepost_changes.urlAPI = /*urlAPI*/ ctx[14];
+			if (dirty[0] & /*urlImages*/ 32768) sharepost_changes.urlImages = /*urlImages*/ ctx[15];
 			sharepost.$set(sharepost_changes);
 		},
 		i(local) {
@@ -1452,15 +1454,16 @@ function create_else_block(ctx) {
 	};
 }
 
-// (926:10) {#if share !== ''}
+// (932:10) {#if share !== ''}
 function create_if_block_1(ctx) {
 	let sharepost;
 	let current;
 
 	sharepost = new SharePost({
 			props: {
-				shareId: /*shareId*/ ctx[19],
-				urlAPI: /*urlAPI*/ ctx[14]
+				shareId: /*shareId*/ ctx[20],
+				urlAPI: /*urlAPI*/ ctx[14],
+				urlImages: /*urlImages*/ ctx[15]
 			}
 		});
 
@@ -1474,8 +1477,9 @@ function create_if_block_1(ctx) {
 		},
 		p(ctx, dirty) {
 			const sharepost_changes = {};
-			if (dirty[0] & /*shareId*/ 524288) sharepost_changes.shareId = /*shareId*/ ctx[19];
+			if (dirty[0] & /*shareId*/ 1048576) sharepost_changes.shareId = /*shareId*/ ctx[20];
 			if (dirty[0] & /*urlAPI*/ 16384) sharepost_changes.urlAPI = /*urlAPI*/ ctx[14];
+			if (dirty[0] & /*urlImages*/ 32768) sharepost_changes.urlImages = /*urlImages*/ ctx[15];
 			sharepost.$set(sharepost_changes);
 		},
 		i(local) {
@@ -1493,11 +1497,11 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (948:6) {#if dataComment}
+// (954:6) {#if dataComment}
 function create_if_block(ctx) {
 	let each_1_anchor;
 	let current;
-	let each_value = /*dataComment*/ ctx[20];
+	let each_value = /*dataComment*/ ctx[21];
 	let each_blocks = [];
 
 	for (let i = 0; i < each_value.length; i += 1) {
@@ -1525,8 +1529,8 @@ function create_if_block(ctx) {
 			current = true;
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*dataComment, urlAPI*/ 1064960) {
-				each_value = /*dataComment*/ ctx[20];
+			if (dirty[0] & /*dataComment, urlAPI, urlImages*/ 2146304) {
+				each_value = /*dataComment*/ ctx[21];
 				let i;
 
 				for (i = 0; i < each_value.length; i += 1) {
@@ -1577,15 +1581,16 @@ function create_if_block(ctx) {
 	};
 }
 
-// (949:8) {#each dataComment as comment}
+// (955:8) {#each dataComment as comment}
 function create_each_block(ctx) {
 	let comment;
 	let current;
 
 	comment = new Comment({
 			props: {
-				comment: /*comment*/ ctx[46],
-				urlAPI: /*urlAPI*/ ctx[14]
+				comment: /*comment*/ ctx[47],
+				urlAPI: /*urlAPI*/ ctx[14],
+				urlImages: /*urlImages*/ ctx[15]
 			}
 		});
 
@@ -1599,8 +1604,9 @@ function create_each_block(ctx) {
 		},
 		p(ctx, dirty) {
 			const comment_changes = {};
-			if (dirty[0] & /*dataComment*/ 1048576) comment_changes.comment = /*comment*/ ctx[46];
+			if (dirty[0] & /*dataComment*/ 2097152) comment_changes.comment = /*comment*/ ctx[47];
 			if (dirty[0] & /*urlAPI*/ 16384) comment_changes.urlAPI = /*urlAPI*/ ctx[14];
+			if (dirty[0] & /*urlImages*/ 32768) comment_changes.urlImages = /*urlImages*/ ctx[15];
 			comment.$set(comment_changes);
 		},
 		i(local) {
@@ -1641,7 +1647,7 @@ function create_fragment(ctx) {
 	let span0;
 	let t5;
 	let t6;
-	let show_if = /*desc*/ ctx[10] && /*code*/ ctx[9] !== localStorage.getItem('lang');
+	let show_if = /*desc*/ ctx[10] && /*code*/ ctx[9] && /*code*/ ctx[9] !== localStorage.getItem('lang');
 	let t7;
 	let div5;
 	let t8;
@@ -1739,23 +1745,23 @@ function create_fragment(ctx) {
 	let current_block_type_1 = select_block_type_1(ctx, [-1, -1]);
 	let if_block1 = current_block_type_1 && current_block_type_1(ctx);
 	let if_block2 = show_if && create_if_block_19(ctx);
-	let if_block3 = /*meta*/ ctx[8] && /*share*/ ctx[15] === '' && create_if_block_15(ctx);
+	let if_block3 = /*meta*/ ctx[8] && /*share*/ ctx[16] === '' && create_if_block_15(ctx);
 	let if_block4 = !!/*img*/ ctx[11] && create_if_block_14(ctx);
-	let if_block5 = /*video*/ ctx[16] && /*share*/ ctx[15] === '' && create_if_block_12(ctx);
-	let if_block6 = /*share*/ ctx[15] !== '' && create_if_block_4(ctx);
-	let if_block7 = /*reactionsLikeList*/ ctx[17] && create_if_block_3(ctx);
-	let if_block8 = /*reactionsLoveList*/ ctx[18] && create_if_block_2(ctx);
+	let if_block5 = /*video*/ ctx[17] && /*share*/ ctx[16] === '' && create_if_block_12(ctx);
+	let if_block6 = /*share*/ ctx[16] !== '' && create_if_block_4(ctx);
+	let if_block7 = /*reactionsLikeList*/ ctx[18] && create_if_block_3(ctx);
+	let if_block8 = /*reactionsLoveList*/ ctx[19] && create_if_block_2(ctx);
 	const if_block_creators = [create_if_block_1, create_else_block];
 	const if_blocks = [];
 
 	function select_block_type_4(ctx, dirty) {
-		if (/*share*/ ctx[15] !== '') return 0;
+		if (/*share*/ ctx[16] !== '') return 0;
 		return 1;
 	}
 
 	current_block_type_index = select_block_type_4(ctx, [-1, -1]);
 	if_block9 = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
-	let if_block10 = /*dataComment*/ ctx[20] && create_if_block(ctx);
+	let if_block10 = /*dataComment*/ ctx[21] && create_if_block(ctx);
 
 	return {
 		c() {
@@ -1875,14 +1881,14 @@ function create_fragment(ctx) {
 			attr(div4, "class", "Card-container");
 			attr(div5, "class", "Card-photo px-0 svelte-1ib3qll");
 			attr(i1, "class", "fas fa-thumbs-up");
-			attr(span1, "id", /*likeValue*/ ctx[23]);
+			attr(span1, "id", /*likeValue*/ ctx[24]);
 			attr(span1, "class", "svelte-1ib3qll");
 			attr(ul1, "class", "p-0 m-0");
 			attr(ul1, "id", ul1_id_value = "ulLikeListReactions" + /*id*/ ctx[13]);
 			attr(span2, "class", "tooltiptext svelte-1ib3qll");
 			attr(div6, "class", "Reaction Header-nav-like mx-2 tooltipp svelte-1ib3qll");
 			attr(i2, "class", "fas fa-heart");
-			attr(span3, "id", /*loveValue*/ ctx[24]);
+			attr(span3, "id", /*loveValue*/ ctx[25]);
 			attr(span3, "class", "svelte-1ib3qll");
 			attr(ul2, "class", "p-0 m-0");
 			attr(ul2, "id", ul2_id_value = "ulLoveReactionsList" + /*id*/ ctx[13]);
@@ -1912,7 +1918,7 @@ function create_fragment(ctx) {
 			attr(div12, "class", "Action Header-nav-share svelte-1ib3qll");
 			attr(div13, "class", "Card-board-actions d-flex justify-content-center justify-content-md-start svelte-1ib3qll");
 			attr(div14, "class", "Card-board-actions svelte-1ib3qll");
-			if (!src_url_equal(img_1.src, img_1_src_value = "" + (/*urlAPI*/ ctx[14] + localStorage.getItem('profilePhoto')))) attr(img_1, "src", img_1_src_value);
+			if (!src_url_equal(img_1.src, img_1_src_value = "" + (/*urlImages*/ ctx[15] + localStorage.getItem('profilePhoto')))) attr(img_1, "src", img_1_src_value);
 			attr(img_1, "alt", "img");
 			attr(img_1, "class", "svelte-1ib3qll");
 			attr(input, "data-translate", "input-make-comment");
@@ -2027,12 +2033,12 @@ function create_fragment(ctx) {
 				dispose = [
 					action_destroyer(link_action = link.call(null, a)),
 					action_destroyer(active_action = active.call(null, a)),
-					listen(span7, "click", /*showComments*/ ctx[26]),
-					listen(button0, "click", /*changeReaction*/ ctx[25]),
-					listen(button1, "click", /*changeReaction*/ ctx[25]),
-					listen(div11, "click", /*showComments*/ ctx[26]),
-					listen(input, "keyup", /*commentAbled*/ ctx[27]),
-					listen(button2, "click", /*addComment*/ ctx[28])
+					listen(span7, "click", /*showComments*/ ctx[27]),
+					listen(button0, "click", /*changeReaction*/ ctx[26]),
+					listen(button1, "click", /*changeReaction*/ ctx[26]),
+					listen(div11, "click", /*showComments*/ ctx[27]),
+					listen(input, "keyup", /*commentAbled*/ ctx[28]),
+					listen(button2, "click", /*addComment*/ ctx[29])
 				];
 
 				mounted = true;
@@ -2068,7 +2074,7 @@ function create_fragment(ctx) {
 			}
 
 			if (!current || dirty[0] & /*desc*/ 1024) set_data(t5, /*desc*/ ctx[10]);
-			if (dirty[0] & /*desc, code*/ 1536) show_if = /*desc*/ ctx[10] && /*code*/ ctx[9] !== localStorage.getItem('lang');
+			if (dirty[0] & /*desc, code*/ 1536) show_if = /*desc*/ ctx[10] && /*code*/ ctx[9] && /*code*/ ctx[9] !== localStorage.getItem('lang');
 
 			if (show_if) {
 				if (if_block2) {
@@ -2093,7 +2099,7 @@ function create_fragment(ctx) {
 				check_outros();
 			}
 
-			if (/*meta*/ ctx[8] && /*share*/ ctx[15] === '') {
+			if (/*meta*/ ctx[8] && /*share*/ ctx[16] === '') {
 				if (if_block3) {
 					if_block3.p(ctx, dirty);
 				} else {
@@ -2119,7 +2125,7 @@ function create_fragment(ctx) {
 				if_block4 = null;
 			}
 
-			if (/*video*/ ctx[16] && /*share*/ ctx[15] === '') {
+			if (/*video*/ ctx[17] && /*share*/ ctx[16] === '') {
 				if (if_block5) {
 					if_block5.p(ctx, dirty);
 				} else {
@@ -2132,7 +2138,7 @@ function create_fragment(ctx) {
 				if_block5 = null;
 			}
 
-			if (/*share*/ ctx[15] !== '') {
+			if (/*share*/ ctx[16] !== '') {
 				if (if_block6) {
 					if_block6.p(ctx, dirty);
 				} else {
@@ -2147,7 +2153,7 @@ function create_fragment(ctx) {
 
 			if ((!current || dirty[0] & /*reactions*/ 1) && t13_value !== (t13_value = /*reactions*/ ctx[0].like + "")) set_data(t13, t13_value);
 
-			if (/*reactionsLikeList*/ ctx[17]) {
+			if (/*reactionsLikeList*/ ctx[18]) {
 				if (if_block7) {
 					if_block7.p(ctx, dirty);
 				} else {
@@ -2166,7 +2172,7 @@ function create_fragment(ctx) {
 
 			if ((!current || dirty[0] & /*reactions*/ 1) && t17_value !== (t17_value = /*reactions*/ ctx[0].love + "")) set_data(t17, t17_value);
 
-			if (/*reactionsLoveList*/ ctx[18]) {
+			if (/*reactionsLoveList*/ ctx[19]) {
 				if (if_block8) {
 					if_block8.p(ctx, dirty);
 				} else {
@@ -2227,7 +2233,7 @@ function create_fragment(ctx) {
 				if_block9.m(div12, null);
 			}
 
-			if (!current || dirty[0] & /*urlAPI*/ 16384 && !src_url_equal(img_1.src, img_1_src_value = "" + (/*urlAPI*/ ctx[14] + localStorage.getItem('profilePhoto')))) {
+			if (!current || dirty[0] & /*urlImages*/ 32768 && !src_url_equal(img_1.src, img_1_src_value = "" + (/*urlImages*/ ctx[15] + localStorage.getItem('profilePhoto')))) {
 				attr(img_1, "src", img_1_src_value);
 			}
 
@@ -2239,11 +2245,11 @@ function create_fragment(ctx) {
 				attr(button2, "id", button2_id_value);
 			}
 
-			if (/*dataComment*/ ctx[20]) {
+			if (/*dataComment*/ ctx[21]) {
 				if (if_block10) {
 					if_block10.p(ctx, dirty);
 
-					if (dirty[0] & /*dataComment*/ 1048576) {
+					if (dirty[0] & /*dataComment*/ 2097152) {
 						transition_in(if_block10, 1);
 					}
 				} else {
@@ -2306,15 +2312,17 @@ function instance($$self, $$props, $$invalidate) {
 	let { userId } = $$props;
 	let { desc, reactions, img, comments, create_time, user, id, user_id, update_time } = $$props;
 	let { name, middle_name, last_name, title, photo, email, username = 0, phone = 0 } = $$props;
-	let { userMain, urlAPI, url_id, meta } = $$props;
+	let { userMain, urlAPI, urlImages, url_id, meta } = $$props;
 	let { share_id, share_count, share = '' } = $$props;
 	let { video, code } = $$props;
+	if (code && code !== false) code = code.charAt(0).toUpperCase() + code.slice(1);
 
-	code
-	? code = code.charAt(0).toUpperCase() + code.slice(1)
-	: code = false;
-
+	// console.log(code);
+	// code
+	//   ? code = code.charAt(0).toUpperCase() + code.slice(1) 
+	//   : code = false
 	let reactionsLikeList;
+
 	let reactionsLoveList;
 
 	// console.log(navigator.language);
@@ -2367,8 +2375,8 @@ function instance($$self, $$props, $$invalidate) {
 		const getIdReaction = await fetch(`${urlAPI}/post/like/?post_id=${id}`);
 		const response = await getIdReaction.json();
 		reactionsPost = response;
-		$$invalidate(17, reactionsLikeList = []);
-		$$invalidate(18, reactionsLoveList = []);
+		$$invalidate(18, reactionsLikeList = []);
+		$$invalidate(19, reactionsLoveList = []);
 
 		reactionsPost.forEach(userReaction => {
 			if (userReaction.like) reactionsLikeList.push(userReaction.name + ' ' + userReaction.last_name); else if (userReaction.love) reactionsLoveList.push(userReaction.name + ' ' + userReaction.last_name);
@@ -2655,7 +2663,8 @@ function instance($$self, $$props, $$invalidate) {
 		if (comments >= 1) {
 			const response = await fetch(`${urlAPI}/post/comment/?post_id=${id}`);
 			const content = await response.json();
-			$$invalidate(20, dataComment = content);
+			$$invalidate(21, dataComment = content);
+			translate();
 		}
 	};
 
@@ -2736,12 +2745,12 @@ function instance($$self, $$props, $$invalidate) {
 	let showLoader = 0;
 
 	const googleTranslate = async text => {
-		$$invalidate(21, showLoader = 1);
+		$$invalidate(22, showLoader = 1);
 		const translated = await googleTranslateJs(text);
 
 		if (translated) {
 			let translation = translated.translatedText;
-			$$invalidate(21, showLoader = 0);
+			$$invalidate(22, showLoader = 0);
 			const textTranslated = document.getElementById(`textTranslated-${id}`);
 			textTranslated.innerHTML = translation;
 		}
@@ -2758,7 +2767,7 @@ function instance($$self, $$props, $$invalidate) {
 	});
 
 	$$self.$$set = $$props => {
-		if ('userId' in $$props) $$invalidate(31, userId = $$props.userId);
+		if ('userId' in $$props) $$invalidate(32, userId = $$props.userId);
 		if ('desc' in $$props) $$invalidate(10, desc = $$props.desc);
 		if ('reactions' in $$props) $$invalidate(0, reactions = $$props.reactions);
 		if ('img' in $$props) $$invalidate(11, img = $$props.img);
@@ -2767,23 +2776,24 @@ function instance($$self, $$props, $$invalidate) {
 		if ('user' in $$props) $$invalidate(2, user = $$props.user);
 		if ('id' in $$props) $$invalidate(13, id = $$props.id);
 		if ('user_id' in $$props) $$invalidate(3, user_id = $$props.user_id);
-		if ('update_time' in $$props) $$invalidate(32, update_time = $$props.update_time);
+		if ('update_time' in $$props) $$invalidate(33, update_time = $$props.update_time);
 		if ('name' in $$props) $$invalidate(4, name = $$props.name);
-		if ('middle_name' in $$props) $$invalidate(33, middle_name = $$props.middle_name);
+		if ('middle_name' in $$props) $$invalidate(34, middle_name = $$props.middle_name);
 		if ('last_name' in $$props) $$invalidate(5, last_name = $$props.last_name);
 		if ('title' in $$props) $$invalidate(6, title = $$props.title);
 		if ('photo' in $$props) $$invalidate(7, photo = $$props.photo);
-		if ('email' in $$props) $$invalidate(34, email = $$props.email);
-		if ('username' in $$props) $$invalidate(36, username = $$props.username);
-		if ('phone' in $$props) $$invalidate(37, phone = $$props.phone);
-		if ('userMain' in $$props) $$invalidate(35, userMain = $$props.userMain);
+		if ('email' in $$props) $$invalidate(35, email = $$props.email);
+		if ('username' in $$props) $$invalidate(37, username = $$props.username);
+		if ('phone' in $$props) $$invalidate(38, phone = $$props.phone);
+		if ('userMain' in $$props) $$invalidate(36, userMain = $$props.userMain);
 		if ('urlAPI' in $$props) $$invalidate(14, urlAPI = $$props.urlAPI);
-		if ('url_id' in $$props) $$invalidate(38, url_id = $$props.url_id);
+		if ('urlImages' in $$props) $$invalidate(15, urlImages = $$props.urlImages);
+		if ('url_id' in $$props) $$invalidate(39, url_id = $$props.url_id);
 		if ('meta' in $$props) $$invalidate(8, meta = $$props.meta);
-		if ('share_id' in $$props) $$invalidate(39, share_id = $$props.share_id);
-		if ('share_count' in $$props) $$invalidate(40, share_count = $$props.share_count);
-		if ('share' in $$props) $$invalidate(15, share = $$props.share);
-		if ('video' in $$props) $$invalidate(16, video = $$props.video);
+		if ('share_id' in $$props) $$invalidate(40, share_id = $$props.share_id);
+		if ('share_count' in $$props) $$invalidate(41, share_count = $$props.share_count);
+		if ('share' in $$props) $$invalidate(16, share = $$props.share);
+		if ('video' in $$props) $$invalidate(17, video = $$props.video);
 		if ('code' in $$props) $$invalidate(9, code = $$props.code);
 	};
 
@@ -2803,6 +2813,7 @@ function instance($$self, $$props, $$invalidate) {
 		create_time,
 		id,
 		urlAPI,
+		urlImages,
 		share,
 		video,
 		reactionsLikeList,
@@ -2843,7 +2854,7 @@ class Post extends SvelteComponent {
 			create_fragment,
 			safe_not_equal,
 			{
-				userId: 31,
+				userId: 32,
 				desc: 10,
 				reactions: 0,
 				img: 11,
@@ -2852,23 +2863,24 @@ class Post extends SvelteComponent {
 				user: 2,
 				id: 13,
 				user_id: 3,
-				update_time: 32,
+				update_time: 33,
 				name: 4,
-				middle_name: 33,
+				middle_name: 34,
 				last_name: 5,
 				title: 6,
 				photo: 7,
-				email: 34,
-				username: 36,
-				phone: 37,
-				userMain: 35,
+				email: 35,
+				username: 37,
+				phone: 38,
+				userMain: 36,
 				urlAPI: 14,
-				url_id: 38,
+				urlImages: 15,
+				url_id: 39,
 				meta: 8,
-				share_id: 39,
-				share_count: 40,
-				share: 15,
-				video: 16,
+				share_id: 40,
+				share_count: 41,
+				share: 16,
+				video: 17,
 				code: 9
 			},
 			null,

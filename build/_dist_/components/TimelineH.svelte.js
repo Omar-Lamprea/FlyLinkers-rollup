@@ -33,11 +33,11 @@ import { translate } from '../js/translate.js';
 
 function get_each_context(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[10] = list[i];
+	child_ctx[11] = list[i];
 	return child_ctx;
 }
 
-// (123:4) {#if id}
+// (128:4) {#if id}
 function create_if_block(ctx) {
 	let addpost;
 	let current;
@@ -46,7 +46,8 @@ function create_if_block(ctx) {
 			props: {
 				id: /*id*/ ctx[0],
 				urlAPI: /*urlAPI*/ ctx[1],
-				colorbox
+				colorbox,
+				urlImages: /*urlImages*/ ctx[2]
 			}
 		});
 
@@ -62,6 +63,7 @@ function create_if_block(ctx) {
 			const addpost_changes = {};
 			if (dirty & /*id*/ 1) addpost_changes.id = /*id*/ ctx[0];
 			if (dirty & /*urlAPI*/ 2) addpost_changes.urlAPI = /*urlAPI*/ ctx[1];
+			if (dirty & /*urlImages*/ 4) addpost_changes.urlImages = /*urlImages*/ ctx[2];
 			addpost.$set(addpost_changes);
 		},
 		i(local) {
@@ -79,15 +81,16 @@ function create_if_block(ctx) {
 	};
 }
 
-// (126:4) {#each $posts as dataPost}
+// (131:4) {#each $posts as dataPost}
 function create_each_block(ctx) {
 	let post;
 	let current;
 
 	const post_spread_levels = [
-		/*dataPost*/ ctx[10],
-		{ userId: /*userId*/ ctx[3] },
-		{ urlAPI: /*urlAPI*/ ctx[1] }
+		/*dataPost*/ ctx[11],
+		{ userId: /*userId*/ ctx[4] },
+		{ urlAPI: /*urlAPI*/ ctx[1] },
+		{ urlImages: /*urlImages*/ ctx[2] }
 	];
 
 	let post_props = {};
@@ -107,11 +110,12 @@ function create_each_block(ctx) {
 			current = true;
 		},
 		p(ctx, dirty) {
-			const post_changes = (dirty & /*$posts, userId, urlAPI*/ 14)
+			const post_changes = (dirty & /*$posts, userId, urlAPI, urlImages*/ 30)
 			? get_spread_update(post_spread_levels, [
-					dirty & /*$posts*/ 4 && get_spread_object(/*dataPost*/ ctx[10]),
-					dirty & /*userId*/ 8 && { userId: /*userId*/ ctx[3] },
-					dirty & /*urlAPI*/ 2 && { urlAPI: /*urlAPI*/ ctx[1] }
+					dirty & /*$posts*/ 8 && get_spread_object(/*dataPost*/ ctx[11]),
+					dirty & /*userId*/ 16 && { userId: /*userId*/ ctx[4] },
+					dirty & /*urlAPI*/ 2 && { urlAPI: /*urlAPI*/ ctx[1] },
+					dirty & /*urlImages*/ 4 && { urlImages: /*urlImages*/ ctx[2] }
 				])
 			: {};
 
@@ -142,7 +146,7 @@ function create_fragment(ctx) {
 	let div0;
 	let current;
 	let if_block = /*id*/ ctx[0] && create_if_block(ctx);
-	let each_value = /*$posts*/ ctx[2];
+	let each_value = /*$posts*/ ctx[3];
 	let each_blocks = [];
 
 	for (let i = 0; i < each_value.length; i += 1) {
@@ -220,8 +224,8 @@ function create_fragment(ctx) {
 				check_outros();
 			}
 
-			if (dirty & /*$posts, userId, urlAPI*/ 14) {
-				each_value = /*$posts*/ ctx[2];
+			if (dirty & /*$posts, userId, urlAPI, urlImages*/ 30) {
+				each_value = /*$posts*/ ctx[3];
 				let i;
 
 				for (i = 0; i < each_value.length; i += 1) {
@@ -280,10 +284,10 @@ let colorbox = 'boxHome';
 function instance($$self, $$props, $$invalidate) {
 	let $posts;
 	let { id } = $$props;
-	let { urlAPI } = $$props;
+	let { urlAPI, urlImages } = $$props;
 	const userId = id;
 	const posts = writable([]);
-	component_subscribe($$self, posts, value => $$invalidate(2, $posts = value));
+	component_subscribe($$self, posts, value => $$invalidate(3, $posts = value));
 	let page = 0;
 	let countPost = null;
 
@@ -307,26 +311,27 @@ function instance($$self, $$props, $$invalidate) {
 				// console.log(datelimit.toISOString());
 				// console.log(new Date(Date.parse(content.results[2].create_time)));
 				// console.log(new Date(Date.parse(content.results[2].create_time) + 10000));
-				if (content.results.length === 3) {
-					for (let i = 0; i < content.results.length; i++) {
-						if (content.results[i].user.id === parseInt(localStorage.getItem('userId')) && new Date(Date.parse(content.results[i].create_time) + 10000) >= dateNowOfMlSeconds) {
-							let aux = content.results[0];
-							let aux2 = content.results[1];
-							content.results[0] = content.results[i];
-							content.results[1] = aux;
-							content.results[2] = aux2;
-						}
-					}
-				} else if (content.results.length === 2) {
-					for (let i = 0; i < content.results.length; i++) {
-						if (content.results[i].user.id === parseInt(localStorage.getItem('userId')) && new Date(Date.parse(content.results[i].create_time) + 10000) >= dateNowOfMlSeconds) {
-							let aux = content.results[0];
-							content.results[0] = content.results[i];
-							content.results[1] = aux;
-						}
-					}
-				}
-
+				// if (content.results.length === 3) {
+				//   for (let i = 0; i < content.results.length; i++) {
+				//     if (content.results[i].user.id === parseInt(localStorage.getItem('userId')) &&
+				//     new Date(Date.parse(content.results[i].create_time) + 10000) >= dateNowOfMlSeconds) {
+				//       let aux = content.results[0]
+				//       let aux2 = content.results[1]
+				//       content.results[0] = content.results[i]
+				//       content.results[1] = aux
+				//       content.results[2] = aux2
+				//     }
+				//   }
+				// }else if(content.results.length === 2){
+				//   for (let i = 0; i < content.results.length; i++) {
+				//     if (content.results[i].user.id === parseInt(localStorage.getItem('userId')) &&
+				//     new Date(Date.parse(content.results[i].create_time) + 10000) >= dateNowOfMlSeconds) {
+				//       let aux = content.results[0]
+				//       content.results[0] = content.results[i]
+				//       content.results[1] = aux
+				//     }
+				//   }
+				// }
 				posts.set([...$posts, ...content.results]);
 			} else {
 				endPosts.classList.remove('d-none');
@@ -346,8 +351,9 @@ function instance($$self, $$props, $$invalidate) {
 
 		const observer = new MutationObserver(() => {
 				// console.log('reloading post...');
-				clearPost();
+				console.log('id el post=', reloadPosts.getAttribute('data-post'));
 
+				clearPost();
 				getPosts(1);
 				reloadPosts.removeAttribute('data-reloading');
 			});
@@ -367,16 +373,19 @@ function instance($$self, $$props, $$invalidate) {
 		reloadPosts();
 
 		document.addEventListener('scroll', async e => {
-			if (window.innerHeight + window.scrollY >= main.offsetHeight - 1 && !window.location.href.includes('settings') && !window.location.href.includes('profile')) {
-				if (countPost !== null) {
-					getPosts();
-				} else {
-					setTimeout(
-						() => {
-							endPosts.classList.remove('d-none');
-						},
-						1000
-					);
+			if (window.location.hash === "#/") {
+				if (window.innerHeight + window.scrollY >= main.offsetHeight - 1 && !window.location.href.includes('settings') && !window.location.href.includes('profile')) {
+					if (countPost !== null && countPost !== undefined) {
+						getPosts();
+						countPost = null;
+					} else {
+						setTimeout(
+							() => {
+								endPosts.classList.remove('d-none');
+							},
+							1000
+						);
+					}
 				}
 			}
 		});
@@ -388,19 +397,26 @@ function instance($$self, $$props, $$invalidate) {
 	$$self.$$set = $$props => {
 		if ('id' in $$props) $$invalidate(0, id = $$props.id);
 		if ('urlAPI' in $$props) $$invalidate(1, urlAPI = $$props.urlAPI);
+		if ('urlImages' in $$props) $$invalidate(2, urlImages = $$props.urlImages);
 	};
 
-	return [id, urlAPI, $posts, userId, posts, getPosts];
+	return [id, urlAPI, urlImages, $posts, userId, posts, getPosts];
 }
 
 class TimelineH extends SvelteComponent {
 	constructor(options) {
 		super();
-		init(this, options, instance, create_fragment, safe_not_equal, { id: 0, urlAPI: 1, getPosts: 5 });
+
+		init(this, options, instance, create_fragment, safe_not_equal, {
+			id: 0,
+			urlAPI: 1,
+			urlImages: 2,
+			getPosts: 6
+		});
 	}
 
 	get getPosts() {
-		return this.$$.ctx[5];
+		return this.$$.ctx[6];
 	}
 }
 

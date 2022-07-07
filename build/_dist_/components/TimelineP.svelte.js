@@ -39,29 +39,29 @@ import { translate } from '../js/translate.js';
 
 function get_each_context_1(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[26] = list[i];
+	child_ctx[27] = list[i];
 	return child_ctx;
 }
 
 function get_each_context(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[26] = list[i];
+	child_ctx[27] = list[i];
 	return child_ctx;
 }
 
 function get_each_context_3(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[26] = list[i];
+	child_ctx[27] = list[i];
 	return child_ctx;
 }
 
 function get_each_context_2(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[26] = list[i];
+	child_ctx[27] = list[i];
 	return child_ctx;
 }
 
-// (153:6) {#if email === dataJson.email}
+// (156:6) {#if email === dataJson.email}
 function create_if_block_6(ctx) {
 	let div;
 	let p;
@@ -72,7 +72,8 @@ function create_if_block_6(ctx) {
 	addpost = new AddPost({
 			props: {
 				id: /*id*/ ctx[6],
-				urlAPI: /*urlAPI*/ ctx[7]
+				urlAPI: /*urlAPI*/ ctx[7],
+				urlImages: /*urlImages*/ ctx[8]
 			}
 		});
 
@@ -98,6 +99,7 @@ function create_if_block_6(ctx) {
 			const addpost_changes = {};
 			if (dirty[0] & /*id*/ 64) addpost_changes.id = /*id*/ ctx[6];
 			if (dirty[0] & /*urlAPI*/ 128) addpost_changes.urlAPI = /*urlAPI*/ ctx[7];
+			if (dirty[0] & /*urlImages*/ 256) addpost_changes.urlImages = /*urlImages*/ ctx[8];
 			addpost.$set(addpost_changes);
 		},
 		i(local) {
@@ -116,7 +118,7 @@ function create_if_block_6(ctx) {
 	};
 }
 
-// (159:6) {#if experiences !== undefined}
+// (162:6) {#if experiences !== undefined}
 function create_if_block_5(ctx) {
 	let experience;
 	let current;
@@ -125,8 +127,8 @@ function create_if_block_5(ctx) {
 			props: {
 				urlAPI: /*urlAPI*/ ctx[7],
 				id: /*id*/ ctx[6],
-				experiences: /*experiences*/ ctx[11],
-				userProfile: /*userProfile*/ ctx[12]
+				experiences: /*experiences*/ ctx[12],
+				userProfile: /*userProfile*/ ctx[13]
 			}
 		});
 
@@ -142,8 +144,8 @@ function create_if_block_5(ctx) {
 			const experience_changes = {};
 			if (dirty[0] & /*urlAPI*/ 128) experience_changes.urlAPI = /*urlAPI*/ ctx[7];
 			if (dirty[0] & /*id*/ 64) experience_changes.id = /*id*/ ctx[6];
-			if (dirty[0] & /*experiences*/ 2048) experience_changes.experiences = /*experiences*/ ctx[11];
-			if (dirty[0] & /*userProfile*/ 4096) experience_changes.userProfile = /*userProfile*/ ctx[12];
+			if (dirty[0] & /*experiences*/ 4096) experience_changes.experiences = /*experiences*/ ctx[12];
+			if (dirty[0] & /*userProfile*/ 8192) experience_changes.userProfile = /*userProfile*/ ctx[13];
 			experience.$set(experience_changes);
 		},
 		i(local) {
@@ -161,13 +163,13 @@ function create_if_block_5(ctx) {
 	};
 }
 
-// (163:6) {#if email === dataJson.email}
+// (166:6) {#if email === dataJson.email}
 function create_if_block_4(ctx) {
 	let panel;
 	let current;
 
 	panel = new Panel({
-			props: { countFriends: /*countFriends*/ ctx[8] }
+			props: { countFriends: /*countFriends*/ ctx[9] }
 		});
 
 	return {
@@ -180,7 +182,7 @@ function create_if_block_4(ctx) {
 		},
 		p(ctx, dirty) {
 			const panel_changes = {};
-			if (dirty[0] & /*countFriends*/ 256) panel_changes.countFriends = /*countFriends*/ ctx[8];
+			if (dirty[0] & /*countFriends*/ 512) panel_changes.countFriends = /*countFriends*/ ctx[9];
 			panel.$set(panel_changes);
 		},
 		i(local) {
@@ -198,7 +200,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (167:6) {#if post}
+// (170:6) {#if post}
 function create_if_block_2(ctx) {
 	let current_block_type_index;
 	let if_block;
@@ -268,11 +270,11 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (174:8) {:else}
+// (177:8) {:else}
 function create_else_block_1(ctx) {
 	let each_1_anchor;
 	let current;
-	let each_value_3 = /*post*/ ctx[13];
+	let each_value_3 = /*post*/ ctx[14];
 	let each_blocks = [];
 
 	for (let i = 0; i < each_value_3.length; i += 1) {
@@ -300,8 +302,8 @@ function create_else_block_1(ctx) {
 			current = true;
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*userPost, post, userId, urlAPI*/ 155776) {
-				each_value_3 = /*post*/ ctx[13];
+			if (dirty[0] & /*userPost, post, userId, urlAPI, urlImages*/ 311680) {
+				each_value_3 = /*post*/ ctx[14];
 				let i;
 
 				for (i = 0; i < each_value_3.length; i += 1) {
@@ -352,11 +354,11 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (168:8) {#if userMain}
+// (171:8) {#if userMain}
 function create_if_block_3(ctx) {
 	let each_1_anchor;
 	let current;
-	let each_value_2 = /*post*/ ctx[13];
+	let each_value_2 = /*post*/ ctx[14];
 	let each_blocks = [];
 
 	for (let i = 0; i < each_value_2.length; i += 1) {
@@ -384,8 +386,8 @@ function create_if_block_3(ctx) {
 			current = true;
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*userPost, post, userMain, urlAPI*/ 24705) {
-				each_value_2 = /*post*/ ctx[13];
+			if (dirty[0] & /*userPost, post, userMain, urlAPI, urlImages*/ 49537) {
+				each_value_2 = /*post*/ ctx[14];
 				let i;
 
 				for (i = 0; i < each_value_2.length; i += 1) {
@@ -436,16 +438,17 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (176:10) {#each post as dataPost}
+// (179:10) {#each post as dataPost}
 function create_each_block_3(ctx) {
 	let post_1;
 	let current;
 
 	const post_1_spread_levels = [
-		/*userPost*/ ctx[14],
-		/*dataPost*/ ctx[26],
-		{ userId: /*userId*/ ctx[17] },
-		{ urlAPI: /*urlAPI*/ ctx[7] }
+		/*userPost*/ ctx[15],
+		/*dataPost*/ ctx[27],
+		{ userId: /*userId*/ ctx[18] },
+		{ urlAPI: /*urlAPI*/ ctx[7] },
+		{ urlImages: /*urlImages*/ ctx[8] }
 	];
 
 	let post_1_props = {};
@@ -465,12 +468,13 @@ function create_each_block_3(ctx) {
 			current = true;
 		},
 		p(ctx, dirty) {
-			const post_1_changes = (dirty[0] & /*userPost, post, userId, urlAPI*/ 155776)
+			const post_1_changes = (dirty[0] & /*userPost, post, userId, urlAPI, urlImages*/ 311680)
 			? get_spread_update(post_1_spread_levels, [
-					dirty[0] & /*userPost*/ 16384 && get_spread_object(/*userPost*/ ctx[14]),
-					dirty[0] & /*post*/ 8192 && get_spread_object(/*dataPost*/ ctx[26]),
-					dirty[0] & /*userId*/ 131072 && { userId: /*userId*/ ctx[17] },
-					dirty[0] & /*urlAPI*/ 128 && { urlAPI: /*urlAPI*/ ctx[7] }
+					dirty[0] & /*userPost*/ 32768 && get_spread_object(/*userPost*/ ctx[15]),
+					dirty[0] & /*post*/ 16384 && get_spread_object(/*dataPost*/ ctx[27]),
+					dirty[0] & /*userId*/ 262144 && { userId: /*userId*/ ctx[18] },
+					dirty[0] & /*urlAPI*/ 128 && { urlAPI: /*urlAPI*/ ctx[7] },
+					dirty[0] & /*urlImages*/ 256 && { urlImages: /*urlImages*/ ctx[8] }
 				])
 			: {};
 
@@ -491,16 +495,17 @@ function create_each_block_3(ctx) {
 	};
 }
 
-// (170:10) {#each post as dataPost}
+// (173:10) {#each post as dataPost}
 function create_each_block_2(ctx) {
 	let post_1;
 	let current;
 
 	const post_1_spread_levels = [
-		/*userPost*/ ctx[14],
-		/*dataPost*/ ctx[26],
+		/*userPost*/ ctx[15],
+		/*dataPost*/ ctx[27],
 		{ userMain: /*userMain*/ ctx[0] },
-		{ urlAPI: /*urlAPI*/ ctx[7] }
+		{ urlAPI: /*urlAPI*/ ctx[7] },
+		{ urlImages: /*urlImages*/ ctx[8] }
 	];
 
 	let post_1_props = {};
@@ -520,12 +525,13 @@ function create_each_block_2(ctx) {
 			current = true;
 		},
 		p(ctx, dirty) {
-			const post_1_changes = (dirty[0] & /*userPost, post, userMain, urlAPI*/ 24705)
+			const post_1_changes = (dirty[0] & /*userPost, post, userMain, urlAPI, urlImages*/ 49537)
 			? get_spread_update(post_1_spread_levels, [
-					dirty[0] & /*userPost*/ 16384 && get_spread_object(/*userPost*/ ctx[14]),
-					dirty[0] & /*post*/ 8192 && get_spread_object(/*dataPost*/ ctx[26]),
+					dirty[0] & /*userPost*/ 32768 && get_spread_object(/*userPost*/ ctx[15]),
+					dirty[0] & /*post*/ 16384 && get_spread_object(/*dataPost*/ ctx[27]),
 					dirty[0] & /*userMain*/ 1 && { userMain: /*userMain*/ ctx[0] },
-					dirty[0] & /*urlAPI*/ 128 && { urlAPI: /*urlAPI*/ ctx[7] }
+					dirty[0] & /*urlAPI*/ 128 && { urlAPI: /*urlAPI*/ ctx[7] },
+					dirty[0] & /*urlImages*/ 256 && { urlImages: /*urlImages*/ ctx[8] }
 				])
 			: {};
 
@@ -546,7 +552,7 @@ function create_each_block_2(ctx) {
 	};
 }
 
-// (184:6) {#if $posts}
+// (187:6) {#if $posts}
 function create_if_block(ctx) {
 	let current_block_type_index;
 	let if_block;
@@ -616,11 +622,11 @@ function create_if_block(ctx) {
 	};
 }
 
-// (191:8) {:else}
+// (194:8) {:else}
 function create_else_block(ctx) {
 	let each_1_anchor;
 	let current;
-	let each_value_1 = /*$posts*/ ctx[15];
+	let each_value_1 = /*$posts*/ ctx[16];
 	let each_blocks = [];
 
 	for (let i = 0; i < each_value_1.length; i += 1) {
@@ -648,8 +654,8 @@ function create_else_block(ctx) {
 			current = true;
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*userPost, $posts, userId, urlAPI*/ 180352) {
-				each_value_1 = /*$posts*/ ctx[15];
+			if (dirty[0] & /*userPost, $posts, userId, urlAPI, urlImages*/ 360832) {
+				each_value_1 = /*$posts*/ ctx[16];
 				let i;
 
 				for (i = 0; i < each_value_1.length; i += 1) {
@@ -700,11 +706,11 @@ function create_else_block(ctx) {
 	};
 }
 
-// (185:8) {#if userMain}
+// (188:8) {#if userMain}
 function create_if_block_1(ctx) {
 	let each_1_anchor;
 	let current;
-	let each_value = /*$posts*/ ctx[15];
+	let each_value = /*$posts*/ ctx[16];
 	let each_blocks = [];
 
 	for (let i = 0; i < each_value.length; i += 1) {
@@ -732,8 +738,8 @@ function create_if_block_1(ctx) {
 			current = true;
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*userPost, $posts, userMain, urlAPI*/ 49281) {
-				each_value = /*$posts*/ ctx[15];
+			if (dirty[0] & /*userPost, $posts, userMain, urlAPI, urlImages*/ 98689) {
+				each_value = /*$posts*/ ctx[16];
 				let i;
 
 				for (i = 0; i < each_value.length; i += 1) {
@@ -784,16 +790,17 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (193:10) {#each $posts as dataPost}
+// (196:10) {#each $posts as dataPost}
 function create_each_block_1(ctx) {
 	let post_1;
 	let current;
 
 	const post_1_spread_levels = [
-		/*userPost*/ ctx[14],
-		/*dataPost*/ ctx[26],
-		{ userId: /*userId*/ ctx[17] },
-		{ urlAPI: /*urlAPI*/ ctx[7] }
+		/*userPost*/ ctx[15],
+		/*dataPost*/ ctx[27],
+		{ userId: /*userId*/ ctx[18] },
+		{ urlAPI: /*urlAPI*/ ctx[7] },
+		{ urlImages: /*urlImages*/ ctx[8] }
 	];
 
 	let post_1_props = {};
@@ -813,12 +820,13 @@ function create_each_block_1(ctx) {
 			current = true;
 		},
 		p(ctx, dirty) {
-			const post_1_changes = (dirty[0] & /*userPost, $posts, userId, urlAPI*/ 180352)
+			const post_1_changes = (dirty[0] & /*userPost, $posts, userId, urlAPI, urlImages*/ 360832)
 			? get_spread_update(post_1_spread_levels, [
-					dirty[0] & /*userPost*/ 16384 && get_spread_object(/*userPost*/ ctx[14]),
-					dirty[0] & /*$posts*/ 32768 && get_spread_object(/*dataPost*/ ctx[26]),
-					dirty[0] & /*userId*/ 131072 && { userId: /*userId*/ ctx[17] },
-					dirty[0] & /*urlAPI*/ 128 && { urlAPI: /*urlAPI*/ ctx[7] }
+					dirty[0] & /*userPost*/ 32768 && get_spread_object(/*userPost*/ ctx[15]),
+					dirty[0] & /*$posts*/ 65536 && get_spread_object(/*dataPost*/ ctx[27]),
+					dirty[0] & /*userId*/ 262144 && { userId: /*userId*/ ctx[18] },
+					dirty[0] & /*urlAPI*/ 128 && { urlAPI: /*urlAPI*/ ctx[7] },
+					dirty[0] & /*urlImages*/ 256 && { urlImages: /*urlImages*/ ctx[8] }
 				])
 			: {};
 
@@ -839,16 +847,17 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (187:10) {#each $posts as dataPost}
+// (190:10) {#each $posts as dataPost}
 function create_each_block(ctx) {
 	let post_1;
 	let current;
 
 	const post_1_spread_levels = [
-		/*userPost*/ ctx[14],
-		/*dataPost*/ ctx[26],
+		/*userPost*/ ctx[15],
+		/*dataPost*/ ctx[27],
 		{ userMain: /*userMain*/ ctx[0] },
-		{ urlAPI: /*urlAPI*/ ctx[7] }
+		{ urlAPI: /*urlAPI*/ ctx[7] },
+		{ urlImages: /*urlImages*/ ctx[8] }
 	];
 
 	let post_1_props = {};
@@ -868,12 +877,13 @@ function create_each_block(ctx) {
 			current = true;
 		},
 		p(ctx, dirty) {
-			const post_1_changes = (dirty[0] & /*userPost, $posts, userMain, urlAPI*/ 49281)
+			const post_1_changes = (dirty[0] & /*userPost, $posts, userMain, urlAPI, urlImages*/ 98689)
 			? get_spread_update(post_1_spread_levels, [
-					dirty[0] & /*userPost*/ 16384 && get_spread_object(/*userPost*/ ctx[14]),
-					dirty[0] & /*$posts*/ 32768 && get_spread_object(/*dataPost*/ ctx[26]),
+					dirty[0] & /*userPost*/ 32768 && get_spread_object(/*userPost*/ ctx[15]),
+					dirty[0] & /*$posts*/ 65536 && get_spread_object(/*dataPost*/ ctx[27]),
 					dirty[0] & /*userMain*/ 1 && { userMain: /*userMain*/ ctx[0] },
-					dirty[0] & /*urlAPI*/ 128 && { urlAPI: /*urlAPI*/ ctx[7] }
+					dirty[0] & /*urlAPI*/ 128 && { urlAPI: /*urlAPI*/ ctx[7] },
+					dirty[0] & /*urlImages*/ 256 && { urlImages: /*urlImages*/ ctx[8] }
 				])
 			: {};
 
@@ -913,8 +923,8 @@ function create_fragment(ctx) {
 
 	coverphoto = new CoverPhoto({
 			props: {
-				coverPhoto: /*coverPhoto*/ ctx[9],
-				userId: /*userId*/ ctx[17]
+				coverPhoto: /*coverPhoto*/ ctx[10],
+				userId: /*userId*/ ctx[18]
 			}
 		});
 
@@ -926,17 +936,17 @@ function create_fragment(ctx) {
 				email: /*email*/ ctx[4],
 				photo: /*photo*/ ctx[5],
 				id: /*id*/ ctx[6],
-				aboutMe: /*aboutMe*/ ctx[10],
-				userMain: /*userMain*/ ctx[0],
-				urlAPI: /*urlAPI*/ ctx[7]
+				aboutMe: /*aboutMe*/ ctx[11],
+				urlAPI: /*urlAPI*/ ctx[7],
+				urlImages: /*urlImages*/ ctx[8]
 			}
 		});
 
-	let if_block0 = /*email*/ ctx[4] === /*dataJson*/ ctx[16].email && create_if_block_6(ctx);
-	let if_block1 = /*experiences*/ ctx[11] !== undefined && create_if_block_5(ctx);
-	let if_block2 = /*email*/ ctx[4] === /*dataJson*/ ctx[16].email && create_if_block_4(ctx);
-	let if_block3 = /*post*/ ctx[13] && create_if_block_2(ctx);
-	let if_block4 = /*$posts*/ ctx[15] && create_if_block(ctx);
+	let if_block0 = /*email*/ ctx[4] === /*dataJson*/ ctx[17].email && create_if_block_6(ctx);
+	let if_block1 = /*experiences*/ ctx[12] !== undefined && create_if_block_5(ctx);
+	let if_block2 = /*email*/ ctx[4] === /*dataJson*/ ctx[17].email && create_if_block_4(ctx);
+	let if_block3 = /*post*/ ctx[14] && create_if_block_2(ctx);
+	let if_block4 = /*$posts*/ ctx[16] && create_if_block(ctx);
 
 	return {
 		c() {
@@ -995,7 +1005,7 @@ function create_fragment(ctx) {
 		},
 		p(ctx, dirty) {
 			const coverphoto_changes = {};
-			if (dirty[0] & /*coverPhoto*/ 512) coverphoto_changes.coverPhoto = /*coverPhoto*/ ctx[9];
+			if (dirty[0] & /*coverPhoto*/ 1024) coverphoto_changes.coverPhoto = /*coverPhoto*/ ctx[10];
 			coverphoto.$set(coverphoto_changes);
 			const userdetails_changes = {};
 			if (dirty[0] & /*name*/ 2) userdetails_changes.name = /*name*/ ctx[1];
@@ -1004,12 +1014,12 @@ function create_fragment(ctx) {
 			if (dirty[0] & /*email*/ 16) userdetails_changes.email = /*email*/ ctx[4];
 			if (dirty[0] & /*photo*/ 32) userdetails_changes.photo = /*photo*/ ctx[5];
 			if (dirty[0] & /*id*/ 64) userdetails_changes.id = /*id*/ ctx[6];
-			if (dirty[0] & /*aboutMe*/ 1024) userdetails_changes.aboutMe = /*aboutMe*/ ctx[10];
-			if (dirty[0] & /*userMain*/ 1) userdetails_changes.userMain = /*userMain*/ ctx[0];
+			if (dirty[0] & /*aboutMe*/ 2048) userdetails_changes.aboutMe = /*aboutMe*/ ctx[11];
 			if (dirty[0] & /*urlAPI*/ 128) userdetails_changes.urlAPI = /*urlAPI*/ ctx[7];
+			if (dirty[0] & /*urlImages*/ 256) userdetails_changes.urlImages = /*urlImages*/ ctx[8];
 			userdetails.$set(userdetails_changes);
 
-			if (/*email*/ ctx[4] === /*dataJson*/ ctx[16].email) {
+			if (/*email*/ ctx[4] === /*dataJson*/ ctx[17].email) {
 				if (if_block0) {
 					if_block0.p(ctx, dirty);
 
@@ -1032,11 +1042,11 @@ function create_fragment(ctx) {
 				check_outros();
 			}
 
-			if (/*experiences*/ ctx[11] !== undefined) {
+			if (/*experiences*/ ctx[12] !== undefined) {
 				if (if_block1) {
 					if_block1.p(ctx, dirty);
 
-					if (dirty[0] & /*experiences*/ 2048) {
+					if (dirty[0] & /*experiences*/ 4096) {
 						transition_in(if_block1, 1);
 					}
 				} else {
@@ -1055,7 +1065,7 @@ function create_fragment(ctx) {
 				check_outros();
 			}
 
-			if (/*email*/ ctx[4] === /*dataJson*/ ctx[16].email) {
+			if (/*email*/ ctx[4] === /*dataJson*/ ctx[17].email) {
 				if (if_block2) {
 					if_block2.p(ctx, dirty);
 
@@ -1078,11 +1088,11 @@ function create_fragment(ctx) {
 				check_outros();
 			}
 
-			if (/*post*/ ctx[13]) {
+			if (/*post*/ ctx[14]) {
 				if (if_block3) {
 					if_block3.p(ctx, dirty);
 
-					if (dirty[0] & /*post*/ 8192) {
+					if (dirty[0] & /*post*/ 16384) {
 						transition_in(if_block3, 1);
 					}
 				} else {
@@ -1101,11 +1111,11 @@ function create_fragment(ctx) {
 				check_outros();
 			}
 
-			if (/*$posts*/ ctx[15]) {
+			if (/*$posts*/ ctx[16]) {
 				if (if_block4) {
 					if_block4.p(ctx, dirty);
 
-					if (dirty[0] & /*$posts*/ 32768) {
+					if (dirty[0] & /*$posts*/ 65536) {
 						transition_in(if_block4, 1);
 					}
 				} else {
@@ -1160,7 +1170,7 @@ function create_fragment(ctx) {
 
 function instance($$self, $$props, $$invalidate) {
 	let $posts;
-	let { name, last_name, title, email, photo, id, urlAPI } = $$props;
+	let { name, last_name, title, email, photo, id, urlAPI, urlImages } = $$props;
 	let { userMain } = $$props;
 	let { countFriends = 0 } = $$props;
 
@@ -1182,10 +1192,10 @@ function instance($$self, $$props, $$invalidate) {
 
 		if (content[0]) {
 			data = content[0];
-			$$invalidate(12, userProfile = data.id);
-			$$invalidate(11, experiences = data.experiences);
-			$$invalidate(9, coverPhoto = `${urlAPI}${data.cover_img}`);
-			$$invalidate(10, aboutMe = data.about);
+			$$invalidate(13, userProfile = data.id);
+			$$invalidate(12, experiences = data.experiences);
+			$$invalidate(10, coverPhoto = `${urlImages}${data.cover_img}`);
+			$$invalidate(11, aboutMe = data.about);
 		}
 	};
 
@@ -1194,7 +1204,7 @@ function instance($$self, $$props, $$invalidate) {
 	let countPost = null;
 
 	const getPost = async () => {
-		$$invalidate(13, post = '');
+		$$invalidate(14, post = '');
 
 		const response = await fetch(`${urlAPI}/post/create/?user=${id}`).then(res => {
 			if (res.ok) {
@@ -1208,8 +1218,8 @@ function instance($$self, $$props, $$invalidate) {
 
 			if (!content.Detail) {
 				if (content.results) {
-					$$invalidate(13, post = content.results.splice(1));
-					$$invalidate(14, userPost = content.results[0]);
+					$$invalidate(14, post = content.results.splice(1));
+					$$invalidate(15, userPost = content.results[0]);
 				}
 			}
 		}).catch(error => {
@@ -1218,7 +1228,7 @@ function instance($$self, $$props, $$invalidate) {
 	};
 
 	const posts = writable([]);
-	component_subscribe($$self, posts, value => $$invalidate(15, $posts = value));
+	component_subscribe($$self, posts, value => $$invalidate(16, $posts = value));
 	let page = 1;
 
 	async function getPosts() {
@@ -1241,7 +1251,7 @@ function instance($$self, $$props, $$invalidate) {
 
 		const observer = new MutationObserver(() => {
 				// console.log('reloading post...');
-				$$invalidate(13, post = '');
+				$$invalidate(14, post = '');
 
 				getPost(1);
 				reloadPosts.removeAttribute('data-reloading');
@@ -1262,16 +1272,19 @@ function instance($$self, $$props, $$invalidate) {
 		reloadPosts();
 
 		document.addEventListener('scroll', async e => {
-			if (window.innerHeight + window.scrollY >= main.offsetHeight - 1 && !window.location.href.includes('settings') && window.location.hash.length === 9) {
-				if (countPost !== null) {
-					getPosts();
-				} else {
-					setTimeout(
-						() => {
-							endPosts.classList.remove('d-none');
-						},
-						1000
-					);
+			if (window.location.hash === "#/profile") {
+				if (window.innerHeight + window.scrollY >= main.offsetHeight - 1 && !window.location.href.includes('settings') && window.location.hash.length === 9) {
+					if (countPost !== null && countPost !== undefined) {
+						getPosts();
+						countPost = null;
+					} else {
+						setTimeout(
+							() => {
+								endPosts.classList.remove('d-none');
+							},
+							1000
+						);
+					}
 				}
 			}
 		});
@@ -1285,8 +1298,9 @@ function instance($$self, $$props, $$invalidate) {
 		if ('photo' in $$props) $$invalidate(5, photo = $$props.photo);
 		if ('id' in $$props) $$invalidate(6, id = $$props.id);
 		if ('urlAPI' in $$props) $$invalidate(7, urlAPI = $$props.urlAPI);
+		if ('urlImages' in $$props) $$invalidate(8, urlImages = $$props.urlImages);
 		if ('userMain' in $$props) $$invalidate(0, userMain = $$props.userMain);
-		if ('countFriends' in $$props) $$invalidate(8, countFriends = $$props.countFriends);
+		if ('countFriends' in $$props) $$invalidate(9, countFriends = $$props.countFriends);
 	};
 
 	return [
@@ -1298,6 +1312,7 @@ function instance($$self, $$props, $$invalidate) {
 		photo,
 		id,
 		urlAPI,
+		urlImages,
 		countFriends,
 		coverPhoto,
 		aboutMe,
@@ -1330,8 +1345,9 @@ class TimelineP extends SvelteComponent {
 				photo: 5,
 				id: 6,
 				urlAPI: 7,
+				urlImages: 8,
 				userMain: 0,
-				countFriends: 8
+				countFriends: 9
 			},
 			null,
 			[-1, -1]

@@ -54,7 +54,7 @@ function create_if_block_4(ctx) {
 			insert(target, p, anchor);
 
 			if (!mounted) {
-				dispose = listen(p, "click", /*editDescription*/ ctx[11]);
+				dispose = listen(p, "click", /*editDescription*/ ctx[12]);
 				mounted = true;
 			}
 		},
@@ -67,7 +67,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (234:16) {#if aboutMe}
+// (235:16) {#if aboutMe}
 function create_if_block_3(ctx) {
 	let p;
 	let t;
@@ -94,13 +94,25 @@ function create_if_block_3(ctx) {
 
 // (282:8) {:else}
 function create_else_block(ctx) {
+	let div1;
+	let a;
+	let i;
 	let t0;
+	let p;
+	let a_href_value;
+	let link_action;
+	let active_action;
+	let t2;
+	let div0;
+	let t3;
 	let button;
-	let t1;
+	let t4;
 	let button_id_value;
+	let mounted;
+	let dispose;
 
 	function select_block_type_1(ctx, dirty) {
-		if (!/*friend*/ ctx[8]) return create_if_block_1;
+		if (!/*friend*/ ctx[9]) return create_if_block_1;
 		return create_else_block_2;
 	}
 
@@ -109,22 +121,58 @@ function create_else_block(ctx) {
 
 	return {
 		c() {
-			if_block.c();
+			div1 = element("div");
+			a = element("a");
+			i = element("i");
 			t0 = space();
+			p = element("p");
+			p.textContent = "Network";
+			t2 = space();
+			div0 = element("div");
+			if_block.c();
+			t3 = space();
 			button = element("button");
-			t1 = text("Send a message");
+			t4 = text("Send a message");
+			attr(i, "class", "fa-solid fa-users svelte-k3krtt");
+			attr(p, "class", "text-center ms-1");
+			set_style(p, "color", "rgb(38, 38, 38)");
+			attr(a, "href", a_href_value = "/network/" + /*id*/ ctx[5]);
+			attr(a, "class", "d-flex justify-content-end align-items-center text-center");
 			attr(button, "data-translate", "send-message");
 			attr(button, "id", button_id_value = "btInitChat-" + /*id*/ ctx[5]);
 			attr(button, "data-chat", /*id*/ ctx[5]);
 			attr(button, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 svelte-k3krtt");
+			attr(div0, "class", "btns-action-user d-flex flex-column");
+			attr(div1, "class", "d-flex flex-column justify-content-evenly");
+			set_style(div1, "height", "100%");
 		},
 		m(target, anchor) {
-			if_block.m(target, anchor);
-			insert(target, t0, anchor);
-			insert(target, button, anchor);
-			append(button, t1);
+			insert(target, div1, anchor);
+			append(div1, a);
+			append(a, i);
+			append(a, t0);
+			append(a, p);
+			append(div1, t2);
+			append(div1, div0);
+			if_block.m(div0, null);
+			append(div0, t3);
+			append(div0, button);
+			append(button, t4);
+
+			if (!mounted) {
+				dispose = [
+					action_destroyer(link_action = link.call(null, a)),
+					action_destroyer(active_action = active.call(null, a))
+				];
+
+				mounted = true;
+			}
 		},
 		p(ctx, dirty) {
+			if (dirty & /*id*/ 32 && a_href_value !== (a_href_value = "/network/" + /*id*/ ctx[5])) {
+				attr(a, "href", a_href_value);
+			}
+
 			if (current_block_type === (current_block_type = select_block_type_1(ctx, dirty)) && if_block) {
 				if_block.p(ctx, dirty);
 			} else {
@@ -133,7 +181,7 @@ function create_else_block(ctx) {
 
 				if (if_block) {
 					if_block.c();
-					if_block.m(t0.parentNode, t0);
+					if_block.m(div0, t3);
 				}
 			}
 
@@ -148,22 +196,31 @@ function create_else_block(ctx) {
 		i: noop,
 		o: noop,
 		d(detaching) {
-			if_block.d(detaching);
-			if (detaching) detach(t0);
-			if (detaching) detach(button);
+			if (detaching) detach(div1);
+			if_block.d();
+			mounted = false;
+			run_all(dispose);
 		}
 	};
 }
 
-// (255:8) {#if id === dataJson.id}
+// (256:8) {#if id === dataJson.id}
 function create_if_block(ctx) {
 	let div;
-	let a;
+	let a0;
+	let i0;
+	let t0;
+	let p0;
+	let a0_href_value;
 	let link_action;
 	let active_action;
 	let t2;
+	let a1;
+	let link_action_1;
+	let active_action_1;
+	let t5;
 	let coverphotomodal;
-	let t3;
+	let t6;
 	let profilephotomodal;
 	let current;
 	let mounted;
@@ -172,58 +229,84 @@ function create_if_block(ctx) {
 	coverphotomodal = new CoverPhotoModal({
 			props: {
 				id: /*id*/ ctx[5],
-				urlAPI: /*urlAPI*/ ctx[7]
+				urlAPI: /*urlAPI*/ ctx[7],
+				urlImages: /*urlImages*/ ctx[8]
 			}
 		});
 
 	profilephotomodal = new ProfilePhotoModal({
 			props: {
 				id: /*id*/ ctx[5],
-				urlAPI: /*urlAPI*/ ctx[7]
+				urlAPI: /*urlAPI*/ ctx[7],
+				urlImages: /*urlImages*/ ctx[8]
 			}
 		});
 
 	return {
 		c() {
 			div = element("div");
-			a = element("a");
+			a0 = element("a");
+			i0 = element("i");
+			t0 = space();
+			p0 = element("p");
+			p0.textContent = "Network";
+			t2 = space();
+			a1 = element("a");
 
-			a.innerHTML = `<p type="button" class="mb-3 svelte-k3krtt" style="color:rgba(38, 38, 38, 07)"><i class="fas fa-pen svelte-k3krtt"></i> 
+			a1.innerHTML = `<p type="button" class="mb-3 svelte-k3krtt" style="color:rgba(38, 38, 38, 07)"><i class="fas fa-pen svelte-k3krtt"></i> 
               <span data-translate="edit-profile" class="svelte-k3krtt">Edit profile</span></p>`;
 
-			t2 = space();
+			t5 = space();
 			create_component(coverphotomodal.$$.fragment);
-			t3 = space();
+			t6 = space();
 			create_component(profilephotomodal.$$.fragment);
-			attr(a, "href", "/settings");
-			attr(div, "class", "edit-profile-content svelte-k3krtt");
+			attr(i0, "class", "fa-solid fa-users svelte-k3krtt");
+			attr(p0, "class", "text-center ms-1");
+			set_style(p0, "color", "rgb(38, 38, 38)");
+			attr(a0, "href", a0_href_value = "/network/" + /*id*/ ctx[5]);
+			attr(a0, "class", "d-flex mb-2 align-items-center text-center");
+			attr(a1, "href", "/settings");
+			attr(div, "class", "edit-profile-content d-flex flex-column svelte-k3krtt");
 		},
 		m(target, anchor) {
 			insert(target, div, anchor);
-			append(div, a);
+			append(div, a0);
+			append(a0, i0);
+			append(a0, t0);
+			append(a0, p0);
 			append(div, t2);
+			append(div, a1);
+			append(div, t5);
 			mount_component(coverphotomodal, div, null);
-			append(div, t3);
+			append(div, t6);
 			mount_component(profilephotomodal, div, null);
 			current = true;
 
 			if (!mounted) {
 				dispose = [
-					action_destroyer(link_action = link.call(null, a)),
-					action_destroyer(active_action = active.call(null, a))
+					action_destroyer(link_action = link.call(null, a0)),
+					action_destroyer(active_action = active.call(null, a0)),
+					action_destroyer(link_action_1 = link.call(null, a1)),
+					action_destroyer(active_action_1 = active.call(null, a1))
 				];
 
 				mounted = true;
 			}
 		},
 		p(ctx, dirty) {
+			if (!current || dirty & /*id*/ 32 && a0_href_value !== (a0_href_value = "/network/" + /*id*/ ctx[5])) {
+				attr(a0, "href", a0_href_value);
+			}
+
 			const coverphotomodal_changes = {};
 			if (dirty & /*id*/ 32) coverphotomodal_changes.id = /*id*/ ctx[5];
 			if (dirty & /*urlAPI*/ 128) coverphotomodal_changes.urlAPI = /*urlAPI*/ ctx[7];
+			if (dirty & /*urlImages*/ 256) coverphotomodal_changes.urlImages = /*urlImages*/ ctx[8];
 			coverphotomodal.$set(coverphotomodal_changes);
 			const profilephotomodal_changes = {};
 			if (dirty & /*id*/ 32) profilephotomodal_changes.id = /*id*/ ctx[5];
 			if (dirty & /*urlAPI*/ 128) profilephotomodal_changes.urlAPI = /*urlAPI*/ ctx[7];
+			if (dirty & /*urlImages*/ 256) profilephotomodal_changes.urlImages = /*urlImages*/ ctx[8];
 			profilephotomodal.$set(profilephotomodal_changes);
 		},
 		i(local) {
@@ -247,7 +330,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (292:10) {:else}
+// (298:14) {:else}
 function create_else_block_2(ctx) {
 	let button;
 
@@ -268,12 +351,12 @@ function create_else_block_2(ctx) {
 	};
 }
 
-// (283:10) {#if !friend}
+// (289:14) {#if !friend}
 function create_if_block_1(ctx) {
 	let if_block_anchor;
 
 	function select_block_type_2(ctx, dirty) {
-		if (/*friendRequest*/ ctx[9]) return create_if_block_2;
+		if (/*friendRequest*/ ctx[10]) return create_if_block_2;
 		return create_else_block_1;
 	}
 
@@ -309,7 +392,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (289:14) {:else}
+// (295:16) {:else}
 function create_else_block_1(ctx) {
 	let button;
 	let mounted;
@@ -327,7 +410,7 @@ function create_else_block_1(ctx) {
 			insert(target, button, anchor);
 
 			if (!mounted) {
-				dispose = listen(button, "click", /*sendFriendRequest*/ ctx[14]);
+				dispose = listen(button, "click", /*sendFriendRequest*/ ctx[15]);
 				mounted = true;
 			}
 		},
@@ -340,7 +423,7 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (284:12) {#if friendRequest}
+// (290:16) {#if friendRequest}
 function create_if_block_2(ctx) {
 	let div;
 	let button0;
@@ -373,8 +456,8 @@ function create_if_block_2(ctx) {
 
 			if (!mounted) {
 				dispose = [
-					listen(button0, "click", /*acceptRequest*/ ctx[15]),
-					listen(button1, "click", /*declineRequest*/ ctx[16])
+					listen(button0, "click", /*acceptRequest*/ ctx[16]),
+					listen(button1, "click", /*declineRequest*/ ctx[17])
 				];
 
 				mounted = true;
@@ -436,17 +519,18 @@ function create_fragment(ctx) {
 			props: {
 				photo: /*photo*/ ctx[4],
 				urlAPI: /*urlAPI*/ ctx[7],
+				urlImages: /*urlImages*/ ctx[8],
 				id: /*id*/ ctx[5]
 			}
 		});
 
-	let if_block0 = /*email*/ ctx[3] === /*dataJson*/ ctx[10].email && create_if_block_4(ctx);
+	let if_block0 = /*email*/ ctx[3] === /*dataJson*/ ctx[11].email && create_if_block_4(ctx);
 	let if_block1 = /*aboutMe*/ ctx[6] && create_if_block_3(ctx);
 	const if_block_creators = [create_if_block, create_else_block];
 	const if_blocks = [];
 
 	function select_block_type(ctx, dirty) {
-		if (/*id*/ ctx[5] === /*dataJson*/ ctx[10].id) return 0;
+		if (/*id*/ ctx[5] === /*dataJson*/ ctx[11].id) return 0;
 		return 1;
 	}
 
@@ -569,8 +653,8 @@ function create_fragment(ctx) {
 
 			if (!mounted) {
 				dispose = [
-					listen(textarea, "keyup", /*valueTextArea*/ ctx[12]),
-					listen(button, "click", /*updateDescription*/ ctx[13])
+					listen(textarea, "keyup", /*valueTextArea*/ ctx[13]),
+					listen(button, "click", /*updateDescription*/ ctx[14])
 				];
 
 				mounted = true;
@@ -580,13 +664,14 @@ function create_fragment(ctx) {
 			const userpotho_changes = {};
 			if (dirty & /*photo*/ 16) userpotho_changes.photo = /*photo*/ ctx[4];
 			if (dirty & /*urlAPI*/ 128) userpotho_changes.urlAPI = /*urlAPI*/ ctx[7];
+			if (dirty & /*urlImages*/ 256) userpotho_changes.urlImages = /*urlImages*/ ctx[8];
 			if (dirty & /*id*/ 32) userpotho_changes.id = /*id*/ ctx[5];
 			userpotho.$set(userpotho_changes);
 			if (!current || dirty & /*name*/ 1) set_data(t1, /*name*/ ctx[0]);
 			if (!current || dirty & /*last_name*/ 2) set_data(t3, /*last_name*/ ctx[1]);
 			if (!current || dirty & /*title*/ 4) set_data(t5, /*title*/ ctx[2]);
 
-			if (/*email*/ ctx[3] === /*dataJson*/ ctx[10].email) {
+			if (/*email*/ ctx[3] === /*dataJson*/ ctx[11].email) {
 				if (if_block0) {
 					if_block0.p(ctx, dirty);
 				} else {
@@ -672,8 +757,10 @@ function create_fragment(ctx) {
 }
 
 function instance($$self, $$props, $$invalidate) {
-	let { name, last_name, title, email, photo, id, aboutMe, urlAPI } = $$props;
-	let { userMain } = $$props;
+	let { name, last_name, title, email, photo, id, aboutMe, urlAPI, urlImages } = $$props;
+	let userMain = localStorage.getItem('userId');
+
+	// console.log(userMain);
 	const dataJson = JSON.parse(localStorage.getItem('data'));
 
 	const editDescription = () => {
@@ -712,7 +799,7 @@ function instance($$self, $$props, $$invalidate) {
 
 		content.forEach(el => {
 			if (el.id === id) {
-				$$invalidate(8, friend = true);
+				$$invalidate(9, friend = true);
 			}
 		});
 
@@ -735,7 +822,7 @@ function instance($$self, $$props, $$invalidate) {
 
 		requestsFriend.forEach(el => {
 			if (el.id === id) {
-				$$invalidate(9, friendRequest = true);
+				$$invalidate(10, friendRequest = true);
 			}
 		});
 	};
@@ -782,7 +869,7 @@ function instance($$self, $$props, $$invalidate) {
 		let response = await declineFriend(urlAPI, id.toString(), userMain, localStorage.getItem('visitProfile'));
 
 		if (response) {
-			$$invalidate(9, friendRequest = false);
+			$$invalidate(10, friendRequest = false);
 		}
 	};
 
@@ -801,7 +888,7 @@ function instance($$self, $$props, $$invalidate) {
 		if ('id' in $$props) $$invalidate(5, id = $$props.id);
 		if ('aboutMe' in $$props) $$invalidate(6, aboutMe = $$props.aboutMe);
 		if ('urlAPI' in $$props) $$invalidate(7, urlAPI = $$props.urlAPI);
-		if ('userMain' in $$props) $$invalidate(17, userMain = $$props.userMain);
+		if ('urlImages' in $$props) $$invalidate(8, urlImages = $$props.urlImages);
 	};
 
 	return [
@@ -813,6 +900,7 @@ function instance($$self, $$props, $$invalidate) {
 		id,
 		aboutMe,
 		urlAPI,
+		urlImages,
 		friend,
 		friendRequest,
 		dataJson,
@@ -821,8 +909,7 @@ function instance($$self, $$props, $$invalidate) {
 		updateDescription,
 		sendFriendRequest,
 		acceptRequest,
-		declineRequest,
-		userMain
+		declineRequest
 	];
 }
 
@@ -839,7 +926,7 @@ class UserDetails extends SvelteComponent {
 			id: 5,
 			aboutMe: 6,
 			urlAPI: 7,
-			userMain: 17
+			urlImages: 8
 		});
 	}
 }

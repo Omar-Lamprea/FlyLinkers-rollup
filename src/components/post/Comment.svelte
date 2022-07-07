@@ -119,11 +119,11 @@
   }
 
 
-  const makeLike = async (icon, count, idComment) =>{
+  const makeLike = async (icon, count, commentId) =>{
     const countLike = document.getElementById(`container-reaction-like-${comment.id}`)
     countLike.setAttribute('disabled', '')
 
-    const result = await sendLike(icon, count, idComment)
+    const result = await sendLike(icon, count, commentId, localStorage.getItem('userId'))
     if(result === "update like to dislike"){
       comment.reactions.like -= 1
       iconLike = "far"
@@ -143,7 +143,7 @@
     const countLove = document.getElementById(`container-reaction-love-${comment.id}`)
     countLove.setAttribute('disabled', '')
 
-    const result = await sendLove(icon, count, idComment)
+    const result = await sendLove(icon, count, idComment, localStorage.getItem('userId'))
     if(result === "update love to dislove"){
       comment.reactions.love -= 1
       iconLove = "far"

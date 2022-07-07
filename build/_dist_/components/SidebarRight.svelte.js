@@ -30,7 +30,8 @@ function create_if_block(ctx) {
 			props: {
 				id: /*id*/ ctx[0],
 				urlAPI: /*urlAPI*/ ctx[1],
-				dataFriends: /*dataFriends*/ ctx[2]
+				urlImages: /*urlImages*/ ctx[2],
+				dataFriends: /*dataFriends*/ ctx[3]
 			}
 		});
 
@@ -46,7 +47,8 @@ function create_if_block(ctx) {
 			const people_changes = {};
 			if (dirty & /*id*/ 1) people_changes.id = /*id*/ ctx[0];
 			if (dirty & /*urlAPI*/ 2) people_changes.urlAPI = /*urlAPI*/ ctx[1];
-			if (dirty & /*dataFriends*/ 4) people_changes.dataFriends = /*dataFriends*/ ctx[2];
+			if (dirty & /*urlImages*/ 4) people_changes.urlImages = /*urlImages*/ ctx[2];
+			if (dirty & /*dataFriends*/ 8) people_changes.dataFriends = /*dataFriends*/ ctx[3];
 			people.$set(people_changes);
 		},
 		i(local) {
@@ -125,7 +127,7 @@ function create_fragment(ctx) {
 }
 
 function instance($$self, $$props, $$invalidate) {
-	let { id = '', urlAPI, dataFriends = '' } = $$props;
+	let { id = '', urlAPI, urlImages = '', dataFriends = '' } = $$props;
 
 	onMount(async () => {
 		await translate();
@@ -134,16 +136,23 @@ function instance($$self, $$props, $$invalidate) {
 	$$self.$$set = $$props => {
 		if ('id' in $$props) $$invalidate(0, id = $$props.id);
 		if ('urlAPI' in $$props) $$invalidate(1, urlAPI = $$props.urlAPI);
-		if ('dataFriends' in $$props) $$invalidate(2, dataFriends = $$props.dataFriends);
+		if ('urlImages' in $$props) $$invalidate(2, urlImages = $$props.urlImages);
+		if ('dataFriends' in $$props) $$invalidate(3, dataFriends = $$props.dataFriends);
 	};
 
-	return [id, urlAPI, dataFriends];
+	return [id, urlAPI, urlImages, dataFriends];
 }
 
 class SidebarRight extends SvelteComponent {
 	constructor(options) {
 		super();
-		init(this, options, instance, create_fragment, safe_not_equal, { id: 0, urlAPI: 1, dataFriends: 2 });
+
+		init(this, options, instance, create_fragment, safe_not_equal, {
+			id: 0,
+			urlAPI: 1,
+			urlImages: 2,
+			dataFriends: 3
+		});
 	}
 }
 
