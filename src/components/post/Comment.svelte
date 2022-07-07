@@ -5,6 +5,8 @@
   import startTime from '../../js/startTime.js'
   import Reply from './Reply.svelte'
   import { translate } from '../../js/translate';
+  import {sendLike, sendLove, getReactionUser} from '../../js/reactionsPost.js'
+  import {onMount} from "svelte"
 
   // import {commentsFirebase} from '../../js/firebase/commentsFirebase.js'
 
@@ -13,9 +15,18 @@
   // let replycomment = 0
 
   export let comment, urlAPI, urlImages;
-  console.log(comment);
 
   let reply;
+
+  let iconLike = "far"
+  let iconLove = "far"
+  const getReaction = async ()=>{
+    const reaction = await getReactionUser(comment.id, localStorage.getItem('userId'));
+    if(reaction){
+      reaction.like ? iconLike = 'fas' : false
+      reaction.love ? iconLove = 'fas' : false
+    }
+  }
 
   const showReply = async()=>{
     try {
@@ -66,6 +77,8 @@
       await showReply()
     }
 
+
+    //firebase:
     // const content = await response.json()
     // if (content) {
       // inputAddReply.value = ''
@@ -104,6 +117,52 @@
     // }
 
   }
+
+
+  const makeLike = async (icon, count, idComment) =>{
+    const countLike = document.getElementById(`container-reaction-like-${comment.id}`)
+    countLike.setAttribute('disabled', '')
+
+    const result = await sendLike(icon, count, idComment)
+    if(result === "update like to dislike"){
+      comment.reactions.like -= 1
+      iconLike = "far"
+    }else if(result === "update like and dislove"){
+      comment.reactions.like += 1
+      comment.reactions.love -= 1
+      iconLike = "fas"
+      iconLove = "far"
+    }else if(result === "update to like" || result === "new like reaction"){
+      comment.reactions.like += 1
+      iconLike = "fas"
+    }
+    countLike.removeAttribute('disabled')
+  }
+
+  const makeLove = async (icon, count, idComment) =>{
+    const countLove = document.getElementById(`container-reaction-love-${comment.id}`)
+    countLove.setAttribute('disabled', '')
+
+    const result = await sendLove(icon, count, idComment)
+    if(result === "update love to dislove"){
+      comment.reactions.love -= 1
+      iconLove = "far"
+    }else if(result === "update love and dislike"){
+      comment.reactions.love += 1
+      comment.reactions.like -= 1
+      iconLove = "fas"
+      iconLike = "far"
+    }else if(result === "update to love" || result === "new love reaction"){
+      comment.reactions.love += 1
+      iconLove = "fas"
+    }
+    countLove.removeAttribute('disabled')
+  }
+
+  onMount(async ()=>{
+    await getReaction()
+  })
+
 </script>
 
 <style>
@@ -177,18 +236,18 @@
           {comment.comment}
         </div>
         <div class="reactions-comment d-flex">
-          <p class="mx-2">
-            <i class="fas fa-thumbs-up" aria-hidden="true"></i>
-            <span class="span-reply">0</span>
+          <p id="container-reaction-like-{comment.id}" class="mx-2" on:click={makeLike(`icon-like-${comment.id}`, `count-like-${comment.id}`, `${comment.id}`)}>
+            <i id="icon-like-{comment.id}" class="{iconLike} fa-thumbs-up" aria-hidden="true"></i>
+            <span id="count-like-{comment.id}" class="span-reply">{comment.reactions.like}</span>
           </p>
 
-          <p class="mx-2">
-            <i class="fas fa-heart" aria-hidden="true"></i>
-            <span class="span-reply">0</span>
+          <p id="container-reaction-love-{comment.id}" class="mx-2" on:click={makeLove(`icon-love-${comment.id}`, `count-love-${comment.id}`, `${comment.id}`)}>
+            <i id="icon-love-{comment.id}" class="{iconLove} fa-heart" aria-hidden="true"></i>
+            <span id="count-love-{comment.id}" class="span-reply">{comment.reactions.love}</span>
           </p>
 
           <p class="mx-2" on:click={showReply}>
-            <i class="fas fa-comment" aria-hidden="true"></i>
+            <i  class="fas fa-comment" aria-hidden="true"></i>
             <span class="span-reply">{comment.answers} <span class="span-reply" data-translate="reply">Reply</span></span>
           </p>
         </div>
