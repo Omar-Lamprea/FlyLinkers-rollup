@@ -456,7 +456,7 @@
             {#if typeof(notification.id) === 'string'}
               <li class="d-flex notificationsList dropdown-item" data-email={notification.id}>
                 <a on:click={visitProfile(notification.id)} href="/profile/{notification.id}" use:link use:active class="d-flex">
-                  <img src="{urlAPI}/{notification.photo}" alt="userImage">
+                  <img src="{urlImages}{notification.photo}" alt="userImage">
                   <span>
                     <div class="data-user-time d-flex justify-content-between">
                       <p class="notification-user-name">{notification.name}</p>
@@ -470,7 +470,7 @@
               <!-- comment or reaction post -->
               <li class="d-flex notificationsList dropdown-item" data-id={notification.id}>
                 <a href="/post/{notification.id}" use:link use:active class="d-flex" on:click={reload}>
-                  <img src="{urlAPI}/{notification.photo}" alt="userImage">
+                  <img src="{urlImages}{notification.photo}" alt="userImage">
                   <span>
                     <div class="data-user-time d-flex justify-content-between">
                       <p class="notification-user-name">{notification.name}</p>

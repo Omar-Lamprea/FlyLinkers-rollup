@@ -37,27 +37,27 @@
         // console.log(new Date(Date.parse(content.results[2].create_time)));
         // console.log(new Date(Date.parse(content.results[2].create_time) + 10000));
 
-        if (content.results.length === 3) {
-          for (let i = 0; i < content.results.length; i++) {
-            if (content.results[i].user.id === parseInt(localStorage.getItem('userId')) &&
-            new Date(Date.parse(content.results[i].create_time) + 10000) >= dateNowOfMlSeconds) {
-              let aux = content.results[0]
-              let aux2 = content.results[1]
-              content.results[0] = content.results[i]
-              content.results[1] = aux
-              content.results[2] = aux2
-            }
-          }
-        }else if(content.results.length === 2){
-          for (let i = 0; i < content.results.length; i++) {
-            if (content.results[i].user.id === parseInt(localStorage.getItem('userId')) &&
-            new Date(Date.parse(content.results[i].create_time) + 10000) >= dateNowOfMlSeconds) {
-              let aux = content.results[0]
-              content.results[0] = content.results[i]
-              content.results[1] = aux
-            }
-          }
-        }
+        // if (content.results.length === 3) {
+        //   for (let i = 0; i < content.results.length; i++) {
+        //     if (content.results[i].user.id === parseInt(localStorage.getItem('userId')) &&
+        //     new Date(Date.parse(content.results[i].create_time) + 10000) >= dateNowOfMlSeconds) {
+        //       let aux = content.results[0]
+        //       let aux2 = content.results[1]
+        //       content.results[0] = content.results[i]
+        //       content.results[1] = aux
+        //       content.results[2] = aux2
+        //     }
+        //   }
+        // }else if(content.results.length === 2){
+        //   for (let i = 0; i < content.results.length; i++) {
+        //     if (content.results[i].user.id === parseInt(localStorage.getItem('userId')) &&
+        //     new Date(Date.parse(content.results[i].create_time) + 10000) >= dateNowOfMlSeconds) {
+        //       let aux = content.results[0]
+        //       content.results[0] = content.results[i]
+        //       content.results[1] = aux
+        //     }
+        //   }
+        // }
 
         posts.set([...$posts, ...content.results])
       }else{
@@ -77,6 +77,7 @@
       const reloadPosts = document.getElementById('reloadPostCheck')
       const observer = new MutationObserver(()=>{
         // console.log('reloading post...');
+        console.log('id el post=', reloadPosts.getAttribute('data-post'))
         clearPost()
         getPosts(1)
         reloadPosts.removeAttribute('data-reloading')
@@ -97,15 +98,19 @@
     reloadPosts()
 
     document.addEventListener('scroll', async (e)=>{
-      if ((window.innerHeight + window.scrollY) >= main.offsetHeight - 1 && !window.location.href.includes('settings') && !window.location.href.includes('profile')){
-        if (countPost !== null) {
-          getPosts()
-        }else{
-          setTimeout(() => {
-            endPosts.classList.remove('d-none')
-          }, 1000);
+      if(window.location.hash === "#/"){
+        if ((window.innerHeight + window.scrollY) >= main.offsetHeight - 1 && !window.location.href.includes('settings') && !window.location.href.includes('profile')){
+          if (countPost !== null && countPost !== undefined) {
+            getPosts()
+            countPost = null
+          }else{
+            setTimeout(() => {
+              endPosts.classList.remove('d-none')
+              
+            }, 1000);
+          }
         }
-      }
+      } 
     })
 
     // translate()

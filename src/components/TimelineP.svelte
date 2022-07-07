@@ -107,18 +107,21 @@
       getPost()
     }
     reloadPosts()
-
-    document.addEventListener('scroll', async (e)=>{
-      if ((window.innerHeight + window.scrollY) >= main.offsetHeight - 1 && !window.location.href.includes('settings') && window.location.hash.length === 9){
-        if (countPost !== null) {
-          getPosts()
-        }else{
-          setTimeout(() => {
-            endPosts.classList.remove('d-none')
-          }, 1000);
+      document.addEventListener('scroll', async (e)=>{
+        if(window.location.hash === "#/profile"){
+          if ((window.innerHeight + window.scrollY) >= main.offsetHeight - 1 && !window.location.href.includes('settings') && window.location.hash.length === 9){
+            if (countPost !== null  && countPost !== undefined) {
+              getPosts()
+              countPost = null
+            }else{
+              setTimeout(() => {
+                endPosts.classList.remove('d-none')
+              }, 1000);
+            }
+          }
         }
-      }
-    })
+      })
+
 
     // translate()
 
@@ -148,12 +151,12 @@
     <input type="checkbox" id="reloadPostCheck" name="reloadPost" class="d-none">
     <div class="Profile-container">
       <CoverPhoto {coverPhoto} {userId}/>
-      <UserDetails {name} {last_name} {title} {email} {photo} {id} {aboutMe} {userMain} {urlAPI} {urlImages}/>
+      <UserDetails {name} {last_name} {title} {email} {photo} {id} {aboutMe} {urlAPI} {urlImages}/>
 
       {#if email === dataJson.email}
         <div class="Background-post-profile">
           <p data-translate="title-post" class="my-2">Post</p>
-          <AddPost {id} {urlAPI}/>
+          <AddPost {id} {urlAPI} {urlImages}/>
         </div>
       {/if}
       {#if experiences !== undefined}

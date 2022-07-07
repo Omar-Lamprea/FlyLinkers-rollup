@@ -1,6 +1,6 @@
 <script>
   import ShareModal from '../../Modals/actions/ShareModal.svelte'
-  export let id, urlAPI, shareId = ''
+  export let id, urlAPI, shareId = '', urlImages
 
   if (!id) id = shareId
 
@@ -32,4 +32,4 @@
   <i class="fas fa-share"></i>
   <span data-translate="share">Share</span>
 </div>
-<ShareModal {urlAPI} {id} {userPost} {infoPost}/>
+<ShareModal {urlAPI} {id} {userPost} {infoPost} {urlImages}/>

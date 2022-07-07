@@ -20,8 +20,8 @@
   export let share_id, share_count, share = '';
   export let video, code;
 
-  if(code !== false) code = code.charAt(0).toUpperCase() + code.slice(1)
-  console.log(code);
+  if(code && code !== false) code = code.charAt(0).toUpperCase() + code.slice(1)
+  // console.log(code);
 
   // code
   //   ? code = code.charAt(0).toUpperCase() + code.slice(1) 
@@ -930,9 +930,9 @@
         </div>
         <div class="Action Header-nav-share">
           {#if share !== ''}
-            <SharePost {shareId} {urlAPI}/>
+            <SharePost {shareId} {urlAPI} {urlImages}/>
           {:else}
-            <SharePost {id} {urlAPI}/>
+            <SharePost {id} {urlAPI} {urlImages}/>
           {/if}
         </div>
         <!-- <div class="Action Header-nav-paper-plane hidden disabled">

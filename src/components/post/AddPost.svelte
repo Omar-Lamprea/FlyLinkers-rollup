@@ -308,6 +308,8 @@
         })
 
         if (post.ok) {
+          let content = await post.json()
+          console.log("contenido:", content.id);
           postDescription.value = ''
           if (postImg.src) {
             postImg.setAttribute('src', '')
@@ -323,6 +325,7 @@
           //recargar post
           const reloadPost = document.getElementById('reloadPostCheck')
           reloadPost.classList.toggle('data-reloading')
+          reloadPost.setAttribute('data-post', content.id)
         }
       }
       

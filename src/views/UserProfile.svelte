@@ -7,6 +7,7 @@
   let userMain = localStorage.getItem('userId');
   export let params;
   const urlAPI = 'https://api.flylinkers.com'
+  const urlImages = 'http://3.130.198.152:8000'
 
   const urlUser = window.location.pathname
   // const urluserProfile = urlUser.slice(9)
@@ -42,7 +43,7 @@
   let dataFriends;
   let countFriends;
   const getFriends = async()=>{
-    const response = await fetch(`${urlAPI}/friend/user/?user=${id}`)
+    const response = await fetch(`${urlAPI}/friend/user/?user=${id}&limit=3`)
     if (response.ok) {
       const content = await response.json()
       dataFriends = content
@@ -59,8 +60,8 @@
 
 <div class="row">
   {#if dataProfile}
-    <TimelineP {name} {last_name} {title} {email} {photo} {id} {userMain} {urlAPI}/>
-    <SidebarRight {id} {urlAPI} {dataFriends}/>
+    <TimelineP {name} {last_name} {title} {email} {photo} {id} {userMain} {urlAPI} {urlImages}/>
+    <SidebarRight {id} {urlAPI} {dataFriends} {urlImages}/>
   {:else}
      <Loader/>
   {/if}

@@ -151,6 +151,13 @@
       </li>
     {:else}
        <p data-translate="nav-no-request" class="text-center">You haven't news</p>
+       <!-- <a href="/network/{id}" class="text-center" use:link use:active>
+        <p class="text-center">Your Network</p>
+      </a> -->
     {/each}
+    <hr>
+    <a href="/network/{id}" class="text-center" use:link use:active>
+      <p class="text-center">Your Network</p>
+    </a>
   </ul>
 </div>

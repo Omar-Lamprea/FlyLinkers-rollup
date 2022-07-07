@@ -2,7 +2,7 @@
   import startTime from "../../../js/startTime";
   import Loader from '../../Loader.svelte'
   import {closeModal} from '../../../js/closeModals'
-  export let id, userPost, infoPost, urlAPI;
+  export let id, userPost, infoPost, urlAPI, urlImages;
 
   const incrementTextArea = (e)=>{
     e.target.style.height = (e.target.scrollHeight > e.target.clientHeight) ? (e.target.scrollHeight)+"px" : "57px";
@@ -119,7 +119,7 @@
         {#if userPost && infoPost}
           <div class="post-shared Default-containers">
             <div class="user d-flex align-items-center">
-              <img src="{urlAPI}{userPost.photo}" alt="">
+              <img src="{urlImages}{userPost.photo}" alt="">
               <h2>
                 {userPost.name} {userPost.last_name}
                 <span>{userPost.title}</span>
@@ -129,7 +129,7 @@
             <div class="info text-start mt-3">
               <p>{infoPost.desc}</p>
               {#if infoPost.img !== ""}
-                <img src="{urlAPI}{infoPost.img}" alt="">
+                <img src="{urlImages}{infoPost.img}" alt="">
               {/if}
 
               {#if infoPost.video}

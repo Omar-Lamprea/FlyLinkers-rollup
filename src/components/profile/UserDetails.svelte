@@ -9,8 +9,9 @@
   import {onMount} from 'svelte'
 
   export let name, last_name, title, email , photo, id, aboutMe, urlAPI, urlImages;
-  export let userMain;
+  let userMain = localStorage.getItem('userId');
 
+  // console.log(userMain);
   const dataJson = JSON.parse(localStorage.getItem('data'))
 
   const editDescription = ()=>{
@@ -253,7 +254,13 @@
     <div class="col-12 col-lg-6">
       <div class="Profile-card-text text-end d-flex flex-column align-items-end mt-0 mt-md-3 px-3 px-md-0" style="height:100%">
         {#if id === dataJson.id}
-        <div class="edit-profile-content">
+        <div class="edit-profile-content d-flex flex-column">
+
+          <a href="/network/{id}" class="d-flex mb-2 align-items-center text-center" use:link use:active>
+            <i class="fa-solid fa-users"></i>
+            <p class="text-center ms-1" style="color: rgb(38, 38, 38);;">Network</p>
+          </a>
+
           <a href="/settings" use:link use:active>
             <p type="button" class="mb-3" style="color:rgba(38, 38, 38, 07)">
               <i class="fas fa-pen"></i>
@@ -264,14 +271,7 @@
           <ProfilePhotoModal {id} {urlAPI} {urlImages}/>
         </div>
 
-          <!-- <div class="Profile-card-statistics">
-            <p>
-              <span data-translate="who-viewed">Who viewed your profile-card</span>
-              <span>3.8K</span></p> 
-            <p>
-              <span data-translate="views-post">Views of your post</span>
-              <span>3.8K</span></p> 
-          </div> -->
+          
           <!-- <div class="Profile-card-buttons mt-5">
             <button class="btn btn-outline-primary btn-flylinkers disabled" disabled>
               <i class="fas fa-pen"></i>
@@ -280,19 +280,27 @@
             <button data-translate="profile-btn-selection" class="btn mt-0 mt-lg-1 mt-xl-0 btn-outline-primary btn-flylinkers disabled" disabled>Add section</button>
           </div> -->
         {:else}
-          {#if !friend}
-            {#if friendRequest}
-            <div class="btn-friend-request mb-3">
-              <button data-translate="btn-accept-request" id="btnSendFriendRequest" class="btn btn-outline-primary btn-flylinkers align-self-end mt-1 accept-friend" on:click={acceptRequest}>Accept friends request</button>
-              <button data-translate="btn-deny-request" id="btnSendFriendRequest" class="btn btn-outline-primary btn-flylinkers align-self-end mt-1 decline-friend" on:click={declineRequest}>Decline friend request</button>
-            </div>
+          <div class="d-flex flex-column justify-content-evenly" style="height: 100%;">
+            <a href="/network/{id}" class="d-flex  justify-content-end align-items-center text-center" use:link use:active>
+              <i class="fa-solid fa-users"></i>
+              <p class="text-center ms-1" style="color: rgb(38, 38, 38);;">Network</p>
+            </a>
+            <div class="btns-action-user d-flex flex-column">
+              {#if !friend}
+                {#if friendRequest}
+                  <div class="btn-friend-request mb-3">
+                    <button data-translate="btn-accept-request" id="btnSendFriendRequest" class="btn btn-outline-primary btn-flylinkers align-self-end mt-1 accept-friend" on:click={acceptRequest}>Accept friends request</button>
+                    <button data-translate="btn-deny-request" id="btnSendFriendRequest" class="btn btn-outline-primary btn-flylinkers align-self-end mt-1 decline-friend" on:click={declineRequest}>Decline friend request</button>
+                  </div>
+                {:else}
+                  <button data-translate="send-friend-request" id="btnSendFriendRequest" class="btn btn-outline-primary btn-flylinkers align-self-end mt-1" on:click={sendFriendRequest}>Send friend request</button>
+                {/if}
               {:else}
-                <button data-translate="send-friend-request" id="btnSendFriendRequest" class="btn btn-outline-primary btn-flylinkers align-self-end mt-1" on:click={sendFriendRequest}>Send friend request</button>
-            {/if}
-          {:else}
-            <button data-translate="is-friend" class="btn btn-outline-primary btn-flylinkers align-self-end mt-1">Friends</button>
-          {/if}
-          <button data-translate="send-message" id="btInitChat-{id}" data-chat={id} class="btn btn-outline-primary btn-flylinkers align-self-end mt-1">Send a message</button>
+                <button data-translate="is-friend" class="btn btn-outline-primary btn-flylinkers align-self-end mt-1">Friends</button>
+              {/if}
+              <button data-translate="send-message" id="btInitChat-{id}" data-chat={id} class="btn btn-outline-primary btn-flylinkers align-self-end mt-1">Send a message</button>
+            </div>
+          </div>
         {/if}
       </div>
     </div>

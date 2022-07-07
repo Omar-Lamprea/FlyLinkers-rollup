@@ -6,7 +6,7 @@ export default{
     "nav-log-out": "Logout",
     "nav-no-chat": "You don't have chats",
     "nav-no-news": "You don't have news",
-    "nav-no-request": "You don't have friend request",
+    "nav-no-request": "No friend requests",
     "nav-acept-request" : "Accept",
     "nav-deline-request" : "Deny",
     "input-search" : "Search",
