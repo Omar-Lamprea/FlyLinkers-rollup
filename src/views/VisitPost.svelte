@@ -55,8 +55,8 @@
     }
   }
 
-  onMount(()=>{
-    getPost()
+  onMount(async()=>{
+    await getPost()
   })
 
 </script>

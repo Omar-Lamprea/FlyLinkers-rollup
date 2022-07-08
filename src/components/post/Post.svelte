@@ -879,29 +879,29 @@
         <div class="Reaction Header-nav-like mx-2 tooltipp">
             <i class="fas fa-thumbs-up"></i>
             <span id={likeValue}>{reactions.like}</span>
-            <span class="tooltiptext">
-              <ul class="p-0 m-0" id="ulLikeListReactions{id}">
-                {#if reactionsLikeList}
-                   {#each reactionsLikeList as userLike}
-                     <li style="list-style: none;">{userLike}</li>
-                   {/each}
-                {/if}
-              </ul>
-            </span>
+            {#if reactionsLikeList && reactionsLikeList.length > 0}
+              <span class="tooltiptext">
+                <ul class="p-0 m-0" id="ulLikeListReactions{id}">
+                  {#each reactionsLikeList as userLike}
+                    <li style="list-style: none;">{userLike}</li>
+                  {/each}
+                </ul>
+              </span>
+            {/if}
         </div>
 
         <div class="Reaction Header-nav-heart mx-2 tooltipp">
           <i class="fas fa-heart"></i>
           <span id={loveValue}>{reactions.love}</span>
-          <span class="tooltiptext">
-            <ul class="p-0 m-0" id="ulLoveReactionsList{id}">
-              {#if reactionsLoveList}
-                   {#each reactionsLoveList as userLove}
-                     <li style="list-style: none;">{userLove}</li>
-                   {/each}
-                {/if}
-            </ul>
-          </span>
+          {#if reactionsLoveList && reactionsLoveList.length > 0}
+            <span class="tooltiptext">
+              <ul class="p-0 m-0" id="ulLoveReactionsList{id}">
+                {#each reactionsLoveList as userLove}
+                  <li style="list-style: none;">{userLove}</li>
+                {/each}
+              </ul>
+            </span>
+          {/if}
         </div>
 
         <div class="Reaction Header-nav-comment mx-2">

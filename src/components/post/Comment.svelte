@@ -5,7 +5,7 @@
   import startTime from '../../js/startTime.js'
   import Reply from './Reply.svelte'
   import { translate } from '../../js/translate';
-  import {sendLike, sendLove, getReactionUser} from '../../js/reactionsPost.js'
+  import {sendLike, sendLove} from '../../js/reactionsPost.js'
   import {onMount} from "svelte"
 
   // import {commentsFirebase} from '../../js/firebase/commentsFirebase.js'
@@ -20,8 +20,24 @@
 
   let iconLike = "far"
   let iconLove = "far"
+  let reactionsLikeList;
+  let reactionsLoveList;
+
   const getReaction = async ()=>{
-    const reaction = await getReactionUser(comment.id, localStorage.getItem('userId'));
+    let reaction;
+    const response = await fetch(`${urlAPI}/post/reacts/?comment_id=${comment.id}`)
+    if (response.ok) {
+      const content = await response.json()
+      reactionsLikeList = []
+      reactionsLoveList = []
+      content.forEach(userReaction => {
+        if (userReaction.like) reactionsLikeList.push(userReaction.name + ' ' + userReaction.last_name)
+        else if (userReaction.love) reactionsLoveList.push(userReaction.name + ' ' + userReaction.last_name)
+      })
+
+      reaction = content.find(r => r.id === parseInt(localStorage.getItem('userId')));
+    }
+
     if(reaction){
       reaction.like ? iconLike = 'fas' : false
       reaction.love ? iconLove = 'fas' : false
@@ -39,7 +55,7 @@
         console.log(response);
       }
     } catch (error) {
-      console.log('asdf');
+      console.log('Error:');
       console.log(error);
     }
   }
@@ -52,11 +68,8 @@
   }
 
   const addReply = async (e) =>{
-
     e.preventDefault()
-
     const inputAddReply = document.getElementById(`input-addReply-${comment.id}`)
-
     const obj = {
       answer: inputAddReply.value,
       user_id: localStorage.getItem('userId'),
@@ -76,8 +89,6 @@
        comment.answers += 1
       await showReply()
     }
-
-
     //firebase:
     // const content = await response.json()
     // if (content) {
@@ -115,7 +126,6 @@
       //   commentsFirebase(commentUserFirebase, aux)
       // }
     // }
-
   }
 
 
@@ -123,7 +133,7 @@
     const countLike = document.getElementById(`container-reaction-like-${comment.id}`)
     countLike.setAttribute('disabled', '')
 
-    const result = await sendLike(icon, count, commentId, localStorage.getItem('userId'))
+    const result = await sendLike(commentId, localStorage.getItem('userId'))
     if(result === "update like to dislike"){
       comment.reactions.like -= 1
       iconLike = "far"
@@ -137,13 +147,14 @@
       iconLike = "fas"
     }
     countLike.removeAttribute('disabled')
+    getReaction()
   }
 
   const makeLove = async (icon, count, idComment) =>{
     const countLove = document.getElementById(`container-reaction-love-${comment.id}`)
     countLove.setAttribute('disabled', '')
 
-    const result = await sendLove(icon, count, idComment, localStorage.getItem('userId'))
+    const result = await sendLove(idComment, localStorage.getItem('userId'))
     if(result === "update love to dislove"){
       comment.reactions.love -= 1
       iconLove = "far"
@@ -157,6 +168,7 @@
       iconLove = "fas"
     }
     countLove.removeAttribute('disabled')
+    getReaction()
   }
 
   onMount(async ()=>{
@@ -175,7 +187,7 @@
     padding: .5rem 1rem;
   }
   .Comments-users {
-    margin: 0 0 0.5rem 0.5rem;
+    /* margin: 0 0 0.5rem 0.5rem; */
     display: flex;
     justify-content: space-between;
   }
@@ -189,17 +201,25 @@
     padding: 0.1rem;
     margin-right: .5rem;
   }
-  .Comments-users span p{
+  .Comments-users span button{
+    font-weight: 600;
+    color: var(--main-color);
+    padding: 0;
+    background-color: transparent;
+    border: none;
+  }
+  .User-comment{
     color: var(--main-color);
     font-weight: 600;
   }
+
   .userInfo .startTime{
     color: grey;
     font-weight: inherit;
   }
 
-  .reactions-comment p{
-    cursor: pointer;
+  .reactions-comment{
+    border-top: 1px solid rgb(184 184 184);
   }
   .reactions-comment .span-reply{
     background-color: inherit;
@@ -209,7 +229,7 @@
   .add-reply input{
     width: 100%;
   }
-  .add-reply button{
+  .Comments-users .add-reply button{
     background-color: var(--main-color);
     color: #fff;
     cursor: pointer;
@@ -217,12 +237,49 @@
     border: none;
     margin-left: 0.1rem;
   }
+
+
+  .tooltipp {
+  position: relative;
+  display: inline-block;
+  /* border-bottom: 1px dotted black; */
+}
+
+.tooltipp .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: rgba(0, 0, 0, 0.761);
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltipp .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+.tooltipp:hover .tooltiptext {
+  visibility: visible;
+}
+
 </style>
 
 <div class="Comments">
   <div class="Comments-content">
-    <div class="Comments-users">
-      <a href="/profile/{comment.user.username}" class="d-flex" use:link use:active>
+    <div class="Comments-users mb-2 mx-2 mx-md-0">
+      <a href="/profile/{comment.user.username}" class="d-flex" style="height: fit-content;" use:link use:active>
         <img src="{urlImages}{comment.user.photo}" alt="">
       </a>
       <span>
@@ -235,21 +292,39 @@
         <div class="mb-2">
           {comment.comment}
         </div>
-        <div class="reactions-comment d-flex">
-          <p id="container-reaction-like-{comment.id}" class="mx-2" on:click={makeLike(`icon-like-${comment.id}`, `count-like-${comment.id}`, `${comment.id}`)}>
+        <div class="reactions-comment d-flex pt-2 pb-1">
+          <button id="container-reaction-like-{comment.id}" class="mx-2 tooltipp" on:click={makeLike(`icon-like-${comment.id}`, `count-like-${comment.id}`, `${comment.id}`)}>
             <i id="icon-like-{comment.id}" class="{iconLike} fa-thumbs-up" aria-hidden="true"></i>
             <span id="count-like-{comment.id}" class="span-reply">{comment.reactions.like}</span>
-          </p>
+            {#if reactionsLikeList && reactionsLikeList.length >0 }
+              <span class="tooltiptext">
+                <ul class="p-0 m-0" id="ulLikeListReactions{comment.id}">
+                    {#each reactionsLikeList as userLike}
+                      <li style="list-style: none;">{userLike}</li>
+                    {/each}
+                </ul>
+              </span>
+            {/if}
+          </button>
 
-          <p id="container-reaction-love-{comment.id}" class="mx-2" on:click={makeLove(`icon-love-${comment.id}`, `count-love-${comment.id}`, `${comment.id}`)}>
+          <button id="container-reaction-love-{comment.id}" class="mx-2 tooltipp" on:click={makeLove(`icon-love-${comment.id}`, `count-love-${comment.id}`, `${comment.id}`)}>
             <i id="icon-love-{comment.id}" class="{iconLove} fa-heart" aria-hidden="true"></i>
             <span id="count-love-{comment.id}" class="span-reply">{comment.reactions.love}</span>
-          </p>
+            {#if reactionsLoveList && reactionsLoveList.length > 0}
+              <span class="tooltiptext">
+                <ul class="p-0 m-0" id="ulLoveReactionsList{comment.id}">
+                  {#each reactionsLoveList as userLove}
+                    <li style="list-style: none;">{userLove}</li>
+                  {/each}
+                </ul>
+              </span>
+            {/if}
+          </button>
 
-          <p class="mx-2" on:click={showReply}>
+          <button class="mx-2" on:click={showReply}>
             <i  class="fas fa-comment" aria-hidden="true"></i>
             <span class="span-reply">{comment.answers} <span class="span-reply" data-translate="reply">Reply</span></span>
-          </p>
+          </button>
         </div>
 
         {#if reply}
@@ -257,7 +332,7 @@
              <img src="{urlImages}{localStorage.getItem('profilePhoto')}" alt="img">
              <form class="d-flex w-100">
                <input data-translate="input-make-reply" id="input-addReply-{comment.id}" type="text" class="Comments-input" placeholder="Write a reply..." on:keyup={commentAbled}>
-               <button data-translate="btn-make-comment" id="btn-addReply-{comment.id}" class="btn-sendComment" disabled on:click={addReply}>Post</button>
+               <button data-translate="btn-make-comment" id="btn-addReply-{comment.id}" class="btn-sendComment" style="ba" disabled on:click={addReply}>Post</button>
              </form>
            </div>
 

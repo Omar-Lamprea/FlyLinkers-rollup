@@ -2,13 +2,11 @@
   import {link} from "svelte-spa-router";
   import active from 'svelte-spa-router/active'
   export let reply, urlImages;
-  console.log(reply)
-
 </script>
 
 <style>
   .container-reply{
-    border-bottom: 2px solid #fefefe;
+    border-bottom: 1px solid rgb(184 184 184);
   }
   .container-reply img{
     width: 35px;
@@ -33,7 +31,7 @@
       <img src="{urlImages}{reply.user[0].photo}" alt="" width="30">
     </a>
   </div>
-  <div class="reply-content">
+  <div class="reply-content ms-2">
     <a href="/profile/{reply.user[0].username}" class="d-flex" use:link use:active>
       <p>{reply.user[0].name} {reply.user[0].last_name}</p>
     </a>

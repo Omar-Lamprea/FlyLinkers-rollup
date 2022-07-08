@@ -653,10 +653,10 @@ function instance($$self, $$props, $$invalidate) {
 	//   commentsFirebase(commentUserFirebase, aux)
 	// }
 	// }
-	const makeLike = async (icon, count, idComment) => {
+	const makeLike = async (icon, count, commentId) => {
 		const countLike = document.getElementById(`container-reaction-like-${comment.id}`);
 		countLike.setAttribute('disabled', '');
-		const result = await sendLike(icon, count, idComment);
+		const result = await sendLike(icon, count, commentId, localStorage.getItem('userId'));
 
 		if (result === "update like to dislike") {
 			$$invalidate(0, comment.reactions.like -= 1, comment);
@@ -677,7 +677,7 @@ function instance($$self, $$props, $$invalidate) {
 	const makeLove = async (icon, count, idComment) => {
 		const countLove = document.getElementById(`container-reaction-love-${comment.id}`);
 		countLove.setAttribute('disabled', '');
-		const result = await sendLove(icon, count, idComment);
+		const result = await sendLove(icon, count, idComment, localStorage.getItem('userId'));
 
 		if (result === "update love to dislove") {
 			$$invalidate(0, comment.reactions.love -= 1, comment);
