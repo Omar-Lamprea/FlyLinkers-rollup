@@ -33,12 +33,12 @@ import { translate } from '../js/translate.js';
 
 function get_each_context(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[11] = list[i];
+	child_ctx[12] = list[i];
 	return child_ctx;
 }
 
 // (128:4) {#if id}
-function create_if_block(ctx) {
+function create_if_block_1(ctx) {
 	let addpost;
 	let current;
 
@@ -87,8 +87,8 @@ function create_each_block(ctx) {
 	let current;
 
 	const post_spread_levels = [
-		/*dataPost*/ ctx[11],
-		{ userId: /*userId*/ ctx[4] },
+		/*dataPost*/ ctx[12],
+		{ userId: /*userId*/ ctx[5] },
 		{ urlAPI: /*urlAPI*/ ctx[1] },
 		{ urlImages: /*urlImages*/ ctx[2] }
 	];
@@ -110,10 +110,10 @@ function create_each_block(ctx) {
 			current = true;
 		},
 		p(ctx, dirty) {
-			const post_changes = (dirty & /*$posts, userId, urlAPI, urlImages*/ 30)
+			const post_changes = (dirty & /*$posts, userId, urlAPI, urlImages*/ 54)
 			? get_spread_update(post_spread_levels, [
-					dirty & /*$posts*/ 8 && get_spread_object(/*dataPost*/ ctx[11]),
-					dirty & /*userId*/ 16 && { userId: /*userId*/ ctx[4] },
+					dirty & /*$posts*/ 16 && get_spread_object(/*dataPost*/ ctx[12]),
+					dirty & /*userId*/ 32 && { userId: /*userId*/ ctx[5] },
 					dirty & /*urlAPI*/ 2 && { urlAPI: /*urlAPI*/ ctx[1] },
 					dirty & /*urlImages*/ 4 && { urlImages: /*urlImages*/ ctx[2] }
 				])
@@ -136,17 +136,38 @@ function create_each_block(ctx) {
 	};
 }
 
+// (135:4) {#if endPostMessage}
+function create_if_block(ctx) {
+	let div;
+
+	return {
+		c() {
+			div = element("div");
+			div.textContent = "Sorry!, we can't find more post to show you.";
+			attr(div, "data-translate", "noPost");
+			attr(div, "id", "endPosts");
+			attr(div, "class", "text-center fw-bold");
+			set_style(div, "color", "var(--main-color)");
+		},
+		m(target, anchor) {
+			insert(target, div, anchor);
+		},
+		d(detaching) {
+			if (detaching) detach(div);
+		}
+	};
+}
+
 function create_fragment(ctx) {
-	let div2;
 	let div1;
+	let div0;
 	let input;
 	let t0;
 	let t1;
 	let t2;
-	let div0;
 	let current;
-	let if_block = /*id*/ ctx[0] && create_if_block(ctx);
-	let each_value = /*$posts*/ ctx[3];
+	let if_block0 = /*id*/ ctx[0] && create_if_block_1(ctx);
+	let each_value = /*$posts*/ ctx[4];
 	let each_blocks = [];
 
 	for (let i = 0; i < each_value.length; i += 1) {
@@ -157,13 +178,15 @@ function create_fragment(ctx) {
 		each_blocks[i] = null;
 	});
 
+	let if_block1 = /*endPostMessage*/ ctx[3] && create_if_block(ctx);
+
 	return {
 		c() {
-			div2 = element("div");
 			div1 = element("div");
+			div0 = element("div");
 			input = element("input");
 			t0 = space();
-			if (if_block) if_block.c();
+			if (if_block0) if_block0.c();
 			t1 = space();
 
 			for (let i = 0; i < each_blocks.length; i += 1) {
@@ -171,61 +194,56 @@ function create_fragment(ctx) {
 			}
 
 			t2 = space();
-			div0 = element("div");
-			div0.textContent = "Sorry!, we can't find more post to show you.";
+			if (if_block1) if_block1.c();
 			attr(input, "type", "checkbox");
 			attr(input, "id", "reloadPostCheck");
 			attr(input, "name", "reloadPost");
 			attr(input, "class", "d-none");
-			attr(div0, "data-translate", "noPost");
-			attr(div0, "id", "endPosts");
-			attr(div0, "class", "d-none text-center fw-bold");
-			set_style(div0, "color", "var(--main-color)");
-			attr(div1, "class", "Timeline-container");
-			attr(div2, "class", "Timeline col-12 col-lg-6");
+			attr(div0, "class", "Timeline-container");
+			attr(div1, "class", "Timeline col-12 col-lg-6");
 		},
 		m(target, anchor) {
-			insert(target, div2, anchor);
-			append(div2, div1);
-			append(div1, input);
-			append(div1, t0);
-			if (if_block) if_block.m(div1, null);
-			append(div1, t1);
+			insert(target, div1, anchor);
+			append(div1, div0);
+			append(div0, input);
+			append(div0, t0);
+			if (if_block0) if_block0.m(div0, null);
+			append(div0, t1);
 
 			for (let i = 0; i < each_blocks.length; i += 1) {
-				each_blocks[i].m(div1, null);
+				each_blocks[i].m(div0, null);
 			}
 
-			append(div1, t2);
-			append(div1, div0);
+			append(div0, t2);
+			if (if_block1) if_block1.m(div0, null);
 			current = true;
 		},
 		p(ctx, [dirty]) {
 			if (/*id*/ ctx[0]) {
-				if (if_block) {
-					if_block.p(ctx, dirty);
+				if (if_block0) {
+					if_block0.p(ctx, dirty);
 
 					if (dirty & /*id*/ 1) {
-						transition_in(if_block, 1);
+						transition_in(if_block0, 1);
 					}
 				} else {
-					if_block = create_if_block(ctx);
-					if_block.c();
-					transition_in(if_block, 1);
-					if_block.m(div1, t1);
+					if_block0 = create_if_block_1(ctx);
+					if_block0.c();
+					transition_in(if_block0, 1);
+					if_block0.m(div0, t1);
 				}
-			} else if (if_block) {
+			} else if (if_block0) {
 				group_outros();
 
-				transition_out(if_block, 1, 1, () => {
-					if_block = null;
+				transition_out(if_block0, 1, 1, () => {
+					if_block0 = null;
 				});
 
 				check_outros();
 			}
 
-			if (dirty & /*$posts, userId, urlAPI, urlImages*/ 30) {
-				each_value = /*$posts*/ ctx[3];
+			if (dirty & /*$posts, userId, urlAPI, urlImages*/ 54) {
+				each_value = /*$posts*/ ctx[4];
 				let i;
 
 				for (i = 0; i < each_value.length; i += 1) {
@@ -238,7 +256,7 @@ function create_fragment(ctx) {
 						each_blocks[i] = create_each_block(child_ctx);
 						each_blocks[i].c();
 						transition_in(each_blocks[i], 1);
-						each_blocks[i].m(div1, t2);
+						each_blocks[i].m(div0, t2);
 					}
 				}
 
@@ -250,10 +268,23 @@ function create_fragment(ctx) {
 
 				check_outros();
 			}
+
+			if (/*endPostMessage*/ ctx[3]) {
+				if (if_block1) {
+					
+				} else {
+					if_block1 = create_if_block(ctx);
+					if_block1.c();
+					if_block1.m(div0, null);
+				}
+			} else if (if_block1) {
+				if_block1.d(1);
+				if_block1 = null;
+			}
 		},
 		i(local) {
 			if (current) return;
-			transition_in(if_block);
+			transition_in(if_block0);
 
 			for (let i = 0; i < each_value.length; i += 1) {
 				transition_in(each_blocks[i]);
@@ -262,7 +293,7 @@ function create_fragment(ctx) {
 			current = true;
 		},
 		o(local) {
-			transition_out(if_block);
+			transition_out(if_block0);
 			each_blocks = each_blocks.filter(Boolean);
 
 			for (let i = 0; i < each_blocks.length; i += 1) {
@@ -272,9 +303,10 @@ function create_fragment(ctx) {
 			current = false;
 		},
 		d(detaching) {
-			if (detaching) detach(div2);
-			if (if_block) if_block.d();
+			if (detaching) detach(div1);
+			if (if_block0) if_block0.d();
 			destroy_each(each_blocks, detaching);
+			if (if_block1) if_block1.d();
 		}
 	};
 }
@@ -287,9 +319,10 @@ function instance($$self, $$props, $$invalidate) {
 	let { urlAPI, urlImages } = $$props;
 	const userId = id;
 	const posts = writable([]);
-	component_subscribe($$self, posts, value => $$invalidate(3, $posts = value));
+	component_subscribe($$self, posts, value => $$invalidate(4, $posts = value));
 	let page = 0;
 	let countPost = null;
+	let endPostMessage;
 
 	async function getPosts(page1) {
 		if (page1) {
@@ -373,7 +406,7 @@ function instance($$self, $$props, $$invalidate) {
 		reloadPosts();
 
 		document.addEventListener('scroll', async e => {
-			if (window.location.hash === "#/") {
+			if (window.location.hash === "#/" || window.location.hash === "") {
 				if (window.innerHeight + window.scrollY >= main.offsetHeight - 1 && !window.location.href.includes('settings') && !window.location.href.includes('profile')) {
 					if (countPost !== null && countPost !== undefined) {
 						getPosts();
@@ -381,7 +414,7 @@ function instance($$self, $$props, $$invalidate) {
 					} else {
 						setTimeout(
 							() => {
-								endPosts.classList.remove('d-none');
+								$$invalidate(3, endPostMessage = 1);
 							},
 							1000
 						);
@@ -400,7 +433,7 @@ function instance($$self, $$props, $$invalidate) {
 		if ('urlImages' in $$props) $$invalidate(2, urlImages = $$props.urlImages);
 	};
 
-	return [id, urlAPI, urlImages, $posts, userId, posts, getPosts];
+	return [id, urlAPI, urlImages, endPostMessage, $posts, userId, posts, getPosts];
 }
 
 class TimelineH extends SvelteComponent {
@@ -411,12 +444,12 @@ class TimelineH extends SvelteComponent {
 			id: 0,
 			urlAPI: 1,
 			urlImages: 2,
-			getPosts: 6
+			getPosts: 7
 		});
 	}
 
 	get getPosts() {
-		return this.$$.ctx[6];
+		return this.$$.ctx[7];
 	}
 }
 

@@ -39,30 +39,30 @@ import { translate } from '../js/translate.js';
 
 function get_each_context_1(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[27] = list[i];
+	child_ctx[28] = list[i];
 	return child_ctx;
 }
 
 function get_each_context(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[27] = list[i];
+	child_ctx[28] = list[i];
 	return child_ctx;
 }
 
 function get_each_context_3(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[27] = list[i];
+	child_ctx[28] = list[i];
 	return child_ctx;
 }
 
 function get_each_context_2(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[27] = list[i];
+	child_ctx[28] = list[i];
 	return child_ctx;
 }
 
-// (154:6) {#if email === dataJson.email}
-function create_if_block_6(ctx) {
+// (156:6) {#if email === dataJson.email}
+function create_if_block_7(ctx) {
 	let div;
 	let p;
 	let t1;
@@ -118,8 +118,8 @@ function create_if_block_6(ctx) {
 	};
 }
 
-// (160:6) {#if experiences !== undefined}
-function create_if_block_5(ctx) {
+// (162:6) {#if experiences !== undefined}
+function create_if_block_6(ctx) {
 	let experience;
 	let current;
 
@@ -163,8 +163,8 @@ function create_if_block_5(ctx) {
 	};
 }
 
-// (164:6) {#if email === dataJson.email}
-function create_if_block_4(ctx) {
+// (166:6) {#if email === dataJson.email}
+function create_if_block_5(ctx) {
 	let panel;
 	let current;
 
@@ -200,13 +200,13 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (168:6) {#if post}
-function create_if_block_2(ctx) {
+// (170:6) {#if post}
+function create_if_block_3(ctx) {
 	let current_block_type_index;
 	let if_block;
 	let if_block_anchor;
 	let current;
-	const if_block_creators = [create_if_block_3, create_else_block_1];
+	const if_block_creators = [create_if_block_4, create_else_block_1];
 	const if_blocks = [];
 
 	function select_block_type(ctx, dirty) {
@@ -270,7 +270,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (175:8) {:else}
+// (177:8) {:else}
 function create_else_block_1(ctx) {
 	let each_1_anchor;
 	let current;
@@ -302,7 +302,7 @@ function create_else_block_1(ctx) {
 			current = true;
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*userPost, post, userId, urlAPI, urlImages*/ 311680) {
+			if (dirty[0] & /*userPost, post, userId, urlAPI, urlImages*/ 573824) {
 				each_value_3 = /*post*/ ctx[14];
 				let i;
 
@@ -354,8 +354,8 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (169:8) {#if userMain}
-function create_if_block_3(ctx) {
+// (171:8) {#if userMain}
+function create_if_block_4(ctx) {
 	let each_1_anchor;
 	let current;
 	let each_value_2 = /*post*/ ctx[14];
@@ -438,15 +438,15 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (177:10) {#each post as dataPost}
+// (179:10) {#each post as dataPost}
 function create_each_block_3(ctx) {
 	let post_1;
 	let current;
 
 	const post_1_spread_levels = [
 		/*userPost*/ ctx[15],
-		/*dataPost*/ ctx[27],
-		{ userId: /*userId*/ ctx[18] },
+		/*dataPost*/ ctx[28],
+		{ userId: /*userId*/ ctx[19] },
 		{ urlAPI: /*urlAPI*/ ctx[7] },
 		{ urlImages: /*urlImages*/ ctx[8] }
 	];
@@ -468,11 +468,11 @@ function create_each_block_3(ctx) {
 			current = true;
 		},
 		p(ctx, dirty) {
-			const post_1_changes = (dirty[0] & /*userPost, post, userId, urlAPI, urlImages*/ 311680)
+			const post_1_changes = (dirty[0] & /*userPost, post, userId, urlAPI, urlImages*/ 573824)
 			? get_spread_update(post_1_spread_levels, [
 					dirty[0] & /*userPost*/ 32768 && get_spread_object(/*userPost*/ ctx[15]),
-					dirty[0] & /*post*/ 16384 && get_spread_object(/*dataPost*/ ctx[27]),
-					dirty[0] & /*userId*/ 262144 && { userId: /*userId*/ ctx[18] },
+					dirty[0] & /*post*/ 16384 && get_spread_object(/*dataPost*/ ctx[28]),
+					dirty[0] & /*userId*/ 524288 && { userId: /*userId*/ ctx[19] },
 					dirty[0] & /*urlAPI*/ 128 && { urlAPI: /*urlAPI*/ ctx[7] },
 					dirty[0] & /*urlImages*/ 256 && { urlImages: /*urlImages*/ ctx[8] }
 				])
@@ -495,14 +495,14 @@ function create_each_block_3(ctx) {
 	};
 }
 
-// (171:10) {#each post as dataPost}
+// (173:10) {#each post as dataPost}
 function create_each_block_2(ctx) {
 	let post_1;
 	let current;
 
 	const post_1_spread_levels = [
 		/*userPost*/ ctx[15],
-		/*dataPost*/ ctx[27],
+		/*dataPost*/ ctx[28],
 		{ userMain: /*userMain*/ ctx[0] },
 		{ urlAPI: /*urlAPI*/ ctx[7] },
 		{ urlImages: /*urlImages*/ ctx[8] }
@@ -528,7 +528,7 @@ function create_each_block_2(ctx) {
 			const post_1_changes = (dirty[0] & /*userPost, post, userMain, urlAPI, urlImages*/ 49537)
 			? get_spread_update(post_1_spread_levels, [
 					dirty[0] & /*userPost*/ 32768 && get_spread_object(/*userPost*/ ctx[15]),
-					dirty[0] & /*post*/ 16384 && get_spread_object(/*dataPost*/ ctx[27]),
+					dirty[0] & /*post*/ 16384 && get_spread_object(/*dataPost*/ ctx[28]),
 					dirty[0] & /*userMain*/ 1 && { userMain: /*userMain*/ ctx[0] },
 					dirty[0] & /*urlAPI*/ 128 && { urlAPI: /*urlAPI*/ ctx[7] },
 					dirty[0] & /*urlImages*/ 256 && { urlImages: /*urlImages*/ ctx[8] }
@@ -552,13 +552,13 @@ function create_each_block_2(ctx) {
 	};
 }
 
-// (185:6) {#if $posts}
-function create_if_block(ctx) {
+// (187:6) {#if $posts}
+function create_if_block_1(ctx) {
 	let current_block_type_index;
 	let if_block;
 	let if_block_anchor;
 	let current;
-	const if_block_creators = [create_if_block_1, create_else_block];
+	const if_block_creators = [create_if_block_2, create_else_block];
 	const if_blocks = [];
 
 	function select_block_type_1(ctx, dirty) {
@@ -622,11 +622,11 @@ function create_if_block(ctx) {
 	};
 }
 
-// (192:8) {:else}
+// (194:8) {:else}
 function create_else_block(ctx) {
 	let each_1_anchor;
 	let current;
-	let each_value_1 = /*$posts*/ ctx[16];
+	let each_value_1 = /*$posts*/ ctx[17];
 	let each_blocks = [];
 
 	for (let i = 0; i < each_value_1.length; i += 1) {
@@ -654,8 +654,8 @@ function create_else_block(ctx) {
 			current = true;
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*userPost, $posts, userId, urlAPI, urlImages*/ 360832) {
-				each_value_1 = /*$posts*/ ctx[16];
+			if (dirty[0] & /*userPost, $posts, userId, urlAPI, urlImages*/ 688512) {
+				each_value_1 = /*$posts*/ ctx[17];
 				let i;
 
 				for (i = 0; i < each_value_1.length; i += 1) {
@@ -706,11 +706,11 @@ function create_else_block(ctx) {
 	};
 }
 
-// (186:8) {#if userMain}
-function create_if_block_1(ctx) {
+// (188:8) {#if userMain}
+function create_if_block_2(ctx) {
 	let each_1_anchor;
 	let current;
-	let each_value = /*$posts*/ ctx[16];
+	let each_value = /*$posts*/ ctx[17];
 	let each_blocks = [];
 
 	for (let i = 0; i < each_value.length; i += 1) {
@@ -738,8 +738,8 @@ function create_if_block_1(ctx) {
 			current = true;
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*userPost, $posts, userMain, urlAPI, urlImages*/ 98689) {
-				each_value = /*$posts*/ ctx[16];
+			if (dirty[0] & /*userPost, $posts, userMain, urlAPI, urlImages*/ 164225) {
+				each_value = /*$posts*/ ctx[17];
 				let i;
 
 				for (i = 0; i < each_value.length; i += 1) {
@@ -790,15 +790,15 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (194:10) {#each $posts as dataPost}
+// (196:10) {#each $posts as dataPost}
 function create_each_block_1(ctx) {
 	let post_1;
 	let current;
 
 	const post_1_spread_levels = [
 		/*userPost*/ ctx[15],
-		/*dataPost*/ ctx[27],
-		{ userId: /*userId*/ ctx[18] },
+		/*dataPost*/ ctx[28],
+		{ userId: /*userId*/ ctx[19] },
 		{ urlAPI: /*urlAPI*/ ctx[7] },
 		{ urlImages: /*urlImages*/ ctx[8] }
 	];
@@ -820,11 +820,11 @@ function create_each_block_1(ctx) {
 			current = true;
 		},
 		p(ctx, dirty) {
-			const post_1_changes = (dirty[0] & /*userPost, $posts, userId, urlAPI, urlImages*/ 360832)
+			const post_1_changes = (dirty[0] & /*userPost, $posts, userId, urlAPI, urlImages*/ 688512)
 			? get_spread_update(post_1_spread_levels, [
 					dirty[0] & /*userPost*/ 32768 && get_spread_object(/*userPost*/ ctx[15]),
-					dirty[0] & /*$posts*/ 65536 && get_spread_object(/*dataPost*/ ctx[27]),
-					dirty[0] & /*userId*/ 262144 && { userId: /*userId*/ ctx[18] },
+					dirty[0] & /*$posts*/ 131072 && get_spread_object(/*dataPost*/ ctx[28]),
+					dirty[0] & /*userId*/ 524288 && { userId: /*userId*/ ctx[19] },
 					dirty[0] & /*urlAPI*/ 128 && { urlAPI: /*urlAPI*/ ctx[7] },
 					dirty[0] & /*urlImages*/ 256 && { urlImages: /*urlImages*/ ctx[8] }
 				])
@@ -847,14 +847,14 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (188:10) {#each $posts as dataPost}
+// (190:10) {#each $posts as dataPost}
 function create_each_block(ctx) {
 	let post_1;
 	let current;
 
 	const post_1_spread_levels = [
 		/*userPost*/ ctx[15],
-		/*dataPost*/ ctx[27],
+		/*dataPost*/ ctx[28],
 		{ userMain: /*userMain*/ ctx[0] },
 		{ urlAPI: /*urlAPI*/ ctx[7] },
 		{ urlImages: /*urlImages*/ ctx[8] }
@@ -877,10 +877,10 @@ function create_each_block(ctx) {
 			current = true;
 		},
 		p(ctx, dirty) {
-			const post_1_changes = (dirty[0] & /*userPost, $posts, userMain, urlAPI, urlImages*/ 98689)
+			const post_1_changes = (dirty[0] & /*userPost, $posts, userMain, urlAPI, urlImages*/ 164225)
 			? get_spread_update(post_1_spread_levels, [
 					dirty[0] & /*userPost*/ 32768 && get_spread_object(/*userPost*/ ctx[15]),
-					dirty[0] & /*$posts*/ 65536 && get_spread_object(/*dataPost*/ ctx[27]),
+					dirty[0] & /*$posts*/ 131072 && get_spread_object(/*dataPost*/ ctx[28]),
 					dirty[0] & /*userMain*/ 1 && { userMain: /*userMain*/ ctx[0] },
 					dirty[0] & /*urlAPI*/ 128 && { urlAPI: /*urlAPI*/ ctx[7] },
 					dirty[0] & /*urlImages*/ 256 && { urlImages: /*urlImages*/ ctx[8] }
@@ -904,11 +904,33 @@ function create_each_block(ctx) {
 	};
 }
 
+// (202:6) {#if endPostMessage}
+function create_if_block(ctx) {
+	let div;
+
+	return {
+		c() {
+			div = element("div");
+			div.textContent = "Sorry!, we can't find more post to show you.";
+			attr(div, "data-translate", "noPost");
+			attr(div, "id", "endPosts");
+			attr(div, "class", "text-center fw-bold");
+			set_style(div, "color", "var(--main-color)");
+		},
+		m(target, anchor) {
+			insert(target, div, anchor);
+		},
+		d(detaching) {
+			if (detaching) detach(div);
+		}
+	};
+}
+
 function create_fragment(ctx) {
-	let div2;
+	let div1;
 	let input;
 	let t0;
-	let div1;
+	let div0;
 	let coverphoto;
 	let t1;
 	let userdetails;
@@ -918,13 +940,12 @@ function create_fragment(ctx) {
 	let t5;
 	let t6;
 	let t7;
-	let div0;
 	let current;
 
 	coverphoto = new CoverPhoto({
 			props: {
 				coverPhoto: /*coverPhoto*/ ctx[10],
-				userId: /*userId*/ ctx[18]
+				userId: /*userId*/ ctx[19]
 			}
 		});
 
@@ -942,18 +963,19 @@ function create_fragment(ctx) {
 			}
 		});
 
-	let if_block0 = /*email*/ ctx[4] === /*dataJson*/ ctx[17].email && create_if_block_6(ctx);
-	let if_block1 = /*experiences*/ ctx[12] !== undefined && create_if_block_5(ctx);
-	let if_block2 = /*email*/ ctx[4] === /*dataJson*/ ctx[17].email && create_if_block_4(ctx);
-	let if_block3 = /*post*/ ctx[14] && create_if_block_2(ctx);
-	let if_block4 = /*$posts*/ ctx[16] && create_if_block(ctx);
+	let if_block0 = /*email*/ ctx[4] === /*dataJson*/ ctx[18].email && create_if_block_7(ctx);
+	let if_block1 = /*experiences*/ ctx[12] !== undefined && create_if_block_6(ctx);
+	let if_block2 = /*email*/ ctx[4] === /*dataJson*/ ctx[18].email && create_if_block_5(ctx);
+	let if_block3 = /*post*/ ctx[14] && create_if_block_3(ctx);
+	let if_block4 = /*$posts*/ ctx[17] && create_if_block_1(ctx);
+	let if_block5 = /*endPostMessage*/ ctx[16] && create_if_block(ctx);
 
 	return {
 		c() {
-			div2 = element("div");
+			div1 = element("div");
 			input = element("input");
 			t0 = space();
-			div1 = element("div");
+			div0 = element("div");
 			create_component(coverphoto.$$.fragment);
 			t1 = space();
 			create_component(userdetails.$$.fragment);
@@ -968,39 +990,34 @@ function create_fragment(ctx) {
 			t6 = space();
 			if (if_block4) if_block4.c();
 			t7 = space();
-			div0 = element("div");
-			div0.textContent = "Sorry!, we can't find more post to show you.";
+			if (if_block5) if_block5.c();
 			attr(input, "type", "checkbox");
 			attr(input, "id", "reloadPostCheck");
 			attr(input, "name", "reloadPost");
 			attr(input, "class", "d-none");
-			attr(div0, "data-translate", "noPost");
-			attr(div0, "id", "endPosts");
-			attr(div0, "class", "d-none text-center fw-bold");
-			set_style(div0, "color", "var(--main-color)");
-			attr(div1, "class", "Profile-container");
-			attr(div2, "class", "Profile col-12 col-lg-9");
+			attr(div0, "class", "Profile-container");
+			attr(div1, "class", "Profile col-12 col-lg-9");
 		},
 		m(target, anchor) {
-			insert(target, div2, anchor);
-			append(div2, input);
-			append(div2, t0);
-			append(div2, div1);
-			mount_component(coverphoto, div1, null);
-			append(div1, t1);
-			mount_component(userdetails, div1, null);
-			append(div1, t2);
-			if (if_block0) if_block0.m(div1, null);
-			append(div1, t3);
-			if (if_block1) if_block1.m(div1, null);
-			append(div1, t4);
-			if (if_block2) if_block2.m(div1, null);
-			append(div1, t5);
-			if (if_block3) if_block3.m(div1, null);
-			append(div1, t6);
-			if (if_block4) if_block4.m(div1, null);
-			append(div1, t7);
+			insert(target, div1, anchor);
+			append(div1, input);
+			append(div1, t0);
 			append(div1, div0);
+			mount_component(coverphoto, div0, null);
+			append(div0, t1);
+			mount_component(userdetails, div0, null);
+			append(div0, t2);
+			if (if_block0) if_block0.m(div0, null);
+			append(div0, t3);
+			if (if_block1) if_block1.m(div0, null);
+			append(div0, t4);
+			if (if_block2) if_block2.m(div0, null);
+			append(div0, t5);
+			if (if_block3) if_block3.m(div0, null);
+			append(div0, t6);
+			if (if_block4) if_block4.m(div0, null);
+			append(div0, t7);
+			if (if_block5) if_block5.m(div0, null);
 			current = true;
 		},
 		p(ctx, dirty) {
@@ -1019,7 +1036,7 @@ function create_fragment(ctx) {
 			if (dirty[0] & /*urlImages*/ 256) userdetails_changes.urlImages = /*urlImages*/ ctx[8];
 			userdetails.$set(userdetails_changes);
 
-			if (/*email*/ ctx[4] === /*dataJson*/ ctx[17].email) {
+			if (/*email*/ ctx[4] === /*dataJson*/ ctx[18].email) {
 				if (if_block0) {
 					if_block0.p(ctx, dirty);
 
@@ -1027,10 +1044,10 @@ function create_fragment(ctx) {
 						transition_in(if_block0, 1);
 					}
 				} else {
-					if_block0 = create_if_block_6(ctx);
+					if_block0 = create_if_block_7(ctx);
 					if_block0.c();
 					transition_in(if_block0, 1);
-					if_block0.m(div1, t3);
+					if_block0.m(div0, t3);
 				}
 			} else if (if_block0) {
 				group_outros();
@@ -1050,10 +1067,10 @@ function create_fragment(ctx) {
 						transition_in(if_block1, 1);
 					}
 				} else {
-					if_block1 = create_if_block_5(ctx);
+					if_block1 = create_if_block_6(ctx);
 					if_block1.c();
 					transition_in(if_block1, 1);
-					if_block1.m(div1, t4);
+					if_block1.m(div0, t4);
 				}
 			} else if (if_block1) {
 				group_outros();
@@ -1065,7 +1082,7 @@ function create_fragment(ctx) {
 				check_outros();
 			}
 
-			if (/*email*/ ctx[4] === /*dataJson*/ ctx[17].email) {
+			if (/*email*/ ctx[4] === /*dataJson*/ ctx[18].email) {
 				if (if_block2) {
 					if_block2.p(ctx, dirty);
 
@@ -1073,10 +1090,10 @@ function create_fragment(ctx) {
 						transition_in(if_block2, 1);
 					}
 				} else {
-					if_block2 = create_if_block_4(ctx);
+					if_block2 = create_if_block_5(ctx);
 					if_block2.c();
 					transition_in(if_block2, 1);
-					if_block2.m(div1, t5);
+					if_block2.m(div0, t5);
 				}
 			} else if (if_block2) {
 				group_outros();
@@ -1096,10 +1113,10 @@ function create_fragment(ctx) {
 						transition_in(if_block3, 1);
 					}
 				} else {
-					if_block3 = create_if_block_2(ctx);
+					if_block3 = create_if_block_3(ctx);
 					if_block3.c();
 					transition_in(if_block3, 1);
-					if_block3.m(div1, t6);
+					if_block3.m(div0, t6);
 				}
 			} else if (if_block3) {
 				group_outros();
@@ -1111,18 +1128,18 @@ function create_fragment(ctx) {
 				check_outros();
 			}
 
-			if (/*$posts*/ ctx[16]) {
+			if (/*$posts*/ ctx[17]) {
 				if (if_block4) {
 					if_block4.p(ctx, dirty);
 
-					if (dirty[0] & /*$posts*/ 65536) {
+					if (dirty[0] & /*$posts*/ 131072) {
 						transition_in(if_block4, 1);
 					}
 				} else {
-					if_block4 = create_if_block(ctx);
+					if_block4 = create_if_block_1(ctx);
 					if_block4.c();
 					transition_in(if_block4, 1);
-					if_block4.m(div1, t7);
+					if_block4.m(div0, t7);
 				}
 			} else if (if_block4) {
 				group_outros();
@@ -1132,6 +1149,19 @@ function create_fragment(ctx) {
 				});
 
 				check_outros();
+			}
+
+			if (/*endPostMessage*/ ctx[16]) {
+				if (if_block5) {
+					
+				} else {
+					if_block5 = create_if_block(ctx);
+					if_block5.c();
+					if_block5.m(div0, null);
+				}
+			} else if (if_block5) {
+				if_block5.d(1);
+				if_block5 = null;
 			}
 		},
 		i(local) {
@@ -1156,7 +1186,7 @@ function create_fragment(ctx) {
 			current = false;
 		},
 		d(detaching) {
-			if (detaching) detach(div2);
+			if (detaching) detach(div1);
 			destroy_component(coverphoto);
 			destroy_component(userdetails);
 			if (if_block0) if_block0.d();
@@ -1164,6 +1194,7 @@ function create_fragment(ctx) {
 			if (if_block2) if_block2.d();
 			if (if_block3) if_block3.d();
 			if (if_block4) if_block4.d();
+			if (if_block5) if_block5.d();
 		}
 	};
 }
@@ -1202,6 +1233,7 @@ function instance($$self, $$props, $$invalidate) {
 	let post;
 	let userPost;
 	let countPost = null;
+	let endPostMessage;
 
 	const getPost = async () => {
 		$$invalidate(14, post = '');
@@ -1228,7 +1260,7 @@ function instance($$self, $$props, $$invalidate) {
 	};
 
 	const posts = writable([]);
-	component_subscribe($$self, posts, value => $$invalidate(16, $posts = value));
+	component_subscribe($$self, posts, value => $$invalidate(17, $posts = value));
 	let page = 1;
 
 	async function getPosts() {
@@ -1280,14 +1312,10 @@ function instance($$self, $$props, $$invalidate) {
 						getPosts();
 						countPost = null;
 					} else {
-						setTimeout(
-							() => {
-								endPosts.classList.remove('d-none');
-							},
-							1000
-						);
-					}
-				}
+						$$invalidate(16, endPostMessage = 1);
+					} // setTimeout(() => {
+					//   if(endPosts) endPosts.classList.remove('d-none')
+				} // }, 1000);
 			}
 		});
 	}); // translate()
@@ -1322,6 +1350,7 @@ function instance($$self, $$props, $$invalidate) {
 		userProfile,
 		post,
 		userPost,
+		endPostMessage,
 		$posts,
 		dataJson,
 		userId,

@@ -71,7 +71,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (243:0) {#if data && getUserMainToFirestore}
+// (242:0) {#if data && getUserMainToFirestore}
 function create_if_block(ctx) {
 	let header;
 	let t0;
@@ -163,7 +163,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (248:5) {#if chatFlag && userMain && getUserMainToFirestore}
+// (247:5) {#if chatFlag && userMain && getUserMainToFirestore}
 function create_if_block_1(ctx) {
 	let chat;
 	let current;
@@ -274,9 +274,6 @@ function create_fragment(ctx) {
 }
 
 const urlLogOut = 'https://flylinkers.com';
-
-// const urlLogOut = 'https://omar-lamprea.github.io/FlyLinkers-Login/'
-// const urlAPI = 'http://18.118.50.78:8000'
 const urlAPI = 'https://api.flylinkers.com';
 
 // const urlImages= 'http://3.130.198.152:8000'
@@ -295,6 +292,7 @@ function instance($$self, $$props, $$invalidate) {
 	const urluserProfile = urlUser.slice(9);
 
 	if (!localStorage.getItem('user') || localStorage.getItem('user') === 'null' || window.location.href.includes('user=')) {
+		localStorage.clear();
 		const param = window.location.search;
 		const urlParams = new URLSearchParams(param);
 		const user = urlParams.get('user');
