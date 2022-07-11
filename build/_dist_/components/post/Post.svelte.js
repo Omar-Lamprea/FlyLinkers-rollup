@@ -1249,9 +1249,11 @@ function create_if_block_6(ctx) {
 	};
 }
 
-// (884:16) {#if reactionsLikeList}
+// (882:12) {#if reactionsLikeList && reactionsLikeList.length > 0}
 function create_if_block_3(ctx) {
-	let each_1_anchor;
+	let span;
+	let ul;
+	let ul_id_value;
 	let each_value_2 = /*reactionsLikeList*/ ctx[18];
 	let each_blocks = [];
 
@@ -1261,18 +1263,24 @@ function create_if_block_3(ctx) {
 
 	return {
 		c() {
+			span = element("span");
+			ul = element("ul");
+
 			for (let i = 0; i < each_blocks.length; i += 1) {
 				each_blocks[i].c();
 			}
 
-			each_1_anchor = empty();
+			attr(ul, "class", "p-0 m-0");
+			attr(ul, "id", ul_id_value = "ulLikeListReactions" + /*id*/ ctx[13]);
+			attr(span, "class", "tooltiptext svelte-1ib3qll");
 		},
 		m(target, anchor) {
-			for (let i = 0; i < each_blocks.length; i += 1) {
-				each_blocks[i].m(target, anchor);
-			}
+			insert(target, span, anchor);
+			append(span, ul);
 
-			insert(target, each_1_anchor, anchor);
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].m(ul, null);
+			}
 		},
 		p(ctx, dirty) {
 			if (dirty[0] & /*reactionsLikeList*/ 262144) {
@@ -1287,7 +1295,7 @@ function create_if_block_3(ctx) {
 					} else {
 						each_blocks[i] = create_each_block_2(child_ctx);
 						each_blocks[i].c();
-						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
+						each_blocks[i].m(ul, null);
 					}
 				}
 
@@ -1297,15 +1305,19 @@ function create_if_block_3(ctx) {
 
 				each_blocks.length = each_value_2.length;
 			}
+
+			if (dirty[0] & /*id*/ 8192 && ul_id_value !== (ul_id_value = "ulLikeListReactions" + /*id*/ ctx[13])) {
+				attr(ul, "id", ul_id_value);
+			}
 		},
 		d(detaching) {
+			if (detaching) detach(span);
 			destroy_each(each_blocks, detaching);
-			if (detaching) detach(each_1_anchor);
 		}
 	};
 }
 
-// (885:19) {#each reactionsLikeList as userLike}
+// (885:18) {#each reactionsLikeList as userLike}
 function create_each_block_2(ctx) {
 	let li;
 	let t_value = /*userLike*/ ctx[53] + "";
@@ -1330,9 +1342,11 @@ function create_each_block_2(ctx) {
 	};
 }
 
-// (898:14) {#if reactionsLoveList}
+// (896:10) {#if reactionsLoveList && reactionsLoveList.length > 0}
 function create_if_block_2(ctx) {
-	let each_1_anchor;
+	let span;
+	let ul;
+	let ul_id_value;
 	let each_value_1 = /*reactionsLoveList*/ ctx[19];
 	let each_blocks = [];
 
@@ -1342,18 +1356,24 @@ function create_if_block_2(ctx) {
 
 	return {
 		c() {
+			span = element("span");
+			ul = element("ul");
+
 			for (let i = 0; i < each_blocks.length; i += 1) {
 				each_blocks[i].c();
 			}
 
-			each_1_anchor = empty();
+			attr(ul, "class", "p-0 m-0");
+			attr(ul, "id", ul_id_value = "ulLoveReactionsList" + /*id*/ ctx[13]);
+			attr(span, "class", "tooltiptext svelte-1ib3qll");
 		},
 		m(target, anchor) {
-			for (let i = 0; i < each_blocks.length; i += 1) {
-				each_blocks[i].m(target, anchor);
-			}
+			insert(target, span, anchor);
+			append(span, ul);
 
-			insert(target, each_1_anchor, anchor);
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].m(ul, null);
+			}
 		},
 		p(ctx, dirty) {
 			if (dirty[0] & /*reactionsLoveList*/ 524288) {
@@ -1368,7 +1388,7 @@ function create_if_block_2(ctx) {
 					} else {
 						each_blocks[i] = create_each_block_1(child_ctx);
 						each_blocks[i].c();
-						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
+						each_blocks[i].m(ul, null);
 					}
 				}
 
@@ -1378,15 +1398,19 @@ function create_if_block_2(ctx) {
 
 				each_blocks.length = each_value_1.length;
 			}
+
+			if (dirty[0] & /*id*/ 8192 && ul_id_value !== (ul_id_value = "ulLoveReactionsList" + /*id*/ ctx[13])) {
+				attr(ul, "id", ul_id_value);
+			}
 		},
 		d(detaching) {
+			if (detaching) detach(span);
 			destroy_each(each_blocks, detaching);
-			if (detaching) detach(each_1_anchor);
 		}
 	};
 }
 
-// (899:19) {#each reactionsLoveList as userLove}
+// (899:16) {#each reactionsLoveList as userLove}
 function create_each_block_1(ctx) {
 	let li;
 	let t_value = /*userLove*/ ctx[50] + "";
@@ -1633,7 +1657,7 @@ function create_fragment(ctx) {
 	let div0;
 	let i0;
 	let t1;
-	let ul0;
+	let ul;
 	let li;
 	let a;
 	let t2;
@@ -1663,29 +1687,23 @@ function create_fragment(ctx) {
 	let t13_value = /*reactions*/ ctx[0].like + "";
 	let t13;
 	let t14;
-	let span2;
-	let ul1;
-	let ul1_id_value;
 	let t15;
 	let div7;
 	let i2;
 	let t16;
-	let span3;
+	let span2;
 	let t17_value = /*reactions*/ ctx[0].love + "";
 	let t17;
 	let t18;
-	let span4;
-	let ul2;
-	let ul2_id_value;
 	let t19;
 	let div8;
 	let i3;
 	let t20;
-	let span7;
 	let span5;
+	let span3;
 	let t21;
 	let t22;
-	let span6;
+	let span4;
 	let t24;
 	let div14;
 	let div13;
@@ -1693,14 +1711,14 @@ function create_fragment(ctx) {
 	let i4;
 	let i4_id_value;
 	let t25;
-	let span8;
+	let span6;
 	let button0_id_value;
 	let t27;
 	let button1;
 	let i5;
 	let i5_id_value;
 	let t28;
-	let span9;
+	let span7;
 	let button1_id_value;
 	let t30;
 	let div11;
@@ -1749,8 +1767,8 @@ function create_fragment(ctx) {
 	let if_block4 = !!/*img*/ ctx[11] && create_if_block_14(ctx);
 	let if_block5 = /*video*/ ctx[17] && /*share*/ ctx[16] === '' && create_if_block_12(ctx);
 	let if_block6 = /*share*/ ctx[16] !== '' && create_if_block_4(ctx);
-	let if_block7 = /*reactionsLikeList*/ ctx[18] && create_if_block_3(ctx);
-	let if_block8 = /*reactionsLoveList*/ ctx[19] && create_if_block_2(ctx);
+	let if_block7 = /*reactionsLikeList*/ ctx[18] && /*reactionsLikeList*/ ctx[18].length > 0 && create_if_block_3(ctx);
+	let if_block8 = /*reactionsLoveList*/ ctx[19] && /*reactionsLoveList*/ ctx[19].length > 0 && create_if_block_2(ctx);
 	const if_block_creators = [create_if_block_1, create_else_block];
 	const if_blocks = [];
 
@@ -1774,7 +1792,7 @@ function create_fragment(ctx) {
 			div0 = element("div");
 			i0 = element("i");
 			t1 = space();
-			ul0 = element("ul");
+			ul = element("ul");
 			li = element("li");
 			a = element("a");
 			t2 = text("See post");
@@ -1804,43 +1822,39 @@ function create_fragment(ctx) {
 			span1 = element("span");
 			t13 = text(t13_value);
 			t14 = space();
-			span2 = element("span");
-			ul1 = element("ul");
 			if (if_block7) if_block7.c();
 			t15 = space();
 			div7 = element("div");
 			i2 = element("i");
 			t16 = space();
-			span3 = element("span");
+			span2 = element("span");
 			t17 = text(t17_value);
 			t18 = space();
-			span4 = element("span");
-			ul2 = element("ul");
 			if (if_block8) if_block8.c();
 			t19 = space();
 			div8 = element("div");
 			i3 = element("i");
 			t20 = space();
-			span7 = element("span");
 			span5 = element("span");
+			span3 = element("span");
 			t21 = text(/*comments*/ ctx[1]);
 			t22 = space();
-			span6 = element("span");
-			span6.textContent = "Comments";
+			span4 = element("span");
+			span4.textContent = "Comments";
 			t24 = space();
 			div14 = element("div");
 			div13 = element("div");
 			button0 = element("button");
 			i4 = element("i");
 			t25 = space();
-			span8 = element("span");
-			span8.textContent = "Like";
+			span6 = element("span");
+			span6.textContent = "Like";
 			t27 = space();
 			button1 = element("button");
 			i5 = element("i");
 			t28 = space();
-			span9 = element("span");
-			span9.textContent = "love";
+			span7 = element("span");
+			span7.textContent = "love";
 			t30 = space();
 			div11 = element("div");
 
@@ -1871,8 +1885,8 @@ function create_fragment(ctx) {
 			attr(a, "href", a_href_value = "/post/" + /*id*/ ctx[13]);
 			attr(a, "data-translate", "see-post");
 			attr(li, "class", "svelte-1ib3qll");
-			attr(ul0, "class", "dropdown-menu");
-			attr(ul0, "aria-labelledby", "settings-post");
+			attr(ul, "class", "dropdown-menu");
+			attr(ul, "aria-labelledby", "settings-post");
 			attr(div0, "class", "dropdown svelte-1ib3qll");
 			attr(div1, "class", "Card-settings svelte-1ib3qll");
 			attr(div2, "class", "Card-Header px-3 px-md-0 svelte-1ib3qll");
@@ -1883,35 +1897,29 @@ function create_fragment(ctx) {
 			attr(i1, "class", "fas fa-thumbs-up");
 			attr(span1, "id", /*likeValue*/ ctx[24]);
 			attr(span1, "class", "svelte-1ib3qll");
-			attr(ul1, "class", "p-0 m-0");
-			attr(ul1, "id", ul1_id_value = "ulLikeListReactions" + /*id*/ ctx[13]);
-			attr(span2, "class", "tooltiptext svelte-1ib3qll");
 			attr(div6, "class", "Reaction Header-nav-like mx-2 tooltipp svelte-1ib3qll");
 			attr(i2, "class", "fas fa-heart");
-			attr(span3, "id", /*loveValue*/ ctx[25]);
-			attr(span3, "class", "svelte-1ib3qll");
-			attr(ul2, "class", "p-0 m-0");
-			attr(ul2, "id", ul2_id_value = "ulLoveReactionsList" + /*id*/ ctx[13]);
-			attr(span4, "class", "tooltiptext svelte-1ib3qll");
+			attr(span2, "id", /*loveValue*/ ctx[25]);
+			attr(span2, "class", "svelte-1ib3qll");
 			attr(div7, "class", "Reaction Header-nav-heart mx-2 tooltipp svelte-1ib3qll");
 			attr(i3, "class", "fas fa-comment");
+			attr(span3, "class", "svelte-1ib3qll");
+			attr(span4, "data-translate", "comments");
+			attr(span4, "class", "svelte-1ib3qll");
 			attr(span5, "class", "svelte-1ib3qll");
-			attr(span6, "data-translate", "comments");
-			attr(span6, "class", "svelte-1ib3qll");
-			attr(span7, "class", "svelte-1ib3qll");
 			attr(div8, "class", "Reaction Header-nav-comment mx-2 svelte-1ib3qll");
 			attr(div9, "class", "Card-board-icons-first d-flex px-3 px-md-0");
 			attr(div10, "class", "Card-board-icons svelte-1ib3qll");
 			attr(i4, "id", i4_id_value = "btnLike" + /*id*/ ctx[13]);
 			attr(i4, "class", "fa-thumbs-up far");
-			attr(span8, "data-translate", "like");
-			attr(span8, "class", "svelte-1ib3qll");
+			attr(span6, "data-translate", "like");
+			attr(span6, "class", "svelte-1ib3qll");
 			attr(button0, "id", button0_id_value = "btnReactionLike" + /*id*/ ctx[13]);
 			attr(button0, "class", "Action Header-nav-thumbs-up d-flex d-xl-block flex-column align-items-center svelte-1ib3qll");
 			attr(i5, "id", i5_id_value = "btnLove" + /*id*/ ctx[13]);
 			attr(i5, "class", "fa-heart far");
-			attr(span9, "data-translate", "love");
-			attr(span9, "class", "svelte-1ib3qll");
+			attr(span7, "data-translate", "love");
+			attr(span7, "class", "svelte-1ib3qll");
 			attr(button1, "id", button1_id_value = "btnReactionLove" + /*id*/ ctx[13]);
 			attr(button1, "class", "Action Header-nav-heart d-flex d-xl-block flex-column align-items-center svelte-1ib3qll");
 			attr(div11, "class", "Action Header-nav-comments d-flex d-xl-block flex-column align-items-center svelte-1ib3qll");
@@ -1946,12 +1954,12 @@ function create_fragment(ctx) {
 			append(div1, div0);
 			append(div0, i0);
 			append(div0, t1);
-			append(div0, ul0);
-			append(ul0, li);
+			append(div0, ul);
+			append(ul, li);
 			append(li, a);
 			append(a, t2);
-			append(ul0, t3);
-			if (if_block1) if_block1.m(ul0, null);
+			append(ul, t3);
+			if (if_block1) if_block1.m(ul, null);
 			append(div4, t4);
 			append(div4, div3);
 			append(div3, span0);
@@ -1976,40 +1984,36 @@ function create_fragment(ctx) {
 			append(div6, span1);
 			append(span1, t13);
 			append(div6, t14);
-			append(div6, span2);
-			append(span2, ul1);
-			if (if_block7) if_block7.m(ul1, null);
+			if (if_block7) if_block7.m(div6, null);
 			append(div9, t15);
 			append(div9, div7);
 			append(div7, i2);
 			append(div7, t16);
-			append(div7, span3);
-			append(span3, t17);
+			append(div7, span2);
+			append(span2, t17);
 			append(div7, t18);
-			append(div7, span4);
-			append(span4, ul2);
-			if (if_block8) if_block8.m(ul2, null);
+			if (if_block8) if_block8.m(div7, null);
 			append(div9, t19);
 			append(div9, div8);
 			append(div8, i3);
 			append(div8, t20);
-			append(div8, span7);
-			append(span7, span5);
-			append(span5, t21);
-			append(span7, t22);
-			append(span7, span6);
+			append(div8, span5);
+			append(span5, span3);
+			append(span3, t21);
+			append(span5, t22);
+			append(span5, span4);
 			append(div17, t24);
 			append(div17, div14);
 			append(div14, div13);
 			append(div13, button0);
 			append(button0, i4);
 			append(button0, t25);
-			append(button0, span8);
+			append(button0, span6);
 			append(div13, t27);
 			append(div13, button1);
 			append(button1, i5);
 			append(button1, t28);
-			append(button1, span9);
+			append(button1, span7);
 			append(div13, t30);
 			append(div13, div11);
 			append(div13, t33);
@@ -2033,7 +2037,7 @@ function create_fragment(ctx) {
 				dispose = [
 					action_destroyer(link_action = link.call(null, a)),
 					action_destroyer(active_action = active.call(null, a)),
-					listen(span7, "click", /*showComments*/ ctx[27]),
+					listen(span5, "click", /*showComments*/ ctx[27]),
 					listen(button0, "click", /*changeReaction*/ ctx[26]),
 					listen(button1, "click", /*changeReaction*/ ctx[26]),
 					listen(div11, "click", /*showComments*/ ctx[27]),
@@ -2069,7 +2073,7 @@ function create_fragment(ctx) {
 
 				if (if_block1) {
 					if_block1.c();
-					if_block1.m(ul0, null);
+					if_block1.m(ul, null);
 				}
 			}
 
@@ -2153,40 +2157,32 @@ function create_fragment(ctx) {
 
 			if ((!current || dirty[0] & /*reactions*/ 1) && t13_value !== (t13_value = /*reactions*/ ctx[0].like + "")) set_data(t13, t13_value);
 
-			if (/*reactionsLikeList*/ ctx[18]) {
+			if (/*reactionsLikeList*/ ctx[18] && /*reactionsLikeList*/ ctx[18].length > 0) {
 				if (if_block7) {
 					if_block7.p(ctx, dirty);
 				} else {
 					if_block7 = create_if_block_3(ctx);
 					if_block7.c();
-					if_block7.m(ul1, null);
+					if_block7.m(div6, null);
 				}
 			} else if (if_block7) {
 				if_block7.d(1);
 				if_block7 = null;
 			}
 
-			if (!current || dirty[0] & /*id*/ 8192 && ul1_id_value !== (ul1_id_value = "ulLikeListReactions" + /*id*/ ctx[13])) {
-				attr(ul1, "id", ul1_id_value);
-			}
-
 			if ((!current || dirty[0] & /*reactions*/ 1) && t17_value !== (t17_value = /*reactions*/ ctx[0].love + "")) set_data(t17, t17_value);
 
-			if (/*reactionsLoveList*/ ctx[19]) {
+			if (/*reactionsLoveList*/ ctx[19] && /*reactionsLoveList*/ ctx[19].length > 0) {
 				if (if_block8) {
 					if_block8.p(ctx, dirty);
 				} else {
 					if_block8 = create_if_block_2(ctx);
 					if_block8.c();
-					if_block8.m(ul2, null);
+					if_block8.m(div7, null);
 				}
 			} else if (if_block8) {
 				if_block8.d(1);
 				if_block8 = null;
-			}
-
-			if (!current || dirty[0] & /*id*/ 8192 && ul2_id_value !== (ul2_id_value = "ulLoveReactionsList" + /*id*/ ctx[13])) {
-				attr(ul2, "id", ul2_id_value);
 			}
 
 			if (!current || dirty[0] & /*comments*/ 2) set_data(t21, /*comments*/ ctx[1]);

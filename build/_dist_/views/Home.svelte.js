@@ -209,7 +209,7 @@ function create_fragment(ctx) {
 }
 
 const urlAPI = 'https://api.flylinkers.com';
-const urlImages = 'http://3.130.198.152:8000';
+const urlImages = 'https://api.flylinkers.com';
 
 function instance($$self, $$props, $$invalidate) {
 	let name, middle_name, last_name, email, title, photo, id;

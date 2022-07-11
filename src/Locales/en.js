@@ -10,6 +10,8 @@ export default{
     "nav-acept-request" : "Accept",
     "nav-deline-request" : "Deny",
     "input-search" : "Search",
+    "your-network" : "Your network",
+
 
     //notifications
     "notification-reaction": "has reacted to your post",

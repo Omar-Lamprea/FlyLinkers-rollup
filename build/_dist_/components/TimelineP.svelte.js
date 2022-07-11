@@ -61,7 +61,7 @@ function get_each_context_2(ctx, list, i) {
 	return child_ctx;
 }
 
-// (156:6) {#if email === dataJson.email}
+// (154:6) {#if email === dataJson.email}
 function create_if_block_6(ctx) {
 	let div;
 	let p;
@@ -118,7 +118,7 @@ function create_if_block_6(ctx) {
 	};
 }
 
-// (162:6) {#if experiences !== undefined}
+// (160:6) {#if experiences !== undefined}
 function create_if_block_5(ctx) {
 	let experience;
 	let current;
@@ -163,7 +163,7 @@ function create_if_block_5(ctx) {
 	};
 }
 
-// (166:6) {#if email === dataJson.email}
+// (164:6) {#if email === dataJson.email}
 function create_if_block_4(ctx) {
 	let panel;
 	let current;
@@ -200,7 +200,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (170:6) {#if post}
+// (168:6) {#if post}
 function create_if_block_2(ctx) {
 	let current_block_type_index;
 	let if_block;
@@ -270,7 +270,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (177:8) {:else}
+// (175:8) {:else}
 function create_else_block_1(ctx) {
 	let each_1_anchor;
 	let current;
@@ -354,7 +354,7 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (171:8) {#if userMain}
+// (169:8) {#if userMain}
 function create_if_block_3(ctx) {
 	let each_1_anchor;
 	let current;
@@ -438,7 +438,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (179:10) {#each post as dataPost}
+// (177:10) {#each post as dataPost}
 function create_each_block_3(ctx) {
 	let post_1;
 	let current;
@@ -495,7 +495,7 @@ function create_each_block_3(ctx) {
 	};
 }
 
-// (173:10) {#each post as dataPost}
+// (171:10) {#each post as dataPost}
 function create_each_block_2(ctx) {
 	let post_1;
 	let current;
@@ -552,7 +552,7 @@ function create_each_block_2(ctx) {
 	};
 }
 
-// (187:6) {#if $posts}
+// (185:6) {#if $posts}
 function create_if_block(ctx) {
 	let current_block_type_index;
 	let if_block;
@@ -622,7 +622,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (194:8) {:else}
+// (192:8) {:else}
 function create_else_block(ctx) {
 	let each_1_anchor;
 	let current;
@@ -706,7 +706,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (188:8) {#if userMain}
+// (186:8) {#if userMain}
 function create_if_block_1(ctx) {
 	let each_1_anchor;
 	let current;
@@ -790,7 +790,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (196:10) {#each $posts as dataPost}
+// (194:10) {#each $posts as dataPost}
 function create_each_block_1(ctx) {
 	let post_1;
 	let current;
@@ -847,7 +847,7 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (190:10) {#each $posts as dataPost}
+// (188:10) {#each $posts as dataPost}
 function create_each_block(ctx) {
 	let post_1;
 	let current;
@@ -1272,8 +1272,10 @@ function instance($$self, $$props, $$invalidate) {
 		reloadPosts();
 
 		document.addEventListener('scroll', async e => {
-			if (window.location.hash === "#/profile") {
-				if (window.innerHeight + window.scrollY >= main.offsetHeight - 1 && !window.location.href.includes('settings') && window.location.hash.length === 9) {
+			if (window.location.hash.includes("#/profile")) {
+				if (window.innerHeight + window.scrollY >= main.offsetHeight - 1 && !window.location.href.includes('settings')) {
+					console.log('get post');
+
 					if (countPost !== null && countPost !== undefined) {
 						getPosts();
 						countPost = null;

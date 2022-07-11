@@ -7,7 +7,8 @@
   let userMain = localStorage.getItem('userId');
   export let params;
   const urlAPI = 'https://api.flylinkers.com'
-  const urlImages = 'http://3.130.198.152:8000'
+  const urlImages = 'https://api.flylinkers.com'
+  // const urlImages = 'http://3.130.198.152:8000'
 
   const urlUser = window.location.pathname
   // const urluserProfile = urlUser.slice(9)

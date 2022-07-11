@@ -83,20 +83,6 @@
     color: var(--main-color);
   }
   
-
-  /* .notifications{
-    position: absolute;
-    top: 6px;
-    left: 14px;
-    background-color: #d70000;
-    border-radius: 50%;
-    font-size: .8rem;
-    font-weight: 500;
-    height: 20px;
-    width: 20px;
-    text-align: center;
-    color: white;
-  } */
   
   .userData{
     cursor: pointer;
@@ -125,6 +111,15 @@
     color: #fefefe;
   }
 
+  .your-network-nav{
+    border-top: 1px solid #c2c2c2;
+    color: #000;
+    /* padding: 0.5rem 0; */
+  }
+  .your-network-nav:hover{
+    background-color: #efefef;
+  }
+
 </style>
 
 <div class="dropdown">
@@ -150,14 +145,14 @@
           </span>
       </li>
     {:else}
-       <p data-translate="nav-no-request" class="text-center">You haven't news</p>
+       <p data-translate="nav-no-request" class="py-2 text-center">You haven't news</p>
        <!-- <a href="/network/{id}" class="text-center" use:link use:active>
         <p class="text-center">Your Network</p>
       </a> -->
     {/each}
-    <hr>
+
     <a href="/network/{id}" class="text-center" use:link use:active>
-      <p class="text-center">Your Network</p>
+      <p data-translate="your-network" class="your-network-nav py-2 text-center">Your Network</p>
     </a>
   </ul>
 </div>

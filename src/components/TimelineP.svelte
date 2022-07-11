@@ -43,6 +43,7 @@
   let post;
   let userPost;
   let countPost = null
+  let endPostMessage;
 
   const getPost = async()=>{
     post = ''
@@ -115,9 +116,10 @@
             getPosts()
             countPost = null
           }else{
-            setTimeout(() => {
-              endPosts.classList.remove('d-none')
-            }, 1000);
+            endPostMessage = 1
+            // setTimeout(() => {
+            //   if(endPosts) endPosts.classList.remove('d-none')
+            // }, 1000);
           }
         }
       }
@@ -197,7 +199,8 @@
 
         {/if}
       {/if}
-
-      <div data-translate="noPost" id="endPosts" class="d-none text-center fw-bold" style="color: var(--main-color);">Sorry!, we can't find more post to show you.</div>
+      {#if endPostMessage}
+        <div data-translate="noPost" id="endPosts" class="text-center fw-bold" style="color: var(--main-color);">Sorry!, we can't find more post to show you.</div>
+      {/if}
     </div>
 </div>

@@ -71,7 +71,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (242:0) {#if data && getUserMainToFirestore}
+// (243:0) {#if data && getUserMainToFirestore}
 function create_if_block(ctx) {
 	let header;
 	let t0;
@@ -163,7 +163,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (247:5) {#if chatFlag && userMain && getUserMainToFirestore}
+// (248:5) {#if chatFlag && userMain && getUserMainToFirestore}
 function create_if_block_1(ctx) {
 	let chat;
 	let current;
@@ -279,7 +279,8 @@ const urlLogOut = 'https://flylinkers.com';
 // const urlAPI = 'http://18.118.50.78:8000'
 const urlAPI = 'https://api.flylinkers.com';
 
-const urlImages = 'http://3.130.198.152:8000';
+// const urlImages= 'http://3.130.198.152:8000'
+const urlImages = 'https://api.flylinkers.com';
 
 function instance($$self, $$props, $$invalidate) {
 	if (!localStorage.getItem('lang')) {

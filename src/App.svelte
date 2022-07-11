@@ -17,7 +17,6 @@
   import {translate} from './js/translate'
 
 
-
   if(!localStorage.getItem('lang')){
     if (navigator.language.includes('en')) {
       localStorage.setItem('lang', 'En')
@@ -29,15 +28,15 @@
   const urlUser = window.location.pathname
   const urluserProfile = urlUser.slice(9)
 
-  // const urlLogOut = 'http://localhost:3000/'
-  const urlLogOut = 'https://flylinkers.com'
-  // const urlLogOut = 'https://omar-lamprea.github.io/FlyLinkers-Login/'
 
-  // const urlAPI = 'http://18.118.50.78:8000'
+  const urlLogOut = 'https://flylinkers.com'
   const urlAPI = 'https://api.flylinkers.com'
-  const urlImages= 'http://3.130.198.152:8000'
+
+  // const urlImages= 'http://3.130.198.152:8000'
+  const urlImages= 'https://api.flylinkers.com'
 
   if(!localStorage.getItem('user') || localStorage.getItem('user') === 'null' || window.location.href.includes('user=')){
+    localStorage.clear()
     const param = window.location.search
     const urlParams = new URLSearchParams(param)
     const user = urlParams.get('user')
@@ -63,6 +62,7 @@
   let getUserMainToFirestore;
 
   const getData = async ()=>{
+    
     if (localStorage.getItem('user')) {
       const response = await fetch(`${urlAPI}/user/logout/?token=${localStorage.getItem('user')}`)
       // console.log(response);

@@ -8,7 +8,7 @@
 
 
   const urlAPI = 'https://api.flylinkers.com'
-  const urlImages= 'http://3.130.198.152:8000'
+  const urlImages= 'https://api.flylinkers.com'
 
   let name, title, email, photo, id, last_name, middle_name;
   let data;

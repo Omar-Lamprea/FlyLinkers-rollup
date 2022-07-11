@@ -95,6 +95,7 @@
     <div class="Default-containers p-0 pb-3 px-3">
       <div class="row">
         {#if networkList}
+        <p class="mx-3 mt-3" style="color: var(--main-color);">Network</p>
           {#each networkList as user}
             <div class="col-12 col-md-6">
               <div class="container-friend p-2 mt-3 d-flex align-items-center">

@@ -17,6 +17,7 @@
 
   let page = 0;
   let countPost = null
+  let endPostMessage;
 
   export async function getPosts (page1){
     if (page1) {
@@ -98,15 +99,14 @@
     reloadPosts()
 
     document.addEventListener('scroll', async (e)=>{
-      if(window.location.hash === "#/"){
+      if(window.location.hash === "#/" || window.location.hash === ""){
         if ((window.innerHeight + window.scrollY) >= main.offsetHeight - 1 && !window.location.href.includes('settings') && !window.location.href.includes('profile')){
           if (countPost !== null && countPost !== undefined) {
             getPosts()
             countPost = null
           }else{
             setTimeout(() => {
-              endPosts.classList.remove('d-none')
-              
+              endPostMessage = 1
             }, 1000);
           }
         }
@@ -132,6 +132,8 @@
       <Post {...dataPost} {userId} {urlAPI} {urlImages}/>
     {/each}
 
-    <div data-translate="noPost" id="endPosts" class="d-none text-center fw-bold" style="color: var(--main-color);">Sorry!, we can't find more post to show you.</div>
+    {#if endPostMessage}
+       <div data-translate="noPost" id="endPosts" class=" text-center fw-bold" style="color: var(--main-color);">Sorry!, we can't find more post to show you.</div>
+    {/if}
   </div>
 </div>

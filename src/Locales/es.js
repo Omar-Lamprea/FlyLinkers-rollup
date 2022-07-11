@@ -10,6 +10,7 @@ export default{
     "nav-acept-request" : "Aceptar",
     "nav-deline-request" : "Rechazar",
     "input-search" : "Buscar",
+    "your-network" : "Tu red de contactos",
     //********************
 
     //notifications
