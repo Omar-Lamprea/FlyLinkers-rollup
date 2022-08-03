@@ -1,5 +1,6 @@
 <script>
   import {closeModal} from '../../../js/closeModals'
+  import {onMount} from 'svelte'
   export let userProfile, urlAPI, experience;
   console.log(experience);
 
@@ -202,6 +203,20 @@
       btnAddExperience.classList.toggle('reload-expereriences')
     }
   }
+
+  let langSelect = localStorage.getItem('lang')
+  const observer = new MutationObserver(()=>{
+
+    if(btnAddEx.dataset.translatee){
+      // console.log(btnAddEx.dataset.translatee);
+      langSelect = btnAddEx.dataset.translatee
+    }
+  })
+
+  onMount(()=>{
+    const btnAddEx = document.getElementById('btnAddEx')
+    observer.observe(btnAddEx, {attributes:true})
+  })
   
 </script>
 
@@ -255,7 +270,7 @@
                 <label data-translate="modal-start-date" for="startDate{experience.id}">Start date*</label>
                 <div class="workStartDate d-md-flex justify-content-between">
                   <select name="startDate{experience.id}" id="startDate{experience.id}" class="me-md-1 mb-3">
-                    {#if localStorage.getItem('lang') === 'En'}
+                    {#if langSelect === 'En'}
                       {#each months as month}
                         {#if joinStartMonth === month.value}
                           <option value={month.value} selected>{month.month}</option>
@@ -288,7 +303,7 @@
                 <div class="workEndDate d-md-flex justify-content-between">
                   {#if !experience.working}
                      <select name="endDate{experience.id}" id="endDate{experience.id}" class="me-md-1 mb-3">
-                      {#if localStorage.getItem('lang') === 'En'}
+                      {#if langSelect === 'En'}
                         {#each months as month}
                           {#if joinEndMonth === month.value}
                             <option value={month.value} selected>{month.month}</option>
@@ -316,7 +331,7 @@
                      </select>
                   {:else}
                     <select name="endDate{experience.id}" id="endDate{experience.id}" disabled class="me-md-1 mb-3">
-                      {#if localStorage.getItem('lang') === 'En'}
+                      {#if langSelect === 'En'}
                         {#each months as month}
                           {#if joinEndMonth === month.value}
                             <option value={month.value} selected>{month.month}</option>

@@ -2,8 +2,9 @@
   import getDataexperiences from '../../profile/Experience.svelte'
   export let userProfile, urlAPI;
   import {closeModal} from '../../../js/closeModals'
+  import { onMount } from 'svelte';
 
-
+  let langSelect = localStorage.getItem('lang')
   const months = [
     {value: '0', month : 'Please select'},
     {value: '1', month : 'January'},
@@ -28,7 +29,7 @@
     {value: '5', month : 'Mayo'},
     {value: '6', month : 'Junio'},
     {value: '7', month : 'Julio'},
-    {value: '8', month : 'Augosto'},
+    {value: '8', month : 'Agosto'},
     {value: '9', month : 'Septiembre'},
     {value: '10', month : 'Octubre'},
     {value: '11', month : 'Noviembre'},
@@ -170,6 +171,20 @@
     }
   }
 
+  //add observer
+  const observer = new MutationObserver(()=>{
+
+    if(btnAddEx.dataset.translatee){
+      // console.log(btnAddEx.dataset.translatee);
+      langSelect = btnAddEx.dataset.translatee
+    }
+  })
+
+  onMount(()=>{
+    const btnAddEx = document.getElementById('btnAddEx')
+    observer.observe(btnAddEx, {attributes:true})
+  })
+
 </script>
 
 <style>
@@ -221,7 +236,7 @@
                 <label data-translate="modal-start-date" for="postStartDate">Start date*</label>
                 <div class="workStartDate d-md-flex justify-content-between">
                   <select name="postStartDate" id="postStartDate" class="me-md-1 mb-3">
-                    {#if localStorage.getItem('lang') === 'En'}
+                    {#if langSelect === 'En'}
                       {#each months as month}
                         <option value={month.value}>{month.month}</option>
                       {/each}
@@ -244,7 +259,7 @@
                 <label data-translate="modal-end-date" for="postEndDate">end date*</label>
                 <div class="workEndDate d-md-flex justify-content-between">
                   <select name="postEndDate" id="postEndDate" class="me-md-1 mb-3">
-                    {#if localStorage.getItem('lang') === 'En'}
+                    {#if langSelect === 'En'}
                       {#each months as month}
                         <option value={month.value}>{month.month}</option>
                       {/each}
@@ -281,7 +296,7 @@
             <label data-translate="modal-job-type" for="postEmploymentType">Employment type*</label>
             <select name="postEmploymentType" id="postEmploymentType">
               <option data-translate="modal-xp-select-job-type" value="pleaseSelect">Please select</option>
-              {#if localStorage.getItem('lang') === 'En'}
+              {#if langSelect === 'En'}
                 {#each employmentTypeList as employment}
                   <option value={employment}>{employment}</option>
                 {/each}

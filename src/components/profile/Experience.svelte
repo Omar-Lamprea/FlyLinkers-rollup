@@ -219,7 +219,7 @@
   {#if id === parseInt(localStorage.getItem('userId'))}
     <div class="addExperiences text-center">
       <p data-translate="add-position">Add position</p>
-      <i class="fas fa-plus-circle" data-bs-toggle="modal" data-bs-target="#modalExperience"></i>
+      <i class="fas fa-plus-circle" id="btnAddEx" data-bs-toggle="modal" data-bs-target="#modalExperience"></i>
       <ExperiencesModal {userProfile} {urlAPI}/>
     </div>
   {/if}
@@ -230,7 +230,7 @@
       <div class="Experience-content mx-3 mx-md-0">
         <div class="addExperiences text-center">
           <p>Add your work experience</p>
-          <i id="" class="fas fa-plus-circle" data-bs-toggle="modal" data-bs-target="#modalExperience"></i>
+          <i class="fas fa-plus-circle" id="btnAddEx" data-bs-toggle="modal" data-bs-target="#modalExperience"></i>
           <ExperiencesModal {userProfile} {urlAPI}/>
         </div>
       </div>

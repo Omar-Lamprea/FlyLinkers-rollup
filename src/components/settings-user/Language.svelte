@@ -5,10 +5,12 @@
     containerLanguage.classList.toggle('container-active')
   }
 
-  const setLanguage = (e)=>{
+  const setLanguage = async (e)=>{
     if (e.target.value !== '') {
       localStorage.setItem('lang', e.target.value)
-      translate()
+      await translate()
+      const btnModalEx = document.getElementById('btnAddEx')
+      btnModalEx.setAttribute('data-translatee', e.target.value)
     }
     // window.location.reload()
   }

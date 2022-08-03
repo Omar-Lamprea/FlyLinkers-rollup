@@ -5,6 +5,7 @@
   import {onMount} from 'svelte'
   import { writable } from 'svelte/store';
   import { translate } from '../js/translate';
+import { findIndex } from 'rxjs';
 
 
   export let id;
@@ -19,7 +20,8 @@
   let countPost = null
   let endPostMessage;
 
-  export async function getPosts (page1){
+  export async function getPosts(page1, idNewPost = false){
+    
     if (page1) {
       page = page1
     }else{
@@ -27,38 +29,28 @@
     }
     try {
       const response = await fetch(`${urlAPI}/post/home/?page=${page}&user_id=${id}`)
-      let content = await response.json()
-      countPost = content.next
       if (response.ok) {
-        const dateNow = new Date()
-        const dateNowOfMlSeconds = dateNow.getTime();
+        let content = await response.json()
+        countPost = content.next
 
-        // const datelimit = new Date(dateNowOfMlSeconds - addMlSeconds)
-        // console.log(datelimit.toISOString());
-        // console.log(new Date(Date.parse(content.results[2].create_time)));
-        // console.log(new Date(Date.parse(content.results[2].create_time) + 10000));
-
-        // if (content.results.length === 3) {
-        //   for (let i = 0; i < content.results.length; i++) {
-        //     if (content.results[i].user.id === parseInt(localStorage.getItem('userId')) &&
-        //     new Date(Date.parse(content.results[i].create_time) + 10000) >= dateNowOfMlSeconds) {
-        //       let aux = content.results[0]
-        //       let aux2 = content.results[1]
-        //       content.results[0] = content.results[i]
-        //       content.results[1] = aux
-        //       content.results[2] = aux2
-        //     }
-        //   }
-        // }else if(content.results.length === 2){
-        //   for (let i = 0; i < content.results.length; i++) {
-        //     if (content.results[i].user.id === parseInt(localStorage.getItem('userId')) &&
-        //     new Date(Date.parse(content.results[i].create_time) + 10000) >= dateNowOfMlSeconds) {
-        //       let aux = content.results[0]
-        //       content.results[0] = content.results[i]
-        //       content.results[1] = aux
-        //     }
-        //   }
-        // }
+        if(idNewPost){
+          let arreglo = content.results
+          let index = (el) => el.id === parseInt(idNewPost);
+          if (arreglo.findIndex(index) >= 0) {
+            //si llega acá faltaría reordenarlo a [0]
+            console.log(arreglo.findIndex(index));
+          }else{
+            const getNewPost = await fetch(`${urlAPI}/post/create/?post_id=${idNewPost}`)
+            if(getNewPost.ok){
+              const response = await getNewPost.json()
+              let userResult = {
+                user : response.results[0]
+              }
+              let template = Object.assign(response.results[1], userResult)
+              content.results.unshift(template)
+            }
+          }
+        }
 
         posts.set([...$posts, ...content.results])
       }else{
@@ -74,19 +66,19 @@
   }
 
   const reloadPosts = () =>{
-    // setTimeout(() => {
       const reloadPosts = document.getElementById('reloadPostCheck')
+
       const observer = new MutationObserver(()=>{
         // console.log('reloading post...');
-        console.log('id el post=', reloadPosts.getAttribute('data-post'))
+        // console.log('id del post nuevo=', reloadPosts.getAttribute('data-post'))
         clearPost()
-        getPosts(1)
+        getPosts(1, reloadPosts.getAttribute('data-post'))
         reloadPosts.removeAttribute('data-reloading')
       })
+
       if (!window.location.href.includes('settings')) {
         observer.observe(reloadPosts, {attributes:true})
       }
-    // }, 4000);
   }
 
   iconHome.addEventListener('click', ()=>{
@@ -133,7 +125,11 @@
     {/each}
 
     {#if endPostMessage}
-       <div data-translate="noPost" id="endPosts" class=" text-center fw-bold" style="color: var(--main-color);">Sorry!, we can't find more post to show you.</div>
+      {#if localStorage.getItem('lang') === "Es"}
+        <div data-translate="noPost" id="endPosts" class=" text-center fw-bold" style="color: var(--main-color);">Lo sentimos!, no hay más publicaciones que mostrarte.</div>
+      {:else}
+         <div data-translate="noPost" id="endPosts" class=" text-center fw-bold" style="color: var(--main-color);">Sorry!, we can't find more post to show you.</div>
+      {/if}
     {/if}
   </div>
 </div>

@@ -111,8 +111,8 @@
     document.addEventListener('scroll', async (e)=>{
       if(window.location.hash.includes("#/profile")){
         if ((window.innerHeight + window.scrollY) >= main.offsetHeight - 1 && !window.location.href.includes('settings')){
-          console.log('get post');
           if (countPost !== null  && countPost !== undefined) {
+            // console.log('get post');
             getPosts()
             countPost = null
           }else{
