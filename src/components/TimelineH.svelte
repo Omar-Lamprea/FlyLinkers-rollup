@@ -21,7 +21,6 @@ import { findIndex } from 'rxjs';
   let endPostMessage;
 
   export async function getPosts(page1, idNewPost = false){
-    
     if (page1) {
       page = page1
     }else{
@@ -36,9 +35,20 @@ import { findIndex } from 'rxjs';
         if(idNewPost){
           let arreglo = content.results
           let index = (el) => el.id === parseInt(idNewPost);
+
           if (arreglo.findIndex(index) >= 0) {
-            //si llega acá faltaría reordenarlo a [0]
-            console.log(arreglo.findIndex(index));
+            //si llega acá se ordena
+
+            // console.log('arreglo sin ordenar:');
+            // console.log(arreglo);
+
+            let aux = arreglo[arreglo.findIndex(index)] // 1
+            arreglo[arreglo.findIndex(index)] = arreglo[0]
+            arreglo[0] = aux
+
+            // console.log('arreglo ordenado:');
+            // console.log(arreglo);
+
           }else{
             const getNewPost = await fetch(`${urlAPI}/post/create/?post_id=${idNewPost}`)
             if(getNewPost.ok){

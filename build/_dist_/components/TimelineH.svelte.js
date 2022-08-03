@@ -11,12 +11,14 @@ import {
 	destroy_each,
 	detach,
 	element,
+	empty,
 	get_spread_object,
 	get_spread_update,
 	group_outros,
 	init,
 	insert,
 	mount_component,
+	noop,
 	safe_not_equal,
 	set_style,
 	space,
@@ -30,6 +32,7 @@ import Loader from './Loader.svelte.js';
 import { onMount } from '../../_snowpack/pkg/svelte.js';
 import { writable } from '../../_snowpack/pkg/svelte/store.js';
 import { translate } from '../js/translate.js';
+import { findIndex } from '../../_snowpack/pkg/rxjs.js';
 
 function get_each_context(ctx, list, i) {
 	const child_ctx = ctx.slice();
@@ -37,8 +40,8 @@ function get_each_context(ctx, list, i) {
 	return child_ctx;
 }
 
-// (128:4) {#if id}
-function create_if_block_1(ctx) {
+// (120:4) {#if id}
+function create_if_block_2(ctx) {
 	let addpost;
 	let current;
 
@@ -81,7 +84,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (131:4) {#each $posts as dataPost}
+// (123:4) {#each $posts as dataPost}
 function create_each_block(ctx) {
 	let post;
 	let current;
@@ -136,14 +139,66 @@ function create_each_block(ctx) {
 	};
 }
 
-// (135:4) {#if endPostMessage}
+// (127:4) {#if endPostMessage}
 function create_if_block(ctx) {
+	let show_if;
+	let if_block_anchor;
+
+	function select_block_type(ctx, dirty) {
+		if (localStorage.getItem('lang') === "Es") return create_if_block_1;
+		return create_else_block;
+	}
+
+	let current_block_type = select_block_type(ctx, -1);
+	let if_block = current_block_type(ctx);
+
+	return {
+		c() {
+			if_block.c();
+			if_block_anchor = empty();
+		},
+		m(target, anchor) {
+			if_block.m(target, anchor);
+			insert(target, if_block_anchor, anchor);
+		},
+		p: noop,
+		d(detaching) {
+			if_block.d(detaching);
+			if (detaching) detach(if_block_anchor);
+		}
+	};
+}
+
+// (130:6) {:else}
+function create_else_block(ctx) {
 	let div;
 
 	return {
 		c() {
 			div = element("div");
 			div.textContent = "Sorry!, we can't find more post to show you.";
+			attr(div, "data-translate", "noPost");
+			attr(div, "id", "endPosts");
+			attr(div, "class", "text-center fw-bold");
+			set_style(div, "color", "var(--main-color)");
+		},
+		m(target, anchor) {
+			insert(target, div, anchor);
+		},
+		d(detaching) {
+			if (detaching) detach(div);
+		}
+	};
+}
+
+// (128:6) {#if localStorage.getItem('lang') === "Es"}
+function create_if_block_1(ctx) {
+	let div;
+
+	return {
+		c() {
+			div = element("div");
+			div.textContent = "Lo sentimos!, no hay más publicaciones que mostrarte.";
 			attr(div, "data-translate", "noPost");
 			attr(div, "id", "endPosts");
 			attr(div, "class", "text-center fw-bold");
@@ -166,7 +221,7 @@ function create_fragment(ctx) {
 	let t1;
 	let t2;
 	let current;
-	let if_block0 = /*id*/ ctx[0] && create_if_block_1(ctx);
+	let if_block0 = /*id*/ ctx[0] && create_if_block_2(ctx);
 	let each_value = /*$posts*/ ctx[4];
 	let each_blocks = [];
 
@@ -227,7 +282,7 @@ function create_fragment(ctx) {
 						transition_in(if_block0, 1);
 					}
 				} else {
-					if_block0 = create_if_block_1(ctx);
+					if_block0 = create_if_block_2(ctx);
 					if_block0.c();
 					transition_in(if_block0, 1);
 					if_block0.m(div0, t1);
@@ -271,7 +326,7 @@ function create_fragment(ctx) {
 
 			if (/*endPostMessage*/ ctx[3]) {
 				if (if_block1) {
-					
+					if_block1.p(ctx, dirty);
 				} else {
 					if_block1 = create_if_block(ctx);
 					if_block1.c();
@@ -324,7 +379,7 @@ function instance($$self, $$props, $$invalidate) {
 	let countPost = null;
 	let endPostMessage;
 
-	async function getPosts(page1) {
+	async function getPosts(page1, idNewPost = false) {
 		if (page1) {
 			page = page1;
 		} else {
@@ -333,38 +388,30 @@ function instance($$self, $$props, $$invalidate) {
 
 		try {
 			const response = await fetch(`${urlAPI}/post/home/?page=${page}&user_id=${id}`);
-			let content = await response.json();
-			countPost = content.next;
 
 			if (response.ok) {
-				const dateNow = new Date();
-				const dateNowOfMlSeconds = dateNow.getTime();
+				let content = await response.json();
+				countPost = content.next;
 
-				// const datelimit = new Date(dateNowOfMlSeconds - addMlSeconds)
-				// console.log(datelimit.toISOString());
-				// console.log(new Date(Date.parse(content.results[2].create_time)));
-				// console.log(new Date(Date.parse(content.results[2].create_time) + 10000));
-				// if (content.results.length === 3) {
-				//   for (let i = 0; i < content.results.length; i++) {
-				//     if (content.results[i].user.id === parseInt(localStorage.getItem('userId')) &&
-				//     new Date(Date.parse(content.results[i].create_time) + 10000) >= dateNowOfMlSeconds) {
-				//       let aux = content.results[0]
-				//       let aux2 = content.results[1]
-				//       content.results[0] = content.results[i]
-				//       content.results[1] = aux
-				//       content.results[2] = aux2
-				//     }
-				//   }
-				// }else if(content.results.length === 2){
-				//   for (let i = 0; i < content.results.length; i++) {
-				//     if (content.results[i].user.id === parseInt(localStorage.getItem('userId')) &&
-				//     new Date(Date.parse(content.results[i].create_time) + 10000) >= dateNowOfMlSeconds) {
-				//       let aux = content.results[0]
-				//       content.results[0] = content.results[i]
-				//       content.results[1] = aux
-				//     }
-				//   }
-				// }
+				if (idNewPost) {
+					let arreglo = content.results;
+					let index = el => el.id === parseInt(idNewPost);
+
+					if (arreglo.findIndex(index) >= 0) {
+						//si llega acá faltaría reordenarlo a [0]
+						console.log(arreglo.findIndex(index));
+					} else {
+						const getNewPost = await fetch(`${urlAPI}/post/create/?post_id=${idNewPost}`);
+
+						if (getNewPost.ok) {
+							const response = await getNewPost.json();
+							let userResult = { user: response.results[0] };
+							let template = Object.assign(response.results[1], userResult);
+							content.results.unshift(template);
+						}
+					}
+				}
+
 				posts.set([...$posts, ...content.results]);
 			} else {
 				endPosts.classList.remove('d-none');
@@ -379,22 +426,21 @@ function instance($$self, $$props, $$invalidate) {
 	}
 
 	const reloadPosts = () => {
-		// setTimeout(() => {
 		const reloadPosts = document.getElementById('reloadPostCheck');
 
 		const observer = new MutationObserver(() => {
 				// console.log('reloading post...');
-				console.log('id el post=', reloadPosts.getAttribute('data-post'));
-
+				// console.log('id del post nuevo=', reloadPosts.getAttribute('data-post'))
 				clearPost();
-				getPosts(1);
+
+				getPosts(1, reloadPosts.getAttribute('data-post'));
 				reloadPosts.removeAttribute('data-reloading');
 			});
 
 		if (!window.location.href.includes('settings')) {
 			observer.observe(reloadPosts, { attributes: true });
 		}
-	}; // }, 4000);
+	};
 
 	iconHome.addEventListener('click', () => {
 		clearPost();

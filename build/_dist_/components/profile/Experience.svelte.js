@@ -72,8 +72,8 @@ function create_if_block_4(ctx) {
 			t2 = space();
 			create_component(experiencesmodal.$$.fragment);
 			attr(p, "class", "svelte-ejk3cr");
-			attr(i, "id", "");
 			attr(i, "class", "fas fa-plus-circle svelte-ejk3cr");
+			attr(i, "id", "btnAddEx");
 			attr(i, "data-bs-toggle", "modal");
 			attr(i, "data-bs-target", "#modalExperience");
 			attr(div0, "class", "addExperiences text-center svelte-ejk3cr");
@@ -741,6 +741,7 @@ function create_if_block_1(ctx) {
 			attr(p, "data-translate", "add-position");
 			attr(p, "class", "svelte-ejk3cr");
 			attr(i, "class", "fas fa-plus-circle svelte-ejk3cr");
+			attr(i, "id", "btnAddEx");
 			attr(i, "data-bs-toggle", "modal");
 			attr(i, "data-bs-target", "#modalExperience");
 			attr(div, "class", "addExperiences text-center svelte-ejk3cr");
