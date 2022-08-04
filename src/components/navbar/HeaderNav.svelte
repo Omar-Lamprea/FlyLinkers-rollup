@@ -492,7 +492,7 @@
               {/if}
           {/each}
         {:else}
-          <p data-translate="nav-no-news">you haven't news</p>
+          <p data-translate="nav-no-news" class="mx-3">you haven't news</p>
         {/if}
       </ul>
     </div>

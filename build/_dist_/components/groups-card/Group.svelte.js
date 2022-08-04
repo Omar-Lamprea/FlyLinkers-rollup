@@ -18,7 +18,6 @@ import {
 function create_fragment(ctx) {
 	let div;
 	let ul;
-	let a;
 	let li;
 	let i;
 	let t0;
@@ -29,24 +28,20 @@ function create_fragment(ctx) {
 		c() {
 			div = element("div");
 			ul = element("ul");
-			a = element("a");
 			li = element("li");
 			i = element("i");
 			t0 = space();
 			span = element("span");
 			t1 = text(/*name*/ ctx[0]);
-			attr(i, "class", "fas fa-users svelte-1vzc48p");
-			attr(li, "class", "svelte-1vzc48p");
-			attr(a, "href", /*link*/ ctx[1]);
-			attr(a, "class", "svelte-1vzc48p");
-			attr(ul, "class", "svelte-1vzc48p");
-			attr(div, "class", "Group svelte-1vzc48p");
+			attr(i, "class", "fas fa-users svelte-1y9nyp");
+			attr(li, "class", "svelte-1y9nyp");
+			attr(ul, "class", "svelte-1y9nyp");
+			attr(div, "class", "Group muted svelte-1y9nyp");
 		},
 		m(target, anchor) {
 			insert(target, div, anchor);
 			append(div, ul);
-			append(ul, a);
-			append(a, li);
+			append(ul, li);
 			append(li, i);
 			append(li, t0);
 			append(li, span);
@@ -54,10 +49,6 @@ function create_fragment(ctx) {
 		},
 		p(ctx, [dirty]) {
 			if (dirty & /*name*/ 1) set_data(t1, /*name*/ ctx[0]);
-
-			if (dirty & /*link*/ 2) {
-				attr(a, "href", /*link*/ ctx[1]);
-			}
 		},
 		i: noop,
 		o: noop,

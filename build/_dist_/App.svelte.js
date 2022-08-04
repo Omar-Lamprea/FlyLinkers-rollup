@@ -71,7 +71,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (242:0) {#if data && getUserMainToFirestore}
+// (260:0) {#if data && getUserMainToFirestore}
 function create_if_block(ctx) {
 	let header;
 	let t0;
@@ -101,7 +101,7 @@ function create_if_block(ctx) {
 			t1 = space();
 			if (if_block) if_block.c();
 			attr(main, "id", "main");
-			attr(main, "class", "container-fluid container-lg svelte-u8f4vv");
+			attr(main, "class", "container-fluid container-lg svelte-14kmf73");
 		},
 		m(target, anchor) {
 			mount_component(header, target, anchor);
@@ -163,7 +163,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (247:5) {#if chatFlag && userMain && getUserMainToFirestore}
+// (265:5) {#if chatFlag && userMain && getUserMainToFirestore}
 function create_if_block_1(ctx) {
 	let chat;
 	let current;
@@ -292,7 +292,12 @@ function instance($$self, $$props, $$invalidate) {
 	const urluserProfile = urlUser.slice(9);
 
 	if (!localStorage.getItem('user') || localStorage.getItem('user') === 'null' || window.location.href.includes('user=')) {
-		localStorage.clear();
+		for (const key in localStorage) {
+			if (Object.hasOwnProperty.call(localStorage, key)) {
+				key !== "lang" ? localStorage.removeItem(key) : false;
+			}
+		}
+
 		const param = window.location.search;
 		const urlParams = new URLSearchParams(param);
 		const user = urlParams.get('user');
@@ -308,7 +313,12 @@ function instance($$self, $$props, $$invalidate) {
 	setTimeout(
 		() => {
 			if (localStorage.getItem('user') === 'null') {
-				localStorage.clear();
+				for (const key in localStorage) {
+					if (Object.hasOwnProperty.call(localStorage, key)) {
+						key !== "lang" ? localStorage.removeItem(key) : false;
+					}
+				}
+
 				window.location.href = urlLogOut;
 			}
 		},
@@ -362,7 +372,12 @@ function instance($$self, $$props, $$invalidate) {
 					localStorage.removeItem('newUser');
 				}
 			} else {
-				localStorage.clear();
+				for (const key in localStorage) {
+					if (Object.hasOwnProperty.call(localStorage, key)) {
+						key !== "lang" ? localStorage.removeItem(key) : false;
+					}
+				}
+
 				window.location.href = urlLogOut;
 			}
 		}

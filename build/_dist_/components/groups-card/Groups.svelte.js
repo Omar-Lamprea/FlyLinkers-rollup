@@ -31,7 +31,7 @@ function get_each_context(ctx, list, i) {
 	return child_ctx;
 }
 
-// (38:2) {:else}
+// (39:2) {:else}
 function create_else_block(ctx) {
 	let p;
 
@@ -49,7 +49,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (36:2) {#each data as group}
+// (37:2) {#each data as group}
 function create_each_block(ctx) {
 	let group;
 	let current;
@@ -130,8 +130,8 @@ function create_fragment(ctx) {
 			}
 
 			attr(h6, "data-translate", "title-groups");
-			attr(h6, "class", "svelte-jg8a8m");
-			attr(div, "class", "Groups d-none d-lg-block Default-containers svelte-jg8a8m");
+			attr(h6, "class", "muted svelte-jg8a8m");
+			attr(div, "class", "Groups d-none d-lg-block Default-containers muted svelte-jg8a8m");
 		},
 		m(target, anchor) {
 			insert(target, div, anchor);
@@ -217,7 +217,7 @@ function instance($$self) {
 	const data = [
 		{ name: 'Aviation', link: '/' },
 		{ name: 'Events', link: '/' },
-		{ name: 'Prodct', link: '/' },
+		{ name: 'Product', link: '/' },
 		{ name: 'Seminars', link: '/' },
 		{ name: 'Planes', link: '/' }
 	];

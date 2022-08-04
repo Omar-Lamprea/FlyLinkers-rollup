@@ -69,7 +69,7 @@ function get_each_context_1(ctx, list, i) {
 	return child_ctx;
 }
 
-// (428:6) {:else}
+// (433:6) {:else}
 function create_else_block_5(ctx) {
 	let div;
 
@@ -89,7 +89,7 @@ function create_else_block_5(ctx) {
 	};
 }
 
-// (426:6) {#if countMessages > 0}
+// (431:6) {#if countMessages > 0}
 function create_if_block_4(ctx) {
 	let div;
 	let t;
@@ -116,7 +116,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (436:8) {:else}
+// (441:8) {:else}
 function create_else_block_4(ctx) {
 	let li;
 
@@ -138,7 +138,7 @@ function create_else_block_4(ctx) {
 	};
 }
 
-// (434:8) {#each $usergroups as groups}
+// (439:8) {#each $usergroups as groups}
 function create_each_block_1(ctx) {
 	let chatlist;
 	let current;
@@ -181,7 +181,7 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (489:8) {:else}
+// (494:8) {:else}
 function create_else_block_3(ctx) {
 	let p;
 
@@ -201,7 +201,7 @@ function create_else_block_3(ctx) {
 	};
 }
 
-// (453:8) {#if notificationsList.length > 0}
+// (458:8) {#if notificationsList.length > 0}
 function create_if_block_1(ctx) {
 	let each_1_anchor;
 	let each_value = /*notificationsList*/ ctx[4];
@@ -257,7 +257,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (469:12) {:else}
+// (474:12) {:else}
 function create_else_block_1(ctx) {
 	let li;
 	let a;
@@ -384,7 +384,7 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (456:12) {#if typeof(notification.id) === 'string'}
+// (461:12) {#if typeof(notification.id) === 'string'}
 function create_if_block_2(ctx) {
 	let li;
 	let a;
@@ -499,7 +499,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (481:20) {:else}
+// (486:20) {:else}
 function create_else_block_2(ctx) {
 	let p;
 	let t_value = /*notification*/ ctx[17].desc + "";
@@ -525,7 +525,7 @@ function create_else_block_2(ctx) {
 	};
 }
 
-// (479:20) {#if notification.desc.includes('reacted')}
+// (484:20) {#if notification.desc.includes('reacted')}
 function create_if_block_3(ctx) {
 	let p;
 	let t_value = /*notification*/ ctx[17].desc + "";
@@ -551,7 +551,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (454:10) {#each notificationsList as notification}
+// (459:10) {#each notificationsList as notification}
 function create_each_block(ctx) {
 	let if_block_anchor;
 
@@ -592,7 +592,7 @@ function create_each_block(ctx) {
 	};
 }
 
-// (501:6) {:else}
+// (506:6) {:else}
 function create_else_block(ctx) {
 	let img;
 	let img_src_value;
@@ -619,7 +619,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (499:6) {#if localStorage.getItem('profilePhoto')}
+// (504:6) {#if localStorage.getItem('profilePhoto')}
 function create_if_block(ctx) {
 	let img;
 	let img_src_value;
@@ -1278,10 +1278,15 @@ function instance($$self, $$props, $$invalidate) {
 		});
 
 		if (logout.ok) {
-			const content = await logout.json();
+			// const content = await logout.json()
+			for (const key in localStorage) {
+				if (Object.hasOwnProperty.call(localStorage, key)) {
+					const item = localStorage[key];
 
-			// console.log(content);
-			localStorage.clear();
+					// console.log(key);
+					key !== "lang" ? localStorage.removeItem(key) : false;
+				}
+			}
 
 			window.location.href = urlLogOut;
 		}

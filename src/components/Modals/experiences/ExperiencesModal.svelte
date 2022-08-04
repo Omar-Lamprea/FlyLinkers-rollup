@@ -182,7 +182,7 @@
 
   onMount(()=>{
     const btnAddEx = document.getElementById('btnAddEx')
-    observer.observe(btnAddEx, {attributes:true})
+    btnAddEx ? observer.observe(btnAddEx, {attributes:true}) : false
   })
 
 </script>

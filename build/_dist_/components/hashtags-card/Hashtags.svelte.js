@@ -134,11 +134,11 @@ function create_fragment(ctx) {
 
 			t2 = space();
 			div0 = element("div");
-			div0.innerHTML = `<p data-translate="discover-hash" class="svelte-1714uyw">Discover More</p>`;
+			div0.innerHTML = `<p data-translate="discover-hash" class="muted svelte-1714uyw">Discover More</p>`;
 			attr(h6, "data-translate", "title-hashtags");
-			attr(h6, "class", "svelte-1714uyw");
-			attr(div0, "class", "Hashtags-discover text-center py-3 svelte-1714uyw");
-			attr(div1, "class", "Hashtags d-none d-lg-block Default-containers px-0 pb-0 svelte-1714uyw");
+			attr(h6, "class", "muted svelte-1714uyw");
+			attr(div0, "class", "Hashtags-discover text-center py-3 muted svelte-1714uyw");
+			attr(div1, "class", "Hashtags d-none d-lg-block Default-containers px-0 pb-0 muted svelte-1714uyw");
 		},
 		m(target, anchor) {
 			insert(target, div1, anchor);
@@ -226,7 +226,7 @@ function instance($$self) {
 	const data = [
 		{ name: 'Aviation', link: '/' },
 		{ name: 'Events', link: '/' },
-		{ name: 'Prodct', link: '/' },
+		{ name: 'Product', link: '/' },
 		{ name: 'Seminars', link: '/' },
 		{ name: 'Planes', link: '/' },
 		{ name: 'Pilot', link: '/' },
