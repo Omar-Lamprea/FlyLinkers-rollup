@@ -7,8 +7,9 @@
   .Group ul{
     padding: 0 1rem;
   }
-  .Group a{
-  color: grey;
+  .Group{
+  /* color: grey; */
+    /* color: rgb(197 197 197); */
   }
   .Group li{
     list-style: none;
@@ -19,13 +20,13 @@
   }
 </style>
 
-<div class="Group">
+<div class="Group muted">
   <ul>
-    <a href={link}>
+    <!-- <a href={link}> -->
       <li>
         <i class="fas fa-users"></i>
         <span>{name}</span>
       </li>
-    </a>
+    <!-- </a> -->
   </ul>
 </div>

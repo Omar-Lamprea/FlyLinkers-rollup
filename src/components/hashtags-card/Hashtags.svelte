@@ -10,7 +10,7 @@
       link: '/'
     },
     {
-      name: 'Prodct',
+      name: 'Product',
       link: '/'
     },
     {
@@ -54,14 +54,14 @@
   }
 </style>
 
-<div class="Hashtags d-none d-lg-block Default-containers px-0 pb-0">
-  <h6 data-translate="title-hashtags">Followed Hashtags</h6>
+<div class="Hashtags d-none d-lg-block Default-containers px-0 pb-0 muted">
+  <h6 data-translate="title-hashtags" class="muted">Followed Hashtags</h6>
   {#each data as hashtag}
     <Hashtag {...hashtag}/>
   {:else}
     <p>Loading...</p>
   {/each}
-  <div class="Hashtags-discover text-center py-3">
-    <p data-translate="discover-hash">Discover More</p>
+  <div class="Hashtags-discover text-center py-3 muted">
+    <p data-translate="discover-hash" class="muted">Discover More</p>
   </div>
 </div>

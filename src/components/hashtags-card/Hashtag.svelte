@@ -18,9 +18,9 @@
 </style>
 <div class="Hastag">
   <ul>
-    <a href={link}>
+    <!-- <a href={link}> -->
       <li>
-        <span># {name}</span>
-    </a>
+        <span class="muted">#{name}</span>
+    <!-- </a> -->
   </ul>
 </div>

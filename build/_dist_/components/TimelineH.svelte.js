@@ -40,7 +40,7 @@ function get_each_context(ctx, list, i) {
 	return child_ctx;
 }
 
-// (120:4) {#if id}
+// (130:4) {#if id}
 function create_if_block_2(ctx) {
 	let addpost;
 	let current;
@@ -84,7 +84,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (123:4) {#each $posts as dataPost}
+// (133:4) {#each $posts as dataPost}
 function create_each_block(ctx) {
 	let post;
 	let current;
@@ -139,7 +139,7 @@ function create_each_block(ctx) {
 	};
 }
 
-// (127:4) {#if endPostMessage}
+// (137:4) {#if endPostMessage}
 function create_if_block(ctx) {
 	let show_if;
 	let if_block_anchor;
@@ -169,7 +169,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (130:6) {:else}
+// (140:6) {:else}
 function create_else_block(ctx) {
 	let div;
 
@@ -191,7 +191,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (128:6) {#if localStorage.getItem('lang') === "Es"}
+// (138:6) {#if localStorage.getItem('lang') === "Es"}
 function create_if_block_1(ctx) {
 	let div;
 
@@ -398,10 +398,16 @@ function instance($$self, $$props, $$invalidate) {
 					let index = el => el.id === parseInt(idNewPost);
 
 					if (arreglo.findIndex(index) >= 0) {
-						//si llega acá faltaría reordenarlo a [0]
-						console.log(arreglo.findIndex(index));
-					} else {
-						const getNewPost = await fetch(`${urlAPI}/post/create/?post_id=${idNewPost}`);
+						//si llega acá se ordena
+						// console.log('arreglo sin ordenar:');
+						// console.log(arreglo);
+						let aux = arreglo[arreglo.findIndex(index)]; // 1
+
+						arreglo[arreglo.findIndex(index)] = arreglo[0];
+						arreglo[0] = aux;
+					} else // console.log(arreglo);
+					{
+						const getNewPost = await fetch(`${urlAPI}/post/create/?post_id=${idNewPost}`); // console.log('arreglo ordenado:');
 
 						if (getNewPost.ok) {
 							const response = await getNewPost.json();

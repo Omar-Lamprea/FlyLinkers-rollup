@@ -281,9 +281,14 @@
       }
     })
     if (logout.ok) {
-      const content = await logout.json()
-      // console.log(content);
-      localStorage.clear();
+      // const content = await logout.json()
+      for (const key in localStorage) {
+        if (Object.hasOwnProperty.call(localStorage, key)) {
+          const item = localStorage[key];
+          // console.log(key);
+          key !== "lang" ? localStorage.removeItem(key) : false
+        }
+      }
       window.location.href = urlLogOut;
     }
   }

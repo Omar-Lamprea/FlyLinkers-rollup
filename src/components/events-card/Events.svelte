@@ -14,7 +14,7 @@
       linkName: 'linkedin.com/in/flylinkers.com'
     },
     {
-      title: 'Comercial Avitaion Conferences',
+      title: 'Comercial Aviation Conferences',
       eventLogo: '../img/airplane.jpg',
       date : '10/12/2021',
       start: '9:00am',

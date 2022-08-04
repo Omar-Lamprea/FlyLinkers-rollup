@@ -16,7 +16,6 @@
   import {openChat} from './js/openChat.js'
   import {translate} from './js/translate'
 
-
   if(!localStorage.getItem('lang')){
     if (navigator.language.includes('en')) {
       localStorage.setItem('lang', 'En')
@@ -36,7 +35,13 @@
   const urlImages= 'https://api.flylinkers.com'
 
   if(!localStorage.getItem('user') || localStorage.getItem('user') === 'null' || window.location.href.includes('user=')){
-    localStorage.clear()
+
+    for (const key in localStorage) {
+      if (Object.hasOwnProperty.call(localStorage, key)) {
+        key !== "lang" ? localStorage.removeItem(key) : false
+      }
+    }
+
     const param = window.location.search
     const urlParams = new URLSearchParams(param)
     const user = urlParams.get('user')
@@ -48,7 +53,11 @@
   }
   setTimeout(() => {
     if(localStorage.getItem('user') === 'null'){
-      localStorage.clear()
+      for (const key in localStorage) {
+        if (Object.hasOwnProperty.call(localStorage, key)) {
+          key !== "lang" ? localStorage.removeItem(key) : false
+        }
+      }
       window.location.href = urlLogOut
     } 
   }, 1000);
@@ -94,7 +103,11 @@
           localStorage.removeItem('newUser')
         }
       }else{
-        localStorage.clear()
+        for (const key in localStorage) {
+          if (Object.hasOwnProperty.call(localStorage, key)) {
+            key !== "lang" ? localStorage.removeItem(key) : false
+          }
+        }
         window.location.href = urlLogOut
       }
     }
@@ -213,6 +226,11 @@
     background-color: inherit;
     color: var(--main-color);
     border: 1px solid #199aaf;
+  }
+  :global(.muted){
+    border-color: rgb(155, 155, 155) !important;
+    color: rgb(155, 155, 155) !important;
+    cursor: default;
   }
   
   main{

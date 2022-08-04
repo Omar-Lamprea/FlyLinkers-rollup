@@ -11,7 +11,7 @@
       link: '/'
     },
     {
-      name: 'Prodct',
+      name: 'Product',
       link: '/'
     },
     {
@@ -23,6 +23,7 @@
       link: '/'
     },
   ]
+
 </script>
 
 <style>
@@ -31,8 +32,8 @@
   }
 </style>
 
-<div class="Groups d-none d-lg-block Default-containers">
-  <h6 data-translate="title-groups">Groups</h6>
+<div class="Groups d-none d-lg-block Default-containers muted">
+  <h6 data-translate="title-groups" class="muted">Groups</h6>
   {#each data as group}
     <Group {...group}/>
   {:else}
