@@ -1,8 +1,8 @@
 <script>
   import {closeModal} from '../../../js/closeModals'
   import {onMount} from 'svelte'
+  import { translate } from '../../../js/translate';
   export let userProfile, urlAPI, experience;
-  console.log(experience);
 
   const dataStartYear = experience.start_date.split('-')[0]
   const dataStartMonth = experience.start_date.split('-')[1]
@@ -39,7 +39,7 @@
     {value: '9', month : 'September'},
     {value: '10', month : 'October'},
     {value: '11', month : 'November'},
-    {value: '12', month : 'December'}    
+    {value: '12', month : 'December'}
   ]
   const monthsEs = [
     {value: '0', month : 'Selecciona una opción'},
@@ -50,7 +50,7 @@
     {value: '5', month : 'Mayo'},
     {value: '6', month : 'Junio'},
     {value: '7', month : 'Julio'},
-    {value: '8', month : 'Augosto'},
+    {value: '8', month : 'Agosto'},
     {value: '9', month : 'Septiembre'},
     {value: '10', month : 'Octubre'},
     {value: '11', month : 'Noviembre'},
@@ -71,8 +71,9 @@
     'Seasonal'
   ]
 
-  const yearStart = 1922
-  const today = new Date()
+  let date = new Date()
+  const yearStart = date.getFullYear() - 40
+  const today = date
   const yearCurrent = today.getFullYear()
   const yearList = []
   for (let i = yearCurrent; i >= yearStart; i--) {
@@ -130,8 +131,7 @@
     const experienceIncompleteMessage = 'please complete all the fields'
     
     if (workingCheck === 0) {
-      if (userProfile !== '' && company_name !== '' && start_date !== '' && end_date !== '' && location !== '' 
-      && titleJob !== '' && employment_type !== '' && descriptionJob){
+      if (userProfile !== '' && company_name !== '' && start_date !== '' && end_date !== '' && titleJob !== ''){
         templateExperience = {
           "profile": userProfile,
           "company_name": company_name,
@@ -149,11 +149,8 @@
         console.error(experienceIncompleteMessage);
         alert(experienceIncompleteMessage);
       }
-    }
-
-    if (workingCheck === 1) {
-      if (userProfile !== '' && company_name !== '' && start_date !== '' && location !== '' 
-      && titleJob !== '' && employment_type !== '' && descriptionJob){
+    } else if (workingCheck === 1) {
+      if (userProfile !== '' && company_name !== '' && start_date !== '' && titleJob !== ''){
         templateExperience = {
           "profile": userProfile,
           "company_name": company_name,
@@ -201,6 +198,9 @@
     if (postExperience.ok) {
       closeModal(`modalUpdateExperience${experience.id}`)
       btnAddExperience.classList.toggle('reload-expereriences')
+      setTimeout(() => {
+        translate()
+      }, 500);
     }
   }
 

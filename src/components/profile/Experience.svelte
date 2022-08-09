@@ -151,7 +151,6 @@
       </div>
        {#each $data as experience}
           <div id="experience{experience.id}" data-experienceId={experience.id} class="experience position-relative">
-            
             <p>
               <span data-translate="company-name">Company Name:</span>
               <span>{experience.company_name}</span>
@@ -164,21 +163,28 @@
             {:else}
                <p>
                 <span data-translate="date-employment">Dates of employments: </span> 
-                <span>{experience.start_date} / <span data-translate="currently">currently</span></span></p>
+                <span>{experience.start_date} / <span data-translate="currently"></span></span></p>
             {/if}
-            <p>
-              <span data-translate="locacy">Ubication:</span>
-              <span>{experience.location}</span>
-            </p>
-  
+
+            {#if experience.location}
+               <p>
+                 <span data-translate="locacy">Ubication:</span>
+                 <span>{experience.location}</span>
+               </p>
+            {/if}
+
             <p>
               <span data-translate="title-exp">Title:</span>
               <span>{experience.title}</span>
             </p>
-            <p>
-              <span data-translate="job-type">job type:</span>
-              <span>{experience.employment_type}</span>
-            </p>
+
+            {#if experience.employment_type}
+               <p>
+                 <span data-translate="job-type">job type:</span>
+                 <span>{experience.employment_type}</span>
+               </p>
+            {/if}
+            
             <p>{experience.description}</p>
 
             {#if id === parseInt(localStorage.getItem('userId'))}
@@ -194,15 +200,15 @@
                   <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="removeExperienceLabel">Remove Experience</h5>
+                        <h5 data-translate="modal-delete-xp-title" class="modal-title" id="removeExperienceLabel">Remove Experience</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
-                      <div class="modal-body">
+                      <div class="modal-body" data-translate="modal-delete-xp-content">
                         Are you sure you want to delete your experience?
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" on:click={removeExperience(experience.id)}>Delete</button>
+                        <button data-translate="modal-delete-xp-btn-close" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button data-translate="modal-delete-xp-btn-del" type="button" class="btn btn-danger" data-bs-dismiss="modal" on:click={removeExperience(experience.id)}>Delete</button>
                       </div>
                     </div>
                   </div>

@@ -190,6 +190,7 @@ function create_else_block_3(ctx) {
 			p = element("p");
 			p.textContent = "you haven't news";
 			attr(p, "data-translate", "nav-no-news");
+			attr(p, "class", "mx-3");
 		},
 		m(target, anchor) {
 			insert(target, p, anchor);

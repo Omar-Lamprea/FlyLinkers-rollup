@@ -1,10 +1,24 @@
 <script>
   export let title, eventLogo, date, start, end, place, href, linkName
+
+  const fullDate = new Date(date)
+
+  date = fullDate.toDateString().slice(3)
+  start= fullDate.toLocaleTimeString('en-US', { hour12: true })
+  start = start.slice(0, -6) + " " + start.slice(-2)
+
+  linkName = linkName.replace('[&hellip;]', '...')
+  linkName.length >= 50 
+    ? linkName = linkName.slice(3,100) + "..." 
+    : linkName = linkName.slice(3) + "..."
+
+
 </script>
 
 <style>
   .Event{
     font-size: 12px;
+    border-bottom: 1px solid var(--main-color);
   }
   .Event h6{
     color: var(--main-color);
@@ -16,9 +30,8 @@
     border-radius: 1rem;
     object-fit: cover;
   }
-  .Event-link{
-    font-size: 11px;
-    border-bottom: 1px solid var(--main-color);
+  .Event-link a{
+    color: gray
   }
   .Event-details{
     padding-right: 0;
@@ -28,8 +41,14 @@
     padding-left: 0;
   }
   .Event-details p{
-    font-size: 10px;
+    /* font-size: 12px; */
+    color: rgb(0, 0, 0);
+    font-weight: 700;
   }
+  .Event-details p span{
+    font-weight: normal;
+  }
+
   .Event ul{
     padding-left: 0rem;
   }
@@ -43,27 +62,28 @@
   }
 </style>
 
-<div class="Event">
+<div class="Event mb-3">
   <ul>
     <li>
-      <div class="Event-row d-flex align-items-center">
-        <!-- <i class="fas fa-circle"></i> -->
-        <h6>{title}</h6>
-      </div>
-      <div class="d-flex mt-1">
-        <div class="Event-img">
-          <img src="{eventLogo}" alt="" class="ms-3">
+      <a href="{href}" target="_blank">
+        <div class="Event-row d-flex align-items-center">
+          <h6>{title}</h6>
         </div>
-        <div class="Event-details ms-3">
-          <p>Date: <span>{date}</span></p>
-          <p>Start time: <span>{start}</span></p>
-          <p>Final hour: <span>{end}</span></p>
-          <p>Place: <span></span>{place}</p>
+        <div class="d-flex mt-1">
+          <div class="Event-img">
+            <img src="{eventLogo}" alt="" class="ms-3">
+          </div>
+          <div class="Event-details ms-3">
+            <p>Date: <span>{date}</span></p>
+            <p>Time: <span>{start}</span></p>
+          </div>
         </div>
-      </div>
-      <div class="Event-link mx-3 mt-2 pb-2">
-        <a href="{href}">{linkName}</a>
-      </div>
+        <div class="Event-link mx-3 mt-1">
+          <a href="{href}" target="_blank">
+            <p>{linkName}</p>
+          </a>
+        </div>
+      </a>
     </li>
   </ul>
 </div>

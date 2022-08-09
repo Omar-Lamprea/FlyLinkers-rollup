@@ -1,39 +1,75 @@
 <script>
   import Event from './Event.svelte'
-  import Chat from '../../views/Chat.svelte'
+  // import Chat from '../../views/Chat.svelte'
+  import { onMount } from 'svelte';
 
-  const data = [
-    {
-      title: 'Flight Operation Conferences',
-      eventLogo: '../img/airplane.jpg',
-      date : '10/12/2021',
-      start: '9:00am',
-      end: '11:00pm',
-      place: 'virtual',
-      href: '/',
-      linkName: 'linkedin.com/in/flylinkers.com'
-    },
-    {
-      title: 'Comercial Aviation Conferences',
-      eventLogo: '../img/airplane.jpg',
-      date : '10/12/2021',
-      start: '9:00am',
-      end: '11:00pm',
-      place: 'virtual',
-      href: '/',
-      linkName: 'linkedin.com/in/flylinkers.com'
-    },
-    {
-      title: 'Comercial Aviation Safety',
-      eventLogo: '../img/airplane.jpg',
-      date : '10/12/2021',
-      start: '9:00am',
-      end: '11:00pm',
-      place: 'virtual',
-      href: '/',
-      linkName: 'linkedin.com/in/flylinkers.com'
-    },
-  ]
+  const eventsAPI = 'https://news.flylinkers.com/wp-json/wp/v2/event'
+
+  let data;
+  const getEvents = async () =>{
+    try {
+      const response = await fetch(eventsAPI)
+      if (response.ok) {
+        const content = await response.json()
+        data = []
+        content.forEach(ev => {
+          if (ev.status === "publish") {
+            data.push({
+              title: ev.slug.charAt(0).toUpperCase() + ev.slug.slice(1).replaceAll('-', ' '),
+              eventLogo: ev.fimg_url,
+              date : ev.date,
+              start: '9:00am',
+              end: '11:00pm',
+              place: 'virtual',
+              href: ev.link,
+              linkName: ev.excerpt.rendered
+            })
+          }
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
+
+  onMount(async ()=>{
+    await getEvents()
+  })
+
+  // const data = [
+  //   {
+  //     title: 'Flight Operation Conferences',
+  //     eventLogo: '../img/airplane.jpg',
+  //     date : '10/12/2021',
+  //     start: '9:00am',
+  //     end: '11:00pm',
+  //     place: 'virtual',
+  //     href: '/',
+  //     linkName: 'linkedin.com/in/flylinkers.com'
+  //   },
+  //   {
+  //     title: 'Comercial Aviation Conferences',
+  //     eventLogo: '../img/airplane.jpg',
+  //     date : '10/12/2021',
+  //     start: '9:00am',
+  //     end: '11:00pm',
+  //     place: 'virtual',
+  //     href: '/',
+  //     linkName: 'linkedin.com/in/flylinkers.com'
+  //   },
+  //   {
+  //     title: 'Comercial Aviation Safety',
+  //     eventLogo: '../img/airplane.jpg',
+  //     date : '10/12/2021',
+  //     start: '9:00am',
+  //     end: '11:00pm',
+  //     place: 'virtual',
+  //     href: '/',
+  //     linkName: 'linkedin.com/in/flylinkers.com'
+  //   },
+  // ]
 
 </script>
 
@@ -50,9 +86,11 @@
 
     <div class="Events-column">
       <div class="Event">
-        {#each data as event}
-          <Event {...event}/>
-        {/each}
+        {#if data}
+          {#each data as event}
+            <Event {...event}/>
+          {/each}
+        {/if}
       </div>
     </div>
 </div>

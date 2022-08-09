@@ -4,6 +4,7 @@
   import {closeModal} from '../../../js/closeModals'
   import { onMount } from 'svelte';
 
+
   let langSelect = localStorage.getItem('lang')
   const months = [
     {value: '0', month : 'Please select'},
@@ -51,8 +52,9 @@
     'Seasonal'
   ]
 
-  const yearStart = 1922
-  const today = new Date()
+  let date = new Date()
+  const yearStart = date.getFullYear() - 40
+  const today = date
   const yearCurrent = today.getFullYear()
   const yearList = []
   for (let i = yearCurrent; i >= yearStart; i--) {
@@ -101,8 +103,7 @@
     const experienceIncompleteMessage = 'please complete all the fields'
     
     if (workingCheck === 0) {
-      if (userProfile !== '' && company_name !== '' && start_date !== '' && end_date !== '' && location !== '' 
-      && titleJob !== '' && employment_type !== '' && descriptionJob){
+      if (userProfile !== '' && company_name !== '' && start_date !== '' && end_date !== '' && titleJob !== ''){
         templateExperience = {
           "profile": userProfile,
           "company_name": company_name,
@@ -120,11 +121,8 @@
         console.error(experienceIncompleteMessage);
         alert(experienceIncompleteMessage);
       }
-    }
-
-    if (workingCheck === 1) {
-      if (userProfile !== '' && company_name !== '' && start_date !== '' && location !== '' 
-      && titleJob !== '' && employment_type !== '' && descriptionJob){
+    } else if (workingCheck === 1) {
+      if (userProfile !== '' && company_name !== '' && start_date !== ''&& titleJob !== ''){
         templateExperience = {
           "profile": userProfile,
           "company_name": company_name,
@@ -287,13 +285,13 @@
               </label>
             </div>
 
-            <label data-translate="modal-locacy" for="postCountry">Location*</label>
+            <label data-translate="modal-locacy" for="postCountry" class="mt-2">Location</label>
             <input type="text" name="postCountry" id="postCountry" placeholder="Ex: Colombia">
 
             <label data-translate="modal-title-exp" for="postTitle">Title*</label>
             <input type="text" name="postTitle" id="postTitle" placeholder="Ex: Manager">
 
-            <label data-translate="modal-job-type" for="postEmploymentType">Employment type*</label>
+            <label data-translate="modal-job-type" for="postEmploymentType">Employment type</label>
             <select name="postEmploymentType" id="postEmploymentType">
               <option data-translate="modal-xp-select-job-type" value="pleaseSelect">Please select</option>
               {#if langSelect === 'En'}
