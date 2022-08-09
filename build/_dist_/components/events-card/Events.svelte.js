@@ -11,6 +11,7 @@ import {
 	destroy_each,
 	detach,
 	element,
+	empty,
 	get_spread_object,
 	get_spread_update,
 	group_outros,
@@ -24,63 +25,19 @@ import {
 } from "../../../_snowpack/pkg/svelte/internal.js";
 
 import Event from './Event.svelte.js';
-import Chat from '../../views/Chat.svelte.js';
+
+// import Chat from '../../views/Chat.svelte'
+import { onMount } from '../../../_snowpack/pkg/svelte.js';
 
 function get_each_context(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[1] = list[i];
+	child_ctx[2] = list[i];
 	return child_ctx;
 }
 
-// (53:8) {#each data as event}
-function create_each_block(ctx) {
-	let event;
-	let current;
-	const event_spread_levels = [/*event*/ ctx[1]];
-	let event_props = {};
-
-	for (let i = 0; i < event_spread_levels.length; i += 1) {
-		event_props = assign(event_props, event_spread_levels[i]);
-	}
-
-	event = new Event({ props: event_props });
-
-	return {
-		c() {
-			create_component(event.$$.fragment);
-		},
-		m(target, anchor) {
-			mount_component(event, target, anchor);
-			current = true;
-		},
-		p(ctx, dirty) {
-			const event_changes = (dirty & /*data*/ 1)
-			? get_spread_update(event_spread_levels, [get_spread_object(/*event*/ ctx[1])])
-			: {};
-
-			event.$set(event_changes);
-		},
-		i(local) {
-			if (current) return;
-			transition_in(event.$$.fragment, local);
-			current = true;
-		},
-		o(local) {
-			transition_out(event.$$.fragment, local);
-			current = false;
-		},
-		d(detaching) {
-			destroy_component(event, detaching);
-		}
-	};
-}
-
-function create_fragment(ctx) {
-	let div3;
-	let div0;
-	let t1;
-	let div2;
-	let div1;
+// (89:8) {#if data}
+function create_if_block(ctx) {
+	let each_1_anchor;
 	let current;
 	let each_value = /*data*/ ctx[0];
 	let each_blocks = [];
@@ -95,36 +52,21 @@ function create_fragment(ctx) {
 
 	return {
 		c() {
-			div3 = element("div");
-			div0 = element("div");
-			div0.innerHTML = `<h4 data-translate="title-upcoming-events" class="svelte-1f1lox1">Upcoming events</h4>`;
-			t1 = space();
-			div2 = element("div");
-			div1 = element("div");
-
 			for (let i = 0; i < each_blocks.length; i += 1) {
 				each_blocks[i].c();
 			}
 
-			attr(div0, "class", "Events-title mb-3 text-center");
-			attr(div1, "class", "Event");
-			attr(div2, "class", "Events-column");
-			attr(div3, "class", "Events Default-containers d-none d-lg-block px-2 svelte-1f1lox1");
+			each_1_anchor = empty();
 		},
 		m(target, anchor) {
-			insert(target, div3, anchor);
-			append(div3, div0);
-			append(div3, t1);
-			append(div3, div2);
-			append(div2, div1);
-
 			for (let i = 0; i < each_blocks.length; i += 1) {
-				each_blocks[i].m(div1, null);
+				each_blocks[i].m(target, anchor);
 			}
 
+			insert(target, each_1_anchor, anchor);
 			current = true;
 		},
-		p(ctx, [dirty]) {
+		p(ctx, dirty) {
 			if (dirty & /*data*/ 1) {
 				each_value = /*data*/ ctx[0];
 				let i;
@@ -139,7 +81,7 @@ function create_fragment(ctx) {
 						each_blocks[i] = create_each_block(child_ctx);
 						each_blocks[i].c();
 						transition_in(each_blocks[i], 1);
-						each_blocks[i].m(div1, null);
+						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
 					}
 				}
 
@@ -171,45 +113,163 @@ function create_fragment(ctx) {
 			current = false;
 		},
 		d(detaching) {
-			if (detaching) detach(div3);
 			destroy_each(each_blocks, detaching);
+			if (detaching) detach(each_1_anchor);
 		}
 	};
 }
 
-function instance($$self) {
-	const data = [
-		{
-			title: 'Flight Operation Conferences',
-			eventLogo: '../img/airplane.jpg',
-			date: '10/12/2021',
-			start: '9:00am',
-			end: '11:00pm',
-			place: 'virtual',
-			href: '/',
-			linkName: 'linkedin.com/in/flylinkers.com'
+// (90:10) {#each data as event}
+function create_each_block(ctx) {
+	let event;
+	let current;
+	const event_spread_levels = [/*event*/ ctx[2]];
+	let event_props = {};
+
+	for (let i = 0; i < event_spread_levels.length; i += 1) {
+		event_props = assign(event_props, event_spread_levels[i]);
+	}
+
+	event = new Event({ props: event_props });
+
+	return {
+		c() {
+			create_component(event.$$.fragment);
 		},
-		{
-			title: 'Comercial Aviation Conferences',
-			eventLogo: '../img/airplane.jpg',
-			date: '10/12/2021',
-			start: '9:00am',
-			end: '11:00pm',
-			place: 'virtual',
-			href: '/',
-			linkName: 'linkedin.com/in/flylinkers.com'
+		m(target, anchor) {
+			mount_component(event, target, anchor);
+			current = true;
 		},
-		{
-			title: 'Comercial Aviation Safety',
-			eventLogo: '../img/airplane.jpg',
-			date: '10/12/2021',
-			start: '9:00am',
-			end: '11:00pm',
-			place: 'virtual',
-			href: '/',
-			linkName: 'linkedin.com/in/flylinkers.com'
+		p(ctx, dirty) {
+			const event_changes = (dirty & /*data*/ 1)
+			? get_spread_update(event_spread_levels, [get_spread_object(/*event*/ ctx[2])])
+			: {};
+
+			event.$set(event_changes);
+		},
+		i(local) {
+			if (current) return;
+			transition_in(event.$$.fragment, local);
+			current = true;
+		},
+		o(local) {
+			transition_out(event.$$.fragment, local);
+			current = false;
+		},
+		d(detaching) {
+			destroy_component(event, detaching);
 		}
-	];
+	};
+}
+
+function create_fragment(ctx) {
+	let div3;
+	let div0;
+	let t1;
+	let div2;
+	let div1;
+	let current;
+	let if_block = /*data*/ ctx[0] && create_if_block(ctx);
+
+	return {
+		c() {
+			div3 = element("div");
+			div0 = element("div");
+			div0.innerHTML = `<h4 data-translate="title-upcoming-events" class="svelte-1f1lox1">Upcoming events</h4>`;
+			t1 = space();
+			div2 = element("div");
+			div1 = element("div");
+			if (if_block) if_block.c();
+			attr(div0, "class", "Events-title mb-3 text-center");
+			attr(div1, "class", "Event");
+			attr(div2, "class", "Events-column");
+			attr(div3, "class", "Events Default-containers d-none d-lg-block px-2 svelte-1f1lox1");
+		},
+		m(target, anchor) {
+			insert(target, div3, anchor);
+			append(div3, div0);
+			append(div3, t1);
+			append(div3, div2);
+			append(div2, div1);
+			if (if_block) if_block.m(div1, null);
+			current = true;
+		},
+		p(ctx, [dirty]) {
+			if (/*data*/ ctx[0]) {
+				if (if_block) {
+					if_block.p(ctx, dirty);
+
+					if (dirty & /*data*/ 1) {
+						transition_in(if_block, 1);
+					}
+				} else {
+					if_block = create_if_block(ctx);
+					if_block.c();
+					transition_in(if_block, 1);
+					if_block.m(div1, null);
+				}
+			} else if (if_block) {
+				group_outros();
+
+				transition_out(if_block, 1, 1, () => {
+					if_block = null;
+				});
+
+				check_outros();
+			}
+		},
+		i(local) {
+			if (current) return;
+			transition_in(if_block);
+			current = true;
+		},
+		o(local) {
+			transition_out(if_block);
+			current = false;
+		},
+		d(detaching) {
+			if (detaching) detach(div3);
+			if (if_block) if_block.d();
+		}
+	};
+}
+
+const eventsAPI = 'https://news.flylinkers.com/wp-json/wp/v2/event';
+
+function instance($$self, $$props, $$invalidate) {
+	let data;
+
+	const getEvents = async () => {
+		try {
+			const response = await fetch(eventsAPI);
+
+			if (response.ok) {
+				const content = await response.json();
+				$$invalidate(0, data = []);
+
+				content.forEach(ev => {
+					if (ev.status === "publish") {
+						data.push({
+							title: ev.slug.charAt(0).toUpperCase() + ev.slug.slice(1).replaceAll('-', ' '),
+							eventLogo: ev.fimg_url,
+							date: ev.date,
+							start: '9:00am',
+							end: '11:00pm',
+							place: 'virtual',
+							href: ev.link,
+							linkName: ev.excerpt.rendered
+						});
+					}
+				});
+			}
+		} catch(error) {
+			console.log(error);
+		}
+	};
+
+	onMount(async () => {
+		await getEvents();
+	});
 
 	return [data];
 }

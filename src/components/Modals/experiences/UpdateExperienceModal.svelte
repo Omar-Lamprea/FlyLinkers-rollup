@@ -378,12 +378,21 @@
             <label data-translate="modal-job-type" for="employmentType{experience.id}">Employment type*</label>
             <select name="employmentType{experience.id}" id="employmentType{experience.id}">
               <option data-translate="modal-xp-select-job-type" value="pleaseSelect">Please select</option>
-              {#each employmentTypeList as employment}
-                {#if experience.employment_type === employment}
-                  <option value={employment} selected>{employment}</option>
-                {/if}
-                <option value={employment}>{employment}</option>
-              {/each}
+              {#if langSelect === 'En'}
+                 {#each employmentTypeList as employment}
+                   {#if experience.employment_type === employment}
+                     <option value={employment} selected>{employment}</option>
+                   {/if}
+                   <option value={employment}>{employment}</option>
+                 {/each}
+              {:else}
+                 {#each employmentTypeListEs as employment}
+                   {#if experience.employment_type === employment}
+                     <option value={employment} selected>{employment}</option>
+                   {/if}
+                   <option value={employment}>{employment}</option>
+                 {/each}
+              {/if}
             </select>
 
             <label data-translate="moda-xp-description" for="description{experience.id}">Description*</label>

@@ -20,6 +20,7 @@ function create_fragment(ctx) {
 	let div5;
 	let ul;
 	let li;
+	let a1;
 	let div0;
 	let h6;
 	let t0;
@@ -40,28 +41,20 @@ function create_fragment(ctx) {
 	let span1;
 	let t7;
 	let t8;
+	let div4;
+	let a0;
 	let p2;
 	let t9;
-	let span2;
-	let t10;
-	let t11;
-	let p3;
-	let t12;
-	let span3;
-	let t13;
-	let t14;
-	let div4;
-	let a;
-	let t15;
 
 	return {
 		c() {
 			div5 = element("div");
 			ul = element("ul");
 			li = element("li");
+			a1 = element("a");
 			div0 = element("div");
 			h6 = element("h6");
-			t0 = text(/*title*/ ctx[0]);
+			t0 = text(/*title*/ ctx[3]);
 			t1 = space();
 			div3 = element("div");
 			div1 = element("div");
@@ -71,53 +64,49 @@ function create_fragment(ctx) {
 			p0 = element("p");
 			t3 = text("Date: ");
 			span0 = element("span");
-			t4 = text(/*date*/ ctx[2]);
+			t4 = text(/*date*/ ctx[0]);
 			t5 = space();
 			p1 = element("p");
-			t6 = text("Start time: ");
+			t6 = text("Time: ");
 			span1 = element("span");
-			t7 = text(/*start*/ ctx[3]);
+			t7 = text(/*start*/ ctx[1]);
 			t8 = space();
-			p2 = element("p");
-			t9 = text("Final hour: ");
-			span2 = element("span");
-			t10 = text(/*end*/ ctx[4]);
-			t11 = space();
-			p3 = element("p");
-			t12 = text("Place: ");
-			span3 = element("span");
-			t13 = text(/*place*/ ctx[5]);
-			t14 = space();
 			div4 = element("div");
-			a = element("a");
-			t15 = text(/*linkName*/ ctx[7]);
-			attr(h6, "class", "svelte-cq96y8");
+			a0 = element("a");
+			p2 = element("p");
+			t9 = text(/*linkName*/ ctx[2]);
+			attr(h6, "class", "svelte-6vgjkm");
 			attr(div0, "class", "Event-row d-flex align-items-center");
-			if (!src_url_equal(img.src, img_src_value = /*eventLogo*/ ctx[1])) attr(img, "src", img_src_value);
+			if (!src_url_equal(img.src, img_src_value = /*eventLogo*/ ctx[4])) attr(img, "src", img_src_value);
 			attr(img, "alt", "");
-			attr(img, "class", "ms-3 svelte-cq96y8");
-			attr(div1, "class", "Event-img svelte-cq96y8");
-			attr(p0, "class", "svelte-cq96y8");
-			attr(p1, "class", "svelte-cq96y8");
-			attr(p2, "class", "svelte-cq96y8");
-			attr(p3, "class", "svelte-cq96y8");
-			attr(div2, "class", "Event-details ms-3 svelte-cq96y8");
+			attr(img, "class", "ms-3 svelte-6vgjkm");
+			attr(div1, "class", "Event-img svelte-6vgjkm");
+			attr(span0, "class", "svelte-6vgjkm");
+			attr(p0, "class", "svelte-6vgjkm");
+			attr(span1, "class", "svelte-6vgjkm");
+			attr(p1, "class", "svelte-6vgjkm");
+			attr(div2, "class", "Event-details ms-3 svelte-6vgjkm");
 			attr(div3, "class", "d-flex mt-1");
-			attr(a, "href", /*href*/ ctx[6]);
-			attr(div4, "class", "Event-link mx-3 mt-2 pb-2 svelte-cq96y8");
-			attr(li, "class", "svelte-cq96y8");
-			attr(ul, "class", "svelte-cq96y8");
-			attr(div5, "class", "Event svelte-cq96y8");
+			attr(a0, "href", /*href*/ ctx[5]);
+			attr(a0, "target", "_blank");
+			attr(a0, "class", "svelte-6vgjkm");
+			attr(div4, "class", "Event-link mx-3 mt-1 svelte-6vgjkm");
+			attr(a1, "href", /*href*/ ctx[5]);
+			attr(a1, "target", "_blank");
+			attr(li, "class", "svelte-6vgjkm");
+			attr(ul, "class", "svelte-6vgjkm");
+			attr(div5, "class", "Event mb-3 svelte-6vgjkm");
 		},
 		m(target, anchor) {
 			insert(target, div5, anchor);
 			append(div5, ul);
 			append(ul, li);
-			append(li, div0);
+			append(li, a1);
+			append(a1, div0);
 			append(div0, h6);
 			append(h6, t0);
-			append(li, t1);
-			append(li, div3);
+			append(a1, t1);
+			append(a1, div3);
 			append(div3, div1);
 			append(div1, img);
 			append(div3, t2);
@@ -131,36 +120,29 @@ function create_fragment(ctx) {
 			append(p1, t6);
 			append(p1, span1);
 			append(span1, t7);
-			append(div2, t8);
-			append(div2, p2);
+			append(a1, t8);
+			append(a1, div4);
+			append(div4, a0);
+			append(a0, p2);
 			append(p2, t9);
-			append(p2, span2);
-			append(span2, t10);
-			append(div2, t11);
-			append(div2, p3);
-			append(p3, t12);
-			append(p3, span3);
-			append(p3, t13);
-			append(li, t14);
-			append(li, div4);
-			append(div4, a);
-			append(a, t15);
 		},
 		p(ctx, [dirty]) {
-			if (dirty & /*title*/ 1) set_data(t0, /*title*/ ctx[0]);
+			if (dirty & /*title*/ 8) set_data(t0, /*title*/ ctx[3]);
 
-			if (dirty & /*eventLogo*/ 2 && !src_url_equal(img.src, img_src_value = /*eventLogo*/ ctx[1])) {
+			if (dirty & /*eventLogo*/ 16 && !src_url_equal(img.src, img_src_value = /*eventLogo*/ ctx[4])) {
 				attr(img, "src", img_src_value);
 			}
 
-			if (dirty & /*date*/ 4) set_data(t4, /*date*/ ctx[2]);
-			if (dirty & /*start*/ 8) set_data(t7, /*start*/ ctx[3]);
-			if (dirty & /*end*/ 16) set_data(t10, /*end*/ ctx[4]);
-			if (dirty & /*place*/ 32) set_data(t13, /*place*/ ctx[5]);
-			if (dirty & /*linkName*/ 128) set_data(t15, /*linkName*/ ctx[7]);
+			if (dirty & /*date*/ 1) set_data(t4, /*date*/ ctx[0]);
+			if (dirty & /*start*/ 2) set_data(t7, /*start*/ ctx[1]);
+			if (dirty & /*linkName*/ 4) set_data(t9, /*linkName*/ ctx[2]);
 
-			if (dirty & /*href*/ 64) {
-				attr(a, "href", /*href*/ ctx[6]);
+			if (dirty & /*href*/ 32) {
+				attr(a0, "href", /*href*/ ctx[5]);
+			}
+
+			if (dirty & /*href*/ 32) {
+				attr(a1, "href", /*href*/ ctx[5]);
 			}
 		},
 		i: noop,
@@ -173,19 +155,28 @@ function create_fragment(ctx) {
 
 function instance($$self, $$props, $$invalidate) {
 	let { title, eventLogo, date, start, end, place, href, linkName } = $$props;
+	const fullDate = new Date(date);
+	date = fullDate.toDateString().slice(3);
+	start = fullDate.toLocaleTimeString('en-US', { hour12: true });
+	start = start.slice(0, -6) + " " + start.slice(-2);
+	linkName = linkName.replace('[&hellip;]', '...');
+
+	linkName.length >= 50
+	? linkName = linkName.slice(3, 100) + "..."
+	: linkName = linkName.slice(3) + "...";
 
 	$$self.$$set = $$props => {
-		if ('title' in $$props) $$invalidate(0, title = $$props.title);
-		if ('eventLogo' in $$props) $$invalidate(1, eventLogo = $$props.eventLogo);
-		if ('date' in $$props) $$invalidate(2, date = $$props.date);
-		if ('start' in $$props) $$invalidate(3, start = $$props.start);
-		if ('end' in $$props) $$invalidate(4, end = $$props.end);
-		if ('place' in $$props) $$invalidate(5, place = $$props.place);
-		if ('href' in $$props) $$invalidate(6, href = $$props.href);
-		if ('linkName' in $$props) $$invalidate(7, linkName = $$props.linkName);
+		if ('title' in $$props) $$invalidate(3, title = $$props.title);
+		if ('eventLogo' in $$props) $$invalidate(4, eventLogo = $$props.eventLogo);
+		if ('date' in $$props) $$invalidate(0, date = $$props.date);
+		if ('start' in $$props) $$invalidate(1, start = $$props.start);
+		if ('end' in $$props) $$invalidate(6, end = $$props.end);
+		if ('place' in $$props) $$invalidate(7, place = $$props.place);
+		if ('href' in $$props) $$invalidate(5, href = $$props.href);
+		if ('linkName' in $$props) $$invalidate(2, linkName = $$props.linkName);
 	};
 
-	return [title, eventLogo, date, start, end, place, href, linkName];
+	return [date, start, linkName, title, eventLogo, href, end, place];
 }
 
 class Event extends SvelteComponent {
@@ -193,14 +184,14 @@ class Event extends SvelteComponent {
 		super();
 
 		init(this, options, instance, create_fragment, safe_not_equal, {
-			title: 0,
-			eventLogo: 1,
-			date: 2,
-			start: 3,
-			end: 4,
-			place: 5,
-			href: 6,
-			linkName: 7
+			title: 3,
+			eventLogo: 4,
+			date: 0,
+			start: 1,
+			end: 6,
+			place: 7,
+			href: 5,
+			linkName: 2
 		});
 	}
 }
