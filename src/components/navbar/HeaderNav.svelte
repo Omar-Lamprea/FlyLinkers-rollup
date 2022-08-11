@@ -2,7 +2,7 @@
   import {link} from 'svelte-spa-router';
   import active from 'svelte-spa-router/active'
   import { onMount } from 'svelte';
-
+  import {translate} from '../../js/translate'
   import {db, getGroupUser} from '../../js/firebase/config.js'
   import {collectionData} from 'rxfire/firestore'
   import {startWith} from 'rxjs/operators'
@@ -293,6 +293,16 @@
     }
   }
 
+  const setLanguage = async (e)=>{
+    if (e.target.value !== '') {
+      console.log(e.target.value);
+      localStorage.setItem('lang', e.target.value)
+      await translate()
+      const btnModalEx = document.getElementById('btnAddEx')
+      btnModalEx ? btnModalEx.setAttribute('data-translatee', e.target.value) : false
+    }
+  }
+
 
   onMount(()=>{
     getUserNotifications()
@@ -391,6 +401,14 @@
   .notificationsList span{
     width: 100%;
   }
+
+  .select-language{
+    border-radius: 20px;
+    padding: 0.2rem;
+    height: fit-content;
+    margin-top: 5px;
+    border: none;
+  }
   
   @media screen and (max-width: 1200px){
     .nav-container{
@@ -412,7 +430,7 @@
 
 
 
-<nav class="nav-container d-flex">
+<nav class="nav-container d-flex align-items-center">
   <div id="iconHome" class="icon Header-nav-home mx-3 fs-3">
     <a href="/" use:link use:active>
       <i class="fas fa-home"></i>
@@ -521,6 +539,16 @@
         </ul>
       </div>
   </div>
+
+  <select class="select-language" name="selectLanguegeHeader" id="selectLanguegeHeader" on:change={setLanguage}>
+    {#if localStorage.getItem("lang") === "Es"}
+       <option value="En">En</option>
+       <option value="Es" selected>Es</option>
+    {:else}
+       <option value="En" selected>En</option>
+       <option value="Es">Es</option>
+    {/if}
+  </select>
   <!-- <div class="icon Header-nav-calendar-week hidden mx-3 fs-3">
     <a href="/" use:link use:active>
       <i class="fas fa-calendar-week"></i>

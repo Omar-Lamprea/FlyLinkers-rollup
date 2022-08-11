@@ -115,7 +115,8 @@
 
   @media screen and (max-width: 768px){
     .Header-input input{
-      width: 90%
+      width: 100%;
+      margin-left: -.5rem;
     }
     .Header h1 {
       display: none;
@@ -130,54 +131,62 @@
     .Header-logo img{
       width: 100%;
     }
+
+    .Header-logo-search{
+      width: 100%;
+      justify-content: space-between;
+    }
   }
 
 </style>
 
 <div class="Header container-fluid">
   <div class="Header-container container">
-    <div class="Header-content d-flex flex-wrap align-items-center justify-content-between">
-
-      <div class="Header-logo d-flex align-items-center px-3">
-        <a href="/" use:link use:active class="d-flex align-items-center">
-          <img src="../img/flylinkers-logo-blanco.png" alt="logo" width="100">
-          <h1>FlyLinkers</h1>
-        </a>
-      </div>
-
-      <div class="Header-input">
-        <input data-translate="input-search" type="text" placeholder="Search" on:keyup={startSearch}>
-        <ul class="dropdown-search d-none" id="searchList">
-          {#if usersFound}
-             {#each usersFound as user}
-                {#if user.name}
+    <div class="Header-content d-flex flex-wrap align-items-center justify-content-center justify-content-lg-between">
+      
+      <div class="Header-logo-search d-flex justify-contens-between align-items-center">
+        <div class="Header-logo d-flex align-items-center px-3">
+          <a href="/" use:link use:active class="d-flex align-items-center">
+            <img src="../img/flylinkers-logo-blanco.png" alt="logo" width="100">
+            <h1>FlyLinkers</h1>
+          </a>
+        </div>
+  
+        <div class="Header-input ms-0 ms-xxl-5">
+          <input data-translate="input-search" type="text" placeholder="Search" on:keyup={startSearch}>
+          <ul class="dropdown-search d-none" id="searchList">
+            {#if usersFound}
+               {#each usersFound as user}
+                  {#if user.name}
+                    <li>
+                      <a href="/profile/{user.username}" use:link use:active on:click={visitProfile(user.username)} class="d-flex">
+                        <span class="dropdown-item d-flex align-items-center">
+                          <img src="{urlImages}{user.photo}" alt="img">
+                          <div class="userInfo">
+                            <h6>{user.name} {user.last_name}</h6>
+                            <p style="color: grey;">{user.title} </p>
+                            <p style="color: grey;">{user.email}</p>
+                          </div>
+                        </span>
+                      </a>
+                    </li>
+                  {:else}
                   <li>
-                    <a href="/profile/{user.username}" use:link use:active on:click={visitProfile(user.username)} class="d-flex">
-                      <span class="dropdown-item d-flex align-items-center">
-                        <img src="{urlImages}{user.photo}" alt="img">
-                        <div class="userInfo">
-                          <h6>{user.name} {user.last_name}</h6>
-                          <p style="color: grey;">{user.title} </p>
-                          <p style="color: grey;">{user.email}</p>
-                        </div>
-                      </span>
-                    </a>
+                    <span class="dropdown-item">
+                      {user.details}
+                    </span>
                   </li>
-                {:else}
-                <li>
-                  <span class="dropdown-item">
-                    {user.details}
-                  </span>
-                </li>
-                {/if}
-             {/each}
-            {:else}
-              <Loader/>
-          {/if}
-        </ul>
+                  {/if}
+               {/each}
+              {:else}
+                <Loader/>
+            {/if}
+          </ul>
+        </div>
+
       </div>
 
-      <div class="Header-nav d-flex m-auto">
+      <div class="Header-nav d-flex m-auto m-lg-0">
         <HeaderNav {photo} {id} {urlLogOut} {urlAPI} {urlImages}/>
       </div>
     </div>

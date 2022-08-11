@@ -58,12 +58,17 @@
   .Header-nav, .Header-nav label{
     cursor: pointer;
   }
-  i, span{
-    color:var(--main-color)
-  }
-  .disabled, .disabled i, .disabled span {
+
+  /* .disabled, .disabled i, .disabled span {
     color: grey;
     cursor: default;
+  } */
+
+  .Header-nav{
+    color: var(--main-color);
+  }
+  .Header-nav:hover{
+    color: var(--hover-main-color);
   }
 
   @media screen and (max-width: 768px){
@@ -74,7 +79,8 @@
 
 </style>
 
-<div class="Nav-add-post d-flex justify-content-center mt-2 text-center">
+<div class="Nav-add-post d-flex justify-content-center ms-2 text-center">
+
   <div class="Header-nav Header-nav-image mx-3" id="loadPhotoPost" type="file">
     <label for="loadPhotoInput">
       <i class="fas fa-image"></i>
@@ -82,6 +88,7 @@
       <input type="file" name="loadPhotoInput" id="loadPhotoInput" class="d-none" accept=".png, .jpg, .jpeg, .gif"  on:change={showPostImg}>
     </label>
   </div>
+
   <div class="Header-nav Header-nav-film mx-3">
     <label for="uploadVideo">
       <i class="fas fa-film"></i>
@@ -90,7 +97,7 @@
     </label>
   </div>
 
-
+</div>
 
   <!-- other buttons -->
   <!-- <div class="Header-nav Header-nav-calendar mx-3 disabled">
@@ -105,4 +112,3 @@
       <span data-translate="icon-article">Write article</span>
     </a>
   </div> -->
-</div>

@@ -1,11 +1,12 @@
 <script>
-  export let title, eventLogo, date, start, end, place, href, linkName
+  export let title, eventLogo, date, href, linkName
 
-  const fullDate = new Date(date)
 
+  const fullDate = new Date(date[0])
   date = fullDate.toDateString().slice(3)
-  start= fullDate.toLocaleTimeString('en-US', { hour12: true })
-  start = start.slice(0, -6) + " " + start.slice(-2)
+
+  let start= fullDate.toLocaleTimeString('en-US', { hour12: true })
+  start = start.slice(0, -6) + start.slice(-2)
 
   linkName = linkName.replace('[&hellip;]', '...')
   linkName.length >= 50 
@@ -18,11 +19,11 @@
 <style>
   .Event{
     font-size: 12px;
-    border-bottom: 1px solid var(--main-color);
+    /* border-bottom: 1px solid var(--main-color); */
   }
   .Event h6{
     color: var(--main-color);
-    margin-left: 1rem;
+    /* margin-left: 1rem; */
   }
   .Event-img img{
     width: 65px;
@@ -42,7 +43,7 @@
   }
   .Event-details p{
     /* font-size: 12px; */
-    color: rgb(0, 0, 0);
+    color: grey;
     font-weight: 700;
   }
   .Event-details p span{
@@ -56,8 +57,9 @@
     list-style: none;
   }
   .Event i{
-    font-size: 8px;
-    margin-right: .1rem;
+    font-size: 6px;
+    /* margin-right: .1rem; */
+    margin: .4rem;
     color: var(--main-color);
   }
 </style>
@@ -66,7 +68,8 @@
   <ul>
     <li>
       <a href="{href}" target="_blank">
-        <div class="Event-row d-flex align-items-center">
+        <div class="Event-row d-flex align-items-start">
+          <i class="fa-solid fa-circle"></i>
           <h6>{title}</h6>
         </div>
         <div class="d-flex mt-1">
@@ -78,11 +81,11 @@
             <p>Time: <span>{start}</span></p>
           </div>
         </div>
-        <div class="Event-link mx-3 mt-1">
+        <!-- <div class="Event-link mx-3 mt-1">
           <a href="{href}" target="_blank">
             <p>{linkName}</p>
           </a>
-        </div>
+        </div> -->
       </a>
     </li>
   </ul>

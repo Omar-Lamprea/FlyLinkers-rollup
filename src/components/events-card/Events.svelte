@@ -2,7 +2,6 @@
   import Event from './Event.svelte'
   // import Chat from '../../views/Chat.svelte'
   import { onMount } from 'svelte';
-
   const eventsAPI = 'https://news.flylinkers.com/wp-json/wp/v2/event'
 
   let data;
@@ -17,10 +16,7 @@
             data.push({
               title: ev.slug.charAt(0).toUpperCase() + ev.slug.slice(1).replaceAll('-', ' '),
               eventLogo: ev.fimg_url,
-              date : ev.date,
-              start: '9:00am',
-              end: '11:00pm',
-              place: 'virtual',
+              date : [ev.metavalue._eventorganiser_schedule_last_start, ev.metavalue._eventorganiser_schedule_last_finish],
               href: ev.link,
               linkName: ev.excerpt.rendered
             })
@@ -28,7 +24,7 @@
         });
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 
@@ -37,40 +33,6 @@
   onMount(async ()=>{
     await getEvents()
   })
-
-  // const data = [
-  //   {
-  //     title: 'Flight Operation Conferences',
-  //     eventLogo: '../img/airplane.jpg',
-  //     date : '10/12/2021',
-  //     start: '9:00am',
-  //     end: '11:00pm',
-  //     place: 'virtual',
-  //     href: '/',
-  //     linkName: 'linkedin.com/in/flylinkers.com'
-  //   },
-  //   {
-  //     title: 'Comercial Aviation Conferences',
-  //     eventLogo: '../img/airplane.jpg',
-  //     date : '10/12/2021',
-  //     start: '9:00am',
-  //     end: '11:00pm',
-  //     place: 'virtual',
-  //     href: '/',
-  //     linkName: 'linkedin.com/in/flylinkers.com'
-  //   },
-  //   {
-  //     title: 'Comercial Aviation Safety',
-  //     eventLogo: '../img/airplane.jpg',
-  //     date : '10/12/2021',
-  //     start: '9:00am',
-  //     end: '11:00pm',
-  //     place: 'virtual',
-  //     href: '/',
-  //     linkName: 'linkedin.com/in/flylinkers.com'
-  //   },
-  // ]
-
 </script>
 
 <style>

@@ -403,9 +403,10 @@
   }
 
   .btn-post{
-    width: 50%;
+    /* width: 50%; */
     background-color: #199aaf;
     color: #fefefe;
+    margin-right: 1rem;
   }
   .urlMeta{
     padding: 1rem;
@@ -426,6 +427,7 @@
   }
   .boxHome{
     background-color: #EFEFEF;
+    border: none;
   }
   .btn-closeImgVideo{
     width: fit-content;
@@ -483,12 +485,15 @@
     {/if}
   </div>
 
-  <NavPost/>
+  
 
   <div id="loaderPost" class="loader-content d-none">
     <div class="loader">
       <div></div>
     </div>
   </div>
-  <button data-translate="post" id="btnSendPost" class="btn btn-outline-primary btn-flylinkers btn-post mt-3" disabled on:click={sendPost}>Post</button>
+  <div class="content-btn-nav mt-2 d-flex justify-content-between align-items-center">
+    <NavPost/>
+    <button data-translate="post" id="btnSendPost" class="btn btn-outline-primary btn-flylinkers btn-post" disabled on:click={sendPost}>Post</button>
+  </div>
 </div>
