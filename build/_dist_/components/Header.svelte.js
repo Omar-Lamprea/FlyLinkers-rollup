@@ -41,7 +41,7 @@ function get_each_context(ctx, list, i) {
 	return child_ctx;
 }
 
-// (174:12) {:else}
+// (181:14) {:else}
 function create_else_block_1(ctx) {
 	let loader;
 	let current;
@@ -71,7 +71,7 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (151:10) {#if usersFound}
+// (158:12) {#if usersFound}
 function create_if_block(ctx) {
 	let each_1_anchor;
 	let each_value = /*usersFound*/ ctx[3];
@@ -129,7 +129,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (166:16) {:else}
+// (173:18) {:else}
 function create_else_block(ctx) {
 	let li;
 	let span;
@@ -144,7 +144,7 @@ function create_else_block(ctx) {
 			t0 = text(t0_value);
 			t1 = space();
 			attr(span, "class", "dropdown-item");
-			attr(li, "class", "svelte-17jelq4");
+			attr(li, "class", "svelte-w0qbqd");
 		},
 		m(target, anchor) {
 			insert(target, li, anchor);
@@ -161,7 +161,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (153:16) {#if user.name}
+// (160:18) {#if user.name}
 function create_if_block_1(ctx) {
 	let li;
 	let a;
@@ -212,15 +212,15 @@ function create_if_block_1(ctx) {
 			t8 = space();
 			if (!src_url_equal(img.src, img_src_value = "" + (/*urlImages*/ ctx[2] + /*user*/ ctx[12].photo))) attr(img, "src", img_src_value);
 			attr(img, "alt", "img");
-			attr(img, "class", "svelte-17jelq4");
-			attr(h6, "class", "svelte-17jelq4");
+			attr(img, "class", "svelte-w0qbqd");
+			attr(h6, "class", "svelte-w0qbqd");
 			set_style(p0, "color", "grey");
 			set_style(p1, "color", "grey");
 			attr(div, "class", "userInfo");
 			attr(span, "class", "dropdown-item d-flex align-items-center");
 			attr(a, "href", a_href_value = "/profile/" + /*user*/ ctx[12].username);
 			attr(a, "class", "d-flex");
-			attr(li, "class", "svelte-17jelq4");
+			attr(li, "class", "svelte-w0qbqd");
 		},
 		m(target, anchor) {
 			insert(target, li, anchor);
@@ -277,7 +277,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (152:13) {#each usersFound as user}
+// (159:15) {#each usersFound as user}
 function create_each_block(ctx) {
 	let if_block_anchor;
 
@@ -319,9 +319,10 @@ function create_each_block(ctx) {
 }
 
 function create_fragment(ctx) {
+	let div6;
 	let div5;
 	let div4;
-	let div3;
+	let div2;
 	let div0;
 	let a;
 	let link_action;
@@ -334,7 +335,7 @@ function create_fragment(ctx) {
 	let current_block_type_index;
 	let if_block;
 	let t4;
-	let div2;
+	let div3;
 	let headernav;
 	let current;
 	let mounted;
@@ -362,14 +363,15 @@ function create_fragment(ctx) {
 
 	return {
 		c() {
+			div6 = element("div");
 			div5 = element("div");
 			div4 = element("div");
-			div3 = element("div");
+			div2 = element("div");
 			div0 = element("div");
 			a = element("a");
 
-			a.innerHTML = `<img src="../img/flylinkers-logo-blanco.png" alt="logo" width="100" class="svelte-17jelq4"/> 
-          <h1 class="svelte-17jelq4">FlyLinkers</h1>`;
+			a.innerHTML = `<img src="../img/flylinkers-logo-blanco.png" alt="logo" width="100" class="svelte-w0qbqd"/> 
+            <h1 class="svelte-w0qbqd">FlyLinkers</h1>`;
 
 			t2 = space();
 			div1 = element("div");
@@ -378,38 +380,40 @@ function create_fragment(ctx) {
 			ul = element("ul");
 			if_block.c();
 			t4 = space();
-			div2 = element("div");
+			div3 = element("div");
 			create_component(headernav.$$.fragment);
 			attr(a, "href", "/");
 			attr(a, "class", "d-flex align-items-center");
-			attr(div0, "class", "Header-logo d-flex align-items-center px-3 svelte-17jelq4");
+			attr(div0, "class", "Header-logo d-flex align-items-center px-3 svelte-w0qbqd");
 			attr(input, "data-translate", "input-search");
 			attr(input, "type", "text");
 			attr(input, "placeholder", "Search");
-			attr(input, "class", "svelte-17jelq4");
-			attr(ul, "class", "dropdown-search d-none svelte-17jelq4");
+			attr(input, "class", "svelte-w0qbqd");
+			attr(ul, "class", "dropdown-search d-none svelte-w0qbqd");
 			attr(ul, "id", "searchList");
-			attr(div1, "class", "Header-input svelte-17jelq4");
-			attr(div2, "class", "Header-nav d-flex m-auto");
-			attr(div3, "class", "Header-content d-flex flex-wrap align-items-center justify-content-between svelte-17jelq4");
-			attr(div4, "class", "Header-container container");
-			attr(div5, "class", "Header container-fluid svelte-17jelq4");
+			attr(div1, "class", "Header-input ms-0 ms-xxl-5 svelte-w0qbqd");
+			attr(div2, "class", "Header-logo-search d-flex justify-contens-between align-items-center svelte-w0qbqd");
+			attr(div3, "class", "Header-nav d-flex m-auto m-lg-0");
+			attr(div4, "class", "Header-content d-flex flex-wrap align-items-center justify-content-center justify-content-lg-between svelte-w0qbqd");
+			attr(div5, "class", "Header-container container");
+			attr(div6, "class", "Header container-fluid svelte-w0qbqd");
 		},
 		m(target, anchor) {
-			insert(target, div5, anchor);
+			insert(target, div6, anchor);
+			append(div6, div5);
 			append(div5, div4);
-			append(div4, div3);
-			append(div3, div0);
+			append(div4, div2);
+			append(div2, div0);
 			append(div0, a);
-			append(div3, t2);
-			append(div3, div1);
+			append(div2, t2);
+			append(div2, div1);
 			append(div1, input);
 			append(div1, t3);
 			append(div1, ul);
 			if_blocks[current_block_type_index].m(ul, null);
-			append(div3, t4);
-			append(div3, div2);
-			mount_component(headernav, div2, null);
+			append(div4, t4);
+			append(div4, div3);
+			mount_component(headernav, div3, null);
 			current = true;
 
 			if (!mounted) {
@@ -467,7 +471,7 @@ function create_fragment(ctx) {
 			current = false;
 		},
 		d(detaching) {
-			if (detaching) detach(div5);
+			if (detaching) detach(div6);
 			if_blocks[current_block_type_index].d();
 			destroy_component(headernav);
 			mounted = false;

@@ -49,7 +49,7 @@
     'Autónomo', 'Profesional independiente', 
     'Contrato temporal', 'Contrato de prácticas', 
     'Contrato de formación', 
-    'Seasonal'
+    'Temporal'
   ]
 
   let date = new Date()

@@ -33,6 +33,7 @@ import {
 import { link } from '../../../_snowpack/pkg/svelte-spa-router.js';
 import active from '../../../_snowpack/pkg/svelte-spa-router/active.js';
 import { onMount } from '../../../_snowpack/pkg/svelte.js';
+import { translate } from '../../js/translate.js';
 import { db, getGroupUser } from '../../js/firebase/config.js';
 import { collectionData } from '../../../_snowpack/pkg/rxfire/firestore.js';
 import { startWith } from '../../../_snowpack/pkg/rxjs/operators.js';
@@ -59,25 +60,25 @@ import startTime from '../../js/startTime.js';
 
 function get_each_context(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[17] = list[i];
+	child_ctx[18] = list[i];
 	return child_ctx;
 }
 
 function get_each_context_1(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[20] = list[i];
+	child_ctx[21] = list[i];
 	return child_ctx;
 }
 
-// (433:6) {:else}
-function create_else_block_5(ctx) {
+// (451:6) {:else}
+function create_else_block_6(ctx) {
 	let div;
 
 	return {
 		c() {
 			div = element("div");
 			attr(div, "id", "notificacionsChatsBubble");
-			attr(div, "class", "notificacions-bubble d-none svelte-1dexmrm");
+			attr(div, "class", "notificacions-bubble d-none svelte-csod33");
 		},
 		m(target, anchor) {
 			insert(target, div, anchor);
@@ -89,8 +90,8 @@ function create_else_block_5(ctx) {
 	};
 }
 
-// (431:6) {#if countMessages > 0}
-function create_if_block_4(ctx) {
+// (449:6) {#if countMessages > 0}
+function create_if_block_5(ctx) {
 	let div;
 	let t;
 
@@ -99,7 +100,7 @@ function create_if_block_4(ctx) {
 			div = element("div");
 			t = text(/*countMessages*/ ctx[6]);
 			attr(div, "id", "notificacionsChatsBubble");
-			attr(div, "class", "notificacions-bubble dropdown-toggle svelte-1dexmrm");
+			attr(div, "class", "notificacions-bubble dropdown-toggle svelte-csod33");
 			attr(div, "data-bs-toggle", "dropdown");
 			attr(div, "aria-expanded", "false");
 		},
@@ -116,8 +117,8 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (441:8) {:else}
-function create_else_block_4(ctx) {
+// (459:8) {:else}
+function create_else_block_5(ctx) {
 	let li;
 
 	return {
@@ -127,7 +128,7 @@ function create_else_block_4(ctx) {
 			li.innerHTML = `<span data-translate="nav-no-chat">You haven&#39;t started any chat</span> 
           `;
 
-			attr(li, "class", "dropdown-item chatList d-flex svelte-1dexmrm");
+			attr(li, "class", "dropdown-item chatList d-flex svelte-csod33");
 		},
 		m(target, anchor) {
 			insert(target, li, anchor);
@@ -138,14 +139,14 @@ function create_else_block_4(ctx) {
 	};
 }
 
-// (439:8) {#each $usergroups as groups}
+// (457:8) {#each $usergroups as groups}
 function create_each_block_1(ctx) {
 	let chatlist;
 	let current;
 
 	chatlist = new ChatList({
 			props: {
-				groups: /*groups*/ ctx[20],
+				groups: /*groups*/ ctx[21],
 				urlAPI: /*urlAPI*/ ctx[2],
 				id: /*id*/ ctx[1]
 			}
@@ -161,7 +162,7 @@ function create_each_block_1(ctx) {
 		},
 		p(ctx, dirty) {
 			const chatlist_changes = {};
-			if (dirty & /*$usergroups*/ 128) chatlist_changes.groups = /*groups*/ ctx[20];
+			if (dirty & /*$usergroups*/ 128) chatlist_changes.groups = /*groups*/ ctx[21];
 			if (dirty & /*urlAPI*/ 4) chatlist_changes.urlAPI = /*urlAPI*/ ctx[2];
 			if (dirty & /*id*/ 2) chatlist_changes.id = /*id*/ ctx[1];
 			chatlist.$set(chatlist_changes);
@@ -181,8 +182,8 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (494:8) {:else}
-function create_else_block_3(ctx) {
+// (512:8) {:else}
+function create_else_block_4(ctx) {
 	let p;
 
 	return {
@@ -202,8 +203,8 @@ function create_else_block_3(ctx) {
 	};
 }
 
-// (458:8) {#if notificationsList.length > 0}
-function create_if_block_1(ctx) {
+// (476:8) {#if notificationsList.length > 0}
+function create_if_block_2(ctx) {
 	let each_1_anchor;
 	let each_value = /*notificationsList*/ ctx[4];
 	let each_blocks = [];
@@ -258,8 +259,8 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (474:12) {:else}
-function create_else_block_1(ctx) {
+// (492:12) {:else}
+function create_else_block_2(ctx) {
 	let li;
 	let a;
 	let img;
@@ -268,11 +269,11 @@ function create_else_block_1(ctx) {
 	let span;
 	let div;
 	let p0;
-	let t1_value = /*notification*/ ctx[17].name + "";
+	let t1_value = /*notification*/ ctx[18].name + "";
 	let t1;
 	let t2;
 	let p1;
-	let t3_value = startTime(/*notification*/ ctx[17].date.toISOString()) + "";
+	let t3_value = startTime(/*notification*/ ctx[18].date.toISOString()) + "";
 	let t3;
 	let t4;
 	let show_if;
@@ -286,9 +287,9 @@ function create_else_block_1(ctx) {
 
 	function select_block_type_3(ctx, dirty) {
 		if (dirty & /*notificationsList*/ 16) show_if = null;
-		if (show_if == null) show_if = !!/*notification*/ ctx[17].desc.includes('reacted');
-		if (show_if) return create_if_block_3;
-		return create_else_block_2;
+		if (show_if == null) show_if = !!/*notification*/ ctx[18].desc.includes('reacted');
+		if (show_if) return create_if_block_4;
+		return create_else_block_3;
 	}
 
 	let current_block_type = select_block_type_3(ctx, -1);
@@ -310,17 +311,17 @@ function create_else_block_1(ctx) {
 			t4 = space();
 			if_block.c();
 			t5 = space();
-			if (!src_url_equal(img.src, img_src_value = "" + (/*urlImages*/ ctx[3] + /*notification*/ ctx[17].photo))) attr(img, "src", img_src_value);
+			if (!src_url_equal(img.src, img_src_value = "" + (/*urlImages*/ ctx[3] + /*notification*/ ctx[18].photo))) attr(img, "src", img_src_value);
 			attr(img, "alt", "userImage");
-			attr(img, "class", "svelte-1dexmrm");
-			attr(p0, "class", "notification-user-name svelte-1dexmrm");
-			attr(p1, "class", "notification-time svelte-1dexmrm");
+			attr(img, "class", "svelte-csod33");
+			attr(p0, "class", "notification-user-name svelte-csod33");
+			attr(p1, "class", "notification-time svelte-csod33");
 			attr(div, "class", "data-user-time d-flex justify-content-between");
-			attr(span, "class", "svelte-1dexmrm");
-			attr(a, "href", a_href_value = "/post/" + /*notification*/ ctx[17].id);
-			attr(a, "class", "d-flex svelte-1dexmrm");
-			attr(li, "class", "d-flex notificationsList dropdown-item svelte-1dexmrm");
-			attr(li, "data-id", li_data_id_value = /*notification*/ ctx[17].id);
+			attr(span, "class", "svelte-csod33");
+			attr(a, "href", a_href_value = "/post/" + /*notification*/ ctx[18].id);
+			attr(a, "class", "d-flex svelte-csod33");
+			attr(li, "class", "d-flex notificationsList dropdown-item svelte-csod33");
+			attr(li, "data-id", li_data_id_value = /*notification*/ ctx[18].id);
 		},
 		m(target, anchor) {
 			insert(target, li, anchor);
@@ -349,12 +350,12 @@ function create_else_block_1(ctx) {
 			}
 		},
 		p(ctx, dirty) {
-			if (dirty & /*urlImages, notificationsList*/ 24 && !src_url_equal(img.src, img_src_value = "" + (/*urlImages*/ ctx[3] + /*notification*/ ctx[17].photo))) {
+			if (dirty & /*urlImages, notificationsList*/ 24 && !src_url_equal(img.src, img_src_value = "" + (/*urlImages*/ ctx[3] + /*notification*/ ctx[18].photo))) {
 				attr(img, "src", img_src_value);
 			}
 
-			if (dirty & /*notificationsList*/ 16 && t1_value !== (t1_value = /*notification*/ ctx[17].name + "")) set_data(t1, t1_value);
-			if (dirty & /*notificationsList*/ 16 && t3_value !== (t3_value = startTime(/*notification*/ ctx[17].date.toISOString()) + "")) set_data(t3, t3_value);
+			if (dirty & /*notificationsList*/ 16 && t1_value !== (t1_value = /*notification*/ ctx[18].name + "")) set_data(t1, t1_value);
+			if (dirty & /*notificationsList*/ 16 && t3_value !== (t3_value = startTime(/*notification*/ ctx[18].date.toISOString()) + "")) set_data(t3, t3_value);
 
 			if (current_block_type === (current_block_type = select_block_type_3(ctx, dirty)) && if_block) {
 				if_block.p(ctx, dirty);
@@ -368,11 +369,11 @@ function create_else_block_1(ctx) {
 				}
 			}
 
-			if (dirty & /*notificationsList*/ 16 && a_href_value !== (a_href_value = "/post/" + /*notification*/ ctx[17].id)) {
+			if (dirty & /*notificationsList*/ 16 && a_href_value !== (a_href_value = "/post/" + /*notification*/ ctx[18].id)) {
 				attr(a, "href", a_href_value);
 			}
 
-			if (dirty & /*notificationsList*/ 16 && li_data_id_value !== (li_data_id_value = /*notification*/ ctx[17].id)) {
+			if (dirty & /*notificationsList*/ 16 && li_data_id_value !== (li_data_id_value = /*notification*/ ctx[18].id)) {
 				attr(li, "data-id", li_data_id_value);
 			}
 		},
@@ -385,8 +386,8 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (461:12) {#if typeof(notification.id) === 'string'}
-function create_if_block_2(ctx) {
+// (479:12) {#if typeof(notification.id) === 'string'}
+function create_if_block_3(ctx) {
 	let li;
 	let a;
 	let img;
@@ -395,15 +396,15 @@ function create_if_block_2(ctx) {
 	let span;
 	let div;
 	let p0;
-	let t1_value = /*notification*/ ctx[17].name + "";
+	let t1_value = /*notification*/ ctx[18].name + "";
 	let t1;
 	let t2;
 	let p1;
-	let t3_value = startTime(/*notification*/ ctx[17].date.toISOString()) + "";
+	let t3_value = startTime(/*notification*/ ctx[18].date.toISOString()) + "";
 	let t3;
 	let t4;
 	let p2;
-	let t5_value = /*notification*/ ctx[17].desc + "";
+	let t5_value = /*notification*/ ctx[18].desc + "";
 	let t5;
 	let a_href_value;
 	let link_action;
@@ -430,19 +431,19 @@ function create_if_block_2(ctx) {
 			p2 = element("p");
 			t5 = text(t5_value);
 			t6 = space();
-			if (!src_url_equal(img.src, img_src_value = "" + (/*urlImages*/ ctx[3] + /*notification*/ ctx[17].photo))) attr(img, "src", img_src_value);
+			if (!src_url_equal(img.src, img_src_value = "" + (/*urlImages*/ ctx[3] + /*notification*/ ctx[18].photo))) attr(img, "src", img_src_value);
 			attr(img, "alt", "userImage");
-			attr(img, "class", "svelte-1dexmrm");
-			attr(p0, "class", "notification-user-name svelte-1dexmrm");
-			attr(p1, "class", "notification-time svelte-1dexmrm");
+			attr(img, "class", "svelte-csod33");
+			attr(p0, "class", "notification-user-name svelte-csod33");
+			attr(p1, "class", "notification-time svelte-csod33");
 			attr(div, "class", "data-user-time d-flex justify-content-between");
 			attr(p2, "data-translate", "notification-Frequest");
 			attr(p2, "class", "notification-desc");
-			attr(span, "class", "svelte-1dexmrm");
-			attr(a, "href", a_href_value = "/profile/" + /*notification*/ ctx[17].id);
-			attr(a, "class", "d-flex svelte-1dexmrm");
-			attr(li, "class", "d-flex notificationsList dropdown-item svelte-1dexmrm");
-			attr(li, "data-email", li_data_email_value = /*notification*/ ctx[17].id);
+			attr(span, "class", "svelte-csod33");
+			attr(a, "href", a_href_value = "/profile/" + /*notification*/ ctx[18].id);
+			attr(a, "class", "d-flex svelte-csod33");
+			attr(li, "class", "d-flex notificationsList dropdown-item svelte-csod33");
+			attr(li, "data-email", li_data_email_value = /*notification*/ ctx[18].id);
 		},
 		m(target, anchor) {
 			insert(target, li, anchor);
@@ -464,7 +465,7 @@ function create_if_block_2(ctx) {
 			if (!mounted) {
 				dispose = [
 					listen(a, "click", function () {
-						if (is_function(visitProfile(/*notification*/ ctx[17].id))) visitProfile(/*notification*/ ctx[17].id).apply(this, arguments);
+						if (is_function(visitProfile(/*notification*/ ctx[18].id))) visitProfile(/*notification*/ ctx[18].id).apply(this, arguments);
 					}),
 					action_destroyer(link_action = link.call(null, a)),
 					action_destroyer(active_action = active.call(null, a))
@@ -476,19 +477,19 @@ function create_if_block_2(ctx) {
 		p(new_ctx, dirty) {
 			ctx = new_ctx;
 
-			if (dirty & /*urlImages, notificationsList*/ 24 && !src_url_equal(img.src, img_src_value = "" + (/*urlImages*/ ctx[3] + /*notification*/ ctx[17].photo))) {
+			if (dirty & /*urlImages, notificationsList*/ 24 && !src_url_equal(img.src, img_src_value = "" + (/*urlImages*/ ctx[3] + /*notification*/ ctx[18].photo))) {
 				attr(img, "src", img_src_value);
 			}
 
-			if (dirty & /*notificationsList*/ 16 && t1_value !== (t1_value = /*notification*/ ctx[17].name + "")) set_data(t1, t1_value);
-			if (dirty & /*notificationsList*/ 16 && t3_value !== (t3_value = startTime(/*notification*/ ctx[17].date.toISOString()) + "")) set_data(t3, t3_value);
-			if (dirty & /*notificationsList*/ 16 && t5_value !== (t5_value = /*notification*/ ctx[17].desc + "")) set_data(t5, t5_value);
+			if (dirty & /*notificationsList*/ 16 && t1_value !== (t1_value = /*notification*/ ctx[18].name + "")) set_data(t1, t1_value);
+			if (dirty & /*notificationsList*/ 16 && t3_value !== (t3_value = startTime(/*notification*/ ctx[18].date.toISOString()) + "")) set_data(t3, t3_value);
+			if (dirty & /*notificationsList*/ 16 && t5_value !== (t5_value = /*notification*/ ctx[18].desc + "")) set_data(t5, t5_value);
 
-			if (dirty & /*notificationsList*/ 16 && a_href_value !== (a_href_value = "/profile/" + /*notification*/ ctx[17].id)) {
+			if (dirty & /*notificationsList*/ 16 && a_href_value !== (a_href_value = "/profile/" + /*notification*/ ctx[18].id)) {
 				attr(a, "href", a_href_value);
 			}
 
-			if (dirty & /*notificationsList*/ 16 && li_data_email_value !== (li_data_email_value = /*notification*/ ctx[17].id)) {
+			if (dirty & /*notificationsList*/ 16 && li_data_email_value !== (li_data_email_value = /*notification*/ ctx[18].id)) {
 				attr(li, "data-email", li_data_email_value);
 			}
 		},
@@ -500,10 +501,10 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (486:20) {:else}
-function create_else_block_2(ctx) {
+// (504:20) {:else}
+function create_else_block_3(ctx) {
 	let p;
-	let t_value = /*notification*/ ctx[17].desc + "";
+	let t_value = /*notification*/ ctx[18].desc + "";
 	let t;
 
 	return {
@@ -518,7 +519,7 @@ function create_else_block_2(ctx) {
 			append(p, t);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*notificationsList*/ 16 && t_value !== (t_value = /*notification*/ ctx[17].desc + "")) set_data(t, t_value);
+			if (dirty & /*notificationsList*/ 16 && t_value !== (t_value = /*notification*/ ctx[18].desc + "")) set_data(t, t_value);
 		},
 		d(detaching) {
 			if (detaching) detach(p);
@@ -526,10 +527,10 @@ function create_else_block_2(ctx) {
 	};
 }
 
-// (484:20) {#if notification.desc.includes('reacted')}
-function create_if_block_3(ctx) {
+// (502:20) {#if notification.desc.includes('reacted')}
+function create_if_block_4(ctx) {
 	let p;
-	let t_value = /*notification*/ ctx[17].desc + "";
+	let t_value = /*notification*/ ctx[18].desc + "";
 	let t;
 
 	return {
@@ -544,7 +545,7 @@ function create_if_block_3(ctx) {
 			append(p, t);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*notificationsList*/ 16 && t_value !== (t_value = /*notification*/ ctx[17].desc + "")) set_data(t, t_value);
+			if (dirty & /*notificationsList*/ 16 && t_value !== (t_value = /*notification*/ ctx[18].desc + "")) set_data(t, t_value);
 		},
 		d(detaching) {
 			if (detaching) detach(p);
@@ -552,13 +553,13 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (459:10) {#each notificationsList as notification}
+// (477:10) {#each notificationsList as notification}
 function create_each_block(ctx) {
 	let if_block_anchor;
 
 	function select_block_type_2(ctx, dirty) {
-		if (typeof /*notification*/ ctx[17].id === 'string') return create_if_block_2;
-		return create_else_block_1;
+		if (typeof /*notification*/ ctx[18].id === 'string') return create_if_block_3;
+		return create_else_block_2;
 	}
 
 	let current_block_type = select_block_type_2(ctx, -1);
@@ -593,8 +594,8 @@ function create_each_block(ctx) {
 	};
 }
 
-// (506:6) {:else}
-function create_else_block(ctx) {
+// (524:6) {:else}
+function create_else_block_1(ctx) {
 	let img;
 	let img_src_value;
 
@@ -604,7 +605,7 @@ function create_else_block(ctx) {
 			attr(img, "id", "headerUserImage");
 			if (!src_url_equal(img.src, img_src_value = "" + (/*urlImages*/ ctx[3] + /*photo*/ ctx[0]))) attr(img, "src", img_src_value);
 			attr(img, "alt", "");
-			attr(img, "class", "svelte-1dexmrm");
+			attr(img, "class", "svelte-csod33");
 		},
 		m(target, anchor) {
 			insert(target, img, anchor);
@@ -620,8 +621,8 @@ function create_else_block(ctx) {
 	};
 }
 
-// (504:6) {#if localStorage.getItem('profilePhoto')}
-function create_if_block(ctx) {
+// (522:6) {#if localStorage.getItem('profilePhoto')}
+function create_if_block_1(ctx) {
 	let img;
 	let img_src_value;
 
@@ -631,7 +632,7 @@ function create_if_block(ctx) {
 			attr(img, "id", "headerUserImage");
 			if (!src_url_equal(img.src, img_src_value = "" + (/*urlImages*/ ctx[3] + localStorage.getItem('profilePhoto')))) attr(img, "src", img_src_value);
 			attr(img, "alt", "");
-			attr(img, "class", "svelte-1dexmrm");
+			attr(img, "class", "svelte-csod33");
 		},
 		m(target, anchor) {
 			insert(target, img, anchor);
@@ -643,6 +644,62 @@ function create_if_block(ctx) {
 		},
 		d(detaching) {
 			if (detaching) detach(img);
+		}
+	};
+}
+
+// (547:4) {:else}
+function create_else_block(ctx) {
+	let option0;
+	let option1;
+
+	return {
+		c() {
+			option0 = element("option");
+			option0.textContent = "En";
+			option1 = element("option");
+			option1.textContent = "Es";
+			option0.__value = "En";
+			option0.value = option0.__value;
+			option0.selected = true;
+			option1.__value = "Es";
+			option1.value = option1.__value;
+		},
+		m(target, anchor) {
+			insert(target, option0, anchor);
+			insert(target, option1, anchor);
+		},
+		d(detaching) {
+			if (detaching) detach(option0);
+			if (detaching) detach(option1);
+		}
+	};
+}
+
+// (544:4) {#if localStorage.getItem("lang") === "Es"}
+function create_if_block(ctx) {
+	let option0;
+	let option1;
+
+	return {
+		c() {
+			option0 = element("option");
+			option0.textContent = "En";
+			option1 = element("option");
+			option1.textContent = "Es";
+			option0.__value = "En";
+			option0.value = option0.__value;
+			option1.__value = "Es";
+			option1.value = option1.__value;
+			option1.selected = true;
+		},
+		m(target, anchor) {
+			insert(target, option0, anchor);
+			insert(target, option1, anchor);
+		},
+		d(detaching) {
+			if (detaching) detach(option0);
+			if (detaching) detach(option1);
 		}
 	};
 }
@@ -675,7 +732,7 @@ function create_fragment(ctx) {
 	let t8;
 	let div7;
 	let a1;
-	let show_if;
+	let show_if_1;
 	let link_action_1;
 	let active_action_1;
 	let t9;
@@ -692,6 +749,9 @@ function create_fragment(ctx) {
 	let t12;
 	let li1;
 	let span1;
+	let t14;
+	let select;
+	let show_if;
 	let current;
 	let mounted;
 	let dispose;
@@ -704,8 +764,8 @@ function create_fragment(ctx) {
 		});
 
 	function select_block_type(ctx, dirty) {
-		if (/*countMessages*/ ctx[6] > 0) return create_if_block_4;
-		return create_else_block_5;
+		if (/*countMessages*/ ctx[6] > 0) return create_if_block_5;
+		return create_else_block_6;
 	}
 
 	let current_block_type = select_block_type(ctx, -1);
@@ -724,31 +784,39 @@ function create_fragment(ctx) {
 	let each_1_else = null;
 
 	if (!each_value_1.length) {
-		each_1_else = create_else_block_4(ctx);
+		each_1_else = create_else_block_5(ctx);
 	}
 
 	function select_block_type_1(ctx, dirty) {
-		if (/*notificationsList*/ ctx[4].length > 0) return create_if_block_1;
-		return create_else_block_3;
+		if (/*notificationsList*/ ctx[4].length > 0) return create_if_block_2;
+		return create_else_block_4;
 	}
 
 	let current_block_type_1 = select_block_type_1(ctx, -1);
 	let if_block1 = current_block_type_1(ctx);
 
 	function select_block_type_4(ctx, dirty) {
-		if (localStorage.getItem('profilePhoto')) return create_if_block;
-		return create_else_block;
+		if (localStorage.getItem('profilePhoto')) return create_if_block_1;
+		return create_else_block_1;
 	}
 
 	let current_block_type_2 = select_block_type_4(ctx, -1);
 	let if_block2 = current_block_type_2(ctx);
+
+	function select_block_type_5(ctx, dirty) {
+		if (localStorage.getItem("lang") === "Es") return create_if_block;
+		return create_else_block;
+	}
+
+	let current_block_type_3 = select_block_type_5(ctx, -1);
+	let if_block3 = current_block_type_3(ctx);
 
 	return {
 		c() {
 			nav = element("nav");
 			div0 = element("div");
 			a0 = element("a");
-			a0.innerHTML = `<i class="fas fa-home svelte-1dexmrm"></i>`;
+			a0.innerHTML = `<i class="fas fa-home svelte-csod33"></i>`;
 			t0 = space();
 			div1 = element("div");
 			create_component(friendrequest.$$.fragment);
@@ -791,54 +859,60 @@ function create_fragment(ctx) {
 			ul2 = element("ul");
 			li0 = element("li");
 			a2 = element("a");
-			a2.innerHTML = `<span data-translate="nav-settings" class="dropdown-item svelte-1dexmrm">Settings</span>`;
+			a2.innerHTML = `<span data-translate="nav-settings" class="dropdown-item svelte-csod33">Settings</span>`;
 			t12 = space();
 			li1 = element("li");
 			span1 = element("span");
 			span1.textContent = "Log Out";
+			t14 = space();
+			select = element("select");
+			if_block3.c();
 			attr(a0, "href", "/");
 			attr(div0, "id", "iconHome");
-			attr(div0, "class", "icon Header-nav-home mx-3 fs-3 svelte-1dexmrm");
-			attr(div1, "class", "icon Header-nav-user-plus notification mx-3 fs-3 svelte-1dexmrm");
-			attr(i1, "class", "fas fa-comment dropdown-toggle svelte-1dexmrm");
+			attr(div0, "class", "icon Header-nav-home mx-3 fs-3 svelte-csod33");
+			attr(div1, "class", "icon Header-nav-user-plus notification mx-3 fs-3 svelte-csod33");
+			attr(i1, "class", "fas fa-comment dropdown-toggle svelte-csod33");
 			attr(i1, "id", "chats");
 			attr(i1, "data-bs-toggle", "dropdown");
 			attr(i1, "aria-expanded", "false");
-			attr(ul0, "class", "dropdown-menu svelte-1dexmrm");
+			attr(ul0, "class", "dropdown-menu svelte-csod33");
 			attr(ul0, "aria-labelledby", "chats");
 			attr(ul0, "id", "ulChatList");
-			attr(div2, "class", "dropdown svelte-1dexmrm");
-			attr(div3, "class", "icon Header-nav-comment mx-3 fs-3 position-relative svelte-1dexmrm");
-			attr(i2, "class", "fas fa-bell dropdown-toggle svelte-1dexmrm");
+			attr(div2, "class", "dropdown svelte-csod33");
+			attr(div3, "class", "icon Header-nav-comment mx-3 fs-3 position-relative svelte-csod33");
+			attr(i2, "class", "fas fa-bell dropdown-toggle svelte-csod33");
 			attr(i2, "id", "notifications");
 			attr(i2, "data-bs-toggle", "dropdown");
 			attr(i2, "aria-expanded", "false");
 			attr(div4, "id", "notificacionsBubbleCount");
-			attr(div4, "class", "notificacions-bubble d-none dropdown-toggle svelte-1dexmrm");
+			attr(div4, "class", "notificacions-bubble d-none dropdown-toggle svelte-csod33");
 			attr(div4, "data-bs-toggle", "dropdown");
 			attr(div4, "aria-expanded", "false");
-			attr(ul1, "class", "dropdown-menu svelte-1dexmrm");
+			attr(ul1, "class", "dropdown-menu svelte-csod33");
 			attr(ul1, "aria-labelledby", "notifications");
-			attr(div5, "class", "dropdown svelte-1dexmrm");
-			attr(div6, "class", "icon Header-nav-bell mx-3 fs-3 notification svelte-1dexmrm");
+			attr(div5, "class", "dropdown svelte-csod33");
+			attr(div6, "class", "icon Header-nav-bell mx-3 fs-3 notification svelte-csod33");
 			attr(div6, "id", "notification");
 			attr(a1, "href", "/profile");
-			attr(div7, "class", "icon Header-nav-user mx-3 fs-3 svelte-1dexmrm");
+			attr(div7, "class", "icon Header-nav-user mx-3 fs-3 svelte-csod33");
 			if (!src_url_equal(img.src, img_src_value = "../img/grid-icon.png")) attr(img, "src", img_src_value);
 			attr(img, "alt", "");
 			attr(img, "width", "27");
-			attr(img, "class", "fas fa-grip-vertical dropdown-toggle svelte-1dexmrm");
+			attr(img, "class", "fas fa-grip-vertical dropdown-toggle svelte-csod33");
 			attr(img, "id", "settings");
 			attr(img, "data-bs-toggle", "dropdown");
 			attr(img, "aria-expanded", "false");
 			attr(a2, "href", "/settings");
 			attr(span1, "data-translate", "nav-log-out");
-			attr(span1, "class", "dropdown-item svelte-1dexmrm");
-			attr(ul2, "class", "dropdown-menu svelte-1dexmrm");
+			attr(span1, "class", "dropdown-item svelte-csod33");
+			attr(ul2, "class", "dropdown-menu svelte-csod33");
 			attr(ul2, "aria-labelledby", "settings");
 			attr(div8, "class", "dropdown");
-			attr(div9, "class", "icon Header-nav-grip-vertical mx-3 fs-3 svelte-1dexmrm");
-			attr(nav, "class", "nav-container d-flex svelte-1dexmrm");
+			attr(div9, "class", "icon Header-nav-grip-vertical mx-3 fs-3 svelte-csod33");
+			attr(select, "class", "select-language svelte-csod33");
+			attr(select, "name", "selectLanguegeHeader");
+			attr(select, "id", "selectLanguegeHeader");
+			attr(nav, "class", "nav-container d-flex align-items-center svelte-csod33");
 		},
 		m(target, anchor) {
 			insert(target, nav, anchor);
@@ -889,6 +963,9 @@ function create_fragment(ctx) {
 			append(ul2, t12);
 			append(ul2, li1);
 			append(li1, span1);
+			append(nav, t14);
+			append(nav, select);
+			if_block3.m(select, null);
 			current = true;
 
 			if (!mounted) {
@@ -900,7 +977,8 @@ function create_fragment(ctx) {
 					action_destroyer(active_action_1 = active.call(null, a1)),
 					action_destroyer(link_action_2 = link.call(null, a2)),
 					action_destroyer(active_action_2 = active.call(null, a2)),
-					listen(span1, "click", /*logOut*/ ctx[10])
+					listen(span1, "click", /*logOut*/ ctx[10]),
+					listen(select, "change", /*setLanguage*/ ctx[11])
 				];
 
 				mounted = true;
@@ -956,7 +1034,7 @@ function create_fragment(ctx) {
 						each_1_else = null;
 					}
 				} else if (!each_1_else) {
-					each_1_else = create_else_block_4(ctx);
+					each_1_else = create_else_block_5(ctx);
 					each_1_else.c();
 					each_1_else.m(ul0, null);
 				}
@@ -1006,6 +1084,7 @@ function create_fragment(ctx) {
 			if (each_1_else) each_1_else.d();
 			if_block1.d();
 			if_block2.d();
+			if_block3.d();
 			mounted = false;
 			run_all(dispose);
 		}
@@ -1293,6 +1372,19 @@ function instance($$self, $$props, $$invalidate) {
 		}
 	};
 
+	const setLanguage = async e => {
+		if (e.target.value !== '') {
+			console.log(e.target.value);
+			localStorage.setItem('lang', e.target.value);
+			await translate();
+			const btnModalEx = document.getElementById('btnAddEx');
+
+			btnModalEx
+			? btnModalEx.setAttribute('data-translatee', e.target.value)
+			: false;
+		}
+	};
+
 	onMount(() => {
 		getUserNotifications();
 
@@ -1316,7 +1408,7 @@ function instance($$self, $$props, $$invalidate) {
 	$$self.$$set = $$props => {
 		if ('photo' in $$props) $$invalidate(0, photo = $$props.photo);
 		if ('id' in $$props) $$invalidate(1, id = $$props.id);
-		if ('urlLogOut' in $$props) $$invalidate(11, urlLogOut = $$props.urlLogOut);
+		if ('urlLogOut' in $$props) $$invalidate(12, urlLogOut = $$props.urlLogOut);
 		if ('urlAPI' in $$props) $$invalidate(2, urlAPI = $$props.urlAPI);
 		if ('urlImages' in $$props) $$invalidate(3, urlImages = $$props.urlImages);
 	};
@@ -1333,6 +1425,7 @@ function instance($$self, $$props, $$invalidate) {
 		usergroups,
 		counterBubble,
 		logOut,
+		setLanguage,
 		urlLogOut
 	];
 }
@@ -1344,7 +1437,7 @@ class HeaderNav extends SvelteComponent {
 		init(this, options, instance, create_fragment, safe_not_equal, {
 			photo: 0,
 			id: 1,
-			urlLogOut: 11,
+			urlLogOut: 12,
 			urlAPI: 2,
 			urlImages: 3
 		});

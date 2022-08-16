@@ -298,7 +298,7 @@
           }
         }
   
-        console.log(template);
+        // console.log(template);
         const post = await fetch(`${urlAPI}/post/create/`,{
           method : 'POST',
           headers : {
@@ -309,7 +309,7 @@
 
         if (post.ok) {
           let content = await post.json()
-          console.log("contenido:", content.id);
+          // console.log("contenido:", content.id);
           postDescription.value = ''
           if (postImg.src) {
             postImg.setAttribute('src', '')

@@ -8,9 +8,9 @@ export const commentsFirebase = async (template, author)=>{
   const docSnap = await getDoc(userDoc)
 
   if (docSnap.exists()) {
-    console.log(docSnap.data());
+    // console.log(docSnap.data());
     
-    console.log(docSnap.data().comments);
+    // console.log(docSnap.data().comments);
     if (docSnap.data().comments === undefined) {
       updateDoc(userDoc,{
         comments: [template]

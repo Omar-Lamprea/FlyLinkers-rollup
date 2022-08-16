@@ -55,31 +55,29 @@ function create_fragment(ctx) {
 			span1.textContent = "Video";
 			t6 = space();
 			input1 = element("input");
-			attr(i0, "class", "fas fa-image svelte-1x5l75b");
+			attr(i0, "class", "fas fa-image");
 			attr(span0, "data-translate", "icon-photo");
-			attr(span0, "class", "svelte-1x5l75b");
 			attr(input0, "type", "file");
 			attr(input0, "name", "loadPhotoInput");
 			attr(input0, "id", "loadPhotoInput");
 			attr(input0, "class", "d-none");
 			attr(input0, "accept", ".png, .jpg, .jpeg, .gif");
 			attr(label0, "for", "loadPhotoInput");
-			attr(label0, "class", "svelte-1x5l75b");
-			attr(div0, "class", "Header-nav Header-nav-image mx-3 svelte-1x5l75b");
+			attr(label0, "class", "svelte-o5k601");
+			attr(div0, "class", "Header-nav Header-nav-image mx-3 svelte-o5k601");
 			attr(div0, "id", "loadPhotoPost");
 			attr(div0, "type", "file");
-			attr(i1, "class", "fas fa-film svelte-1x5l75b");
+			attr(i1, "class", "fas fa-film");
 			attr(span1, "data-translate", "icon-video");
-			attr(span1, "class", "svelte-1x5l75b");
 			attr(input1, "type", "file");
 			attr(input1, "name", "uploadVideo");
 			attr(input1, "id", "uploadVideo");
 			attr(input1, "class", "d-none");
 			attr(input1, "accept", "video/mp4,video/x-m4v,video/*");
 			attr(label1, "for", "uploadVideo");
-			attr(label1, "class", "svelte-1x5l75b");
-			attr(div1, "class", "Header-nav Header-nav-film mx-3 svelte-1x5l75b");
-			attr(div2, "class", "Nav-add-post d-flex justify-content-center mt-2 text-center");
+			attr(label1, "class", "svelte-o5k601");
+			attr(div1, "class", "Header-nav Header-nav-film mx-3 svelte-o5k601");
+			attr(div2, "class", "Nav-add-post d-flex justify-content-center ms-2 text-center");
 		},
 		m(target, anchor) {
 			insert(target, div2, anchor);

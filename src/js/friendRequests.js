@@ -1,6 +1,6 @@
 export async function addFriend(urlAPI, friendId, userId, username){
   const redirect = `${window.location.origin}/#/profile/${username}`
-  console.log(urlAPI, friendId, userId, username);
+  // console.log(urlAPI, friendId, userId, username);
   const response = await fetch(`${urlAPI}/friend/request/`, {
     method : 'PUT',
     headers : {
@@ -13,7 +13,7 @@ export async function addFriend(urlAPI, friendId, userId, username){
   })
 
   if (response.ok) {
-    console.log(redirect);
+    // console.log(redirect);
     window.location.href = redirect
     window.location.reload()
   }
@@ -21,7 +21,7 @@ export async function addFriend(urlAPI, friendId, userId, username){
 
 export async function declineFriend(urlAPI, friendId, userId, username){
   const redirect = `${window.location.host}/#/profile/${username}`
-  console.log(urlAPI, friendId, userId, username);
+  // console.log(urlAPI, friendId, userId, username);
   let res = false
   const response = await fetch(`${urlAPI}/friend/request/?sender_id=${friendId}&receptor_id=${userId}`, {
     method : 'DELETE',

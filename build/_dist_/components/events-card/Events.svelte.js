@@ -35,7 +35,7 @@ function get_each_context(ctx, list, i) {
 	return child_ctx;
 }
 
-// (89:8) {#if data}
+// (51:8) {#if data}
 function create_if_block(ctx) {
 	let each_1_anchor;
 	let current;
@@ -119,7 +119,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (90:10) {#each data as event}
+// (52:10) {#each data as event}
 function create_each_block(ctx) {
 	let event;
 	let current;
@@ -252,10 +252,10 @@ function instance($$self, $$props, $$invalidate) {
 						data.push({
 							title: ev.slug.charAt(0).toUpperCase() + ev.slug.slice(1).replaceAll('-', ' '),
 							eventLogo: ev.fimg_url,
-							date: ev.date,
-							start: '9:00am',
-							end: '11:00pm',
-							place: 'virtual',
+							date: [
+								ev.metavalue._eventorganiser_schedule_last_start,
+								ev.metavalue._eventorganiser_schedule_last_finish
+							],
 							href: ev.link,
 							linkName: ev.excerpt.rendered
 						});
@@ -263,7 +263,7 @@ function instance($$self, $$props, $$invalidate) {
 				});
 			}
 		} catch(error) {
-			console.log(error);
+			console.error(error);
 		}
 	};
 

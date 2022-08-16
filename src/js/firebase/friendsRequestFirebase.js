@@ -8,9 +8,9 @@ export const friendsRequestFirebase = async (template, author)=>{
   const docSnap = await getDoc(userDoc)
 
   if (docSnap.exists()) {
-    console.log(docSnap.data());
+    // console.log(docSnap.data());
 
-    console.log(docSnap.data().friends);
+    // console.log(docSnap.data().friends);
     if (docSnap.data().friends === undefined) {
       updateDoc(userDoc,{
         friends: [template]

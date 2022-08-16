@@ -26,7 +26,7 @@
   }
 
   const uploadVideoPost = (e) =>{
-    console.log(uploadVideo.files);
+    // console.log(uploadVideo.files);
     // postVideo.srx = uploadVideo.files[0]
     if (uploadVideo.files[0]) {
       if (uploadVideo.files[0].size > 52_428_800) {
