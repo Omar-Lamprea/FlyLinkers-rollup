@@ -711,8 +711,7 @@ function instance($$self, $$props, $$invalidate) {
 					}
 				}
 
-				console.log(template);
-
+				// console.log(template);
 				const post = await fetch(`${urlAPI}/post/create/`, {
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json' },
@@ -721,7 +720,8 @@ function instance($$self, $$props, $$invalidate) {
 
 				if (post.ok) {
 					let content = await post.json();
-					console.log("contenido:", content.id);
+
+					// console.log("contenido:", content.id);
 					postDescription.value = '';
 
 					if (postImg.src) {

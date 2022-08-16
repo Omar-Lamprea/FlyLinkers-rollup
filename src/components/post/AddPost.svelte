@@ -378,6 +378,9 @@
 </script>
 
 <style>
+  .Add-post{
+    padding: 1.5rem 2rem;
+  }
   .Add-post textarea{
     margin: .5rem 0;
     padding: .5rem;

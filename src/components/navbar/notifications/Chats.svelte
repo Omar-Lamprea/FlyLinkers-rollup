@@ -66,7 +66,7 @@
         const q = query(docRef, where('seen', '==', false))
         
         let a = 1
-        console.log('help');
+        // console.log('help');
         
         const snapDocs = onSnapshot(q, docs =>{
           docs.forEach(async el => {

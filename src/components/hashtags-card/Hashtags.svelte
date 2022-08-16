@@ -52,9 +52,20 @@
   .Hashtags-discover{
     border-top: 1px solid var(--main-color);
   }
+
+  .banner{
+    /* padding: .5rem; */
+    padding: 0;
+    border: none;
+  }
+  .banner img{
+    width: 100%;
+    border-radius: 1rem;
+  }
+
 </style>
 
-<div class="Hashtags d-none d-lg-block Default-containers px-0 pb-0 muted">
+<!-- <div class="Hashtags d-none d-lg-block Default-containers px-0 pb-0 muted">
   <h6 data-translate="title-hashtags" class="muted">Followed Hashtags</h6>
   {#each data as hashtag}
     <Hashtag {...hashtag}/>
@@ -64,4 +75,10 @@
   <div class="Hashtags-discover text-center py-3 muted">
     <p data-translate="discover-hash" class="muted">Discover More</p>
   </div>
+</div> -->
+
+<div class="banner Default-containers d-none d-lg-block">
+  <a href="https://news.flylinkers.com/" target="_blank" rel="nofollow noopener noreferrer">
+    <img src="../img/banner01flylinkers-01.jpg" alt="banner">
+  </a>
 </div>
