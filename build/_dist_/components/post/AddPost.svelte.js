@@ -59,7 +59,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (462:6) {#if urlContent && urlLink.includes('https://')}
+// (465:6) {#if urlContent && urlLink.includes('https://')}
 function create_if_block_1(ctx) {
 	let i;
 	let t0;
@@ -87,13 +87,13 @@ function create_if_block_1(ctx) {
 			t3 = text(t3_value);
 			t4 = space();
 			img = element("img");
-			attr(i, "class", "fa-solid fa-xmark d-flex- align-self-end svelte-jiv190");
+			attr(i, "class", "fa-solid fa-xmark d-flex- align-self-end svelte-7kiz40");
 			attr(h6, "id", "metaTitle");
 			attr(p, "id", "metaDescription");
 			attr(img, "id", "metaImage");
 			if (!src_url_equal(img.src, img_src_value = /*urlContent*/ ctx[4].image)) attr(img, "src", img_src_value);
 			attr(img, "alt", "");
-			attr(img, "class", "svelte-jiv190");
+			attr(img, "class", "svelte-7kiz40");
 		},
 		m(target, anchor) {
 			insert(target, i, anchor);
@@ -135,7 +135,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (474:4) {#if YTlink}
+// (477:4) {#if YTlink}
 function create_if_block(ctx) {
 	let i;
 	let t;
@@ -149,7 +149,7 @@ function create_if_block(ctx) {
 			i = element("i");
 			t = space();
 			iframe = element("iframe");
-			attr(i, "class", "fa-solid fa-xmark d-flex- align-self-end svelte-jiv190");
+			attr(i, "class", "fa-solid fa-xmark d-flex- align-self-end svelte-7kiz40");
 			attr(iframe, "width", "100%");
 			attr(iframe, "height", "350");
 			if (!src_url_equal(iframe.src, iframe_src_value = /*YTlink*/ ctx[2])) attr(iframe, "src", iframe_src_value);
@@ -270,37 +270,37 @@ function create_fragment(ctx) {
 			attr(textarea, "cols", "1");
 			attr(textarea, "rows", "1");
 			attr(textarea, "id", "postDescription");
-			attr(textarea, "class", "Default-containers svelte-jiv190");
+			attr(textarea, "class", "Default-containers svelte-7kiz40");
 			attr(textarea, "placeholder", "Start a post...");
 			attr(div0, "id", "characterCountSpan");
-			attr(div0, "class", "characterCount characterCount-active svelte-jiv190");
+			attr(div0, "class", "characterCount characterCount-active svelte-7kiz40");
 			attr(i0, "id", "closeImg");
-			attr(i0, "class", "fa-solid fa-xmark btn-closeImgVideo d-none svelte-jiv190");
+			attr(i0, "class", "fa-solid fa-xmark btn-closeImgVideo d-none svelte-7kiz40");
 			attr(img, "alt", "postImg");
 			attr(img, "id", "postImg");
-			attr(img, "class", "d-none my-3 svelte-jiv190");
+			attr(img, "class", "d-none my-3 svelte-7kiz40");
 			set_style(img, "width", "100%");
 			set_style(img, "max-height", "400px");
 			set_style(img, "object-fit", "contain");
 			attr(i1, "id", "closeVd");
-			attr(i1, "class", "fa-solid fa-xmark btn-closeImgVideo d-none svelte-jiv190");
+			attr(i1, "class", "fa-solid fa-xmark btn-closeImgVideo d-none svelte-7kiz40");
 			video.controls = true;
 			attr(video, "id", "postVideo");
 			attr(video, "class", "d-none my-3");
 			set_style(video, "max-height", "400px");
 			attr(div1, "class", "Add-post-input mx-3 d-flex flex-column justify-content-center position-relative");
 			attr(div2, "id", "urlMeta");
-			attr(div2, "class", "urlMeta d-flex flex-column d-none svelte-jiv190");
+			attr(div2, "class", "urlMeta d-flex flex-column d-none svelte-7kiz40");
 			attr(div3, "id", "YTvideoContainer");
 			attr(div3, "class", "YTvideo d-flex flex-column d-none");
 			attr(div6, "id", "loaderPost");
 			attr(div6, "class", "loader-content d-none");
 			attr(button, "data-translate", "post");
 			attr(button, "id", "btnSendPost");
-			attr(button, "class", "btn btn-outline-primary btn-flylinkers btn-post svelte-jiv190");
+			attr(button, "class", "btn btn-outline-primary btn-flylinkers btn-post svelte-7kiz40");
 			button.disabled = true;
 			attr(div7, "class", "content-btn-nav mt-2 d-flex justify-content-between align-items-center");
-			attr(div8, "class", div8_class_value = "Add-post " + /*colorbox*/ ctx[0] + " Default-containers px-lg-5 d-flex flex-column" + " svelte-jiv190");
+			attr(div8, "class", div8_class_value = "Add-post " + /*colorbox*/ ctx[0] + " Default-containers px-lg-5 d-flex flex-column" + " svelte-7kiz40");
 		},
 		m(target, anchor) {
 			insert(target, div8, anchor);
@@ -386,7 +386,7 @@ function create_fragment(ctx) {
 				if_block1 = null;
 			}
 
-			if (!current || dirty & /*colorbox*/ 1 && div8_class_value !== (div8_class_value = "Add-post " + /*colorbox*/ ctx[0] + " Default-containers px-lg-5 d-flex flex-column" + " svelte-jiv190")) {
+			if (!current || dirty & /*colorbox*/ 1 && div8_class_value !== (div8_class_value = "Add-post " + /*colorbox*/ ctx[0] + " Default-containers px-lg-5 d-flex flex-column" + " svelte-7kiz40")) {
 				attr(div8, "class", div8_class_value);
 			}
 		},

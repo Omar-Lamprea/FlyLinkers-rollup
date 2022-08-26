@@ -29,7 +29,7 @@
   let userProfile;
 
   const getProfile = async ()=>{
-    const response = await fetch(`${urlAPI}/user/profile/?user_id=${id}`)
+    const response = await fetch(`${urlAPI}/user/profile/?user_id=${id}&main_user=${dataJson.id}`)
     const content = await response.json()
     if (content[0]) {
       data = content[0]
@@ -47,7 +47,7 @@
 
   const getPost = async()=>{
     post = ''
-    const response = await fetch(`${urlAPI}/post/create/?user=${id}`).then(res =>{
+    const response = await fetch(`${urlAPI}/post/create/?user=${id}&main_user=${dataJson.id}`).then(res =>{
       if (res.ok) {
         return res.json()
       }else{
@@ -76,7 +76,7 @@
   async function getPosts (){
     page += 1
 
-    const response = await fetch(`${urlAPI}/post/create/?page=${page}&user=${id}`)
+    const response = await fetch(`${urlAPI}/post/create/?page=${page}&user=${id}&main_user=${dataJson.id}`)
     const content = await response.json()
     countPost = content.next
     try {

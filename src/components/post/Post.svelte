@@ -1,4 +1,5 @@
 <script>
+  import './Post.css'
   import {link} from "svelte-spa-router";
   import active from 'svelte-spa-router/active'
   import Comment from './Comment.svelte'
@@ -10,8 +11,7 @@
   import { translate } from '../../js/translate';
   import {googleTranslateJs} from '../..//js/googleTranslate'
   import Loader from '../Loader.svelte'
-
-
+  import ReportPostModal from "../Modals/reportPostModal.svelte";
 
   export let userId;
   export let desc, reactions, img, comments, create_time, user, id, user_id, update_time;
@@ -488,229 +488,8 @@
   })
 </script>
 
-<style>
-  .Card-Header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    /* padding: 0 1em; */
-  }
-  .Card-user {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    margin-bottom: .5rem;
-  }
-  .Card-user img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 1px solid var(--main-color);
-    padding: .1rem;
-  }
-  .Card-user h2 {
-    cursor: pointer;
-    margin: 0;
-    padding: 0;
-    font-size: 14px;
-    font-weight: 600;
-    margin: 0 0 0 1em;
-    color: var(--main-color);
-    font-weight: bold;
-  }
-  .Card-user h2 span {
-    display: block;
-    font-size: 12px;
-    font-weight: normal;
-    color: rgba(38, 38, 38, 0.7);
-  }
-  .Card-photo {
-    padding: 0 1rem;
-    margin: 0;
-  }
-  .Card-photo img {
-    width: 100%;
-    max-height: 400px;
-    object-fit: contain;
-  }
-  .Card-photo figure {
-    margin: 0;
-    padding: 0;
-    cursor: pointer;
-  }
-  .Card-settings i {
-    cursor: pointer;
-    color: var(--main-color);
-    font-size: 20px;
-  }
-  .Card-board-icons {
-    padding: 1em 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--main-color);
-  }
-  .Reaction{
-    cursor: pointer;
-    font-size: .8rem;
-    color: var(--main-color);
-  }
-
-  .Card-board-actions {
-    font-size: 1rem;
-    margin-top: 1rem;
-    color: var(--main-color);
-  }
-  .Card-board-actions button{
-    color: var(--main-color);
-    padding: 0;
-    background-color: transparent;
-    border: none;
-  }
-  .Card-board-actions span, .Reaction span {
-    color: rgba(38, 38, 38, 0.7);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;;
-    font-weight: initial;
-  }
-
-  .Card-description span{
-    font-size: 14px;
-    margin: 0 1rem;
-  }
-
-  .Card-description .btn-translatePost{
-    color: var(--main-color);
-    font-weight: 700;
-    font-size: 12px;
-    cursor: pointer;
-  }
-
-  .Action{
-    cursor: pointer;
-    margin-right: 1rem;
-    text-align: center;
-  }
-
-  .Comments-add {
-    padding: 1rem 0;
-    border-top: 1px solid rgba(219, 219, 219, 0.8);
-  }
-  .Comments-add img{
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 1px solid var(--main-color);
-    padding: 0.1rem;
-  }
-  .Comments-add form {
-    display: flex;
-    align-items: center;
-    width: 90%;
-  }
-
-  .Comments-input {
-    border: solid 1px #e9e9e9;
-    border-radius: 5px;
-    color: #696969;
-    border: 1px solid transparent;
-    font-size: 12px;
-    outline: none;
-    width: 100%;
-    display: flex;
-  }
-  .btn-sendComment {
-    border: none;
-    color: white;
-    background-color: var(--main-color);
-    font-size: 12px;
-    outline: none;
-    cursor: pointer;
-  }
-  .disabled{
-    color: grey;
-    cursor: default;
-  }
-
-  .urlMeta{
-    padding: 1rem;
-    margin-top: 1rem;
-    border: 1px solid var(--main-color);
-    border-radius: 1rem;
-  }
-  .urlMeta img{
-    width: 100%;
-    margin-top: 1rem;
-  }
-  .urlMeta a{
-    color: #000;
-  }
-  .dropdown-toggle:empty::after{
-    content: inherit;
-  }
-  .dropdown li{
-    cursor: pointer;
-  }
-  .dropdown a{
-    color: inherit;
-  }
-
-  .tooltipp {
-  position: relative;
-  display: inline-block;
-  /* border-bottom: 1px dotted black; */
-}
-
-.tooltipp .tooltiptext {
-  visibility: hidden;
-  width: 120px;
-  background-color: rgba(0, 0, 0, 0.761);
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-  position: absolute;
-  z-index: 1;
-  bottom: 150%;
-  left: 50%;
-  margin-left: -60px;
-}
-
-.tooltipp .tooltiptext::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: black transparent transparent transparent;
-}
-.tooltipp:hover .tooltiptext {
-  visibility: visible;
-}
-
-
-  @media screen and (max-width: 768px){
-    .hidden{
-      display: none;
-    }
-    .Action{
-      margin: 0 1rem;
-    }
-    .Comments-add {
-      padding-left: .5rem;
-    }
-
-  }
-
-</style>
-
-
-<div class="Card Default-containers">
-
+<div class="Card Default-containers" id="post-{id}">
+  <ReportPostModal {id} {urlAPI}/>
   <div class="Card-container">
     <div class="Card-Header px-3 px-md-0">
 
@@ -741,6 +520,8 @@
           <i class="fas fa-ellipsis-h dropdown-toggle" type="button" id="settings-post" data-bs-toggle="dropdown" aria-expanded="false"></i> 
           <ul class="dropdown-menu" aria-labelledby="settings-post">
             <li><a class="dropdown-item" href="/post/{id}" use:link use:active data-translate="see-post">See post</a></li>
+            <li data-translate="modal-report-post-title" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#reportPostModal{id}">Report post</li>
+
             {#if user}
                {#if user.id.toString() === localStorage.getItem('userId')}
                  <li class="dropdown-item" on:click={deletePost(id)} data-translate="delete-post">Delete post</li>
@@ -958,4 +739,3 @@
       {/if}
     </div>
 </div>
-

@@ -36,7 +36,7 @@
   }
 
   const getUserProfile = async(id)=>{
-    const response = await fetch(`${urlAPI}/user/profile/?user_id=${id}`)
+    const response = await fetch(`${urlAPI}/user/profile/?user_id=${id}&main_user=${userMain}`)
     const content = await response.json()
     dataProfile = content[0]
   }

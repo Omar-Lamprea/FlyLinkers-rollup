@@ -177,5 +177,10 @@ export default{
       "p-profile": "Agregar foto de perfil",
       "modal-profile-btn-close": "Cerrar",
       "modal-profile-btn-save": "Guardar foto",
+
+      //modal report post
+      "modal-report-post-title" : "Reportar publicación",
+      "modal-report-user-title" : "Reportar usuario"
+
   }
 }

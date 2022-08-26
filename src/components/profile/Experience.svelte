@@ -195,25 +195,25 @@
 
                 <div class="deleteExperience mx-3" >
                  <i class="fa-solid fa-trash" data-bs-toggle="modal" data-bs-target="#removeExperience{experience.id}"></i>
-                 <!-- modal remove xp -->
-                 <div class="modal fade" id="removeExperience{experience.id}" tabindex="-1" aria-labelledby="removeExperienceLabel" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 data-translate="modal-delete-xp-title" class="modal-title" id="removeExperienceLabel">Remove Experience</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body" data-translate="modal-delete-xp-content">
-                        Are you sure you want to delete your experience?
-                      </div>
-                      <div class="modal-footer">
-                        <button data-translate="modal-delete-xp-btn-close" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button data-translate="modal-delete-xp-btn-del" type="button" class="btn btn-danger" data-bs-dismiss="modal" on:click={removeExperience(experience.id)}>Delete</button>
+                  <!-- modal remove xp -->
+                  <div class="modal fade" id="removeExperience{experience.id}" tabindex="-1" aria-labelledby="removeExperienceLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 data-translate="modal-delete-xp-title" class="modal-title" id="removeExperienceLabel">Remove Experience</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" data-translate="modal-delete-xp-content">
+                          Are you sure you want to delete your experience?
+                        </div>
+                        <div class="modal-footer">
+                          <button data-translate="modal-delete-xp-btn-close" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button tton data-translate="modal-delete-xp-btn-del" type="button" class="btn btn-danger" data-bs-dismiss="modal" on:click={removeExperience(experience.id)}>Delete</button>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-               </div>
               </div>
             {/if}
 

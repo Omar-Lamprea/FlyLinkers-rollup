@@ -7,6 +7,7 @@
   import {friendsRequestFirebase} from '../../js/firebase/friendsRequestFirebase'
   import {addFriend, declineFriend} from '../../js/friendRequests'
   import {onMount} from 'svelte'
+  import ReportUserModal from '../Modals/ReportUserModal.svelte';
 
   export let name, last_name, title, email , photo, id, aboutMe, urlAPI, urlImages;
   let userMain = localStorage.getItem('userId');
@@ -126,6 +127,10 @@
     }
   }
 
+  const reportUser =()=>{
+    console.log('hiii');
+  }
+
   onMount(()=>{
     if (id !== dataJson.id) {
       searchFriends()
@@ -210,6 +215,19 @@
     margin: 1rem 0;
   }
 
+  .report-user{
+    background-color: transparent;
+    border: none;
+    width: fit-content;
+    align-self: flex-end;
+    padding: 0;
+  }
+  .report-user i{
+    margin: 0 .5rem;
+    color: #cb0719;
+  }
+
+
 </style>
 <div class="UserDetails Default-containers mt-3">
   <div class="row">
@@ -285,6 +303,12 @@
               <i class="fa-solid fa-users"></i>
               <p class="text-center ms-1" style="color: rgb(38, 38, 38);;">Network</p>
             </a>
+
+            <button class="report-user d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#reportUserModal" on:click={reportUser}>
+              <i class="fa-solid fa-flag"></i>
+              Report user
+            </button>
+
             <div class="btns-action-user d-flex flex-column">
               {#if !friend}
                 {#if friendRequest}
@@ -306,3 +330,6 @@
     </div>
   </div>
 </div>
+
+
+<ReportUserModal {id} {urlAPI}/>

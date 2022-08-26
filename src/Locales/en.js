@@ -165,5 +165,9 @@ export default{
       "p-profile": "Add profile photo",
       "modal-profile-btn-close": "Close",
       "modal-profile-btn-save": "Save photo",
+
+      //modal report post
+      "modal-report-post-title" : "Report post",
+      "modal-report-user-title" : "Report user"
   }
 }

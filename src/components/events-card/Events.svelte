@@ -12,9 +12,11 @@
         const content = await response.json()
         data = []
         content.forEach(ev => {
+          // console.log(ev);
           if (ev.status === "publish") {
             data.push({
               title: ev.slug.charAt(0).toUpperCase() + ev.slug.slice(1).replaceAll('-', ' '),
+              // title: ev.title.rendered,
               eventLogo: ev.fimg_url,
               date : [ev.metavalue._eventorganiser_schedule_last_start, ev.metavalue._eventorganiser_schedule_last_finish],
               href: ev.link,
@@ -23,6 +25,7 @@
           }
         });
       }
+      
     } catch (error) {
       console.error(error);
     }

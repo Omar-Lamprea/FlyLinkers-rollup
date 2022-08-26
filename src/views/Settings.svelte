@@ -9,10 +9,10 @@
   import Language from '../components/settings-user/Language.svelte'
   // import InfoExperiences from '../components/settings-user/InfoExperiences.svelte'
   import Loader from '../components/Loader.svelte'
-
   import {translate} from '../js/translate'
 
   const urlAPI = 'https://api.flylinkers.com'
+  const userMain = localStorage.getItem('userId')
 
   let dataUser = false
   const getUser = async ()=>{
@@ -26,7 +26,7 @@
   let dataProfile = false
   let id = parseInt(localStorage.getItem('userId')), experiences, userProfile
   const getProfile = async ()=>{
-    const response = await fetch(`${urlAPI}/user/profile/?user_id=${localStorage.getItem('userId')}`)
+    const response = await fetch(`${urlAPI}/user/profile/?user_id=${userMain}&main_user=${userMain}`)
     const content = await response.json()
     if (response.ok) {
       dataProfile = content[0]

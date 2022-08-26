@@ -12,8 +12,9 @@
 
   let usersFound = false;
 
+
   const makeSearch = async (value) =>{
-    const response = await fetch(`${urlAPI}/friend/search/?search=${value}`)
+    const response = await fetch(`${urlAPI}/friend/search/?search=${value}&user_id=${id}`)
     const content = await response.json()
 
     if (response.ok ) {

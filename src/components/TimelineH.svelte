@@ -5,7 +5,6 @@
   import {onMount} from 'svelte'
   import { writable } from 'svelte/store';
   import { translate } from '../js/translate';
-import { findIndex } from 'rxjs';
 
 
   export let id;
