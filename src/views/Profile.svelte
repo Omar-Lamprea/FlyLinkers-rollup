@@ -18,21 +18,25 @@
     if (localStorage.getItem('user')) {
       const response = await fetch(`${urlAPI}/user/logout/?token=${localStorage.getItem('user')}`)
       const content = await response.json();
-      data = content.User
-      await getUserToFirestore(data)
-      getUserMainToFirestore = await getUserToFirestore(data)
-
-      if (!localStorage.getItem('profilePhoto')) {
-        localStorage.setItem('profilePhoto', data.photo)
+      if (response.ok) {
+        data = content.User
+        await getUserToFirestore(data)
+        getUserMainToFirestore = await getUserToFirestore(data)
+  
+        if (!localStorage.getItem('profilePhoto')) {
+          localStorage.setItem('profilePhoto', data.photo)
+        }
+  
+        name = data.name
+        middle_name = data.middle_name
+        last_name = data.last_name
+        email = data.email
+        title = data.title
+        photo = data.photo
+        id = data.id;
+      } else {
+        console.log(content);
       }
-
-      name = data.name
-      middle_name = data.middle_name
-      last_name = data.last_name
-      email = data.email
-      title = data.title
-      photo = data.photo
-      id = data.id;
     }
   }
 
@@ -40,10 +44,12 @@
   let countFriends;
   const getFriends = async()=>{
     const response = await fetch(`${urlAPI}/friend/user/?user=${id}&limit=3`)
+    const content = await response.json()
     if (response.ok) {
-      const content = await response.json()
       dataFriends = content
       countFriends = content.length;
+    }else{
+      console.log(content);
     }
   }
 

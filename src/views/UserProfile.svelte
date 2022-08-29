@@ -38,7 +38,11 @@
   const getUserProfile = async(id)=>{
     const response = await fetch(`${urlAPI}/user/profile/?user_id=${id}&main_user=${userMain}`)
     const content = await response.json()
-    dataProfile = content[0]
+    if (response.ok) {
+      dataProfile = content[0]
+    } else {
+      content.Detail === "block" ? window.location.href = "/#/user_not_found" : false
+    }
   }
 
   let dataFriends;

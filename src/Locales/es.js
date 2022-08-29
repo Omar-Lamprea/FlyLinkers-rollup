@@ -180,7 +180,13 @@ export default{
 
       //modal report post
       "modal-report-post-title" : "Reportar publicación",
-      "modal-report-user-title" : "Reportar usuario"
+      "modal-report-post-body" : "¿Estás seguro de enviar un reporte de esta publicación?",
+      "modal-report-user-title" : "Reportar usuario",
+      "modal-report-user-body" : "¿Estás seguro de enviar un reporte de este usuario?",
+      "modal-delete-account-title" : "Eliminar cuenta",
+      "modal-delete-account-body" : "¿Estás seguro de eliminar esta cuenta?",
+      "delete" : "Eliminar"
+
 
   }
 }

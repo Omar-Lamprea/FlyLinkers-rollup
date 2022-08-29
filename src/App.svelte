@@ -8,7 +8,6 @@
   import Profile from "./views/Profile.svelte";
   import UserProfile from "./views/UserProfile.svelte";
   import Loader from './components/Loader.svelte'
-  import Login from './views/Login.svelte'
   import Chat from './views/Chat.svelte'
   import {onMount} from 'svelte'
 

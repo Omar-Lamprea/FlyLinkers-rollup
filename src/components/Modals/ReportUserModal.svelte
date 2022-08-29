@@ -67,7 +67,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p class="mb-2">¿Estás seguro de enviar un reporte de esta publicación? {id}</p>
+        <p class="mb-2" data-translate="modal-report-user-body">¿Estás seguro de enviar un reporte de esta publicación?</p>
       </div>
       <div class="modal-footer">
         <div id="reportLoader-{id}" class="m-0 d-none">
@@ -75,7 +75,7 @@
         </div>
         <i id="icon-check-{id}" class="me-3 fa-solid fa-circle-check icon-check-report d-none"></i>
         <button data-translate="modal-delete-xp-btn-close" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button data-translate="modal-delete-xp-btn-del" type="button" class="btn btn-danger" on:click={sendReport}>Enviar</button>
+        <button data-translate="send" type="button" class="btn btn-danger" on:click={sendReport}>Enviar</button>
       </div>
     </div>
   </div>

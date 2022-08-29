@@ -1,6 +1,7 @@
 <script>
   export let id, urlAPI;
   import { closeModal } from "../../js/closeModals";
+  import { deleteFirebaseAccount } from "../../js/firebase/config";
   import Loader from "../Loader.svelte";
   let sizeLoader = {
     size : "35px",
@@ -9,39 +10,39 @@
     height: "40px"
   }
 
-  const sendReport = async () =>{
+  const closeAccount = async () =>{
+    console.log('chao');
     const loader = document.getElementById(`reportLoader-${id}`)
     const check = document.getElementById(`icon-check-${id}`)
-    const postList = document.querySelector('.Timeline-container') || document.querySelector('.Profile-container')
-    const post = document.querySelector(`#post-${id}`)
 
-    console.log('enviando');
+    // console.log('enviando');
     loader.classList.remove('d-none')
 
-    const response = await fetch(`${urlAPI}/post/block/`, {
+    const response = await fetch(`${urlAPI}/user/delete/`, {
       method: "POST",
       headers: {
         'Content-Type' : 'application/json'
       },
       body: JSON.stringify({
-        "user": localStorage.getItem('userId'),
-        "post": id
+        "user_id": id
       })
     })
 
     const content = await response.json()
 
-    if (response.ok) {
+    if (response.ok){
       console.log(content);
-      console.log('report enviado');
       loader.classList.add('d-none')
       check.classList.remove('d-none')
-      setTimeout(() => {
-        closeModal(`reportPostModal${id}`)
+
+      //eliminar de firebase
+      
+      setTimeout(async () => {
+        closeModal(`deleteAccount${id}`)
         check.classList.add('d-none')
-        setTimeout(() => {
-          postList.removeChild(post)
-        }, 500);
+        localStorage.clear()
+        await deleteFirebaseAccount(id)
+        window.location.reload()
       }, 1000);
     }else{
       console.log(content);
@@ -58,15 +59,15 @@
   }
 </style>
 
-<div class="modal fade" id="reportPostModal{id}" tabindex="-1" aria-labelledby="reportPostModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteAccount{id}" tabindex="-1" aria-labelledby="deleteAccountLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 data-translate="modal-report-post-title" class="modal-title" id="reportPostModalLabel">Report post</h5>
+        <h5 data-translate="modal-delete-account-title" class="modal-title" id="deleteAccountLabel">Report post</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p class="mb-2" data-translate="modal-report-post-body">¿Estás seguro de enviar un reporte de esta publicación?</p>
+        <p class="mb-2" data-translate="modal-delete-account-body">¿Estás seguro de enviar un reporte de esta publicación?</p>
       </div>
       <div class="modal-footer">
         <div id="reportLoader-{id}" class="m-0 d-none">
@@ -74,7 +75,7 @@
         </div>
         <i id="icon-check-{id}" class="me-3 fa-solid fa-circle-check icon-check-report d-none"></i>
         <button data-translate="modal-delete-xp-btn-close" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button data-translate="send" type="button" class="btn btn-danger" on:click={sendReport}>Enviar</button>
+        <button data-translate="delete" type="button" class="btn btn-danger" on:click={closeAccount}>Enviar</button>
       </div>
     </div>
   </div>
@@ -82,11 +83,11 @@
 
 
 <!-- Modal -->
-<!-- <div class="modal fade" id="reportPostModal{id}" tabindex="-1" aria-labelledby="reportPostModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="deleteAccount{id}" tabindex="-1" aria-labelledby="deleteAccountLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 data-translate="modal-report-post-title" class="modal-title" id="reportPostModalLabel">Report post</h5>
+        <h5 data-translate="modal-report-post-title" class="modal-title" id="deleteAccountLabel">Report post</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">

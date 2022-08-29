@@ -31,12 +31,17 @@
   const getProfile = async ()=>{
     const response = await fetch(`${urlAPI}/user/profile/?user_id=${id}&main_user=${dataJson.id}`)
     const content = await response.json()
-    if (content[0]) {
-      data = content[0]
-      userProfile = data.id
-      experiences = data.experiences
-      coverPhoto = `${urlImages}${data.cover_img}`
-      aboutMe = data.about
+    if (response.ok) {
+      if (content[0]) {
+        data = content[0]
+        userProfile = data.id
+        experiences = data.experiences
+        coverPhoto = `${urlImages}${data.cover_img}`
+        aboutMe = data.about
+      }
+    } else {
+      console.log(content);
+      content.Detail === "block" ? window.location.href = "/#/user_not_found" : false
     }
   }
 

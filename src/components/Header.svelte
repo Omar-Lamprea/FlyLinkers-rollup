@@ -21,7 +21,10 @@
       if (content.count > 0) {
         usersFound = content.results
       }else{
-        usersFound = [{ details: 'User not found'}]
+        usersFound = [{ 
+          details: 'User not found',
+          detailsEs: "Usuario no encontrado"
+        }]
       }
     }
   }
@@ -143,7 +146,7 @@
 
 <div class="Header container-fluid">
   <div class="Header-container container">
-    <div class="Header-content d-flex flex-wrap align-items-center justify-content-center justify-content-lg-between">
+    <div class="Header-content d-flex flex-wrap align-items-center justify-content-center justify-content-xl-between">
       
       <div class="Header-logo-search d-flex justify-contens-between align-items-center">
         <div class="Header-logo d-flex align-items-center px-3">
@@ -173,9 +176,15 @@
                     </li>
                   {:else}
                   <li>
-                    <span class="dropdown-item">
-                      {user.details}
-                    </span>
+                    {#if localStorage.getItem('lang') === "En"}
+                      <span class="dropdown-item">
+                        {user.details}
+                      </span>
+                    {:else}
+                      <span class="dropdown-item">
+                        {user.detailsEs}
+                      </span>
+                    {/if}
                   </li>
                   {/if}
                {/each}

@@ -168,6 +168,12 @@ export default{
 
       //modal report post
       "modal-report-post-title" : "Report post",
-      "modal-report-user-title" : "Report user"
+      "modal-report-post-body" : "Are you sure to submit a report for this post?",
+      "modal-report-user-title" : "Report user",
+      "modal-report-user-body" : "Are you sure to submit a report for this user?",
+      "modal-delete-account-title" : "Delete account",
+      "modal-delete-account-body" : "Are you sure you want to delete this account?",
+      "delete" : "Delete"
+
   }
 }
