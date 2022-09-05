@@ -35,6 +35,7 @@ import ProfilePhotoModal from '../Modals/profile/ProfilePhotoModal.svelte.js';
 import { friendsRequestFirebase } from '../../js/firebase/friendsRequestFirebase.js';
 import { addFriend, declineFriend } from '../../js/friendRequests.js';
 import { onMount } from '../../../_snowpack/pkg/svelte.js';
+import ReportUserModal from '../Modals/ReportUserModal.svelte.js';
 
 function create_if_block_4(ctx) {
 	let p;
@@ -45,10 +46,10 @@ function create_if_block_4(ctx) {
 		c() {
 			p = element("p");
 
-			p.innerHTML = `<i class="fas fa-pen svelte-k3krtt"></i> 
-                  <span data-translate="profile-about-me" class="svelte-k3krtt">About me...</span>`;
+			p.innerHTML = `<i class="fas fa-pen svelte-seymbd"></i> 
+                  <span data-translate="profile-about-me" class="svelte-seymbd">About me...</span>`;
 
-			attr(p, "class", "edit-description svelte-k3krtt");
+			attr(p, "class", "edit-description svelte-seymbd");
 		},
 		m(target, anchor) {
 			insert(target, p, anchor);
@@ -67,7 +68,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (235:16) {#if aboutMe}
+// (253:16) {#if aboutMe}
 function create_if_block_3(ctx) {
 	let p;
 	let t;
@@ -77,7 +78,7 @@ function create_if_block_3(ctx) {
 			p = element("p");
 			t = text(/*aboutMe*/ ctx[6]);
 			attr(p, "id", "userDescription");
-			attr(p, "class", "svelte-k3krtt");
+			attr(p, "class", "svelte-seymbd");
 		},
 		m(target, anchor) {
 			insert(target, p, anchor);
@@ -92,22 +93,24 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (282:8) {:else}
+// (300:8) {:else}
 function create_else_block(ctx) {
 	let div1;
 	let a;
-	let i;
+	let i0;
 	let t0;
 	let p;
 	let a_href_value;
 	let link_action;
 	let active_action;
 	let t2;
-	let div0;
-	let t3;
-	let button;
+	let button0;
 	let t4;
-	let button_id_value;
+	let div0;
+	let t5;
+	let button1;
+	let t6;
+	let button1_id_value;
 	let mounted;
 	let dispose;
 
@@ -123,25 +126,34 @@ function create_else_block(ctx) {
 		c() {
 			div1 = element("div");
 			a = element("a");
-			i = element("i");
+			i0 = element("i");
 			t0 = space();
 			p = element("p");
 			p.textContent = "Network";
 			t2 = space();
+			button0 = element("button");
+
+			button0.innerHTML = `<i class="fa-solid fa-flag svelte-seymbd"></i>
+              Report user`;
+
+			t4 = space();
 			div0 = element("div");
 			if_block.c();
-			t3 = space();
-			button = element("button");
-			t4 = text("Send a message");
-			attr(i, "class", "fa-solid fa-users svelte-k3krtt");
+			t5 = space();
+			button1 = element("button");
+			t6 = text("Send a message");
+			attr(i0, "class", "fa-solid fa-users svelte-seymbd");
 			attr(p, "class", "text-center ms-1");
 			set_style(p, "color", "rgb(38, 38, 38)");
 			attr(a, "href", a_href_value = "/network/" + /*id*/ ctx[5]);
 			attr(a, "class", "d-flex justify-content-end align-items-center text-center");
-			attr(button, "data-translate", "send-message");
-			attr(button, "id", button_id_value = "btInitChat-" + /*id*/ ctx[5]);
-			attr(button, "data-chat", /*id*/ ctx[5]);
-			attr(button, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 svelte-k3krtt");
+			attr(button0, "class", "report-user d-flex align-items-center svelte-seymbd");
+			attr(button0, "data-bs-toggle", "modal");
+			attr(button0, "data-bs-target", "#reportUserModal");
+			attr(button1, "data-translate", "send-message");
+			attr(button1, "id", button1_id_value = "btInitChat-" + /*id*/ ctx[5]);
+			attr(button1, "data-chat", /*id*/ ctx[5]);
+			attr(button1, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 svelte-seymbd");
 			attr(div0, "class", "btns-action-user d-flex flex-column");
 			attr(div1, "class", "d-flex flex-column justify-content-evenly");
 			set_style(div1, "height", "100%");
@@ -149,20 +161,23 @@ function create_else_block(ctx) {
 		m(target, anchor) {
 			insert(target, div1, anchor);
 			append(div1, a);
-			append(a, i);
+			append(a, i0);
 			append(a, t0);
 			append(a, p);
 			append(div1, t2);
+			append(div1, button0);
+			append(div1, t4);
 			append(div1, div0);
 			if_block.m(div0, null);
-			append(div0, t3);
-			append(div0, button);
-			append(button, t4);
+			append(div0, t5);
+			append(div0, button1);
+			append(button1, t6);
 
 			if (!mounted) {
 				dispose = [
 					action_destroyer(link_action = link.call(null, a)),
-					action_destroyer(active_action = active.call(null, a))
+					action_destroyer(active_action = active.call(null, a)),
+					listen(button0, "click", /*reportUser*/ ctx[18])
 				];
 
 				mounted = true;
@@ -181,16 +196,16 @@ function create_else_block(ctx) {
 
 				if (if_block) {
 					if_block.c();
-					if_block.m(div0, t3);
+					if_block.m(div0, t5);
 				}
 			}
 
-			if (dirty & /*id*/ 32 && button_id_value !== (button_id_value = "btInitChat-" + /*id*/ ctx[5])) {
-				attr(button, "id", button_id_value);
+			if (dirty & /*id*/ 32 && button1_id_value !== (button1_id_value = "btInitChat-" + /*id*/ ctx[5])) {
+				attr(button1, "id", button1_id_value);
 			}
 
 			if (dirty & /*id*/ 32) {
-				attr(button, "data-chat", /*id*/ ctx[5]);
+				attr(button1, "data-chat", /*id*/ ctx[5]);
 			}
 		},
 		i: noop,
@@ -204,7 +219,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (256:8) {#if id === dataJson.id}
+// (274:8) {#if id === dataJson.id}
 function create_if_block(ctx) {
 	let div;
 	let a0;
@@ -253,20 +268,20 @@ function create_if_block(ctx) {
 			t2 = space();
 			a1 = element("a");
 
-			a1.innerHTML = `<p type="button" class="mb-3 svelte-k3krtt" style="color:rgba(38, 38, 38, 07)"><i class="fas fa-pen svelte-k3krtt"></i> 
-              <span data-translate="edit-profile" class="svelte-k3krtt">Edit profile</span></p>`;
+			a1.innerHTML = `<p type="button" class="mb-3 svelte-seymbd" style="color:rgba(38, 38, 38, 07)"><i class="fas fa-pen svelte-seymbd"></i> 
+              <span data-translate="edit-profile" class="svelte-seymbd">Edit profile</span></p>`;
 
 			t5 = space();
 			create_component(coverphotomodal.$$.fragment);
 			t6 = space();
 			create_component(profilephotomodal.$$.fragment);
-			attr(i0, "class", "fa-solid fa-users svelte-k3krtt");
+			attr(i0, "class", "fa-solid fa-users svelte-seymbd");
 			attr(p0, "class", "text-center ms-1");
 			set_style(p0, "color", "rgb(38, 38, 38)");
 			attr(a0, "href", a0_href_value = "/network/" + /*id*/ ctx[5]);
 			attr(a0, "class", "d-flex mb-2 align-items-center text-center");
 			attr(a1, "href", "/settings");
-			attr(div, "class", "edit-profile-content d-flex flex-column svelte-k3krtt");
+			attr(div, "class", "edit-profile-content d-flex flex-column svelte-seymbd");
 		},
 		m(target, anchor) {
 			insert(target, div, anchor);
@@ -330,7 +345,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (298:14) {:else}
+// (322:14) {:else}
 function create_else_block_2(ctx) {
 	let button;
 
@@ -339,7 +354,7 @@ function create_else_block_2(ctx) {
 			button = element("button");
 			button.textContent = "Friends";
 			attr(button, "data-translate", "is-friend");
-			attr(button, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 svelte-k3krtt");
+			attr(button, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 svelte-seymbd");
 		},
 		m(target, anchor) {
 			insert(target, button, anchor);
@@ -351,7 +366,7 @@ function create_else_block_2(ctx) {
 	};
 }
 
-// (289:14) {#if !friend}
+// (313:14) {#if !friend}
 function create_if_block_1(ctx) {
 	let if_block_anchor;
 
@@ -392,7 +407,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (295:16) {:else}
+// (319:16) {:else}
 function create_else_block_1(ctx) {
 	let button;
 	let mounted;
@@ -404,7 +419,7 @@ function create_else_block_1(ctx) {
 			button.textContent = "Send friend request";
 			attr(button, "data-translate", "send-friend-request");
 			attr(button, "id", "btnSendFriendRequest");
-			attr(button, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 svelte-k3krtt");
+			attr(button, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 svelte-seymbd");
 		},
 		m(target, anchor) {
 			insert(target, button, anchor);
@@ -423,7 +438,7 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (290:16) {#if friendRequest}
+// (314:16) {#if friendRequest}
 function create_if_block_2(ctx) {
 	let div;
 	let button0;
@@ -442,10 +457,10 @@ function create_if_block_2(ctx) {
 			button1.textContent = "Decline friend request";
 			attr(button0, "data-translate", "btn-accept-request");
 			attr(button0, "id", "btnSendFriendRequest");
-			attr(button0, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 accept-friend svelte-k3krtt");
+			attr(button0, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 accept-friend svelte-seymbd");
 			attr(button1, "data-translate", "btn-deny-request");
 			attr(button1, "id", "btnSendFriendRequest");
-			attr(button1, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 decline-friend svelte-k3krtt");
+			attr(button1, "class", "btn btn-outline-primary btn-flylinkers align-self-end mt-1 decline-friend svelte-seymbd");
 			attr(div, "class", "btn-friend-request mb-3");
 		},
 		m(target, anchor) {
@@ -511,6 +526,8 @@ function create_fragment(ctx) {
 	let div9;
 	let current_block_type_index;
 	let if_block2;
+	let t16;
+	let reportusermodal;
 	let current;
 	let mounted;
 	let dispose;
@@ -536,6 +553,13 @@ function create_fragment(ctx) {
 
 	current_block_type_index = select_block_type(ctx, -1);
 	if_block2 = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
+
+	reportusermodal = new ReportUserModal({
+			props: {
+				id: /*id*/ ctx[5],
+				urlAPI: /*urlAPI*/ ctx[7]
+			}
+		});
 
 	return {
 		c() {
@@ -579,32 +603,34 @@ function create_fragment(ctx) {
 			div10 = element("div");
 			div9 = element("div");
 			if_block2.c();
-			attr(h2, "class", "svelte-k3krtt");
-			attr(span, "class", "svelte-k3krtt");
-			attr(div0, "class", "Profile-card-user p-3 p-md-0 mt-4 mt-md-0 svelte-k3krtt");
+			t16 = space();
+			create_component(reportusermodal.$$.fragment);
+			attr(h2, "class", "svelte-seymbd");
+			attr(span, "class", "svelte-seymbd");
+			attr(div0, "class", "Profile-card-user p-3 p-md-0 mt-4 mt-md-0 svelte-seymbd");
 			attr(textarea, "name", "");
 			attr(textarea, "id", "textArea");
 			attr(textarea, "cols", "30");
 			attr(textarea, "rows", "3");
 			set_style(textarea, "width", "100%");
 			textarea.value = /*aboutMe*/ ctx[6];
-			attr(button, "class", "btn btn-outline-primary btn-flylinkers m-0 mt-1 d-flex align-self-end svelte-k3krtt");
+			attr(button, "class", "btn btn-outline-primary btn-flylinkers m-0 mt-1 d-flex align-self-end svelte-seymbd");
 			attr(div1, "id", "editAboutMe");
 			attr(div1, "class", "d-none d-flex flex-column");
 			attr(div2, "class", "Profile-description-text my-2");
 			attr(p0, "data-translate", "profile-email");
-			attr(p0, "class", "svelte-k3krtt");
+			attr(p0, "class", "svelte-seymbd");
 			set_style(p1, "color", "var(--main-color)");
 			set_style(p1, "cursor", "pointer");
-			attr(p1, "class", "svelte-k3krtt");
+			attr(p1, "class", "svelte-seymbd");
 			attr(a, "href", a_href_value = "mailto:" + /*email*/ ctx[3]);
 			attr(div3, "class", "Profile-description-contact");
-			attr(div4, "class", "Profile-description m-3 mx-md-0 svelte-k3krtt");
-			attr(div5, "class", "Profile-card-info mt-2 svelte-k3krtt");
+			attr(div4, "class", "Profile-description m-3 mx-md-0 svelte-seymbd");
+			attr(div5, "class", "Profile-card-info mt-2 svelte-seymbd");
 			attr(div6, "class", "Profile-card-content d-flex flex-column");
-			attr(div7, "class", "Profile-card svelte-k3krtt");
+			attr(div7, "class", "Profile-card svelte-seymbd");
 			attr(div8, "class", "col-12 col-lg-6");
-			attr(div9, "class", "Profile-card-text text-end d-flex flex-column align-items-end mt-0 mt-md-3 px-3 px-md-0 svelte-k3krtt");
+			attr(div9, "class", "Profile-card-text text-end d-flex flex-column align-items-end mt-0 mt-md-3 px-3 px-md-0 svelte-seymbd");
 			set_style(div9, "height", "100%");
 			attr(div10, "class", "col-12 col-lg-6");
 			attr(div11, "class", "row");
@@ -649,6 +675,8 @@ function create_fragment(ctx) {
 			append(div11, div10);
 			append(div10, div9);
 			if_blocks[current_block_type_index].m(div9, null);
+			insert(target, t16, anchor);
+			mount_component(reportusermodal, target, anchor);
 			current = true;
 
 			if (!mounted) {
@@ -732,16 +760,23 @@ function create_fragment(ctx) {
 				transition_in(if_block2, 1);
 				if_block2.m(div9, null);
 			}
+
+			const reportusermodal_changes = {};
+			if (dirty & /*id*/ 32) reportusermodal_changes.id = /*id*/ ctx[5];
+			if (dirty & /*urlAPI*/ 128) reportusermodal_changes.urlAPI = /*urlAPI*/ ctx[7];
+			reportusermodal.$set(reportusermodal_changes);
 		},
 		i(local) {
 			if (current) return;
 			transition_in(userpotho.$$.fragment, local);
 			transition_in(if_block2);
+			transition_in(reportusermodal.$$.fragment, local);
 			current = true;
 		},
 		o(local) {
 			transition_out(userpotho.$$.fragment, local);
 			transition_out(if_block2);
+			transition_out(reportusermodal.$$.fragment, local);
 			current = false;
 		},
 		d(detaching) {
@@ -750,6 +785,8 @@ function create_fragment(ctx) {
 			if (if_block0) if_block0.d();
 			if (if_block1) if_block1.d();
 			if_blocks[current_block_type_index].d();
+			if (detaching) detach(t16);
+			destroy_component(reportusermodal, detaching);
 			mounted = false;
 			run_all(dispose);
 		}
@@ -873,6 +910,10 @@ function instance($$self, $$props, $$invalidate) {
 		}
 	};
 
+	const reportUser = () => {
+		console.log('hiii');
+	};
+
 	onMount(() => {
 		if (id !== dataJson.id) {
 			searchFriends();
@@ -909,7 +950,8 @@ function instance($$self, $$props, $$invalidate) {
 		updateDescription,
 		sendFriendRequest,
 		acceptRequest,
-		declineRequest
+		declineRequest,
+		reportUser
 	];
 }
 

@@ -52,7 +52,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (63:2) {#if dataProfile}
+// (67:2) {#if dataProfile}
 function create_if_block(ctx) {
 	let timelinep;
 	let t;
@@ -230,9 +230,16 @@ function instance($$self, $$props, $$invalidate) {
 	};
 
 	const getUserProfile = async id => {
-		const response = await fetch(`${urlAPI}/user/profile/?user_id=${id}`);
+		const response = await fetch(`${urlAPI}/user/profile/?user_id=${id}&main_user=${userMain}`);
 		const content = await response.json();
-		$$invalidate(0, dataProfile = content[0]);
+
+		if (response.ok) {
+			$$invalidate(0, dataProfile = content[0]);
+		} else {
+			content.Detail === "block"
+			? window.location.href = "/#/user_not_found"
+			: false;
+		}
 	};
 
 	let dataFriends;

@@ -61,7 +61,7 @@ function get_each_context_2(ctx, list, i) {
 	return child_ctx;
 }
 
-// (156:6) {#if email === dataJson.email}
+// (161:6) {#if email === dataJson.email}
 function create_if_block_7(ctx) {
 	let div;
 	let p;
@@ -118,7 +118,7 @@ function create_if_block_7(ctx) {
 	};
 }
 
-// (162:6) {#if experiences !== undefined}
+// (167:6) {#if experiences !== undefined}
 function create_if_block_6(ctx) {
 	let experience;
 	let current;
@@ -163,7 +163,7 @@ function create_if_block_6(ctx) {
 	};
 }
 
-// (166:6) {#if email === dataJson.email}
+// (171:6) {#if email === dataJson.email}
 function create_if_block_5(ctx) {
 	let panel;
 	let current;
@@ -200,7 +200,7 @@ function create_if_block_5(ctx) {
 	};
 }
 
-// (170:6) {#if post}
+// (175:6) {#if post}
 function create_if_block_3(ctx) {
 	let current_block_type_index;
 	let if_block;
@@ -270,7 +270,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (177:8) {:else}
+// (182:8) {:else}
 function create_else_block_1(ctx) {
 	let each_1_anchor;
 	let current;
@@ -354,7 +354,7 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (171:8) {#if userMain}
+// (176:8) {#if userMain}
 function create_if_block_4(ctx) {
 	let each_1_anchor;
 	let current;
@@ -438,7 +438,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (179:10) {#each post as dataPost}
+// (184:10) {#each post as dataPost}
 function create_each_block_3(ctx) {
 	let post_1;
 	let current;
@@ -495,7 +495,7 @@ function create_each_block_3(ctx) {
 	};
 }
 
-// (173:10) {#each post as dataPost}
+// (178:10) {#each post as dataPost}
 function create_each_block_2(ctx) {
 	let post_1;
 	let current;
@@ -552,7 +552,7 @@ function create_each_block_2(ctx) {
 	};
 }
 
-// (187:6) {#if $posts}
+// (192:6) {#if $posts}
 function create_if_block_1(ctx) {
 	let current_block_type_index;
 	let if_block;
@@ -622,7 +622,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (194:8) {:else}
+// (199:8) {:else}
 function create_else_block(ctx) {
 	let each_1_anchor;
 	let current;
@@ -706,7 +706,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (188:8) {#if userMain}
+// (193:8) {#if userMain}
 function create_if_block_2(ctx) {
 	let each_1_anchor;
 	let current;
@@ -790,7 +790,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (196:10) {#each $posts as dataPost}
+// (201:10) {#each $posts as dataPost}
 function create_each_block_1(ctx) {
 	let post_1;
 	let current;
@@ -847,7 +847,7 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (190:10) {#each $posts as dataPost}
+// (195:10) {#each $posts as dataPost}
 function create_each_block(ctx) {
 	let post_1;
 	let current;
@@ -904,7 +904,7 @@ function create_each_block(ctx) {
 	};
 }
 
-// (202:6) {#if endPostMessage}
+// (207:6) {#if endPostMessage}
 function create_if_block(ctx) {
 	let div;
 
@@ -1218,15 +1218,23 @@ function instance($$self, $$props, $$invalidate) {
 	let userProfile;
 
 	const getProfile = async () => {
-		const response = await fetch(`${urlAPI}/user/profile/?user_id=${id}`);
+		const response = await fetch(`${urlAPI}/user/profile/?user_id=${id}&main_user=${dataJson.id}`);
 		const content = await response.json();
 
-		if (content[0]) {
-			data = content[0];
-			$$invalidate(13, userProfile = data.id);
-			$$invalidate(12, experiences = data.experiences);
-			$$invalidate(10, coverPhoto = `${urlImages}${data.cover_img}`);
-			$$invalidate(11, aboutMe = data.about);
+		if (response.ok) {
+			if (content[0]) {
+				data = content[0];
+				$$invalidate(13, userProfile = data.id);
+				$$invalidate(12, experiences = data.experiences);
+				$$invalidate(10, coverPhoto = `${urlImages}${data.cover_img}`);
+				$$invalidate(11, aboutMe = data.about);
+			}
+		} else {
+			console.log(content);
+
+			content.Detail === "block"
+			? window.location.href = "/#/user_not_found"
+			: false;
 		}
 	};
 
@@ -1238,7 +1246,7 @@ function instance($$self, $$props, $$invalidate) {
 	const getPost = async () => {
 		$$invalidate(14, post = '');
 
-		const response = await fetch(`${urlAPI}/post/create/?user=${id}`).then(res => {
+		const response = await fetch(`${urlAPI}/post/create/?user=${id}&main_user=${dataJson.id}`).then(res => {
 			if (res.ok) {
 				return res.json();
 			} else {
@@ -1265,7 +1273,7 @@ function instance($$self, $$props, $$invalidate) {
 
 	async function getPosts() {
 		page += 1;
-		const response = await fetch(`${urlAPI}/post/create/?page=${page}&user=${id}`);
+		const response = await fetch(`${urlAPI}/post/create/?page=${page}&user=${id}&main_user=${dataJson.id}`);
 		const content = await response.json();
 		countPost = content.next;
 

@@ -32,7 +32,6 @@ import Loader from './Loader.svelte.js';
 import { onMount } from '../../_snowpack/pkg/svelte.js';
 import { writable } from '../../_snowpack/pkg/svelte/store.js';
 import { translate } from '../js/translate.js';
-import { findIndex } from '../../_snowpack/pkg/rxjs.js';
 
 function get_each_context(ctx, list, i) {
 	const child_ctx = ctx.slice();
@@ -40,7 +39,7 @@ function get_each_context(ctx, list, i) {
 	return child_ctx;
 }
 
-// (130:4) {#if id}
+// (129:4) {#if id}
 function create_if_block_2(ctx) {
 	let addpost;
 	let current;
@@ -84,7 +83,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (133:4) {#each $posts as dataPost}
+// (132:4) {#each $posts as dataPost}
 function create_each_block(ctx) {
 	let post;
 	let current;
@@ -139,7 +138,7 @@ function create_each_block(ctx) {
 	};
 }
 
-// (137:4) {#if endPostMessage}
+// (136:4) {#if endPostMessage}
 function create_if_block(ctx) {
 	let show_if;
 	let if_block_anchor;
@@ -169,7 +168,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (140:6) {:else}
+// (139:6) {:else}
 function create_else_block(ctx) {
 	let div;
 
@@ -191,7 +190,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (138:6) {#if localStorage.getItem('lang') === "Es"}
+// (137:6) {#if localStorage.getItem('lang') === "Es"}
 function create_if_block_1(ctx) {
 	let div;
 

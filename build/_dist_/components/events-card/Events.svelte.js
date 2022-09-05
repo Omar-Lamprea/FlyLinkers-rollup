@@ -35,7 +35,7 @@ function get_each_context(ctx, list, i) {
 	return child_ctx;
 }
 
-// (51:8) {#if data}
+// (54:8) {#if data}
 function create_if_block(ctx) {
 	let each_1_anchor;
 	let current;
@@ -119,7 +119,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (52:10) {#each data as event}
+// (55:10) {#each data as event}
 function create_each_block(ctx) {
 	let event;
 	let current;
@@ -248,9 +248,11 @@ function instance($$self, $$props, $$invalidate) {
 				$$invalidate(0, data = []);
 
 				content.forEach(ev => {
+					// console.log(ev);
 					if (ev.status === "publish") {
 						data.push({
 							title: ev.slug.charAt(0).toUpperCase() + ev.slug.slice(1).replaceAll('-', ' '),
+							// title: ev.title.rendered,
 							eventLogo: ev.fimg_url,
 							date: [
 								ev.metavalue._eventorganiser_schedule_last_start,

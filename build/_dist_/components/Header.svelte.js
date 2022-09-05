@@ -41,8 +41,8 @@ function get_each_context(ctx, list, i) {
 	return child_ctx;
 }
 
-// (181:14) {:else}
-function create_else_block_1(ctx) {
+// (191:14) {:else}
+function create_else_block_2(ctx) {
 	let loader;
 	let current;
 	loader = new Loader({});
@@ -71,7 +71,7 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (158:12) {#if usersFound}
+// (162:12) {#if usersFound}
 function create_if_block(ctx) {
 	let each_1_anchor;
 	let each_value = /*usersFound*/ ctx[3];
@@ -97,7 +97,7 @@ function create_if_block(ctx) {
 			insert(target, each_1_anchor, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*usersFound, visitProfile, urlImages*/ 140) {
+			if (dirty & /*usersFound, visitProfile, urlImages, localStorage*/ 140) {
 				each_value = /*usersFound*/ ctx[3];
 				let i;
 
@@ -129,39 +129,43 @@ function create_if_block(ctx) {
 	};
 }
 
-// (173:18) {:else}
+// (177:18) {:else}
 function create_else_block(ctx) {
 	let li;
-	let span;
-	let t0_value = /*user*/ ctx[12].details + "";
-	let t0;
-	let t1;
+	let show_if;
+	let t;
+
+	function select_block_type_2(ctx, dirty) {
+		if (localStorage.getItem('lang') === "En") return create_if_block_2;
+		return create_else_block_1;
+	}
+
+	let current_block_type = select_block_type_2(ctx, -1);
+	let if_block = current_block_type(ctx);
 
 	return {
 		c() {
 			li = element("li");
-			span = element("span");
-			t0 = text(t0_value);
-			t1 = space();
-			attr(span, "class", "dropdown-item");
+			if_block.c();
+			t = space();
 			attr(li, "class", "svelte-w0qbqd");
 		},
 		m(target, anchor) {
 			insert(target, li, anchor);
-			append(li, span);
-			append(span, t0);
-			append(li, t1);
+			if_block.m(li, null);
+			append(li, t);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*usersFound*/ 8 && t0_value !== (t0_value = /*user*/ ctx[12].details + "")) set_data(t0, t0_value);
+			if_block.p(ctx, dirty);
 		},
 		d(detaching) {
 			if (detaching) detach(li);
+			if_block.d();
 		}
 	};
 }
 
-// (160:18) {#if user.name}
+// (164:18) {#if user.name}
 function create_if_block_1(ctx) {
 	let li;
 	let a;
@@ -277,7 +281,57 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (159:15) {#each usersFound as user}
+// (183:20) {:else}
+function create_else_block_1(ctx) {
+	let span;
+	let t_value = /*user*/ ctx[12].detailsEs + "";
+	let t;
+
+	return {
+		c() {
+			span = element("span");
+			t = text(t_value);
+			attr(span, "class", "dropdown-item");
+		},
+		m(target, anchor) {
+			insert(target, span, anchor);
+			append(span, t);
+		},
+		p(ctx, dirty) {
+			if (dirty & /*usersFound*/ 8 && t_value !== (t_value = /*user*/ ctx[12].detailsEs + "")) set_data(t, t_value);
+		},
+		d(detaching) {
+			if (detaching) detach(span);
+		}
+	};
+}
+
+// (179:20) {#if localStorage.getItem('lang') === "En"}
+function create_if_block_2(ctx) {
+	let span;
+	let t_value = /*user*/ ctx[12].details + "";
+	let t;
+
+	return {
+		c() {
+			span = element("span");
+			t = text(t_value);
+			attr(span, "class", "dropdown-item");
+		},
+		m(target, anchor) {
+			insert(target, span, anchor);
+			append(span, t);
+		},
+		p(ctx, dirty) {
+			if (dirty & /*usersFound*/ 8 && t_value !== (t_value = /*user*/ ctx[12].details + "")) set_data(t, t_value);
+		},
+		d(detaching) {
+			if (detaching) detach(span);
+		}
+	};
+}
+
+// (163:15) {#each usersFound as user}
 function create_each_block(ctx) {
 	let if_block_anchor;
 
@@ -340,7 +394,7 @@ function create_fragment(ctx) {
 	let current;
 	let mounted;
 	let dispose;
-	const if_block_creators = [create_if_block, create_else_block_1];
+	const if_block_creators = [create_if_block, create_else_block_2];
 	const if_blocks = [];
 
 	function select_block_type(ctx, dirty) {
@@ -394,7 +448,7 @@ function create_fragment(ctx) {
 			attr(div1, "class", "Header-input ms-0 ms-xxl-5 svelte-w0qbqd");
 			attr(div2, "class", "Header-logo-search d-flex justify-contens-between align-items-center svelte-w0qbqd");
 			attr(div3, "class", "Header-nav d-flex m-auto m-lg-0");
-			attr(div4, "class", "Header-content d-flex flex-wrap align-items-center justify-content-center justify-content-lg-between svelte-w0qbqd");
+			attr(div4, "class", "Header-content d-flex flex-wrap align-items-center justify-content-center justify-content-xl-between svelte-w0qbqd");
 			attr(div5, "class", "Header-container container");
 			attr(div6, "class", "Header container-fluid svelte-w0qbqd");
 		},
@@ -487,14 +541,19 @@ function instance($$self, $$props, $$invalidate) {
 	let usersFound = false;
 
 	const makeSearch = async value => {
-		const response = await fetch(`${urlAPI}/friend/search/?search=${value}`);
+		const response = await fetch(`${urlAPI}/friend/search/?search=${value}&user_id=${id}`);
 		const content = await response.json();
 
 		if (response.ok) {
 			if (content.count > 0) {
 				$$invalidate(3, usersFound = content.results);
 			} else {
-				$$invalidate(3, usersFound = [{ details: 'User not found' }]);
+				$$invalidate(3, usersFound = [
+					{
+						details: 'User not found',
+						detailsEs: "Usuario no encontrado"
+					}
+				]);
 			}
 		}
 	};

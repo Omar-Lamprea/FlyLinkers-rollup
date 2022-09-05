@@ -18,8 +18,7 @@
   export let name, middle_name, last_name, title, photo, email, username = 0, phone = 0;
   export let userMain, urlAPI, urlImages, url_id, meta;
   export let share_id, share_count, share = '';
-  export let video, code;
-
+  export let video, code = '';
   if(code && code !== false) code = code.charAt(0).toUpperCase() + code.slice(1)
   // console.log(code);
 
@@ -451,15 +450,18 @@
   }
 
   const deletePost = async(id)=>{
-    const response = await fetch(`${urlAPI}/post/create/?post_id=${id}`,{
+    const response = await fetch(`${urlAPI}/post/create/?post_id=${id}&user_id=${userId}`,{
       method: 'DELETE',
       headers: {
         'Content-Type' : 'application/json'
       },
     })
+    const content = await response.json()
     if (response.ok) {
       const reloadPost = document.getElementById('reloadPostCheck')
       reloadPost.classList.toggle('data-reloading')
+    }else{
+      console.log(content);
     }
   }
 
@@ -474,6 +476,12 @@
       showLoader = 0
       const textTranslated = document.getElementById(`textTranslated-${id}`)
       textTranslated.innerHTML = translation
+    }else{
+      showLoader = 0
+      const textTranslated = document.getElementById(`textTranslated-${id}`)
+      localStorage.getItem('lang') === "En"
+        ? textTranslated.innerHTML = "This post cannot be translated"
+        : textTranslated.innerHTML = "No se puede traducir este post"
     }
   }
 

@@ -1,6 +1,6 @@
 import { async } from "../../../_snowpack/pkg/@firebase/util.js";
 import { initializeApp } from "../../../_snowpack/pkg/firebase/app.js";
-import { getFirestore, collection, where, query, getDocs, getDoc, setDoc, addDoc, doc, updateDoc, orderBy, onSnapshot, limit} from '../../../_snowpack/pkg/firebase/firestore.js';
+import { getFirestore, collection, where, query, getDocs, getDoc, setDoc, addDoc, doc, updateDoc, orderBy, onSnapshot, limit, deleteDoc} from '../../../_snowpack/pkg/firebase/firestore.js';
 
 const firebaseConfig = {
   apiKey: "AIzaSyB8KpNHJILsB2erTcBgMuhTHWGJd_rSttk",
@@ -222,4 +222,9 @@ export const getGroupUser = async (groupId)=>{
     }
   });
   return parseInt(chatWhith)
+}
+
+export const deleteFirebaseAccount = async (id)=>{
+  console.log("desde firebase",id);
+  await deleteDoc(doc(db, "user", id.toString()));
 }

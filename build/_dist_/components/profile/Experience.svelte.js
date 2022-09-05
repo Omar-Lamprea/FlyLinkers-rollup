@@ -457,7 +457,7 @@ function create_if_block_2(ctx) {
 			div1 = element("div");
 
 			div1.innerHTML = `<h5 data-translate="modal-delete-xp-title" class="modal-title" id="removeExperienceLabel">Remove Experience</h5> 
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>`;
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>`;
 
 			t4 = space();
 			div2 = element("div");
@@ -483,6 +483,7 @@ function create_if_block_2(ctx) {
 			attr(button1, "type", "button");
 			attr(button1, "class", "btn btn-secondary");
 			attr(button1, "data-bs-dismiss", "modal");
+			attr(button2, "tton", "");
 			attr(button2, "data-translate", "modal-delete-xp-btn-del");
 			attr(button2, "type", "button");
 			attr(button2, "class", "btn btn-danger");

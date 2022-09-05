@@ -9,49 +9,108 @@ import {
 	init,
 	insert,
 	noop,
-	safe_not_equal
+	safe_not_equal,
+	set_style
 } from "../../_snowpack/pkg/svelte/internal.js";
 
 function create_else_block(ctx) {
 	let div2;
+	let div1;
+	let div0;
 
 	return {
 		c() {
 			div2 = element("div");
-			div2.innerHTML = `<div class="loader"><div></div></div>`;
+			div1 = element("div");
+			div0 = element("div");
+			set_style(div0, "width", /*sizeLoader*/ ctx[1].size);
+			set_style(div0, "height", /*sizeLoader*/ ctx[1].size);
+			set_style(div0, "left", /*sizeLoader*/ ctx[1].left);
+			set_style(div0, "top", /*sizeLoader*/ ctx[1].top);
+			attr(div1, "class", "loader");
 			attr(div2, "class", "loader-content");
+			set_style(div2, "height", /*sizeLoader*/ ctx[1].height);
 		},
 		m(target, anchor) {
 			insert(target, div2, anchor);
+			append(div2, div1);
+			append(div1, div0);
 		},
-		p: noop,
+		p(ctx, dirty) {
+			if (dirty & /*sizeLoader*/ 2) {
+				set_style(div0, "width", /*sizeLoader*/ ctx[1].size);
+			}
+
+			if (dirty & /*sizeLoader*/ 2) {
+				set_style(div0, "height", /*sizeLoader*/ ctx[1].size);
+			}
+
+			if (dirty & /*sizeLoader*/ 2) {
+				set_style(div0, "left", /*sizeLoader*/ ctx[1].left);
+			}
+
+			if (dirty & /*sizeLoader*/ 2) {
+				set_style(div0, "top", /*sizeLoader*/ ctx[1].top);
+			}
+
+			if (dirty & /*sizeLoader*/ 2) {
+				set_style(div2, "height", /*sizeLoader*/ ctx[1].height);
+			}
+		},
 		d(detaching) {
 			if (detaching) detach(div2);
 		}
 	};
 }
 
-// (5:0) {#if size}
+// (8:0) {#if size}
 function create_if_block(ctx) {
 	let div2;
 	let div1;
+	let div0;
 	let div2_class_value;
 
 	return {
 		c() {
 			div2 = element("div");
 			div1 = element("div");
-			div1.innerHTML = `<div></div>`;
+			div0 = element("div");
+			set_style(div0, "width", /*sizeLoader*/ ctx[1].size);
+			set_style(div0, "height", /*sizeLoader*/ ctx[1].size);
+			set_style(div0, "left", /*sizeLoader*/ ctx[1].left);
+			set_style(div0, "top", /*sizeLoader*/ ctx[1].top);
 			attr(div1, "class", "loader");
 			attr(div2, "class", div2_class_value = "loader-content " + /*size*/ ctx[0]);
+			set_style(div2, "height", /*sizeLoader*/ ctx[1].height);
 		},
 		m(target, anchor) {
 			insert(target, div2, anchor);
 			append(div2, div1);
+			append(div1, div0);
 		},
 		p(ctx, dirty) {
+			if (dirty & /*sizeLoader*/ 2) {
+				set_style(div0, "width", /*sizeLoader*/ ctx[1].size);
+			}
+
+			if (dirty & /*sizeLoader*/ 2) {
+				set_style(div0, "height", /*sizeLoader*/ ctx[1].size);
+			}
+
+			if (dirty & /*sizeLoader*/ 2) {
+				set_style(div0, "left", /*sizeLoader*/ ctx[1].left);
+			}
+
+			if (dirty & /*sizeLoader*/ 2) {
+				set_style(div0, "top", /*sizeLoader*/ ctx[1].top);
+			}
+
 			if (dirty & /*size*/ 1 && div2_class_value !== (div2_class_value = "loader-content " + /*size*/ ctx[0])) {
 				attr(div2, "class", div2_class_value);
+			}
+
+			if (dirty & /*sizeLoader*/ 2) {
+				set_style(div2, "height", /*sizeLoader*/ ctx[1].height);
 			}
 		},
 		d(detaching) {
@@ -104,18 +163,20 @@ function create_fragment(ctx) {
 
 function instance($$self, $$props, $$invalidate) {
 	let { size = 0 } = $$props;
+	let { sizeLoader = '' } = $$props;
 
 	$$self.$$set = $$props => {
 		if ('size' in $$props) $$invalidate(0, size = $$props.size);
+		if ('sizeLoader' in $$props) $$invalidate(1, sizeLoader = $$props.sizeLoader);
 	};
 
-	return [size];
+	return [size, sizeLoader];
 }
 
 class Loader extends SvelteComponent {
 	constructor(options) {
 		super();
-		init(this, options, instance, create_fragment, safe_not_equal, { size: 0 });
+		init(this, options, instance, create_fragment, safe_not_equal, { size: 0, sizeLoader: 1 });
 	}
 }
 

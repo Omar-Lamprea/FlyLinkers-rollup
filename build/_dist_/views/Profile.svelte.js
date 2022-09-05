@@ -61,7 +61,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (60:2) {#if id && getUserMainToFirestore}
+// (66:2) {#if id && getUserMainToFirestore}
 function create_if_block(ctx) {
 	let timelinep;
 	let t;
@@ -219,21 +219,26 @@ function instance($$self, $$props, $$invalidate) {
 		if (localStorage.getItem('user')) {
 			const response = await fetch(`${urlAPI}/user/logout/?token=${localStorage.getItem('user')}`);
 			const content = await response.json();
-			data = content.User;
-			await getUserToFirestore(data);
-			$$invalidate(6, getUserMainToFirestore = await getUserToFirestore(data));
 
-			if (!localStorage.getItem('profilePhoto')) {
-				localStorage.setItem('profilePhoto', data.photo);
+			if (response.ok) {
+				data = content.User;
+				await getUserToFirestore(data);
+				$$invalidate(6, getUserMainToFirestore = await getUserToFirestore(data));
+
+				if (!localStorage.getItem('profilePhoto')) {
+					localStorage.setItem('profilePhoto', data.photo);
+				}
+
+				$$invalidate(0, name = data.name);
+				middle_name = data.middle_name;
+				$$invalidate(5, last_name = data.last_name);
+				$$invalidate(2, email = data.email);
+				$$invalidate(1, title = data.title);
+				$$invalidate(3, photo = data.photo);
+				$$invalidate(4, id = data.id);
+			} else {
+				console.log(content);
 			}
-
-			$$invalidate(0, name = data.name);
-			middle_name = data.middle_name;
-			$$invalidate(5, last_name = data.last_name);
-			$$invalidate(2, email = data.email);
-			$$invalidate(1, title = data.title);
-			$$invalidate(3, photo = data.photo);
-			$$invalidate(4, id = data.id);
 		}
 	};
 
@@ -242,11 +247,13 @@ function instance($$self, $$props, $$invalidate) {
 
 	const getFriends = async () => {
 		const response = await fetch(`${urlAPI}/friend/user/?user=${id}&limit=3`);
+		const content = await response.json();
 
 		if (response.ok) {
-			const content = await response.json();
 			$$invalidate(7, dataFriends = content);
 			$$invalidate(8, countFriends = content.length);
+		} else {
+			console.log(content);
 		}
 	};
 

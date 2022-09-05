@@ -21,7 +21,7 @@
 
   const userId = localStorage.getItem('userId')
   const getPost = async()=>{
-    const response = await fetch(`${urlAPI}/post/create/?post_id=${params.id}`)
+    const response = await fetch(`${urlAPI}/post/create/?post_id=${params.id}&main_user=${userId}`)
     if (response.ok) {
       const result = await response.json()
       data = result
@@ -50,8 +50,10 @@
         meta: content[1].meta
       }
     }else{
+      const result = await response.json()
       error = 'Ops... We have a problem, refresh this page or try again later.'
       console.log(error)
+      console.log(result);
     }
   }
 

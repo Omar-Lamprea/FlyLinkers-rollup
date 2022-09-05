@@ -29,7 +29,6 @@ import Home from './views/Home.svelte.js';
 import Profile from "./views/Profile.svelte.js";
 import UserProfile from "./views/UserProfile.svelte.js";
 import Loader from './components/Loader.svelte.js';
-import Login from './views/Login.svelte.js';
 import Chat from './views/Chat.svelte.js';
 import { onMount } from '../_snowpack/pkg/svelte.js';
 import { getUserToFirestore } from './js/firebase/config.js';
@@ -71,7 +70,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (260:0) {#if data && getUserMainToFirestore}
+// (259:0) {#if data && getUserMainToFirestore}
 function create_if_block(ctx) {
 	let header;
 	let t0;
@@ -163,7 +162,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (265:5) {#if chatFlag && userMain && getUserMainToFirestore}
+// (264:5) {#if chatFlag && userMain && getUserMainToFirestore}
 function create_if_block_1(ctx) {
 	let chat;
 	let current;
