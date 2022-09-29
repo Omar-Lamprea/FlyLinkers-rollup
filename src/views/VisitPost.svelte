@@ -8,6 +8,7 @@
   export let params
   const urlAPI = 'https://api.flylinkers.com'
   const urlImages= 'https://api.flylinkers.com'
+  const urlParams = window.location.href;
 
   let data;
   let template;
@@ -57,16 +58,63 @@
     }
   }
 
+  const ignore = ()=>{
+    window.location.href = "./"
+    //delete report....
+  }
+
+  const deletePost = async ()=>{
+    const response = await fetch(`${urlAPI}/post/create/?post_id=${params.id}&user_id=${userId}`,{
+      method: 'DELETE',
+      headers: {
+        'Content-Type' : 'application/json'
+      },
+    })
+    const content = await response.json()
+    if (response.ok) {
+      window.location.href = "./"
+    }else{
+      console.log(content);
+    }
+  }
+
   onMount(async()=>{
     await getPost()
   })
 
 </script>
 
+
+<style>
+  .btns-admin-report button{
+    border: none;
+    border-radius: 5px;
+    padding: .5rem 1rem;
+    background-color: var(--main-color);
+    color: #fff;
+  }
+  .btns-admin-report button:hover{
+    background-color: var(--hover-main-color);
+  }
+  .btns-admin-report button.delete:hover{
+    background-color: rgb(149, 25, 25);
+  }
+  .btns-admin-report button.delete{
+    background-color: rgb(180, 19, 19);
+  }
+
+</style>
+
 <div class="row">
   {#if template}
     <SidebarLeft {name} {last_name} {title} {photo} {urlAPI} {urlImages}/>
     <div class="col-12 col-lg-6">
+      {#if urlParams.includes('?admin=reportedPost')}
+        <div class="btns-admin-report mb-2 d-flex justify-content-center">
+          <button class="me-2" on:click={ignore}>Ignore</button>
+          <button class="ms-2 delete" on:click={deletePost}>Delete post</button>
+        </div>
+      {/if}
       <Post {urlAPI} {...template} {userId} {urlImages}/>
     </div>
     <SidebarRight {urlAPI} {urlImages}/>

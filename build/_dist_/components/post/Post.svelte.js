@@ -60,7 +60,7 @@ function get_each_context_2(ctx, list, i) {
 	return child_ctx;
 }
 
-// (507:8) {:else}
+// (515:8) {:else}
 function create_else_block_3(ctx) {
 	let div;
 	let img_1;
@@ -128,7 +128,7 @@ function create_else_block_3(ctx) {
 	};
 }
 
-// (496:8) {#if user}
+// (504:8) {#if user}
 function create_if_block_24(ctx) {
 	let div;
 	let a;
@@ -225,7 +225,7 @@ function create_if_block_24(ctx) {
 	};
 }
 
-// (530:14) {#if user_id.toString() === localStorage.getItem('userId')}
+// (538:14) {#if user_id.toString() === localStorage.getItem('userId')}
 function create_if_block_23(ctx) {
 	let li;
 	let mounted;
@@ -260,7 +260,7 @@ function create_if_block_23(ctx) {
 	};
 }
 
-// (525:12) {#if user}
+// (533:12) {#if user}
 function create_if_block_21(ctx) {
 	let show_if = /*user*/ ctx[2].id.toString() === localStorage.getItem('userId');
 	let if_block_anchor;
@@ -298,7 +298,7 @@ function create_if_block_21(ctx) {
 	};
 }
 
-// (526:15) {#if user.id.toString() === localStorage.getItem('userId')}
+// (534:15) {#if user.id.toString() === localStorage.getItem('userId')}
 function create_if_block_22(ctx) {
 	let li;
 	let mounted;
@@ -333,7 +333,7 @@ function create_if_block_22(ctx) {
 	};
 }
 
-// (541:6) {#if desc && code && code !== localStorage.getItem('lang') }
+// (549:6) {#if desc && code && code !== localStorage.getItem('lang') }
 function create_if_block_19(ctx) {
 	let span0;
 	let t1;
@@ -426,7 +426,7 @@ function create_if_block_19(ctx) {
 	};
 }
 
-// (544:10) {#if showLoader}
+// (552:10) {#if showLoader}
 function create_if_block_20(ctx) {
 	let loader;
 	let current;
@@ -455,7 +455,7 @@ function create_if_block_20(ctx) {
 	};
 }
 
-// (554:6) {#if meta && share === ''}
+// (562:6) {#if meta && share === ''}
 function create_if_block_15(ctx) {
 	let div;
 	let a;
@@ -541,7 +541,7 @@ function create_if_block_15(ctx) {
 	};
 }
 
-// (557:12) {#if meta.title}
+// (565:12) {#if meta.title}
 function create_if_block_18(ctx) {
 	let h6;
 	let t_value = /*meta*/ ctx[8].title + "";
@@ -565,7 +565,7 @@ function create_if_block_18(ctx) {
 	};
 }
 
-// (560:12) {#if meta.description}
+// (568:12) {#if meta.description}
 function create_if_block_17(ctx) {
 	let p;
 	let t_value = /*meta*/ ctx[8].description + "";
@@ -589,7 +589,7 @@ function create_if_block_17(ctx) {
 	};
 }
 
-// (563:12) {#if meta.image}
+// (571:12) {#if meta.image}
 function create_if_block_16(ctx) {
 	let img_1;
 	let img_1_src_value;
@@ -614,7 +614,7 @@ function create_if_block_16(ctx) {
 	};
 }
 
-// (570:6) {#if !!img}
+// (578:6) {#if !!img}
 function create_if_block_14(ctx) {
 	let figure;
 	let img_1;
@@ -642,7 +642,7 @@ function create_if_block_14(ctx) {
 	};
 }
 
-// (577:4) {#if video && share === ''}
+// (585:4) {#if video && share === ''}
 function create_if_block_12(ctx) {
 	let show_if;
 	let if_block_anchor;
@@ -686,7 +686,7 @@ function create_if_block_12(ctx) {
 	};
 }
 
-// (588:6) {:else}
+// (596:6) {:else}
 function create_else_block_2(ctx) {
 	let video_1;
 	let source;
@@ -720,7 +720,7 @@ function create_else_block_2(ctx) {
 	};
 }
 
-// (578:6) {#if video.includes('https://www.youtube.com/')}
+// (586:6) {#if video.includes('https://www.youtube.com/')}
 function create_if_block_13(ctx) {
 	let iframe;
 	let iframe_src_value;
@@ -750,7 +750,7 @@ function create_if_block_13(ctx) {
 	};
 }
 
-// (597:4) {#if share !== ''}
+// (605:4) {#if share !== ''}
 function create_if_block_4(ctx) {
 	let hr;
 	let t0;
@@ -939,7 +939,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (617:10) {#if share[1].img !== ''}
+// (625:10) {#if share[1].img !== ''}
 function create_if_block_11(ctx) {
 	let img_1;
 	let img_1_src_value;
@@ -965,7 +965,7 @@ function create_if_block_11(ctx) {
 	};
 }
 
-// (620:10) {#if share[1].video}
+// (628:10) {#if share[1].video}
 function create_if_block_9(ctx) {
 	let show_if;
 	let if_block_anchor;
@@ -1009,7 +1009,7 @@ function create_if_block_9(ctx) {
 	};
 }
 
-// (631:12) {:else}
+// (639:12) {:else}
 function create_else_block_1(ctx) {
 	let video_1;
 	let source;
@@ -1043,7 +1043,7 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (621:12) {#if share[1].video.includes('https://www.youtube.com/')}
+// (629:12) {#if share[1].video.includes('https://www.youtube.com/')}
 function create_if_block_10(ctx) {
 	let iframe;
 	let iframe_src_value;
@@ -1073,7 +1073,7 @@ function create_if_block_10(ctx) {
 	};
 }
 
-// (639:10) {#if share[1].url_id !== 0}
+// (647:10) {#if share[1].url_id !== 0}
 function create_if_block_5(ctx) {
 	let div;
 	let a;
@@ -1159,7 +1159,7 @@ function create_if_block_5(ctx) {
 	};
 }
 
-// (642:16) {#if meta.title}
+// (650:16) {#if meta.title}
 function create_if_block_8(ctx) {
 	let h6;
 	let t_value = /*meta*/ ctx[8].title + "";
@@ -1183,7 +1183,7 @@ function create_if_block_8(ctx) {
 	};
 }
 
-// (645:16) {#if meta.description}
+// (653:16) {#if meta.description}
 function create_if_block_7(ctx) {
 	let p;
 	let t_value = /*meta*/ ctx[8].description + "";
@@ -1207,7 +1207,7 @@ function create_if_block_7(ctx) {
 	};
 }
 
-// (648:16) {#if meta.image}
+// (656:16) {#if meta.image}
 function create_if_block_6(ctx) {
 	let img_1;
 	let img_1_src_value;
@@ -1232,7 +1232,7 @@ function create_if_block_6(ctx) {
 	};
 }
 
-// (663:12) {#if reactionsLikeList && reactionsLikeList.length > 0}
+// (671:12) {#if reactionsLikeList && reactionsLikeList.length > 0}
 function create_if_block_3(ctx) {
 	let span;
 	let ul;
@@ -1300,7 +1300,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (666:18) {#each reactionsLikeList as userLike}
+// (674:18) {#each reactionsLikeList as userLike}
 function create_each_block_2(ctx) {
 	let li;
 	let t_value = /*userLike*/ ctx[53] + "";
@@ -1325,7 +1325,7 @@ function create_each_block_2(ctx) {
 	};
 }
 
-// (677:10) {#if reactionsLoveList && reactionsLoveList.length > 0}
+// (685:10) {#if reactionsLoveList && reactionsLoveList.length > 0}
 function create_if_block_2(ctx) {
 	let span;
 	let ul;
@@ -1393,7 +1393,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (680:16) {#each reactionsLoveList as userLove}
+// (688:16) {#each reactionsLoveList as userLove}
 function create_each_block_1(ctx) {
 	let li;
 	let t_value = /*userLove*/ ctx[50] + "";
@@ -1418,7 +1418,7 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (715:10) {:else}
+// (723:10) {:else}
 function create_else_block(ctx) {
 	let sharepost;
 	let current;
@@ -1461,7 +1461,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (713:10) {#if share !== ''}
+// (721:10) {#if share !== ''}
 function create_if_block_1(ctx) {
 	let sharepost;
 	let current;
@@ -1504,7 +1504,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (735:6) {#if dataComment}
+// (743:6) {#if dataComment}
 function create_if_block(ctx) {
 	let each_1_anchor;
 	let current;
@@ -1588,7 +1588,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (736:8) {#each dataComment as comment}
+// (744:8) {#each dataComment as comment}
 function create_each_block(ctx) {
 	let comment;
 	let current;
@@ -2328,7 +2328,7 @@ function instance($$self, $$props, $$invalidate) {
 	let { name, middle_name, last_name, title, photo, email, username = 0, phone = 0 } = $$props;
 	let { userMain, urlAPI, urlImages, url_id, meta } = $$props;
 	let { share_id, share_count, share = '' } = $$props;
-	let { video, code } = $$props;
+	let { video, code = '' } = $$props;
 	if (code && code !== false) code = code.charAt(0).toUpperCase() + code.slice(1);
 
 	// console.log(code);
@@ -2745,14 +2745,18 @@ function instance($$self, $$props, $$invalidate) {
 	};
 
 	const deletePost = async id => {
-		const response = await fetch(`${urlAPI}/post/create/?post_id=${id}`, {
+		const response = await fetch(`${urlAPI}/post/create/?post_id=${id}&user_id=${userId}`, {
 			method: 'DELETE',
 			headers: { 'Content-Type': 'application/json' }
 		});
 
+		const content = await response.json();
+
 		if (response.ok) {
 			const reloadPost = document.getElementById('reloadPostCheck');
 			reloadPost.classList.toggle('data-reloading');
+		} else {
+			console.log(content);
 		}
 	};
 
@@ -2767,6 +2771,13 @@ function instance($$self, $$props, $$invalidate) {
 			$$invalidate(22, showLoader = 0);
 			const textTranslated = document.getElementById(`textTranslated-${id}`);
 			textTranslated.innerHTML = translation;
+		} else {
+			$$invalidate(22, showLoader = 0);
+			const textTranslated = document.getElementById(`textTranslated-${id}`);
+
+			localStorage.getItem('lang') === "En"
+			? textTranslated.innerHTML = "This post cannot be translated"
+			: textTranslated.innerHTML = "No se puede traducir este post";
 		}
 	};
 

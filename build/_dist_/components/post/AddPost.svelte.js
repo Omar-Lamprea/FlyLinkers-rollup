@@ -668,7 +668,7 @@ function instance($$self, $$props, $$invalidate) {
 
 				const joinPostDescriptionClean = postDescriptionClean.join(' ');
 				const translated = await googleTranslateJs(joinPostDescriptionClean);
-				let code = translated.detectedSourceLanguage;
+				let code = translated.detectedSourceLanguage || '';
 				let template;
 
 				if (urlContent === undefined && !YTlink) {
@@ -746,7 +746,7 @@ function instance($$self, $$props, $$invalidate) {
 			const data = new FormData();
 			data.append('video', uploadVideo.files[0]);
 			const translated = await googleTranslateJs(postDescription.value);
-			let code = translated.detectedSourceLanguage;
+			let code = translated.detectedSourceLanguage || '';
 			const responseVideo = await fetch(`${urlAPI}/resources/video/`, { method: 'POST', body: data });
 
 			if (responseVideo.ok) {

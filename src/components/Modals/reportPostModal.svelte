@@ -32,17 +32,35 @@
     const content = await response.json()
 
     if (response.ok) {
-      console.log(content);
-      console.log('report enviado');
-      loader.classList.add('d-none')
-      check.classList.remove('d-none')
-      setTimeout(() => {
-        closeModal(`reportPostModal${id}`)
-        check.classList.add('d-none')
+
+      // sendEmail....
+      const responseEmail = await fetch(`${urlAPI}/post/report/`, {
+        method: "POST",
+        headers: {
+          'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify({
+          "post": id
+       })
+      })
+
+      if(responseEmail.ok){
+        console.log(content);
+        console.log('post hidden and report sended');
+        loader.classList.add('d-none')
+        check.classList.remove('d-none')
         setTimeout(() => {
-          postList.removeChild(post)
-        }, 500);
-      }, 1000);
+          closeModal(`reportPostModal${id}`)
+          check.classList.add('d-none')
+          setTimeout(() => {
+            window.location.href.includes("/post/") 
+              ? window.location.href = "./" 
+              : postList.removeChild(post)
+          }, 500);
+        }, 1000);
+      }else{
+        console.log(content);
+      }
     }else{
       console.log(content);
     }
