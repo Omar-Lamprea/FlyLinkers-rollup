@@ -10,7 +10,7 @@
   // import InfoExperiences from '../components/settings-user/InfoExperiences.svelte'
   import Loader from '../components/Loader.svelte'
   import {translate} from '../js/translate'
-  import DeleteAccount from '../components/Modals/DeleteAccount.svelte';
+  import DeleteUserAccount from '../components/settings-user/DeleteAccount.svelte';
 
   const urlAPI = 'https://api.flylinkers.com'
   const userMain = localStorage.getItem('userId')
@@ -56,12 +56,7 @@
   .btn-home:hover{
     background-color: var(--hover-main-color);
   }
-  .delete-account button{
-    background-color: transparent;
-    border: none;
-    color: #c61f1f;
-    font-weight: 700;
-  }
+
 </style>
 
 <div class="row">
@@ -70,14 +65,10 @@
       <InfoUser {urlAPI} {dataUser}/>
       <InfoProfile {urlAPI} {dataProfile}/>
       <Language/>
+      <DeleteUserAccount {id} {urlAPI}/>
       <Experience {urlAPI} {id} {experiences} {userProfile}/>
 
-      <div class="delete-account d-flex justify-content-end mx-3">
-        <button class="d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#deleteAccount{id}">
-          <i class="fa-solid fa-user-xmark mx-1"></i>
-          <p>Delete account</p>
-        </button>
-      </div>
+      
       <a class="d-flex align-self-center" href="/" use:link use:active>
         <button data-translate="finish-settings" class="btn-home">Finish</button>
       </a>
@@ -88,4 +79,3 @@
   <SidebarRight {urlAPI}/>
 </div>
 
-<DeleteAccount {id} {urlAPI}/>

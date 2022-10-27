@@ -129,6 +129,10 @@ export default{
       "select-lg-2" : 'English',
       "select-lg-3" : 'Spanish',
 
+      //delete account
+      "title-account": "Account",
+      "delete-account": "delete Account",
+
     //Modals
       //update exp
       "title-update-xp": "Update experience",

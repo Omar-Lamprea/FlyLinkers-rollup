@@ -141,6 +141,10 @@ export default{
       "select-lg-3" : 'Español',
       //********************
 
+      //delete account
+      "title-account": "Cuenta",
+      "delete-account": "Eliminar Cuenta",
+
     //Modals
       //update exp
       "title-update-xp": "Actualizar experiencia",
