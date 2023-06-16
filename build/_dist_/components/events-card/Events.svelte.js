@@ -35,7 +35,7 @@ function get_each_context(ctx, list, i) {
 	return child_ctx;
 }
 
-// (54:8) {#if data}
+// (59:8) {#if data}
 function create_if_block(ctx) {
 	let each_1_anchor;
 	let current;
@@ -119,7 +119,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (55:10) {#each data as event}
+// (60:10) {#each data as event}
 function create_each_block(ctx) {
 	let event;
 	let current;
@@ -262,6 +262,12 @@ function instance($$self, $$props, $$invalidate) {
 							linkName: ev.excerpt.rendered
 						});
 					}
+				});
+
+				data.sort(function (a, b) {
+					const dateA = new Date(a.date[0][0]);
+					const dateB = new Date(b.date[0][0]);
+					return dateA - dateB;
 				});
 			}
 		} catch(error) {
